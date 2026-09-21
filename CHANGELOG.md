@@ -6,6 +6,62 @@ All notable changes to NEXG Concierge. Format follows
 
 ---
 
+## [Unreleased] — hero motivation pods
+
+The hero subtitle now groups the catalogue's 21 verticals by the **motivation** a
+person is in when they open the app — Craving, Reset, Arrive, Supply, Fix — instead
+of listing verticals. Five groups, five different psychological levers. Each names
+real verticals from the seeded catalogue, so the taxonomy drives the copy rather
+than decorating invented copy.
+
+Built as three variants and compared in the browser; **variant 3 (the rotating clip
+wipe)** was chosen and the other two were deleted. Full account:
+`logs/2026-09-21-live-hero-pods.log`.
+
+### Added
+
+- `src/components/HeroRotatingSubtitle.tsx` — `HERO_PODS` (the five motivations) and
+  `HeroWipeSubtitle`. Rotation is 3200ms, deliberately slower than a UI transition
+  because this is a reading line, not a status indicator. The reveal is a clip wipe
+  re-keyed on every change, so it reports the state change rather than firing once on
+  mount and leaving a static line. `prefers-reduced-motion` renders all five
+  motivations as static text with `clip-path: none`, verified in-browser.
+
+### Fixed
+
+- The light-mode accent was keyed off `@media (prefers-color-scheme: light)`, but the
+  app drives its theme with an explicit `html.light` / `html.dark` class. An OS set to
+  light with the app set to dark painted `#8A6413` on the dark hero at **2.4:1**. Now
+  keyed off the class the theme provider writes.
+- `.hero-rail__item--active .hero-rail__lead` lost the cascade to Tailwind's
+  `text-gray-200` / `text-slate-700` on the rail container, so the active item was
+  gold in dark mode and grey in light. It won on one theme and lost on the other,
+  which is the kind of defect a single-theme review cannot see.
+- Variant 3 carried **no gold at all**: `.hero-wipe__inner` had no colour rule and
+  inherited slate, so the variant silently missed the brief's contrast requirement.
+- Variant 3's wipe fired once on mount and left a static line, duplicating variant 2's
+  static presentation and leaving the motion axis undemonstrated.
+
+### Removed
+
+- The two variants that were not chosen, and their styling: variant 1's rotating pod
+  with its blur cross-fade, subcategory chips and `examples` data (the chip idea is
+  kept in reserve), and variant 2's five-item rail. Variant 2 was rejected on
+  measurement, not taste: it needed two lines at 672px and so could not honour the
+  one-line brief.
+- The previous subtitle's dead CSS: `.hero-subtitle`, `.hero-subtitle__separator`,
+  `.hero-subtitle__promise`, `.hero-subtitle__promise--light/--dark`,
+  `@keyframes hero-word-rise` and its ten `nth-child` delay rules. Verified by grep:
+  zero references remain in `src/`.
+
+### Repaired
+
+- `src/index.css` held a double-encoded em-dash from an earlier PowerShell 5.1
+  `Set-Content`; all 23 logs in `logs/` were unreadable as text — 16 UTF-16LE, 3
+  mixed UTF-8-header/UTF-16LE-body, 1 cp1252 double-encoded. All are now clean UTF-8.
+
+---
+
 ## [2.1.0] — 2026-09-21
 
 Remediation of the Impeccable dual-agent design critique of the v2 discovery flow.

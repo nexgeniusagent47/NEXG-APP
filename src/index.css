@@ -45,81 +45,67 @@ html {
 }
 
 /* ---------------------------------------------------------------------------
-   Hero subtitle
+   Hero subtitle: five motivations, revealed one at a time
 
-   Wolt-grade brevity: the verticals, then the promise, in one line. The entrance
-   is a staggered word rise rather than one block fade, so the line assembles in
-   reading order instead of appearing all at once.
+   The taxonomy drives the copy. 21 verticals in a row is not a reason to do
+   anything, so they are grouped by the MOTIVATION someone is in when they open
+   the app — Craving, Reset, Arrive, Supply, Fix — and the line rotates between
+   them. Each names real verticals from the seeded catalogue.
 
-   Replaced a four-line sentence that restated the headline. Plain CSS rather than
-   a JS animation because it runs once on first paint and never needs to be
-   interrupted — which is what CSS is better at than the main thread.
+   See src/components/HeroRotatingSubtitle.tsx for the data and the reasoning.
 --------------------------------------------------------------------------- */
-/* Separator and promise widths are tightened so the whole line holds at 20px on a
-   672px measure. Without this the extra glyphs push "One concierge" onto a second
-   line at desktop and mobile alike, which is the one thing the copy must not do. */
-.hero-subtitle {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0 0.08em;
-  /* The subtitle is a single line of short list items, so it sizes to its content
-     rather than inheriting a prose measure. `max-width: 100%` keeps it inside the
-     viewport on the narrowest phones. */
+.hero-wipe {
+  display: block;
   width: max-content;
   max-width: 100%;
+  min-height: 1.9em; /* reserves the line so rotation cannot shift the layout below */
 }
 
-.hero-subtitle__word {
+/* The reveal is a clip wipe re-keyed on every change, so gold sweeps across the
+   line instead of the line cross-fading. Re-keying is what makes it report the
+   state change rather than firing once on mount and leaving a static line. */
+.hero-wipe__inner {
   display: inline-block;
-  animation: hero-word-rise 420ms cubic-bezier(0.23, 1, 0.32, 1) both;
+  clip-path: inset(0 100% 0 0);
+  animation: hero-wipe 600ms cubic-bezier(0.77, 0, 0.175, 1) 120ms forwards;
 }
 
-/* The separator is punctuation, not content: lighter than the words it divides. */
-.hero-subtitle__separator {
-  opacity: 0.55;
-  font-weight: 400;
-}
-
-/* What the list resolves to. Accent, and a touch more space so the promise reads
-   as a separate clause rather than a fifth category.
-   Two tokens because the palette needs two: #E5B65F is 9.92:1 on the dark hero,
-   while #B88728 is only 3.21:1 on the light one. See DESIGN.md. */
-.hero-subtitle__promise {
-  margin-left: 0.1em;
-  font-weight: 700;
-}
-
-.hero-subtitle__promise--dark {
-  color: #e5b65f;
-}
-
-.hero-subtitle__promise--light {
-  color: #8a6413;
-}
-
-@keyframes hero-word-rise {
-  from {
-    opacity: 0;
-    transform: translateY(0.4em);
+@keyframes hero-wipe {
+  to {
+    clip-path: inset(0 0 0 0);
   }
 }
 
-/* Stagger is decorative: it must never delay interaction. Nine entries at 55ms
-   apart settle the line by roughly 900ms. */
-.hero-subtitle__word:nth-child(1) { animation-delay: 0ms; }
-.hero-subtitle__word:nth-child(2) { animation-delay: 55ms; }
-.hero-subtitle__word:nth-child(3) { animation-delay: 110ms; }
-.hero-subtitle__word:nth-child(4) { animation-delay: 165ms; }
-.hero-subtitle__word:nth-child(5) { animation-delay: 220ms; }
-.hero-subtitle__word:nth-child(6) { animation-delay: 275ms; }
-.hero-subtitle__word:nth-child(7) { animation-delay: 330ms; }
-.hero-subtitle__word:nth-child(8) { animation-delay: 385ms; }
-.hero-subtitle__word:nth-child(9) { animation-delay: 440ms; }
-.hero-subtitle__word:nth-child(10) { animation-delay: 495ms; }
+/* The accent. One point of contrast on the line, on the motivation word rather
+   than the merchandise. Two tokens because the palette needs two: #E5B65F is
+   9.92:1 on the dark hero, #8A6413 is 5.05:1 on the light one. See DESIGN.md. */
+.hero-wipe__lead {
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #e5b65f;
+}
+
+/* Keyed off the class the theme provider writes, not `prefers-color-scheme`: the
+   app decides its own theme, so an OS preference of light with the app set to
+   dark would have painted #8a6413 on the dark hero at 2.4:1. */
+html.light .hero-wipe__lead {
+  color: #8a6413;
+}
+
+.hero-pod__sep {
+  opacity: 0.45;
+  font-weight: 400;
+}
+
+.hero-pod__support {
+  font-weight: 500;
+  opacity: 0.9;
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-subtitle__word {
+  .hero-wipe__inner {
     animation: none;
+    clip-path: none;
   }
 }
 
@@ -152,22 +138,6 @@ html {
 @media (prefers-reduced-motion: reduce) {
   .success-settle {
     animation: none;
-  }
-}
-
-/* Below the `sm` breakpoint the four categories plus the promise will not fit on
-   one line at a legible size — measured: 44 characters need ~445px at 16px and a
-   360px viewport offers 328px. Rather than shrink the type until it is unreadable,
-   the categories drop and the promise stands alone. It is the shortest true
-   statement of what the product is, which is what a small screen should get. */
-@media (max-width: 639.98px) {
-  .hero-subtitle__category,
-  .hero-subtitle__separator {
-    display: none;
-  }
-
-  .hero-subtitle__promise {
-    margin-left: 0;
   }
 }
 

@@ -5,35 +5,19 @@ import heroDaylightImage from '../assets/images/hero_daylight_resort_17899140856
 import heroImageMobile from '../assets/images/mobile_landing_page_image.png';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
+import { useReducedMotion } from 'motion/react';
+import { HeroWipeSubtitle } from './HeroRotatingSubtitle';
 
 interface HeroProps {
   onNavigate?: (page: string) => void;
   onOpenCategories?: (initialQuery?: string) => void;
 }
 
-/**
- * The hero subtitle, as data rather than a sentence.
- *
- * Short by design: the headline already carries the promise, so the subtitle only
- * has to name what the marketplace covers and what it amounts to. Separators are
- * explicit entries so the animation can stagger them too, and so the copy reads as
- * a list rather than a run-on.
- */
-const HERO_SUBTITLE: Array<{ word: string; kind: 'category' | 'separator' | 'promise' }> = [
-  { word: 'Dining', kind: 'category' },
-  { word: '·', kind: 'separator' },
-  { word: 'Spa', kind: 'category' },
-  { word: '·', kind: 'separator' },
-  { word: 'Chauffeurs', kind: 'category' },
-  { word: '·', kind: 'separator' },
-  { word: 'Groceries', kind: 'category' },
-  { word: 'One concierge', kind: 'promise' },
-];
-
 export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
   const [query, setQuery] = useState('');
   const { isLight, toggleTheme } = useTheme();
   const { t } = useLanguage();
+  const prefersReducedMotion = useReducedMotion();
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -135,47 +119,20 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
             {t.hero.titleLine2}
           </h1>
 
-          {/* Hero subtitle.
-              Wolt-grade brevity: the verticals, then the promise, in one line.
-              Replaced the previous four-line sentence about "curated gourmet
-              dishes, sanctuary spa treatments, VIP chauffeurs and swift concierge
-              delivery", which spent the full width restating the headline.
-
-              The first four entries are categories and are separated by a middot
-              so the line scans as a list rather than a sentence with a missing
-              verb. "One concierge" is what the list resolves to, so it carries the
-              accent and takes no separator — which is also why it is the only part
-              not wrapped in the de-emphasised class.
-
-              The entrance is a staggered word rise; `prefers-reduced-motion` drops
-              it to a plain render. Styles live beside the rest of the Hero's
-              presentation in `src/index.css`. */}
-          <p
-            className={`hero-subtitle text-base sm:text-lg md:text-xl mb-7 sm:mb-8 font-semibold leading-snug transition-colors duration-300 ${
+          {/* Hero subtitle: five motivations, revealed one at a time.
+              The taxonomy drives the copy. 21 verticals in a row is not a reason to
+              do anything, so they are grouped by the MOTIVATION someone is in when
+              they open the app — Craving, Reset, Arrive, Supply, Fix — and the line
+              rotates between them. Each names real verticals from the seeded
+              catalogue. See HeroRotatingSubtitle.tsx for the data and the reasoning,
+              and src/index.css for the reveal. */}
+          <HeroWipeSubtitle
+            isLight={isLight}
+            reduceMotion={Boolean(prefersReducedMotion)}
+            className={`text-base sm:text-lg md:text-xl mb-7 sm:mb-8 font-semibold leading-snug transition-colors duration-300 ${
               isLight ? 'text-slate-700' : 'text-gray-200 drop-shadow-sm'
             }`}
-          >
-            {HERO_SUBTITLE.map((entry, index) =>
-              entry.kind === 'separator' ? (
-                <span key={`sep-${index}`} className="hero-subtitle__word hero-subtitle__separator" aria-hidden="true">
-                  ·
-                </span>
-              ) : (
-                <span
-                  key={entry.word}
-                  className={`hero-subtitle__word${
-                    entry.kind === 'promise'
-                      ? ` hero-subtitle__promise ${isLight ? 'hero-subtitle__promise--light' : 'hero-subtitle__promise--dark'}`
-                      : entry.kind === 'category'
-                      ? ' hero-subtitle__category'
-                      : ''
-                  }`}
-                >
-                  {entry.word}
-                </span>
-              )
-            )}
-          </p>
+          />
 
           {/* Adaptive Editable Search Bar with Live Clear & Suggestions */}
           <form onSubmit={handleSearchSubmit} className="relative mb-3">

@@ -27,6 +27,10 @@ closed.
    design skills flag it; changing it changes the product's visual identity, so it
    is raised rather than done silently.
 
+4. **The hero subtitle decision is made and shipped** (§7.0): the rotating clip
+   wipe. Nothing is pending there, but the tree was left uncommitted at the moment
+   of the decision — check `git status` before assuming it is clean.
+
 ---
 
 ## 2. Run it
@@ -69,6 +73,7 @@ again, it fails.
 | Merchant page | one template for all 21 verticals |
 | Item modal | one modal, requirements derived from arc + the catalogue's own declared fields |
 | Cart | add from the modal, persisted to `localStorage` |
+| Hero motivation pods | five motivations (Craving/Reset/Arrive/Supply/Fix) drawn from the real catalogue, **three variants awaiting selection** — uncommitted, see §7.0 |
 
 ### The five commerce arcs
 
@@ -133,6 +138,27 @@ re-measured since.
    Tailwind v4 emits `oklch()`, which a numeric parse misreads. **A dramatic
    number is more likely to be a broken instrument than a broken product.**
 
+   A fourth, from the hero-pods session: the live scaffold injects a per-event
+   stylesheet that forces variant 1 visible with `!important`. Measuring any other
+   variant without disabling that sheet first returns a `0x0` box and every
+   derived number is zero. Disable it before you measure —
+   `logs/critique/_verify-hero-pods.mjs` shows how.
+
+6. **Never write files with `Set-Content` or `Out-File`; encoding will bite you.**
+   PowerShell 5.1's `Out-File` defaults to **UTF-16LE** and `Set-Content` is not
+   UTF-8. This has already cost real damage twice: a double-encoded em-dash in
+   `src/index.css`, and 20 of 23 logs in `logs/` unreadable as text (16 UTF-16LE,
+   3 mixed UTF-8-header + UTF-16LE-body, 1 cp1252). Use
+   `[System.IO.File]::WriteAllText($p, $t, (New-Object System.Text.UTF8Encoding($false)))`,
+   or write through Node, which is what fixed it. Two traps worth knowing if you
+   ever have to repair such a file:
+
+   - **Mixed-encoding files must be split on the file's original byte alignment**,
+     not on a line boundary. Deriving the split from the first NUL byte lands one
+     byte late and byte-swaps the whole tail into CJK-looking garbage.
+   - **The double-encoding is cp1252, not Latin-1.** Bytes `0x80`-`0x9F` map to
+     `U+0150`-`U+017F` (`ž`, `œ`), so a Latin-1 round-trip fails on exactly those.
+
 ---
 
 ## 6. The catalogue is generated, not authored
@@ -156,6 +182,30 @@ removing the cap, so all 14,895 items reach the database.
 ---
 
 ## 7. Backlog, in priority order
+
+### 7.0 ✅ Decided — the hero subtitle is the rotating clip wipe
+
+Recorded 2026-09-21. The user chose **variant 3**, so `Hero.tsx` renders
+`HeroWipeSubtitle` directly: five motivations, revealed one at a time, gold
+sweeping across the line on each change. The other two presentations are deleted,
+along with their CSS and the `examples` field they used.
+
+| Variant | Verdict |
+| --- | --- |
+| 1 — rotating pod with blur cross-fade + subcategory chips | not chosen; **the chip idea is kept in reserve** and may return |
+| 2 — five-item visible rail | rejected: needed two lines at 672px, so it could not honour the one-line brief |
+| **3 — rotating clip wipe** | **shipped** |
+
+Measured on the shipped build: gold `#E5B65F` at **9.92:1** dark and `#8A6413` at
+**5.05:1** light, one line at every width, rotation confirmed changing
+(`Craving → Reset`), and the wipe animation live on every change rather than firing
+once on mount. With `prefers-reduced-motion`, all five motivations render as static
+text with `clip-path: none` — verified, not assumed.
+
+Note for the record: the browser's accept event reported `variantId: 1`, because
+variant 1 was the scaffold's visible default rather than the choice. The decision
+above is the one that shipped; the discrepancy is recorded in
+`.impeccable/live/accept-receipts/9c63bcac.json`.
 
 ### 7.1 🔴 Migrate the remaining 19 verticals off static data
 
@@ -217,8 +267,10 @@ blames the search term rather than the scope.
 1. `npm run db:up && npm run server && npm run dev` — confirm the stack runs.
 2. `npm run test:api && npm run test:flow && npm run test:consistency` — confirm
    102 assertions still pass.
-3. Raise `SQL_ITEM_LIMIT` in `scripts/regenerate_catalog_seed.py`, regenerate,
+3. **Ask the user which hero variant won (§7.0), delete the other two, commit.** The
+   tree is dirty until this happens, so do it before layering more work on top.
+4. Raise `SQL_ITEM_LIMIT` in `scripts/regenerate_catalog_seed.py`, regenerate,
    re-apply, and confirm `/api/health` reports a much larger `totalItems`.
-4. Pick one static vertical (`Restaurants.tsx` is the largest) and migrate it to
+5. Pick one static vertical (`Restaurants.tsx` is the largest) and migrate it to
    `/api/merchants?category=restaurants-food`, using the discovery screen as the
    worked example.
