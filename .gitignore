@@ -12,6 +12,10 @@ coverage/
 # Local npm cache created because the global cache path is outside the sandbox.
 .npm-cache/
 
+# Scratch files (temp commit messages, debug probes).
+logs/_*
+scripts/_*
+
 # OS / editor
 Thumbs.db
 desktop.ini
