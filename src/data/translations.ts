@@ -315,7 +315,7 @@ export const translations: Record<Language, TranslationSchema> = {
     hero: {
       badge: 'Curated Hospitality Concierge',
       titleLine1: 'Everything you need,',
-      titleLine2: 'right where you are.',
+      titleLine2: 'Right where you are.',
       subtitle: 'Order curated gourmet dishes, book sanctuary spa treatments, arrange VIP chauffeurs, and enjoy swift concierge delivery directly to your villa, room, or residence.',
       searchPlaceholder: 'Search Nobu, Wagyu, Balinese Spa, Maybach, Caviar...',
       searchBtn: 'Search',
