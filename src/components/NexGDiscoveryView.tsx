@@ -208,7 +208,16 @@ export default function NexGDiscoveryView({
             </button>
 
             <div className="flex items-center gap-2">
-              <span className="font-black text-base sm:text-lg tracking-tight bg-gradient-to-r from-[#B88728] to-[#E5B65F] bg-clip-text text-transparent">
+              {/* Solid brand gold, not a gradient-clipped fill. Gradient text is a
+                  refusal in DESIGN.md: emphasis comes from weight and size, and a
+                  gradient across two golds reads as neither one. This also lets the
+                  token switch cleanly between themes. */}
+              <span
+                className={cn(
+                  'font-black text-base sm:text-lg tracking-tight',
+                  isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'
+                )}
+              >
                 NEXG
               </span>
               <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-[#E5B65F]/20 text-[#B88728] dark:text-[#E5B65F] border border-[#E5B65F]/30">

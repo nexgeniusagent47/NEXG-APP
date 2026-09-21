@@ -632,7 +632,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
             <LanguageSwitcher />
             <button
               onClick={() => onNavigate?.('home')}
-              className="text-xs font-bold uppercase tracking-wider text-slate-600 hover:text-[#E5B65F] transition-colors flex items-center gap-1.5 cursor-pointer bg-slate-50 hover:bg-amber-50 border border-slate-200 hover:border-amber-200 px-3 py-1.5 rounded-xl"
+              className="text-xs font-bold uppercase tracking-wider text-amber-800 hover:text-[#B88728] transition-colors flex items-center gap-1.5 cursor-pointer bg-slate-50 hover:bg-amber-50 border border-slate-200 hover:border-amber-200 px-3 py-1.5 rounded-xl"
             >
               {renderIcon('ArrowLeft', 'w-3.5 h-3.5')} {t.partnersPortal.backToSite}
             </button>
@@ -1924,7 +1924,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
             {/* STEP 11: SUCCESS SCREEN STATE */}
             {currentStep === 11 && (
               <div className="text-center py-12 space-y-6">
-                <div className="w-20 h-20 rounded-full bg-emerald-100 text-emerald-500 flex items-center justify-center text-4xl mx-auto shadow-md animate-bounce">
+                <div className="w-20 h-20 rounded-full bg-emerald-100 text-emerald-500 flex items-center justify-center text-4xl mx-auto shadow-md success-settle">
                   {renderIcon('CheckCircle2', 'w-10 h-10')}
                 </div>
                 

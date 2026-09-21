@@ -2261,7 +2261,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                 ======================================= */}
             {currentStep === 7 && (
               <div className="py-12 text-center max-w-lg mx-auto space-y-8">
-                <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center text-green-600 mx-auto shadow-md animate-bounce">
+                <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center text-green-600 mx-auto shadow-md success-settle">
                   <CheckCircle size={48} className="fill-current text-white bg-green-600 rounded-full" />
                 </div>
                 
