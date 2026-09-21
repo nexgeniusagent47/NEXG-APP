@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import MerchantAdCarousel from './components/MerchantAdCarousel';
-import CategoryExplorerModal from './components/CategoryExplorerModal';
 import ScrollToTop from './components/ScrollToTop';
 import HowItWorks from './components/HowItWorks';
 import Promo from './components/Promo';
@@ -38,7 +37,6 @@ import OrderTrackingModal from './components/OrderTrackingModal';
 import { NexGNavigationProvider, useNexGNavigation } from './components/nexg/NexGNavigationContext';
 import { NexGItemSheet } from './components/nexg/NexGItemSheet';
 import FloatingCartBar from './components/FloatingCartBar';
-import { MerchantPage } from './components/nexg/MerchantPage';
 import { NexGMerchant } from './types/nexg';
 import DiscoveryScreen from './components/discovery/DiscoveryScreen';
 import { MerchantPreviewSheet } from './components/discovery/MerchantPreviewSheet';
@@ -64,8 +62,6 @@ function AppContent() {
   const [selectedNexGCategory, setSelectedNexGCategory] = useState<CatalogCategory>(
     CATEGORIES_21[0]
   );
-  const [isCategoryExplorerOpen, setIsCategoryExplorerOpen] = useState(false);
-  const [categorySearchQuery, setCategorySearchQuery] = useState('');
   const [isSqlModalOpen, setIsSqlModalOpen] = useState(false);
   const [selectedMerchant, setSelectedMerchant] = useState<NexGMerchant | null>(null);
 
@@ -114,28 +110,27 @@ function AppContent() {
     'courier_onboarding',
   ].includes(currentPage);
 
-  // Search entry point: the hero search box AND the "Explore Categories" cards.
-  //
-  // v2 requirement R1: this ALWAYS opens the merchant discovery surface, with or
-  // without a query. An earlier pass routed an empty query to the taxonomy
-  // explorer, which meant clicking the search bar produced a category list with
-  // no merchants, results or filters. The explorer is now a separate, explicitly
-  // requested surface (`handleOpenCategoryExplorer`).
-  //
-  // v1 fix retained: `setIsCategoryExplorerOpen(true)` originally existed nowhere
-  // in the app, so these entry points were entirely inert (D-10).
-  const handleOpenNexGWorkflow = (query?: string) => {
-    setDiscoveryQuery((query ?? '').trim());
+  /**
+   * Open the discovery surface, optionally pre-filled with a query.
+   *
+   * This is the single browse entry point, reached from the hero search box, the
+   * "Explore Categories" cards and the header's Explore action.
+   *
+   * v2 requirement R1: it ALWAYS opens merchant discovery, with or without a
+   * query. An earlier pass routed an empty query to the taxonomy explorer, so
+   * clicking the search bar produced a category list with no merchants, results
+   * or filters.
+   *
+   * v1 fix retained: `setIsCategoryExplorerOpen(true)` originally existed nowhere
+   * in the app, so every one of these entry points was entirely inert (D-10).
+   */
+  const handleOpenNexGWorkflow = (query = '') => {
+    setDiscoveryQuery(query.trim());
     setIsDiscoveryOpen(true);
-    setIsCategoryExplorerOpen(false);
     setNexgStage('none');
   };
 
-  /**
-   * Open the discovery surface from the header, with no pre-filled query.
-   * Equivalent to `handleOpenNexGWorkflow()`; kept as a named alias so the
-   * header's intent reads clearly at the call site.
-   */
+  /** Alias so the header call site reads as its intent. */
   const handleOpenDiscovery = (query = '') => handleOpenNexGWorkflow(query);
 
   /**
@@ -340,27 +335,6 @@ function AppContent() {
       <OrderTrackingModal />
       <FloatingCartBar />
       <NexGItemSheet />
-
-      {/* 21 Categories & 134 Subcategories Merchant Hierarchy Modal */}
-      <CategoryExplorerModal
-        isOpen={isCategoryExplorerOpen}
-        initialQuery={categorySearchQuery}
-        onClose={() => setIsCategoryExplorerOpen(false)}
-        onNavigate={(page) => {
-          setIsCategoryExplorerOpen(false);
-          if (page === 'restaurants' || page === 'groceries' || page === 'spa' || page === 'transport') {
-            const foundCat = CATEGORIES_21.find((c) => c.slug === page);
-            if (foundCat) {
-              setSelectedNexGCategory(foundCat);
-              setNexgStage('drilldown');
-            } else {
-              setCurrentPage(page as AppCurrentPage);
-            }
-          } else {
-            setCurrentPage(page as AppCurrentPage);
-          }
-        }}
-      />
 
       {/* PostgreSQL DB Schema & Seed Viewer Modal */}
       <DatabaseSqlModal

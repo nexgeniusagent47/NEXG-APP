@@ -122,7 +122,12 @@ These are worth recording because each was invisible until something exercised i
 - `inter` is still the typeface, loaded from Google Fonts via `@import`. Both are
   flagged by the design skills; changing the typeface changes the product's whole
   visual identity, so it is raised rather than done silently.
-- The `CategoryExplorerModal` is now unreachable. Either wire it or delete it.
+- The `CategoryExplorerModal` is now unreachable, and its wiring was removed from
+  `App.tsx`. The component file is kept as an intentional reserve rather than
+  deleted: nothing imports it, so it costs nothing at build time, and it already
+  implements search across all 21 categories. Either wire it to a "browse all
+  categories" control or delete it. `src/lib/adapters.ts` was genuinely dead and
+  has been deleted.
 
 ---
 
