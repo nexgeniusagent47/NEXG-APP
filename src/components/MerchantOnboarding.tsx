@@ -692,7 +692,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
           </div>
           <div className="h-2.5 bg-slate-200 rounded-full overflow-hidden shadow-inner">
             <div 
-              className="h-full bg-gradient-to-r from-[#E5B65F] via-amber-500 to-orange-500 transition-all duration-300 rounded-full"
+              className="h-full bg-gradient-to-r from-[#E5B65F] via-amber-500 to-orange-500 transition-colors duration-300 rounded-full"
               style={{ width: `${(currentStep / totalSteps) * 100}%` }}
             ></div>
           </div>
@@ -730,7 +730,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                     type="text" 
                     value={categorySearch}
                     onChange={(e) => setCategorySearch(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-2xl text-sm focus:ring-2 focus:ring-[#E5B65F] focus:outline-none focus:border-transparent transition-all"
+                    className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-2xl text-sm focus:ring-2 focus:ring-[#E5B65F] focus:outline-none focus:border-transparent transition-colors"
                     placeholder="Search categories e.g. Food, Safe, Spa, Flight..."
                   />
                 </div>
@@ -743,7 +743,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                         key={cat.id}
                         onClick={() => selectCategory(cat)}
                         style={{ borderColor: isSelected ? cat.color : '#e2e8f0', backgroundColor: isSelected ? cat.bg : 'white' }}
-                        className={`rounded-2xl p-5 border cursor-pointer hover:shadow-md hover:scale-[1.01] transition-all flex flex-col justify-between`}
+                        className={`rounded-2xl p-5 border cursor-pointer hover:shadow-md hover:scale-[1.01] transition flex flex-col justify-between`}
                       >
                         <div className="flex items-center justify-between">
                           <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: isSelected ? 'rgba(255,255,255,0.8)' : cat.bg, color: cat.color }}>
@@ -782,7 +782,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       <div 
                         key={sub.id}
                         onClick={() => toggleSubcategory(sub)}
-                        className={`rounded-2xl p-5 border cursor-pointer hover:shadow-md transition-all flex flex-col justify-between ${isSelected ? 'border-[#E5B65F] bg-amber-50/20 shadow-sm' : 'border-slate-200 bg-white'}`}
+                        className={`rounded-2xl p-5 border cursor-pointer hover:shadow-md transition flex flex-col justify-between ${isSelected ? 'border-[#E5B65F] bg-amber-50/20 shadow-sm' : 'border-slate-200 bg-white'}`}
                       >
                         <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-50 text-slate-700">
                           {renderIcon(sub.icon, "w-5 h-5")}
@@ -817,7 +817,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       <p className="text-xs text-amber-400 font-medium">{selectedSubcategories.map(s => s.name).join(', ')}</p>
                     </div>
                   </div>
-                  <button onClick={() => setCurrentStep(1)} className="text-xs bg-slate-800 text-slate-300 hover:text-white px-3 py-1.5 rounded-lg border border-slate-700 transition-all flex items-center gap-1.5">
+                  <button onClick={() => setCurrentStep(1)} className="text-xs bg-slate-800 text-slate-300 hover:text-white px-3 py-1.5 rounded-lg border border-slate-700 transition-colors flex items-center gap-1.5">
                     {renderIcon('Edit2', 'w-3 h-3')} Change
                   </button>
                 </div>
@@ -895,7 +895,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                                   type="button"
                                   key={o}
                                   onClick={() => handleDynamicFieldChange(fieldId, o)}
-                                  className={`px-3 py-1.5 border rounded-xl text-xs font-semibold transition-all ${dynamicFields[fieldId] === o ? 'border-amber-500 bg-amber-50/20 text-amber-800' : 'border-slate-200 hover:border-amber-400 text-slate-600'}`}
+                                  className={`px-3 py-1.5 border rounded-xl text-xs font-semibold transition-colors ${dynamicFields[fieldId] === o ? 'border-amber-500 bg-amber-50/20 text-amber-800' : 'border-slate-200 hover:border-amber-400 text-slate-600'}`}
                                 >
                                   {o}
                                 </button>
@@ -915,7 +915,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                                       const next = isChecked ? currentList.filter((x: string) => x !== o) : [...currentList, o];
                                       handleDynamicFieldChange(fieldId, next);
                                     }}
-                                    className={`px-3 py-1.5 border rounded-xl text-xs font-semibold transition-all ${isChecked ? 'border-amber-500 bg-amber-50/20 text-amber-800' : 'border-slate-200 hover:border-amber-400 text-slate-600'}`}
+                                    className={`px-3 py-1.5 border rounded-xl text-xs font-semibold transition-colors ${isChecked ? 'border-amber-500 bg-amber-50/20 text-amber-800' : 'border-slate-200 hover:border-amber-400 text-slate-600'}`}
                                   >
                                     {o}
                                   </button>
@@ -949,7 +949,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                               type="button"
                               key={secName}
                               onClick={() => toggleSuggestedSection(secName)}
-                              className={`px-3 py-1.5 border rounded-full text-xs font-semibold transition-all ${isSelected ? 'border-amber-500 bg-amber-50/40 text-amber-800 font-extrabold' : 'border-slate-200 bg-white text-slate-600'}`}
+                              className={`px-3 py-1.5 border rounded-full text-xs font-semibold transition-colors ${isSelected ? 'border-amber-500 bg-amber-50/40 text-amber-800 font-extrabold' : 'border-slate-200 bg-white text-slate-600'}`}
                             >
                               {secName}
                             </button>
@@ -995,7 +995,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                         <button 
                           type="button"
                           onClick={addCustomSection}
-                          className="px-4 py-1.5 bg-slate-900 text-white font-bold rounded-xl text-xs hover:bg-black transition-all"
+                          className="px-4 py-1.5 bg-slate-900 text-white font-bold rounded-xl text-xs hover:bg-black transition-colors"
                         >
                           Add Section
                         </button>
@@ -1090,7 +1090,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   <button 
                     type="button"
                     onClick={addBranch}
-                    className="px-4 py-2 text-xs font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-xl transition-all flex items-center gap-1.5"
+                    className="px-4 py-2 text-xs font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-xl transition-colors flex items-center gap-1.5"
                   >
                     {renderIcon('Plus', 'w-3.5 h-3.5')} Add Branch
                   </button>
@@ -1099,7 +1099,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                 <div className="space-y-6">
                   {branches.map((branch, idx) => (
-                    <div key={branch.id} className="border border-slate-200 bg-white p-6 rounded-3xl relative space-y-4 shadow-sm hover:shadow-md transition-all">
+                    <div key={branch.id} className="border border-slate-200 bg-white p-6 rounded-3xl relative space-y-4 shadow-sm hover:shadow-md transition">
                       <div className="flex justify-between items-center border-b border-slate-100 pb-3">
                         <span className="font-extrabold text-sm text-slate-800 flex items-center gap-2">
                           <span className="w-6 h-6 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-xs font-bold">{idx + 1}</span>
@@ -1109,7 +1109,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           <button 
                             type="button" 
                             onClick={() => removeBranch(branch.id)}
-                            className="text-red-500 hover:text-red-700 text-xs font-bold flex items-center gap-1 hover:bg-red-50 px-2 py-1 rounded-lg transition-all"
+                            className="text-red-500 hover:text-red-700 text-xs font-bold flex items-center gap-1 hover:bg-red-50 px-2 py-1 rounded-lg transition-colors"
                           >
                             {renderIcon('Trash2', 'w-3.5 h-3.5')} Remove
                           </button>
@@ -1150,7 +1150,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           <button 
                             type="button"
                             onClick={() => handleOpenMapPicker(branch.id)}
-                            className="px-4 py-2 bg-slate-900 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 hover:bg-black transition-all shadow-sm"
+                            className="px-4 py-2 bg-slate-900 text-white font-bold text-xs rounded-xl flex items-center gap-1.5 hover:bg-black transition shadow-sm"
                           >
                             {renderIcon('MapPin', 'w-3.5 h-3.5 text-amber-400')} Pick Coordinates
                           </button>
@@ -1360,7 +1360,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           onClick={() => {
                             setOperatingDays(prev => isChecked ? prev.filter(d => d !== day) : [...prev, day]);
                           }}
-                          className={`py-2 px-3 border rounded-xl text-xs font-semibold transition-all ${isChecked ? 'border-amber-500 bg-amber-50 text-amber-800' : 'border-slate-200 bg-white text-slate-600'}`}
+                          className={`py-2 px-3 border rounded-xl text-xs font-semibold transition-colors ${isChecked ? 'border-amber-500 bg-amber-50 text-amber-800' : 'border-slate-200 bg-white text-slate-600'}`}
                         >
                           {day}
                         </button>
@@ -1379,7 +1379,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           key={mode}
                           type="button"
                           onClick={() => setHoursMode(mode)}
-                          className={`px-3 py-1.5 rounded-lg font-bold capitalize transition-all ${hoursMode === mode ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500'}`}
+                          className={`px-3 py-1.5 rounded-lg font-bold capitalize transition ${hoursMode === mode ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500'}`}
                         >
                           {mode === 'same' ? 'Same Everyday' : mode === 'split' ? 'Split Weekends' : 'Custom Daily'}
                         </button>
@@ -1499,7 +1499,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           key={mode}
                           type="button"
                           onClick={() => setHolidayMode(mode)}
-                          className={`py-2 px-3 border rounded-xl text-xs font-semibold transition-all ${holidayMode === mode ? 'border-amber-500 bg-amber-50 text-amber-800' : 'border-slate-200 bg-white text-slate-600'}`}
+                          className={`py-2 px-3 border rounded-xl text-xs font-semibold transition-colors ${holidayMode === mode ? 'border-amber-500 bg-amber-50 text-amber-800' : 'border-slate-200 bg-white text-slate-600'}`}
                         >
                           {mode === 'closed' ? 'Closed' : mode === 'same' ? 'Regular Hours' : 'Custom Hours'}
                         </button>
@@ -1536,7 +1536,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div 
                       onClick={() => setDeliveryNexg(!deliveryNexg)}
-                      className={`border p-5 rounded-3xl cursor-pointer transition-all ${deliveryNexg ? 'border-amber-500 bg-amber-50/25 shadow-sm' : 'border-slate-200 bg-white hover:border-amber-300'}`}
+                      className={`border p-5 rounded-3xl cursor-pointer transition ${deliveryNexg ? 'border-amber-500 bg-amber-50/25 shadow-sm' : 'border-slate-200 bg-white hover:border-amber-300'}`}
                     >
                       <div className="flex items-center justify-between">
                         <span className="font-extrabold text-slate-900 text-sm">NEXG Riders Fleet</span>
@@ -1552,7 +1552,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                     <div 
                       onClick={() => setDeliveryOwn(!deliveryOwn)}
-                      className={`border p-5 rounded-3xl cursor-pointer transition-all ${deliveryOwn ? 'border-amber-500 bg-amber-50/25 shadow-sm' : 'border-slate-200 bg-white hover:border-amber-300'}`}
+                      className={`border p-5 rounded-3xl cursor-pointer transition ${deliveryOwn ? 'border-amber-500 bg-amber-50/25 shadow-sm' : 'border-slate-200 bg-white hover:border-amber-300'}`}
                     >
                       <div className="flex items-center justify-between">
                         <span className="font-extrabold text-slate-900 text-sm">Own Store Riders</span>
@@ -1701,7 +1701,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       <p className="text-slate-500 text-xs mt-1">Upload business registration scan PDF or image.</p>
                     </div>
                     <div className="mt-4">
-                      <label className={`w-full py-2.5 px-4 border text-center font-semibold rounded-2xl text-xs flex items-center justify-center gap-2 cursor-pointer transition-all ${uploadedFiles.certFile ? 'bg-emerald-50 border-emerald-300 text-emerald-700' : 'bg-white border-slate-300 text-slate-700 hover:border-amber-400 hover:bg-slate-50'}`}>
+                      <label className={`w-full py-2.5 px-4 border text-center font-semibold rounded-2xl text-xs flex items-center justify-center gap-2 cursor-pointer transition-colors ${uploadedFiles.certFile ? 'bg-emerald-50 border-emerald-300 text-emerald-700' : 'bg-white border-slate-300 text-slate-700 hover:border-amber-400 hover:bg-slate-50'}`}>
                         <input type="file" onChange={(e) => handleFileUpload(e, 'certFile')} className="hidden" />
                         {renderIcon(uploadedFiles.certFile ? 'CheckCircle2' : 'FileUp', 'w-4 h-4')}
                         {uploadedFiles.certFile ? `${uploadedFiles.certFile.slice(0, 20)}...` : 'Choose File'}
@@ -1715,7 +1715,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       <p className="text-slate-500 text-xs mt-1">Upload ID or passport of major primary director.</p>
                     </div>
                     <div className="mt-4">
-                      <label className={`w-full py-2.5 px-4 border text-center font-semibold rounded-2xl text-xs flex items-center justify-center gap-2 cursor-pointer transition-all ${uploadedFiles.idFile ? 'bg-emerald-50 border-emerald-300 text-emerald-700' : 'bg-white border-slate-300 text-slate-700 hover:border-amber-400 hover:bg-slate-50'}`}>
+                      <label className={`w-full py-2.5 px-4 border text-center font-semibold rounded-2xl text-xs flex items-center justify-center gap-2 cursor-pointer transition-colors ${uploadedFiles.idFile ? 'bg-emerald-50 border-emerald-300 text-emerald-700' : 'bg-white border-slate-300 text-slate-700 hover:border-amber-400 hover:bg-slate-50'}`}>
                         <input type="file" onChange={(e) => handleFileUpload(e, 'idFile')} className="hidden" />
                         {renderIcon(uploadedFiles.idFile ? 'CheckCircle2' : 'FileUp', 'w-4 h-4')}
                         {uploadedFiles.idFile ? `${uploadedFiles.idFile.slice(0, 20)}...` : 'Choose File'}
@@ -1732,7 +1732,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">Business Logo (Square 1:1)</label>
-                      <div className="border-2 border-dashed border-slate-200 rounded-2xl aspect-square flex flex-col items-center justify-center p-4 bg-white relative cursor-pointer group hover:border-amber-400 transition-all">
+                      <div className="border-2 border-dashed border-slate-200 rounded-2xl aspect-square flex flex-col items-center justify-center p-4 bg-white relative cursor-pointer group hover:border-amber-400 transition-colors">
                         <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setLogoPreview)} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" />
                         {logoPreview ? (
                           <img src={logoPreview} className="absolute inset-0 w-full h-full object-cover rounded-2xl z-10" alt="Logo preview" />
@@ -1747,7 +1747,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                     <div className="space-y-2">
                       <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">Store Front Banner (16:9 Landscape)</label>
-                      <div className="border-2 border-dashed border-slate-200 rounded-2xl aspect-[16/9] flex flex-col items-center justify-center p-4 bg-white relative cursor-pointer group hover:border-amber-400 transition-all">
+                      <div className="border-2 border-dashed border-slate-200 rounded-2xl aspect-[16/9] flex flex-col items-center justify-center p-4 bg-white relative cursor-pointer group hover:border-amber-400 transition-colors">
                         <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setBannerPreview)} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" />
                         {bannerPreview ? (
                           <img src={bannerPreview} className="absolute inset-0 w-full h-full object-cover rounded-2xl z-10" alt="Banner preview" />
@@ -1884,7 +1884,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           key={mode}
                           type="button"
                           onClick={() => setSigMode(mode)}
-                          className={`px-3 py-1.5 rounded-lg transition-all ${sigMode === mode ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500'}`}
+                          className={`px-3 py-1.5 rounded-lg transition ${sigMode === mode ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500'}`}
                         >
                           {mode === 'draw' ? 'Draw Sign' : 'Type Sign'}
                         </button>
@@ -1916,7 +1916,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                         <button 
                           type="button" 
                           onClick={clearSignatureCanvas}
-                          className="absolute right-4 bottom-4 px-3 py-1 bg-slate-800 text-white text-xs font-semibold rounded-lg shadow hover:bg-black transition-all"
+                          className="absolute right-4 bottom-4 px-3 py-1 bg-slate-800 text-white text-xs font-semibold rounded-lg shadow hover:bg-black transition-colors"
                         >
                           Clear
                         </button>
@@ -1978,14 +1978,14 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   <button 
                     type="button" 
                     onClick={triggerPrint}
-                    className="px-6 py-3 bg-slate-900 text-white font-bold rounded-2xl text-xs hover:bg-black transition-all flex items-center justify-center gap-2 shadow-lg"
+                    className="px-6 py-3 bg-slate-900 text-white font-bold rounded-2xl text-xs hover:bg-black transition flex items-center justify-center gap-2 shadow-lg"
                   >
                     {renderIcon('Printer', 'w-4 h-4 text-amber-400')} Print Signed Contract
                   </button>
                   <button 
                     type="button" 
                     onClick={resetOnboarding}
-                    className="px-6 py-3 bg-slate-100 text-slate-700 font-bold border border-slate-200 rounded-2xl text-xs hover:bg-slate-200 transition-all"
+                    className="px-6 py-3 bg-slate-100 text-slate-700 font-bold border border-slate-200 rounded-2xl text-xs hover:bg-slate-200 transition-colors"
                   >
                     Onboard Another Store
                   </button>
@@ -2060,7 +2060,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                 <button 
                   type="button" 
                   onClick={handleConfirmMapPin}
-                  className="px-5 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow transition-all"
+                  className="px-5 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow transition-colors"
                 >
                   Confirm Coordinates
                 </button>

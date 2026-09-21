@@ -9,7 +9,7 @@ export default function LogoIcon({ className = "w-10 h-10" }: { className?: stri
       <img 
         src={nexgLogo} 
         alt="NEXG Logo" 
-        className={`w-full h-full object-contain transition-all duration-300 ${
+        className={`w-full h-full object-contain transition duration-300 ${
           isLight 
             ? 'filter drop-shadow-sm brightness-0 contrast-200 opacity-90' 
             : 'filter drop-shadow-[0_2px_10px_rgba(229,182,95,0.35)]'

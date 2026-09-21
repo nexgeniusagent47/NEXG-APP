@@ -145,7 +145,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
                 setActiveStepIndex(0);
               }}
               className={cn(
-                'px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-200 flex items-center gap-2 cursor-pointer border shadow-2xs',
+                'px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition duration-200 flex items-center gap-2 cursor-pointer border shadow-2xs',
                 isSelected
                   ? isLight
                     ? 'bg-[#B88728] text-white border-[#B88728] shadow-md scale-102'
@@ -167,7 +167,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
       {/* 3. LEVEL 2: ACTIVE WORLD HERO & PROGRESSIVE JOURNEY STEPPER */}
       <div
         className={cn(
-          'relative rounded-3xl border overflow-hidden p-5 sm:p-7 transition-all duration-300 shadow-sm',
+          'relative rounded-3xl border overflow-hidden p-5 sm:p-7 transition duration-300 shadow-sm',
           isLight
             ? 'bg-gradient-to-br from-amber-50/70 via-white to-slate-50 border-amber-200/60'
             : 'bg-gradient-to-br from-[#1E1B15] via-[#151719] to-[#121315] border-[#E5B65F]/20'
@@ -254,7 +254,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
                   key={step.stepNumber}
                   onClick={() => setActiveStepIndex(idx)}
                   className={cn(
-                    'relative p-3.5 rounded-2xl border transition-all duration-200 cursor-pointer text-left',
+                    'relative p-3.5 rounded-2xl border transition-colors duration-200 cursor-pointer text-left',
                     isActive
                       ? isLight
                         ? 'bg-white border-[#B88728] shadow-md ring-2 ring-[#B88728]/20'

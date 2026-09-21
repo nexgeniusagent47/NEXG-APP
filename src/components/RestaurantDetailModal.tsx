@@ -106,7 +106,7 @@ export default function RestaurantDetailModal({
             <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-20">
               <button
                 onClick={onClose}
-                className="w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-md transition-all cursor-pointer border border-white/10"
+                className="w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-md transition-colors cursor-pointer border border-white/10"
                 aria-label="Back"
               >
                 <X size={20} />
@@ -115,7 +115,7 @@ export default function RestaurantDetailModal({
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setIsFavorite(!isFavorite)}
-                  className={`w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 flex items-center justify-center backdrop-blur-md transition-all cursor-pointer border border-white/10 ${
+                  className={`w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 flex items-center justify-center backdrop-blur-md transition-colors cursor-pointer border border-white/10 ${
                     isFavorite ? 'text-rose-500' : 'text-white'
                   }`}
                   aria-label="Save to favorites"
@@ -135,7 +135,7 @@ export default function RestaurantDetailModal({
                 {/* Google Reviews Badge in Header */}
                 <button
                   onClick={() => setModalTab('google-reviews')}
-                  className="flex items-center gap-1.5 bg-black/75 hover:bg-black/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-white border border-white/15 cursor-pointer transition-all hover:border-[#E5B65F]/60"
+                  className="flex items-center gap-1.5 bg-black/75 hover:bg-black/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-white border border-white/15 cursor-pointer transition-colors hover:border-[#E5B65F]/60"
                   title="View Google Reviews"
                 >
                   <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24">
@@ -178,7 +178,7 @@ export default function RestaurantDetailModal({
           <div className="flex items-center border-b border-white/10 bg-[#141517] px-4 sm:px-6">
             <button
               onClick={() => setModalTab('menu')}
-              className={`py-3.5 px-4 font-bold text-xs sm:text-sm border-b-2 transition-all cursor-pointer flex items-center gap-2 ${
+              className={`py-3.5 px-4 font-bold text-xs sm:text-sm border-b-2 transition-colors cursor-pointer flex items-center gap-2 ${
                 modalTab === 'menu'
                   ? 'border-[#E5B65F] text-[#E5B65F]'
                   : 'border-transparent text-gray-400 hover:text-white'
@@ -193,7 +193,7 @@ export default function RestaurantDetailModal({
 
             <button
               onClick={() => setModalTab('google-reviews')}
-              className={`py-3.5 px-4 font-bold text-xs sm:text-sm border-b-2 transition-all cursor-pointer flex items-center gap-2 ${
+              className={`py-3.5 px-4 font-bold text-xs sm:text-sm border-b-2 transition-colors cursor-pointer flex items-center gap-2 ${
                 modalTab === 'google-reviews'
                   ? 'border-[#E5B65F] text-[#E5B65F]'
                   : 'border-transparent text-gray-400 hover:text-white'
@@ -223,7 +223,7 @@ export default function RestaurantDetailModal({
                     <button
                       key={cat.id}
                       onClick={() => setActiveCategory(cat.id)}
-                      className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+                      className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition cursor-pointer ${
                         activeCategory === cat.id
                           ? 'bg-[#E5B65F] text-black shadow-md'
                           : 'bg-[#202224] text-gray-400 hover:text-white hover:bg-[#282a2d] border border-white/5'
@@ -259,7 +259,7 @@ export default function RestaurantDetailModal({
                       <div
                         key={dish.id}
                         onClick={() => setCustomizingDish(dish)}
-                        className="p-4 rounded-2xl bg-[#1e2022] border border-white/5 hover:border-[#E5B65F]/40 hover:bg-[#242629] transition-all duration-300 flex justify-between gap-3 group cursor-pointer relative"
+                        className="p-4 rounded-2xl bg-[#1e2022] border border-white/5 hover:border-[#E5B65F]/40 hover:bg-[#242629] transition-colors duration-300 flex justify-between gap-3 group cursor-pointer relative"
                       >
                         <div className="flex flex-col justify-between flex-grow min-w-0 pr-2">
                           <div>
@@ -359,7 +359,7 @@ export default function RestaurantDetailModal({
 
                   <div className="flex items-center gap-2">
                     <span className="text-xs text-gray-400 font-medium">Synced Live</span>
-                    <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <div className="w-2 h-2 rounded-full bg-emerald-400 animate-status" />
                   </div>
                 </div>
 
@@ -425,7 +425,7 @@ export default function RestaurantDetailModal({
                     return (
                       <div
                         key={rev.id}
-                        className="p-5 rounded-2xl bg-[#191b1d] border border-white/10 hover:border-white/20 transition-all space-y-3"
+                        className="p-5 rounded-2xl bg-[#191b1d] border border-white/10 hover:border-white/20 transition-colors space-y-3"
                       >
                         <div className="flex items-start justify-between gap-3">
                           <div className="flex items-center gap-3">
@@ -479,7 +479,7 @@ export default function RestaurantDetailModal({
                         <div className="flex items-center justify-between pt-2 border-t border-white/5">
                           <button
                             onClick={() => handleHelpfulClick(rev.id, rev.helpfulVotes ?? 12)}
-                            className={`flex items-center gap-1.5 text-xs px-3 py-1 rounded-full transition-all cursor-pointer ${
+                            className={`flex items-center gap-1.5 text-xs px-3 py-1 rounded-full transition-colors cursor-pointer ${
                               hasVoted
                                 ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold'
                                 : 'bg-white/5 text-gray-400 hover:text-white hover:bg-white/10'
@@ -513,7 +513,7 @@ export default function RestaurantDetailModal({
                   onClose();
                   setIsCartOpen(true);
                 }}
-                className="px-5 py-2.5 rounded-full bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-bold text-xs flex items-center gap-2 shadow-md cursor-pointer transition-all active:scale-95"
+                className="px-5 py-2.5 rounded-full bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-bold text-xs flex items-center gap-2 shadow-md cursor-pointer transition active:scale-95"
               >
                 <ShoppingBag size={14} />
                 <span>View Cart ({itemsCount})</span>

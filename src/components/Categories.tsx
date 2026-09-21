@@ -99,7 +99,7 @@ export default function Categories({ onNavigate }: { onNavigate?: (page: string)
         {categories.map((cat, i) => (
           <div 
             key={i} 
-            className={`min-w-[240px] sm:min-w-[300px] lg:min-w-[340px] flex-shrink-0 rounded-2xl overflow-hidden relative transition-all duration-300 aspect-square group cursor-pointer flex flex-col snap-start ${
+            className={`min-w-[240px] sm:min-w-[300px] lg:min-w-[340px] flex-shrink-0 rounded-2xl overflow-hidden relative transition duration-300 aspect-square group cursor-pointer flex flex-col snap-start ${
               isLight
                 ? 'bg-white hover:bg-slate-50/95 ring-1 ring-inset ring-slate-200/90 hover:ring-2 hover:ring-[#B88728] shadow-sm hover:shadow-xl hover:-translate-y-1 active:scale-[0.99]'
                 : 'bg-[#181a1d] hover:bg-[#1f2227] ring-1 ring-inset ring-white/10 hover:ring-2 hover:ring-[#E5B65F] shadow-lg hover:shadow-2xl hover:-translate-y-1 active:scale-[0.99]'

@@ -87,7 +87,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
       
       {/* Adaptive Docked Navigation for Properties */}
       <nav 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition duration-300 ${
           scrolled 
             ? (isLight ? 'bg-[#F8F9FA]/85 backdrop-blur-2xl shadow-xs py-3' : 'bg-[#0d0e0e]/85 backdrop-blur-2xl shadow-xs py-3')
             : 'bg-transparent py-5 sm:py-6'
@@ -98,7 +98,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           <div className="flex items-center gap-3 sm:gap-4">
             <button 
               onClick={() => onNavigate('home')}
-              className={`flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full transition-all backdrop-blur-md cursor-pointer min-w-[40px] min-h-[40px] ${
+              className={`flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full transition backdrop-blur-md cursor-pointer min-w-[40px] min-h-[40px] ${
                 isLight
                   ? 'bg-white/80 hover:bg-white text-slate-800 shadow-xs'
                   : 'bg-white/10 hover:bg-white/20 text-white'
@@ -140,7 +140,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             {/* Quick Action Docked CTA */}
             <button
               onClick={() => onNavigate('merchant_onboarding')}
-              className={`px-4 py-2 rounded-full font-bold text-xs transition-all cursor-pointer shadow-xs active:scale-95 ${
+              className={`px-4 py-2 rounded-full font-bold text-xs transition cursor-pointer shadow-xs active:scale-95 ${
                 isLight 
                   ? 'bg-[#B88728] hover:bg-[#9e721d] text-white'
                   : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-[#291800]'
@@ -156,7 +156,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             <button
               id="properties-theme-toggle-btn"
               onClick={toggleTheme}
-              className={`flex items-center justify-center w-9 h-9 rounded-xl border transition-all cursor-pointer ${
+              className={`flex items-center justify-center w-9 h-9 rounded-xl border transition cursor-pointer ${
                 isLight
                   ? 'bg-white/80 hover:bg-white border-slate-200 text-amber-800 shadow-2xs'
                   : 'bg-white/10 hover:bg-white/20 border-white/15 text-[#E5B65F]'
@@ -274,7 +274,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <button 
                 onClick={() => onNavigate('host_onboarding')}
-                className="flex items-center justify-center gap-2 bg-[#E5B65F] hover:bg-[#ffddb1] text-[#291800] px-8 py-4 rounded-full font-bold text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+                className="flex items-center justify-center gap-2 bg-[#E5B65F] hover:bg-[#ffddb1] text-[#291800] px-8 py-4 rounded-full font-bold text-base transition shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
               >
                 Partner with NEXG
                 <ArrowRight size={18} />
@@ -320,7 +320,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             
             {/* Fine Dining */}
             <div className="group cursor-default">
-              <div className={`aspect-square rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center p-4 sm:p-6 transition-all duration-300 hover:-translate-y-2 shadow-sm ${
+              <div className={`aspect-square rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center p-4 sm:p-6 transition duration-300 hover:-translate-y-2 shadow-sm ${
                 isLight
                   ? 'bg-white hover:bg-amber-50/40 hover:shadow-[0_10px_30px_rgba(229,182,95,0.18)]'
                   : 'bg-white/5 hover:bg-[#E5B65F]/10 hover:shadow-[0_0_20px_rgba(229,182,95,0.15)]'
@@ -339,7 +339,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
 
             {/* Spa & Wellness */}
             <div className="group cursor-default">
-              <div className={`aspect-square rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center p-4 sm:p-6 transition-all duration-300 hover:-translate-y-2 shadow-sm ${
+              <div className={`aspect-square rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center p-4 sm:p-6 transition duration-300 hover:-translate-y-2 shadow-sm ${
                 isLight
                   ? 'bg-white hover:bg-cyan-50/40 hover:shadow-[0_10px_30px_rgba(6,182,212,0.18)]'
                   : 'bg-white/5 hover:bg-[#06B6D4]/10 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)]'
@@ -356,7 +356,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
 
             {/* Luxury Transport */}
             <div className="group cursor-default">
-              <div className={`aspect-square rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center p-4 sm:p-6 transition-all duration-300 hover:-translate-y-2 shadow-sm ${
+              <div className={`aspect-square rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center p-4 sm:p-6 transition duration-300 hover:-translate-y-2 shadow-sm ${
                 isLight
                   ? 'bg-white hover:bg-blue-50/40 hover:shadow-[0_10px_30px_rgba(59,130,246,0.18)]'
                   : 'bg-white/5 hover:bg-[#3B82F6]/10 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)]'
@@ -373,7 +373,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
 
             {/* Local Adventures */}
             <div className="group cursor-default">
-              <div className={`aspect-square rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center p-4 sm:p-6 transition-all duration-300 hover:-translate-y-2 shadow-sm ${
+              <div className={`aspect-square rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center p-4 sm:p-6 transition duration-300 hover:-translate-y-2 shadow-sm ${
                 isLight
                   ? 'bg-white hover:bg-rose-50/40 hover:shadow-[0_10px_30px_rgba(244,63,94,0.18)]'
                   : 'bg-white/5 hover:bg-[#F43F5E]/10 hover:shadow-[0_0_20px_rgba(244,63,94,0.15)]'
@@ -541,21 +541,21 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             <span className={`text-xs sm:text-sm md:text-base font-bold tracking-tight flex items-center gap-1.5 ${
               isLight ? 'text-slate-800' : 'text-gray-200'
             }`}>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] animate-pulse"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>
               Happy Guests
             </span>
             <span className={`hidden sm:inline font-light ${isLight ? 'text-slate-300' : 'text-gray-600'}`}>|</span>
             <span className={`text-xs sm:text-sm md:text-base font-bold tracking-tight flex items-center gap-1.5 ${
               isLight ? 'text-amber-700' : 'text-[#E5B65F]'
             }`}>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] animate-pulse"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>
               Better Reviews
             </span>
             <span className={`hidden sm:inline font-light ${isLight ? 'text-slate-300' : 'text-gray-600'}`}>|</span>
             <span className={`text-xs sm:text-sm md:text-base font-bold tracking-tight flex items-center gap-1.5 ${
               isLight ? 'text-slate-800' : 'text-gray-200'
             }`}>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] animate-pulse"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>
               More Bookings
             </span>
           </div>
@@ -564,7 +564,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           
           {/* Pillar 1: Enhanced Experience */}
-          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition-all duration-300 hover:-translate-y-1 ${
+          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white border-slate-200 hover:border-amber-400 hover:shadow-xl shadow-sm'
               : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border-white/10 hover:border-[#E5B65F]/30 hover:shadow-[0_0_30px_rgba(229,182,95,0.1)]'
@@ -579,7 +579,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           </div>
 
           {/* Pillar 2: 5-Star Reviews */}
-          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition-all duration-300 hover:-translate-y-1 ${
+          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white border-slate-200 hover:border-cyan-400 hover:shadow-xl shadow-sm'
               : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border-white/10 hover:border-cyan-500/30 hover:shadow-[0_0_30px_rgba(6,182,212,0.1)]'
@@ -594,7 +594,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           </div>
 
           {/* Pillar 3: Earn More Income */}
-          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition-all duration-300 hover:-translate-y-1 ${
+          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white border-slate-200 hover:border-emerald-400 hover:shadow-xl shadow-sm'
               : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border-white/10 hover:border-emerald-500/30 hover:shadow-[0_0_30px_rgba(16,185,129,0.1)]'
@@ -609,7 +609,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           </div>
 
           {/* Pillar 4: Stand Out */}
-          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition-all duration-300 hover:-translate-y-1 ${
+          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white border-slate-200 hover:border-purple-400 hover:shadow-xl shadow-sm'
               : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border-white/10 hover:border-purple-500/30 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]'
@@ -624,7 +624,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           </div>
 
           {/* Pillar 5: We Handle Everything */}
-          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition-all duration-300 hover:-translate-y-1 ${
+          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white border-slate-200 hover:border-rose-400 hover:shadow-xl shadow-sm'
               : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border-white/10 hover:border-rose-500/30 hover:shadow-[0_0_30px_rgba(244,63,94,0.1)]'
@@ -639,7 +639,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           </div>
 
           {/* Pillar 6: Trusted & Safe */}
-          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition-all duration-300 hover:-translate-y-1 ${
+          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white border-slate-200 hover:border-blue-400 hover:shadow-xl shadow-sm'
               : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border-white/10 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)]'
@@ -682,7 +682,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             
             {/* Analytics Card 1 */}
-            <div className={`rounded-2xl sm:rounded-3xl p-6 sm:p-8 border flex flex-col justify-between transition-all ${
+            <div className={`rounded-2xl sm:rounded-3xl p-6 sm:p-8 border flex flex-col justify-between transition ${
               isLight
                 ? 'bg-white border-slate-200 shadow-md hover:shadow-xl text-slate-900'
                 : 'bg-white/5 border-white/10 shadow-md hover:shadow-lg text-white'
@@ -716,7 +716,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             </div>
 
             {/* Analytics Card 2 */}
-            <div className={`rounded-2xl sm:rounded-3xl p-6 sm:p-8 border flex flex-col justify-between transition-all ${
+            <div className={`rounded-2xl sm:rounded-3xl p-6 sm:p-8 border flex flex-col justify-between transition ${
               isLight
                 ? 'bg-white border-slate-200 shadow-md hover:shadow-xl text-slate-900'
                 : 'bg-white/5 border-white/10 shadow-md hover:shadow-lg text-white'
@@ -750,7 +750,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             </div>
 
             {/* Analytics Card 3 */}
-            <div className={`rounded-2xl sm:rounded-3xl p-6 sm:p-8 border flex flex-col justify-between transition-all sm:max-lg:col-span-2 ${
+            <div className={`rounded-2xl sm:rounded-3xl p-6 sm:p-8 border flex flex-col justify-between transition sm:max-lg:col-span-2 ${
               isLight
                 ? 'bg-white border-slate-200 shadow-md hover:shadow-xl text-slate-900'
                 : 'bg-white/5 border-white/10 shadow-md hover:shadow-lg text-white'
@@ -819,7 +819,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
             
             {/* Step 1 */}
-            <div className={`relative rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between min-h-[220px] ${
+            <div className={`relative rounded-2xl p-6 transition duration-300 flex flex-col justify-between min-h-[220px] ${
               isLight
                 ? 'bg-white border border-slate-200 hover:border-amber-400 hover:shadow-lg shadow-sm text-slate-900'
                 : 'bg-[#131515] border border-white/10 hover:border-[#E5B65F]/40 hover:bg-white/[0.02] shadow-lg text-white'
@@ -849,7 +849,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             </div>
 
             {/* Step 2 */}
-            <div className={`relative rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between min-h-[220px] ${
+            <div className={`relative rounded-2xl p-6 transition duration-300 flex flex-col justify-between min-h-[220px] ${
               isLight
                 ? 'bg-white border border-slate-200 hover:border-amber-400 hover:shadow-lg shadow-sm text-slate-900'
                 : 'bg-[#131515] border border-white/10 hover:border-[#E5B65F]/40 hover:bg-white/[0.02] shadow-lg text-white'
@@ -879,7 +879,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             </div>
 
             {/* Step 3 */}
-            <div className={`relative rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between min-h-[220px] ${
+            <div className={`relative rounded-2xl p-6 transition duration-300 flex flex-col justify-between min-h-[220px] ${
               isLight
                 ? 'bg-white border border-slate-200 hover:border-amber-400 hover:shadow-lg shadow-sm text-slate-900'
                 : 'bg-[#131515] border border-white/10 hover:border-[#E5B65F]/40 hover:bg-white/[0.02] shadow-lg text-white'
@@ -909,7 +909,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             </div>
 
             {/* Step 4 */}
-            <div className={`relative rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between min-h-[220px] ${
+            <div className={`relative rounded-2xl p-6 transition duration-300 flex flex-col justify-between min-h-[220px] ${
               isLight
                 ? 'bg-white border border-slate-200 hover:border-emerald-400 hover:shadow-lg shadow-sm text-slate-900'
                 : 'bg-[#131515] border border-white/10 hover:border-[#E5B65F]/40 hover:bg-white/[0.02] shadow-lg text-white'
@@ -1094,7 +1094,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
 
                 <button 
                   onClick={() => onNavigate('merchant_onboarding')}
-                  className="w-full py-4 mt-4 bg-[#E5B65F] hover:bg-[#ffddb1] text-[#291800] rounded-xl font-bold transition-all text-sm tracking-wide shadow-md cursor-pointer"
+                  className="w-full py-4 mt-4 bg-[#E5B65F] hover:bg-[#ffddb1] text-[#291800] rounded-xl font-bold transition text-sm tracking-wide shadow-md cursor-pointer"
                 >
                   Apply for Partnership
                 </button>

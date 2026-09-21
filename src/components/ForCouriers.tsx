@@ -96,7 +96,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
       
       {/* Adaptive Docked Navigation for Couriers */}
       <nav 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition duration-300 ${
           scrolled 
             ? (isLight ? 'bg-[#F8F9FA]/85 backdrop-blur-2xl shadow-xs py-3' : 'bg-[#1a1c1c]/85 backdrop-blur-2xl shadow-xs py-3')
             : 'bg-transparent py-5 sm:py-6'
@@ -107,7 +107,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
           <div className="flex items-center gap-3 sm:gap-4">
             <button 
               onClick={() => onNavigate('home')}
-              className={`flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full transition-all backdrop-blur-md cursor-pointer min-w-[40px] min-h-[40px] ${
+              className={`flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full transition backdrop-blur-md cursor-pointer min-w-[40px] min-h-[40px] ${
                 isLight
                   ? 'bg-white/80 hover:bg-white text-slate-800 shadow-xs'
                   : 'bg-white/10 hover:bg-white/20 text-white'
@@ -149,7 +149,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             {/* Quick Action Docked CTA */}
             <button
               onClick={() => onNavigate('courier_onboarding')}
-              className={`px-4 py-2 rounded-full font-bold text-xs transition-all cursor-pointer shadow-xs active:scale-95 ${
+              className={`px-4 py-2 rounded-full font-bold text-xs transition cursor-pointer shadow-xs active:scale-95 ${
                 isLight 
                   ? 'bg-[#B88728] hover:bg-[#9e721d] text-white'
                   : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-[#291800]'
@@ -165,7 +165,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             <button
               id="couriers-theme-toggle-btn"
               onClick={toggleTheme}
-              className={`flex items-center justify-center w-9 h-9 rounded-xl border transition-all cursor-pointer ${
+              className={`flex items-center justify-center w-9 h-9 rounded-xl border transition cursor-pointer ${
                 isLight
                   ? 'bg-white/80 hover:bg-white border-slate-200 text-amber-800 shadow-2xs'
                   : 'bg-white/10 hover:bg-white/20 border-white/15 text-[#E5B65F]'
@@ -326,7 +326,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Card 1 */}
-          <div className={`rounded-2xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 shadow-lg hover:-translate-y-1.5 transition-all duration-300 ${
+          <div className={`rounded-2xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 shadow-lg hover:-translate-y-1.5 transition duration-300 ${
             isLight
               ? 'bg-white hover:shadow-xl text-slate-900'
               : 'bg-white/5 hover:bg-white/[0.08] text-white'
@@ -343,7 +343,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
           </div>
 
           {/* Card 2 */}
-          <div className={`rounded-2xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 shadow-lg hover:-translate-y-1.5 transition-all duration-300 ${
+          <div className={`rounded-2xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 shadow-lg hover:-translate-y-1.5 transition duration-300 ${
             isLight
               ? 'bg-white hover:shadow-xl text-slate-900'
               : 'bg-white/5 hover:bg-white/[0.08] text-white'
@@ -360,7 +360,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
           </div>
 
           {/* Card 3 */}
-          <div className={`rounded-2xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 shadow-lg hover:-translate-y-1.5 transition-all duration-300 ${
+          <div className={`rounded-2xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 shadow-lg hover:-translate-y-1.5 transition duration-300 ${
             isLight
               ? 'bg-white hover:shadow-xl text-slate-900'
               : 'bg-white/5 hover:bg-white/[0.08] text-white'
@@ -377,7 +377,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
           </div>
 
           {/* Card 4 */}
-          <div className={`rounded-2xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 shadow-lg hover:-translate-y-1.5 transition-all duration-300 ${
+          <div className={`rounded-2xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 shadow-lg hover:-translate-y-1.5 transition duration-300 ${
             isLight
               ? 'bg-white hover:shadow-xl text-slate-900'
               : 'bg-white/5 hover:bg-white/[0.08] text-white'
@@ -394,7 +394,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
           </div>
 
           {/* Card 5 */}
-          <div className={`rounded-2xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 shadow-lg hover:-translate-y-1.5 transition-all duration-300 ${
+          <div className={`rounded-2xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 shadow-lg hover:-translate-y-1.5 transition duration-300 ${
             isLight
               ? 'bg-white hover:shadow-xl text-slate-900'
               : 'bg-white/5 hover:bg-white/[0.08] text-white'
@@ -411,7 +411,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
           </div>
 
           {/* Card 6 */}
-          <div className={`rounded-2xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 shadow-lg hover:-translate-y-1.5 transition-all duration-300 ${
+          <div className={`rounded-2xl sm:rounded-[32px] p-6 sm:p-8 md:p-10 shadow-lg hover:-translate-y-1.5 transition duration-300 ${
             isLight
               ? 'bg-white hover:shadow-xl text-slate-900'
               : 'bg-white/5 hover:bg-white/[0.08] text-white'
@@ -619,7 +619,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                   <div className="grid grid-cols-3 gap-2 sm:gap-3">
                     <button
                       onClick={() => setVehicleType('motorbike')}
-                      className={`py-3 px-1 sm:px-2 rounded-xl text-[10px] xs:text-xs font-bold text-center border transition-all cursor-pointer ${
+                      className={`py-3 px-1 sm:px-2 rounded-xl text-[10px] xs:text-xs font-bold text-center border transition cursor-pointer ${
                         vehicleType === 'motorbike'
                           ? isLight
                             ? 'border-amber-500 bg-amber-100 text-amber-900 shadow-sm'
@@ -633,7 +633,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     </button>
                     <button
                       onClick={() => setVehicleType('executive_car')}
-                      className={`py-3 px-1 sm:px-2 rounded-xl text-[10px] xs:text-xs font-bold text-center border transition-all cursor-pointer ${
+                      className={`py-3 px-1 sm:px-2 rounded-xl text-[10px] xs:text-xs font-bold text-center border transition cursor-pointer ${
                         vehicleType === 'executive_car'
                           ? isLight
                             ? 'border-amber-500 bg-amber-100 text-amber-900 shadow-sm'
@@ -647,7 +647,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     </button>
                     <button
                       onClick={() => setVehicleType('bicycle')}
-                      className={`py-3 px-1 sm:px-2 rounded-xl text-[10px] xs:text-xs font-bold text-center border transition-all cursor-pointer ${
+                      className={`py-3 px-1 sm:px-2 rounded-xl text-[10px] xs:text-xs font-bold text-center border transition cursor-pointer ${
                         vehicleType === 'bicycle'
                           ? isLight
                             ? 'border-amber-500 bg-amber-100 text-amber-900 shadow-sm'
@@ -735,7 +735,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
 
                 <button 
                   onClick={() => onNavigate('courier_onboarding')}
-                  className="w-full py-4 bg-[#E5B65F] hover:bg-[#ffddb1] text-[#291800] rounded-xl font-bold transition-all text-sm tracking-wide shadow-md cursor-pointer"
+                  className="w-full py-4 bg-[#E5B65F] hover:bg-[#ffddb1] text-[#291800] rounded-xl font-bold transition text-sm tracking-wide shadow-md cursor-pointer"
                 >
                   Apply to Drive
                 </button>
@@ -772,7 +772,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             
             {/* Analytics Card 1 */}
-            <div className={`rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-md border flex flex-col justify-between transition-all ${
+            <div className={`rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-md border flex flex-col justify-between transition ${
               isLight
                 ? 'bg-slate-50/80 border-slate-200 hover:shadow-xl text-slate-900'
                 : 'bg-white/5 border-white/10 hover:shadow-lg text-white'
@@ -806,7 +806,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             </div>
 
             {/* Analytics Card 2 */}
-            <div className={`rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-md border flex flex-col justify-between transition-all ${
+            <div className={`rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-md border flex flex-col justify-between transition ${
               isLight
                 ? 'bg-slate-50/80 border-slate-200 hover:shadow-xl text-slate-900'
                 : 'bg-white/5 border-white/10 hover:shadow-lg text-white'
@@ -840,7 +840,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             </div>
 
             {/* Analytics Card 3 */}
-            <div className={`rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-md border flex flex-col justify-between transition-all sm:max-lg:col-span-2 ${
+            <div className={`rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-md border flex flex-col justify-between transition sm:max-lg:col-span-2 ${
               isLight
                 ? 'bg-slate-50/80 border-slate-200 hover:shadow-xl text-slate-900'
                 : 'bg-white/5 border-white/10 hover:shadow-lg text-white'
@@ -909,7 +909,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
             
             {/* Step 1 */}
-            <div className={`relative rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between min-h-[220px] ${
+            <div className={`relative rounded-2xl p-6 transition duration-300 flex flex-col justify-between min-h-[220px] ${
               isLight
                 ? 'bg-white border border-slate-200 hover:border-amber-400 hover:shadow-lg shadow-sm text-slate-900'
                 : 'bg-[#131515] border border-white/10 hover:border-[#E5B65F]/40 hover:bg-white/[0.02] shadow-lg text-white'
@@ -939,7 +939,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             </div>
 
             {/* Step 2 */}
-            <div className={`relative rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between min-h-[220px] ${
+            <div className={`relative rounded-2xl p-6 transition duration-300 flex flex-col justify-between min-h-[220px] ${
               isLight
                 ? 'bg-white border border-slate-200 hover:border-amber-400 hover:shadow-lg shadow-sm text-slate-900'
                 : 'bg-[#131515] border border-white/10 hover:border-[#E5B65F]/40 hover:bg-white/[0.02] shadow-lg text-white'
@@ -969,7 +969,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             </div>
 
             {/* Step 3 */}
-            <div className={`relative rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between min-h-[220px] ${
+            <div className={`relative rounded-2xl p-6 transition duration-300 flex flex-col justify-between min-h-[220px] ${
               isLight
                 ? 'bg-white border border-slate-200 hover:border-amber-400 hover:shadow-lg shadow-sm text-slate-900'
                 : 'bg-[#131515] border border-white/10 hover:border-[#E5B65F]/40 hover:bg-white/[0.02] shadow-lg text-white'
@@ -999,7 +999,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             </div>
 
             {/* Step 4 */}
-            <div className={`relative rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between min-h-[220px] ${
+            <div className={`relative rounded-2xl p-6 transition duration-300 flex flex-col justify-between min-h-[220px] ${
               isLight
                 ? 'bg-white border border-slate-200 hover:border-emerald-400 hover:shadow-lg shadow-sm text-slate-900'
                 : 'bg-[#131515] border border-white/10 hover:border-[#E5B65F]/40 hover:bg-white/[0.02] shadow-lg text-white'
@@ -1141,7 +1141,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 max-w-4xl mx-auto">
-            <div className={`rounded-2xl p-5 sm:p-6 border transition-all ${
+            <div className={`rounded-2xl p-5 sm:p-6 border transition ${
               isLight
                 ? 'bg-white border-slate-200 shadow-sm hover:shadow-md text-slate-900'
                 : 'bg-white/5 border-white/10 text-white'
@@ -1157,7 +1157,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               </p>
             </div>
 
-            <div className={`rounded-2xl p-5 sm:p-6 border transition-all ${
+            <div className={`rounded-2xl p-5 sm:p-6 border transition ${
               isLight
                 ? 'bg-white border-slate-200 shadow-sm hover:shadow-md text-slate-900'
                 : 'bg-white/5 border-white/10 text-white'
@@ -1173,7 +1173,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               </p>
             </div>
 
-            <div className={`rounded-2xl p-5 sm:p-6 border transition-all ${
+            <div className={`rounded-2xl p-5 sm:p-6 border transition ${
               isLight
                 ? 'bg-white border-slate-200 shadow-sm hover:shadow-md text-slate-900'
                 : 'bg-white/5 border-white/10 text-white'
@@ -1189,7 +1189,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               </p>
             </div>
 
-            <div className={`rounded-2xl p-5 sm:p-6 border transition-all ${
+            <div className={`rounded-2xl p-5 sm:p-6 border transition ${
               isLight
                 ? 'bg-white border-slate-200 shadow-sm hover:shadow-md text-slate-900'
                 : 'bg-white/5 border-white/10 text-white'

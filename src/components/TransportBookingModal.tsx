@@ -121,7 +121,7 @@ export default function TransportBookingModal({
             <div className="absolute inset-0 bg-gradient-to-t from-[#141618] via-[#141618]/70 to-transparent" />
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all cursor-pointer"
+              className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-colors cursor-pointer"
             >
               <X size={18} />
             </button>
@@ -171,7 +171,7 @@ export default function TransportBookingModal({
                         key={s.key}
                         type="button"
                         onClick={() => setServiceType(s.key as any)}
-                        className={`p-3 rounded-2xl border text-center transition-all cursor-pointer ${
+                        className={`p-3 rounded-2xl border text-center transition cursor-pointer ${
                           serviceType === s.key
                             ? 'bg-[#E5B65F]/15 border-[#E5B65F] text-white shadow-md'
                             : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
@@ -195,7 +195,7 @@ export default function TransportBookingModal({
                           key={h}
                           type="button"
                           onClick={() => setHours(h)}
-                          className={`flex-1 py-2 rounded-xl text-xs font-bold border transition-all ${
+                          className={`flex-1 py-2 rounded-xl text-xs font-bold border transition-colors ${
                             hours === h
                               ? 'bg-[#E5B65F] text-black border-[#E5B65F]'
                               : 'bg-white/5 text-gray-300 border-white/10 hover:bg-white/10'
@@ -302,7 +302,7 @@ export default function TransportBookingModal({
                         <label
                           key={amenity}
                           onClick={() => toggleAmenity(amenity)}
-                          className={`flex items-center justify-between p-3 rounded-xl border cursor-pointer transition-all ${
+                          className={`flex items-center justify-between p-3 rounded-xl border cursor-pointer transition-colors ${
                             isSelected
                               ? 'bg-[#E5B65F]/15 border-[#E5B65F] text-white'
                               : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
@@ -407,7 +407,7 @@ export default function TransportBookingModal({
                     </div>
                     <a
                       href={`tel:${confirmedBooking.driver.phone}`}
-                      className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all cursor-pointer"
+                      className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-colors cursor-pointer"
                       title="Call Chauffeur"
                     >
                       <Phone size={16} />
@@ -457,7 +457,7 @@ export default function TransportBookingModal({
                   <button
                     type="button"
                     onClick={onClose}
-                    className="w-full py-3 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-bold text-sm transition-all cursor-pointer shadow-lg"
+                    className="w-full py-3 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-bold text-sm transition cursor-pointer shadow-lg"
                   >
                     Done & Return to App
                   </button>
@@ -479,7 +479,7 @@ export default function TransportBookingModal({
                   <button
                     type="button"
                     onClick={() => setStep((prev) => (prev - 1) as any)}
-                    className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all cursor-pointer"
+                    className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-colors cursor-pointer"
                   >
                     Back
                   </button>
@@ -489,7 +489,7 @@ export default function TransportBookingModal({
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="px-6 py-2.5 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black text-xs sm:text-sm font-bold transition-all cursor-pointer shadow-md"
+                    className="px-6 py-2.5 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black text-xs sm:text-sm font-bold transition cursor-pointer shadow-md"
                   >
                     Continue to Amenities
                   </button>
@@ -497,7 +497,7 @@ export default function TransportBookingModal({
                   <button
                     type="button"
                     onClick={handleConfirm}
-                    className="px-6 py-2.5 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black text-xs sm:text-sm font-bold transition-all cursor-pointer shadow-lg"
+                    className="px-6 py-2.5 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black text-xs sm:text-sm font-bold transition cursor-pointer shadow-lg"
                   >
                     Confirm VIP Chauffeur
                   </button>

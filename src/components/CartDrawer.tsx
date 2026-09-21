@@ -142,11 +142,15 @@ export default function CartDrawer() {
                 <div className={`w-full h-1.5 rounded-full overflow-hidden ${
                   isLight ? 'bg-slate-200' : 'bg-white/10'
                 }`}>
+                  {/* scaleX rather than width: the free-delivery meter animates on
+                      every cart change, and a width tween relayouts the drawer each
+                      frame. Transform is composited. */}
                   <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${progressToFreeDelivery}%` }}
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: Math.max(0, Math.min(1, progressToFreeDelivery / 100)) }}
                     transition={{ duration: 0.5 }}
-                    className={`h-full rounded-full ${
+                    style={{ originX: 0 }}
+                    className={`h-full w-full origin-left rounded-full ${
                       isLight
                         ? 'bg-gradient-to-r from-[#B88728] to-emerald-600'
                         : 'bg-gradient-to-r from-[#E5B65F] to-emerald-400'
@@ -377,7 +381,7 @@ export default function CartDrawer() {
                         key={amount}
                         type="button"
                         onClick={() => setTipAmount(amount)}
-                        className={`py-2 rounded-lg text-xs font-semibold transition-all cursor-pointer border ${
+                        className={`py-2 rounded-lg text-xs font-semibold transition-colors cursor-pointer border ${
                           tipAmount === amount
                             ? isLight
                               ? 'bg-[#B88728] text-white border-[#B88728]'
@@ -454,7 +458,7 @@ export default function CartDrawer() {
                 <button
                   type="button"
                   onClick={handleProceedToCheckout}
-                  className={`w-full flex items-center justify-between px-6 py-4 rounded-full font-bold text-base transition-all transform active:scale-[0.98] shadow-lg cursor-pointer ${
+                  className={`w-full flex items-center justify-between px-6 py-4 rounded-full font-bold text-base transition transform active:scale-[0.98] shadow-lg cursor-pointer ${
                     isLight
                       ? 'bg-[#B88728] hover:bg-[#967C3B] text-white shadow-[#B88728]/20'
                       : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-black shadow-[#E5B65F]/20'

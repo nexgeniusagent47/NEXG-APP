@@ -117,7 +117,7 @@ export default function GoogleReviewsModal({
 
           <button
             onClick={onClose}
-            className={`p-2 rounded-full border transition-all cursor-pointer ${
+            className={`p-2 rounded-full border transition-colors cursor-pointer ${
               isLight
                 ? 'hover:bg-slate-200 border-slate-200 text-slate-700'
                 : 'hover:bg-white/10 border-white/10 text-gray-300'
@@ -214,7 +214,7 @@ export default function GoogleReviewsModal({
                   <button
                     key={num}
                     onClick={() => setFilterRating(filterRating === num ? null : num)}
-                    className={`px-2.5 py-1 rounded-lg text-xs font-semibold border transition-all cursor-pointer flex items-center gap-1 ${
+                    className={`px-2.5 py-1 rounded-lg text-xs font-semibold border transition-colors cursor-pointer flex items-center gap-1 ${
                       filterRating === num
                         ? 'bg-[#E5B65F] text-black border-[#E5B65F]'
                         : isLight
@@ -257,7 +257,7 @@ export default function GoogleReviewsModal({
                   href={`https://instagram.com/${socials.instagram.replace('@', '')}`}
                   target="_blank"
                   rel="noreferrer"
-                  className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold border transition-all ${
+                  className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold border transition-colors ${
                     isLight
                       ? 'bg-white text-pink-600 border-pink-200 hover:bg-pink-50'
                       : 'bg-white/5 text-pink-400 border-pink-500/30 hover:bg-pink-500/10'
@@ -273,7 +273,7 @@ export default function GoogleReviewsModal({
                   href={socials.googleMaps}
                   target="_blank"
                   rel="noreferrer"
-                  className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold border transition-all ${
+                  className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold border transition-colors ${
                     isLight
                       ? 'bg-white text-blue-600 border-blue-200 hover:bg-blue-50'
                       : 'bg-white/5 text-blue-400 border-blue-500/30 hover:bg-blue-500/10'
@@ -290,7 +290,7 @@ export default function GoogleReviewsModal({
                   href={socials.website}
                   target="_blank"
                   rel="noreferrer"
-                  className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold border transition-all ${
+                  className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold border transition-colors ${
                     isLight
                       ? 'bg-white text-slate-800 border-slate-200 hover:bg-slate-100'
                       : 'bg-white/5 text-gray-200 border-white/10 hover:bg-white/10'
@@ -304,7 +304,7 @@ export default function GoogleReviewsModal({
               {socials?.phone && (
                 <a
                   href={`tel:${socials.phone}`}
-                  className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold border transition-all ${
+                  className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold border transition-colors ${
                     isLight
                       ? 'bg-white text-emerald-700 border-emerald-200 hover:bg-emerald-50'
                       : 'bg-white/5 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/10'
@@ -359,7 +359,7 @@ export default function GoogleReviewsModal({
               filteredReviews.map((rev) => (
                 <div
                   key={rev.id}
-                  className={`p-4 rounded-xl border transition-all ${
+                  className={`p-4 rounded-xl border transition ${
                     isLight
                       ? 'bg-white border-slate-200 shadow-sm'
                       : 'bg-[#181a1c] border-white/10'
@@ -467,7 +467,7 @@ export default function GoogleReviewsModal({
           <div className="flex items-center gap-3">
             <button
               onClick={onClose}
-              className={`px-5 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
+              className={`px-5 py-2 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${
                 isLight
                   ? 'bg-white border-slate-200 hover:bg-slate-100 text-slate-800'
                   : 'bg-white/5 border-white/10 hover:bg-white/10 text-white'

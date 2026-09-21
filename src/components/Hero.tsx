@@ -258,7 +258,7 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
               onChange={(e) => setQuery(e.target.value)}
               onClick={() => onOpenCategories?.(query)}
               placeholder="Search luxury dining, private chauffeurs, spa retreats, cellar reserve..."
-              className={`w-full pl-13 pr-32 py-4 sm:py-4.5 rounded-2xl text-xs sm:text-sm md:text-base font-semibold outline-none backdrop-blur-xl transition-all duration-300 cursor-pointer ${
+              className={`w-full pl-13 pr-32 py-4 sm:py-4.5 rounded-2xl text-xs sm:text-sm md:text-base font-semibold outline-none backdrop-blur-xl transition duration-300 cursor-pointer ${
                 isLight
                   ? 'bg-white/95 text-slate-900 border border-slate-300/80 placeholder:text-slate-400 focus:border-[#B88728] focus:ring-4 focus:ring-[#B88728]/15 shadow-[0_8px_30px_rgba(0,0,0,0.06)]'
                   : 'bg-[#181a1b]/95 text-white border border-white/20 placeholder:text-gray-400 focus:border-[#E5B65F] focus:ring-4 focus:ring-[#E5B65F]/20 shadow-[0_8px_30px_rgba(0,0,0,0.4)]'
@@ -282,7 +282,7 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
             <button
               id="hero-search-submit-btn"
               type="submit"
-              className={`absolute right-2 top-1/2 -translate-y-1/2 px-4 sm:px-6 py-2.5 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer shadow-md active:scale-95 ${
+              className={`absolute right-2 top-1/2 -translate-y-1/2 px-4 sm:px-6 py-2.5 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm transition cursor-pointer shadow-md active:scale-95 ${
                 isLight
                   ? 'bg-[#B88728] hover:bg-[#9e721d] text-white'
                   : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-black'

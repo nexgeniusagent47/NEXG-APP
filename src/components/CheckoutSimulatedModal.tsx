@@ -221,7 +221,7 @@ export default function CheckoutSimulatedModal() {
                 <button
                   type="button"
                   onClick={() => setPaymentMethod('mpesa')}
-                  className={`p-4 rounded-xl text-left border transition-all cursor-pointer flex flex-col justify-between ${
+                  className={`p-4 rounded-xl text-left border transition cursor-pointer flex flex-col justify-between ${
                     paymentMethod === 'mpesa'
                       ? isLight
                         ? 'bg-amber-50 border-[#B88728] shadow-sm'
@@ -255,7 +255,7 @@ export default function CheckoutSimulatedModal() {
                 <button
                   type="button"
                   onClick={() => setPaymentMethod('card')}
-                  className={`p-4 rounded-xl text-left border transition-all cursor-pointer flex flex-col justify-between ${
+                  className={`p-4 rounded-xl text-left border transition cursor-pointer flex flex-col justify-between ${
                     paymentMethod === 'card'
                       ? isLight
                         ? 'bg-amber-50 border-[#B88728] shadow-sm'
@@ -289,7 +289,7 @@ export default function CheckoutSimulatedModal() {
                 <button
                   type="button"
                   onClick={() => setPaymentMethod('apple_pay')}
-                  className={`p-4 rounded-xl text-left border transition-all cursor-pointer flex flex-col justify-between ${
+                  className={`p-4 rounded-xl text-left border transition cursor-pointer flex flex-col justify-between ${
                     paymentMethod === 'apple_pay'
                       ? isLight
                         ? 'bg-amber-50 border-[#B88728] shadow-sm'
@@ -323,7 +323,7 @@ export default function CheckoutSimulatedModal() {
                 <button
                   type="button"
                   onClick={() => setPaymentMethod('cash')}
-                  className={`p-4 rounded-xl text-left border transition-all cursor-pointer flex flex-col justify-between ${
+                  className={`p-4 rounded-xl text-left border transition cursor-pointer flex flex-col justify-between ${
                     paymentMethod === 'cash'
                       ? isLight
                         ? 'bg-amber-50 border-[#B88728] shadow-sm'
@@ -447,7 +447,7 @@ export default function CheckoutSimulatedModal() {
                   <Loader2 size={18} className="animate-spin" />
                   <span>Processing Demo Payment...</span>
                 </div>
-                <p className={`text-xs font-semibold animate-pulse ${
+                <p className={`text-xs font-semibold animate-status ${
                   isLight ? 'text-slate-600' : 'text-gray-400'
                 }`}>
                   {processingStage}
@@ -457,7 +457,7 @@ export default function CheckoutSimulatedModal() {
               <button
                 type="button"
                 onClick={handleSimulatePayment}
-                className="w-full flex items-center justify-between px-6 py-4 rounded-full bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-black text-sm uppercase tracking-wider transition-all transform active:scale-[0.98] shadow-lg shadow-[#E5B65F]/20 cursor-pointer"
+                className="w-full flex items-center justify-between px-6 py-4 rounded-full bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-black text-sm uppercase tracking-wider transition transform active:scale-[0.98] shadow-lg shadow-[#E5B65F]/20 cursor-pointer"
               >
                 <div className="flex items-center gap-2">
                   <span>Simulate Payment & Place Order</span>

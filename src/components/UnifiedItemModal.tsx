@@ -204,7 +204,7 @@ export default function UnifiedItemModal({
                 {/* Google Reviews Pill button */}
                 <button
                   onClick={() => setShowGoogleReviewsModal(true)}
-                  className="bg-black/70 hover:bg-black/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/20 text-white text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shrink-0 shadow-lg"
+                  className="bg-black/70 hover:bg-black/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/20 text-white text-xs font-bold flex items-center gap-1.5 transition cursor-pointer shrink-0 shadow-lg"
                 >
                   <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24">
                     <path
@@ -289,7 +289,7 @@ export default function UnifiedItemModal({
 
                   <button
                     onClick={() => setShowGoogleReviewsModal(true)}
-                    className="px-2.5 py-1 rounded-lg bg-[#E5B65F]/15 text-[#E5B65F] font-bold text-[11px] hover:bg-[#E5B65F]/25 transition-all cursor-pointer"
+                    className="px-2.5 py-1 rounded-lg bg-[#E5B65F]/15 text-[#E5B65F] font-bold text-[11px] hover:bg-[#E5B65F]/25 transition-colors cursor-pointer"
                   >
                     View All Reviews
                   </button>
@@ -340,7 +340,7 @@ export default function UnifiedItemModal({
                         key={d.duration}
                         type="button"
                         onClick={() => setSelectedDurationIndex(index)}
-                        className={`p-3 rounded-xl border text-center transition-all cursor-pointer ${
+                        className={`p-3 rounded-xl border text-center transition cursor-pointer ${
                           selectedDurationIndex === index
                             ? 'bg-[#E5B65F] text-black border-[#E5B65F] font-extrabold shadow-md'
                             : isLight
@@ -368,7 +368,7 @@ export default function UnifiedItemModal({
                         key={oil}
                         type="button"
                         onClick={() => setSelectedOil(oil)}
-                        className={`p-2.5 rounded-xl border text-left text-xs transition-all cursor-pointer ${
+                        className={`p-2.5 rounded-xl border text-left text-xs transition cursor-pointer ${
                           (selectedOil || item.availableOils![0]) === oil
                             ? 'bg-[#E5B65F] text-black border-[#E5B65F] font-bold shadow-sm'
                             : isLight
@@ -408,7 +408,7 @@ export default function UnifiedItemModal({
                                 [optGroup.title]: choice.id,
                               })
                             }
-                            className={`p-2.5 rounded-xl border text-left flex items-center justify-between text-xs transition-all cursor-pointer ${
+                            className={`p-2.5 rounded-xl border text-left flex items-center justify-between text-xs transition cursor-pointer ${
                               isSelected
                                 ? 'bg-[#E5B65F] text-black border-[#E5B65F] font-bold shadow-sm'
                                 : isLight
@@ -469,7 +469,7 @@ export default function UnifiedItemModal({
                   value={specialNotes}
                   onChange={(e) => setSpecialNotes(e.target.value)}
                   placeholder="E.g. Villa Suite 402, gate access code, dietary allergies, or arrival notes..."
-                  className={`w-full p-3 rounded-xl border text-xs outline-none transition-all ${
+                  className={`w-full p-3 rounded-xl border text-xs outline-none transition-colors ${
                     isLight
                       ? 'bg-slate-50 border-slate-200 text-slate-900 focus:border-[#E5B65F]'
                       : 'bg-white/5 border-white/10 text-white focus:border-[#E5B65F]'
@@ -519,7 +519,7 @@ export default function UnifiedItemModal({
                   <button
                     type="button"
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold border transition-all cursor-pointer ${
+                    className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold border transition-colors cursor-pointer ${
                       isLight ? 'border-slate-300 hover:bg-slate-200' : 'border-white/15 hover:bg-white/10'
                     }`}
                   >
@@ -529,7 +529,7 @@ export default function UnifiedItemModal({
                   <button
                     type="button"
                     onClick={() => setQuantity(quantity + 1)}
-                    className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold border transition-all cursor-pointer ${
+                    className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold border transition-colors cursor-pointer ${
                       isLight ? 'border-slate-300 hover:bg-slate-200' : 'border-white/15 hover:bg-white/10'
                     }`}
                   >
@@ -541,7 +541,7 @@ export default function UnifiedItemModal({
               <button
                 type="button"
                 onClick={handleAction}
-                className="bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-extrabold px-6 py-3 rounded-xl text-xs sm:text-sm shadow-lg hover:shadow-xl transition-all cursor-pointer flex items-center gap-2"
+                className="bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-extrabold px-6 py-3 rounded-xl text-xs sm:text-sm shadow-lg hover:shadow-xl transition cursor-pointer flex items-center gap-2"
               >
                 {item.hasCalendarBooking ? (
                   <>

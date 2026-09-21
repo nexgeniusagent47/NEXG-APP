@@ -101,7 +101,7 @@ export default function OrderTrackingModal() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ type: 'spring', damping: 26, stiffness: 320 }}
-          className={`relative w-full max-w-2xl rounded-2xl sm:rounded-3xl shadow-2xl border z-10 my-auto max-h-[92vh] flex flex-col overflow-hidden transition-all duration-300 ${
+          className={`relative w-full max-w-2xl rounded-2xl sm:rounded-3xl shadow-2xl border z-10 my-auto max-h-[92vh] flex flex-col overflow-hidden transition duration-300 ${
             isLight
               ? 'bg-white text-slate-900 border-slate-200'
               : 'bg-[#161819] text-[#f2f2f2] border-white/15'
@@ -306,7 +306,7 @@ export default function OrderTrackingModal() {
                         fill="none"
                         stroke={isLight ? '#B88728' : '#E5B65F'}
                         strokeWidth="3"
-                        className="animate-pulse"
+                        className="animate-status"
                       />
                     </svg>
 
@@ -439,15 +439,15 @@ export default function OrderTrackingModal() {
                       <div key={step.key} className="relative flex items-start gap-4">
                         {/* Dot Icon */}
                         <div
-                          className={`absolute -left-6 top-0.5 w-5 h-5 rounded-full flex items-center justify-center transition-all ${
+                          className={`absolute -left-6 top-0.5 w-5 h-5 rounded-full flex items-center justify-center transition-colors ${
                             step.completed
                               ? isLight
                                 ? 'bg-[#B88728] text-white ring-4 ring-[#B88728]/20'
                                 : 'bg-[#E5B65F] text-black ring-4 ring-[#E5B65F]/20'
                               : step.current
                               ? isLight
-                                ? 'bg-slate-900 text-white ring-4 ring-slate-400/20 animate-pulse'
-                                : 'bg-white text-black ring-4 ring-white/20 animate-pulse'
+                                ? 'bg-slate-900 text-white ring-4 ring-slate-400/20 animate-status'
+                                : 'bg-white text-black ring-4 ring-white/20 animate-status'
                               : isLight
                               ? 'bg-slate-100 border border-slate-300 text-slate-400'
                               : 'bg-[#202224] border border-white/20 text-gray-500'

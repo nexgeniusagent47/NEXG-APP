@@ -31,7 +31,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
     <div className={`${isLight ? 'bg-[#F8F9FA] text-slate-900' : 'bg-[#1a1c1c] text-[#f9f9f9]'} font-sans antialiased selection:bg-[#E5B65F] selection:text-black min-h-screen transition-colors duration-300`}>
       {/* Adaptive Docked Navigation for Merchants */}
       <nav 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition duration-300 ${
           scrolled 
             ? (isLight ? 'bg-[#F8F9FA]/85 backdrop-blur-2xl shadow-xs py-3' : 'bg-[#1a1c1c]/85 backdrop-blur-2xl shadow-xs py-3')
             : 'bg-transparent py-5 sm:py-6'
@@ -42,7 +42,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
           <div className="flex items-center gap-3 sm:gap-4">
             <button 
               onClick={() => onNavigate?.('home')}
-              className={`flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full transition-all backdrop-blur-md cursor-pointer min-w-[40px] min-h-[40px] ${
+              className={`flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full transition backdrop-blur-md cursor-pointer min-w-[40px] min-h-[40px] ${
                 isLight 
                   ? 'bg-white/80 hover:bg-white text-slate-800 shadow-xs' 
                   : 'bg-white/10 hover:bg-white/20 text-white'
@@ -84,7 +84,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
             {/* Quick Action Docked CTA */}
             <button
               onClick={() => onNavigate?.('merchant_onboarding')}
-              className={`px-4 py-2 rounded-full font-bold text-xs transition-all cursor-pointer shadow-xs active:scale-95 ${
+              className={`px-4 py-2 rounded-full font-bold text-xs transition cursor-pointer shadow-xs active:scale-95 ${
                 isLight 
                   ? 'bg-[#B88728] hover:bg-[#9e721d] text-white'
                   : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-[#291800]'
@@ -100,7 +100,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
             <button
               id="merchants-theme-toggle-btn"
               onClick={toggleTheme}
-              className={`flex items-center justify-center w-9 h-9 rounded-xl border transition-all cursor-pointer ${
+              className={`flex items-center justify-center w-9 h-9 rounded-xl border transition cursor-pointer ${
                 isLight
                   ? 'bg-white/80 hover:bg-white border-slate-200 text-amber-800 shadow-2xs'
                   : 'bg-white/10 hover:bg-white/20 border-white/15 text-[#E5B65F]'
@@ -218,7 +218,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <button 
                 onClick={() => onNavigate?.('merchant_onboarding')}
-                className="w-full sm:w-auto bg-[#E5B65F] text-[#291800] px-8 py-4 rounded-full font-bold text-base hover:bg-[#ffddb1] transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 text-center cursor-pointer min-h-[48px]"
+                className="w-full sm:w-auto bg-[#E5B65F] text-[#291800] px-8 py-4 rounded-full font-bold text-base hover:bg-[#ffddb1] transition shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 text-center cursor-pointer min-h-[48px]"
               >
                 Start Onboarding
               </button>
@@ -266,17 +266,17 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
               : 'bg-[#131515] border-white/10'
           }`}>
             <span className={`text-xs sm:text-sm md:text-base font-bold tracking-tight flex items-center gap-1.5 ${isLight ? 'text-slate-800' : 'text-gray-200'}`}>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] animate-pulse"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>
               Verified Properties
             </span>
             <span className={`hidden sm:inline font-light ${isLight ? 'text-slate-300' : 'text-gray-600'}`}>|</span>
             <span className="text-xs sm:text-sm md:text-base font-bold text-[#E5B65F] tracking-tight flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] animate-pulse"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>
               Consistent Orders
             </span>
             <span className={`hidden sm:inline font-light ${isLight ? 'text-slate-300' : 'text-gray-600'}`}>|</span>
             <span className={`text-xs sm:text-sm md:text-base font-bold tracking-tight flex items-center gap-1.5 ${isLight ? 'text-slate-800' : 'text-gray-200'}`}>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] animate-pulse"></span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>
               Seamless Payouts
             </span>
           </div>
@@ -285,7 +285,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           
           {/* Pillar 1: Premium Exposure */}
-          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition-all duration-300 hover:-translate-y-1 ${
+          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg'
               : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md hover:shadow-[0_0_30px_rgba(229,182,95,0.1)]'
@@ -300,7 +300,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
           </div>
 
           {/* Pillar 2: Multiply Orders */}
-          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition-all duration-300 hover:-translate-y-1 ${
+          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg'
               : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md hover:shadow-[0_0_30px_rgba(6,182,212,0.1)]'
@@ -315,7 +315,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
           </div>
 
           {/* Pillar 3: White-Glove Logistics */}
-          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition-all duration-300 hover:-translate-y-1 ${
+          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg'
               : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md hover:shadow-[0_0_30px_rgba(16,185,129,0.1)]'
@@ -330,7 +330,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
           </div>
 
           {/* Pillar 4: Zero Friction Setup */}
-          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition-all duration-300 hover:-translate-y-1 ${
+          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg'
               : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]'
@@ -345,7 +345,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
           </div>
 
           {/* Pillar 5: Direct Split Payouts */}
-          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition-all duration-300 hover:-translate-y-1 ${
+          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg'
               : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md hover:shadow-[0_0_30px_rgba(244,63,94,0.1)]'
@@ -360,7 +360,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
           </div>
 
           {/* Pillar 6: Dedicated Live Support */}
-          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition-all duration-300 hover:-translate-y-1 ${
+          <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg'
               : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md hover:shadow-[0_0_30px_rgba(59,130,246,0.1)]'
@@ -403,7 +403,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
             
             {/* Step 1 */}
-            <div className={`relative rounded-2xl p-6 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[220px] border ${
+            <div className={`relative rounded-2xl p-6 shadow-lg transition duration-300 flex flex-col justify-between min-h-[220px] border ${
               isLight
                 ? 'bg-white border-slate-200 hover:border-amber-400 hover:shadow-md'
                 : 'bg-[#131515] border-white/10 hover:border-[#E5B65F]/40 hover:bg-white/[0.02]'
@@ -429,7 +429,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
             </div>
 
             {/* Step 2 */}
-            <div className={`relative rounded-2xl p-6 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[220px] border ${
+            <div className={`relative rounded-2xl p-6 shadow-lg transition duration-300 flex flex-col justify-between min-h-[220px] border ${
               isLight
                 ? 'bg-white border-slate-200 hover:border-amber-400 hover:shadow-md'
                 : 'bg-[#131515] border-white/10 hover:border-[#E5B65F]/40 hover:bg-white/[0.02]'
@@ -455,7 +455,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
             </div>
 
             {/* Step 3 */}
-            <div className={`relative rounded-2xl p-6 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[220px] border ${
+            <div className={`relative rounded-2xl p-6 shadow-lg transition duration-300 flex flex-col justify-between min-h-[220px] border ${
               isLight
                 ? 'bg-white border-slate-200 hover:border-amber-400 hover:shadow-md'
                 : 'bg-[#131515] border-white/10 hover:border-[#E5B65F]/40 hover:bg-white/[0.02]'
@@ -481,7 +481,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
             </div>
 
             {/* Step 4 */}
-            <div className={`relative rounded-2xl p-6 shadow-lg transition-all duration-300 flex flex-col justify-between min-h-[220px] border ${
+            <div className={`relative rounded-2xl p-6 shadow-lg transition duration-300 flex flex-col justify-between min-h-[220px] border ${
               isLight
                 ? 'bg-white border-slate-200 hover:border-emerald-400 hover:shadow-md'
                 : 'bg-[#131515] border-white/10 hover:border-[#E5B65F]/40 hover:bg-white/[0.02]'
@@ -520,7 +520,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
           </p>
           <button 
             onClick={() => onNavigate?.('merchant_onboarding')}
-            className="w-full sm:w-auto bg-[#E5B65F] text-[#291800] px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-base sm:text-lg hover:bg-[#ffddb1] transition-all shadow-[0_0_40px_rgba(229,182,95,0.3)] hover:shadow-[0_0_60px_rgba(229,182,95,0.5)] active:scale-95 cursor-pointer text-center min-h-[48px]"
+            className="w-full sm:w-auto bg-[#E5B65F] text-[#291800] px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-base sm:text-lg hover:bg-[#ffddb1] transition shadow-[0_0_40px_rgba(229,182,95,0.3)] hover:shadow-[0_0_60px_rgba(229,182,95,0.5)] active:scale-95 cursor-pointer text-center min-h-[48px]"
           >
             Apply to Join NEXG
           </button>

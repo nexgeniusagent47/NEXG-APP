@@ -261,7 +261,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setInVillaOnly(!inVillaOnly)}
-                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${
                   inVillaOnly
                     ? isLight
                       ? 'bg-[#B88728] text-white border-[#B88728]'
@@ -288,7 +288,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                 <div
                   key={venue.id}
                   onClick={() => setSelectedVenue(venue)}
-                  className={`rounded-2xl overflow-hidden border transition-all duration-300 flex flex-col group cursor-pointer shadow-md hover:shadow-2xl hover:-translate-y-1 ${
+                  className={`rounded-2xl overflow-hidden border transition duration-300 flex flex-col group cursor-pointer shadow-md hover:shadow-2xl hover:-translate-y-1 ${
                     isLight
                       ? 'bg-white border-slate-200 hover:border-[#B88728]'
                       : 'bg-[#15171b] border-white/10 hover:border-[#E5B65F]/60'
@@ -579,7 +579,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                 <div
                   key={treatment.id}
                   onClick={() => handleOpenTreatmentModal(treatment, selectedVenue)}
-                  className={`rounded-2xl overflow-hidden border transition-all duration-300 flex flex-col group cursor-pointer shadow-md hover:shadow-xl hover:-translate-y-1 ${
+                  className={`rounded-2xl overflow-hidden border transition duration-300 flex flex-col group cursor-pointer shadow-md hover:shadow-xl hover:-translate-y-1 ${
                     isLight
                       ? 'bg-white border-slate-200 hover:border-[#B88728]'
                       : 'bg-[#15171a] border-white/10 hover:border-[#E5B65F]/60'
@@ -657,7 +657,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
       {bookingModalConfig.isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md">
           <div
-            className={`w-full max-w-xl rounded-3xl overflow-hidden border shadow-2xl transition-all ${
+            className={`w-full max-w-xl rounded-3xl overflow-hidden border shadow-2xl transition ${
               isLight ? 'bg-white border-slate-200 text-slate-900' : 'bg-[#15171a] border-white/15 text-white'
             }`}
           >

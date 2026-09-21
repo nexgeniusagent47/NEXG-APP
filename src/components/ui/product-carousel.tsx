@@ -60,7 +60,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, twoPerScreen = true 
     >
       <div
         className={cn(
-          "flex flex-col h-full overflow-hidden rounded-2xl border shadow-xs transition-all duration-300 hover:shadow-lg",
+          "flex flex-col h-full overflow-hidden rounded-2xl border shadow-xs transition duration-300 hover:shadow-lg",
           isLight
             ? "bg-white text-slate-900 border-slate-200/90 hover:border-[#B88728]/40"
             : "bg-[#181A1F] text-[#F3F4F6] border-white/10 hover:border-[#E5B65F]/40"
@@ -154,7 +154,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, twoPerScreen = true 
               whileTap={{ scale: 0.94 }}
               onClick={handleAdd}
               className={cn(
-                "rounded-xl px-4 py-2 text-xs font-black transition-all flex items-center gap-1.5 cursor-pointer shadow-xs",
+                "rounded-xl px-4 py-2 text-xs font-black transition flex items-center gap-1.5 cursor-pointer shadow-xs",
                 isAdded
                   ? "bg-emerald-600 text-white border border-emerald-600"
                   : isLight
@@ -276,7 +276,7 @@ export const ProductCarousel = React.forwardRef<HTMLDivElement, ProductCarouselP
             <button
               onClick={handlePrev}
               className={cn(
-                "absolute top-1/2 -translate-y-1/2 left-2 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer shadow-md backdrop-blur-md border",
+                "absolute top-1/2 -translate-y-1/2 left-2 z-20 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 cursor-pointer shadow-md backdrop-blur-md border",
                 isLight
                   ? "bg-white/90 text-slate-800 border-slate-200 hover:bg-white hover:border-[#B88728]"
                   : "bg-black/75 text-white border-white/20 hover:bg-black hover:border-[#E5B65F]"
@@ -325,7 +325,7 @@ export const ProductCarousel = React.forwardRef<HTMLDivElement, ProductCarouselP
             <button
               onClick={handleNext}
               className={cn(
-                "absolute top-1/2 -translate-y-1/2 right-2 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer shadow-md backdrop-blur-md border",
+                "absolute top-1/2 -translate-y-1/2 right-2 z-20 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 cursor-pointer shadow-md backdrop-blur-md border",
                 isLight
                   ? "bg-white/90 text-slate-800 border-slate-200 hover:bg-white hover:border-[#B88728]"
                   : "bg-black/75 text-white border-white/20 hover:bg-black hover:border-[#E5B65F]"
@@ -347,7 +347,7 @@ export const ProductCarousel = React.forwardRef<HTMLDivElement, ProductCarouselP
                   key={idx}
                   onClick={() => setCurrentIndex(idx)}
                   className={cn(
-                    "h-2 rounded-full transition-all duration-300 cursor-pointer",
+                    "h-2 rounded-full transition-colors duration-300 cursor-pointer",
                     isActive
                       ? "w-6 bg-[#B88728] dark:bg-[#E5B65F]"
                       : isLight

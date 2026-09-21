@@ -210,7 +210,7 @@ export const MerchantPage: React.FC<MerchantPageProps> = ({
                 type="button"
                 onClick={() => scrollToSection(section.id)}
                 className={cn(
-                  'px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer border',
+                  'px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-colors cursor-pointer border',
                   isActive
                     ? isLight
                       ? 'bg-[#B88728] text-white border-[#B88728] shadow-xs'
@@ -247,7 +247,7 @@ export const MerchantPage: React.FC<MerchantPageProps> = ({
                   key={item.id}
                   onClick={() => onSelectItem(item, merchant)}
                   className={cn(
-                    'group relative flex items-center justify-between p-4 rounded-2xl border transition-all duration-200 hover:shadow-md cursor-pointer select-none',
+                    'group relative flex items-center justify-between p-4 rounded-2xl border transition duration-200 hover:shadow-md cursor-pointer select-none',
                     isLight
                       ? 'bg-white border-slate-200 hover:border-[#B88728]/50'
                       : 'bg-[#181A1F] border-white/10 hover:border-[#E5B65F]/50'

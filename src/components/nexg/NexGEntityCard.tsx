@@ -50,7 +50,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
       <div
         onClick={entity.onClick}
         className={cn(
-          'group relative flex items-center gap-3.5 p-3 rounded-2xl border transition-all duration-300 hover:shadow-md cursor-pointer select-none',
+          'group relative flex items-center gap-3.5 p-3 rounded-2xl border transition duration-300 hover:shadow-md cursor-pointer select-none',
           isLight
             ? 'bg-white text-slate-900 border-slate-200/90 hover:border-[#B88728]/40'
             : 'bg-[#181A1F] text-[#F3F4F6] border-white/10 hover:border-[#E5B65F]/40',
@@ -134,7 +134,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
       <div
         onClick={entity.onClick}
         className={cn(
-          'group relative flex flex-col rounded-xl overflow-hidden border transition-all duration-300 hover:shadow-md cursor-pointer select-none',
+          'group relative flex flex-col rounded-xl overflow-hidden border transition duration-300 hover:shadow-md cursor-pointer select-none',
           isLight
             ? 'bg-white text-slate-900 border-slate-200 hover:border-[#B88728]/40'
             : 'bg-[#181A1F] text-[#F3F4F6] border-white/10 hover:border-[#E5B65F]/40',
@@ -182,7 +182,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
       <div
         onClick={entity.onClick}
         className={cn(
-          'group relative flex flex-col rounded-3xl overflow-hidden border transition-all duration-300 hover:shadow-xl cursor-pointer select-none',
+          'group relative flex flex-col rounded-3xl overflow-hidden border transition duration-300 hover:shadow-xl cursor-pointer select-none',
           isLight
             ? 'bg-white text-slate-900 border-slate-200 hover:border-[#B88728]/40'
             : 'bg-[#181A1F] text-[#F3F4F6] border-white/10 hover:border-[#E5B65F]/40',
@@ -261,7 +261,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
     <div
       onClick={entity.onClick}
       className={cn(
-        'group relative flex flex-col h-full rounded-2xl overflow-hidden border shadow-xs transition-all duration-300 hover:shadow-lg cursor-pointer select-none',
+        'group relative flex flex-col h-full rounded-2xl overflow-hidden border shadow-xs transition duration-300 hover:shadow-lg cursor-pointer select-none',
         isLight
           ? 'bg-white text-slate-900 border-slate-200/90 hover:border-[#B88728]/40'
           : 'bg-[#181A1F] text-[#F3F4F6] border-white/10 hover:border-[#E5B65F]/40',
@@ -348,7 +348,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
 
           <div
             className={cn(
-              'w-7 h-7 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:translate-x-0.5 group-hover:bg-[#B88728] group-hover:text-white',
+              'w-7 h-7 rounded-full flex items-center justify-center transform transition duration-300 group-hover:translate-x-0.5 group-hover:bg-[#B88728] group-hover:text-white',
               isLight ? 'bg-slate-100 text-slate-700' : 'bg-white/10 text-gray-200'
             )}
           >

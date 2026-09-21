@@ -139,7 +139,7 @@ export default function CategoryExplorerModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.96, y: 15 }}
           transition={{ duration: 0.25, ease: 'easeOut' }}
-          className={`relative w-full max-w-5xl max-h-[90vh] rounded-3xl flex flex-col shadow-2xl overflow-hidden z-10 border transition-all ${
+          className={`relative w-full max-w-5xl max-h-[90vh] rounded-3xl flex flex-col shadow-2xl overflow-hidden z-10 border transition ${
             isLight
               ? 'bg-white/95 text-slate-900 border-slate-200/90 shadow-2xl'
               : 'bg-[#15171a]/95 text-white border-white/15 shadow-2xl'
@@ -207,7 +207,7 @@ export default function CategoryExplorerModal({
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search across all 21 categories & 134 subcategories (e.g. Fine Dining, Vapes, Chauffeur, Safari)..."
                 autoFocus
-                className={`w-full pl-11 pr-10 py-3 rounded-xl text-sm font-medium border transition-all focus:outline-none focus:ring-2 ${
+                className={`w-full pl-11 pr-10 py-3 rounded-xl text-sm font-medium border transition-colors focus:outline-none focus:ring-2 ${
                   isLight
                     ? 'bg-white border-slate-200 text-slate-900 placeholder:text-slate-400 focus:ring-[#B88728]/40 focus:border-[#B88728]'
                     : 'bg-[#111315] border-white/10 text-white placeholder:text-gray-500 focus:ring-[#E5B65F]/40 focus:border-[#E5B65F]'
@@ -231,7 +231,7 @@ export default function CategoryExplorerModal({
             <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide text-xs font-semibold">
               <button
                 onClick={() => setSelectedCategoryId('all')}
-                className={`px-3 py-1.5 rounded-full border transition-all whitespace-nowrap cursor-pointer ${
+                className={`px-3 py-1.5 rounded-full border transition whitespace-nowrap cursor-pointer ${
                   selectedCategoryId === 'all'
                     ? isLight
                       ? 'bg-[#B88728] text-white border-[#B88728] shadow-xs'
@@ -247,7 +247,7 @@ export default function CategoryExplorerModal({
                 <button
                   key={c.id}
                   onClick={() => setSelectedCategoryId(c.id)}
-                  className={`px-3 py-1.5 rounded-full border transition-all whitespace-nowrap cursor-pointer ${
+                  className={`px-3 py-1.5 rounded-full border transition whitespace-nowrap cursor-pointer ${
                     selectedCategoryId === c.id
                       ? isLight
                         ? 'bg-[#B88728] text-white border-[#B88728] shadow-xs'
@@ -301,7 +301,7 @@ export default function CategoryExplorerModal({
                   <div
                     key={cat.id}
                     id={`cat-card-${cat.id}`}
-                    className={`rounded-2xl p-4 sm:p-5 border transition-all duration-200 flex flex-col justify-between group ${
+                    className={`rounded-2xl p-4 sm:p-5 border transition duration-200 flex flex-col justify-between group ${
                       isLight
                         ? 'bg-white border-slate-200 hover:border-amber-400 hover:shadow-md'
                         : 'bg-[#181a1e] border-white/10 hover:border-[#E5B65F]/60 hover:shadow-lg'
@@ -370,7 +370,7 @@ export default function CategoryExplorerModal({
                             <button
                               key={sub.id}
                               onClick={() => handleSelectSubcategory(cat)}
-                              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border transition-all cursor-pointer ${
+                              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-medium border transition-colors cursor-pointer ${
                                 isLight
                                   ? 'bg-slate-50 hover:bg-amber-50/80 text-slate-700 hover:text-[#B88728] border-slate-200/80 hover:border-amber-300'
                                   : 'bg-white/5 hover:bg-white/10 text-gray-300 hover:text-[#E5B65F] border-white/10 hover:border-[#E5B65F]/40'

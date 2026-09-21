@@ -154,7 +154,7 @@ export default function HowItWorks() {
 
           {/* Step 1 */}
           <div className="flex flex-col items-center text-center group relative z-10">
-            <div className={`w-[96px] h-[96px] rounded-full border flex items-center justify-center relative transition-all duration-300 group-hover:scale-105 ${
+            <div className={`w-[96px] h-[96px] rounded-full border flex items-center justify-center relative transition duration-300 group-hover:scale-105 ${
               isLight
                 ? 'border-[#B88728]/35 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)]'
                 : 'border-[#E5B65F]/30 bg-[#161819] shadow-[0_8px_30px_rgba(0,0,0,0.6)]'
@@ -182,7 +182,7 @@ export default function HowItWorks() {
 
           {/* Step 2 */}
           <div className="flex flex-col items-center text-center group relative z-10">
-            <div className={`w-[96px] h-[96px] rounded-full border flex items-center justify-center relative transition-all duration-300 group-hover:scale-105 ${
+            <div className={`w-[96px] h-[96px] rounded-full border flex items-center justify-center relative transition duration-300 group-hover:scale-105 ${
               isLight
                 ? 'border-[#B88728]/35 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)]'
                 : 'border-[#E5B65F]/30 bg-[#161819] shadow-[0_8px_30px_rgba(0,0,0,0.6)]'
@@ -210,7 +210,7 @@ export default function HowItWorks() {
 
           {/* Step 3 */}
           <div className="flex flex-col items-center text-center group relative z-10">
-            <div className={`w-[96px] h-[96px] rounded-full border flex items-center justify-center relative transition-all duration-300 group-hover:scale-105 ${
+            <div className={`w-[96px] h-[96px] rounded-full border flex items-center justify-center relative transition duration-300 group-hover:scale-105 ${
               isLight
                 ? 'border-[#B88728]/35 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)]'
                 : 'border-[#E5B65F]/30 bg-[#161819] shadow-[0_8px_30px_rgba(0,0,0,0.6)]'

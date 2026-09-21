@@ -65,7 +65,7 @@ export default function Features() {
           return (
             <div 
               key={index} 
-              className={`flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 sm:gap-5 p-3 sm:p-4 rounded-2xl transition-all duration-300 hover:-translate-y-1 ${
+              className={`flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-3 sm:gap-5 p-3 sm:p-4 rounded-2xl transition duration-300 hover:-translate-y-1 ${
                 isLight ? 'bg-white/70 shadow-xs' : 'bg-white/[0.02]'
               } ${item.hoverShadow}`}
             >

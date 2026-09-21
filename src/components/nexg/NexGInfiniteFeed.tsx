@@ -111,7 +111,7 @@ export function NexGInfiniteFeed<T>({
               <div
                 key={`skel-${sIdx}`}
                 className={cn(
-                  'h-64 rounded-2xl animate-pulse border',
+                  'h-64 rounded-2xl animate-status border',
                   isLight ? 'bg-slate-100 border-slate-200' : 'bg-white/5 border-white/5'
                 )}
               />
@@ -129,7 +129,7 @@ export function NexGInfiniteFeed<T>({
               onClick={loadNextBatch}
               disabled={isLoadingMore}
               className={cn(
-                'px-6 py-2.5 rounded-full text-xs font-bold transition-all flex items-center gap-2 border shadow-xs cursor-pointer',
+                'px-6 py-2.5 rounded-full text-xs font-bold transition flex items-center gap-2 border shadow-xs cursor-pointer',
                 isLight
                   ? 'bg-white hover:bg-slate-50 text-slate-800 border-slate-200 hover:border-[#B88728]'
                   : 'bg-[#181A1F] hover:bg-[#202328] text-gray-200 border-white/10 hover:border-[#E5B65F]'
@@ -151,7 +151,7 @@ export function NexGInfiniteFeed<T>({
             </button>
             <div className="w-48 h-1 rounded-full bg-slate-200 dark:bg-white/10 overflow-hidden mt-1">
               <div
-                className="h-full bg-[#B88728] dark:bg-[#E5B65F] transition-all duration-300"
+                className="h-full bg-[#B88728] dark:bg-[#E5B65F] transition-colors duration-300"
                 style={{ width: `${(displayedCount / items.length) * 100}%` }}
               />
             </div>

@@ -135,7 +135,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
               type="button"
               onClick={onBackToHome}
               className={cn(
-                'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all border cursor-pointer',
+                'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-colors border cursor-pointer',
                 isLight
                   ? 'bg-slate-100 hover:bg-slate-200 text-slate-700 border-slate-200'
                   : 'bg-white/5 hover:bg-white/10 text-gray-300 border-white/10'
@@ -190,7 +190,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
             type="button"
             onClick={() => setSelectedSubcatId('all')}
             className={cn(
-              'px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer border',
+              'px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-colors cursor-pointer border',
               selectedSubcatId === 'all'
                 ? isLight
                   ? 'bg-[#B88728] text-white border-[#B88728] shadow-xs'
@@ -211,7 +211,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
                 type="button"
                 onClick={() => setSelectedSubcatId(sub.id)}
                 className={cn(
-                  'px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer border',
+                  'px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-colors cursor-pointer border',
                   isActive
                     ? isLight
                       ? 'bg-[#B88728] text-white border-[#B88728] shadow-xs'
@@ -313,7 +313,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
                     if (foundMerchant) onSelectItem(item, foundMerchant);
                   }}
                   className={cn(
-                    'group/pop flex-shrink-0 w-48 sm:w-56 p-2.5 rounded-2xl border transition-all duration-200 hover:shadow-md cursor-pointer',
+                    'group/pop flex-shrink-0 w-48 sm:w-56 p-2.5 rounded-2xl border transition duration-200 hover:shadow-md cursor-pointer',
                     isLight
                       ? 'bg-white border-slate-200 hover:border-[#B88728]/50'
                       : 'bg-[#181A1F] border-white/10 hover:border-[#E5B65F]/50'

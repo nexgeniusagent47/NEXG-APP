@@ -341,7 +341,7 @@ export const NexGItemSheet: React.FC = () => {
                           type="button"
                           onClick={() => setSelectedDuration(dur)}
                           className={cn(
-                            'py-2 px-3 rounded-xl text-xs font-bold transition-all border cursor-pointer text-center',
+                            'py-2 px-3 rounded-xl text-xs font-bold transition-colors border cursor-pointer text-center',
                             selectedDuration === dur
                               ? isLight
                                 ? 'bg-[#B88728] text-white border-[#B88728] shadow-xs'
@@ -405,7 +405,7 @@ export const NexGItemSheet: React.FC = () => {
                         key={addon.id}
                         onClick={() => toggleAddon(addon.id)}
                         className={cn(
-                          'p-3 rounded-xl border flex items-center justify-between transition-all cursor-pointer select-none',
+                          'p-3 rounded-xl border flex items-center justify-between transition-colors cursor-pointer select-none',
                           isChecked
                             ? isLight
                               ? 'bg-[#B88728]/10 border-[#B88728] text-slate-900'
@@ -494,7 +494,7 @@ export const NexGItemSheet: React.FC = () => {
               disabled={sheetState === 'ACTION_PENDING'}
               onClick={handleAction}
               className={cn(
-                'flex-1 py-3.5 px-6 rounded-2xl font-black text-sm tracking-wide transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer',
+                'flex-1 py-3.5 px-6 rounded-2xl font-black text-sm tracking-wide transition shadow-lg flex items-center justify-center gap-2 cursor-pointer',
                 sheetState === 'SUCCESS'
                   ? 'bg-emerald-600 text-white'
                   : isLight

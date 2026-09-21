@@ -1486,9 +1486,12 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
           </span>
         </div>
         <div className="h-2.5 overflow-hidden rounded-full bg-slate-200 shadow-inner">
+          {/* scaleX rather than width. Animating width relayouts the bar and
+              everything beside it on every step; a transform is composited and
+              costs nothing. The bar is drawn full width and scaled from the left. */}
           <div
-            className="h-full rounded-full bg-gradient-to-r from-[#E5B65F] via-[#D2A24A] to-[#B88728] transition-[width] duration-300 ease-out"
-            style={{ width: `${progress}%` }}
+            className="h-full origin-left rounded-full bg-gradient-to-r from-[#E5B65F] via-[#D2A24A] to-[#B88728] transition-transform duration-300 ease-out"
+            style={{ transform: `scaleX(${Math.max(0, Math.min(1, progress / 100))})` }}
           />
         </div>
         <div className="mt-3 hidden justify-between text-[10px] font-bold uppercase tracking-wider text-slate-400 sm:flex">
@@ -1949,7 +1952,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               <button
                 type="button"
                 onClick={() => setSpaces((previous) => [...previous, createSpace()])}
-                className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-slate-200 py-4 text-sm font-bold text-slate-600 transition-all hover:border-amber-400 hover:bg-amber-400/10 hover:text-slate-900"
+                className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-slate-200 py-4 text-sm font-bold text-slate-600 transition-colors hover:border-amber-400 hover:bg-amber-400/10 hover:text-slate-900"
               >
                 <Plus className="h-4 w-4" />
                 Add a space / unit type

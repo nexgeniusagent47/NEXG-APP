@@ -111,7 +111,7 @@ export const NexGSearchEngine: React.FC<NexGSearchEngineProps> = ({ query }) => 
                     key={cat.id}
                     onClick={() => navigateToCategory(cat, null, 'search')}
                     className={cn(
-                      'p-3.5 rounded-2xl border flex items-center gap-3 transition-all hover:shadow-md cursor-pointer select-none',
+                      'p-3.5 rounded-2xl border flex items-center gap-3 transition hover:shadow-md cursor-pointer select-none',
                       isLight
                         ? 'bg-white border-slate-200 hover:border-[#B88728]'
                         : 'bg-[#181A1F] border-white/10 hover:border-[#E5B65F]'

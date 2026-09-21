@@ -53,7 +53,7 @@ export const MerchantCard: React.FC<MerchantCardProps> = ({
     <div
       onClick={handleCardClick}
       className={cn(
-        'group relative flex flex-col rounded-2xl border transition-all duration-300 hover:shadow-xl cursor-pointer select-none overflow-hidden',
+        'group relative flex flex-col rounded-2xl border transition duration-300 hover:shadow-xl cursor-pointer select-none overflow-hidden',
         isLight
           ? 'bg-white border-slate-200/90 hover:border-[#B88728]/50 shadow-xs'
           : 'bg-[#181A1F] border-white/10 hover:border-[#E5B65F]/50 shadow-md',
@@ -173,7 +173,7 @@ export const MerchantCard: React.FC<MerchantCardProps> = ({
                   key={item.id}
                   onClick={(e) => handleItemClick(e, item)}
                   className={cn(
-                    'group/item relative flex flex-col p-1.5 rounded-xl border transition-all duration-200 hover:border-[#B88728]/60 cursor-pointer overflow-hidden',
+                    'group/item relative flex flex-col p-1.5 rounded-xl border transition-colors duration-200 hover:border-[#B88728]/60 cursor-pointer overflow-hidden',
                     isLight
                       ? 'bg-slate-50/80 hover:bg-white border-slate-200/80'
                       : 'bg-white/5 hover:bg-white/10 border-white/5'

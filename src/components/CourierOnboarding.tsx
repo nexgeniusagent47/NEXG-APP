@@ -570,7 +570,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
           <div className="flex items-center gap-4">
             <button
               onClick={() => onNavigate('couriers')}
-              className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 hover:bg-gray-100 text-gray-700 transition-all cursor-pointer"
+              className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 hover:bg-gray-100 text-gray-700 transition-colors cursor-pointer"
               title="Back to Couriers"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -608,7 +608,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
             </div>
             <div className="h-2.5 bg-gray-200 rounded-full overflow-hidden shadow-inner">
               <div 
-                className="h-full bg-gradient-to-r from-[#7a5821] via-[#c49a5c] to-[#E5B65F] rounded-full transition-all duration-500 ease-out"
+                className="h-full bg-gradient-to-r from-[#7a5821] via-[#c49a5c] to-[#E5B65F] rounded-full transition-colors duration-500 ease-out"
                 style={{ width: `${(currentStep / steps.length) * 100}%` }}
               ></div>
             </div>
@@ -648,7 +648,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   {/* Option 1: Independent */}
                   <label 
                     onClick={() => setSelectedType('independent')}
-                    className={`border-2 rounded-[28px] p-6 cursor-pointer block transition-all group relative select-none text-center ${
+                    className={`border-2 rounded-[28px] p-6 cursor-pointer block transition group relative select-none text-center ${
                       selectedType === 'independent' 
                         ? 'border-[#7a5821] bg-[#7a5821]/5 shadow-md' 
                         : 'border-gray-200 hover:border-[#7a5821] hover:bg-gray-50 bg-white'
@@ -690,7 +690,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   {/* Option 2: Dedicated */}
                   <label 
                     onClick={() => setSelectedType('dedicated')}
-                    className={`border-2 rounded-[28px] p-6 cursor-pointer block transition-all group relative select-none text-center ${
+                    className={`border-2 rounded-[28px] p-6 cursor-pointer block transition group relative select-none text-center ${
                       selectedType === 'dedicated' 
                         ? 'border-[#7a5821] bg-[#7a5821]/5 shadow-md' 
                         : 'border-gray-200 hover:border-[#7a5821] hover:bg-gray-50 bg-white'
@@ -732,7 +732,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   {/* Option 3: Fleet Partner */}
                   <label 
                     onClick={() => setSelectedType('fleet')}
-                    className={`border-2 rounded-[28px] p-6 cursor-pointer block transition-all group relative select-none text-center ${
+                    className={`border-2 rounded-[28px] p-6 cursor-pointer block transition group relative select-none text-center ${
                       selectedType === 'fleet' 
                         ? 'border-[#7a5821] bg-[#7a5821]/5 shadow-md' 
                         : 'border-gray-200 hover:border-[#7a5821] hover:bg-gray-50 bg-white'
@@ -1066,7 +1066,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                               key={v}
                               type="button"
                               onClick={() => handleChange('vehiclePref', v)}
-                              className={`py-3 px-2 rounded-xl text-xs font-bold text-center border transition-all cursor-pointer ${
+                              className={`py-3 px-2 rounded-xl text-xs font-bold text-center border transition-colors cursor-pointer ${
                                 formData.vehiclePref === v
                                   ? 'border-[#7a5821] bg-[#7a5821]/5 text-[#7a5821]'
                                   : 'border-gray-200 hover:border-gray-300 text-gray-600'
@@ -1113,7 +1113,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       />
                       <label 
                         htmlFor="indIdFile" 
-                        className={`w-full py-3 px-4 border rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-all ${
+                        className={`w-full py-3 px-4 border rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-colors ${
                           uploadedFiles['indIdFile'] 
                             ? 'bg-green-50 border-green-300 text-green-700' 
                             : 'bg-white border-gray-300 hover:border-[#7a5821] text-gray-700'
@@ -1140,7 +1140,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       />
                       <label 
                         htmlFor="indDlFile" 
-                        className={`w-full py-3 px-4 border rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-all ${
+                        className={`w-full py-3 px-4 border rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-colors ${
                           uploadedFiles['indDlFile'] 
                             ? 'bg-green-50 border-green-300 text-green-700' 
                             : 'bg-white border-gray-300 hover:border-[#7a5821] text-gray-700'
@@ -1167,7 +1167,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       />
                       <label 
                         htmlFor="indPinFile" 
-                        className={`w-full py-3 px-4 border rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-all ${
+                        className={`w-full py-3 px-4 border rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-colors ${
                           uploadedFiles['indPinFile'] 
                             ? 'bg-green-50 border-green-300 text-green-700' 
                             : 'bg-white border-gray-300 hover:border-[#7a5821] text-gray-700'
@@ -1181,7 +1181,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
 
                   {/* Document 4: (Only mandatory for Independent) */}
                   <div 
-                    className={`border border-gray-200 bg-gray-50 p-6 rounded-[24px] flex flex-col justify-between shadow-sm transition-all ${
+                    className={`border border-gray-200 bg-gray-50 p-6 rounded-[24px] flex flex-col justify-between shadow-sm transition ${
                       selectedType === 'dedicated' ? 'opacity-40 select-none pointer-events-none' : ''
                     }`}
                   >
@@ -1201,7 +1201,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       />
                       <label 
                         htmlFor="indLogbookFile" 
-                        className={`w-full py-3 px-4 border rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-all ${
+                        className={`w-full py-3 px-4 border rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-colors ${
                           uploadedFiles['indLogbookFile'] 
                             ? 'bg-green-50 border-green-300 text-green-700' 
                             : 'bg-white border-gray-300 hover:border-[#7a5821] text-gray-700'
@@ -1266,7 +1266,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   <label className="block text-xs font-bold uppercase text-gray-500 mb-3">Which elite services are you interested to offer?</label>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     
-                    <label className="border-2 rounded-2xl p-4 flex flex-col items-center gap-2 bg-white cursor-pointer select-none transition-all text-center">
+                    <label className="border-2 rounded-2xl p-4 flex flex-col items-center gap-2 bg-white cursor-pointer select-none transition-colors text-center">
                       <input 
                         type="checkbox" 
                         checked={formData.services.includes('Ride-Hailing')}
@@ -1278,7 +1278,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       <span className="text-[11px] text-gray-400">Carry VIP guests to properties</span>
                     </label>
 
-                    <label className="border-2 rounded-2xl p-4 flex flex-col items-center gap-2 bg-white cursor-pointer select-none transition-all text-center">
+                    <label className="border-2 rounded-2xl p-4 flex flex-col items-center gap-2 bg-white cursor-pointer select-none transition-colors text-center">
                       <input 
                         type="checkbox" 
                         checked={formData.services.includes('Package Delivery')}
@@ -1290,7 +1290,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       <span className="text-[11px] text-gray-400">Deliver premium retail items</span>
                     </label>
 
-                    <label className="border-2 rounded-2xl p-4 flex flex-col items-center gap-2 bg-white cursor-pointer select-none transition-all text-center">
+                    <label className="border-2 rounded-2xl p-4 flex flex-col items-center gap-2 bg-white cursor-pointer select-none transition-colors text-center">
                       <input 
                         type="checkbox" 
                         checked={formData.services.includes('Premium Concierge')}
@@ -1642,7 +1642,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     {['Motorcycles', 'TukTuks', 'Cars/Vans', 'Bicycles'].map((vt) => (
                       <label 
                         key={vt}
-                        className={`border rounded-xl p-3 flex items-center gap-2 cursor-pointer text-xs select-none hover:bg-gray-50 transition-all ${
+                        className={`border rounded-xl p-3 flex items-center gap-2 cursor-pointer text-xs select-none hover:bg-gray-50 transition-colors ${
                           formData.flVehicleTypes.includes(vt) ? 'border-[#7a5821] bg-[#7a5821]/5 text-[#7a5821]' : 'border-gray-200 text-gray-600'
                         }`}
                       >
@@ -1719,7 +1719,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     <button 
                       type="button" 
                       onClick={addFleetRider}
-                      className="bg-[#7a5821] hover:bg-[#c49a5c] text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm active:scale-95"
+                      className="bg-[#7a5821] hover:bg-[#c49a5c] text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition shadow-sm active:scale-95"
                     >
                       + Add Rider Card
                     </button>
@@ -1727,7 +1727,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     <button 
                       type="button" 
                       onClick={() => document.getElementById('csvUploadInput')?.click()}
-                      className="bg-gray-900 hover:bg-black text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm active:scale-95"
+                      className="bg-gray-900 hover:bg-black text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition shadow-sm active:scale-95"
                     >
                       <Download size={12} className="text-[#E5B65F]" />
                       Import CSV Spreadsheet
@@ -1936,7 +1936,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       />
                       <label 
                         htmlFor="flCertFile" 
-                        className={`w-full py-3 px-4 border rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-all ${
+                        className={`w-full py-3 px-4 border rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-colors ${
                           uploadedFiles['flCertFile'] 
                             ? 'bg-green-50 border-green-300 text-green-700' 
                             : 'bg-white border-gray-300 hover:border-[#7a5821] text-gray-700'
@@ -1963,7 +1963,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       />
                       <label 
                         htmlFor="flPinFile" 
-                        className={`w-full py-3 px-4 border rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-all ${
+                        className={`w-full py-3 px-4 border rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-colors ${
                           uploadedFiles['flPinFile'] 
                             ? 'bg-green-50 border-green-300 text-green-700' 
                             : 'bg-white border-gray-300 hover:border-[#7a5821] text-gray-700'
@@ -1990,7 +1990,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       />
                       <label 
                         htmlFor="flInsFile" 
-                        className={`w-full py-3 px-4 border rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-all ${
+                        className={`w-full py-3 px-4 border rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-colors ${
                           uploadedFiles['flInsFile'] 
                             ? 'bg-green-50 border-green-300 text-green-700' 
                             : 'bg-white border-gray-300 hover:border-[#7a5821] text-gray-700'
@@ -2017,7 +2017,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       />
                       <label 
                         htmlFor="flDirectorIdFile" 
-                        className={`w-full py-3 px-4 border rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-all ${
+                        className={`w-full py-3 px-4 border rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer transition-colors ${
                           uploadedFiles['flDirectorIdFile'] 
                             ? 'bg-green-50 border-green-300 text-green-700' 
                             : 'bg-white border-gray-300 hover:border-[#7a5821] text-gray-700'
@@ -2167,14 +2167,14 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       <button 
                         type="button" 
                         onClick={() => setSigMode('draw')} 
-                        className={`px-4 py-1.5 rounded-lg font-bold transition-all ${sigMode === 'draw' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-900'}`}
+                        className={`px-4 py-1.5 rounded-lg font-bold transition ${sigMode === 'draw' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-900'}`}
                       >
                         Draw Signature
                       </button>
                       <button 
                         type="button" 
                         onClick={() => setSigMode('type')} 
-                        className={`px-4 py-1.5 rounded-lg font-bold transition-all ${sigMode === 'type' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-900'}`}
+                        className={`px-4 py-1.5 rounded-lg font-bold transition ${sigMode === 'type' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-900'}`}
                       >
                         Type Signature
                       </button>
@@ -2219,7 +2219,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                         <button 
                           type="button" 
                           onClick={clearCanvas}
-                          className="absolute right-3.5 bottom-3.5 px-3 py-1.5 bg-gray-900 text-white hover:bg-black rounded-lg text-[10px] font-bold transition-all tracking-wider uppercase active:scale-95"
+                          className="absolute right-3.5 bottom-3.5 px-3 py-1.5 bg-gray-900 text-white hover:bg-black rounded-lg text-[10px] font-bold transition tracking-wider uppercase active:scale-95"
                         >
                           Clear canvas
                         </button>
@@ -2300,14 +2300,14 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   <button 
                     type="button" 
                     onClick={() => window.print()}
-                    className="flex items-center justify-center gap-2 bg-[#1a1c1c] hover:bg-black text-white px-6 py-3 rounded-xl font-bold text-sm transition-all shadow-md active:scale-95"
+                    className="flex items-center justify-center gap-2 bg-[#1a1c1c] hover:bg-black text-white px-6 py-3 rounded-xl font-bold text-sm transition shadow-md active:scale-95"
                   >
                     <FileText size={16} /> Print Agreement Document
                   </button>
                   <button 
                     type="button" 
                     onClick={() => onNavigate('couriers')}
-                    className="flex items-center justify-center gap-2 border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-xl font-bold text-sm transition-all"
+                    className="flex items-center justify-center gap-2 border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-xl font-bold text-sm transition-colors"
                   >
                     Return to Elite Fleet page
                   </button>
@@ -2334,7 +2334,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                 {currentStep === 6 ? (
                   <button 
                     type="submit"
-                    className="bg-[#7a5821] hover:bg-[#c49a5c] text-white px-8 py-3 rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer active:scale-95"
+                    className="bg-[#7a5821] hover:bg-[#c49a5c] text-white px-8 py-3 rounded-xl font-bold text-sm transition flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer active:scale-95"
                   >
                     Submit Portfolio Agreement
                     <CheckCircle size={16} />
@@ -2343,7 +2343,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   <button 
                     type="button" 
                     onClick={handleNext}
-                    className="bg-[#7a5821] hover:bg-[#c49a5c] text-white px-8 py-3 rounded-xl font-bold text-sm transition-all flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer active:scale-95"
+                    className="bg-[#7a5821] hover:bg-[#c49a5c] text-white px-8 py-3 rounded-xl font-bold text-sm transition flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer active:scale-95"
                   >
                     Next Step
                     <ArrowRight size={16} />

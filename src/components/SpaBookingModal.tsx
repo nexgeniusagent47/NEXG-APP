@@ -139,7 +139,7 @@ export default function SpaBookingModal({
             <div className="absolute inset-0 bg-gradient-to-t from-[#141618] via-[#141618]/70 to-transparent" />
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-all cursor-pointer"
+              className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-colors cursor-pointer"
             >
               <X size={18} />
             </button>
@@ -186,7 +186,7 @@ export default function SpaBookingModal({
                         key={d.duration}
                         type="button"
                         onClick={() => setSelectedDuration(d.duration)}
-                        className={`p-3 rounded-2xl border text-center transition-all cursor-pointer ${
+                        className={`p-3 rounded-2xl border text-center transition cursor-pointer ${
                           selectedDuration === d.duration
                             ? 'bg-[#E5B65F]/15 border-[#E5B65F] text-white shadow-md'
                             : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
@@ -208,7 +208,7 @@ export default function SpaBookingModal({
                     <button
                       type="button"
                       onClick={() => setLocationType('in_villa')}
-                      className={`p-3.5 rounded-2xl border text-left flex items-start gap-3 transition-all cursor-pointer ${
+                      className={`p-3.5 rounded-2xl border text-left flex items-start gap-3 transition-colors cursor-pointer ${
                         locationType === 'in_villa'
                           ? 'bg-[#E5B65F]/15 border-[#E5B65F] text-white'
                           : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
@@ -226,7 +226,7 @@ export default function SpaBookingModal({
                     <button
                       type="button"
                       onClick={() => setLocationType('sanctuary_pavilion')}
-                      className={`p-3.5 rounded-2xl border text-left flex items-start gap-3 transition-all cursor-pointer ${
+                      className={`p-3.5 rounded-2xl border text-left flex items-start gap-3 transition-colors cursor-pointer ${
                         locationType === 'sanctuary_pavilion'
                           ? 'bg-[#E5B65F]/15 border-[#E5B65F] text-white'
                           : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
@@ -255,7 +255,7 @@ export default function SpaBookingModal({
                           key={d}
                           type="button"
                           onClick={() => setSelectedDate(d)}
-                          className={`px-3 py-1 rounded-full text-xs font-semibold capitalize transition-all cursor-pointer ${
+                          className={`px-3 py-1 rounded-full text-xs font-semibold capitalize transition-colors cursor-pointer ${
                             selectedDate === d
                               ? 'bg-[#E5B65F] text-black'
                               : 'bg-white/10 text-gray-300 hover:bg-white/15'
@@ -273,7 +273,7 @@ export default function SpaBookingModal({
                         key={slot.time}
                         type="button"
                         onClick={() => setSelectedTimeSlot(slot.time)}
-                        className={`p-2.5 rounded-xl border text-center transition-all cursor-pointer ${
+                        className={`p-2.5 rounded-xl border text-center transition cursor-pointer ${
                           selectedTimeSlot === slot.time
                             ? 'bg-[#E5B65F] text-black font-bold border-[#E5B65F] shadow-lg'
                             : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
@@ -314,7 +314,7 @@ export default function SpaBookingModal({
                         key={pref.key}
                         type="button"
                         onClick={() => setTherapistGender(pref.key as any)}
-                        className={`p-3 rounded-xl border text-center text-xs font-semibold transition-all cursor-pointer ${
+                        className={`p-3 rounded-xl border text-center text-xs font-semibold transition-colors cursor-pointer ${
                           therapistGender === pref.key
                             ? 'bg-[#E5B65F] text-black border-[#E5B65F]'
                             : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
@@ -341,7 +341,7 @@ export default function SpaBookingModal({
                         key={p.key}
                         type="button"
                         onClick={() => setPressureLevel(p.key as any)}
-                        className={`p-2.5 rounded-xl border text-center text-xs font-semibold transition-all cursor-pointer ${
+                        className={`p-2.5 rounded-xl border text-center text-xs font-semibold transition-colors cursor-pointer ${
                           pressureLevel === p.key
                             ? 'bg-[#E5B65F]/20 border-[#E5B65F] text-[#E5B65F]'
                             : 'bg-white/5 border-white/10 text-gray-400 hover:bg-white/10'
@@ -362,7 +362,7 @@ export default function SpaBookingModal({
                       <label
                         key={oil}
                         onClick={() => setSelectedOil(oil)}
-                        className={`flex items-center justify-between p-3 rounded-xl border cursor-pointer transition-all ${
+                        className={`flex items-center justify-between p-3 rounded-xl border cursor-pointer transition-colors ${
                           selectedOil === oil
                             ? 'bg-[#E5B65F]/10 border-[#E5B65F] text-white'
                             : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
@@ -394,7 +394,7 @@ export default function SpaBookingModal({
                           <div
                             key={addon.id}
                             onClick={() => toggleAddOn(addon)}
-                            className={`p-3 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
+                            className={`p-3 rounded-xl border flex items-center justify-between cursor-pointer transition-colors ${
                               isAdded
                                 ? 'bg-[#E5B65F]/15 border-[#E5B65F]'
                                 : 'bg-white/5 border-white/10 hover:bg-white/10'
@@ -536,7 +536,7 @@ export default function SpaBookingModal({
                     </div>
                     <a
                       href={`tel:${confirmedBooking.therapist.phone}`}
-                      className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all cursor-pointer"
+                      className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-colors cursor-pointer"
                       title="Contact Spa Concierge"
                     >
                       <Phone size={16} />
@@ -589,7 +589,7 @@ export default function SpaBookingModal({
                     onClick={() => {
                       alert(`Event for ${treatment.title} on ${confirmedBooking.date} at ${confirmedBooking.timeSlot} added to device calendar.`);
                     }}
-                    className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold transition-all cursor-pointer"
+                    className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold transition-colors cursor-pointer"
                   >
                     <CalendarPlus size={16} />
                     <span>Add to Calendar</span>
@@ -598,7 +598,7 @@ export default function SpaBookingModal({
                   <button
                     type="button"
                     onClick={onClose}
-                    className="flex items-center justify-center gap-2 py-3 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black text-xs font-bold transition-all cursor-pointer shadow-lg"
+                    className="flex items-center justify-center gap-2 py-3 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black text-xs font-bold transition cursor-pointer shadow-lg"
                   >
                     <span>Done</span>
                   </button>
@@ -620,7 +620,7 @@ export default function SpaBookingModal({
                   <button
                     type="button"
                     onClick={() => setStep((prev) => (prev - 1) as any)}
-                    className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all cursor-pointer"
+                    className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-colors cursor-pointer"
                   >
                     Back
                   </button>
@@ -630,7 +630,7 @@ export default function SpaBookingModal({
                   <button
                     type="button"
                     onClick={() => setStep((prev) => (prev + 1) as any)}
-                    className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black text-xs sm:text-sm font-bold transition-all cursor-pointer shadow-md"
+                    className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black text-xs sm:text-sm font-bold transition cursor-pointer shadow-md"
                   >
                     <span>Continue</span>
                     <ArrowRight size={14} />
@@ -639,7 +639,7 @@ export default function SpaBookingModal({
                   <button
                     type="button"
                     onClick={handleConfirmBooking}
-                    className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black text-xs sm:text-sm font-bold transition-all cursor-pointer shadow-lg"
+                    className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black text-xs sm:text-sm font-bold transition cursor-pointer shadow-lg"
                   >
                     <Sparkles size={15} />
                     <span>Confirm Spa Booking</span>

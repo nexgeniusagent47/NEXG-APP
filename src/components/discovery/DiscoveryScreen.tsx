@@ -590,7 +590,7 @@ const SkeletonGrid: React.FC<{ isLight: boolean; count?: number; className?: str
       <div
         key={index}
         className={cn(
-          'rounded-2xl overflow-hidden border animate-pulse',
+          'rounded-2xl overflow-hidden border animate-status',
           isLight ? 'bg-white border-slate-200' : 'bg-[#181A1F] border-white/10'
         )}
       >

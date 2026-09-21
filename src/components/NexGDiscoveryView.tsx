@@ -197,7 +197,7 @@ export default function NexGDiscoveryView({
               type="button"
               onClick={onBackToLanding}
               className={cn(
-                'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-all border cursor-pointer',
+                'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold transition-colors border cursor-pointer',
                 isLight
                   ? 'bg-slate-100 hover:bg-slate-200 text-slate-700 border-slate-200'
                   : 'bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border-white/10'
@@ -230,7 +230,7 @@ export default function NexGDiscoveryView({
           <div className="flex-1 max-w-xl">
             <div
               className={cn(
-                'relative flex items-center rounded-full border transition-all px-3.5 py-2 shadow-2xs',
+                'relative flex items-center rounded-full border transition px-3.5 py-2 shadow-2xs',
                 isLight
                   ? 'bg-slate-50 border-slate-200 focus-within:border-[#B88728] focus-within:bg-white'
                   : 'bg-white/5 border-white/10 focus-within:border-[#E5B65F] focus-within:bg-[#181a1b]'
@@ -293,7 +293,7 @@ export default function NexGDiscoveryView({
                   type="button"
                   onClick={() => setActiveTab(tab.id as any)}
                   className={cn(
-                    'px-3.5 py-1.5 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer border',
+                    'px-3.5 py-1.5 rounded-full text-xs font-bold transition-colors flex items-center gap-1.5 whitespace-nowrap cursor-pointer border',
                     isActive
                       ? isLight
                         ? 'bg-[#B88728] text-white border-[#B88728] shadow-xs'
@@ -369,7 +369,7 @@ export default function NexGDiscoveryView({
                     type="button"
                     onClick={() => onSelectCategory(category)}
                     className={cn(
-                      'flex-shrink-0 w-36 sm:w-44 p-3 rounded-2xl border text-left transition-all duration-200 hover:-translate-y-1 cursor-pointer group shadow-2xs snap-start',
+                      'flex-shrink-0 w-36 sm:w-44 p-3 rounded-2xl border text-left transition duration-200 hover:-translate-y-1 cursor-pointer group shadow-2xs snap-start',
                       isLight
                         ? 'bg-white border-slate-200/90 hover:border-[#B88728] hover:shadow-md'
                         : 'bg-[#181a1b] border-white/10 hover:border-[#E5B65F]/60 hover:shadow-lg'

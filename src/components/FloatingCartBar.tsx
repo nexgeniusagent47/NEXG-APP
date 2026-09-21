@@ -35,7 +35,7 @@ export default function FloatingCartBar() {
         <button
           type="button"
           onClick={() => setIsCartOpen(true)}
-          className={`w-full pointer-events-auto backdrop-blur-xl border transition-all duration-300 rounded-full p-2 pl-3.5 pr-2.5 flex items-center justify-between group cursor-pointer ${
+          className={`w-full pointer-events-auto backdrop-blur-xl border transition duration-300 rounded-full p-2 pl-3.5 pr-2.5 flex items-center justify-between group cursor-pointer ${
             isLight
               ? 'bg-white/95 border-slate-200 text-slate-900 shadow-[0_12px_35px_rgba(0,0,0,0.12)] hover:border-[#B88728]'
               : 'bg-[#1a1c1e]/95 border-[#E5B65F]/40 text-white shadow-[0_12px_40px_rgba(0,0,0,0.6)] hover:border-[#E5B65F]'

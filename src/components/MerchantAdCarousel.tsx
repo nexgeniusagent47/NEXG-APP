@@ -328,14 +328,14 @@ export default function MerchantAdCarousel({
 
               {hasLocation ? (
                 <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-black tracking-wide bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-status" />
                   <span className="truncate max-w-[160px] sm:max-w-none">{locationName}</span>
                 </div>
               ) : (
                 <button
                   onClick={requestLocation}
                   disabled={isLocating}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#B88728]/10 dark:bg-[#E5B65F]/15 text-[#B88728] dark:text-[#E5B65F] border border-[#B88728]/25 dark:border-[#E5B65F]/35 hover:bg-[#B88728]/20 transition-all cursor-pointer"
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#B88728]/10 dark:bg-[#E5B65F]/15 text-[#B88728] dark:text-[#E5B65F] border border-[#B88728]/25 dark:border-[#E5B65F]/35 hover:bg-[#B88728]/20 transition-colors cursor-pointer"
                   title="Enable location to see trending offerings near you"
                 >
                   <Navigation size={12} className={isLocating ? 'animate-spin' : ''} />

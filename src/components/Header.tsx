@@ -46,7 +46,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 w-full z-50 rounded-none border-none transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 w-full z-50 rounded-none border-none transition duration-300 ${
         isScrolled
           ? isLight
             ? 'py-2.5 sm:py-3 shadow-[0_6px_25px_rgba(0,0,0,0.04)]'
@@ -60,7 +60,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
       <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
         {/* Layer 1: Core Frosted Glass with gradual vertical transparency falloff */}
         <div
-          className={`absolute inset-0 backdrop-blur-2xl transition-all duration-500 ${
+          className={`absolute inset-0 backdrop-blur-2xl transition-colors duration-500 ${
             isLight
               ? isScrolled
                 ? 'bg-white/94'
@@ -153,7 +153,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
               <span>{t.nav.partners}</span>
               <ChevronDown size={13} className="transition-transform group-hover:rotate-180" />
             </button>
-            <div className="absolute top-full left-0 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <div className="absolute top-full left-0 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-colors duration-200">
               <div
                 className={`w-48 rounded-xl shadow-2xl flex flex-col overflow-hidden py-2 border backdrop-blur-xl ${
                   isLight
@@ -212,7 +212,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
           <button
             id="header-theme-toggle-btn"
             onClick={toggleTheme}
-            className={`flex items-center justify-center w-9 h-9 rounded-xl border transition-all cursor-pointer ${
+            className={`flex items-center justify-center w-9 h-9 rounded-xl border transition-colors cursor-pointer ${
               isLight
                 ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-amber-800'
                 : 'bg-white/10 hover:bg-white/20 border-white/15 text-[#E5B65F]'
@@ -226,7 +226,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
           {/* Cart Trigger */}
           <button
             onClick={() => setIsCartOpen(true)}
-            className={`relative flex items-center justify-center w-9 h-9 rounded-xl border transition-all cursor-pointer ${
+            className={`relative flex items-center justify-center w-9 h-9 rounded-xl border transition-colors cursor-pointer ${
               isLight
                 ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-800'
                 : 'bg-white/10 hover:bg-white/20 border-white/15 text-white'

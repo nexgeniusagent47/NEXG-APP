@@ -71,7 +71,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
       <div
         onClick={handleCardClick}
         className={cn(
-          'group relative flex items-center justify-between gap-4 p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 hover:shadow-md cursor-pointer select-none',
+          'group relative flex items-center justify-between gap-4 p-3.5 sm:p-4 rounded-2xl border transition duration-300 hover:shadow-md cursor-pointer select-none',
           isLight
             ? 'bg-white text-slate-900 border-slate-200/90 hover:border-[#B88728]/40'
             : 'bg-[#181A1F] text-[#F3F4F6] border-white/10 hover:border-[#E5B65F]/40'
@@ -125,7 +125,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
             type="button"
             onClick={handleActionClick}
             className={cn(
-              'absolute bottom-2 right-2 px-2.5 py-1 rounded-lg text-xs font-black transition-all flex items-center gap-1 shadow-md cursor-pointer',
+              'absolute bottom-2 right-2 px-2.5 py-1 rounded-lg text-xs font-black transition flex items-center gap-1 shadow-md cursor-pointer',
               justAdded
                 ? 'bg-emerald-600 text-white'
                 : isLight
@@ -160,7 +160,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
     <div
       onClick={handleCardClick}
       className={cn(
-        'group relative flex flex-col h-full rounded-2xl overflow-hidden border shadow-xs transition-all duration-300 hover:shadow-lg cursor-pointer select-none',
+        'group relative flex flex-col h-full rounded-2xl overflow-hidden border shadow-xs transition duration-300 hover:shadow-lg cursor-pointer select-none',
         isLight
           ? 'bg-white text-slate-900 border-slate-200/90 hover:border-[#B88728]/40'
           : 'bg-[#181A1F] text-[#F3F4F6] border-white/10 hover:border-[#E5B65F]/40'
@@ -236,7 +236,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
             type="button"
             onClick={handleActionClick}
             className={cn(
-              'rounded-xl px-3.5 py-1.5 text-xs font-black transition-all flex items-center gap-1.5 cursor-pointer shadow-xs',
+              'rounded-xl px-3.5 py-1.5 text-xs font-black transition flex items-center gap-1.5 cursor-pointer shadow-xs',
               justAdded
                 ? 'bg-emerald-600 text-white border-emerald-600'
                 : item.workflowType === 'book'

@@ -19,7 +19,7 @@ export default function Promo({ onNavigate }: PromoProps) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
         
         {/* Left Column: Take NEXG everywhere card */}
-        <div className={`lg:col-span-7 rounded-[24px] sm:rounded-[32px] border overflow-hidden min-h-[315px] sm:min-h-[380px] md:min-h-[415px] lg:min-h-[480px] xl:min-h-[520px] relative flex items-stretch transition-all duration-300 ${
+        <div className={`lg:col-span-7 rounded-[24px] sm:rounded-[32px] border overflow-hidden min-h-[315px] sm:min-h-[380px] md:min-h-[415px] lg:min-h-[480px] xl:min-h-[520px] relative flex items-stretch transition duration-300 ${
           isLight
             ? 'bg-gradient-to-br from-slate-100 via-white to-amber-50/20 border-slate-200 shadow-sm'
             : 'bg-[#252828] border-gray-800/80 shadow-2xl'
@@ -41,7 +41,7 @@ export default function Promo({ onNavigate }: PromoProps) {
             {/* App download badges stacked vertically as shown in sample photo */}
             <div className="flex flex-col gap-2.5 items-start">
               {/* Apple Store Button */}
-              <button className={`w-fit flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-2.5 rounded-[10px] sm:rounded-[12px] transition-all text-left shadow-sm hover:shadow-md cursor-pointer ${
+              <button className={`w-fit flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-2.5 rounded-[10px] sm:rounded-[12px] transition text-left shadow-sm hover:shadow-md cursor-pointer ${
                 isLight ? 'bg-slate-900 text-white hover:bg-black' : 'bg-[#1C1C1E] text-white hover:bg-black'
               }`}>
                 <Apple size={18} className="fill-current text-white flex-shrink-0 sm:w-5 sm:h-5" />
@@ -52,7 +52,7 @@ export default function Promo({ onNavigate }: PromoProps) {
               </button>
               
               {/* Google Play Button */}
-              <button className={`w-fit flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-2.5 rounded-[10px] sm:rounded-[12px] transition-all text-left shadow-sm hover:shadow-md cursor-pointer ${
+              <button className={`w-fit flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-2.5 rounded-[10px] sm:rounded-[12px] transition text-left shadow-sm hover:shadow-md cursor-pointer ${
                 isLight ? 'bg-slate-900 text-white hover:bg-black' : 'bg-[#1C1C1E] text-white hover:bg-black'
               }`}>
                 <Play size={16} className="fill-current text-white flex-shrink-0 sm:w-4 sm:h-4" />
@@ -81,7 +81,7 @@ export default function Promo({ onNavigate }: PromoProps) {
           {/* Card 1: For Merchants */}
           <div 
             onClick={() => onNavigate?.('merchants')}
-            className={`flex items-stretch overflow-hidden rounded-[20px] h-[140px] lg:flex-1 lg:h-auto lg:min-h-[140px] xl:min-h-[150px] transition-all duration-300 cursor-pointer border group ${
+            className={`flex items-stretch overflow-hidden rounded-[20px] h-[140px] lg:flex-1 lg:h-auto lg:min-h-[140px] xl:min-h-[150px] transition duration-300 cursor-pointer border group ${
               isLight
                 ? 'bg-white border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300'
                 : 'bg-[#252828] border-gray-800 hover:shadow-lg hover:border-gray-700'
@@ -119,7 +119,7 @@ export default function Promo({ onNavigate }: PromoProps) {
           {/* Card 2: For Couriers */}
           <div 
             onClick={() => onNavigate?.('couriers')}
-            className={`flex items-stretch overflow-hidden rounded-[20px] h-[140px] lg:flex-1 lg:h-auto lg:min-h-[140px] xl:min-h-[150px] transition-all duration-300 cursor-pointer border group ${
+            className={`flex items-stretch overflow-hidden rounded-[20px] h-[140px] lg:flex-1 lg:h-auto lg:min-h-[140px] xl:min-h-[150px] transition duration-300 cursor-pointer border group ${
               isLight
                 ? 'bg-white border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300'
                 : 'bg-[#252828] border-gray-800 hover:shadow-lg hover:border-gray-700'
@@ -157,7 +157,7 @@ export default function Promo({ onNavigate }: PromoProps) {
           {/* Card 3: For Properties */}
           <div 
             onClick={() => onNavigate?.('properties')}
-            className={`flex items-stretch overflow-hidden rounded-[20px] h-[140px] lg:flex-1 lg:h-auto lg:min-h-[140px] xl:min-h-[150px] transition-all duration-300 cursor-pointer border group ${
+            className={`flex items-stretch overflow-hidden rounded-[20px] h-[140px] lg:flex-1 lg:h-auto lg:min-h-[140px] xl:min-h-[150px] transition duration-300 cursor-pointer border group ${
               isLight
                 ? 'bg-white border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300'
                 : 'bg-[#252828] border-gray-800 hover:shadow-lg hover:border-gray-700'

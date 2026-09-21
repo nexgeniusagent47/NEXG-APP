@@ -238,7 +238,7 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
                 <div
                   key={host.id}
                   onClick={() => setSelectedHost(host)}
-                  className={`rounded-2xl overflow-hidden border transition-all duration-300 flex flex-col group cursor-pointer shadow-md hover:shadow-2xl hover:-translate-y-1 ${
+                  className={`rounded-2xl overflow-hidden border transition duration-300 flex flex-col group cursor-pointer shadow-md hover:shadow-2xl hover:-translate-y-1 ${
                     isLight
                       ? 'bg-white border-slate-200 hover:border-[#B88728]'
                       : 'bg-[#15171b] border-white/10 hover:border-[#E5B65F]/60'
@@ -451,7 +451,7 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
               <div
                 key={act.id}
                 onClick={() => handleOpenActivityModal(act, selectedHost)}
-                className={`rounded-2xl overflow-hidden border transition-all duration-300 flex flex-col group cursor-pointer shadow-md hover:shadow-xl hover:-translate-y-1 ${
+                className={`rounded-2xl overflow-hidden border transition duration-300 flex flex-col group cursor-pointer shadow-md hover:shadow-xl hover:-translate-y-1 ${
                   isLight
                     ? 'bg-white border-slate-200 hover:border-[#B88728]'
                     : 'bg-[#15171a] border-white/10 hover:border-[#E5B65F]/60'
@@ -526,7 +526,7 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
       {bookingModalConfig.isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md">
           <div
-            className={`w-full max-w-xl rounded-3xl overflow-hidden border shadow-2xl transition-all ${
+            className={`w-full max-w-xl rounded-3xl overflow-hidden border shadow-2xl transition ${
               isLight ? 'bg-white border-slate-200 text-slate-900' : 'bg-[#15171a] border-white/15 text-white'
             }`}
           >

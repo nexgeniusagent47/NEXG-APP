@@ -200,7 +200,7 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
                 <div
                   key={purveyor.id}
                   onClick={() => setSelectedPurveyor(purveyor)}
-                  className={`rounded-2xl overflow-hidden border transition-all duration-300 flex flex-col group cursor-pointer shadow-md hover:shadow-2xl hover:-translate-y-1 ${
+                  className={`rounded-2xl overflow-hidden border transition duration-300 flex flex-col group cursor-pointer shadow-md hover:shadow-2xl hover:-translate-y-1 ${
                     isLight
                       ? 'bg-white border-slate-200 hover:border-[#B88728]'
                       : 'bg-[#15171b] border-white/10 hover:border-[#E5B65F]/60'
@@ -408,7 +408,7 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
               <div
                 key={item.id}
                 onClick={() => handleOpenItemModal(item, selectedPurveyor)}
-                className={`rounded-2xl overflow-hidden border transition-all duration-300 flex flex-col group cursor-pointer shadow-md hover:shadow-xl hover:-translate-y-1 ${
+                className={`rounded-2xl overflow-hidden border transition duration-300 flex flex-col group cursor-pointer shadow-md hover:shadow-xl hover:-translate-y-1 ${
                   isLight
                     ? 'bg-white border-slate-200 hover:border-[#B88728]'
                     : 'bg-[#15171a] border-white/10 hover:border-[#E5B65F]/60'

@@ -341,7 +341,7 @@ export default function DishCustomizerModal({
           <div className="flex items-center border-b border-white/10 bg-[#141517] px-5 sm:px-7 mt-2">
             <button
               onClick={() => setActiveTab('customize')}
-              className={`py-3 px-3 font-bold text-xs sm:text-sm border-b-2 transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`py-3 px-3 font-bold text-xs sm:text-sm border-b-2 transition-colors cursor-pointer flex items-center gap-1.5 ${
                 activeTab === 'customize'
                   ? 'border-[#E5B65F] text-[#E5B65F]'
                   : 'border-transparent text-gray-400 hover:text-white'
@@ -352,7 +352,7 @@ export default function DishCustomizerModal({
 
             <button
               onClick={() => setActiveTab('reviews')}
-              className={`py-3 px-3 font-bold text-xs sm:text-sm border-b-2 transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`py-3 px-3 font-bold text-xs sm:text-sm border-b-2 transition-colors cursor-pointer flex items-center gap-1.5 ${
                 activeTab === 'reviews'
                   ? 'border-[#E5B65F] text-[#E5B65F]'
                   : 'border-transparent text-gray-400 hover:text-white'
@@ -397,7 +397,7 @@ export default function DishCustomizerModal({
                                 <label
                                   key={choice.id}
                                   onClick={() => handleRadioSelect(group.id, choice.id, choice.name, choice.price)}
-                                  className={`flex items-center justify-between p-3.5 rounded-xl border transition-all cursor-pointer ${
+                                  className={`flex items-center justify-between p-3.5 rounded-xl border transition cursor-pointer ${
                                     isSelected
                                       ? 'bg-[#E5B65F]/10 border-[#E5B65F] text-white shadow-sm'
                                       : 'bg-[#212325] border-white/5 hover:border-white/20 text-gray-300'
@@ -428,7 +428,7 @@ export default function DishCustomizerModal({
                               <label
                                 key={choice.id}
                                 onClick={() => handleCheckboxToggle(group.id, choice.id, choice.name, choice.price)}
-                                className={`flex items-center justify-between p-3.5 rounded-xl border transition-all cursor-pointer ${
+                                className={`flex items-center justify-between p-3.5 rounded-xl border transition cursor-pointer ${
                                   isChecked
                                     ? 'bg-[#E5B65F]/10 border-[#E5B65F] text-white shadow-sm'
                                     : 'bg-[#212325] border-white/5 hover:border-white/20 text-gray-300'
@@ -582,7 +582,7 @@ export default function DishCustomizerModal({
                             key={tag}
                             type="button"
                             onClick={() => setSelectedTag(tag)}
-                            className={`text-[11px] px-2.5 py-1 rounded-full border transition-all cursor-pointer ${
+                            className={`text-[11px] px-2.5 py-1 rounded-full border transition-colors cursor-pointer ${
                               selectedTag === tag
                                 ? 'bg-[#E5B65F] text-black border-[#E5B65F] font-bold'
                                 : 'bg-black/30 text-gray-300 border-white/10 hover:border-white/20'
@@ -606,7 +606,7 @@ export default function DishCustomizerModal({
 
                     <button
                       type="submit"
-                      className="w-full py-2.5 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-bold text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-md"
+                      className="w-full py-2.5 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-bold text-xs flex items-center justify-center gap-1.5 transition cursor-pointer shadow-md"
                     >
                       <Send size={13} />
                       <span>Submit Verified Review</span>
@@ -685,7 +685,7 @@ export default function DishCustomizerModal({
                           <button
                             type="button"
                             onClick={() => handleHelpfulClick(rev.id, rev.helpfulCount ?? 6)}
-                            className={`flex items-center gap-1 text-[11px] px-2.5 py-0.5 rounded-full transition-all cursor-pointer ${
+                            className={`flex items-center gap-1 text-[11px] px-2.5 py-0.5 rounded-full transition-colors cursor-pointer ${
                               hasVoted
                                 ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold'
                                 : 'text-gray-400 hover:text-white bg-white/5'
@@ -733,7 +733,7 @@ export default function DishCustomizerModal({
             <button
               type="button"
               onClick={handleAddToCart}
-              className="flex-grow flex items-center justify-between px-6 py-3.5 rounded-full bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-bold text-sm sm:text-base transition-all transform active:scale-[0.98] shadow-lg shadow-[#E5B65F]/15 cursor-pointer"
+              className="flex-grow flex items-center justify-between px-6 py-3.5 rounded-full bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-bold text-sm sm:text-base transition transform active:scale-[0.98] shadow-lg shadow-[#E5B65F]/15 cursor-pointer"
             >
               <span>Add to Order</span>
               <span className="font-extrabold tracking-wide">

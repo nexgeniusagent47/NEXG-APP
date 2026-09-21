@@ -84,7 +84,7 @@ export default function NexGLandingHero({
           {/* Location Selector */}
           <button
             onClick={handleLocateMe}
-            className="hidden sm:flex items-center gap-2 bg-white/15 hover:bg-white/25 px-3.5 py-1.5 rounded-full text-xs font-semibold text-white transition-all cursor-pointer backdrop-blur-md"
+            className="hidden sm:flex items-center gap-2 bg-white/15 hover:bg-white/25 px-3.5 py-1.5 rounded-full text-xs font-semibold text-white transition-colors cursor-pointer backdrop-blur-md"
             title="Change Delivery Location"
           >
             <div className="w-5 h-5 rounded-full bg-white text-[#009DE0] flex items-center justify-center">
@@ -131,7 +131,7 @@ export default function NexGLandingHero({
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           onClick={() => onEnterDiscovery()}
-          className="inline-flex items-center gap-1.5 bg-white/20 hover:bg-white/30 backdrop-blur-md text-white text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full mb-6 cursor-pointer transition-all border border-white/25"
+          className="inline-flex items-center gap-1.5 bg-white/20 hover:bg-white/30 backdrop-blur-md text-white text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full mb-6 cursor-pointer transition-colors border border-white/25"
         >
           <span>♥ Delivered sustainably & in private warmth</span>
           <ArrowRight size={13} className="ml-0.5" />
@@ -158,7 +158,7 @@ export default function NexGLandingHero({
         {/* Central Search Bar (The Address / Category Trigger) */}
         <form
           onSubmit={handleAddressSubmit}
-          className="w-full max-w-xl bg-white rounded-full p-2 sm:p-2.5 shadow-2xl flex items-center gap-3 transition-all hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] focus-within:ring-4 focus-within:ring-white/40"
+          className="w-full max-w-xl bg-white rounded-full p-2 sm:p-2.5 shadow-2xl flex items-center gap-3 transition hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] focus-within:ring-4 focus-within:ring-white/40"
         >
           <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-[#009DE0] flex-shrink-0 ml-1">
             <MapPin size={20} className="fill-[#009DE0]" />
@@ -189,7 +189,7 @@ export default function NexGLandingHero({
 
           <button
             type="submit"
-            className="bg-[#009DE0] hover:bg-[#008cc7] text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-bold text-xs sm:text-sm transition-all flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer flex-shrink-0"
+            className="bg-[#009DE0] hover:bg-[#008cc7] text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-bold text-xs sm:text-sm transition flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer flex-shrink-0"
           >
             <span>Explore</span>
             <ArrowRight size={15} />
@@ -200,7 +200,7 @@ export default function NexGLandingHero({
         <div className="mt-5 flex flex-col sm:flex-row items-center gap-3 text-xs sm:text-sm font-semibold text-white/90">
           <button
             onClick={() => onEnterDiscovery()}
-            className="bg-white/15 hover:bg-white/25 px-4 py-2 rounded-full transition-all cursor-pointer backdrop-blur-sm"
+            className="bg-white/15 hover:bg-white/25 px-4 py-2 rounded-full transition-colors cursor-pointer backdrop-blur-sm"
           >
             Log in for saved addresses &gt;
           </button>
@@ -226,7 +226,7 @@ export default function NexGLandingHero({
           </button>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-status" />
           <span>Active Concierge Fleet in Nairobi</span>
         </div>
       </footer>

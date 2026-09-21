@@ -51,7 +51,7 @@ const OfferCard: React.FC<OfferCardProps> = ({ offer, twoPerScreen = true }) => 
     >
       <div
         className={cn(
-          "flex flex-col h-full overflow-hidden rounded-2xl border shadow-xs transition-all duration-300 hover:shadow-lg",
+          "flex flex-col h-full overflow-hidden rounded-2xl border shadow-xs transition duration-300 hover:shadow-lg",
           isLight
             ? "bg-white text-slate-900 border-slate-200/90 hover:border-[#B88728]/40"
             : "bg-[#181A1F] text-[#F3F4F6] border-white/10 hover:border-[#E5B65F]/40"
@@ -167,7 +167,7 @@ const OfferCard: React.FC<OfferCardProps> = ({ offer, twoPerScreen = true }) => 
               </span>
               <div
                 className={cn(
-                  "w-7 h-7 rounded-full flex items-center justify-center transform transition-all duration-300 group-hover:rotate-[-45deg] group-hover:bg-[#B88728] group-hover:text-white flex-shrink-0",
+                  "w-7 h-7 rounded-full flex items-center justify-center transform transition duration-300 group-hover:rotate-[-45deg] group-hover:bg-[#B88728] group-hover:text-white flex-shrink-0",
                   isLight ? "bg-slate-100 text-slate-800" : "bg-white/10 text-white"
                 )}
               >
@@ -280,7 +280,7 @@ export const OfferCarousel = React.forwardRef<HTMLDivElement, OfferCarouselProps
             <button
               onClick={handlePrev}
               className={cn(
-                "absolute top-1/2 -translate-y-1/2 left-2 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer shadow-md backdrop-blur-md border",
+                "absolute top-1/2 -translate-y-1/2 left-2 z-20 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 cursor-pointer shadow-md backdrop-blur-md border",
                 isLight
                   ? "bg-white/90 text-slate-800 border-slate-200 hover:bg-white hover:border-[#B88728]"
                   : "bg-black/75 text-white border-white/20 hover:bg-black hover:border-[#E5B65F]"
@@ -329,7 +329,7 @@ export const OfferCarousel = React.forwardRef<HTMLDivElement, OfferCarouselProps
             <button
               onClick={handleNext}
               className={cn(
-                "absolute top-1/2 -translate-y-1/2 right-2 z-20 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer shadow-md backdrop-blur-md border",
+                "absolute top-1/2 -translate-y-1/2 right-2 z-20 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 cursor-pointer shadow-md backdrop-blur-md border",
                 isLight
                   ? "bg-white/90 text-slate-800 border-slate-200 hover:bg-white hover:border-[#B88728]"
                   : "bg-black/75 text-white border-white/20 hover:bg-black hover:border-[#E5B65F]"
@@ -351,7 +351,7 @@ export const OfferCarousel = React.forwardRef<HTMLDivElement, OfferCarouselProps
                   key={idx}
                   onClick={() => setCurrentIndex(idx)}
                   className={cn(
-                    "h-2 rounded-full transition-all duration-300 cursor-pointer",
+                    "h-2 rounded-full transition-colors duration-300 cursor-pointer",
                     isActive
                       ? "w-6 bg-[#B88728] dark:bg-[#E5B65F]"
                       : isLight

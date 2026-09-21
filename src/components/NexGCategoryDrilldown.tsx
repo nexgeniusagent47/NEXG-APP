@@ -235,7 +235,7 @@ export default function NexGCategoryDrilldown({
           {/* Search bar inside category */}
           <div className="flex-grow max-w-md">
             <div
-              className={`flex items-center gap-2.5 px-3.5 py-2 rounded-xl border transition-all ${
+              className={`flex items-center gap-2.5 px-3.5 py-2 rounded-xl border transition-colors ${
                 isLight
                   ? 'bg-white border-slate-200 text-slate-800 focus-within:border-[#B88728]'
                   : 'bg-[#181a1b] border-white/10 text-white focus-within:border-[#E5B65F]'
@@ -301,7 +301,7 @@ export default function NexGCategoryDrilldown({
             <div className="flex items-center gap-1.5">
               <button
                 onClick={() => scrollSubcategories('left')}
-                className={`p-2 rounded-xl border transition-all cursor-pointer ${
+                className={`p-2 rounded-xl border transition-colors cursor-pointer ${
                   isLight
                     ? 'bg-white border-slate-200 hover:border-[#B88728] text-slate-700'
                     : 'bg-[#181a1b] border-white/10 hover:border-[#E5B65F] text-white'
@@ -312,7 +312,7 @@ export default function NexGCategoryDrilldown({
               </button>
               <button
                 onClick={() => scrollSubcategories('right')}
-                className={`p-2 rounded-xl border transition-all cursor-pointer ${
+                className={`p-2 rounded-xl border transition-colors cursor-pointer ${
                   isLight
                     ? 'bg-white border-slate-200 hover:border-[#B88728] text-slate-700'
                     : 'bg-[#181a1b] border-white/10 hover:border-[#E5B65F] text-white'
@@ -332,7 +332,7 @@ export default function NexGCategoryDrilldown({
             {/* "All" card */}
             <button
               onClick={() => setSelectedSubcategory('all')}
-              className={`flex-shrink-0 w-32 sm:w-36 rounded-2xl p-3 border transition-all cursor-pointer flex flex-col items-center text-center justify-between group ${
+              className={`flex-shrink-0 w-32 sm:w-36 rounded-2xl p-3 border transition cursor-pointer flex flex-col items-center text-center justify-between group ${
                 selectedSubcategory === 'all'
                   ? isLight
                     ? 'bg-white border-[#B88728] ring-2 ring-[#B88728]/30 shadow-md scale-[1.02]'
@@ -367,7 +367,7 @@ export default function NexGCategoryDrilldown({
                 <button
                   key={sub.id}
                   onClick={() => setSelectedSubcategory(sub.name)}
-                  className={`flex-shrink-0 w-32 sm:w-36 rounded-2xl p-3 border transition-all cursor-pointer flex flex-col items-center text-center justify-between group ${
+                  className={`flex-shrink-0 w-32 sm:w-36 rounded-2xl p-3 border transition cursor-pointer flex flex-col items-center text-center justify-between group ${
                     isSelected
                       ? isLight
                         ? 'bg-white border-[#B88728] ring-2 ring-[#B88728]/30 shadow-md scale-[1.02]'
@@ -419,7 +419,7 @@ export default function NexGCategoryDrilldown({
             {/* Quick Filter: Rating 4.5+ */}
             <button
               onClick={() => setFilterRating45(!filterRating45)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer flex items-center gap-1.5 ${
                 filterRating45
                   ? isLight
                     ? 'bg-[#B88728] text-white border-[#B88728]'
@@ -436,7 +436,7 @@ export default function NexGCategoryDrilldown({
             {/* Quick Filter: Fast Delivery */}
             <button
               onClick={() => setFilterFastDelivery(!filterFastDelivery)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer flex items-center gap-1.5 ${
                 filterFastDelivery
                   ? isLight
                     ? 'bg-[#B88728] text-white border-[#B88728]'
@@ -453,7 +453,7 @@ export default function NexGCategoryDrilldown({
             {/* Quick Filter: Special Offers */}
             <button
               onClick={() => setFilterDiscountOnly(!filterDiscountOnly)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer flex items-center gap-1.5 ${
                 filterDiscountOnly
                   ? isLight
                     ? 'bg-[#B88728] text-white border-[#B88728]'
@@ -542,7 +542,7 @@ export default function NexGCategoryDrilldown({
                       document.getElementById('active-merchant-banner')?.scrollIntoView({ behavior: 'smooth' });
                     }, 50);
                   }}
-                  className={`rounded-2xl border text-left transition-all cursor-pointer overflow-hidden flex flex-col justify-between group ${
+                  className={`rounded-2xl border text-left transition cursor-pointer overflow-hidden flex flex-col justify-between group ${
                     isActive
                       ? isLight
                         ? 'bg-white border-[#B88728] ring-2 ring-[#B88728]/35 shadow-lg scale-[1.01]'
@@ -620,7 +620,7 @@ export default function NexGCategoryDrilldown({
         {!currentMerchant ? (
           <section className="py-6">
             <div
-              className={`p-10 text-center rounded-3xl border border-dashed transition-all ${
+              className={`p-10 text-center rounded-3xl border border-dashed transition ${
                 isLight ? 'bg-white border-slate-300 shadow-xs' : 'bg-[#181a1b] border-white/15'
               }`}
             >
@@ -643,7 +643,7 @@ export default function NexGCategoryDrilldown({
                         document.getElementById('active-merchant-banner')?.scrollIntoView({ behavior: 'smooth' });
                       }, 50);
                     }}
-                    className="px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-white/10 hover:border-[#B88728] dark:hover:border-[#E5B65F] bg-slate-50 dark:bg-white/5 transition-all cursor-pointer flex items-center gap-1.5 hover:scale-105"
+                    className="px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-white/10 hover:border-[#B88728] dark:hover:border-[#E5B65F] bg-slate-50 dark:bg-white/5 transition cursor-pointer flex items-center gap-1.5 hover:scale-105"
                   >
                     <Star size={12} className="fill-amber-400 text-amber-400" />
                     <span>{m.name}</span>
@@ -657,7 +657,7 @@ export default function NexGCategoryDrilldown({
             {/* Active Provider Info Banner */}
             <section
               id="active-merchant-banner"
-              className={`p-5 rounded-2xl border flex flex-col md:flex-row md:items-center justify-between gap-4 transition-all ${
+              className={`p-5 rounded-2xl border flex flex-col md:flex-row md:items-center justify-between gap-4 transition ${
                 isLight
                   ? 'bg-white border-[#B88728]/30 shadow-md ring-1 ring-[#B88728]/20'
                   : 'bg-[#181a1b] border-[#E5B65F]/30 shadow-xl ring-1 ring-[#E5B65F]/20'
@@ -753,7 +753,7 @@ export default function NexGCategoryDrilldown({
               {filteredItems.map((item) => (
                 <div
                   key={item.id}
-                  className={`rounded-2xl border overflow-hidden transition-all duration-200 flex flex-col shadow-2xs ${
+                  className={`rounded-2xl border overflow-hidden transition duration-200 flex flex-col shadow-2xs ${
                     isLight
                       ? 'bg-white border-slate-200/90 hover:border-[#B88728] hover:shadow-md'
                       : 'bg-[#181a1b] border-white/10 hover:border-[#E5B65F]/50 hover:shadow-xl'
@@ -829,7 +829,7 @@ export default function NexGCategoryDrilldown({
 
                       <button
                         onClick={() => handleActionClick(item, currentMerchant)}
-                        className={`px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-1.5 transition-all cursor-pointer shadow-md active:scale-95 ${
+                        className={`px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-1.5 transition cursor-pointer shadow-md active:scale-95 ${
                           item.workflowType === 'order'
                             ? isLight
                               ? 'bg-[#B88728] hover:bg-[#9e721d] text-white'
@@ -866,7 +866,7 @@ export default function NexGCategoryDrilldown({
       {selectedItemForWorkflow && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
           <div
-            className={`w-full max-w-lg rounded-3xl border p-6 sm:p-8 shadow-2xl relative transition-all ${
+            className={`w-full max-w-lg rounded-3xl border p-6 sm:p-8 shadow-2xl relative transition ${
               isLight ? 'bg-white border-slate-200 text-slate-900' : 'bg-[#181a1b] border-white/15 text-white'
             }`}
           >
@@ -964,7 +964,7 @@ export default function NexGCategoryDrilldown({
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className={`w-full py-3 rounded-xl font-black text-sm transition-all cursor-pointer shadow-lg active:scale-98 ${
+                    className={`w-full py-3 rounded-xl font-black text-sm transition cursor-pointer shadow-lg active:scale-98 ${
                       isLight
                         ? 'bg-[#B88728] hover:bg-[#9e721d] text-white'
                         : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-black'

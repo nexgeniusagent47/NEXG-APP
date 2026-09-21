@@ -121,7 +121,7 @@ export default function BookingCalendar({
 
   return (
     <div
-      className={`rounded-2xl border p-4 sm:p-6 transition-all ${
+      className={`rounded-2xl border p-4 sm:p-6 transition ${
         isLight
           ? 'bg-white border-slate-200 text-slate-900 shadow-sm'
           : 'bg-[#141618] border-white/10 text-white shadow-xl'
@@ -149,7 +149,7 @@ export default function BookingCalendar({
         <button
           type="button"
           onClick={handleExportToCalendar}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors cursor-pointer ${
             isLight
               ? 'bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200'
               : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
@@ -175,7 +175,7 @@ export default function BookingCalendar({
         <button
           type="button"
           onClick={() => selectQuickDate(0)}
-          className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-all border cursor-pointer ${
+          className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-colors border cursor-pointer ${
             selectedDate === todayStr
               ? 'bg-[#E5B65F] text-black border-[#E5B65F]'
               : isLight
@@ -188,7 +188,7 @@ export default function BookingCalendar({
         <button
           type="button"
           onClick={() => selectQuickDate(1)}
-          className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-all border cursor-pointer ${
+          className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-colors border cursor-pointer ${
             isLight
               ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
               : 'bg-white/5 hover:bg-white/10 border-white/10 text-gray-300'
@@ -199,7 +199,7 @@ export default function BookingCalendar({
         <button
           type="button"
           onClick={() => selectQuickDate(2)}
-          className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-all border cursor-pointer ${
+          className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-colors border cursor-pointer ${
             isLight
               ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
               : 'bg-white/5 hover:bg-white/10 border-white/10 text-gray-300'
@@ -210,7 +210,7 @@ export default function BookingCalendar({
         <button
           type="button"
           onClick={() => selectQuickDate(7)}
-          className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-all border cursor-pointer ${
+          className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-colors border cursor-pointer ${
             isLight
               ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
               : 'bg-white/5 hover:bg-white/10 border-white/10 text-gray-300'
@@ -232,7 +232,7 @@ export default function BookingCalendar({
               <button
                 type="button"
                 onClick={handlePrevMonth}
-                className={`p-1.5 rounded-lg border transition-all cursor-pointer ${
+                className={`p-1.5 rounded-lg border transition-colors cursor-pointer ${
                   isLight
                     ? 'hover:bg-slate-100 border-slate-200 text-slate-700'
                     : 'hover:bg-white/10 border-white/10 text-gray-300'
@@ -244,7 +244,7 @@ export default function BookingCalendar({
               <button
                 type="button"
                 onClick={handleNextMonth}
-                className={`p-1.5 rounded-lg border transition-all cursor-pointer ${
+                className={`p-1.5 rounded-lg border transition-colors cursor-pointer ${
                   isLight
                     ? 'hover:bg-slate-100 border-slate-200 text-slate-700'
                     : 'hover:bg-white/10 border-white/10 text-gray-300'
@@ -299,7 +299,7 @@ export default function BookingCalendar({
                   key={dateStr}
                   type="button"
                   onClick={() => onDateSelect(dateStr)}
-                  className={`h-9 w-full rounded-xl flex flex-col items-center justify-center relative font-semibold transition-all cursor-pointer ${
+                  className={`h-9 w-full rounded-xl flex flex-col items-center justify-center relative font-semibold transition cursor-pointer ${
                     isSelected
                       ? 'bg-[#E5B65F] text-black font-extrabold shadow-md scale-105 z-10'
                       : isLight
@@ -341,7 +341,7 @@ export default function BookingCalendar({
                     key={slot.time}
                     type="button"
                     onClick={() => onTimeSelect(slot.time)}
-                    className={`px-3 py-2 rounded-xl text-left border transition-all cursor-pointer flex flex-col ${
+                    className={`px-3 py-2 rounded-xl text-left border transition cursor-pointer flex flex-col ${
                       isSelected
                         ? 'bg-[#E5B65F] text-black border-[#E5B65F] shadow-sm font-bold'
                         : isLight
@@ -379,7 +379,7 @@ export default function BookingCalendar({
                       type="button"
                       onClick={() => onGuestsChange(Math.max(minGuests, guests - 1))}
                       disabled={guests <= minGuests}
-                      className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold border transition-all disabled:opacity-30 cursor-pointer ${
+                      className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold border transition-colors disabled:opacity-30 cursor-pointer ${
                         isLight ? 'border-slate-200 hover:bg-slate-100 text-slate-800' : 'border-white/10 hover:bg-white/10 text-white'
                       }`}
                     >
@@ -390,7 +390,7 @@ export default function BookingCalendar({
                       type="button"
                       onClick={() => onGuestsChange(Math.min(maxGuests, guests + 1))}
                       disabled={guests >= maxGuests}
-                      className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold border transition-all disabled:opacity-30 cursor-pointer ${
+                      className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold border transition-colors disabled:opacity-30 cursor-pointer ${
                         isLight ? 'border-slate-200 hover:bg-slate-100 text-slate-800' : 'border-white/10 hover:bg-white/10 text-white'
                       }`}
                     >

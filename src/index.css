@@ -86,6 +86,18 @@
     ui-sans-serif, system-ui, sans-serif;
   /* Warm accent face. The full Cooper* family, so the weight is a real choice. */
   --font-warm: "Cooper Local", "Cooper Black", Georgia, serif;
+  /* Live-status indicator. Opacity only: Tailwind's `animate-pulse` also scales the
+     element, which is a transform on every frame of an animation that never ends. */
+  --animate-status: status-breathe 2.4s ease-in-out infinite;
+}
+
+@keyframes status-breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-status { animation: none; }
 }
 
 body {

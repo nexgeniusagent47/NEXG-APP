@@ -6,7 +6,7 @@ export default function Stats() {
 
   return (
     <section className="py-12 px-6 sm:px-8 xl:px-16 max-w-[1400px] mx-auto">
-      <div className={`rounded-[2rem] p-8 sm:p-12 lg:p-16 overflow-hidden relative transition-all duration-300 ${
+      <div className={`rounded-[2rem] p-8 sm:p-12 lg:p-16 overflow-hidden relative transition duration-300 ${
         isLight
           ? 'bg-white text-slate-900 border border-slate-200 shadow-xl'
           : 'bg-[#0D1013] text-white shadow-2xl border border-white/5'
