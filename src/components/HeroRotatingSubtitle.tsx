@@ -17,33 +17,47 @@
 //   Supply   competence, the household running itself
 //   Fix      relief, the problem is already handled
 //
-// The categories are the source, not decoration: each group is real verticals from
-// the seeded catalogue. Nothing here is invented copy standing in for taxonomy —
-// the taxonomy decides.
+// The taxonomy is the source, not the copy. Each group is real verticals from the
+// seeded catalogue, and the support line names them, so the specific thing being
+// advertised is still legible under the warm word.
 //
-// Motion lives in `src/index.css` beside the rest of the hero's presentation. The
-// reveal is re-keyed on every change so its animation replays; `prefers-reduced-motion`
-// stops the rotation and shows every group as static text, because hiding four of
-// five groups behind an animation fails exactly the people who asked for less
-// animation.
+// The first drafts failed in two different directions, and both failures are worth
+// keeping on record:
+//
+//   Draft 1 — "Arrive, Supply, Fix". Operational verbs. A verb describes what the
+//   platform does TO you, which is why it read rigid. Only Craving and Reset were
+//   states the customer is already in.
+//
+//   Draft 2 — "Breathe, Welcomed, Handled, Sorted". Abstract states. Warmer, but
+//   they name a mood and hide the goods, so a customer still cannot tell what is
+//   for sale.
+//
+// What works is both at once: a plain lead the customer recognises themselves in,
+// then the actual services, spelled out. The block below IS the call to action —
+// it answers "what is this and what can I get" without a second sentence. "Relax"
+// and "Cravings" are the customer's words; "spa · massage · wellness" is the
+// inventory. Neither half carries the line alone.
 
 import React, { useEffect, useMemo, useState } from 'react';
+
+/** How the line reveals itself. Each variant gives the words a different amount of room. */
+export type RevealMode = 'dash' | 'stack' | 'plain';
 
 export interface HeroPod {
   /** Stable id, also the React key. */
   id: string;
-  /** The accent word: the motivation, not the merchandise. */
+  /** The customer's own word for the moment. Carries the accent. */
   lead: string;
-  /** The sub-line naming which real verticals this covers. */
+  /** The actual services, so the line names what is for sale. */
   support: string;
 }
 
 export const HERO_PODS: HeroPod[] = [
-  { id: 'craving', lead: 'Craving', support: 'Fine dining, cellar, late-night' },
-  { id: 'reset', lead: 'Reset', support: 'Spa, beauty, wellness' },
-  { id: 'arrive', lead: 'Arrive', support: 'Chauffeurs, transfers, safaris' },
-  { id: 'supply', lead: 'Supply', support: 'Groceries, pharmacy, butcher' },
-  { id: 'fix', lead: 'Fix', support: 'Vehicle service, laundry, repairs' },
+  { id: 'relax', lead: 'Relax', support: 'spa · massage · wellness' },
+  { id: 'cravings', lead: 'Cravings', support: 'food · restaurants · late-night' },
+  { id: 'arrive', lead: 'Arrive', support: 'chauffeurs · transfers · airport' },
+  { id: 'stockup', lead: 'Stock up', support: 'groceries · pharmacy · butcher' },
+  { id: 'sorted', lead: 'Get sorted', support: 'laundry · repairs · vehicle care' },
 ];
 
 /**
@@ -56,21 +70,29 @@ interface HeroSubtitleProps {
   isLight: boolean;
   reduceMotion: boolean;
   className?: string;
+  /** How much room the words get. Defaults to the shipped treatment. */
+  reveal?: RevealMode;
 }
 
 /**
- * The five motivations, revealed one at a time behind a clip wipe. Gold sweeps
- * across the line on each change rather than the line cross-fading, and the reveal
- * is re-keyed on every change so it reports the state change instead of firing once
- * on mount and leaving a static line behind.
+ * The five moments, revealed one at a time.
  *
- * `prefers-reduced-motion` renders all five statically rather than stopping the
+ * Three treatments exist so the amount of air around the words can be judged rather
+ * than argued about: `plain` drops the services and leaves the customer's own word
+ * standing alone, `dash` sets one line with an em dash as the call to action, and
+ * `stack` puts the word in a large warm face with the services as a tracked
+ * caption beneath it.
+ *
+ * The reveal is re-keyed on every change so it reports the state change instead of
+ * firing once on mount and leaving a static line behind. With
+ * `prefers-reduced-motion` all five render as static text rather than stopping the
  * rotation on one of them: hiding four of five behind motion fails exactly the
  * people who asked for less motion.
  */
 export const HeroWipeSubtitle: React.FC<HeroSubtitleProps> = ({
   reduceMotion,
   className,
+  reveal = 'dash',
 }) => {
   const [index, setIndex] = useState(0);
 
@@ -85,17 +107,23 @@ export const HeroWipeSubtitle: React.FC<HeroSubtitleProps> = ({
 
   const pod = useMemo(() => HERO_PODS[index], [index]);
 
+  // The modifier names the reveal in every case, including the default. Emitting no
+  // class for the default is what stopped the `dash` rules from ever matching: the
+  // stylesheet targets `.hero-wipe--dash`, so the class has to exist.
+  const innerClass = `hero-wipe__inner hero-wipe--${reveal}`;
+
   if (reduceMotion) {
     return (
       <p className={className} data-hero-wipe="static">
-        <span className="hero-wipe__inner">
-          <span className="hero-wipe__lead">Craving</span>
-          {HERO_PODS.slice(1).map((entry) => (
+        <span className={innerClass}>
+          {HERO_PODS.map((entry, i) => (
             <React.Fragment key={entry.id}>
-              <span className="hero-pod__sep" aria-hidden="true">
-                {' · '}
-              </span>
-              {entry.lead}
+              {i > 0 && (
+                <span className="hero-pod__sep" aria-hidden="true">
+                  {' · '}
+                </span>
+              )}
+              <span className="hero-wipe__lead">{entry.lead}</span>
             </React.Fragment>
           ))}
         </span>
@@ -109,13 +137,23 @@ export const HeroWipeSubtitle: React.FC<HeroSubtitleProps> = ({
           interrupt a screen reader mid-sentence. */}
       <span className="hero-wipe" aria-live="polite" aria-atomic="true">
         {/* Re-keyed on the pod id: a new key remounts the node, which is what
-            restarts the clip-path animation. */}
-        <span key={pod.id} className="hero-wipe__inner">
+            restarts the reveal animation. */}
+        <span key={pod.id} className={innerClass}>
           <span className="hero-wipe__lead">{pod.lead}</span>
-          <span className="hero-pod__sep" aria-hidden="true">
-            ·
-          </span>
-          <span className="hero-pod__support">{pod.support}</span>
+          {reveal !== 'plain' && (
+            <>
+              {/* The em dash is the hinge of the whole line: customer's word on the
+                  left, what they can actually buy on the right. It is decorative, so
+                  it stays out of the accessibility tree — a screen reader announcing
+                  "dash" mid-sentence is noise. */}
+              {reveal === 'dash' && (
+                <span className="hero-wipe__dash" aria-hidden="true">
+                  {' — '}
+                </span>
+              )}
+              <span className="hero-wipe__support">{pod.support}</span>
+            </>
+          )}
         </span>
       </span>
     </p>

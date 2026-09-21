@@ -23,13 +23,62 @@ closed.
    `Restaurants.tsx`, `SpaWellness`, `TransportPage`, `GroceriesPage` and
    `NexGDiscoveryView` read bundled modules (`restaurantsData.ts`, `spaData.ts`,
    …). The discovery flow is real; those pages are not yet migrated.
-3. **`Inter` is still the typeface**, loaded from Google Fonts via `@import`. Both
-   design skills flag it; changing it changes the product's visual identity, so it
-   is raised rather than done silently.
+3. **Typefaces are self-hosted and freely licensed** (changed from Inter-only). See
+   §3.1. The commercial faces the client originally asked for are **not** in the repo
+   and must not be added without a licence.
 
-4. **The hero subtitle decision is made and shipped** (§7.0): the rotating clip
-   wipe. Nothing is pending there, but the tree was left uncommitted at the moment
-   of the decision — check `git status` before assuming it is clean.
+4. **The hero line is mid-decision.** Three reveal treatments sit in one component
+   awaiting a pick (§7.0). The copy is settled; only the presentation is open. The
+   working tree should not be committed until one is chosen.
+
+---
+
+## 3.1 Typefaces
+
+Everything is served from `public/fonts/`. No subscription, no page-view tier, no
+CDN dependency — which matters because this project deploys continuously.
+
+| Role | Face | Licence | File |
+| --- | --- | --- | --- |
+| Headings | **TeX Gyre Adventor** | GUST Font License | `texgyreadventor-regular.otf` |
+| Warm accent line | **Cooper Black** (indestructible type\*) | SIL OFL 1.1 | `Cooper-Black.ttf` |
+| UI and body | **Inter** | SIL OFL 1.1 | Google Fonts `@import` |
+
+Tokens are `--font-display` and `--font-warm` in `src/index.css`, consumed as the
+`font-display` Tailwind utility. Inter stays for UI text: both new faces are display
+faces, and Adventor is poor at small sizes.
+
+**What was asked for, and why it is not here.** The request was ITC Avant Garde
+Gothic plus Cooper BT. Neither has a free version, and the files supplied were
+**Adobe-served** — their embedded name tables name Adobe as manufacturer and point at
+`typekit.com/eulas/...`. Those records *are* the licence:
+
+- Adobe's web font licence requires fonts be added *"by the embed code provided"*;
+  *"Any other method of displaying the font on your website isn't allowed."*
+- Adobe *"doesn't offer the ability to host fonts locally."*
+- Client sites must load Adobe Fonts through the **client's own** subscription.
+
+Stripping the embedded metadata was requested and declined. It would remove the
+record of origin without granting any right, and would leave a deployed `dist/`
+carrying unlicensed commercial font software.
+
+**Two licensed routes remain**, if the exact faces are wanted:
+
+1. **Adobe Fonts embed code** — the client's Creative Cloud subscription covers both
+   faces; swap the `@font-face` for Adobe's `<link>`. Note it will not render on
+   `localhost` until the domain is added to the web project, so keep the current
+   stack as the fallback.
+2. **A Monotype webfont licence** — permits self-hosting, annual and priced by monthly
+   page views. **Check the SaaS clause first**: the Cooper BT WebFont EULA excludes
+   *"Web Based Customer Product (e.g., a web server application, SaaS or other online
+   product)"*. A marketing site is covered; a logged-in product UI may not be. Get it
+   in writing before paying.
+
+One correction worth keeping: **Cooper BT is not the same as Cooper Black.** Cooper BT
+is Bitstream's commercial cut (now Monotype); Adobe Fonts' "Cooper Black" is Adobe
+Originals' own digitisation; the file shipped here is indestructible type\*'s OFL
+revival. Three different cuts with different metrics — expect layout to shift if the
+face is ever swapped.
 
 ---
 

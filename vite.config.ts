@@ -30,6 +30,12 @@ export default defineConfig(() => {
       //
       // `logs/` and `scripts/` are excluded for the same reason: throwaway
       // harnesses, screenshots and run logs live there.
+      //
+      // `public/fonts/` is excluded because binary font files are written by
+      // download tools and lock briefly while being copied. Watching one produced
+      // the same `EBUSY` and killed the dev server a third time. They are static
+      // assets served straight from `public/`, never imported, so watching them
+      // buys nothing.
       watch:
         process.env.DISABLE_HMR === 'true'
           ? null
@@ -44,6 +50,7 @@ export default defineConfig(() => {
                 '**/.npm-cache/**',
                 '**/dist/**',
                 '**/.git/**',
+                '**/public/fonts/**',
               ],
             },
       // Proxy the API so the SPA can call same-origin /api/* with no CORS and

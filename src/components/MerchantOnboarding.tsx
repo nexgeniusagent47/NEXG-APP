@@ -590,7 +590,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
   };
 
   return (
-    <div className="bg-slate-50 min-h-screen text-slate-800">
+    <div className="onboarding-theme bg-slate-50 min-h-screen text-slate-800">
       
       {/* Dynamic Style Injection for Font Cursive in Agreement Preview */}
       <style>{`
@@ -613,6 +613,36 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
             background: white;
             color: black;
             padding: 20px;
+          }
+          /* Pin the neutral tokens back to light for print. The screen theme may have
+             inverted them, and an agreement that prints as pale text on white paper is
+             unusable. Declared on the print container itself so it wins for the whole
+             subtree by proximity, the same mechanism the screen theme uses. */
+          #printAgreementArea {
+            --color-white: #ffffff;
+            --color-slate-50: #f8fafc;
+            --color-slate-100: #f1f5f9;
+            --color-slate-200: #e2e8f0;
+            --color-slate-300: #cbd5e1;
+            --color-slate-400: #94a3b8;
+            --color-slate-500: #64748b;
+            --color-slate-600: #475569;
+            --color-slate-700: #334155;
+            --color-slate-800: #1e293b;
+            --color-slate-900: #0f172a;
+            --color-slate-950: #020617;
+            --color-gray-50: #f9fafb;
+            --color-gray-100: #f3f4f6;
+            --color-gray-200: #e5e7eb;
+            --color-gray-300: #d1d5db;
+            --color-gray-400: #9ca3af;
+            --color-gray-500: #6b7280;
+            --color-gray-600: #4b5563;
+            --color-gray-700: #374151;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+            --color-gray-950: #030712;
+            --color-black: #000000;
           }
           .no-print {
             display: none !important;

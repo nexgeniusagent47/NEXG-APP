@@ -112,27 +112,138 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
       <div className="container mx-auto max-w-[1400px] relative z-20 flex flex-col justify-center flex-1">
         <div className="max-w-xl lg:max-w-2xl mt-auto sm:mt-0 mb-8 sm:mb-0">
           
-          <h1 className={`text-[2.5rem] leading-[1.05] sm:text-5xl md:text-6xl lg:text-[4.25rem] font-black mb-4 sm:mb-6 tracking-tight transition-colors duration-300 ${
+          <h1 className={`font-display text-[2.5rem] leading-[1.05] sm:text-5xl md:text-6xl lg:text-[4.25rem] font-black mb-4 sm:mb-6 tracking-tight transition-colors duration-300 ${
             isLight ? 'text-slate-900 drop-shadow-sm' : 'text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)]'
           }`}>
             <span className={isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'}>{t.hero.titleLine1}</span><br />
             {t.hero.titleLine2}
           </h1>
 
-          {/* Hero subtitle: five motivations, revealed one at a time.
-              The taxonomy drives the copy. 21 verticals in a row is not a reason to
-              do anything, so they are grouped by the MOTIVATION someone is in when
-              they open the app — Craving, Reset, Arrive, Supply, Fix — and the line
-              rotates between them. Each names real verticals from the seeded
-              catalogue. See HeroRotatingSubtitle.tsx for the data and the reasoning,
-              and src/index.css for the reveal. */}
-          <HeroWipeSubtitle
-            isLight={isLight}
-            reduceMotion={Boolean(prefersReducedMotion)}
-            className={`text-base sm:text-lg md:text-xl mb-7 sm:mb-8 font-semibold leading-snug transition-colors duration-300 ${
-              isLight ? 'text-slate-700' : 'text-gray-200 drop-shadow-sm'
-            }`}
-          />
+        <div data-impeccable-variants="d6d13a63" data-impeccable-variant-count="3" style={{ display: 'contents' }}>
+          {/* impeccable-variants-start d6d13a63 */}
+          {/* The gold lead and the greyer support line are fixed tokens in both
+              treatments, so contrast does not shift as the line rotates. The lead
+              carries the accent and the call to action stays the gold Search button;
+              nothing else in the line competes with it. */}
+          <style>{`
+            /* Each rule steps into its own variant wrapper; @scope keeps the three
+               treatments from reaching each other. The modifier class lives on
+               .hero-wipe__inner because that is the element the wipe's width and
+               clip-path constraint sits on, and a rule targeting anything else would
+               never see it. */
+            @scope ([data-impeccable-variant="1"]) {
+              :scope > .hero-wipe__inner.hero-wipe--plain {
+                display: inline-block;
+                animation: hwAloneIn 900ms cubic-bezier(0.33, 0, 0.15, 1) both;
+              }
+              :scope .hero-wipe--plain .hero-wipe__lead {
+                font-size: 1.6em;
+                letter-spacing: 0.005em;
+              }
+            }
+
+            @scope ([data-impeccable-variant="2"]) {
+              /* One line: the customer's word, an em dash, then the services. The dash
+                 is styled here rather than inherited because it is doing layout work,
+                 not punctuation — it needs its own breathing room on both sides. */
+              :scope .hero-wipe--dash .hero-wipe__lead {
+                display: inline-block;
+                animation: hwLeadIn 1000ms cubic-bezier(0.33, 0, 0.15, 1) both;
+              }
+              :scope .hero-wipe--dash .hero-wipe__dash {
+                opacity: 0;
+                color: #7d838b;
+                animation: hwSupportIn 700ms cubic-bezier(0.33, 0, 0.15, 1) 260ms both;
+              }
+              :scope .hero-wipe--dash .hero-wipe__support {
+                display: inline-block;
+                opacity: 0;
+                animation: hwSupportIn 900ms cubic-bezier(0.33, 0, 0.15, 1) 380ms both;
+              }
+            }
+
+            @scope ([data-impeccable-variant="3"]) {
+              /* The word becomes display type in the warm face, with the services as
+                 a tracked caption beneath it. */
+              :scope .hero-wipe--stack .hero-wipe__lead {
+                display: block;
+                font-family: var(--font-warm);
+                font-size: 1.9em;
+                /* Cooper* Bold, not Black. The family's heavy end is the famous one,
+                   but at this size Black reads as bulk; Bold keeps the counters open
+                   and the Art Nouveau bowing visible. It is a real weight in the
+                   family, so nothing is synthesised. */
+                font-weight: 700;
+                line-height: 1.1;
+                letter-spacing: 0;
+                animation: hwLeadIn 1000ms cubic-bezier(0.33, 0, 0.15, 1) both;
+              }
+              :scope .hero-wipe--stack .hero-wipe__support {
+                display: block;
+                margin-top: 0.2em;
+                font-size: 0.6em;
+                font-weight: 600;
+                letter-spacing: 0.16em;
+                text-transform: uppercase;
+                opacity: 0;
+                animation: hwSupportIn 900ms cubic-bezier(0.33, 0, 0.15, 1) 360ms both;
+              }
+            }
+
+            @keyframes hwLeadIn {
+              from { opacity: 0; transform: translateY(0.38em); filter: blur(4px); }
+              to   { opacity: 1; transform: translateY(0); filter: blur(0); }
+            }
+            @keyframes hwSupportIn {
+              from { opacity: 0; transform: translateY(0.3em); }
+              to   { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes hwAloneIn {
+              from { opacity: 0; transform: translateY(0.3em) scale(0.985); }
+              to   { opacity: 1; transform: translateY(0) scale(1); }
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .hero-wipe__inner, .hero-wipe__lead, .hero-wipe__support { animation: none !important; }
+            }
+          `}</style>
+          {/* Variant 1 — axis: RESTRAINT. The state word alone, larger, no support
+              line. Nothing to read but the feeling; the verticals are one tap away. */}
+          <div data-impeccable-variant="1">
+            <HeroWipeSubtitle
+              isLight={isLight}
+              reduceMotion={Boolean(prefersReducedMotion)}
+              reveal="plain"
+              className={`text-base sm:text-lg md:text-xl mb-7 sm:mb-8 font-semibold leading-snug transition-colors duration-300 ${
+                isLight ? 'text-slate-700' : 'text-gray-200 drop-shadow-sm'
+              }`}
+            />
+          </div>
+          {/* Variant 2 — axis: BREATH. The word lands, then the verticals arrive
+              after it. Same information, loosened into two beats. */}
+          <div data-impeccable-variant="2" style={{ display: 'none' }}>
+            <HeroWipeSubtitle
+              isLight={isLight}
+              reduceMotion={Boolean(prefersReducedMotion)}
+              reveal="dash"
+              className={`text-base sm:text-lg md:text-xl mb-7 sm:mb-8 font-semibold leading-snug transition-colors duration-300 ${
+                isLight ? 'text-slate-700' : 'text-gray-200 drop-shadow-sm'
+              }`}
+            />
+          </div>
+          {/* Variant 3 — axis: HIERARCHY. The word becomes display type and the
+              verticals become a quiet tracked footnote beneath it. */}
+          <div data-impeccable-variant="3" style={{ display: 'none' }}>
+            <HeroWipeSubtitle
+              isLight={isLight}
+              reduceMotion={Boolean(prefersReducedMotion)}
+              reveal="stack"
+              className={`text-base sm:text-lg md:text-xl mb-7 sm:mb-8 font-semibold leading-snug transition-colors duration-300 ${
+                isLight ? 'text-slate-700' : 'text-gray-200 drop-shadow-sm'
+              }`}
+            />
+          </div>
+          {/* impeccable-variants-end d6d13a63 */}
+        </div>
 
           {/* Adaptive Editable Search Bar with Live Clear & Suggestions */}
           <form onSubmit={handleSearchSubmit} className="relative mb-3">

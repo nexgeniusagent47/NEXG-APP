@@ -1,13 +1,172 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+/* ---------------------------------------------------------------------------
+   Typefaces
+
+   Two display faces, both freely licensed and self-hosted from `public/fonts/`,
+   so the build carries no subscription, no page-view tier and no CDN dependency:
+
+     TeX Gyre Adventor  — the geometric sans for headings. It is the metric
+                          compatible ITC Avant Garde Gothic clone from URW's
+                          Ghostscript Base 35 set. GUST Font License.
+     Cooper Black       — the warm rounded serif for the accent line. This is the
+                          OFL revival by indestructible type*, not Bitstream's
+                          commercial Cooper BT, which is a different cut.
+
+   Inter stays as the UI and body face: both of the above are display faces, and
+   Adventor is poor at small sizes.
+--------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Adventor';
+  src: url('/fonts/texgyreadventor-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* The full Cooper* family, not just the Black weight. Cooper* is a researched
+   revival of Oswald Cooper's original 1920s series, and the regular weights are
+   the point: the Art Nouveau detail — lines that bow inward, ascenders that curve
+   like stems — survives at Regular and is lost inside the Black weight's bulk.
+   Six discrete weights, so each @font-face declares one real weight rather than a
+   range that would advertise weights the file does not contain. */
+@font-face {
+  font-family: 'Cooper Local';
+  src: url('/fonts/Cooper-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cooper Local';
+  src: url('/fonts/Cooper-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cooper Local';
+  src: url('/fonts/Cooper-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cooper Local';
+  src: url('/fonts/Cooper-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cooper Local';
+  src: url('/fonts/Cooper-ExtraBold.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cooper Local';
+  src: url('/fonts/Cooper-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  /* Heading face. Adventor first, then the closest geometric fallbacks. */
+  --font-display: "Adventor", "TeX Gyre Adventor", "Century Gothic", "Jost",
+    ui-sans-serif, system-ui, sans-serif;
+  /* Warm accent face. The full Cooper* family, so the weight is a real choice. */
+  --font-warm: "Cooper Local", "Cooper Black", Georgia, serif;
 }
 
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------------------------------------------------------------------------
+   Theme-adaptive onboarding forms
+
+   The merchant and courier onboarding forms were written against a light-only
+   palette: roughly 650 `bg-white` / `text-slate-500` / `border-slate-200`
+   utilities between them, with no theme conditionals at all. They also called
+   `useTheme()` without ever reading `isLight`, so they never adapted.
+
+   Rewriting 650 call sites into `isLight ? … : …` would add thousands of tokens of
+   noise and a chance of error at every one. Instead the neutral scales are
+   redefined as tokens scoped to `.onboarding-theme`, which is the same move the
+   rest of the app already makes with `html.light` — just at component scope.
+
+   Only neutrals flip. Amber, emerald, red and blue keep their meaning in both
+   themes, which is what makes a warning still look like a warning at night.
+
+   The dark values invert the scale, so a `bg-slate-50` page becomes near-black and
+   `text-slate-900` body copy becomes near-white. Because the classes were written
+   as light-theme UI, the inversion is what makes them correct in dark mode.
+--------------------------------------------------------------------------- */
+.onboarding-theme {
+  --color-white: #ffffff;
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-gray-950: #030712;
+  --color-black: #000000;
+}
+
+html.dark .onboarding-theme {
+  --color-white: #16191d;
+  --color-slate-50: #0f1216;
+  --color-slate-100: #14181d;
+  --color-slate-200: #23282f;
+  --color-slate-300: #333a43;
+  --color-slate-400: #6b7280;
+  --color-slate-500: #98a1ac;
+  --color-slate-600: #b3bac3;
+  --color-slate-700: #cbd2da;
+  --color-slate-800: #e2e6eb;
+  --color-slate-900: #f1f3f6;
+  --color-slate-950: #f8fafc;
+  --color-gray-50: #0f1216;
+  --color-gray-100: #14181d;
+  --color-gray-200: #23282f;
+  --color-gray-300: #333a43;
+  --color-gray-400: #6b7280;
+  --color-gray-500: #98a1ac;
+  --color-gray-600: #b3bac3;
+  --color-gray-700: #cbd2da;
+  --color-gray-800: #e2e6eb;
+  --color-gray-900: #f1f3f6;
+  --color-gray-950: #f8fafc;
+  /* `bg-black` is used for high-contrast chips; inverting it keeps that contrast
+     rather than painting black on a near-black page. */
+  --color-black: #f8fafc;
 }
 
 /* Browser surfaces carry the palette.
@@ -61,13 +220,13 @@ html {
   min-height: 1.9em; /* reserves the line so rotation cannot shift the layout below */
 }
 
-/* The reveal is a clip wipe re-keyed on every change, so gold sweeps across the
-   line instead of the line cross-fading. Re-keying is what makes it report the
-   state change rather than firing once on mount and leaving a static line. */
+/* The reveal is clipped rather than cross-faded, so the gold sweeps across the line
+   as the state changes. Re-keying remounts the node so it replays every time
+   instead of firing once on mount. */
 .hero-wipe__inner {
   display: inline-block;
   clip-path: inset(0 100% 0 0);
-  animation: hero-wipe 600ms cubic-bezier(0.77, 0, 0.175, 1) 120ms forwards;
+  animation: hero-wipe 700ms cubic-bezier(0.33, 0, 0.15, 1) 80ms forwards;
 }
 
 @keyframes hero-wipe {
@@ -97,9 +256,16 @@ html.light .hero-wipe__lead {
   font-weight: 400;
 }
 
-.hero-pod__support {
+/* The supporting line, naming the real verticals under the warm word. It clears
+   4.5:1 in both themes rather than sitting at an opacity low enough to read as
+   disabled, which is what the previous `opacity: 0.9` on a lighter base did. */
+.hero-wipe__support {
   font-weight: 500;
-  opacity: 0.9;
+  color: #b4b8bd;
+}
+
+html.light .hero-wipe__support {
+  color: #55606d;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -562,7 +562,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
   };
 
   return (
-    <div className="bg-[#f9f9f9] text-[#1a1c1c] font-sans antialiased min-h-screen pt-[88px] pb-20 selection:bg-[#E5B65F] selection:text-black">
+    <div className="onboarding-theme bg-slate-50 text-slate-900 font-sans antialiased min-h-screen pt-[88px] pb-20 selection:bg-[#E5B65F] selection:text-black">
       
       {/* Top Header Navigation Overlay */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm py-4 border-b border-gray-100">
