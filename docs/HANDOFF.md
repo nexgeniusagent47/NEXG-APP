@@ -203,6 +203,25 @@ re-measured since.
    docking at exactly the header's height. **When a sticky element looks broken,
    check the scroll method before the CSS.**
 
+   A sixth, and the most serious — it produced a false all-clear that was reported
+   as a pass: **the Impeccable detector's URL path is broken in this environment.**
+   It shells out to Puppeteer, which times out on every page, and it **still exits 0
+   while printing `[]`**. A failed scan is therefore byte-identical to a clean one.
+
+   This went unnoticed because the negative control (a deliberately bad file) *had*
+   reported findings earlier in the session, so the sweep looked validated. It had
+   since regressed. What caught it was the user's browser showing six findings that
+   the sweep reported as zero.
+
+   **Rules for anyone repeating this:**
+   - `impeccable detect <file-or-dir>` still works. **Only URL scanning is broken.**
+     Prefer source scans, and treat any URL scan as suspect.
+   - **A clean result is not evidence unless a known-bad input fails in the same
+     run.** Re-run the negative control every time, not once per session.
+   - Most of these rules need computed style and rendered geometry, which no
+     source scan can see. `logs/critique/_audit-rules.mjs` reimplements them against
+     Playwright, which this project already controls. Use it.
+
 6. **Never write files with `Set-Content` or `Out-File`; encoding will bite you.**
    PowerShell 5.1's `Out-File` defaults to **UTF-16LE** and `Set-Content` is not
    UTF-8. This has already cost real damage twice: a double-encoded em-dash in
