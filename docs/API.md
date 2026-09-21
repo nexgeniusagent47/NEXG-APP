@@ -69,7 +69,8 @@ All 21 active categories with their subcategories nested.
 
 ## `GET /api/merchants`
 
-Paginated merchant list. **Items are included and hydrated in one extra query.**
+Paginated merchant list. **Items and the primary subcategory are each hydrated in
+one extra query for the whole page, not one per merchant.**
 
 | Query param | Type | Default | Notes |
 | --- | --- | --- | --- |
@@ -79,6 +80,23 @@ Paginated merchant list. **Items are included and hydrated in one extra query.**
 | `subcategory` | string | — | matches subcategory `id` **or** `slug` |
 | `area` | string | — | matches `merchants.metadata->>'area'` exactly |
 | `search` | string | — | `ILIKE` over merchant name, category name, subcategory name |
+| `sort` | enum | `recommended` | `recommended` · `rating` · `delivery` · `price_low` · `price_high` |
+
+**`sort` is applied in SQL, behind a whitelist.** An unknown value falls back to
+`recommended` rather than erroring, and the key is never interpolated from user
+input — it selects a pre-written `ORDER BY` clause. Sorting client-side over the
+loaded page was the previous behaviour and it silently lied: the first page sorted
+correctly, then scrolling appended the next page in server order and re-sorted the
+union, beneath a header showing the server total.
+
+> Changing `sort` resets pagination to page one. If your client keeps its own
+> offset, reset it when the sort key changes or you will fetch an arbitrary late
+> page of the newly ordered set.
+
+Each merchant also carries `subcategory` and `subcategoryId`, resolved from
+`merchant_subcategories` (primary link wins). The client needs these to resolve the
+catalogue-declared order requirements — liquor licence, age gate, session duration
+— because `orderRequirements` looks fields up **by subcategory**.
 
 ```json
 {

@@ -70,22 +70,37 @@ still seq-scan. At 640 rows this is irrelevant; at 640k it will matter.
 ## Data flow
 
 ```
-Browser → GET /api/merchants?limit=20
+Browser → GET /api/merchants?limit=20&sort=price_low
    → Vite proxy (dev) → Express :3001
    → repository.listMerchants()
        → SELECT count(*) ... (total)
-       → SELECT ... LIMIT/OFFSET ... (page)
-       → attachItems()  ← ONE extra query for the whole page, not per merchant
+       → SELECT ... ORDER BY <whitelisted clause> LIMIT/OFFSET ... (page)
+       → attachSubcategories()  ← ONE extra query for the whole page
+       → attachItems()          ← ONE extra query for the whole page
    → mapMerchant() shapes rows into the frontend's NexGMerchant contract
    → JSON
 ```
 
 ### The N+1 decision
 
-`attachItems()` fetches items for **all** merchants on a page in a single query using
-`row_number() OVER (PARTITION BY merchant_id)`. The naive alternative — one items
-query per merchant — would issue 201 round trips for a 200-merchant page. This is the
-single most important performance property of the list endpoint.
+Both hydrations fetch data for **all** merchants on a page in a single query:
+`attachItems()` uses `row_number() OVER (PARTITION BY merchant_id)`, and
+`attachSubcategories()` uses `DISTINCT ON (merchant_id)`. The naive alternative —
+one query per merchant — would issue 401 round trips for a 200-merchant page.
+
+`attachSubcategories()` is not a nicety. Without it the list response carried no
+subcategory, so cards printed the category name and **the client could not resolve
+any catalogue-declared requirement**, because `orderRequirements` looks fields up by
+subcategory. Its absence was one of three stacked defects behind a missing
+compliance section (see `logs/2026-09-21-critique-remediation.log`).
+
+### Sorting happens in SQL
+
+`sort` selects a pre-written `ORDER BY` clause from a whitelist in
+`server/repository.ts`. It is never interpolated from the query string. Sorting the
+loaded page client-side was the previous behaviour and it silently lied: the first
+page sorted, then pagination appended in server order and the union was re-sorted
+beneath a header showing the server total.
 
 ### The contract boundary
 
@@ -94,6 +109,76 @@ The database uses different names (`primary_category_id`, `hero_image_url`). All
 translation happens in `server/repository.ts` so that neither the SQL schema nor the
 React components have to know about each other's naming. **If you change the API
 shape, change `mapMerchant`/`mapItem` and the type — nothing else.**
+
+## The commerce-arc engine
+
+The product's actual idea is that a marketplace vertical is not just a tag: each one
+transacts differently. That lives in two modules.
+
+```
+merchant.workflow (seeded string)
+        │
+        ▼
+  workflowEngine.resolveIntent()          ── five arcs, ordered detectors,
+        │                                    then a per-category default
+        ▼
+   CommerceArc  (browse_buy │ book_slot │ request_service │
+                 compliance_appointment │ get_quote)
+        │
+        ├──► cardAction      what the merchant card offers
+        ├──► primaryAction   the verb that OPENS the flow (navigation)
+        ├──► commitAction    the verb on the modal's submit button
+        └──► needsSchedule
+        │
+        ▼
+  orderRequirements.buildRequirements()
+        │
+        ├── arc requirements        structural: date, pickup point, origin/destination
+        └── catalogue requirements  the subcategory's declared `fields`
+                                    resolved through FIELD_DEFS
+        │
+        ▼
+  sections: quantity │ options │ schedule │ fulfilment │ compliance │ notes
+```
+
+`primaryAction` and `commitAction` are separate on purpose. The modal used to render
+the navigation verb on its submit button, so a quantity-and-notes dialog finished
+with "View full menu" — a label describing a navigation the user had already
+performed, on a control that adds a line to the cart.
+
+### Two invariants worth protecting
+
+1. **Every `RequirementKind` must appear in `SECTION_ORDER`.** Sections are built by
+   filtering over that list, so a missing kind is dropped from the UI while
+   remaining in the flat `all` array — and validation then rejects a submission over
+   a field the user was never shown. A test asserts every validated requirement is
+   reachable in a rendered section.
+2. **`findSubcategory` must not use `??` for the id/name fallback.** `??` falls
+   through only on null/undefined, and the API returns an empty string for a missing
+   id, so an empty id short-circuits the fallback and every lookup misses. It must
+   also strip the API's category prefix (`adults-only_vapes` → `vapes`), removing the
+   **whole** prefix rather than splitting at the first hyphen.
+
+## Catalogue generation
+
+`src/db/seed_excel.sql` and `src/data/seededCatalog.json` are **generated**. Do not
+hand-edit them.
+
+```
+NEXG_Nairobi_Merchant_Seed_Catalog.xlsx
+        │
+        ▼
+scripts/regenerate_catalog_seed.py
+        │   emits merchant_subcategories links, spreads prices inside each
+        │   declared band, assigns per-vertical imagery, composes descriptions
+        │   from the item's own facts
+        ▼
+seed_excel.sql + seededCatalog.json  ──►  npm run db:up  ──►  Postgres
+```
+
+`scripts/parse_excel_to_db.py` is the original generator and is **superseded**. It
+read the Excel correctly and then discarded most of it; its specific failures are
+documented in `CHANGELOG.md` under 2.1.0.
 
 ## Data source strategy
 
@@ -116,35 +201,43 @@ empty while health looked healthy.
 | Area | Path | Responsibility |
 | --- | --- | --- |
 | Shell | `src/App.tsx` | page router, modal orchestration, providers |
-| Marketplace UI | `src/components/nexg/` | design system: cards, sheets, feed, search |
-| Legacy pages | `src/components/*.tsx` | vertical landing pages |
+| Discovery | `src/components/discovery/` | browse surface, workflow-aware card, preview sheet |
+| Merchant | `src/components/merchant/` | the one merchant page and the one item modal |
+| Forms | `src/components/forms/` | `DynamicField` — one renderer for all seven control types |
+| Marketplace UI | `src/components/nexg/` | legacy design-system components |
+| Legacy pages | `src/components/*.tsx` | vertical landing pages — **still on static data** |
 | State | `src/context/` | cart, theme, language |
-| Static data | `src/data/` | **catalogue modules — to be replaced in v2** |
+| Static data | `src/data/` | taxonomy + the generated JSON bundle |
+| Hooks | `src/hooks/` | `useMerchantSearch`, `useModalBehavior` |
 
 ### Known architectural debt
 
-`src/data/` contains **five overlapping catalogue sources**:
-`catalogData.ts` (JSON import), `restaurantsData.ts`, `spaData.ts`,
-`transportData.ts`, `cellarData.ts`, plus `merchantCatalog.ts` (taxonomy).
-Different pages read different ones. This is the root cause of inconsistent merchant
-counts between screens, and it is why the API is not yet wired in.
+**Nineteen verticals still render bundled static data.** `Restaurants.tsx`,
+`SpaWellness`, `TransportPage`, `GroceriesPage` and `NexGDiscoveryView` read
+`restaurantsData.ts`, `spaData.ts`, `transportData.ts` and `cellarData.ts` rather
+than the API, so the same product shows different data depending on the route taken.
+The discovery flow, the merchant page and the item modal are migrated; the rest are
+the top backlog item in `docs/HANDOFF.md`.
 
-Additionally there are duplicate component directories — `components/ui/` and
+There are also duplicate component directories — `components/ui/` and
 `src/components/ui/` — where the former appears to be dead code.
 
 ## Security posture
 
-v1 is a **local development baseline**. It has no authentication and must not be
+This is a **local development baseline**. It has no authentication and must not be
 exposed publicly. Notable properties:
 
 - All SQL uses **parameterised queries**; no string concatenation of user input.
+  The one value concatenated into SQL is the `sort` key, which selects from a
+  fixed whitelist rather than being interpolated from the query string.
 - Pagination input is clamped (`limit` ≤ 200, `offset` ≥ 0) rather than trusted.
 - `CORS: Access-Control-Allow-Origin: *` — safe locally, must be restricted in
   production.
 - The database password is a **local-only placeholder** committed to `ci.yml` by
   design; production must inject a real secret.
 
-## Out of scope for v1
+## Out of scope
 
-Auth, payments, real courier dispatch, live GPS, merchant self-service portal,
-pagination UX in the frontend, and i18n completion.
+Auth, payments, real courier dispatch, live GPS, merchant self-service portal, and
+completed i18n. Discovery pagination exists; the legacy vertical pages still render
+their whole catalogue at once.

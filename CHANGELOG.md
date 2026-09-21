@@ -6,6 +6,128 @@ All notable changes to NEXG Concierge. Format follows
 
 ---
 
+## [2.1.0] — 2026-09-21
+
+Remediation of the Impeccable dual-agent design critique of the v2 discovery flow.
+The critique scored the surface **20/40** and raised three P0 and two P1 issues; all
+five are fixed and verified. Full account: `logs/2026-09-21-critique-remediation.log`.
+
+### Fixed — P0
+
+**The dynamic requirements engine silently degraded, through three stacked defects.**
+
+Each was independently sufficient to keep the "Required to proceed" section from
+ever rendering, so an adults-only order never asked for age verification while the
+step rail promised "Eligibility check".
+
+| # | Defect | Effect |
+| --- | --- | --- |
+| a | `parse_excel_to_db.py` computed a `subcategoryId` per merchant and never emitted `merchant_subcategories` rows | junction table held **0 rows**; the API returned no `subcategoryId` at all |
+| b | `findSubcategory` resolved `normaliseKey(subcategoryId ?? subcategoryName ?? '')` | `??` does not fall through an **empty string**, so the name fallback never fired |
+| c | The API sends a category-prefixed id (`adults-only_vapes`); the catalogue keys by bare slug (`vapes`) | even with links present, the id lookup missed |
+
+A first attempt at (c) split at the *first* hyphen, turning `adults-only-vapes`
+into `only-vapes`; the whole category prefix must be removed, and both the
+catalogue id and slug are tried.
+
+**One price for 1,500 items, and a sort that could not sort.** The Excel holds a
+price *band* per item and the parser collapsed each band to a single value.
+`sortMerchants` then sorted only the loaded page while pagination appended in
+server order, so scrolling re-shuffled the list beneath a header showing the
+server total.
+
+**Recycled imagery and leaked generator copy.** 16 hero images across 640
+merchants, and item descriptions shipped the Excel "Image Brief" column, which is
+a prompt for an image generator rather than copy for a customer.
+
+### Fixed — P1
+
+**The item modal was a modal in appearance only.** `MerchantItemModal` imported no
+`useEffect` at all: no Escape, no focus move, no focus trap, no scroll lock, while
+`MerchantPreviewSheet` one layer down did all four. Extracted
+`src/hooks/useModalBehavior.ts` so the two cannot drift apart again. Also fixed a
+dangling `aria-labelledby` on the radiogroup — the label carried `htmlFor` but no
+`id` of its own, so the group had no accessible name.
+
+**The workflow rendered in the palette's least legible colour.** Measured, then
+corrected:
+
+| Pair | Before | After |
+| --- | --- | --- |
+| `gray-500` on card `#181A1F` | 3.60:1 | `gray-400` → **6.86:1** |
+| `gray-500` on page `#111315` | 3.85:1 | `gray-400` → **7.33:1** |
+| light `slate-400` on `#f7f8fa` | 2.41:1 | `slate-600` → **7.13:1** |
+| light gold `#B88728` as text on white | 3.21:1 | `#8A6413` → **5.37:1** |
+
+### Fixed — further correctness
+
+- **The preview sheet's two buttons had identical destinations.** The primary CTA
+  fell through to `onViewFull`, so "Check availability" and "View full profile"
+  did the same thing under different labels. The primary now lands on the merchant
+  page *at the offerings*, where the flow its label names begins; the secondary
+  became "See all offerings".
+- **The item modal's submit borrowed the arc's navigation verb**, so a
+  quantity-and-notes dialog finished with "View full menu" — a label describing a
+  navigation the user had already performed. Arcs now carry a separate
+  `commitAction` ("Add to order", "Request booking", "Submit request", …).
+- **Booking could not collect a pickup point.** `book_slot` asked for a date, a
+  time and a party size but never where to go. Added a required `pickupAddress`
+  and an optional `flightNumber`.
+- **Vite's file watcher crashed the dev server** with `EBUSY: resource busy or
+  locked` on the transient `*.tmpdir` directories that atomic writes create beside
+  their target file. Added to the watcher ignore list.
+
+### Added
+
+- `scripts/regenerate_catalog_seed.py` — regenerates the seed from the source
+  Excel with the data the original parser discarded: `merchant_subcategories`
+  links, per-item prices spread inside each declared band, per-vertical imagery,
+  and descriptions composed from the item's own facts. Idempotent (truncates
+  before inserting) so re-running cannot duplicate the seed.
+- `src/hooks/useModalBehavior.ts`.
+- `GET /api/merchants` accepts `sort` (`recommended`, `rating`, `delivery`,
+  `price_low`, `price_high`), ordered in SQL behind a whitelist.
+
+### Data quality
+
+| Metric | Before | After |
+| --- | --- | --- |
+| Distinct item prices | 1 | 270 (500–34,000) |
+| Distinct hero images | 16 | 87 |
+| `merchant_subcategories` rows | 0 | 640 |
+| Items leaking generator copy | all | 0 |
+
+### Verified
+
+`tsc` clean · **34** unit · **29** API contract · **18** flow · **21** consistency —
+**102 assertions**. Detector still reports zero findings on the surface.
+
+One failure during remediation was **correct behaviour, not a regression**: once
+the compliance gates began rendering, the adults-only modal gained required fields
+and correctly refused a half-filled submission. The test was under-filling.
+
+### A note on measurement
+
+Three instruments of mine were wrong during this work, and each nearly caused a
+change to working code: a screenshot taken mid-load read as "the grid is all
+skeletons"; a copy-leak marker matched `crop` inside an image URL's `&fit=crop`;
+and a contrast harness reported 144 failures because Tailwind v4 emits `oklch()`,
+which a numeric parse reads as red/green/blue. The last one still over-reports:
+its canvas conversion reads `fillStyle` before compositing, so translucent
+backdrops appear opaque and a handful of false positives remain. **Do not quote
+that harness as a clean bill of health.**
+
+### Known issues carried forward
+
+- The typeface is still `Inter`, loaded from Google Fonts via `@import`. Both
+  design skills flag it (`overused-font`); changing it changes the product's whole
+  visual identity, so it was raised rather than changed silently.
+- `CategoryExplorerModal` remains on disk unreferenced, as an intentional reserve.
+- `.img2threejs-mascot/` belongs to an unrelated tool; it is gitignored and
+  untracked, but still present on disk.
+
+---
+
 ## [2.0.0] — 2026-09-21
 
 The discovery, merchant-page and item-ordering surfaces, rebuilt on real API data.

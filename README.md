@@ -4,7 +4,7 @@
 
 **On-demand luxury concierge for Nairobi — Airbnb-grade discovery meets Glovo-grade fulfilment.**
 
-Version **v2.0.0**
+Version **v2.1.0**
 
 </div>
 
@@ -29,17 +29,21 @@ quote, rental, ticket, appointment).
 | **One merchant page** for all 21 verticals | ✅ v2 |
 | **One item modal** that adapts to each vertical's order requirements | ✅ v2 |
 | Add to cart from the item modal, persisted | ✅ v2 |
-| Typecheck / unit / API / flow / consistency tests | ✅ 101 assertions |
-| Merchants carrying catalogue items across all verticals | ⚠️ only 2 of 21 (data gap) |
+| Typecheck / unit / API / flow / consistency tests | ✅ 102 assertions |
+| Legacy vertical landing pages (19 of them) | ⚠️ still on bundled static data |
 | Auth, payments, real dispatch, live GPS | ❌ out of scope |
 
-### Known gap: catalogue depth
+### Known gaps
 
-The seeded database has items on merchants in **only two verticals**
-(`airport-transfers` and `adults-only`). Every other vertical renders a merchant page
-with an honest empty state. This is a **data** problem, not a code problem:
-`scripts/parse_excel_to_db.py` imports 1,500 of the ~14,895 items present in the
-source Excel. Fixing the importer is the highest-value next task.
+**Catalogue depth.** The SQL seed ships **6,000 of the ~14,895 items** in the source
+Excel (`SQL_ITEM_LIMIT` in `scripts/regenerate_catalog_seed.py`). Merchants beyond
+that cap render an honest empty state. Raising the cap is the highest-value next
+task.
+
+**Legacy pages.** The discovery flow, merchant page and item modal read the API.
+`Restaurants.tsx`, `SpaWellness`, `TransportPage`, `GroceriesPage` and
+`NexGDiscoveryView` still read bundled static modules, so the same product shows
+different data depending on the route taken.
 
 ---
 
@@ -106,7 +110,7 @@ npm run lint             # TypeScript
 npm test                 # 34 unit tests
 npm run test:api         # 29 API contract assertions    (server must be running)
 npm run test:flow        # 18 discovery-flow assertions
-npm run test:consistency # 20 merchant-page + item-modal assertions
+npm run test:consistency # 21 merchant-page + item-modal assertions
 npm run shots            # Playwright screenshots -> logs/screenshots/
 ```
 
