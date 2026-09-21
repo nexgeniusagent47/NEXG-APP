@@ -122,7 +122,10 @@ again, it fails.
 | Merchant page | one template for all 21 verticals |
 | Item modal | one modal, requirements derived from arc + the catalogue's own declared fields |
 | Cart | add from the modal, persisted to `localStorage` |
-| Hero motivation pods | five motivations (Craving/Reset/Arrive/Supply/Fix) drawn from the real catalogue, **three variants awaiting selection** — uncommitted, see §7.0 |
+| Merchant menu | sectioned, with a **docked category rail** that sticks under the header on scroll and tracks the active section |
+| Host onboarding | 10-step property intake with a Leaflet map pin, lazy-loaded from `For Properties → Partner with NEXG` |
+| Deep links | `?page=<name>` per route, `?merchant=<id-or-slug>` per merchant |
+| Hero motivation pods | five moments drawn from the real catalogue; three reveal treatments await a pick (§7.0) |
 
 ### The five commerce arcs
 
@@ -256,7 +259,39 @@ variant 1 was the scaffold's visible default rather than the choice. The decisio
 above is the one that shipped; the discrepancy is recorded in
 `.impeccable/live/accept-receipts/9c63bcac.json`.
 
-### 7.1 🔴 Migrate the remaining 19 verticals off static data
+### 7.1 🔴 Assign real menu sections in the catalogue
+
+The merchant page now renders a sectioned menu with a docked rail, but **the sections
+are derived at read time by hashing the item id** (`src/data/menuSections.ts`), not
+authored in the catalogue. It works and it looks right; it is still a workaround, and
+the reason is worth understanding before touching it.
+
+Grouping by an item's own subcategory cannot work here:
+
+1. `server/repository.ts` stamps **the merchant's subcategory onto every item**
+   (`mapItem(i, …, m.subcategory)`), discarding the item's own `subcategory_id`. That
+   mapping is simply wrong and should be corrected regardless.
+2. Even fixed, the source workbook has nothing to group by: sheet 3 of
+   `NEXG_Nairobi_Merchant_Seed_Catalog.xlsx` holds **14,895 item rows across 640
+   merchants, and not one merchant's items span more than a single subcategory.**
+
+**The real fix is upstream**, in the Excel generator: give each item a genuine menu
+section (Starters / Mains / Desserts; Red / White / Sparkling). Then the hash in
+`menuSections.ts` can be deleted and the page can group on real data. Until then, a
+customer sees plausible sections that do not correspond to anything in the catalogue.
+
+### 7.2 🔴 Item names carry generator artefacts
+
+Visible in the shipped catalogue and worth fixing with §7.1:
+
+- Doubled modifiers: **"Signature Signature Facial"**, **"Premium Premium Intimacy
+  Set"**, **"Premium Luxury Care Bundle Bundle"**. The generator appends a second
+  prefix to names that already carry one.
+- Every description repeats the merchant name and the vertical:
+  *"Champagne in the Alcohol & Beverages vertical, dispatched by the NEXG concierge
+  team."* — identical text on all 30 items of a merchant, so it distinguishes nothing.
+
+### 7.3 🔴 Migrate the remaining 19 verticals off static data
 
 `Restaurants.tsx`, `SpaWellness`, `TransportPage`, `GroceriesPage` and
 `NexGDiscoveryView` still read bundled modules. Discovery, the merchant page and
@@ -264,25 +299,25 @@ the item modal are on the API; these are not, so the same product shows differen
 data depending on the route taken. **Acceptance:** deleting `restaurantsData.ts`
 does not break the restaurants page.
 
-### 7.2 🟠 Raise the item cap so the full catalogue is served
+### 7.4 🟠 Raise the item cap so the full catalogue is served
 
 `SQL_ITEM_LIMIT = 6000` in `regenerate_catalog_seed.py`. The Excel holds ~14,895
 items. Watch seed size and load time; consider chunked inserts.
 
-### 7.3 🟠 Finish the contrast work honestly
+### 7.5 🟠 Finish the contrast work honestly
 
 The token changes are verified (3.60→6.86, 2.41→7.13, 3.21→5.37). The
 **measurement harness is not**: it reads `fillStyle` before compositing, so
 translucent backdrops report as opaque and a handful of false positives remain.
 Build a compositing-correct checker before claiming AA compliance.
 
-### 7.4 🟠 Real search scope
+### 7.6 🟠 Real search scope
 
 Search matches merchant name, category and subcategory only — not item names or
 descriptions. Searching "JKIA" or "wagyu" returns nothing, and the empty state
 blames the search term rather than the scope.
 
-### 7.5 🟡 Smaller items
+### 7.7 🟡 Smaller items
 
 - `CategoryExplorerModal` is on disk, unreferenced. Wire it to a "browse all
   categories" control or delete it.
@@ -314,12 +349,16 @@ blames the search term rather than the scope.
 ## 9. Suggested first 30 minutes of v3
 
 1. `npm run db:up && npm run server && npm run dev` — confirm the stack runs.
-2. `npm run test:api && npm run test:flow && npm run test:consistency` — confirm
-   102 assertions still pass.
-3. **Ask the user which hero variant won (§7.0), delete the other two, commit.** The
-   tree is dirty until this happens, so do it before layering more work on top.
-4. Raise `SQL_ITEM_LIMIT` in `scripts/regenerate_catalog_seed.py`, regenerate,
+2. `npm run lint && npm test && npm run test:api && npm run test:flow && npm run test:consistency`
+   — expect **110 assertions** (42 unit, 29 API, 18 flow, 21 consistency).
+3. **Ask the user which hero reveal treatment won (§7.0), delete the other two,
+   commit.** The tree is dirty until this happens, so do it before layering more
+   work on top.
+4. **Give the catalogue real menu sections (§7.1).** This is the highest-value data
+   fix: it replaces a hash with authored taxonomy and makes the merchant menu
+   truthful. Fix the doubled-modifier item names in the same pass (§7.2).
+5. Raise `SQL_ITEM_LIMIT` in `scripts/regenerate_catalog_seed.py`, regenerate,
    re-apply, and confirm `/api/health` reports a much larger `totalItems`.
-5. Pick one static vertical (`Restaurants.tsx` is the largest) and migrate it to
+6. Pick one static vertical (`Restaurants.tsx` is the largest) and migrate it to
    `/api/merchants?category=restaurants-food`, using the discovery screen as the
    worked example.

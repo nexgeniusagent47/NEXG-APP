@@ -6,6 +6,68 @@ All notable changes to NEXG Concierge. Format follows
 
 ---
 
+## [Unreleased] — merchant menu, host onboarding, deep links, audit
+
+### Added
+
+- **Host onboarding** (`HostOnboarding.tsx`): the `nexg-host-onboarding.html`
+  prototype as a React component — 10 steps, 48 controls, 54 chip options, a Leaflet
+  map pin, dynamic space and guest-request rows, uploads, a signature canvas and a
+  review step. Lazy-loaded, so Leaflet stays out of the first paint (its own 205 kB
+  chunk). Reached from **For Properties → "Partner with NEXG"**, which previously
+  sent a property owner into the *merchant* intake form.
+- **Merchant menu sections** (`src/data/menuSections.ts`) with a **docked category
+  rail**: sticky under the header on scroll, active section tracked by intersection,
+  tap to jump.
+- **Deep-linkable pages**: `?page=<name>` for the top-level routes and
+  `?merchant=<id-or-slug>` for a merchant. Previously every route lived only in React
+  state, so nothing could be linked, reloaded or audited by an external tool.
+
+### Fixed
+
+- **The merchant page showed its whole catalogue in one unbroken grid.** See the
+  "Repaired" note below for why the obvious grouping fix could not work.
+- **Passing a partial merchant as a route fallback crashed the page.**
+  `MerchantRoute` treats a fallback as a complete record, and `MerchantView` called
+  `merchant.rating.toFixed()` on it. A deep-linked identifier is now held separately
+  from the resolved record so a partial object can never be presented as loaded.
+- **`For Properties` → "Partner with NEXG" routed to merchant onboarding**, so a
+  property owner landed in a merchant intake. It now opens the host form.
+- The prototype's mojibake `<title>` — a cp1252-double-encoded em dash, the same
+  corruption repaired across the logs earlier.
+
+### Repaired — why the merchant menu is derived
+
+Grouping by an item's own subcategory is the obvious fix and it does not work. Two
+measurements, both recorded in `menuSections.ts` so nobody retries it:
+
+1. `server/repository.ts` stamps **the merchant's subcategory onto every item**
+   (`mapItem(i, …, m.subcategory)`), discarding the item's own `subcategory_id`.
+2. Even fixed, there is nothing to group by: sheet 3 of
+   `NEXG_Nairobi_Merchant_Seed_Catalog.xlsx` holds **14,895 item rows across 640
+   merchants, and not one merchant's items span more than a single subcategory.**
+
+A menu built from subcategory is therefore one group holding everything — the
+current page with a heading on top. Real merchants' items are near-identical variants
+distinguished by a modifier ("House Red", "Signature House Red", "Premium House
+Red"), so there is no semantic sub-kind to recover either.
+
+Sections are assigned by a **stable hash of the item id** — never the index, never
+random — so an item keeps its section across reloads, pagination and reordering.
+Measured on Gold Champagne Co.: 4 sections, 8/8/7/7, all 30 items accounted for.
+
+### Audited
+
+All **11 pages × 2 viewports** scanned with the Impeccable detector: **zero findings
+on every page.** The source tree carries one finding, the pre-existing
+`overused-font` for Inter.
+
+That result was validated before it was believed: a known-bad control file still
+produces 10 source findings and 8 URL findings, and the deep links render 10 distinct
+headings — so the sweep is a real pass, not a silent no-op.
+
+---
+
 ## [Unreleased] — the hero line becomes a call to action
 
 The hero subtitle rotates five moments, each pairing the customer's own word with
