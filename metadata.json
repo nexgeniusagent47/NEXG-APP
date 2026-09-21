@@ -1,0 +1,6 @@
+{
+  "name": "NEXG Concierge",
+  "description": "On-demand luxury concierge & gourmet discovery with NEXG bespoke experience and PostgreSQL database.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

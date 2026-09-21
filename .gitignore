@@ -1,0 +1,24 @@
+node_modules/
+build/
+dist/
+coverage/
+.DS_Store
+*.log
+
+# Env files carry real credentials / connection strings.
+.env*
+!.env.example
+
+# Local npm cache created because the global cache path is outside the sandbox.
+.npm-cache/
+
+# OS / editor
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+
+# Test + tool artifacts
+logs/screenshots/
+test-results/
+playwright-report/

@@ -1,0 +1,64 @@
+name: NEXG Concierge CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    name: Lint, Test & Validate PostgreSQL Seeding
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: nexg_user
+          POSTGRES_PASSWORD: nexg_password
+          POSTGRES_DB: nexg_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: npm ci || npm install
+
+      - name: Validate Excel Parsing & SQL Generation
+        run: python scripts/parse_excel_to_db.py
+
+      - name: Test PostgreSQL Schema & Seed Migration
+        env:
+          DATABASE_URL: postgresql://nexg_user:nexg_password@localhost:5432/nexg_db
+        run: |
+          psql $DATABASE_URL -f src/db/schema.sql
+          psql $DATABASE_URL -f src/db/seed_excel.sql
+
+      - name: Run Typecheck
+        run: npm run lint
+
+      - name: Run Vitest Unit & Integration Tests
+        run: npm run test
+
+      - name: Production Vite Build
+        run: npm run build

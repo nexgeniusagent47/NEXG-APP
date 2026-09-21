@@ -1,0 +1,303 @@
+import { SpaVenue } from '../types';
+
+export const SPA_VENUES: SpaVenue[] = [
+  {
+    id: 'spa-anantara',
+    name: 'Aura In-Villa & Coastal Spa Sanctuary',
+    tagline: 'Deep restorative Balinese, hot stone & hydro-cellular rituals',
+    rating: 4.96,
+    reviewsCount: 428,
+    googleRating: 4.9,
+    googleReviewsCount: 890,
+    googleAspects: {
+      food: 4.8, // herbal refreshments
+      service: 5.0, // therapists
+      atmosphere: 5.0, // ambiance
+    },
+    socials: {
+      instagram: '@auracoastal.spa',
+      googleMaps: 'https://maps.google.com/?q=Aura+Coastal+Spa+Sanctuary',
+      website: 'https://auracoastalspa.luxury',
+      phone: '+1 (800) 555-AURA',
+    },
+    googleReviews: [
+      {
+        id: 'rev-aura-1',
+        author: 'Elena Rostova',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80',
+        rating: 5,
+        relativeTime: '2 days ago',
+        text: 'The in-villa Balinese treatment was heavenly after 14 hours in the air. The therapist arrived with warmed aromatic oils, heated stones, and soothing ambient chimes. Absolute perfection.',
+        likes: 24,
+        verifiedGoogleDiner: true,
+      },
+      {
+        id: 'rev-aura-2',
+        author: 'David & Clara Sterling',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80',
+        rating: 5,
+        relativeTime: '1 week ago',
+        text: 'The Twilight Sunset Couple ritual was the highlight of our anniversary. Synchronized massages on the terrace followed by champagne. Impeccable hygiene and therapists.',
+        likes: 19,
+        verifiedGoogleDiner: true,
+      },
+      {
+        id: 'rev-aura-3',
+        author: 'Marcus Vance',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80',
+        rating: 5,
+        relativeTime: '3 weeks ago',
+        text: 'Aura is the pinnacle of resort spas. Deep tissue therapist knew exactly which acupressure meridians were tight. Left feeling completely rejuvenated.',
+        likes: 11,
+        verifiedGoogleDiner: true,
+      }
+    ],
+    image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80',
+    location: 'Oceanfront Pavilion & In-Villa Dispatch',
+    distanceKm: 0.8,
+    operatingHours: '08:00 AM - 11:30 PM',
+    treatments: [
+      {
+        id: 'treat-deep-tissue',
+        spaId: 'spa-anantara',
+        title: 'Deep Tissue & Myofascial Tension Release',
+        tagline: 'Targeted acupressure & warm eucalyptus oil to dissolve travel fatigue',
+        category: 'massages',
+        description: 'A deeply therapeutic treatment designed to release chronic tension and realign deep layers of muscles and connective tissue. Highly recommended for jet lag, post-flight fatigue, and active lifestyle recovery.',
+        image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80',
+        durations: [
+          { duration: 60, price: 145 },
+          { duration: 90, price: 195 },
+          { duration: 120, price: 255 },
+        ],
+        rating: 4.98,
+        reviewsCount: 214,
+        inVillaAvailable: true,
+        availableOils: [
+          'French Organic Lavender & Blue Chamomile',
+          'Balinese Lemongrass, Ginger & Clove',
+          'Arabian Oud & Damascus Rosewood',
+          'Tasmanian Peppermint & Eucalyptus',
+        ],
+        addOns: [
+          { id: 'addon-stone', name: 'Heated Volcanic Basalt Stones', price: 35, description: 'Direct thermal placement on spinal meridians' },
+          { id: 'addon-sound', name: 'Harmonic Singing Bowl Sound Prelude', price: 25, description: '10-minute theta wave acoustic grounding' },
+          { id: 'addon-eye', name: '24K Gold Collagen Eye Treatment', price: 20, description: 'Depuffs and hydrates delicate eye contour' },
+          { id: 'addon-champagne', name: 'Post-Ritual Chilled Champagne & Herbal Elixir', price: 30, description: 'Served in-suite with fresh chilled berries' },
+        ],
+      },
+      {
+        id: 'treat-balinese',
+        spaId: 'spa-anantara',
+        title: 'Signature Balinese Harmony & Aromatherapy',
+        tagline: 'Rhythmic long strokes, skin rolling & calming floral botanical infusions',
+        category: 'massages',
+        description: 'Traditional Indonesian healing ritual combining gentle stretching, acupressure, and reflexology with warmed floral oils. Balances body meridians and induces deep tranquil slumber.',
+        image: 'https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=800&q=80',
+        durations: [
+          { duration: 60, price: 135 },
+          { duration: 90, price: 185 },
+          { duration: 120, price: 240 },
+        ],
+        rating: 4.95,
+        reviewsCount: 162,
+        inVillaAvailable: true,
+        availableOils: [
+          'French Organic Lavender & Blue Chamomile',
+          'Balinese Lemongrass, Ginger & Clove',
+          'Sweet Ylang-Ylang & Jasmine Blossom',
+        ],
+        addOns: [
+          { id: 'addon-stone', name: 'Heated Volcanic Basalt Stones', price: 35, description: 'Direct thermal placement on spinal meridians' },
+          { id: 'addon-eye', name: '24K Gold Collagen Eye Treatment', price: 20, description: 'Depuffs and hydrates delicate eye contour' },
+          { id: 'addon-champagne', name: 'Post-Ritual Chilled Champagne & Herbal Elixir', price: 30, description: 'Served in-suite with fresh chilled berries' },
+        ],
+      },
+      {
+        id: 'treat-couples',
+        spaId: 'spa-anantara',
+        title: "Twilight Sunset Couple's Sanctuary Ritual",
+        tagline: 'Dual side-by-side bespoke massages with rose petal bath & champagne',
+        category: 'couples',
+        description: 'An intimate, luxurious escape for two. Commencing with an aromatic foot cleansing ritual, followed by simultaneous synchronized full-body massages and finishing with chilled vintage champagne and artisanal dark truffles.',
+        image: 'https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=800&q=80',
+        durations: [
+          { duration: 90, price: 380 },
+          { duration: 120, price: 490 },
+        ],
+        rating: 4.99,
+        reviewsCount: 94,
+        inVillaAvailable: true,
+        availableOils: [
+          'Arabian Oud & Damascus Rosewood',
+          'French Organic Lavender & Blue Chamomile',
+          'Sweet Ylang-Ylang & Jasmine Blossom',
+        ],
+        addOns: [
+          { id: 'addon-stone', name: 'Dual Heated Volcanic Stones', price: 60, description: 'Therapeutic warmth for both guests' },
+          { id: 'addon-sound', name: 'Couple Singing Bowl Acoustic Immersion', price: 40, description: 'Harmonic sound meditation' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'spa-lotus',
+    name: 'The Lotus Ayurvedic & Holistic Wellness Retreat',
+    tagline: 'Centuries-old Vedic herbal therapies, Shirodhara & dosha harmonization',
+    rating: 4.94,
+    reviewsCount: 310,
+    googleRating: 4.9,
+    googleReviewsCount: 654,
+    googleAspects: {
+      food: 4.9,
+      service: 5.0,
+      atmosphere: 4.9,
+    },
+    socials: {
+      instagram: '@lotus.ayurveda',
+      googleMaps: 'https://maps.google.com/?q=The+Lotus+Ayurvedic+Wellness',
+      website: 'https://lotusayurveda.retreat',
+      phone: '+1 (800) 555-VEDA',
+    },
+    googleReviews: [
+      {
+        id: 'rev-lotus-1',
+        author: 'Dr. Sophia Lindqvist',
+        avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80',
+        rating: 5,
+        relativeTime: '4 days ago',
+        text: 'The Shirodhara was an out-of-body sensory experience. Warm herbal oil cascading onto the forehead completely quieted my mind. Highly recommend booking the 120min journey.',
+        likes: 31,
+        verifiedGoogleDiner: true,
+      },
+      {
+        id: 'rev-lotus-2',
+        author: 'Alexander Petrov',
+        avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&q=80',
+        rating: 5,
+        relativeTime: '2 weeks ago',
+        text: 'The 24K Gold Cellular facial transformed my skin. My face felt hydrated, sculpted, and noticeably glowing. Pure luxury and clinical expertise.',
+        likes: 18,
+        verifiedGoogleDiner: true,
+      }
+    ],
+    image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1200&q=80',
+    location: 'Hillside Zen Gardens & In-Villa Dispatch',
+    distanceKm: 1.4,
+    operatingHours: '09:00 AM - 10:00 PM',
+    treatments: [
+      {
+        id: 'treat-shirodhara',
+        spaId: 'spa-lotus',
+        title: 'Authentic Royal Shirodhara & Abhyanga',
+        tagline: 'Continuous stream of warm medicated herbal oil on the third eye chakra',
+        category: 'ayurvedic',
+        description: 'A sublime mind-calming therapy. Begins with a grounding four-hand Abhyanga oil massage, followed by a continuous soothing stream of warm herbalized oils poured onto the forehead to melt stress, anxiety, and insomnia.',
+        image: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=800&q=80',
+        durations: [
+          { duration: 90, price: 220 },
+          { duration: 120, price: 295 },
+        ],
+        rating: 4.97,
+        reviewsCount: 148,
+        inVillaAvailable: true,
+        availableOils: [
+          'Warm Mahanarayan Herb-Infused Sesame',
+          'Brahmi & Sandalwood Crown Infusion',
+          'Centella & Organic Indian Vetiver',
+        ],
+        addOns: [
+          { id: 'addon-sound', name: 'Tibetan Sound Bowl Prelude', price: 25, description: '10-minute chakra acoustic tuning' },
+          { id: 'addon-tea', name: 'Herbal Ashwagandha Rejuvenation Elixir', price: 18, description: 'Ayurvedic restorative infusion' },
+        ],
+      },
+      {
+        id: 'treat-facial-cellular',
+        spaId: 'spa-lotus',
+        title: '24K Gold Cellular Radiance & Gua Sha Facial',
+        tagline: 'Ultrasonic cleansing, pure gold foil leaf & lifting lymphatic sculpting',
+        category: 'facials',
+        description: 'A transformative clinical luxury facial. Featuring micro-exfoliation, bio-active cellular peptides, authentic 24K gold foil masks, and jade stone Gua Sha to sculpt cheekbones and restore luminous radiance.',
+        image: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=80',
+        durations: [
+          { duration: 60, price: 175 },
+          { duration: 90, price: 235 },
+        ],
+        rating: 4.96,
+        reviewsCount: 112,
+        inVillaAvailable: true,
+        availableOils: [
+          'Organic Rosehip & Squalane Facial Nectar',
+          'Frankincense & Neroli Cellular Elixir',
+        ],
+        addOns: [
+          { id: 'addon-eye', name: 'Cryo-Ice Globe Sculpting', price: 25, description: 'Chilled vascular stimulation and depuffing' },
+          { id: 'addon-neck', name: 'Decollete Firming Peptide Mask', price: 30, description: 'Intensive neck and chest renewal' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'spa-nordic',
+    name: 'Nordic Hydro-Thermal & Banya Pavilion',
+    tagline: 'Contrast hot sauna, cold plunge, birch whisk venik & mineral salt cave',
+    rating: 4.98,
+    reviewsCount: 285,
+    googleRating: 4.9,
+    googleReviewsCount: 512,
+    googleAspects: {
+      food: 4.7,
+      service: 4.9,
+      atmosphere: 5.0,
+    },
+    socials: {
+      instagram: '@nordic.hydrothermal',
+      googleMaps: 'https://maps.google.com/?q=Nordic+Hydro+Thermal+Pavilion',
+      website: 'https://nordichydro.wellness',
+      phone: '+1 (800) 555-COLD',
+    },
+    googleReviews: [
+      {
+        id: 'rev-nordic-1',
+        author: 'Henrik Larsson',
+        avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80',
+        rating: 5,
+        relativeTime: '3 days ago',
+        text: 'The private cold plunge and cedarwood sauna cycle restored all my energy. The sauna master prepared fragrant birch whisk eucalyptus infusions.',
+        likes: 27,
+        verifiedGoogleDiner: true,
+      }
+    ],
+    image: 'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1200&q=80',
+    location: 'Pine Forest Reserve & Private Pavilion',
+    distanceKm: 2.1,
+    operatingHours: '07:30 AM - 11:00 PM',
+    treatments: [
+      {
+        id: 'treat-thermal-cycle',
+        spaId: 'spa-nordic',
+        title: 'Contrast Hydrotherapy & Siberian Cedarwood Banya',
+        tagline: 'Thermal sauna, 45°F glacial cold dip & aromatic birch whisk massage',
+        category: 'massages',
+        description: 'Traditional Nordic thermal contrast circuit. Releases intense endorphins, boosts immunity, and purifies lymphatic circulation with organic birch venik steam whisking.',
+        image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80',
+        durations: [
+          { duration: 75, price: 160 },
+          { duration: 105, price: 210 },
+        ],
+        rating: 4.99,
+        reviewsCount: 175,
+        inVillaAvailable: false,
+        availableOils: [
+          'Wild Nordic Pine & Fir Needle',
+          'Crisp Siberian Birch & Peppermint',
+        ],
+        addOns: [
+          { id: 'addon-salt', name: 'Himalayan Pink Salt Scrub', price: 35, description: 'Full body mineral exfoliation' },
+          { id: 'addon-elixir', name: 'Electrolyte Herbal Chaga Tea', price: 15, description: 'Wild harvested antioxidant brew' },
+        ],
+      }
+    ]
+  }
+];
+
