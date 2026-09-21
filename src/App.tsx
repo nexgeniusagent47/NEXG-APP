@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import MerchantAdCarousel from './components/MerchantAdCarousel';
@@ -43,6 +43,13 @@ import { MerchantPreviewSheet } from './components/discovery/MerchantPreviewShee
 import type { ApiItem, ApiMerchant } from './lib/apiClient';
 import MerchantRoute from './components/merchant/MerchantRoute';
 
+/**
+ * Host onboarding is split out of the main bundle on purpose. It carries Leaflet
+ * and a ten-step form that nobody reaches from the landing page, so loading it
+ * eagerly would make every first paint pay for it.
+ */
+const HostOnboarding = lazy(() => import('./components/HostOnboarding'));
+
 export type AppCurrentPage =
   | 'home'
   | 'merchants'
@@ -54,16 +61,78 @@ export type AppCurrentPage =
   | 'merchant_onboarding'
   | 'properties'
   | 'couriers'
-  | 'courier_onboarding';
+  | 'courier_onboarding'
+  | 'host_onboarding';
+
+/**
+ * Pages addressable through `?page=`.
+ *
+ * Without this, every route lives only in React state, so a page cannot be linked
+ * to, reloaded, or audited by any external tool — a URL scanner can only ever see
+ * `home`. Reading the initial page from the query string fixes all three, and the
+ * allow-list keeps an unknown value from rendering a blank screen.
+ */
+const DEEP_LINK_PAGES: readonly AppCurrentPage[] = [
+  'home',
+  'merchants',
+  'restaurants',
+  'experiences',
+  'spa',
+  'transport',
+  'groceries',
+  'merchant_onboarding',
+  'properties',
+  'couriers',
+  'courier_onboarding',
+  'host_onboarding',
+];
+
+function pageFromUrl(): AppCurrentPage {
+  try {
+    const requested = new URLSearchParams(window.location.search).get('page');
+    if (requested && (DEEP_LINK_PAGES as readonly string[]).includes(requested)) {
+      return requested as AppCurrentPage;
+    }
+  } catch {
+    // A malformed query string must not stop the app from booting.
+  }
+  return 'home';
+}
 
 function AppContent() {
-  const [currentPage, setCurrentPage] = useState<AppCurrentPage>('home');
+  const [currentPage, setCurrentPage] = useState<AppCurrentPage>(pageFromUrl);
   const [nexgStage, setNexgStage] = useState<'none' | 'discovery' | 'drilldown'>('none');
   const [selectedNexGCategory, setSelectedNexGCategory] = useState<CatalogCategory>(
     CATEGORIES_21[0]
   );
   const [isSqlModalOpen, setIsSqlModalOpen] = useState(false);
   const [selectedMerchant, setSelectedMerchant] = useState<NexGMerchant | null>(null);
+
+  // Keep the query string in step with the page so the address bar stays accurate
+  // and Back/Forward work, using replaceState rather than pushState: navigating the
+  // SPA should not bury the previous site in the history stack.
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (currentPage === 'home') params.delete('page');
+      else params.set('page', currentPage);
+      const query = params.toString();
+      window.history.replaceState(
+        null,
+        '',
+        `${window.location.pathname}${query ? `?${query}` : ''}`
+      );
+    } catch {
+      // History is unavailable in some embedded contexts; navigation still works.
+    }
+  }, [currentPage]);
+
+  // Browser Back/Forward re-reads the address bar.
+  useEffect(() => {
+    const onPop = () => setCurrentPage(pageFromUrl());
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
 
   // v2 discovery flow.
   // `isDiscoveryOpen` renders the merchant discovery surface; `previewMerchant`
@@ -110,6 +179,7 @@ function AppContent() {
     'couriers',
     'merchant_onboarding',
     'courier_onboarding',
+    'host_onboarding',
   ].includes(currentPage);
 
   /**
@@ -301,6 +371,18 @@ function AppContent() {
 
         {currentPage === 'courier_onboarding' && (
           <CourierOnboarding onNavigate={handleNavigate} />
+        )}
+
+        {currentPage === 'host_onboarding' && (
+          <Suspense
+            fallback={
+              <div className="min-h-screen flex items-center justify-center">
+                <span className="text-sm font-semibold opacity-60">Loading host onboarding…</span>
+              </div>
+            }
+          >
+            <HostOnboarding onNavigate={handleNavigate} />
+          </Suspense>
         )}
           </>
         )}

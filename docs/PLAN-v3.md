@@ -159,7 +159,70 @@ announcing "dash" mid-sentence is noise.
 
 ---
 
-## 5. Verification
+## 7. Merchant page: from one flat block to a menu
+
+### 7.1 What is wrong today
+
+The merchant page renders **every item in a single grid**. There is no grouping,
+no sections, and no way to navigate. For a merchant with 15 offerings that is
+merely dense; the design does not scale and it reads as overwhelming.
+
+### 7.2 The root cause is in the data, not the markup
+
+Measured, not assumed:
+
+- `server/repository.ts` calls `mapItem(i, ..., m.subcategory)` — it stamps **the
+  merchant's own subcategory onto every item** and discards the item's own
+  `subcategory_id`.
+- The source workbook `NEXG_Nairobi_Merchant_Seed_Catalog.xlsx` sheet 3 holds
+  **14,895 item rows across 640 merchants, and not one merchant's items span more
+  than a single subcategory.**
+
+So the page cannot group by subcategory — there is exactly one group. Fixing the
+markup alone would produce a single menu section containing everything, which is
+the current page with a heading on it.
+
+### 7.3 Why that is fixable
+
+Item names are already section-shaped. Sampled from the workbook:
+
+| Vertical | Real item names | Natural sections |
+| --- | --- | --- |
+| Alcohol & Beverages | House Red, Sauvignon Blanc, Cabernet, Merlot | Wines |
+| Wellness | Deep Tissue Ritual, Signature Facial, Body Scrub | Massage · Facials · Body |
+| Restaurants & Food | Signature Burger, Grilled Chicken, Beef Steak | Mains · Grills |
+| Groceries | Milk, Bread, Eggs, Rice, Pasta | Dairy · Bakery · Pantry |
+
+The taxonomy exists in the names; it was never assigned.
+
+### 7.4 Work
+
+1. **Assign a menu section per item** in the seed generator, from a per-vertical
+   section taxonomy plus a keyword classifier over the item name. Deterministic, so
+   regeneration is stable. Store it as the item's subcategory so it flows through
+   the existing `subcategoryId` column rather than adding a parallel concept.
+2. **Serve it.** `mapItem` must use the item's own subcategory; `attachItems` must
+   join `subcategories` to resolve the name. This is a real defect fix independent
+   of the UI — the current mapping is simply wrong.
+3. **Group and collapse in the UI.** Render per-section blocks with a bounded
+   initial height so the page no longer shows everything at once.
+4. **Dock the section nav.** A sticky category rail that sits under the header and
+   sticks while scrolling, with the active section tracked by intersection and
+   tapping a section scrolling to it. This is the Wolt behaviour that was asked
+   for.
+5. **Anchor offset.** Jumping to a section must clear the sticky rail, or the
+   heading hides underneath it.
+
+### 7.5 Acceptance
+
+- No merchant page shows its full catalogue in one unbroken block.
+- The category rail sticks while scrolling and tracks the active section.
+- Tapping a category scrolls to that section with its heading clear of the rail.
+- A merchant with items spanning several sections renders several sections.
+
+---
+
+## 8. Verification
 
 Every claim is measured in a browser, not read off the source:
 
@@ -177,7 +240,7 @@ Every claim is measured in a browser, not read off the source:
 
 ---
 
-## 6. Known traps to avoid
+## 9. Known traps to avoid
 
 Carried forward because each one has already cost time in this project:
 

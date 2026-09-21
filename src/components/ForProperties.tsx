@@ -273,7 +273,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <button 
-                onClick={() => onNavigate('merchant_onboarding')}
+                onClick={() => onNavigate('host_onboarding')}
                 className="flex items-center justify-center gap-2 bg-[#E5B65F] hover:bg-[#ffddb1] text-[#291800] px-8 py-4 rounded-full font-bold text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
               >
                 Partner with NEXG
