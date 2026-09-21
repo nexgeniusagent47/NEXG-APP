@@ -28,6 +28,7 @@ import {
   type RequirementSection,
 } from '../../data/orderRequirements';
 import { DynamicField } from '../forms/DynamicField';
+import { useModalBehavior } from '../../hooks/useModalBehavior';
 
 interface MerchantItemModalProps {
   item: ApiItem;
@@ -47,6 +48,12 @@ export const MerchantItemModal: React.FC<MerchantItemModalProps> = ({
   onConfirm,
 }) => {
   const { isLight } = useTheme();
+
+  // Escape, background scroll lock, initial focus and focus restore. Without this
+  // the highest-stakes surface in the flow was a modal in appearance only: a
+  // keyboard user could not dismiss it and a thumb-drag scrolled the merchant page
+  // behind it.
+  const { initialFocusRef } = useModalBehavior({ isOpen: true, onClose });
 
   const [values, setValues] = useState<Record<string, unknown>>(() => {
     const initial: Record<string, unknown> = {};
@@ -102,6 +109,10 @@ export const MerchantItemModal: React.FC<MerchantItemModalProps> = ({
         role="dialog"
         aria-modal="true"
         aria-label={item.name}
+        // Focus target for useModalBehavior when no explicit ref is attached, and
+        // focusable so the dialog itself can hold focus before any control is hit.
+        data-modal-panel
+        tabIndex={-1}
         initial={reduceMotion ? { opacity: 0 } : { y: 24, opacity: 0 }}
         animate={reduceMotion ? { opacity: 1 } : { y: 0, opacity: 1 }}
         exit={reduceMotion ? { opacity: 0 } : { y: 16, opacity: 0 }}
@@ -110,7 +121,7 @@ export const MerchantItemModal: React.FC<MerchantItemModalProps> = ({
           'relative w-full sm:max-w-lg max-h-[92dvh] flex flex-col overflow-hidden',
           'rounded-t-3xl sm:rounded-3xl',
           isLight ? 'bg-white' : 'bg-[#141618]',
-          'shadow-2xl'
+          'shadow-2xl focus:outline-none'
         )}
       >
         {/* Header */}
@@ -124,6 +135,7 @@ export const MerchantItemModal: React.FC<MerchantItemModalProps> = ({
             />
           </div>
           <button
+            ref={initialFocusRef as React.RefObject<HTMLButtonElement>}
             type="button"
             onClick={onClose}
             aria-label="Close"
@@ -149,14 +161,14 @@ export const MerchantItemModal: React.FC<MerchantItemModalProps> = ({
               >
                 {item.name}
               </h2>
-              <span className="text-base font-black text-[#B88728] dark:text-[#E5B65F] tabular-nums flex-shrink-0">
+              <span className="text-base font-black text-[#8A6413] dark:text-[#E5B65F] tabular-nums flex-shrink-0">
                 KSh {item.price.toLocaleString()}
               </span>
             </div>
             <p className={cn('text-xs mt-1.5 leading-relaxed', isLight ? 'text-slate-600' : 'text-gray-400')}>
               {item.description}
             </p>
-            <p className={cn('text-[11px] mt-1.5', isLight ? 'text-slate-400' : 'text-gray-500')}>
+            <p className={cn('text-[11px] mt-1.5', isLight ? 'text-slate-600' : 'text-gray-400')}>
               {merchant.name} · {requirements.arcLabel}
             </p>
           </div>
@@ -221,7 +233,7 @@ export const MerchantItemModal: React.FC<MerchantItemModalProps> = ({
             )}
           >
             <Check size={15} />
-            {requirements.primaryAction}
+            {requirements.commitAction}
           </button>
         </div>
       </motion.div>
@@ -242,7 +254,7 @@ const RequirementSectionView: React.FC<{
       <h3
         className={cn(
           'text-xs font-black uppercase tracking-[0.12em]',
-          isLight ? 'text-slate-500' : 'text-gray-500'
+          isLight ? 'text-slate-500' : 'text-gray-400'
         )}
       >
         {section.title}

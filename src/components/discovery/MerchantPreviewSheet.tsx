@@ -8,7 +8,13 @@
 //
 // The click opens this sheet, which answers "what is this and what can I do here?"
 // before committing the user to a full page. Navigation to MerchantPage happens
-// ONLY through the explicit "View full profile" action.
+// ONLY through an explicit action inside this sheet.
+//
+// The two actions are deliberately distinct:
+//   * primary   — the arc's workflow CTA, landing on the merchant page AT THE
+//                 OFFERINGS, where the flow the label names actually begins.
+//   * secondary — "See all offerings", the full merchant page from the top.
+// Passing one handler to both is what previously gave two labels one destination.
 //
 // The action set and the step rail come from the merchant's commerce arc
 // (workflowEngine), so a pharmacist, a chauffeur company, a freight forwarder and
@@ -172,20 +178,20 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                     <span className="inline-flex items-center gap-1.5">
                       <Star size={13} className="fill-current text-amber-500" />
                       {merchant.rating.toFixed(1)}
-                      <span className={isLight ? 'text-slate-400' : 'text-gray-500'}>
+                      <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>
                         ({merchant.ratingCount})
                       </span>
                     </span>
                     <span className="inline-flex items-center gap-1.5">
-                      <Clock size={13} className="text-[#B88728] dark:text-[#E5B65F]" />
+                      <Clock size={13} className="text-[#8A6413] dark:text-[#E5B65F]" />
                       {merchant.deliveryTime}
                     </span>
                     <span className="inline-flex items-center gap-1.5">
-                      <Bike size={13} className="text-[#B88728] dark:text-[#E5B65F]" />
+                      <Bike size={13} className="text-[#8A6413] dark:text-[#E5B65F]" />
                       {merchant.deliveryFee === 0 ? 'Free delivery' : `KSh ${merchant.deliveryFee}`}
                     </span>
                     <span className="inline-flex items-center gap-1.5">
-                      <MapPin size={13} className="text-[#B88728] dark:text-[#E5B65F]" />
+                      <MapPin size={13} className="text-[#8A6413] dark:text-[#E5B65F]" />
                       {merchant.nairobiArea}
                     </span>
                   </div>
@@ -202,7 +208,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                     <ol
                       className={cn(
                         'flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[11px] font-medium pt-1',
-                        isLight ? 'text-slate-500' : 'text-gray-500'
+                        isLight ? 'text-slate-500' : 'text-gray-400'
                       )}
                     >
                       {intent.arc.steps.map((step, index) => (
@@ -219,7 +225,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                     </ol>
 
                     {intent.inferred && (
-                      <p className={cn('text-[11px] italic', isLight ? 'text-slate-400' : 'text-gray-500')}>
+                      <p className={cn('text-[11px] italic', isLight ? 'text-slate-600' : 'text-gray-400')}>
                         This merchant does not declare its own workflow, so the default for its category is shown.
                       </p>
                     )}
@@ -256,7 +262,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                             >
                               {item.name}
                             </p>
-                            <span className="text-xs font-bold text-[#B88728] dark:text-[#E5B65F] flex-shrink-0">
+                            <span className="text-xs font-bold text-[#8A6413] dark:text-[#E5B65F] flex-shrink-0">
                               KSh {item.price.toLocaleString()}
                             </span>
                           </li>
@@ -266,7 +272,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                   )}
 
                   <p className={cn('flex items-start gap-2 text-xs', isLight ? 'text-slate-500' : 'text-gray-400')}>
-                    <Store size={13} className="mt-0.5 flex-shrink-0 text-[#B88728] dark:text-[#E5B65F]" />
+                    <Store size={13} className="mt-0.5 flex-shrink-0 text-[#8A6413] dark:text-[#E5B65F]" />
                     {merchant.address}
                   </p>
                 </div>
@@ -308,7 +314,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                       : 'bg-white/5 border-white/15 text-gray-100 hover:bg-white/10 focus-visible:ring-offset-[#141618]'
                   )}
                 >
-                  View full profile
+                  See all offerings
                 </button>
               </div>
             </motion.div>

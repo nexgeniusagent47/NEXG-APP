@@ -72,6 +72,8 @@ function AppContent() {
   const [isDiscoveryOpen, setIsDiscoveryOpen] = useState(false);
   const [discoveryQuery, setDiscoveryQuery] = useState('');
   const [previewMerchant, setPreviewMerchant] = useState<ApiMerchant | null>(null);
+  // Set when the journey into the merchant page came from the sheet's workflow CTA.
+  const [focusOfferings, setFocusOfferings] = useState(false);
 
   const {
     customizingDish,
@@ -151,8 +153,9 @@ function AppContent() {
    * the route can re-fetch the complete record, with the list copy passed as a
    * fallback so the page paints immediately instead of flashing a loader.
    */
-  const handleViewFullMerchant = (merchant: ApiMerchant) => {
+  const handleViewFullMerchant = (merchant: ApiMerchant, focusOfferings = false) => {
     setPreviewMerchant(null);
+    setFocusOfferings(focusOfferings);
     setSelectedMerchant(merchant);
   };
 
@@ -197,6 +200,7 @@ function AppContent() {
             fallback={selectedMerchant}
             onBack={() => setSelectedMerchant(null)}
             onAddedToCart={handleAddedToCart}
+            focusOfferings={focusOfferings}
           />
         ) : isDiscoveryOpen ? (
           <DiscoveryScreen
@@ -321,7 +325,8 @@ function AppContent() {
       <MerchantPreviewSheet
         merchant={previewMerchant}
         onClose={() => setPreviewMerchant(null)}
-        onViewFull={handleViewFullMerchant}
+        onViewFull={(m) => handleViewFullMerchant(m, false)}
+        onPrimaryAction={(m) => handleViewFullMerchant(m, true)}
       />
 
       <DishCustomizerModal

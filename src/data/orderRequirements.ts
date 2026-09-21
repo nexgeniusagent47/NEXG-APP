@@ -83,12 +83,43 @@ function findSubcategory(
   const category = findCategory(categoryId, null);
   if (!category) return undefined;
 
-  const wanted = normaliseKey(subcategoryId ?? subcategoryName ?? '');
+  // NOTE: `??` cannot be used here. It falls through only on null/undefined, and
+  // the API legitimately returns an EMPTY STRING for subcategoryId when a merchant
+  // has no link. With `subcategoryId ?? subcategoryName`, an empty id short-circuits
+  // the fallback, `wanted` becomes '', every lookup fails, and the function returns
+  // undefined — so no catalogue-declared requirement ever resolved and the
+  // "Required to proceed" section never rendered for any merchant. Trim and use
+  // `||` so an empty id falls through to the name.
+  const wanted = normaliseKey(
+    (subcategoryId ?? '').trim() || (subcategoryName ?? '').trim()
+  );
   if (!wanted) return undefined;
 
-  return category.subcategories.find(
-    (s) => normaliseKey(s.id) === wanted || normaliseKey(s.name) === wanted
-  );
+  const matches = (candidateId: string, candidateName: string) => {
+    const id = normaliseKey(candidateId);
+    const name = normaliseKey(candidateName);
+    if (id === wanted || name === wanted) return true;
+
+    // The API sends a CATEGORY-PREFIXED subcategory id (`adults-only_vapes`) while
+    // the catalogue keys subcategories by their bare slug (`vapes`). Without
+    // stripping the prefix every id-based lookup missed, so no merchant ever
+    // resolved a catalogue field and the compliance section never rendered — even
+    // once the database actually held the links.
+    //
+    // The whole category prefix must be removed, not just up to the first hyphen:
+    // splitting at the first hyphen turns `adults-only-vapes` into `only-vapes`.
+    // Both the catalogue id and slug are tried, because the API writes
+    // `adults-only` where the catalogue writes `adults_only`.
+    for (const prefix of [normaliseKey(category.id), normaliseKey(category.slug)]) {
+      if (!prefix || !wanted.startsWith(`${prefix}-`)) continue;
+      const suffix = wanted.slice(prefix.length + 1);
+      if (suffix === id || suffix === name) return true;
+    }
+
+    return false;
+  };
+
+  return category.subcategories.find((s) => matches(s.id, s.name));
 }
 
 /** Compliance-flavoured field ids. These are gates, not preferences. */
@@ -141,14 +172,20 @@ function arcRequirements(arc: CommerceArc): OrderRequirement[] {
   if (fulfilmentApplies) {
     out.push({
       id: 'fulfilmentMethod',
-      label: 'How would you like to receive this?',
+      // A booking is not "received". Asking a chauffeur customer how they would
+      // like to "receive" an airport transfer does not parse; the question is
+      // where the service happens, so the label and options change with the arc.
+      label:
+        arc === 'browse_buy'
+          ? 'How would you like to receive this?'
+          : 'Where should this take place?',
       kind: 'fulfilment',
       control: 'radio',
       required: true,
       options:
         arc === 'browse_buy'
           ? ['Deliver to me', 'I will collect']
-          : ['Send a provider to me', 'I will come to the location'],
+          : ['At my address', 'At the provider’s location'],
       source: 'arc',
     });
   }
@@ -172,6 +209,29 @@ function arcRequirements(arc: CommerceArc): OrderRequirement[] {
           control: 'text',
           required: true,
           placeholder: 'e.g. 19:30',
+          source: 'arc',
+        },
+        {
+          id: 'pickupAddress',
+          // Without this an airport transfer is unfulfillable: the provider has a
+          // date, a time and a party size but no idea where to go. The customer's
+          // only outlet was the optional notes field, which told them the required
+          // information was optional.
+          label: 'Pickup or meeting point',
+          kind: 'fulfilment',
+          control: 'textarea',
+          required: true,
+          placeholder: 'Terminal, hotel, or building and street',
+          source: 'arc',
+        },
+        {
+          id: 'flightNumber',
+          label: 'Flight or booking reference',
+          kind: 'fulfilment',
+          control: 'text',
+          required: false,
+          placeholder: 'e.g. KQ100',
+          hint: 'Lets the provider track your arrival and adjust for delays.',
           source: 'arc',
         },
         {
@@ -332,7 +392,10 @@ export interface BuildRequirementsInput {
 export interface BuiltRequirements {
   arc: CommerceArc;
   arcLabel: string;
+  /** Navigation verb — opens the flow from a card or sheet. */
   primaryAction: string;
+  /** Commit verb — the label for the modal's submit button. */
+  commitAction: string;
   /** Whether the arc needs a date before it can proceed. */
   needsSchedule: boolean;
   sections: RequirementSection[];
@@ -388,6 +451,7 @@ export function buildRequirements(input: BuildRequirementsInput): BuiltRequireme
     arc,
     arcLabel: intent.arc.label,
     primaryAction: intent.arc.primaryAction,
+    commitAction: intent.arc.commitAction,
     needsSchedule: intent.arc.needsSchedule,
     sections,
     all: deduped,

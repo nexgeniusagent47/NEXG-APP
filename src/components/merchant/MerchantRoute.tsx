@@ -22,6 +22,8 @@ interface MerchantRouteProps {
   fallback?: ApiMerchant | null;
   onBack: () => void;
   onAddedToCart?: (summary: { item: ApiItem; quantity: number }) => void;
+  /** Scroll the offerings into view — set when arriving from the sheet's workflow CTA. */
+  focusOfferings?: boolean;
 }
 
 export default function MerchantRoute({
@@ -29,6 +31,7 @@ export default function MerchantRoute({
   fallback = null,
   onBack,
   onAddedToCart,
+  focusOfferings = false,
 }: MerchantRouteProps) {
   const { isLight } = useTheme();
   const [merchant, setMerchant] = useState<ApiMerchant | null>(fallback);
@@ -100,7 +103,12 @@ export default function MerchantRoute({
   if (!merchant) {
     return (
       <div className={cn('min-h-[100dvh] flex items-center justify-center', isLight ? 'bg-[#f7f8fa]' : 'bg-[#111315]')}>
-        <div className="flex items-center gap-2 text-xs font-semibold text-slate-400">
+        <div
+          className={cn(
+            'flex items-center gap-2 text-xs font-semibold',
+            isLight ? 'text-slate-600' : 'text-gray-400'
+          )}
+        >
           <RefreshCw size={14} className="animate-spin" />
           Loading merchant
         </div>
@@ -113,6 +121,7 @@ export default function MerchantRoute({
       merchant={merchant}
       onBack={onBack}
       onAddedToCart={onAddedToCart}
+      focusOfferings={focusOfferings}
     />
   );
 }

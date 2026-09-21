@@ -150,7 +150,7 @@ export default function DiscoveryScreen({
                 : 'bg-white/5 border-white/10 focus-within:border-[#E5B65F]'
             )}
           >
-            <Search size={16} className="flex-shrink-0 text-[#B88728] dark:text-[#E5B65F]" />
+            <Search size={16} className="flex-shrink-0 text-[#8A6413] dark:text-[#E5B65F]" />
             <input
               ref={searchRef}
               id="discovery-search-input"
@@ -159,7 +159,7 @@ export default function DiscoveryScreen({
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search restaurants, spa, safaris, champagne, chauffeur, pharmacy..."
               aria-label="Search merchants"
-              className="w-full bg-transparent text-sm font-medium focus:outline-none placeholder:text-slate-400 dark:placeholder:text-gray-500"
+              className="w-full bg-transparent text-sm font-medium focus:outline-none placeholder:text-slate-600 dark:placeholder:text-gray-400"
             />
             {query && (
               <button
@@ -246,7 +246,7 @@ export default function DiscoveryScreen({
                         className={cn(
                           'w-full text-left px-4 py-2 text-xs font-semibold transition-colors',
                           sort === option.key
-                            ? 'text-[#B88728] dark:text-[#E5B65F]'
+                            ? 'text-[#8A6413] dark:text-[#E5B65F]'
                             : isLight
                             ? 'text-slate-700 hover:bg-slate-50'
                             : 'text-gray-300 hover:bg-white/5'
@@ -271,7 +271,7 @@ export default function DiscoveryScreen({
             <h2
               className={cn(
                 'px-3 pb-1.5 text-[10px] font-black uppercase tracking-[0.16em]',
-                isLight ? 'text-slate-400' : 'text-gray-500'
+                isLight ? 'text-slate-600' : 'text-gray-400'
               )}
             >
               All verticals
@@ -373,7 +373,7 @@ export default function DiscoveryScreen({
               <div
                 className={cn(
                   'w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-3',
-                  isLight ? 'bg-slate-100 text-slate-400' : 'bg-white/5 text-gray-500'
+                  isLight ? 'bg-slate-100 text-slate-600' : 'bg-white/5 text-gray-400'
                 )}
               >
                 <Search size={20} />
@@ -481,7 +481,7 @@ const RailButton: React.FC<{
       'w-full flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-left transition-colors',
       active
         ? isLight
-          ? 'bg-[#B88728]/10 text-[#B88728]'
+          ? 'bg-[#B88728]/10 text-[#8A6413]'
           : 'bg-[#E5B65F]/15 text-[#E5B65F]'
         : isLight
         ? 'text-slate-600 hover:bg-slate-100'

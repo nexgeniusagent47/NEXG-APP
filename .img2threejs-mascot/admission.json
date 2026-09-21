@@ -1,0 +1,14 @@
+{
+  "admitted": true,
+  "reasons": [],
+  "provenance": {
+    "viewpoint": "reference",
+    "sourcePath": "C:\\Users\\limta\\Downloads\\nexg-concierge\\.img2threejs-mascot\\mascot-cutout.png",
+    "width": 1418,
+    "height": 2048,
+    "foregroundCoverage": 0.3941,
+    "largestComponentFraction": 1.0,
+    "pHash": 12441945670059994792,
+    "duplicateOfHash": null
+  }
+}

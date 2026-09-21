@@ -45,8 +45,21 @@ export interface ArcDefinition {
   intent: string;
   /** The end-to-end journey for this arc, in order. */
   steps: ArcStep[];
-  /** Label for the primary CTA. Never a full sentence. */
+  /**
+   * Label for the action that OPENS this merchant's flow, from a card or a sheet.
+   * A navigation verb: "View full menu", "Check availability".
+   */
   primaryAction: string;
+  /**
+   * Label for the button that COMMITS the form the user has just filled in.
+   *
+   * Deliberately separate from `primaryAction`. The item modal used to render
+   * `primaryAction` on its submit button, so a quantity-and-notes dialog finished
+   * with "View full menu": a label describing a navigation the user had already
+   * performed, on a control whose real effect was to add a line to the cart. The
+   * button label is the only contract the user has, so it must name its action.
+   */
+  commitAction: string;
   /** Verb used on the merchant card's quick action. */
   cardAction: string;
   /**
@@ -79,6 +92,7 @@ export const ARCS: Record<CommerceArc, ArcDefinition> = {
       { id: 'deliver', label: 'Delivered' },
     ],
     primaryAction: 'View full menu',
+    commitAction: 'Add to order',
     cardAction: 'View menu',
     needsSchedule: false,
     instant: true,
@@ -98,6 +112,7 @@ export const ARCS: Record<CommerceArc, ArcDefinition> = {
       { id: 'confirm', label: 'Confirmation' },
     ],
     primaryAction: 'Check availability',
+    commitAction: 'Request booking',
     cardAction: 'Check dates',
     needsSchedule: true,
     instant: false,
@@ -117,6 +132,7 @@ export const ARCS: Record<CommerceArc, ArcDefinition> = {
       { id: 'complete', label: 'Completed' },
     ],
     primaryAction: 'Request this service',
+    commitAction: 'Submit request',
     cardAction: 'Request',
     needsSchedule: true,
     instant: false,
@@ -135,6 +151,7 @@ export const ARCS: Record<CommerceArc, ArcDefinition> = {
       { id: 'confirm', label: 'Confirmation' },
     ],
     primaryAction: 'Book appointment',
+    commitAction: 'Confirm appointment request',
     cardAction: 'Book',
     needsSchedule: true,
     instant: false,
@@ -152,6 +169,7 @@ export const ARCS: Record<CommerceArc, ArcDefinition> = {
       { id: 'dispatch', label: 'Dispatch' },
     ],
     primaryAction: 'Get shipping quote',
+    commitAction: 'Request quote',
     cardAction: 'Get quote',
     needsSchedule: false,
     instant: false,

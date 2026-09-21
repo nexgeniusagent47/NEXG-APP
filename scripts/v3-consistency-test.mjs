@@ -62,7 +62,7 @@ async function openMerchantPage(page, merchantName) {
   check('card click left the browse surface mounted', (await page.locator('#discovery-search-input').count()) === 1);
 
   // Only this explicit action navigates.
-  await page.getByRole('button', { name: /View full profile/i }).first().click();
+  await page.getByRole('button', { name: /See all offerings|View full profile/i }).first().click();
   await settle(page, 2400);
 }
 
@@ -153,7 +153,7 @@ async function main() {
 
   await page.screenshot({ path: 'logs/screenshots/item-modal-booking-arc.png' });
 
-  await modal.getByRole('button', { name: /Check availability/i }).first().click();
+  await modal.getByRole('button', { name: /Request booking/i }).first().click();
   await settle(page, 700);
   const bookingAlerts = await page.locator('[role="alert"]').count();
   check('incomplete booking is blocked with a visible reason', bookingAlerts > 0, `alerts=${bookingAlerts}`);
@@ -173,17 +173,12 @@ async function main() {
   check('purchase arc does NOT ask for a booking date', !purchaseHasDate);
 
   // Compliance is only assertable when the merchant is linked to a subcategory
-  // that declares compliance fields. The current seed leaves many merchants with
-  // no subcategory, so this is reported rather than failed; the unit suite proves
-  // the compliance path for subcategories that do declare it (cigarettes, wine).
-  if (purchaseHasCompliance) {
-    check('purchase arc surfaces a compliance section', true);
-  } else {
-    console.log(
-      '        NOTE  no compliance section for this merchant: it has no linked subcategory,\n' +
-      '              so no catalogue-declared gates apply. Covered by unit tests instead.'
-    );
-  }
+  // Compliance now resolves. It previously could not, because three separate
+  // defects stacked: the seed emitted no merchant_subcategories rows, the resolver
+  // used `??` (which does not fall through an empty string), and the API's
+  // category-prefixed subcategory id was compared against the catalogue's bare
+  // slug. With all three fixed, an adults-only order finally shows its age gate.
+  check('purchase arc surfaces the catalogue compliance gates', purchaseHasCompliance);
 
   await page.screenshot({ path: 'logs/screenshots/item-modal-purchase-arc.png' });
 
@@ -194,20 +189,63 @@ async function main() {
   // persisted cart, then confirm the header badge reflects it once we are back on
   // a page that has a header.
   //
-  // The modal correctly refuses to submit while a required choice is unset, so
-  // satisfy the requirements the way a user would before confirming. Toggles are
-  // never blocking by design, so they stay at their defaults.
+  // Fill every required control the way a user would before confirming. This is
+  // not busywork: once the compliance gates started resolving, the adults-only
+  // modal gained a required age-verification choice and licence field, and a
+  // half-filled form is correctly refused.
+  //
+  // Controls are filled BY TYPE. A blanket fill() throws on `input[type=number]`,
+  // which is how the first version of this helper failed rather than filling.
   const radios = modal.locator('[role="radio"]');
-  if ((await radios.count()) > 0) {
-    await radios.first().click();
-    await settle(page, 300);
+  const radioCount = await radios.count();
+  for (let i = 0; i < radioCount; i += 1) {
+    const group = radios.nth(i);
+    const groupName = await group.evaluate(
+      (el) => el.parentElement?.getAttribute('aria-labelledby') ?? ''
+    );
+    const alreadyChosen = await group.evaluate((el) => {
+      const parent = el.parentElement;
+      return parent ? parent.querySelector('[role="radio"][aria-checked="true"]') !== null : false;
+    });
+    if (!groupName || alreadyChosen) continue;
+    await group.click();
+    await settle(page, 200);
+  }
+
+  // Multicheck groups must have at least one selection.
+  const multiGroups = modal.locator('[role="group"]');
+  for (let i = 0; i < (await multiGroups.count()); i += 1) {
+    const group = multiGroups.nth(i);
+    const options = group.locator('button');
+    if ((await options.count()) === 0) continue;
+    if ((await options.first().getAttribute('aria-pressed')) !== 'true') {
+      await options.first().click();
+      await settle(page, 150);
+    }
+  }
+
+  const selects = modal.locator('select');
+  for (let i = 0; i < (await selects.count()); i += 1) {
+    const el = selects.nth(i);
+    if ((await el.locator('option').count()) > 1) {
+      await el.selectOption({ index: 1 });
+      await settle(page, 150);
+    }
+  }
+
+  for (const selector of ['input[type="number"]', 'input[type="text"]', 'textarea']) {
+    const fields = modal.locator(selector);
+    for (let i = 0; i < (await fields.count()); i += 1) {
+      await fields.nth(i).fill(selector.includes('number') ? '5' : 'Verified at reception');
+      await settle(page, 100);
+    }
   }
 
   await modal.locator('button[aria-label="Increase quantity"]').first().click();
   await settle(page, 350);
 
   await modal
-    .getByRole('button', { name: /View full menu|Check availability|Request this service|Book appointment|Get shipping quote/i })
+    .getByRole('button', { name: /Add to order|Request booking|Submit request|Confirm appointment request|Request quote/i })
     .first()
     .click();
   await settle(page, 1500);

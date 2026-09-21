@@ -32,11 +32,11 @@ function fieldClasses(isLight: boolean, invalid: boolean): string {
     'placeholder:font-normal',
     invalid
       ? isLight
-        ? 'border-rose-400 focus:ring-rose-300 bg-white text-slate-900 placeholder:text-slate-400'
-        : 'border-rose-500/60 focus:ring-rose-500/30 bg-white/5 text-white placeholder:text-gray-500'
+        ? 'border-rose-400 focus:ring-rose-300 bg-white text-slate-900 placeholder:text-slate-600'
+        : 'border-rose-500/60 focus:ring-rose-500/30 bg-white/5 text-white placeholder:text-gray-400'
       : isLight
-      ? 'border-slate-300 focus:border-[#B88728] focus:ring-[#B88728]/25 bg-white text-slate-900 placeholder:text-slate-400'
-      : 'border-white/15 focus:border-[#E5B65F] focus:ring-[#E5B65F]/25 bg-white/5 text-white placeholder:text-gray-500'
+      ? 'border-slate-300 focus:border-[#B88728] focus:ring-[#B88728]/25 bg-white text-slate-900 placeholder:text-slate-600'
+      : 'border-white/15 focus:border-[#E5B65F] focus:ring-[#E5B65F]/25 bg-white/5 text-white placeholder:text-gray-400'
   );
 }
 
@@ -50,22 +50,40 @@ export const DynamicField: React.FC<DynamicFieldProps> = ({
   const invalid = Boolean(error);
   const describedBy = error ? `${requirement.id}-error` : requirement.hint ? `${requirement.id}-hint` : undefined;
 
-  const label = (
-    <label
-      htmlFor={requirement.id}
-      className={cn(
-        'block text-xs font-bold mb-1.5',
-        isLight ? 'text-slate-700' : 'text-gray-200'
-      )}
-    >
+  // Grouped controls (radio, multicheck) are not labelable elements, so
+  // `htmlFor` cannot point at them. They need a container that carries the
+  // accessible name instead.
+  const isGroup = requirement.control === 'radio' || requirement.control === 'multicheck';
+  const labelId = `${requirement.id}-label`;
+
+  const optionalNote = !requirement.required && (
+    <span className={cn('ml-1.5 font-medium', isLight ? 'text-slate-600' : 'text-gray-400')}>
+      optional
+    </span>
+  );
+
+  const labelClass = cn(
+    'block text-xs font-bold mb-1.5',
+    isLight ? 'text-slate-700' : 'text-gray-200'
+  );
+
+  const label = isGroup ? (
+    // `id` is what makes aria-labelledby resolve. Previously the label had only
+    // htmlFor, which left `aria-labelledby={requirement.id}` on the radiogroup
+    // pointing at nothing: the group had no accessible name at all, and the
+    // rendered <label for> targeted a nonexistent element.
+    <p id={labelId} className={labelClass}>
       {requirement.label}
-      {!requirement.required && (
-        <span className={cn('ml-1.5 font-medium', isLight ? 'text-slate-400' : 'text-gray-500')}>
-          optional
-        </span>
-      )}
+      {optionalNote}
+    </p>
+  ) : (
+    <label htmlFor={requirement.id} className={labelClass}>
+      {requirement.label}
+      {optionalNote}
     </label>
   );
+
+  const labelIdFor = isGroup ? labelId : undefined;
 
   const hint = requirement.hint && !error && (
     <p id={`${requirement.id}-hint`} className={cn('mt-1 text-[11px]', isLight ? 'text-slate-500' : 'text-gray-400')}>
@@ -169,7 +187,12 @@ export const DynamicField: React.FC<DynamicFieldProps> = ({
 
       case 'radio':
         return (
-          <div role="radiogroup" aria-labelledby={requirement.id} className="flex flex-col gap-2">
+          <div
+            role="radiogroup"
+            aria-labelledby={labelIdFor}
+            aria-describedby={describedBy}
+            className="flex flex-col gap-2"
+          >
             {(requirement.options ?? []).map((option) => {
               const selected = value === option;
               return (
@@ -211,7 +234,12 @@ export const DynamicField: React.FC<DynamicFieldProps> = ({
       case 'multicheck': {
         const selectedValues = Array.isArray(value) ? (value as string[]) : [];
         return (
-          <div className="flex flex-wrap gap-2">
+          <div
+            role="group"
+            aria-labelledby={labelIdFor}
+            aria-describedby={describedBy}
+            className="flex flex-wrap gap-2"
+          >
             {(requirement.options ?? []).map((option) => {
               const selected = selectedValues.includes(option);
               return (

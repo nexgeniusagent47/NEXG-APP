@@ -16,6 +16,14 @@ coverage/
 logs/_*
 scripts/_*
 
+# Another tool's working directory. Unrelated to this app and referenced by
+# nothing in src/ or server/, so it stays out of this project's history.
+.img2threejs-mascot/
+
+# Impeccable workflow scratch: screenshots, harnesses and detector payloads
+# captured while running the critique. The written report lives in logs/*.log.
+logs/critique/
+
 # OS / editor
 Thumbs.db
 desktop.ini

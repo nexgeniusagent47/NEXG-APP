@@ -139,6 +139,7 @@ app.get('/api/merchants', async (req: Request, res: Response) => {
         subcategory: req.query.subcategory ? String(req.query.subcategory) : undefined,
         area: req.query.area ? String(req.query.area) : undefined,
         search: req.query.search ? String(req.query.search) : undefined,
+        sort: req.query.sort ? String(req.query.sort) : undefined,
         limit,
         offset,
       });

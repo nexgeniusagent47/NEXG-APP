@@ -27,7 +27,16 @@ export const SORT_OPTIONS: Array<{ key: SortKey; label: string }> = [
   { key: 'price_high', label: 'Price: high to low' },
 ];
 
-/** Client-side ordering. The API returns a stable recommended order already. */
+/**
+ * Kept for callers that already hold a complete result set.
+ *
+ * The live search path deliberately does NOT use this. Sorting client-side over
+ * the loaded page produced a control that appeared to work and did not: the first
+ * page sorted correctly, then scrolling appended the next page in server order and
+ * re-sorted the union, so the visible order silently changed under the user. The
+ * API now accepts a `sort` parameter and orders in SQL (see SORT_CLAUSES in
+ * server/repository.ts), which is also what makes the header total honest.
+ */
 export function sortMerchants(merchants: ApiMerchant[], key: SortKey): ApiMerchant[] {
   const copy = [...merchants];
   switch (key) {
@@ -81,10 +90,12 @@ export function useMerchantSearch(options: UseMerchantSearchOptions): UseMerchan
   const trimmedQuery = query.trim();
   const abortRef = useRef<AbortController | null>(null);
 
-  // Any change to the filter set returns to page 1.
+  // Any change to the filter set — INCLUDING the sort key — returns to page 1.
+  // Without `sort` here, changing the sort kept the current offset and fetched an
+  // arbitrary late page of the newly ordered set, which looks like a broken sort.
   useEffect(() => {
     setOffset(0);
-  }, [category, subcategory, area, trimmedQuery, pageSize]);
+  }, [category, subcategory, area, trimmedQuery, pageSize, sort]);
 
   useEffect(() => {
     const isFirstPage = offset === 0;
@@ -106,6 +117,7 @@ export function useMerchantSearch(options: UseMerchantSearchOptions): UseMerchan
           subcategory,
           area,
           search: trimmedQuery || undefined,
+          sort,
         };
 
         fetchMerchants(params, controller.signal)
@@ -126,7 +138,7 @@ export function useMerchantSearch(options: UseMerchantSearchOptions): UseMerchan
     );
 
     return () => clearTimeout(timer);
-  }, [category, subcategory, area, trimmedQuery, offset, pageSize, reloadToken]);
+  }, [category, subcategory, area, trimmedQuery, offset, pageSize, sort, reloadToken]);
 
   // Cancel any in-flight request on unmount.
   useEffect(() => () => abortRef.current?.abort(), []);
@@ -137,10 +149,10 @@ export function useMerchantSearch(options: UseMerchantSearchOptions): UseMerchan
 
   const retry = useCallback(() => setReloadToken((n) => n + 1), []);
 
-  const sorted = useMemo(() => sortMerchants(merchants, sort), [merchants, sort]);
-
   return {
-    merchants: sorted,
+    // Already ordered by the API. No client-side re-sort, which is what used to
+    // make the order change under the user as pages arrived.
+    merchants,
     total,
     loading,
     loadingMore,

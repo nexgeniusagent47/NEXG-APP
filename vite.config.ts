@@ -19,8 +19,33 @@ export default defineConfig(() => {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
-      // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
-      watch: process.env.DISABLE_HMR === 'true' ? null : {},
+      // Watcher ignore list.
+      //
+      // The `.tmpdir` patterns are the important ones. Editors and agents write
+      // atomically by creating a hidden sibling directory
+      // (`src/components/forms/.DynamicField.tsx.<pid>.<uuid>.tmpdir/`) and moving
+      // the finished file out of it. Vite tried to watch that transient directory
+      // and died outright with `EBUSY: resource busy or locked`, taking the dev
+      // server down mid-session twice. None of these paths are imported by the app.
+      //
+      // `logs/` and `scripts/` are excluded for the same reason: throwaway
+      // harnesses, screenshots and run logs live there.
+      watch:
+        process.env.DISABLE_HMR === 'true'
+          ? null
+          : {
+              ignored: [
+                '**/*.tmpdir/**',
+                '**/.*.tmpdir/**',
+                '**/.tmpdir/**',
+                '**/*.tmp',
+                '**/logs/**',
+                '**/scripts/**',
+                '**/.npm-cache/**',
+                '**/dist/**',
+                '**/.git/**',
+              ],
+            },
       // Proxy the API so the SPA can call same-origin /api/* with no CORS and
       // no hardcoded hostname. Without this the frontend would have to know the
       // API port and the browser would need CORS preflight on every call.

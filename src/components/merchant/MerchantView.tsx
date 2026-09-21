@@ -15,7 +15,7 @@
 // the same page with different behaviour, which is what "consistent" has to mean
 // if it is not to mean "identical and wrong".
 
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import {
   ArrowLeft,
@@ -41,13 +41,41 @@ interface MerchantViewProps {
   onBack: () => void;
   /** Called after an order line is confirmed, so the host can open the cart. */
   onAddedToCart?: (summary: { item: ApiItem; quantity: number }) => void;
+  /**
+   * When true, scroll the offerings into view on mount.
+   *
+   * The preview sheet's workflow CTA ("Check availability", "View full menu")
+   * routes here with this set, so that button performs a distinct action — taking
+   * the user straight to where the flow begins — rather than landing on the same
+   * view as "View full profile". Those two buttons previously had identical
+   * destinations under different labels.
+   */
+  focusOfferings?: boolean;
 }
 
-export default function MerchantView({ merchant, onBack, onAddedToCart }: MerchantViewProps) {
+export default function MerchantView({
+  merchant,
+  onBack,
+  onAddedToCart,
+  focusOfferings = false,
+}: MerchantViewProps) {
   const { isLight } = useTheme();
   const reduceMotion = useReducedMotion();
   const [filter, setFilter] = useState('');
   const [openItem, setOpenItem] = useState<ApiItem | null>(null);
+  const offeringsRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!focusOfferings) return;
+    // After paint, so the section has a measured position to scroll to.
+    const timer = window.setTimeout(() => {
+      offeringsRef.current?.scrollIntoView({
+        behavior: reduceMotion ? 'auto' : 'smooth',
+        block: 'start',
+      });
+    }, 120);
+    return () => window.clearTimeout(timer);
+  }, [focusOfferings, reduceMotion]);
 
   const intent = resolveIntent(merchant);
 
@@ -135,20 +163,20 @@ export default function MerchantView({ merchant, onBack, onAddedToCart }: Mercha
           <span className="inline-flex items-center gap-1.5">
             <Star size={14} className="fill-current text-amber-500" />
             <span className="tabular-nums">{merchant.rating.toFixed(1)}</span>
-            <span className={isLight ? 'text-slate-400' : 'text-gray-500'}>
+            <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>
               (<span className="tabular-nums">{merchant.ratingCount}</span> reviews)
             </span>
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <Clock size={14} className="text-[#B88728] dark:text-[#E5B65F]" />
+            <Clock size={14} className="text-[#8A6413] dark:text-[#E5B65F]" />
             {merchant.deliveryTime}
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <Bike size={14} className="text-[#B88728] dark:text-[#E5B65F]" />
+            <Bike size={14} className="text-[#8A6413] dark:text-[#E5B65F]" />
             {merchant.deliveryFee === 0 ? 'Free delivery' : `KSh ${merchant.deliveryFee} delivery`}
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <MapPin size={14} className="text-[#B88728] dark:text-[#E5B65F]" />
+            <MapPin size={14} className="text-[#8A6413] dark:text-[#E5B65F]" />
             {merchant.address}
           </span>
           {!merchant.isOpen && (
@@ -162,7 +190,7 @@ export default function MerchantView({ merchant, onBack, onAddedToCart }: Mercha
             merchant instead of assuming they all sell the same way. */}
         <section className="mt-6">
           <div className="flex items-center gap-2 mb-2">
-            <ShieldCheck size={15} className="text-[#B88728] dark:text-[#E5B65F]" />
+            <ShieldCheck size={15} className="text-[#8A6413] dark:text-[#E5B65F]" />
             <h2 className={cn('text-sm font-bold', isLight ? 'text-slate-900' : 'text-white')}>
               {intent.arc.label}
             </h2>
@@ -176,7 +204,7 @@ export default function MerchantView({ merchant, onBack, onAddedToCart }: Mercha
           <ol
             className={cn(
               'mt-3 flex flex-wrap items-center gap-x-1.5 gap-y-1.5 text-[11px] font-semibold',
-              isLight ? 'text-slate-500' : 'text-gray-500'
+              isLight ? 'text-slate-500' : 'text-gray-400'
             )}
           >
             {intent.arc.steps.map((step, index) => (
@@ -191,7 +219,7 @@ export default function MerchantView({ merchant, onBack, onAddedToCart }: Mercha
         </section>
 
         {/* Catalogue */}
-        <section className="mt-8">
+        <section ref={offeringsRef} className="mt-8 scroll-mt-6">
           <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
             <h2 className={cn('text-base sm:text-lg font-black tracking-tight', isLight ? 'text-slate-900' : 'text-white')}>
               {items.length > 0 ? `${items.length} offerings` : 'Offerings'}
@@ -206,14 +234,14 @@ export default function MerchantView({ merchant, onBack, onAddedToCart }: Mercha
                     : 'bg-white/5 border-white/10 focus-within:border-[#E5B65F]'
                 )}
               >
-                <Search size={14} className="flex-shrink-0 text-[#B88728] dark:text-[#E5B65F]" />
+                <Search size={14} className="flex-shrink-0 text-[#8A6413] dark:text-[#E5B65F]" />
                 <input
                   type="search"
                   value={filter}
                   onChange={(e) => setFilter(e.target.value)}
                   placeholder={`Search ${merchant.name}...`}
                   aria-label={`Search offerings from ${merchant.name}`}
-                  className="w-full bg-transparent text-sm font-medium focus:outline-none placeholder:text-slate-400 dark:placeholder:text-gray-500"
+                  className="w-full bg-transparent text-sm font-medium focus:outline-none placeholder:text-slate-600 dark:placeholder:text-gray-400"
                 />
               </div>
             )}
@@ -248,7 +276,7 @@ export default function MerchantView({ merchant, onBack, onAddedToCart }: Mercha
               <button
                 type="button"
                 onClick={() => setFilter('')}
-                className="mt-3 text-xs font-bold text-[#B88728] dark:text-[#E5B65F] underline underline-offset-2"
+                className="mt-3 text-xs font-bold text-[#8A6413] dark:text-[#E5B65F] underline underline-offset-2"
               >
                 Clear search
               </button>
@@ -291,7 +319,7 @@ export default function MerchantView({ merchant, onBack, onAddedToCart }: Mercha
                         {item.description}
                       </p>
                       <div className="mt-auto pt-2 flex items-center justify-between gap-2">
-                        <span className="text-sm font-bold text-[#B88728] dark:text-[#E5B65F] tabular-nums">
+                        <span className="text-sm font-bold text-[#8A6413] dark:text-[#E5B65F] tabular-nums">
                           KSh {item.price.toLocaleString()}
                         </span>
                         <span

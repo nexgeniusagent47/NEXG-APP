@@ -168,8 +168,32 @@ export interface MerchantQuery {
   subcategory?: string;
   area?: string;
   search?: string;
+  sort?: string;
   limit: number;
   offset: number;
+}
+
+/**
+ * Whitelisted ORDER BY clauses.
+ *
+ * Sorting MUST happen in SQL, not in the client over the loaded page. The client
+ * version sorted only the accumulated array while pagination kept appending in
+ * server order, so scrolling re-shuffled the list and the header total disagreed
+ * with what the user could see — a control that appeared to work and did not.
+ *
+ * A whitelist rather than interpolation: the sort key arrives from a query string
+ * and is concatenated into SQL, so it can never be taken on trust.
+ */
+const SORT_CLAUSES: Record<string, string> = {
+  recommended: 'm.is_featured DESC, m.rating DESC, m.name ASC',
+  rating: 'm.rating DESC, m.review_count DESC, m.name ASC',
+  delivery: 'm.delivery_time_min ASC, m.rating DESC, m.name ASC',
+  price_low: 'm.price_level ASC, m.rating DESC, m.name ASC',
+  price_high: 'm.price_level DESC, m.rating DESC, m.name ASC',
+};
+
+export function resolveSortClause(sort?: string): string {
+  return SORT_CLAUSES[sort ?? 'recommended'] ?? SORT_CLAUSES.recommended;
 }
 
 /**
@@ -219,13 +243,51 @@ export async function listMerchants(opts: MerchantQuery) {
   const offsetParam = params.length + 2;
   const rows = await query(
     `${MERCHANT_SELECT}${whereSql}
-     ORDER BY m.is_featured DESC, m.rating DESC, m.name ASC
+     ORDER BY ${resolveSortClause(opts.sort)}
      LIMIT $${limitParam} OFFSET $${offsetParam}`,
     [...params, opts.limit, opts.offset]
   );
 
-  const merchants = await attachItems(rows.map((r) => mapMerchant(r)));
+  const merchants = rows.map((r) => mapMerchant(r));
+  await attachSubcategories(merchants);
+  await attachItems(merchants);
   return { total, merchants };
+}
+
+/**
+ * Attach each merchant's PRIMARY subcategory, in one query for the whole page.
+ *
+ * Before this existed, list responses carried no subcategory at all: the cards
+ * fell back to printing the category name, and the client could not resolve the
+ * catalogue-declared order requirements (liquor licence, age gate, session
+ * duration) because `orderRequirements` looks up fields by subcategory.
+ *
+ * Same batching discipline as attachItems: one query per page, not per merchant.
+ */
+export async function attachSubcategories(merchants: any[]): Promise<any[]> {
+  const ids = merchants.map((m) => m.id).filter(Boolean);
+  if (ids.length === 0) return merchants;
+
+  const rows = await query(
+    `SELECT DISTINCT ON (ms.merchant_id)
+            ms.merchant_id, s.id, s.name, s.slug
+     FROM merchant_subcategories ms
+     JOIN subcategories s ON s.id = ms.subcategory_id
+     WHERE ms.merchant_id = ANY($1::varchar[])
+     ORDER BY ms.merchant_id, ms.is_primary DESC, s.display_order, s.name`,
+    [ids]
+  );
+
+  const byMerchant = new Map<string, any>();
+  for (const r of rows) byMerchant.set(asString(r.merchant_id), r);
+
+  for (const m of merchants) {
+    const sub = byMerchant.get(m.id);
+    if (!sub) continue;
+    m.subcategory = asString(sub.name, m.subcategory);
+    m.subcategoryId = asString(sub.id);
+  }
+  return merchants;
 }
 
 /**

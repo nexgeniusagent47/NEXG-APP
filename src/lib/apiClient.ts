@@ -137,6 +137,8 @@ export interface MerchantQueryParams {
   subcategory?: string;
   area?: string;
   search?: string;
+  /** Whitelisted server-side sort key. See SORT_CLAUSES in server/repository.ts. */
+  sort?: string;
 }
 
 export interface MerchantPage {

@@ -1,0 +1,267 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="709" height="1024" viewBox="0 0 709 1024">
+<!-- SVG created with Arrow, by QuiverAI (https://quiver.ai) -->
+  <defs>
+    <radialGradient id="background-gradient" cy="44%" r="73%">
+      <stop stop-color="#b1b3b2" offset="0"/>
+      <stop stop-color="#9c9e9e" offset="1"/>
+    </radialGradient>
+    <linearGradient id="black-left-arm" y2=".35">
+      <stop stop-color="#090a09" offset="0"/>
+      <stop stop-color="#252624" offset=".4"/>
+      <stop stop-color="#141513" offset=".65"/>
+      <stop stop-color="#050605" offset="1"/>
+    </linearGradient>
+    <linearGradient id="black-right-arm" y1=".2">
+      <stop stop-color="#080908" offset="0"/>
+      <stop stop-color="#252623" offset=".55"/>
+      <stop stop-color="#0a0b09" offset="1"/>
+    </linearGradient>
+    <radialGradient id="body-gradient" cx="66%" cy="53%" r="69%">
+      <stop stop-color="#252624" offset="0"/>
+      <stop stop-color="#191a18" offset=".56"/>
+      <stop stop-color="#0b0c0a" offset=".86"/>
+      <stop stop-color="#050604" offset="1"/>
+    </radialGradient>
+    <linearGradient id="leg-gradient" y2=".05">
+      <stop stop-color="#070806" offset="0"/>
+      <stop stop-color="#11120f" offset=".23"/>
+      <stop stop-color="#252522" offset=".6"/>
+      <stop stop-color="#0a0b09" offset="1"/>
+    </linearGradient>
+    <linearGradient id="gold-dome" y1=".4" y2=".55">
+      <stop stop-color="#a9660c" offset="0"/>
+      <stop stop-color="#e39b30" offset=".042"/>
+      <stop stop-color="#ffd277" offset=".105"/>
+      <stop stop-color="#d9972d" offset=".17"/>
+      <stop stop-color="#c28524" offset=".3"/>
+      <stop stop-color="#efb94f" offset=".48"/>
+      <stop stop-color="#ffd47a" offset=".68"/>
+      <stop stop-color="#e9ab40" offset=".84"/>
+      <stop stop-color="#c68321" offset=".96"/>
+      <stop stop-color="#e6ab48" offset="1"/>
+    </linearGradient>
+    <radialGradient id="dome-shine" cx="63%" cy="14%" r="71%">
+      <stop stop-color="#ffe6a0" stop-opacity=".9" offset="0"/>
+      <stop stop-color="#ffd064" stop-opacity=".33" offset=".33"/>
+      <stop stop-color="#be7916" stop-opacity="0" offset=".73"/>
+    </radialGradient>
+    <linearGradient id="upper-rim" x2="0" y2="1">
+      <stop stop-color="#ffe198" offset="0"/>
+      <stop stop-color="#f7c367" offset=".25"/>
+      <stop stop-color="#d99831" offset=".62"/>
+      <stop stop-color="#bd791b" offset="1"/>
+    </linearGradient>
+    <linearGradient id="rim-gradient" y1=".4" y2=".5">
+      <stop stop-color="#e7a640" offset="0"/>
+      <stop stop-color="#ffd17b" offset=".04"/>
+      <stop stop-color="#b77a20" offset=".12"/>
+      <stop stop-color="#dca039" offset=".29"/>
+      <stop stop-color="#e6af47" offset=".56"/>
+      <stop stop-color="#ffd77f" offset=".76"/>
+      <stop stop-color="#ecb448" offset=".92"/>
+      <stop stop-color="#d18a24" offset="1"/>
+    </linearGradient>
+    <radialGradient id="face-gradient" cx="66%" cy="20%" r="85%">
+      <stop stop-color="#25241f" offset="0"/>
+      <stop stop-color="#161714" offset=".55"/>
+      <stop stop-color="#070907" offset="1"/>
+    </radialGradient>
+    <linearGradient id="expression-gradient" x2="0" y2="1">
+      <stop stop-color="#ffdb7e" offset="0"/>
+      <stop stop-color="#ffc855" offset=".5"/>
+      <stop stop-color="#efab38" offset="1"/>
+    </linearGradient>
+    <radialGradient id="button-gradient" cx="65%" cy="29%" r="75%">
+      <stop stop-color="#fff7ba" offset="0"/>
+      <stop stop-color="#ffe18a" offset=".2"/>
+      <stop stop-color="#edaf42" offset=".44"/>
+      <stop stop-color="#bc7614" offset=".74"/>
+      <stop stop-color="#965708" offset="1"/>
+    </radialGradient>
+    <linearGradient id="button-stem">
+      <stop stop-color="#955908" offset="0"/>
+      <stop stop-color="#e9a537" offset=".23"/>
+      <stop stop-color="#a96a10" offset=".41"/>
+      <stop stop-color="#ffdd80" offset=".68"/>
+      <stop stop-color="#e5a137" offset=".83"/>
+      <stop stop-color="#9d5c06" offset="1"/>
+    </linearGradient>
+    <linearGradient id="button-base" x2=".12" y2="1">
+      <stop stop-color="#ffe195" offset="0"/>
+      <stop stop-color="#eeb449" offset=".32"/>
+      <stop stop-color="#bd7a19" offset=".63"/>
+      <stop stop-color="#dfa037" offset="1"/>
+    </linearGradient>
+    <linearGradient id="bow-left" x1=".2" x2=".65" y2="1">
+      <stop stop-color="#414039" offset="0"/>
+      <stop stop-color="#302f29" offset=".52"/>
+      <stop stop-color="#1a1b17" offset="1"/>
+    </linearGradient>
+    <linearGradient id="bow-right" x1=".8" x2=".2" y2="1">
+      <stop stop-color="#393932" offset="0"/>
+      <stop stop-color="#2c2b25" offset=".64"/>
+      <stop stop-color="#141511" offset="1"/>
+    </linearGradient>
+    <linearGradient id="bow-knot" y2="1">
+      <stop stop-color="#3b3b33" offset="0"/>
+      <stop stop-color="#2c2d27" offset=".5"/>
+      <stop stop-color="#191a16" offset="1"/>
+    </linearGradient>
+    <radialGradient id="glove-gradient" cx="49%" cy="33%" r="75%">
+      <stop stop-color="#fff3df" offset="0"/>
+      <stop stop-color="#f2e3ca" offset=".62"/>
+      <stop stop-color="#d8c5a8" offset="1"/>
+    </radialGradient>
+    <linearGradient id="cuff-gradient" x2="0" y2="1">
+      <stop stop-color="#fff7e7" offset="0"/>
+      <stop stop-color="#f3e6d0" offset=".5"/>
+      <stop stop-color="#deccb0" offset="1"/>
+    </linearGradient>
+    <linearGradient id="shoe-gold" y2=".3">
+      <stop stop-color="#c17e23" offset="0"/>
+      <stop stop-color="#f5b746" offset=".42"/>
+      <stop stop-color="#e5a130" offset=".72"/>
+      <stop stop-color="#c38625" offset="1"/>
+    </linearGradient>
+    <radialGradient id="toe-gradient" cx="49%" cy="27%" r="78%">
+      <stop stop-color="#fff5e5" offset="0"/>
+      <stop stop-color="#f3e5cf" offset=".51"/>
+      <stop stop-color="#e9d8bd" offset=".78"/>
+      <stop stop-color="#cdb99b" offset="1"/>
+    </radialGradient>
+    <linearGradient id="sole-gradient" x2="0" y2="1">
+      <stop stop-color="#f9ebd5" offset="0"/>
+      <stop stop-color="#edddc4" offset=".55"/>
+      <stop stop-color="#d2bea0" offset="1"/>
+    </linearGradient>
+  </defs>
+  <g id="background">
+    <path d="M0 0H709V1024H0Z" fill="url(#background-gradient)"/>
+    <ellipse cx="350.5" cy="927" rx="282" ry="36" fill="#636968" opacity=".32"/>
+    <path d="m177 920c36-33 95-50 143-50h70c56 6 99 31 134 59-84 19-267 21-347-9z" fill="#646b69" opacity=".2"/>
+    <ellipse cx="216" cy="939" rx="92" ry="16" fill="#686d69" opacity=".18"/>
+    <ellipse cx="487" cy="939" rx="98" ry="15" fill="#686d69" opacity=".18"/>
+  </g>
+  <g id="legs" stroke="#0b0c09" stroke-width="3">
+    <path id="left-leg" d="m262 559 58 15-19 230q-22 24-60-3z" fill="url(#leg-gradient)"/>
+    <path d="m262 588-17 187" fill="none" opacity=".45" stroke="#444540" stroke-width="3"/>
+    <path id="right-leg" d="m387 575 58-17 20 237q-23 25-61 7z" fill="url(#leg-gradient)"/>
+    <path d="m393 596 14 184" fill="none" opacity=".35" stroke="#3c3d37" stroke-width="3"/>
+  </g>
+  <g id="arms" stroke-width="3">
+    <path id="left-arm" d="m165 412c-37 35-61 91-72 147l52 11c10-43 20-77 42-102l12-42z" fill="url(#black-left-arm)" stroke="#131410"/>
+    <path d="m155 425c-27 33-47 84-57 128" fill="none" opacity=".5" stroke="#53544f"/>
+    <path id="right-arm" d="m539 410c40 37 65 90 77 149l-52 12c-8-38-20-78-41-103l-12-38z" fill="url(#black-right-arm)" stroke="#10110e"/>
+    <path d="m556 432c27 34 46 85 53 119" fill="none" opacity=".45" stroke="#353631"/>
+  </g>
+  <g id="shoes">
+    <g id="left-shoe">
+      <path d="m211 817c-8-22 3-36 20-39 23-3 69 3 82 15 7 8 6 26-6 32l-52 18z" fill="#24241e" stroke="#100f0b" stroke-width="3"/>
+      <path d="m217 817c8-10 29-11 52-5 16 6 30 7 43 3l8 65-34 36-133-7c-2-25 19-54 55-73z" fill="url(#shoe-gold)" stroke="#c08c39" stroke-width="2.5"/>
+      <path d="m310 836c-8 16-9 40-6 54" fill="none" opacity=".55" stroke="#ffe09a" stroke-width="3"/>
+      <path d="m280 854 8 11q3 8-2 8l-7-9" fill="none" stroke="#fff1ce" stroke-linecap="round" stroke-width="4"/>
+      <path d="m212 834 5-44c4-13 32-11 52-1q10 4 7 15l-11 42z" fill="url(#cuff-gradient)" stroke="#d8c8ac" stroke-width="2"/>
+      <path d="m200 824c16-17 42-12 66-3q9 4 4 12l-8 8-65-5z" fill="url(#cuff-gradient)" stroke="#d8c7ac" stroke-width="3"/>
+      <path d="m190 838c20-15 48-12 70-2q10 6-1 14h-74z" fill="url(#cuff-gradient)" stroke="#d3bfa1" stroke-width="3"/>
+      <path d="m178 852c15-15 48-13 74-3q11 5 0 14l-77 6z" fill="url(#cuff-gradient)" stroke="#d3bfa1" stroke-width="3"/>
+      <path d="m136 906c-2-25 19-49 46-54 37-9 74 9 90 36 5 8 7 18 7 28-37 30-110 28-143 6z" fill="url(#toe-gradient)" stroke="#e6d6bc" stroke-width="3"/>
+      <path d="m139 905c0-25 23-44 43-47" fill="none" opacity=".7" stroke="#fff7e6" stroke-width="3"/>
+      <path d="m279 910c15-9 35-15 40-25l4 18c2 10-21 16-35 25-8 13-34 19-68 20-36 2-70-4-84-13-6-4-6-21-2-29 31 19 108 23 145 4z" fill="url(#sole-gradient)" stroke="#c9b89d" stroke-width="2.5"/>
+      <path d="m135 907c30 17 110 22 144 4 13-8 32-12 40-23" fill="none" stroke="#fff3db" stroke-width="3"/>
+      <path d="m138 931c37 17 109 15 140-1" fill="none" opacity=".6" stroke="#f7e6cc" stroke-width="2"/>
+    </g>
+    <g id="right-shoe">
+      <path d="m391 794c17-14 62-18 85-15 18 2 26 20 14 38l-45 23-50-16c-9-5-9-21-4-30z" fill="#24241e" stroke="#10110b" stroke-width="3"/>
+      <path d="m395 816c17 6 33-2 51-4 20-2 38 6 50 26 29 14 56 42 58 70l-129 14-41-35 3-41z" fill="url(#shoe-gold)" stroke="#c08c39" stroke-width="2.5"/>
+      <path d="m396 835c7 15 10 40 6 61" fill="none" opacity=".5" stroke="#ffda89" stroke-width="3"/>
+      <path d="m421 854-6 9q-3 5 1 9l7-11" fill="none" stroke="#fff0c9" stroke-linecap="round" stroke-width="4"/>
+      <path d="m438 845-8-33c-4-15-3-22 7-27s34-8 44-1c7 6 7 32 14 54z" fill="url(#cuff-gradient)" stroke="#d8c8ac" stroke-width="2"/>
+      <path d="m437 822c24-11 49-14 62 3l4 13-59 6q-14-5-7-22z" fill="url(#cuff-gradient)" stroke="#d8c7ac" stroke-width="3"/>
+      <path d="m448 838c22-11 48-13 62 1l7 13-61 2q-15-5-8-16z" fill="url(#cuff-gradient)" stroke="#d3bfa1" stroke-width="3"/>
+      <path d="m459 851c21-10 51-12 65 1l11 19-70-3q-14-7-6-17z" fill="url(#cuff-gradient)" stroke="#d3bfa1" stroke-width="3"/>
+      <path d="m424 914c3-27 19-47 45-57 27-10 52-4 72 9 18 11 28 29 28 48l-15 21-94 4z" fill="url(#toe-gradient)" stroke="#e7d6bb" stroke-width="3"/>
+      <path d="m430 903c6-21 25-37 45-42" fill="none" opacity=".65" stroke="#fff5e3" stroke-width="3"/>
+      <path d="m385 884c9 13 26 17 39 26 34 18 111 19 146-3 4 1 5 19 2 25-11 12-46 16-79 16-31-1-59-5-74-17-14-10-35-12-37-24z" fill="url(#sole-gradient)" stroke="#c9b89d" stroke-width="2.5"/>
+      <path d="m385 888c9 11 28 15 40 24 35 16 113 15 145-4" fill="none" stroke="#fff2d8" stroke-width="3"/>
+      <path d="m430 932c36 13 107 14 137 0" fill="none" opacity=".6" stroke="#f8e7cd" stroke-width="2"/>
+    </g>
+  </g>
+  <g id="gloves" stroke-linejoin="round">
+    <g id="left-glove">
+      <path d="m91 579c-15 13-22 34-25 53-5 22-1 47 11 60 5 5 10 5 16 6 13 15 20 16 29 11 13 9 23 8 30 0 10-11-2-22-6-33-5-11-6-26-2-37 5 15 14 31 27 29 14-2 17-15 9-24-11-13-8-29-20-44-11-15-23-20-34-22z" fill="url(#glove-gradient)" stroke="#e2d4bd" stroke-width="3"/>
+      <path d="m80 657c1 17 6 31 13 39m13-38c2 22 5 36 17 48" fill="none" stroke="#c6b497" stroke-linecap="round" stroke-width="3.5"/>
+      <path d="m77 658c1 19 6 33 13 37m13-36c3 25 9 39 17 45" fill="none" stroke="#fff0d7" stroke-linecap="round" stroke-width="2"/>
+      <path d="m87 597-6 23m16-22-4 25m17-25-2 24" fill="none" stroke="#c4b195" stroke-linecap="round" stroke-width="4.5"/>
+      <path d="m86 584c-12-5-10-17-1-23 12-7 52-2 66 2 10 3 9 15 2 22-20-4-45-5-67-1z" fill="url(#cuff-gradient)" stroke="#e4d7c0" stroke-width="3"/>
+      <path d="m86 562c17-5 49-1 61 2" fill="none" opacity=".85" stroke="#fff8e9" stroke-width="3"/>
+    </g>
+    <g id="right-glove">
+      <path d="m562 582c-14 10-22 25-26 43-3 12-13 18-12 31 1 10 11 14 18 11 11-4 17-15 22-28 4 15 3 32-5 48-8 10-11 19-3 26 7 6 17 2 23-2 8 5 18-2 25-8 15-3 24-6 30-18 10-18 11-38 8-54-2-19-11-39-21-51z" fill="url(#glove-gradient)" stroke="#e2d4bd" stroke-width="3"/>
+      <path d="m602 660c-3 22-11 41-22 50m48-53c-3 19-8 33-15 40" fill="none" stroke="#c6b497" stroke-linecap="round" stroke-width="3.5"/>
+      <path d="m606 660c-5 25-12 42-22 49m48-52c-3 18-9 33-15 39" fill="none" stroke="#fff0d7" stroke-linecap="round" stroke-width="2"/>
+      <path d="m598 598 3 26m11-27 6 28m8-27 6 22" fill="none" stroke="#c4b195" stroke-linecap="round" stroke-width="4.5"/>
+      <path d="m559 586c-9-5-9-14-2-20 11-7 49-10 62-6 11 2 16 11 10 21l-7 4c-22-4-45-2-63 1z" fill="url(#cuff-gradient)" stroke="#e4d7c0" stroke-width="3"/>
+      <path d="m563 564c16-3 43-6 57-2" fill="none" opacity=".85" stroke="#fff8e9" stroke-width="3"/>
+    </g>
+  </g>
+  <g id="rounded-body">
+    <path d="m163 401c0 55 18 110 55 146 35 32 83 47 132 47 52 0 102-16 139-50 36-33 55-80 61-137z" fill="url(#body-gradient)" stroke="#10110d" stroke-width="3"/>
+    <path d="m180 471c12 32 31 60 51 75" fill="none" opacity=".4" stroke="#393a33" stroke-width="2"/>
+    <path d="m281 459 16 51 40-30c12 13 29 12 41-1l41 35 24-54z" fill="#050603" opacity=".43"/>
+  </g>
+  <g id="gold-bell">
+    <path id="bell-crown" d="m146 345c2-71 24-130 69-173 37-34 86-53 137-53 57-1 107 21 143 57 44 43 65 101 68 167-58 27-341 33-417 2z" fill="url(#gold-dome)" stroke="#aa701e" stroke-width="3"/>
+    <path d="m146 345c2-71 24-130 69-173 37-34 86-53 137-53 57-1 107 21 143 57 44 43 65 101 68 167-58 27-341 33-417 2z" fill="url(#dome-shine)"/>
+    <path d="m153 337c3-73 30-129 71-166 23-21 48-35 75-42" fill="none" opacity=".65" stroke="#ffe2a0" stroke-width="5"/>
+    <path d="m408 129c87 21 140 101 150 195" fill="none" opacity=".48" stroke="#ffdb89" stroke-width="3"/>
+    <g id="bell-top-button">
+      <path d="m334 74h42v34h-42z" fill="url(#button-stem)" stroke="#a66b15" stroke-width="3"/>
+      <path d="m342 81v19" opacity=".8" stroke="#ffd777" stroke-width="3"/>
+      <path d="m312 122c-6-1-5-10-1-15 5-7 15-5 23-6h48c12 0 19 4 19 13 1 9-8 13-15 14-24 6-58 4-74-6z" fill="url(#button-base)" stroke="#ae751f" stroke-width="2.5"/>
+      <path d="m313 114c-1-7 8-10 15-10h52c7 0 13 2 15 5" fill="none" opacity=".75" stroke="#ffe09b" stroke-width="3"/>
+      <path d="m322 80c-12-2-16-11-15-21 1-18 18-29 43-29 24-1 45 5 52 22 6 17-5 28-13 28-21-3-45 0-67 0z" fill="url(#button-gradient)" stroke="#a46b1a" stroke-width="2.5"/>
+      <path d="m321 74c-13-3-12-20-4-29 6-7 17-11 30-12" fill="none" opacity=".9" stroke="#ffe6a1" stroke-width="3"/>
+      <path d="m362 33c18 1 32 9 37 21" fill="none" opacity=".65" stroke="#ffd586" stroke-width="2"/>
+    </g>
+    <g id="face-panel">
+      <path d="m355 172c-42 0-76 8-101 27-29 21-43 50-45 80-3 31 8 55 31 69s62 17 110 18c45 0 85-3 111-14 30-13 42-37 42-70 0-34-16-64-43-84-25-18-61-26-105-26z" fill="url(#face-gradient)" stroke="#a36916" stroke-width="6"/>
+      <path d="m355 173c-43 0-76 8-100 26-28 20-42 48-44 78-3 30 7 54 31 69 21 13 60 17 108 18 45 0 83-3 109-14 29-13 42-36 42-68 0-33-15-62-42-82-25-18-61-27-104-27z" fill="none" stroke="#090c07" stroke-width="3"/>
+      <path d="m210 296c6 51 38 68 140 70 79 1 123-8 141-40" fill="none" opacity=".9" stroke="#ffdf83" stroke-width="3"/>
+      <path d="m220 237c22-47 71-65 135-65 66-1 115 20 135 65" fill="none" opacity=".8" stroke="#f6c265" stroke-width="2.5"/>
+    </g>
+    <g id="happy-expression" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m274 221q17-17 34-7m97-1q18-9 34 7" stroke="#080905" stroke-width="16"/>
+      <path d="m274 221q17-17 34-7m97-1q18-9 34 7" stroke="#ac7626" stroke-width="12"/>
+      <path d="m274 221q17-17 34-7m97-1q18-9 34 7" stroke="url(#expression-gradient)" stroke-width="8"/>
+      <path d="m274 285c-1-19 3-39 20-39 18-1 24 18 23 38m78 0c0-17 3-37 20-38 18-1 25 20 24 39" stroke="#080a06" stroke-width="23"/>
+      <path d="m274 285c-1-19 3-39 20-39 18-1 24 18 23 38m78 0c0-17 3-37 20-38 18-1 25 20 24 39" stroke="#b98028" stroke-width="16"/>
+      <path d="m274 285c-1-19 3-39 20-39 18-1 24 18 23 38m78 0c0-17 3-37 20-38 18-1 25 20 24 39" stroke="url(#expression-gradient)" stroke-width="12"/>
+      <path d="m321 317c13 24 54 25 71 0" stroke="#050805" stroke-width="23"/>
+      <path d="m321 317c13 24 54 25 71 0" stroke="#bc862d" stroke-width="16"/>
+      <path d="m321 317c13 24 54 25 71 0" stroke="url(#expression-gradient)" stroke-width="12"/>
+      <path d="m321 314c18 22 51 23 71 0" opacity=".6" stroke="#ffe18b" stroke-width="2"/>
+    </g>
+    <g id="bell-rim">
+      <path d="m145 339c58 16 134 21 207 21 84 0 162-9 210-20 7-2 13 3 13 9v20c-61 19-380 27-441 0v-19c0-6 4-9 11-11z" fill="url(#upper-rim)" stroke="#b4802c" stroke-width="3"/>
+      <path d="m143 344c114 25 307 27 423 1" fill="none" opacity=".8" stroke="#ffdc91" stroke-width="4"/>
+      <path d="m135 365c118 25 318 23 439-1 10 1 18 6 20 12l5 24c1 5-6 8-15 11-109 25-345 20-448 3-16-3-27-7-26-14l4-20c2-9 11-13 21-15z" fill="url(#rim-gradient)" stroke="#ab7521" stroke-width="3"/>
+      <path d="m120 377c106 26 349 22 467-1" fill="none" opacity=".87" stroke="#ffdc8a" stroke-width="4"/>
+      <path d="m117 382-4 18c1 4 11 7 21 10" fill="none" opacity=".8" stroke="#ffe09a" stroke-width="3"/>
+      <path d="m594 397-4-18" fill="none" opacity=".65" stroke="#ffcf6a" stroke-width="2.5"/>
+      <path d="m135 413c105 19 338 22 448-4" fill="none" stroke="#d29932" stroke-width="2"/>
+    </g>
+  </g>
+  <g id="bow-tie" stroke-linejoin="round">
+    <path id="left-bow-wing" d="m337 429c-18-11-45-28-60-24-13 2-12 13-12 28l2 38c1 16 5 28 17 26 18-3 38-15 55-28z" fill="url(#bow-left)" stroke="#171812" stroke-width="3.5"/>
+    <path d="m271 416c0-9 7-10 17-7 16 4 31 12 43 20" fill="none" opacity=".45" stroke="#5b5648" stroke-width="2.5"/>
+    <path d="m270 439c0 24 0 45 9 52" fill="none" opacity=".4" stroke="#48473d" stroke-width="2"/>
+    <path d="m307 444q16 0 32 7l-27 8 19-6z" fill="#10110d" opacity=".78"/>
+    <path d="m311 440 24 8" fill="none" opacity=".4" stroke="#514d40" stroke-width="3"/>
+    <path id="right-bow-wing" d="m375 429c22-15 50-27 62-25 13 1 12 17 12 33l-2 35c-1 15-4 27-15 25-20-4-42-17-58-28z" fill="url(#bow-right)" stroke="#191a14" stroke-width="3.5"/>
+    <path d="m385 427c18-11 39-19 50-19 8-1 10 6 10 19" fill="none" opacity=".5" stroke="#565245" stroke-width="2.5"/>
+    <path d="m379 448q15-9 28-6l-20 9 20 8q-16-1-30-5z" fill="#0d0f0a" opacity=".75"/>
+    <path d="m382 462c15 13 35 24 52 28" fill="none" opacity=".24" stroke="#4a463c" stroke-width="2.5"/>
+    <path id="bow-center-knot" d="m341 426c8-2 23-1 31 1 6 2 6 12 6 22s0 21-7 25c-7 3-25 1-31-2-6-4-6-15-6-24 0-11-1-18 7-22z" fill="url(#bow-knot)" stroke="#11130e" stroke-width="3.5"/>
+    <path d="m341 430c8-2 23-1 29 1" fill="none" opacity=".35" stroke="#565245" stroke-width="2"/>
+  </g>
+</svg>

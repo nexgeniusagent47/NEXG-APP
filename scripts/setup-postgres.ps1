@@ -37,10 +37,23 @@ function Write-Warn2($msg){ Write-Host "  [warn] $msg" -ForegroundColor Yellow }
 # automatic variable in PowerShell and shadowing it breaks native argument
 # forwarding (`ValueFromRemainingArguments` then binds tokens like `--format`
 # as if they were parameter names).
+#
+# stderr is relaxed to Continue for the duration of the call. docker writes
+# ordinary progress and psql writes NOTICE lines to stderr, and under the
+# script-level `Stop` preference PowerShell promotes the first such line to a
+# terminating error — which aborted a run on the harmless
+# "extension already exists, skipping". The caller still checks $LASTEXITCODE,
+# so real failures are caught by exit status rather than by stderr noise.
 function Invoke-Docker {
     param([string[]]$DockerArgs)
-    $out = & docker @DockerArgs 2>&1
-    return @{ Output = $out; ExitCode = $LASTEXITCODE }
+    $previous = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try {
+        $out = & docker @DockerArgs 2>&1
+        return @{ Output = $out; ExitCode = $LASTEXITCODE }
+    } finally {
+        $ErrorActionPreference = $previous
+    }
 }
 
 Write-Step 'Preflight'

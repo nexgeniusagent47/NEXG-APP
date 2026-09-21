@@ -111,7 +111,7 @@ async function main() {
   // route to the full profile, and they must be different controls.
   if ((await dialog.count()) === 1) {
     const dialogText = (await dialog.textContent()) ?? '';
-    const hasViewFull = /View full profile/i.test(dialogText);
+    const hasViewFull = /See all offerings|View full profile/i.test(dialogText);
     check('sheet offers an explicit "View full profile" action', hasViewFull);
 
     const workflowActions = [
