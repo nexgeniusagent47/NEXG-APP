@@ -28,13 +28,14 @@
 //   * One authored motion moment (the sheet entrance). Everything else is a
 //     150-200ms state transition.
 
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { X, Star, Clock, Bike, MapPin, ArrowRight, Store } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { cn } from '../../lib/utils';
 import type { ApiMerchant } from '../../lib/apiClient';
 import { resolveIntent } from '../../data/workflowEngine';
+import { useModalBehavior } from '../../hooks/useModalBehavior';
 
 interface MerchantPreviewSheetProps {
   merchant: ApiMerchant | null;
@@ -58,25 +59,14 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
   const isOpen = merchant !== null;
   const intent = merchant ? resolveIntent(merchant) : null;
 
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    document.addEventListener('keydown', onKeyDown);
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-
-    const focusTimer = window.setTimeout(() => closeButtonRef.current?.focus(), 50);
-
-    return () => {
-      document.removeEventListener('keydown', onKeyDown);
-      document.body.style.overflow = previousOverflow;
-      window.clearTimeout(focusTimer);
-    };
-  }, [isOpen, onClose]);
+  // Escape, scroll lock, initial focus and focus restore, from the shared hook.
+  //
+  // This sheet previously owned an inline copy of that behaviour, bound on the
+  // bubble phase. It silently stopped receiving Escape while the close button kept
+  // working — a failure mode with no visible symptom until a keyboard user tries to
+  // leave. The shared hook binds on the capture phase and is the same code path the
+  // item modal already proves, so the two overlays cannot diverge again.
+  useModalBehavior({ isOpen, onClose });
 
   const previewItems = merchant?.items?.slice(0, 4) ?? [];
 

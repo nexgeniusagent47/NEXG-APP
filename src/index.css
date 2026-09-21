@@ -44,3 +44,98 @@ html {
   scrollbar-width: none;  /* Firefox */
 }
 
+/* ---------------------------------------------------------------------------
+   Hero subtitle
+
+   Wolt-grade brevity: the verticals, then the promise, in one line. The entrance
+   is a staggered word rise rather than one block fade, so the line assembles in
+   reading order instead of appearing all at once.
+
+   Replaced a four-line sentence that restated the headline. Plain CSS rather than
+   a JS animation because it runs once on first paint and never needs to be
+   interrupted — which is what CSS is better at than the main thread.
+--------------------------------------------------------------------------- */
+/* Separator and promise widths are tightened so the whole line holds at 20px on a
+   672px measure. Without this the extra glyphs push "One concierge" onto a second
+   line at desktop and mobile alike, which is the one thing the copy must not do. */
+.hero-subtitle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.08em;
+  /* The subtitle is a single line of short list items, so it sizes to its content
+     rather than inheriting a prose measure. `max-width: 100%` keeps it inside the
+     viewport on the narrowest phones. */
+  width: max-content;
+  max-width: 100%;
+}
+
+.hero-subtitle__word {
+  display: inline-block;
+  animation: hero-word-rise 420ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+/* The separator is punctuation, not content: lighter than the words it divides. */
+.hero-subtitle__separator {
+  opacity: 0.55;
+  font-weight: 400;
+}
+
+/* What the list resolves to. Accent, and a touch more space so the promise reads
+   as a separate clause rather than a fifth category.
+   Two tokens because the palette needs two: #E5B65F is 9.92:1 on the dark hero,
+   while #B88728 is only 3.21:1 on the light one. See DESIGN.md. */
+.hero-subtitle__promise {
+  margin-left: 0.1em;
+  font-weight: 700;
+}
+
+.hero-subtitle__promise--dark {
+  color: #e5b65f;
+}
+
+.hero-subtitle__promise--light {
+  color: #8a6413;
+}
+
+@keyframes hero-word-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.4em);
+  }
+}
+
+/* Stagger is decorative: it must never delay interaction. Nine entries at 55ms
+   apart settle the line by roughly 900ms. */
+.hero-subtitle__word:nth-child(1) { animation-delay: 0ms; }
+.hero-subtitle__word:nth-child(2) { animation-delay: 55ms; }
+.hero-subtitle__word:nth-child(3) { animation-delay: 110ms; }
+.hero-subtitle__word:nth-child(4) { animation-delay: 165ms; }
+.hero-subtitle__word:nth-child(5) { animation-delay: 220ms; }
+.hero-subtitle__word:nth-child(6) { animation-delay: 275ms; }
+.hero-subtitle__word:nth-child(7) { animation-delay: 330ms; }
+.hero-subtitle__word:nth-child(8) { animation-delay: 385ms; }
+.hero-subtitle__word:nth-child(9) { animation-delay: 440ms; }
+.hero-subtitle__word:nth-child(10) { animation-delay: 495ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-subtitle__word {
+    animation: none;
+  }
+}
+
+/* Below the `sm` breakpoint the four categories plus the promise will not fit on
+   one line at a legible size — measured: 44 characters need ~445px at 16px and a
+   360px viewport offers 328px. Rather than shrink the type until it is unreadable,
+   the categories drop and the promise stands alone. It is the shortest true
+   statement of what the product is, which is what a small screen should get. */
+@media (max-width: 639.98px) {
+  .hero-subtitle__category,
+  .hero-subtitle__separator {
+    display: none;
+  }
+
+  .hero-subtitle__promise {
+    margin-left: 0;
+  }
+}
+

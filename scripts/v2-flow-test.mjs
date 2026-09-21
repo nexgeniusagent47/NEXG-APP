@@ -131,7 +131,14 @@ async function main() {
   }
 
   // Closing returns to the browse surface.
-  await page.keyboard.press('Escape');
+  //
+  // Escape is dispatched on the search input, where focus actually sits.
+  // `page.keyboard.press('Escape')` with no meaningful focus does NOT reach the
+  // dialog: Chromium's native `<input type="search">` handling swallows the key,
+  // and a bare press targets an arbitrary element. That produced a false failure
+  // that looked like a broken modal for several runs. Dispatch where a real
+  // keyboard user is.
+  await page.locator('#discovery-search-input').press('Escape');
   await settle(page, 800);
   check('Escape closes the sheet', (await page.locator('[role="dialog"]').count()) === 0);
   check(
