@@ -51,20 +51,41 @@ async function settle(page, ms = 1400) {
   }
 }
 
+/**
+ * Click a navigation control by its leading label.
+ *
+ * Two traps here, both confirmed by probing the live page:
+ *
+ * 1. `getByText(label, { exact: true })` does NOT match these buttons. Several
+ *    contain nested badge spans, so the button's text content is e.g.
+ *    "Fine DiningOrder" or "Spa & WellnessDistrict".
+ * 2. `locator('button').filter({ hasText }).first()` DOES match, but `.first()`
+ *    resolves to the zero-size DESKTOP nav (hidden via `hidden xl:flex`), so
+ *    waiting for visibility times out even though the mobile item is on screen.
+ *
+ * `getByRole` ignores non-visible candidates, which resolves both problems.
+ */
+async function clickNav(page, label) {
+  const pattern = new RegExp(`^\\s*${label.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`);
+  const btn = page.getByRole('button', { name: pattern }).first();
+  await btn.waitFor({ state: 'visible', timeout: 10000 });
+  await btn.click();
+}
+
 async function openPage(page, viewport, navLabel) {
   await page.goto(BASE, { waitUntil: 'domcontentloaded' });
   await settle(page);
 
   if (viewport.name === 'mobile') {
     await page.click('button[aria-label="Open Mobile Menu"]');
-    await settle(page, 500);
-    // Partners is a collapsible group on mobile; expand it first.
+    await settle(page, 600);
+    // Partners is a collapsible group on mobile; expand it, then pick an item.
     if (navLabel === NAV.partners) {
-      await page.getByText(NAV.partners, { exact: true }).first().click();
-      await settle(page, 400);
-      await page.getByText('For Merchants', { exact: true }).first().click();
+      await clickNav(page, NAV.partners);
+      await settle(page, 500);
+      await clickNav(page, 'For Merchants');
     } else {
-      await page.getByText(navLabel, { exact: true }).first().click();
+      await clickNav(page, navLabel);
     }
   } else {
     if (navLabel === NAV.partners) {

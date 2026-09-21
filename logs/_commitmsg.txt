@@ -1,0 +1,17 @@
+docs: v1 documentation set, session log, and screenshot harness fix
+
+- README rewritten: honest status table, quick start, architecture, and the
+  critical warning that the frontend does not yet consume the API
+- docs/ARCHITECTURE.md: layers, data model rationale, the N+1 decision, the
+  contract boundary, and frontend debt
+- docs/API.md: every endpoint, params, response shapes, status codes
+- docs/HANDOFF.md: full v2 backlog in priority order with acceptance criteria
+- CHANGELOG.md: v1.0.0 with every defect ID and its resolution
+- logs/2026-09-21-build-session.log: environment limits, actions, verification
+
+Fix the mobile screenshot harness. getByText(exact) cannot match nav buttons
+that contain nested badge spans (their text is "Fine DiningOrder"), and
+locator().filter({hasText}).first() resolves to the zero-size desktop nav
+hidden by 'hidden xl:flex', so waitFor(visible) timed out. getByRole filters
+out non-visible candidates. Result: 20/20 surfaces captured with zero page
+errors and zero console errors.
