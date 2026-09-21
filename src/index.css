@@ -258,9 +258,19 @@ html {
 /* The accent. One point of contrast on the line, on the motivation word rather
    than the merchandise. Two tokens because the palette needs two: #E5B65F is
    9.92:1 on the dark hero, #8A6413 is 5.05:1 on the light one. See DESIGN.md. */
+/* The accent. One point of contrast on the line, on the motivation word rather
+   than the merchandise. Two tokens because the palette needs two: #E5B65F is
+   9.92:1 on the dark hero, #8A6413 is 5.05:1 on the light one. See DESIGN.md.
+
+   The face lives here rather than in a variant's scoped block. It was previously
+   declared only inside `@scope ([data-impeccable-variant="3"])`, so with variant 1
+   visible — which is what the scaffold shows by default — the browser never
+   requested Cooper at all and the line fell back to the body sans. A font that
+   only loads under one experimental variant is a font that looks unused. */
 .hero-wipe__lead {
-  font-weight: 800;
-  letter-spacing: -0.01em;
+  font-family: var(--font-warm);
+  font-weight: 700;
+  letter-spacing: 0;
   color: #e5b65f;
 }
 
