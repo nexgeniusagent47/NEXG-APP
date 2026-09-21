@@ -480,7 +480,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
   const renderIndContract = () => {
     const isDed = selectedType === 'dedicated';
     const finalVehicle = isDed ? formData.vehiclePref : formData.vehicleType;
-    const finalPlate = isDed ? 'NexG-Provided and Maintained Vehicle' : (formData.plateNum || '[Register License Plate]');
+    const finalPlate = isDed ? 'NEXG-Provided and Maintained Vehicle' : (formData.plateNum || '[Register License Plate]');
     
     return (
       <div className="space-y-4 text-xs md:text-sm text-gray-700 leading-relaxed font-sans">
@@ -496,7 +496,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
         <p>This Services Agreement (the "Agreement") is executed on this date by and between:</p>
         
         <p className="pl-4 border-l-2 border-amber-300">
-          <strong>NEXG CONCIERGE LIMITED</strong>, a legal logistics platform company incorporated in Kenya (hereinafter referred to as "NexG"); and
+          <strong>NEXG CONCIERGE LIMITED</strong>, a legal logistics platform company incorporated in Kenya (hereinafter referred to as "NEXG"); and
         </p>
 
         <p className="pl-4 border-l-2 border-amber-300">
@@ -504,7 +504,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
         </p>
 
         <h4 className="font-bold text-gray-950 mt-6 text-sm">1. Scope of Fleet Services</h4>
-        <p>The Rider agrees to provide premium logistics, transportation, and white-glove errand solutions on behalf of clients booking through the NexG Concierge Ecosystem. Active capabilities agreed upon include: <strong>{formData.services.join(', ') || 'Premium Errands'}</strong>.</p>
+        <p>The Rider agrees to provide premium logistics, transportation, and white-glove errand solutions on behalf of clients booking through the NEXG Concierge Ecosystem. Active capabilities agreed upon include: <strong>{formData.services.join(', ') || 'Premium Errands'}</strong>.</p>
         
         <h4 className="font-bold text-gray-950 mt-4 text-sm">2. Equipment & Vehicles</h4>
         <ul className="list-disc pl-5 space-y-1">
@@ -521,7 +521,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
           {isDed ? (
             'The Rider shall be compensated with a guaranteed base salary on a shift completion model, plus progressive milestones and rating multiplier bonuses. Settlements are processed direct to the M-Pesa/Bank accounts registered in this form weekly.'
           ) : (
-            'The Rider shall earn platform delivery commissions per successfully closed trip or package delivery. Settlements are compiled weekly and dispatched directly with a platform maintenance fee of 15% withheld by NexG.'
+            'The Rider shall earn platform delivery commissions per successfully closed trip or package delivery. Settlements are compiled weekly and dispatched directly with a platform maintenance fee of 15% withheld by NEXG.'
           )}
         </p>
 
@@ -529,13 +529,13 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
         <p>Rider agrees to strictly wear the customized NEXG apparel on duty, maintain exemplary clean vehicle hygiene, arrive within specified time slots, and respect international hospitality guests' absolute privacy. Failure to maintain a minimum 4.0/5.0 star rating may result in temporary profile deactivation.</p>
 
         <h4 className="font-bold text-gray-950 mt-4 text-sm">5. Termination Clause</h4>
-        <p>This agreement begins immediately on approval and is valid for a period of 12 months. Either party may terminate with 7 days' written notice, or NexG may block platform access instantly in cases of safety breach, driving license revocation, or fraudulent behavior.</p>
+        <p>This agreement begins immediately on approval and is valid for a period of 12 months. Either party may terminate with 7 days' written notice, or NEXG may block platform access instantly in cases of safety breach, driving license revocation, or fraudulent behavior.</p>
 
         <div className="grid grid-cols-2 gap-8 border-t border-gray-200 pt-8 mt-8">
           <div>
-            <p className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-6">For NexG Concierge</p>
+            <p className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-6">For NEXG Concierge</p>
             <div className="h-10 flex items-end mb-1">
-              <span className="font-mono text-xs text-gray-400 font-semibold italic">NexG Fleet Operations</span>
+              <span className="font-mono text-xs text-gray-400 font-semibold italic">NEXG Fleet Operations</span>
             </div>
             <div className="h-0.5 bg-gray-200 w-full mb-1"></div>
             <p className="text-[11px] text-gray-500">Authorized Dispatch Committee</p>
@@ -622,7 +622,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
           <div className="bg-[#1a1c1c] px-8 py-8 md:px-12 md:py-10 text-white relative overflow-hidden border-b border-gray-800">
             <div className="absolute -right-12 -top-12 w-48 h-48 bg-gradient-to-br from-[#c49a5c] to-[#E5B65F] opacity-15 rounded-full blur-2xl"></div>
             <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white mb-2">
-              Join the Elite NexG Rider Fleet
+              Join the Elite NEXG Rider Fleet
             </h1>
             <p className="text-gray-300 text-sm md:text-base max-w-xl leading-relaxed">
               Unlock premier delivery earnings, tailored branding, and unmatched support in Kenya’s luxury hospitality ecosystem.
@@ -709,14 +709,14 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     }`}>
                       <FileText size={24} />
                     </div>
-                    <h3 className="font-bold text-gray-900 text-base mb-2">NexG Dedicated Rider</h3>
+                    <h3 className="font-bold text-gray-900 text-base mb-2">NEXG Dedicated Rider</h3>
                     <p className="text-gray-500 text-xs leading-relaxed mb-6">
-                      Ride custom NexG-branded premium logistics vehicles, operate consistent shifts, and enjoy a stable guaranteed base salary.
+                      Ride custom NEXG-branded premium logistics vehicles, operate consistent shifts, and enjoy a stable guaranteed base salary.
                     </p>
                     <div className="space-y-2 text-left border-t border-gray-100 pt-4">
                       <div className="text-[11px] text-gray-500 flex items-center gap-2">
                         <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />
-                        NexG Provides Vehicle
+                        NEXG Provides Vehicle
                       </div>
                       <div className="text-[11px] text-gray-500 flex items-center gap-2">
                         <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />
@@ -792,7 +792,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   <div className="bg-[#FDF9F1] border border-[#F3E5C8] rounded-2xl p-4 flex gap-3 text-xs text-[#967C3B] leading-relaxed">
                     <Info size={16} className="flex-shrink-0 mt-0.5" />
                     <div>
-                      <strong>Dedicated Rider Note:</strong> You are applying for a scheduled, salaried position. NexG provides custom branded bikes, gear, and fuel budgets. Below, you will also designate your operational preferences.
+                      <strong>Dedicated Rider Note:</strong> You are applying for a scheduled, salaried position. NEXG provides custom branded bikes, gear, and fuel budgets. Below, you will also designate your operational preferences.
                     </div>
                   </div>
                 )}
@@ -931,7 +931,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
 
                 {selectedType === 'dedicated' && (
                   <div className="bg-[#7a5821]/5 border border-[#7a5821]/15 rounded-2xl p-4 text-xs text-[#7a5821] leading-relaxed">
-                    <strong>Note:</strong> Your premium motorbike is provided by NexG. You do not need to register a personal motorbike logbook or license plate here.
+                    <strong>Note:</strong> Your premium motorbike is provided by NEXG. You do not need to register a personal motorbike logbook or license plate here.
                   </div>
                 )}
 
@@ -1218,7 +1218,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                 {/* Profile Photo Selfie */}
                 <div className="border border-gray-200 bg-gray-50 p-6 rounded-[28px] mt-6">
                   <p className="font-bold text-gray-900 text-sm mb-1">Passport-Style Selfie Photo <span className="text-red-500">*</span></p>
-                  <p className="text-gray-500 text-xs mb-5">Front-facing shot with clear neutral lighting. This is generated on your custom metal NexG Ambassador ID Card.</p>
+                  <p className="text-gray-500 text-xs mb-5">Front-facing shot with clear neutral lighting. This is generated on your custom metal NEXG Ambassador ID Card.</p>
                   <div className="flex flex-col sm:flex-row items-center gap-5">
                     <div className="w-24 h-24 rounded-2xl border-2 border-dashed border-gray-300 bg-white flex items-center justify-center cursor-pointer relative group">
                       <input 
@@ -2034,7 +2034,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                 {/* Bank Settlements */}
                 <div className="border-t border-gray-100 pt-6 space-y-4">
                   <h3 className="font-bold text-gray-900 text-sm">Corporate Bank Settlement Account</h3>
-                  <p className="text-xs text-gray-500 leading-relaxed">NexG remits compiled client transport payout settlements directly to your corporate account weekly on Mondays.</p>
+                  <p className="text-xs text-gray-500 leading-relaxed">NEXG remits compiled client transport payout settlements directly to your corporate account weekly on Mondays.</p>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-5 bg-gray-50 border border-gray-200 p-6 rounded-2xl shadow-inner">
                     <div>
                       <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">Corporate Bank Name <span className="text-red-500">*</span></label>
@@ -2113,7 +2113,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       <p>The Fleet Provider certifies that they actively manage and pay a squad of <strong>{formData.flTotalRiders || '[Rider Count]'} active couriers</strong> operating <strong>{formData.flTotalVehicles || '[Vehicle Count]'} vehicles</strong> under direct commercial contract. The primary coverage area of operations agreed upon includes: <strong>{formData.flZones || '[Coverage Zones]'}</strong>.</p>
                       
                       <h4 className="font-bold text-gray-950 mt-4 text-sm">2. Platform Commission & Remittances</h4>
-                      <p>NexG agrees to compile and settle client order payments to the Fleet Provider’s registered bank account weekly on Mondays, less a platform operations commission fee of <strong>12%</strong> per completed logistics job.</p>
+                      <p>NEXG agrees to compile and settle client order payments to the Fleet Provider’s registered bank account weekly on Mondays, less a platform operations commission fee of <strong>12%</strong> per completed logistics job.</p>
 
                       <h4 className="font-bold text-gray-950 mt-4 text-sm">3. Compliance, Insurance & Licensing</h4>
                       <p>The Fleet Provider represents and warrants that all couriers and motorbikes comply with roadworthy rules, hold comprehensive insurance certifications, and observe Kenya's Data Protection Act 2019 standards.</p>
@@ -2123,9 +2123,9 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
 
                       <div className="grid grid-cols-2 gap-8 border-t border-gray-200 pt-8 mt-8">
                         <div>
-                          <p className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-6">For NexG Concierge</p>
+                          <p className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-6">For NEXG Concierge</p>
                           <div className="h-10 flex items-end mb-1">
-                            <span className="font-mono text-xs text-gray-400 font-semibold italic">NexG Operations Admin</span>
+                            <span className="font-mono text-xs text-gray-400 font-semibold italic">NEXG Operations Admin</span>
                           </div>
                           <div className="h-0.5 bg-gray-200 w-full mb-1"></div>
                           <p className="text-[11px] text-gray-500">Board Operations Committee</p>

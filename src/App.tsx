@@ -18,7 +18,7 @@ import ForProperties from './components/ForProperties';
 import ForCouriers from './components/ForCouriers';
 import CourierOnboarding from './components/CourierOnboarding';
 
-// NexG Flow Components
+// NEXG Flow Components
 import NexGLandingHero from './components/NexGLandingHero';
 import NexGDiscoveryView from './components/NexGDiscoveryView';
 import NexGCategoryDrilldown from './components/NexGCategoryDrilldown';

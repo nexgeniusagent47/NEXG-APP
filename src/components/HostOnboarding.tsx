@@ -306,7 +306,7 @@ const HOST_ROLE_OPTIONS = [
   'Other',
 ] as const;
 
-const CONTACT_METHOD_OPTIONS = ['WhatsApp', 'Phone call', 'Email', 'NexG Portal'] as const;
+const CONTACT_METHOD_OPTIONS = ['WhatsApp', 'Phone call', 'Email', 'NEXG Portal'] as const;
 
 const PORTFOLIO_OPTIONS: readonly RadioOption[] = [
   { value: 'one', label: 'One property', hint: "I'm setting up a single property." },
@@ -1510,7 +1510,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               Property partner
             </div>
             <h1 className="font-display text-2xl font-extrabold tracking-tight sm:text-3xl">
-              Bring your property into NexG.
+              Bring your property into NEXG.
             </h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-300 sm:text-base">
               Tell us what exists, what guests can access, and how your team operates. We'll use this to build
@@ -2072,7 +2072,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
 
               <Field
                 htmlFor="nexgOpportunity"
-                label="What would you like NexG to help you expose to guests?"
+                label="What would you like NEXG to help you expose to guests?"
               >
                 <textarea
                   rows={3}
@@ -2150,7 +2150,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               </div>
 
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-                <Field htmlFor="requestOwner" label="Who should receive NexG requests?">
+                <Field htmlFor="requestOwner" label="Who should receive NEXG requests?">
                   <input
                     className={fieldClass('requestOwner')}
                     placeholder="e.g. Front office, duty manager"

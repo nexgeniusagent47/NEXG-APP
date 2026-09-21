@@ -1789,7 +1789,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                   <div className="space-y-4 text-xs md:text-sm">
                     <p>This Merchant Partnership Agreement (the <strong>"Agreement"</strong>) is executed between:</p>
-                    <p><strong>NexG Concierge Limited</strong> (hereinafter referred to as <strong>"NexG"</strong> or <strong>"Platform"</strong>), registered in the Republic of Kenya with offices in Nairobi;</p>
+                    <p><strong>NEXG Concierge Limited</strong> (hereinafter referred to as <strong>"NEXG"</strong> or <strong>"Platform"</strong>), registered in the Republic of Kenya with offices in Nairobi;</p>
                     <p>and</p>
                     <p>
                       <strong><span className="font-bold underline text-slate-900">{profileData.legalName || '[Legal Business Name]'}</span></strong>, 
@@ -1799,7 +1799,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                     </p>
 
                     <h4 className="font-bold text-slate-950 mt-6 border-b pb-1">1. Recitals</h4>
-                    <p>WHEREAS, NexG operates a premier high-net-worth concierge, booking and logistics carrier network across Kenya; and</p>
+                    <p>WHEREAS, NEXG operates a premier high-net-worth concierge, booking and logistics carrier network across Kenya; and</p>
                     <p>WHEREAS, the Merchant wishes to list its premium product catalog under the <strong><span className="font-semibold">{selectedCategory?.name || '[Category]'}</span></strong> segments of the platform;</p>
                     <p>NOW, THEREFORE, both parties execute the contract bound by the following clauses:</p>
 
@@ -1807,7 +1807,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       <div className="mt-4 bg-slate-50 p-4 border border-slate-200 rounded-2xl text-xs space-y-2">
                         <p className="font-bold text-slate-800">Special Logistics Carriage &amp; Warehousing Addendum:</p>
                         <p>1. <strong>Carriage Responsibility:</strong> The Merchant represents that they hold all valid licenses and permits required for shipping and logistics operations under the Laws of Kenya, including NTSA, KRA, and Kenya Ports Authority (KPA) approvals.</p>
-                        <p>2. <strong>Cargo Insurance &amp; Liability:</strong> The Merchant agrees to maintain standard Goods In Transit (GIT) insurance and warehouse keepers liability insurance, and holds NexG harmless against cargo losses, demurrage, or transit damage.</p>
+                        <p>2. <strong>Cargo Insurance &amp; Liability:</strong> The Merchant agrees to maintain standard Goods In Transit (GIT) insurance and warehouse keepers liability insurance, and holds NEXG harmless against cargo losses, demurrage, or transit damage.</p>
                         <p>3. <strong>Customs and Tariff Compliance:</strong> The Merchant is solely responsible for clearing customs duties, port levies, and ensuring all shipping cargo meets international and local compliance standards.</p>
                       </div>
                     )}
