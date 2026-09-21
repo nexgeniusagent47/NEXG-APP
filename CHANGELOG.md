@@ -19,6 +19,12 @@ All notable changes to NEXG Concierge. Format follows
 - **Merchant menu sections** (`src/data/menuSections.ts`) with a **docked category
   rail**: sticky under the header on scroll, active section tracked by intersection,
   tap to jump.
+- **Docked category rail on the discovery screen** for mobile and tablet. Below `lg`
+  there is no room for the desktop left rail, so the category chips previously
+  scrolled away with the results — twenty merchants down, there was no way to change
+  vertical without scrolling back to the top. The chips now dock under the header,
+  and the selected vertical is scrolled into view so the rail keeps reporting which
+  category you are browsing.
 - **Deep-linkable pages**: `?page=<name>` for the top-level routes and
   `?merchant=<id-or-slug>` for a merchant. Previously every route lived only in React
   state, so nothing could be linked, reloaded or audited by an external tool.

@@ -117,7 +117,7 @@ again, it fails.
 | --- | --- |
 | PostgreSQL 15 (`nexg-concierge-pg`, port 5433) | 21 categories · 128 subcategories · 640 merchants · 6,000 items · 640 merchant↔subcategory links |
 | REST API with JSON cold-start fallback | `/api/health`, `/api/categories`, `/api/merchants` (filter + sort), `/api/merchants/:id`, `/api/search`, `/api/areas` |
-| Discovery screen | live search, 21-vertical rail, subcategory chips, sort, pagination, skeletons, empty and error states |
+| Discovery screen | live search, 21-vertical rail, subcategory chips, sort, pagination, skeletons, empty and error states; **category rail docks under the header on mobile and tablet** |
 | Commerce-arc engine | five arcs derived from each merchant's seeded `workflow` string |
 | Merchant page | one template for all 21 verticals |
 | Item modal | one modal, requirements derived from arc + the catalogue's own declared fields |
@@ -195,6 +195,13 @@ re-measured since.
    variant without disabling that sheet first returns a `0x0` box and every
    derived number is zero. Disable it before you measure —
    `logs/critique/_verify-hero-pods.mjs` shows how.
+
+   A fifth, from the docked category rail: **`window.scrollTo` reported
+   `scrollY: 0` on a page with 10,218px of content**, because the search input held
+   focus and programmatic scrolling fought focus scrolling. That read as "position:
+   sticky is broken" when the rail was fine. Driving a real `mouse.wheel` showed it
+   docking at exactly the header's height. **When a sticky element looks broken,
+   check the scroll method before the CSS.**
 
 6. **Never write files with `Set-Content` or `Out-File`; encoding will bite you.**
    PowerShell 5.1's `Out-File` defaults to **UTF-16LE** and `Set-Content` is not
