@@ -24,6 +24,11 @@ scripts/_*
 # captured while running the critique. The written report lives in logs/*.log.
 logs/critique/
 
+# Impeccable tool state: live-mode session journal, inject journal, detector
+# caches, roots manifest. Machine-local working state, not project source. The
+# durable artefacts it produces — PRODUCT.md and DESIGN.md — ARE committed.
+.impeccable/
+
 # OS / editor
 Thumbs.db
 desktop.ini
