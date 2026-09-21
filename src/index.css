@@ -98,16 +98,22 @@
   --animate-status: status-breathe 2.4s ease-in-out infinite;
 }
 
-/* Headings carry Cooper.
-   Set on the element selector rather than sprinkled through components: every
-   heading in the product should agree on its face, and a rule here cannot drift the
-   way 200 call sites can. Component-level `font-sans` still wins where a heading is
-   deliberately set in the body face. */
+/* Headings carry the clean geometric sans.
+   Cooper* is a warm 1920s display serif and it earns its place as an ACCENT — the
+   rotating hero line, the host onboarding wordmark — but set across every heading it
+   makes the product read as decorative rather than clean. The reference this product
+   is measured against sets headings in a low-contrast geometric sans: heavy, tight,
+   lots of air. TeX Gyre Adventor is exactly that (it is the Avant Garde clone), so
+   headings use it and Cooper is reserved for the few places that want warmth. */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-warm);
-  /* Cooper* is a heavy display serif, so the optical letter-spacing that suits a
-     geometric sans reads as cramped on it. */
-  letter-spacing: 0;
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* The hero headline is the one piece of type big enough to carry real tracking
+   correction; at 4.25rem the default spacing looks loose. */
+h1 {
+  letter-spacing: -0.03em;
 }
 
 @keyframes status-breathe {
