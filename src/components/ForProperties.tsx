@@ -569,7 +569,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               ? 'bg-white border-slate-200 hover:border-amber-400 hover:shadow-xl shadow-sm'
               : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border-white/10 hover:border-[#E5B65F]/30 hover:shadow-[0_0_30px_rgba(229,182,95,0.1)]'
           }`}>
-            <div className="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-500 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 shadow-sm">
+            <div className="w-12 h-12 rounded-xl bg-[#E5B65F]/10 border border-[#E5B65F]/20 text-[#E5B65F] flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 shadow-sm">
               <Sparkles size={24} />
             </div>
             <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Enhanced Experience</h3>
@@ -582,9 +582,9 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white border-slate-200 hover:border-cyan-400 hover:shadow-xl shadow-sm'
-              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border-white/10 hover:border-cyan-500/30 hover:shadow-[0_0_30px_rgba(6,182,212,0.1)]'
+              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border-white/10 hover:border-[#E5B65F]/30 hover:shadow-[0_0_30px_rgba(229,182,95,0.1)]'
           }`}>
-            <div className="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-500 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 shadow-sm">
+            <div className="w-12 h-12 rounded-xl bg-[#E5B65F]/10 border border-[#E5B65F]/20 text-[#E5B65F] flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 shadow-sm">
               <Star size={24} />
             </div>
             <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>5-Star Reviews</h3>
@@ -597,9 +597,9 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white border-slate-200 hover:border-emerald-400 hover:shadow-xl shadow-sm'
-              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border-white/10 hover:border-emerald-500/30 hover:shadow-[0_0_30px_rgba(16,185,129,0.1)]'
+              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border-white/10 hover:border-[#E5B65F]/30 hover:shadow-[0_0_30px_rgba(229,182,95,0.1)]'
           }`}>
-            <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 shadow-sm">
+            <div className="w-12 h-12 rounded-xl bg-[#E5B65F]/10 border border-[#E5B65F]/20 text-[#E5B65F] flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 shadow-sm">
               <DollarSign size={24} />
             </div>
             <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Earn More Income</h3>
@@ -612,9 +612,9 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white border-slate-200 hover:border-purple-400 hover:shadow-xl shadow-sm'
-              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border-white/10 hover:border-purple-500/30 hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]'
+              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border-white/10 hover:border-[#E5B65F]/30 hover:shadow-[0_0_30px_rgba(229,182,95,0.1)]'
           }`}>
-            <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-500 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 shadow-sm">
+            <div className="w-12 h-12 rounded-xl bg-[#E5B65F]/10 border border-[#E5B65F]/20 text-[#E5B65F] flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 shadow-sm">
               <Award size={24} />
             </div>
             <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Stand Out</h3>
@@ -627,9 +627,9 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white border-slate-200 hover:border-rose-400 hover:shadow-xl shadow-sm'
-              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border-white/10 hover:border-rose-500/30 hover:shadow-[0_0_30px_rgba(244,63,94,0.1)]'
+              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border-white/10 hover:border-[#E5B65F]/30 hover:shadow-[0_0_30px_rgba(229,182,95,0.1)]'
           }`}>
-            <div className="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-500 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 shadow-sm">
+            <div className="w-12 h-12 rounded-xl bg-[#E5B65F]/10 border border-[#E5B65F]/20 text-[#E5B65F] flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 shadow-sm">
               <Briefcase size={24} />
             </div>
             <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>We Handle Everything</h3>
@@ -642,9 +642,9 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 border transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white border-slate-200 hover:border-blue-400 hover:shadow-xl shadow-sm'
-              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border-white/10 hover:border-blue-500/30 hover:shadow-[0_0_30px_rgba(59,130,246,0.1)]'
+              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md border-white/10 hover:border-[#E5B65F]/30 hover:shadow-[0_0_30px_rgba(229,182,95,0.1)]'
           }`}>
-            <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 text-blue-500 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 shadow-sm">
+            <div className="w-12 h-12 rounded-xl bg-[#E5B65F]/10 border border-[#E5B65F]/20 text-[#E5B65F] flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 shadow-sm">
               <ShieldCheck size={24} />
             </div>
             <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Trusted & Safe</h3>

@@ -6,8 +6,37 @@ import { defineConfig } from 'vite';
 export default defineConfig(() => {
   const apiPort = process.env.API_PORT ?? '3001';
 
+  /**
+   * Strip the live-editing block out of the built HTML.
+   *
+   * `index.html` carries an `impeccable-live-start/end` region that the design
+   * tooling injects into during a review session. Vite copies `index.html` into
+   * `dist` verbatim, so without this the shipped page referenced
+   * `http://localhost:8400/live.js` and embedded the session's auth token — a broken
+   * request and a leaked credential in every production page load.
+   *
+   * Stripping at build time rather than deleting the block by hand means the
+   * markers can stay in source (where the tool needs them) and can never reach a
+   * deployment.
+   *
+   * `apply: 'build'` is load-bearing: without it the transform also runs on the dev
+   * server, which would remove the very block the live tooling injects into and
+   * silently break the design-review workflow.
+   */
+  const stripLiveInjection = () => ({
+    name: 'nexg-strip-live-injection',
+    apply: 'build' as const,
+    enforce: 'pre' as const,
+    transformIndexHtml(html: string) {
+      return html.replace(
+        /[ \t]*<!--\s*impeccable-live-start\s*-->[\s\S]*?<!--\s*impeccable-live-end\s*-->\s*/g,
+        ''
+      );
+    },
+  });
+
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss(), stripLiveInjection()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),

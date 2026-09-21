@@ -290,7 +290,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
               ? 'bg-white shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg'
               : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md hover:shadow-[0_0_30px_rgba(229,182,95,0.1)]'
           }`}>
-            <div className="text-amber-500 mb-5 transition-transform duration-300 group-hover:scale-110">
+            <div className="text-[#E5B65F] mb-5 transition-transform duration-300 group-hover:scale-110">
               <Icons.Sparkles size={28} />
             </div>
             <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Premium Exposure</h3>
@@ -303,9 +303,9 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
           <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg'
-              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md hover:shadow-[0_0_30px_rgba(6,182,212,0.1)]'
+              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md hover:shadow-[0_0_30px_rgba(229,182,95,0.1)]'
           }`}>
-            <div className="text-cyan-500 mb-5 transition-transform duration-300 group-hover:scale-110">
+            <div className="text-[#E5B65F] mb-5 transition-transform duration-300 group-hover:scale-110">
               <Icons.TrendingUp size={28} />
             </div>
             <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Multiply Volume</h3>
@@ -318,9 +318,9 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
           <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg'
-              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md hover:shadow-[0_0_30px_rgba(16,185,129,0.1)]'
+              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md hover:shadow-[0_0_30px_rgba(229,182,95,0.1)]'
           }`}>
-            <div className="text-emerald-500 mb-5 transition-transform duration-300 group-hover:scale-110">
+            <div className="text-[#E5B65F] mb-5 transition-transform duration-300 group-hover:scale-110">
               <Icons.Truck size={28} />
             </div>
             <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>White-Glove Logistics</h3>
@@ -333,9 +333,9 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
           <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg'
-              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]'
+              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md hover:shadow-[0_0_30px_rgba(229,182,95,0.1)]'
           }`}>
-            <div className="text-purple-500 mb-5 transition-transform duration-300 group-hover:scale-110">
+            <div className="text-[#E5B65F] mb-5 transition-transform duration-300 group-hover:scale-110">
               <Icons.Zap size={28} />
             </div>
             <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Zero Friction Setup</h3>
@@ -348,7 +348,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
           <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg'
-              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md hover:shadow-[0_0_30px_rgba(244,63,94,0.1)]'
+              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md hover:shadow-[0_0_30px_rgba(229,182,95,0.1)]'
           }`}>
             <div className="text-rose-500 mb-5 transition-transform duration-300 group-hover:scale-110">
               <Icons.CreditCard size={28} />
@@ -363,9 +363,9 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
           <div className={`group cursor-default rounded-2xl sm:rounded-3xl p-6 sm:p-8 transition duration-300 hover:-translate-y-1 ${
             isLight
               ? 'bg-white shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg'
-              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md hover:shadow-[0_0_30px_rgba(59,130,246,0.1)]'
+              : 'bg-white/[0.03] hover:bg-white/[0.06] backdrop-blur-md hover:shadow-[0_0_30px_rgba(229,182,95,0.1)]'
           }`}>
-            <div className="text-blue-500 mb-5 transition-transform duration-300 group-hover:scale-110">
+            <div className="text-[#E5B65F] mb-5 transition-transform duration-300 group-hover:scale-110">
               <Icons.ShieldCheck size={28} />
             </div>
             <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Dedicated Support</h3>
