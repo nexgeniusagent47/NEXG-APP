@@ -18,9 +18,11 @@ import { useLanguage } from '../context/LanguageContext';
 interface HeaderProps {
   currentPage: string;
   onNavigate: (page: any) => void;
+  /** Opens the category explorer. Without this, "Explore" was a no-op. */
+  onExplore?: () => void;
 }
 
-export default function Header({ currentPage, onNavigate }: HeaderProps) {
+export default function Header({ currentPage, onNavigate, onExplore }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isPartnersExpanded, setIsPartnersExpanded] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -111,7 +113,7 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
         {/* Desktop Navigation Links */}
         <nav className="hidden xl:flex items-center gap-7 text-xs sm:text-[13px] font-semibold tracking-wide">
           <button
-            onClick={() => onNavigate('home')}
+            onClick={() => (onExplore ? onExplore() : onNavigate('home'))}
             className={`transition-colors cursor-pointer text-left bg-transparent border-none p-0 ${
               currentPage === 'home'
                 ? isLight
@@ -362,7 +364,11 @@ export default function Header({ currentPage, onNavigate }: HeaderProps) {
 
             <div className="flex flex-col gap-2 font-medium text-sm pt-2 border-t border-black/5 dark:border-white/10">
               <button
-                onClick={() => handleMobileNav('home')}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  if (onExplore) onExplore();
+                  else onNavigate('home');
+                }}
                 className={`text-left py-2 transition-colors border-b ${
                   isLight ? 'border-slate-100 hover:text-[#B88728] text-slate-800' : 'border-white/10 hover:text-[#E5B65F] text-gray-200'
                 }`}

@@ -1,140 +1,307 @@
 // server/index.ts
-// NEXG Concierge Express Backend with PostgreSQL connectivity & seeded JSON fallback
+// NEXG Concierge API.
+//
+// Data strategy (see docs/PLAN-v1.md):
+//   1. PostgreSQL  — source of truth when DATABASE_URL is set and reachable
+//   2. JSON cache  — cold-start fallback so the API always serves traffic
+//
+// The active source is reported by /api/health, and the counts it reports are
+// derived from the SAME collection the list endpoints serve. Previously health
+// advertised the JSON `summary` block (640 merchants) while /api/merchants
+// served the much smaller `merchants` array (120) — defect D-03.
 
+import 'dotenv/config';
 import express from 'express';
-import type { Request, Response } from 'express';
-import fs from 'fs';
-import path from 'path';
+import type { Request, Response, NextFunction } from 'express';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+import { initDb, isDbReady, getDbUnavailableReason, closeDb } from './db.ts';
+import * as repo from './repository.ts';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const REPO_ROOT = path.resolve(__dirname, '..');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = Number(process.env.PORT ?? 3001);
 
-app.use(express.json());
+app.use(express.json({ limit: '1mb' }));
 
-// CORS headers
-app.use((req, res, next) => {
+// CORS. Only the methods that actually exist are advertised (defect D-08).
+app.use((req: Request, res: Response, next: NextFunction) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  if (req.method === 'OPTIONS') return res.sendStatus(200);
+  res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  if (req.method === 'OPTIONS') return res.sendStatus(204);
   next();
 });
 
-// Load the seeded JSON cache for instant low-latency serving or fallback
-const seedCatalogPath = path.resolve(process.cwd(), 'src/data/seededCatalog.json');
+// ---------------------------------------------------------------- fallback data
+
+const seedCatalogPath = path.resolve(REPO_ROOT, 'src/data/seededCatalog.json');
 let seededCatalog: any = null;
 
 try {
   if (fs.existsSync(seedCatalogPath)) {
-    const rawData = fs.readFileSync(seedCatalogPath, 'utf-8');
-    seededCatalog = JSON.parse(rawData);
-    console.log(`[NEXG Server] Seeded catalog loaded: ${seededCatalog?.summary?.totalMerchants} merchants, ${seededCatalog?.summary?.totalItems} items`);
+    seededCatalog = JSON.parse(fs.readFileSync(seedCatalogPath, 'utf-8'));
   }
 } catch (err: any) {
-  console.warn('[NEXG Server] Notice: seededCatalog.json could not be loaded:', err.message);
+  console.warn('[NEXG] seededCatalog.json unreadable:', err?.message ?? err);
 }
 
-// 1. Health Check
-app.get('/api/health', (req: Request, res: Response) => {
+/** Counts derived from the collection actually served, never from a summary. */
+function fallbackCounts() {
+  const merchants: any[] = seededCatalog?.merchants ?? [];
+  return {
+    totalCategories: (seededCatalog?.categories ?? []).length,
+    totalSubcategories: (seededCatalog?.categories ?? []).reduce(
+      (sum: number, c: any) => sum + (c.subcategories?.length ?? 0),
+      0
+    ),
+    totalMerchants: merchants.length,
+    totalItems: merchants.reduce((sum, m) => sum + (m.items?.length ?? 0), 0),
+  };
+}
+
+async function activeCounts() {
+  if (isDbReady()) {
+    try {
+      return await repo.getCounts();
+    } catch (err: any) {
+      console.error('[NEXG] count query failed, using fallback:', err?.message ?? err);
+    }
+  }
+  return fallbackCounts();
+}
+
+// -------------------------------------------------------------------- helpers
+
+/** Clamp pagination input so arbitrary values cannot reach the database (D-09). */
+function parsePaging(rawLimit: unknown, rawOffset: unknown, defaultLimit = 50, maxLimit = 200) {
+  const limit = Number.parseInt(String(rawLimit ?? ''), 10);
+  const offset = Number.parseInt(String(rawOffset ?? ''), 10);
+  return {
+    limit: Number.isFinite(limit) ? Math.min(Math.max(limit, 1), maxLimit) : defaultLimit,
+    offset: Number.isFinite(offset) ? Math.max(offset, 0) : 0,
+  };
+}
+
+function requireDbOrFallback(res: Response): boolean {
+  if (isDbReady()) return true;
+  if (!seededCatalog) {
+    res.status(503).json({
+      error: 'Catalogue unavailable',
+      detail: getDbUnavailableReason() ?? 'no data source configured',
+    });
+    return false;
+  }
+  return false;
+}
+
+// --------------------------------------------------------------------- routes
+
+// 1. Health — reports the ACTIVE source and its real counts.
+app.get('/api/health', async (_req: Request, res: Response) => {
+  const counts = await activeCounts();
   res.json({
     status: 'ok',
     timestamp: new Date().toISOString(),
-    postgresConfigured: !!process.env.DATABASE_URL,
-    catalogSource: seededCatalog ? 'seeded_json_cache' : 'none',
-    totalMerchants: seededCatalog?.summary?.totalMerchants || 0,
-    totalItems: seededCatalog?.summary?.totalItems || 0,
+    source: isDbReady() ? 'postgres' : 'seeded_json_fallback',
+    postgresConfigured: Boolean(process.env.DATABASE_URL),
+    postgresConnected: isDbReady(),
+    postgresError: isDbReady() ? null : getDbUnavailableReason(),
+    ...counts,
   });
 });
 
-// 2. Categories
-app.get('/api/categories', (req: Request, res: Response) => {
-  if (!seededCatalog) {
-    return res.status(503).json({ error: 'Catalog data unavailable' });
+// 2. Categories (21, with nested subcategories).
+app.get('/api/categories', async (_req: Request, res: Response) => {
+  if (isDbReady()) {
+    try {
+      return res.json({ categories: await repo.listCategories() });
+    } catch (err: any) {
+      console.error('[NEXG] /api/categories failed:', err?.message ?? err);
+    }
   }
-  res.json({
-    categories: seededCatalog.categories || [],
-  });
+  requireDbOrFallback(res);
+  res.json({ categories: seededCatalog?.categories ?? [] });
 });
 
-// 3. Merchants
-app.get('/api/merchants', (req: Request, res: Response) => {
-  if (!seededCatalog) {
-    return res.status(503).json({ error: 'Catalog data unavailable' });
+// 3. Merchants, paginated + filtered.
+app.get('/api/merchants', async (req: Request, res: Response) => {
+  const { limit, offset } = parsePaging(req.query.limit, req.query.offset);
+
+  if (isDbReady()) {
+    try {
+      const result = await repo.listMerchants({
+        category: req.query.category ? String(req.query.category) : undefined,
+        subcategory: req.query.subcategory ? String(req.query.subcategory) : undefined,
+        area: req.query.area ? String(req.query.area) : undefined,
+        search: req.query.search ? String(req.query.search) : undefined,
+        limit,
+        offset,
+      });
+      return res.json({ total: result.total, offset, limit, merchants: result.merchants });
+    } catch (err: any) {
+      console.error('[NEXG] /api/merchants failed:', err?.message ?? err);
+    }
   }
 
-  const { category, subcategory, area, search, limit = '50', offset = '0' } = req.query;
+  if (!requireDbOrFallback(res)) {
+    let results: any[] = seededCatalog?.merchants ?? [];
+    const { category, subcategory, area, search } = req.query;
 
-  let results = seededCatalog.merchants || [];
+    if (category) {
+      const c = String(category).toLowerCase();
+      results = results.filter(
+        (m) => m.categoryId?.toLowerCase() === c || m.category?.toLowerCase() === c
+      );
+    }
+    if (subcategory) {
+      const s = String(subcategory).toLowerCase();
+      results = results.filter(
+        (m) => m.subcategoryId?.toLowerCase() === s || m.subcategory?.toLowerCase() === s
+      );
+    }
+    if (area && area !== 'all') {
+      const a = String(area).toLowerCase();
+      results = results.filter((m) => m.nairobiArea?.toLowerCase() === a);
+    }
+    if (search) {
+      const q = String(search).toLowerCase();
+      results = results.filter(
+        (m) =>
+          m.name?.toLowerCase().includes(q) ||
+          m.subcategory?.toLowerCase().includes(q) ||
+          m.category?.toLowerCase().includes(q)
+      );
+    }
 
-  if (category) {
-    const catStr = String(category).toLowerCase();
-    results = results.filter(
-      (m: any) =>
-        m.categoryId?.toLowerCase() === catStr ||
-        m.category?.toLowerCase() === catStr
-    );
+    res.json({
+      total: results.length,
+      offset,
+      limit,
+      merchants: results.slice(offset, offset + limit),
+      source: 'seeded_json_fallback',
+    });
   }
-
-  if (subcategory) {
-    const subStr = String(subcategory).toLowerCase();
-    results = results.filter(
-      (m: any) =>
-        m.subcategoryId?.toLowerCase() === subStr ||
-        m.subcategory?.toLowerCase() === subStr
-    );
-  }
-
-  if (area && area !== 'all') {
-    const areaStr = String(area).toLowerCase();
-    results = results.filter(
-      (m: any) => m.nairobiArea?.toLowerCase() === areaStr
-    );
-  }
-
-  if (search) {
-    const q = String(search).toLowerCase();
-    results = results.filter(
-      (m: any) =>
-        m.name?.toLowerCase().includes(q) ||
-        m.subcategory?.toLowerCase().includes(q) ||
-        m.category?.toLowerCase().includes(q)
-    );
-  }
-
-  const start = parseInt(String(offset), 10) || 0;
-  const count = parseInt(String(limit), 10) || 50;
-
-  res.json({
-    total: results.length,
-    offset: start,
-    limit: count,
-    merchants: results.slice(start, start + count),
-  });
 });
 
-// 4. Merchant Detail
-app.get('/api/merchants/:id', (req: Request, res: Response) => {
-  if (!seededCatalog) {
-    return res.status(503).json({ error: 'Catalog data unavailable' });
-  }
-
+// 4. Merchant detail (accepts id or slug).
+app.get('/api/merchants/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
-  const merchant = (seededCatalog.merchants || []).find(
-    (m: any) => m.id === id || m.slug === id
-  );
 
-  if (!merchant) {
-    return res.status(404).json({ error: 'Merchant not found' });
+  if (isDbReady()) {
+    try {
+      const merchant = await repo.getMerchant(id);
+      if (!merchant) return res.status(404).json({ error: 'Merchant not found' });
+      return res.json(merchant);
+    } catch (err: any) {
+      console.error('[NEXG] /api/merchants/:id failed:', err?.message ?? err);
+    }
   }
 
-  res.json(merchant);
+  if (!requireDbOrFallback(res)) {
+    const merchant = (seededCatalog?.merchants ?? []).find(
+      (m: any) => m.id === id || m.slug === id
+    );
+    if (!merchant) return res.status(404).json({ error: 'Merchant not found' });
+    res.json(merchant);
+  }
 });
 
-// Start Server if run directly
-if (process.env.NODE_ENV !== 'test') {
-  app.listen(PORT, () => {
-    console.log(`[NEXG Server] Listening on http://localhost:${PORT}`);
+// 5. Search across merchants and items.
+app.get('/api/search', async (req: Request, res: Response) => {
+  const q = String(req.query.q ?? '').trim();
+  if (!q) return res.status(400).json({ error: 'Query parameter "q" is required' });
+
+  const { limit } = parsePaging(req.query.limit, 0, 20, 50);
+
+  if (isDbReady()) {
+    try {
+      return res.json({ query: q, ...(await repo.search(q, limit)) });
+    } catch (err: any) {
+      console.error('[NEXG] /api/search failed:', err?.message ?? err);
+    }
+  }
+
+  if (!requireDbOrFallback(res)) {
+    const needle = q.toLowerCase();
+    const merchants = (seededCatalog?.merchants ?? []).filter(
+      (m: any) =>
+        m.name?.toLowerCase().includes(needle) ||
+        m.category?.toLowerCase().includes(needle) ||
+        m.subcategory?.toLowerCase().includes(needle)
+    );
+    res.json({ query: q, merchants: merchants.slice(0, limit), items: [] });
+  }
+});
+
+// 6. Neighbourhoods, for filter UI.
+app.get('/api/areas', async (_req: Request, res: Response) => {
+  if (isDbReady()) {
+    try {
+      return res.json({ areas: await repo.listAreas() });
+    } catch (err: any) {
+      console.error('[NEXG] /api/areas failed:', err?.message ?? err);
+    }
+  }
+  const areas = Array.from(
+    new Set((seededCatalog?.merchants ?? []).map((m: any) => m.nairobiArea).filter(Boolean))
+  ).sort();
+  res.json({ areas });
+});
+
+// ------------------------------------------------------------ static + errors
+
+// Serve the built SPA when it exists, so `npm run build && npm run server`
+// produces a single deployable process.
+const distDir = path.resolve(REPO_ROOT, 'dist');
+if (fs.existsSync(distDir)) {
+  app.use(express.static(distDir));
+  app.get(/^(?!\/api\/).*/, (_req: Request, res: Response) => {
+    res.sendFile(path.join(distDir, 'index.html'));
   });
 }
 
-export default app;
+app.use((_req: Request, res: Response) => {
+  res.status(404).json({ error: 'Not found' });
+});
+
+app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
+  console.error('[NEXG] unhandled error:', err);
+  res.status(500).json({ error: 'Internal server error' });
+});
+
+// -------------------------------------------------------------------- startup
+
+/** Start listening. Returns the http.Server so tests can close it. */
+export async function start() {
+  await initDb();
+  return app.listen(PORT, () => {
+    const source = isDbReady() ? 'PostgreSQL' : 'seeded JSON fallback';
+    console.log(`[NEXG] API listening on http://localhost:${PORT} (source: ${source})`);
+  });
+}
+
+export { app, closeDb };
+
+// Only auto-start when executed directly, never on import (defect D-07).
+const invokedDirectly =
+  process.argv[1] && path.resolve(process.argv[1]) === path.resolve(fileURLToPath(import.meta.url));
+
+if (invokedDirectly) {
+  start().catch((err) => {
+    console.error('[NEXG] failed to start:', err);
+    process.exit(1);
+  });
+
+  for (const signal of ['SIGINT', 'SIGTERM'] as const) {
+    process.on(signal, async () => {
+      console.log(`\n[NEXG] ${signal} received, shutting down`);
+      await closeDb();
+      process.exit(0);
+    });
+  }
+}

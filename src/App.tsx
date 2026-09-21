@@ -101,20 +101,30 @@ function AppContent() {
     'courier_onboarding',
   ].includes(currentPage);
 
-  // Triggered when search bar or categories are clicked
+  // Entry point for category exploration, triggered by the hero search box and
+  // the "Explore Categories" cards.
+  //
+  // Previously this only set the discovery stage and never opened the explorer,
+  // and `setIsCategoryExplorerOpen(true)` did not exist anywhere in the app, so
+  // the search box and category cards were inert (D-10).
   const handleOpenNexGWorkflow = (query?: string) => {
-    if (query) {
-      const q = query.toLowerCase();
+    const q = (query ?? '').trim().toLowerCase();
+
+    if (q) {
+      // A concrete query goes straight to the matching vertical.
       const matched = CATEGORIES_21.find(
         (c) => c.name.toLowerCase().includes(q) || c.slug.toLowerCase().includes(q)
       );
       if (matched) {
+        setIsCategoryExplorerOpen(false);
         setSelectedNexGCategory(matched);
         setNexgStage('drilldown');
         return;
       }
     }
-    setNexgStage('discovery');
+
+    // No query, or no vertical matched: browse all 21 categories in the explorer.
+    setIsCategoryExplorerOpen(true);
   };
 
   const handleNavigate = (page: string) => {
@@ -132,7 +142,13 @@ function AppContent() {
     >
       {/* Global Docked Header */}
       {!isPartnerOrOnboarding && (currentPage !== 'home' || nexgStage === 'none') && (
-        <Header currentPage={currentPage} onNavigate={handleNavigate} />
+        <Header
+          currentPage={currentPage}
+          onNavigate={handleNavigate}
+          // "Explore" in the header used to be a no-op: it called
+          // onNavigate('home'), which on the home page changed nothing (D-17).
+          onExplore={() => handleOpenNexGWorkflow()}
+        />
       )}
 
       {/* Main View Router */}
