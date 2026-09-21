@@ -99,6 +99,24 @@ function pageFromUrl(): AppCurrentPage {
   return 'home';
 }
 
+/**
+ * `?merchant=<id-or-slug>` opens a merchant page directly.
+ *
+ * The merchant page previously existed only as React state, so it could not be
+ * linked, refreshed, or opened by an external tool — the same gap the page deep
+ * links close for the top-level routes. Only the identifier is read; the full
+ * record is fetched by MerchantRoute, which already resolves either an id or a slug.
+ */
+function merchantIdFromUrl(): string | null {
+  try {
+    const requested = new URLSearchParams(window.location.search).get('merchant');
+    if (requested && requested.trim()) return requested.trim();
+  } catch {
+    // Ignore malformed input.
+  }
+  return null;
+}
+
 function AppContent() {
   const [currentPage, setCurrentPage] = useState<AppCurrentPage>(pageFromUrl);
   const [nexgStage, setNexgStage] = useState<'none' | 'discovery' | 'drilldown'>('none');
@@ -107,6 +125,10 @@ function AppContent() {
   );
   const [isSqlModalOpen, setIsSqlModalOpen] = useState(false);
   const [selectedMerchant, setSelectedMerchant] = useState<NexGMerchant | null>(null);
+  // An identifier from the address bar, resolved to a full record by MerchantRoute.
+  // Kept separate from `selectedMerchant` so a deep link never passes a partial
+  // object off as a loaded merchant.
+  const [deepLinkMerchantId, setDeepLinkMerchantId] = useState<string | null>(merchantIdFromUrl);
 
   // Keep the query string in step with the page so the address bar stays accurate
   // and Back/Forward work, using replaceState rather than pushState: navigating the
@@ -116,6 +138,9 @@ function AppContent() {
       const params = new URLSearchParams(window.location.search);
       if (currentPage === 'home') params.delete('page');
       else params.set('page', currentPage);
+      const openMerchantId = selectedMerchant?.id ?? deepLinkMerchantId;
+      if (openMerchantId) params.set('merchant', openMerchantId);
+      else params.delete('merchant');
       const query = params.toString();
       window.history.replaceState(
         null,
@@ -125,11 +150,14 @@ function AppContent() {
     } catch {
       // History is unavailable in some embedded contexts; navigation still works.
     }
-  }, [currentPage]);
+  }, [currentPage, selectedMerchant, deepLinkMerchantId]);
 
   // Browser Back/Forward re-reads the address bar.
   useEffect(() => {
-    const onPop = () => setCurrentPage(pageFromUrl());
+    const onPop = () => {
+      setCurrentPage(pageFromUrl());
+      setDeepLinkMerchantId(merchantIdFromUrl());
+    };
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
   }, []);
@@ -264,11 +292,14 @@ function AppContent() {
           so it is tested first: when a merchant is selected we render it whatever
           else is open, and only then fall through to discovery or the site. */}
       <main className="flex-grow">
-        {selectedMerchant ? (
+        {selectedMerchant || deepLinkMerchantId ? (
           <MerchantRoute
-            merchantId={selectedMerchant.id}
+            merchantId={selectedMerchant?.id ?? deepLinkMerchantId ?? ''}
             fallback={selectedMerchant}
-            onBack={() => setSelectedMerchant(null)}
+            onBack={() => {
+              setSelectedMerchant(null);
+              setDeepLinkMerchantId(null);
+            }}
             onAddedToCart={handleAddedToCart}
             focusOfferings={focusOfferings}
           />
