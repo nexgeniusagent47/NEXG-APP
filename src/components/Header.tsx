@@ -110,7 +110,15 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
           </div>
         </div>
 
-        {/* Desktop Navigation Links */}
+        {/* Desktop Navigation Links
+            v2: reduced to Explore + Partners. The six vertical entries that used
+            to sit between them (Fine Dining, Spa & Wellness, VIP Mobility, Fine
+            Cellar, Experiences) now live in the Discovery surface, which is the
+            single browse entry point, and remain reachable from the footer.
+
+            This also fixes v1 defect D-15: the full nav needed ~1331px inside a
+            1280px `xl` breakpoint, so items crowded at exactly the width where
+            they first appeared. */}
         <nav className="hidden xl:flex items-center gap-7 text-xs sm:text-[13px] font-semibold tracking-wide">
           <button
             onClick={() => (onExplore ? onExplore() : onNavigate('home'))}
@@ -125,84 +133,6 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
             }`}
           >
             {t.nav.explore}
-          </button>
-
-          <button
-            onClick={() => onNavigate('restaurants')}
-            className={`transition-colors cursor-pointer text-left bg-transparent border-none p-0 ${
-              currentPage === 'restaurants'
-                ? isLight
-                  ? 'text-[#B88728] font-bold'
-                  : 'text-[#E5B65F] font-bold'
-                : isLight
-                ? 'text-slate-600 hover:text-slate-900'
-                : 'text-gray-300 hover:text-white'
-            }`}
-          >
-            {t.nav.restaurants}
-          </button>
-
-          <button
-            onClick={() => onNavigate('spa')}
-            className={`transition-colors cursor-pointer text-left bg-transparent border-none p-0 flex items-center gap-1.5 ${
-              currentPage === 'spa'
-                ? isLight
-                  ? 'text-[#B88728] font-bold'
-                  : 'text-[#E5B65F] font-bold'
-                : isLight
-                ? 'text-slate-600 hover:text-slate-900'
-                : 'text-gray-300 hover:text-white'
-            }`}
-          >
-            <span>{t.nav.spa}</span>
-            <span className="text-[9px] px-1.5 py-0.2 rounded-full bg-[#E5B65F]/20 text-[#B88728] dark:text-[#E5B65F] font-bold">
-              {t.nav.spaDistrict}
-            </span>
-          </button>
-
-          <button
-            onClick={() => onNavigate('transport')}
-            className={`transition-colors cursor-pointer text-left bg-transparent border-none p-0 ${
-              currentPage === 'transport'
-                ? isLight
-                  ? 'text-[#B88728] font-bold'
-                  : 'text-[#E5B65F] font-bold'
-                : isLight
-                ? 'text-slate-600 hover:text-slate-900'
-                : 'text-gray-300 hover:text-white'
-            }`}
-          >
-            {t.nav.transport}
-          </button>
-
-          <button
-            onClick={() => onNavigate('groceries')}
-            className={`transition-colors cursor-pointer text-left bg-transparent border-none p-0 ${
-              currentPage === 'groceries'
-                ? isLight
-                  ? 'text-[#B88728] font-bold'
-                  : 'text-[#E5B65F] font-bold'
-                : isLight
-                ? 'text-slate-600 hover:text-slate-900'
-                : 'text-gray-300 hover:text-white'
-            }`}
-          >
-            {t.nav.groceries}
-          </button>
-
-          <button
-            onClick={() => onNavigate('experiences')}
-            className={`transition-colors cursor-pointer text-left bg-transparent border-none p-0 ${
-              currentPage === 'experiences'
-                ? isLight
-                  ? 'text-[#B88728] font-bold'
-                  : 'text-[#E5B65F] font-bold'
-                : isLight
-                ? 'text-slate-600 hover:text-slate-900'
-                : 'text-gray-300 hover:text-white'
-            }`}
-          >
-            {t.nav.experiences}
           </button>
 
           {/* Partners Dropdown */}
@@ -373,58 +303,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
                   isLight ? 'border-slate-100 hover:text-[#B88728] text-slate-800' : 'border-white/10 hover:text-[#E5B65F] text-gray-200'
                 }`}
               >
-                {t.nav.home}
-              </button>
-
-              <button
-                onClick={() => handleMobileNav('restaurants')}
-                className={`text-left py-2 transition-colors border-b flex items-center justify-between ${
-                  isLight ? 'border-slate-100 hover:text-[#B88728] text-slate-800' : 'border-white/10 hover:text-[#E5B65F] text-gray-200'
-                }`}
-              >
-                <span>{t.nav.restaurants}</span>
-                <span className="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-[#E5B65F]/20 text-[#B88728] dark:text-[#E5B65F]">
-                  Order
-                </span>
-              </button>
-
-              <button
-                onClick={() => handleMobileNav('spa')}
-                className={`text-left py-2 transition-colors border-b flex items-center justify-between ${
-                  isLight ? 'border-slate-100 hover:text-[#B88728] text-slate-800' : 'border-white/10 hover:text-[#E5B65F] text-gray-200'
-                }`}
-              >
-                <span>{t.nav.spa}</span>
-                <span className="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded bg-[#E5B65F]/20 text-[#B88728] dark:text-[#E5B65F]">
-                  {t.nav.spaDistrict}
-                </span>
-              </button>
-
-              <button
-                onClick={() => handleMobileNav('transport')}
-                className={`text-left py-2 transition-colors border-b ${
-                  isLight ? 'border-slate-100 hover:text-[#B88728] text-slate-800' : 'border-white/10 hover:text-[#E5B65F] text-gray-200'
-                }`}
-              >
-                {t.nav.transport}
-              </button>
-
-              <button
-                onClick={() => handleMobileNav('groceries')}
-                className={`text-left py-2 transition-colors border-b ${
-                  isLight ? 'border-slate-100 hover:text-[#B88728] text-slate-800' : 'border-white/10 hover:text-[#E5B65F] text-gray-200'
-                }`}
-              >
-                {t.nav.groceries}
-              </button>
-
-              <button
-                onClick={() => handleMobileNav('experiences')}
-                className={`text-left py-2 transition-colors border-b ${
-                  isLight ? 'border-slate-100 hover:text-[#B88728] text-slate-800' : 'border-white/10 hover:text-[#E5B65F] text-gray-200'
-                }`}
-              >
-                {t.nav.experiences}
+                {t.nav.explore}
               </button>
 
               <div>

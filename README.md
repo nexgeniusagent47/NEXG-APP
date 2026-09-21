@@ -4,7 +4,7 @@
 
 **On-demand luxury concierge for Nairobi — Airbnb-grade discovery meets Glovo-grade fulfilment.**
 
-Version **v1.0.0**
+Version **v2.0.0**
 
 </div>
 
@@ -17,31 +17,72 @@ safaris, groceries, logistics and more — share one discovery and fulfilment en
 while each subcategory declares its own commerce model (instant purchase, booking,
 quote, rental, ticket, appointment).
 
-## Status — read this first
-
-v1 is a **working baseline**, not a finished product. Honest state:
+## Status
 
 | Capability | State |
 | --- | --- |
 | PostgreSQL database (21 categories / 128 subcategories / 640 merchants / 1,500 items) | ✅ working |
 | REST API over the database, with JSON cold-start fallback | ✅ working |
-| API contract tests | ✅ 29/29 passing |
-| TypeScript typecheck | ✅ clean |
-| Unit tests | ✅ 11/11 passing |
-| Frontend runs and renders | ✅ working |
-| Category explorer opens from header + hero search | ✅ fixed in v1 |
-| **Frontend reads catalogue from the API** | ⚠️ **NOT YET — see below** |
-| Auth, payments, real dispatch | ❌ out of scope for v1 |
+| **Discovery surface** — search opens a merchant browse screen | ✅ v2 |
+| **Dynamic workflows** — five commerce arcs derived per merchant | ✅ v2 |
+| **Merchant preview** — card click never navigates straight to the page | ✅ v2 |
+| **One merchant page** for all 21 verticals | ✅ v2 |
+| **One item modal** that adapts to each vertical's order requirements | ✅ v2 |
+| Add to cart from the item modal, persisted | ✅ v2 |
+| Typecheck / unit / API / flow / consistency tests | ✅ 101 assertions |
+| Merchants carrying catalogue items across all verticals | ⚠️ only 2 of 21 (data gap) |
+| Auth, payments, real dispatch, live GPS | ❌ out of scope |
 
-### The one thing to know
+### Known gap: catalogue depth
 
-The backend is real and serves the full 640-merchant catalogue from PostgreSQL.
-**The React frontend does not consume it yet.** The UI still renders bundled static
-modules (`src/data/restaurantsData.ts`, `catalogData.ts`'s 120-merchant subset),
-so you are currently looking at hardcoded data while a complete API sits next to it.
+The seeded database has items on merchants in **only two verticals**
+(`airport-transfers` and `adults-only`). Every other vertical renders a merchant page
+with an honest empty state. This is a **data** problem, not a code problem:
+`scripts/parse_excel_to_db.py` imports 1,500 of the ~14,895 items present in the
+source Excel. Fixing the importer is the highest-value next task.
 
-Wiring the frontend to the API is the **first task of v2**. It is thoroughly
-documented in [`docs/HANDOFF.md`](docs/HANDOFF.md).
+---
+
+## The discovery flow
+
+```
+landing ──click search bar──▶ Discovery ──click a merchant card──▶ Preview sheet
+                                  │                                     │
+                        live search, vertical rail,        workflow-specific action
+                        subcategory chips, sorting,        + "View full profile"
+                        pagination, skeletons                        │
+                                                                     ▼
+                                                      Merchant page (all verticals)
+                                                                     │
+                                                       click an offering
+                                                                     ▼
+                                                    Item modal (adapts to the arc)
+                                                                     │
+                                                                 Add to cart
+```
+
+Clicking a merchant card **never** navigates. The preview sheet answers "what is this
+and what can I do here?" first; only the explicit *View full profile* action opens the
+merchant page.
+
+### Dynamic workflows
+
+Every merchant carries a `workflow` string from the catalogue. `workflowEngine` maps it
+onto one of five commerce arcs, and the arc decides the card's action, the sheet's
+primary action, and what the item modal asks for:
+
+| Arc | Example verticals | The modal asks for |
+| --- | --- | --- |
+| Browse & buy | restaurants, groceries, pharmacy | quantity, options, delivery or pickup |
+| Book a slot | airport transfers, experiences | date, time, party size |
+| Request a service | concierge, laundry | service address, scope, preferred window |
+| Compliance & appointment | financial services | eligibility, then digital or branch |
+| Get a quote | logistics & shipping | origin, destination, units |
+
+Vertical-specific requirements come from the catalogue's own declarations
+(`merchantCatalog.ts` `fields` + `FIELD_DEFS`), so an alcohol order collects a liquor
+licence and an adults-only order collects an age-gate method — without either being
+hardcoded in the modal.
 
 ---
 
@@ -50,37 +91,29 @@ documented in [`docs/HANDOFF.md`](docs/HANDOFF.md).
 Prerequisites: **Node 22+**, **Docker Desktop running**.
 
 ```bash
-# 1. Install dependencies
 npm install
-
-# 2. Provision PostgreSQL (isolated container on port 5433)
-npm run db:up
-
-# 3. Start the API  (terminal 1)  -> http://localhost:3001
-npm run server
-
-# 4. Start the frontend (terminal 2) -> http://localhost:3000
-npm run dev
+npm run db:up       # provisions Postgres 15 on port 5433
+npm run server      # API on :3001   (terminal 1)
+npm run dev         # SPA on :3000   (terminal 2)
 ```
 
-Open <http://localhost:3000>.
-
-The API works **without** step 2 — it falls back to the bundled JSON cache and
-`/api/health` reports `source: seeded_json_fallback`. Postgres is preferred
-whenever `DATABASE_URL` is reachable.
+Open <http://localhost:3000> and click the search bar.
 
 ### Verify it works
 
 ```bash
-npm run lint      # TypeScript
-npm test          # unit tests
-npm run test:api  # 29 API contract assertions (needs `npm run server` running)
-npm run shots     # Playwright screenshots -> logs/screenshots/
+npm run lint             # TypeScript
+npm test                 # 34 unit tests
+npm run test:api         # 29 API contract assertions    (server must be running)
+npm run test:flow        # 18 discovery-flow assertions
+npm run test:consistency # 20 merchant-page + item-modal assertions
+npm run shots            # Playwright screenshots -> logs/screenshots/
 ```
 
 ---
 
 ## Architecture
+
 
 ```
 React 19 + Vite 6 (SPA)  :3000

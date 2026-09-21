@@ -1,7 +1,7 @@
 {
   "name": "nexg-concierge",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --port=3000 --host=0.0.0.0",
@@ -14,7 +14,10 @@
     "db:generate-sql": "python scripts/parse_excel_to_db.py",
     "test": "vitest run",
     "test:api": "node scripts/api-contract-test.mjs",
+    "test:flow": "node scripts/v2-flow-test.mjs",
+    "test:consistency": "node scripts/v3-consistency-test.mjs",
     "shots": "node scripts/screenshots.mjs",
+    "skills:install": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/install-global-skills.ps1",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit"
   },

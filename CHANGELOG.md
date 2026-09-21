@@ -6,6 +6,126 @@ All notable changes to NEXG Concierge. Format follows
 
 ---
 
+## [2.0.0] — 2026-09-21
+
+The discovery, merchant-page and item-ordering surfaces, rebuilt on real API data.
+
+### The four requirements this release delivers
+
+| # | Requirement | Result |
+| --- | --- | --- |
+| R1 | Clicking the search bar leads to a merchant discovery screen (Wolt-style) | New `DiscoveryScreen`: live search, 21-vertical rail, subcategory chips, sorting, pagination, skeletons, empty and error states |
+| R2 | Each vertical gets its own dynamic workflow for its intended use | New `workflowEngine` derives one of five commerce arcs per merchant and adapts every action to it |
+| R3 | Clicking a merchant must never go straight to the merchant screen | New `MerchantPreviewSheet`; the discovery surface stays mounted behind it and navigation requires an explicit "View full profile" |
+| R4 | Remove every nav item from Explore through Experiences in the docked state | Nav is now Explore + Partners only. Verticals remain reachable via discovery and the footer |
+
+### Added
+
+- **`src/data/workflowEngine.ts`** — maps a merchant's seeded `workflow` string onto
+  one of five commerce arcs, each with its own step rail, CTA wording and structural
+  requirements:
+
+  | Arc | Verticals | Primary action |
+  | --- | --- | --- |
+  | Browse & buy | restaurants, groceries, alcohol, pharmacy, marketplace, retail | View full menu |
+  | Book a slot | airport transfers, experiences, travel, vehicle rentals | Check availability |
+  | Request a service | concierge, laundry | Request this service |
+  | Compliance & appointment | financial services | Book appointment |
+  | Get a quote | logistics & shipping | Get shipping quote |
+
+  Falls back to a per-category default when a merchant declares no workflow, and
+  flags that fallback in the UI rather than hiding it.
+
+- **`src/components/discovery/`** — `DiscoveryScreen`, `DiscoveryMerchantCard`,
+  `MerchantPreviewSheet`.
+
+- **`src/lib/apiClient.ts`** — typed, abortable API access. Every call takes an
+  `AbortSignal`; without cancellation a slow response for `"ch"` can overwrite a
+  fast one for `"champagne"` and the grid renders a stale query.
+
+- **`src/hooks/useMerchantSearch.ts`** — debounced (280 ms) search with pagination.
+  Deliberately aborts the in-flight request on every query change.
+
+- **`src/components/forms/DynamicField.tsx`** — one renderer for all seven control
+  types, so the product cannot drift into three text-field styles.
+
+- **`scripts/v2-flow-test.mjs`** (18 assertions) and
+  **`scripts/v3-consistency-test.mjs`** (20 assertions) — behavioural tests for the
+  new flows. Neither behaviour is visible in a screenshot.
+
+### Fixed
+
+| ID | Defect | Resolution |
+| --- | --- | --- |
+| D-04 | Frontend never consumed the API | Discovery, merchant page and item modal all read `/api/*` |
+| D-16 | Hero search was a fake search | It now opens a real query surface |
+| D-10 | Category explorer unreachable | Superseded: search opens discovery. The taxonomy modal is now unreachable from the UI and remains in the tree pending a decision |
+| D-15 | Nav overflowed its own breakpoint | Removing six items resolved it as a side effect |
+| D-18 | UI claimed 134 subcategories while the database had 128 | Counts now come from the API, so the number cannot drift |
+
+### Fixed during this release (found by testing, not by reading)
+
+These are worth recording because each was invisible until something exercised it:
+
+1. **Merchant page was unreachable from discovery.** The merchant route was nested
+   *inside* the non-discovery branch of the render tree, so while discovery was open
+   the `selectedMerchant` branch could never render. "View full profile" closed the
+   sheet and displayed nothing. Fixed by giving the merchant route top precedence.
+2. **Escape tore down the whole surface.** The discovery screen and the preview
+   sheet both bound Escape. With the sheet open, Escape could unmount discovery
+   instead of closing the sheet. A modal must own Escape while it is open.
+3. **Quantity was validated but never rendered.** `'quantity'` was missing from
+   `SECTION_ORDER`, so the section builder silently dropped it while it stayed in
+   the flat requirement list. The form therefore rejected submissions over a field
+   the user had never been shown. Fixed, with a regression test asserting that every
+   validated requirement is reachable in a rendered section.
+4. **Validation copy was ungrammatical.** Editing a required field produced
+   *"How would you like to receive this? is required."* Messages were rewritten to
+   name the problem and the recovery.
+
+### Changed
+
+- **One merchant page for all 21 verticals** (`MerchantView`), replacing the
+  per-vertical bespoke presentations. What varies is the workflow, not the layout.
+- **One item modal for all order types** (`MerchantItemModal`), rendering
+  requirements grouped into Quantity / Options / When / Delivery / Required to
+  proceed / Anything else. A bag of groceries gets a quantity and a note; a
+  chauffeur transfer gets a date, a time, a party size and a pickup choice.
+- Requirements come from the catalogue's own declarations — the subcategory `fields`
+  in `merchantCatalog.ts` and the `FIELD_DEFS` schema — rather than a new invented
+  schema, so the modal and the merchant-onboarding form cannot disagree.
+- Styling aligned to the Impeccable craft floor: no kicker/eyebrow labels, no nested
+  cards, no icon-in-a-tile scaffolds, 150–200 ms transitions, one authored motion
+  moment per surface.
+- Browser surfaces themed from the palette: `::selection`, `caret-color`, and
+  global `:focus-visible`.
+
+### Verified
+
+- `tsc --noEmit` — clean.
+- `vitest run` — **34/34** across 5 suites.
+- API contract — **29/29**.
+- v2 flow — **18/18**.
+- v3 consistency — **20/20**.
+- Total: **101 assertions passing**.
+
+### Known issues carried forward
+
+- The seeded catalogue has items on merchants in only **two** verticals
+  (`airport-transfers`, `adults-only`). The other 19 verticals render a merchant
+  page with an empty offerings state. This is a **data** gap (the Excel import is
+  lossy — see D-06), not a code gap.
+- Many merchants have `subcategory` set to their category name with no
+  `subcategoryId`, because they are not linked in `merchant_subcategories`. Those
+  merchants therefore render no catalogue-declared requirements, so the compliance
+  section never appears for them. Covered by unit tests instead.
+- `inter` is still the typeface, loaded from Google Fonts via `@import`. Both are
+  flagged by the design skills; changing the typeface changes the product's whole
+  visual identity, so it is raised rather than done silently.
+- The `CategoryExplorerModal` is now unreachable. Either wire it or delete it.
+
+---
+
 ## [1.0.0] — 2026-09-21
 
 First continuously-deployable baseline. The project previously had a working UI

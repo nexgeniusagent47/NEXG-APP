@@ -10,7 +10,29 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Scrollbar hiding utilities */
+/* Browser surfaces carry the palette.
+   Text selection, the caret and focus rings are drawn by the browser, not by the
+   component library, so they silently ship a default blue that belongs to no
+   design system. Theming them is the cheapest signal that a page was built. */
+::selection {
+  background-color: #e5b65f;
+  color: #0c0e12;
+}
+
+html {
+  caret-color: #b88728;
+}
+
+:focus-visible {
+  outline: 2px solid #b88728;
+  outline-offset: 2px;
+}
+
+/* Scrollbar hiding utilities.
+   NOTE: keeping the native scrollbar is the better default on a browse surface
+   (Impeccable operate mode lists custom scrollbars under "product constraints").
+   These utilities are retained because existing components use them; new code
+   should prefer a visible, native scrollbar. */
 .scrollbar-hide::-webkit-scrollbar,
 .no-scrollbar::-webkit-scrollbar {
   display: none;
