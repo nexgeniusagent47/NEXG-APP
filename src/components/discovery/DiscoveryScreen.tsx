@@ -22,6 +22,7 @@ import {
   RefreshCw,
 } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
+import { useReducedMotion } from 'motion/react';
 import { cn } from '../../lib/utils';
 import { fetchCategories, type ApiCategory, type ApiMerchant } from '../../lib/apiClient';
 import { useMerchantSearch, SORT_OPTIONS, type SortKey } from '../../hooks/useMerchantSearch';
@@ -50,6 +51,52 @@ export default function DiscoveryScreen({
 
   const searchRef = useRef<HTMLInputElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useReducedMotion();
+  // The docked rail sits directly under the header, so its offset is the header's
+  // measured height rather than a guessed constant. Measured at runtime because the
+  // header wraps on narrow screens, and a hardcoded value that is 40px out leaves a
+  // visible gap for merchants to scroll through.
+  const headerRef = useRef<HTMLElement>(null);
+  const railRef = useRef<HTMLDivElement>(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const [isRailDocked, setIsRailDocked] = useState(false);
+  const activeChipRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const measure = () => {
+      const h = headerRef.current?.getBoundingClientRect().height ?? 0;
+      setHeaderHeight(Math.round(h));
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, []);
+
+  // "Docked" means the rail has reached its sticky offset, which is what decides
+  // whether it paints a scrim. Keying this off window.scrollY instead would be wrong:
+  // the rail is already stuck at the top of the page on short viewports, so a
+  // scroll-based test reports undocked while it is visibly pinned.
+  useEffect(() => {
+    const onScroll = () => {
+      const rail = railRef.current;
+      if (!rail) return;
+      setIsRailDocked(rail.getBoundingClientRect().top <= headerHeight + 2);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [headerHeight]);
+
+  // Keep the selected vertical visible in the rail. Without this, choosing a
+  // category far down the list leaves the active chip scrolled out of sight, so the
+  // rail stops reporting which vertical you are actually browsing.
+  useEffect(() => {
+    activeChipRef.current?.scrollIntoView({
+      behavior: reduceMotion ? 'auto' : 'smooth',
+      block: 'nearest',
+      inline: 'center',
+    });
+  }, [categoryId, reduceMotion]);
 
   const activeCategory = useMemo(
     () => categories.find((c) => c.id === categoryId) ?? null,
@@ -121,6 +168,7 @@ export default function DiscoveryScreen({
     >
       {/* ---------------------------------------------------------------- header */}
       <header
+        ref={headerRef}
         className={cn(
           'sticky top-0 z-40 border-b backdrop-blur-2xl',
           isLight ? 'bg-white/90 border-slate-200' : 'bg-[#141618]/92 border-white/10'
@@ -302,9 +350,37 @@ export default function DiscoveryScreen({
 
         {/* Results */}
         <main className="flex-1 min-w-0">
-          {/* Mobile vertical chips */}
-          <div className="lg:hidden mb-4 flex gap-2 overflow-x-auto pb-1">
-            <Chip isLight={isLight} active={categoryId === 'all'} onClick={() => handleSelectCategory('all')}>
+          {/* Vertical chips, docked.
+              Below `lg` there is no room for the left rail, so the categories used
+              to scroll away with the results — once you were 20 merchants down there
+              was no way to change vertical without scrolling back to the top. This
+              docks directly under the header (top-[66px], matching its height) and
+              keeps the categories reachable for the whole browse, the same way the
+              merchant page's section rail does.
+
+              The negative margins let it span the full width of the scroller so
+              chips pass under the page padding rather than being clipped at it. */}
+          <div
+            ref={railRef}
+            className={cn(
+              'lg:hidden sticky z-30 -mx-4 sm:-mx-6 px-4 sm:px-6 py-2.5 mb-3',
+              'flex gap-2 overflow-x-auto scrollbar-hide transition-colors duration-200',
+              isRailDocked
+                ? isLight
+                  ? 'bg-[#f7f8fa]/95 backdrop-blur-md border-b border-slate-200'
+                  : 'bg-[#111315]/95 backdrop-blur-md border-b border-white/10'
+                : 'border-b border-transparent'
+            )}
+            style={{ top: headerHeight }}
+            role="tablist"
+            aria-label="Merchant categories"
+          >
+            <Chip
+              isLight={isLight}
+              active={categoryId === 'all'}
+              onClick={() => handleSelectCategory('all')}
+              ref={activeChipRef}
+            >
               Everything
             </Chip>
             {categories.map((category) => (
@@ -313,6 +389,7 @@ export default function DiscoveryScreen({
                 isLight={isLight}
                 active={categoryId === category.id}
                 onClick={() => handleSelectCategory(category.id)}
+                ref={categoryId === category.id ? activeChipRef : undefined}
               >
                 {category.name}
               </Chip>
@@ -442,18 +519,23 @@ export default function DiscoveryScreen({
 
 // ------------------------------------------------------------------ sub-pieces
 
-const Chip: React.FC<{
-  isLight: boolean;
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}> = ({ isLight, active, onClick, children }) => (
+const Chip = React.forwardRef<
+  HTMLButtonElement,
+  {
+    isLight: boolean;
+    active: boolean;
+    onClick: () => void;
+    children: React.ReactNode;
+  }
+>(({ isLight, active, onClick, children }, ref) => (
   <button
+    ref={ref}
     type="button"
     onClick={onClick}
-    aria-pressed={active}
+    role="tab"
+    aria-selected={active}
     className={cn(
-      'px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap border transition-colors',
+      'flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap border transition-colors',
       active
         ? isLight
           ? 'bg-[#B88728] text-white border-[#B88728]'
@@ -465,7 +547,8 @@ const Chip: React.FC<{
   >
     {children}
   </button>
-);
+));
+Chip.displayName = 'Chip';
 
 const RailButton: React.FC<{
   isLight: boolean;
