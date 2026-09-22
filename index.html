@@ -3,14 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NEXG Concierge</title>
+    <title>NEXG App</title>
     <meta name="description" content="On-demand luxury concierge & gourmet discovery with NEXG bespoke experience and PostgreSQL database." />
-    <meta property="og:title" content="NEXG Concierge" />
+    <meta property="og:title" content="NEXG App" />
     <meta property="og:description" content="On-demand luxury concierge & gourmet discovery with NEXG bespoke experience and PostgreSQL database." />
+    <!-- Fonts are fetched from Google's CDN; opening the connection early keeps the
+         first paint from waiting on a cold TLS handshake. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-  </body>
+</body>
 </html>
 
