@@ -613,9 +613,9 @@ export function DateTimeField(props: DateTimeFieldProps) {
                               type="button"
                               data-focused={focused}
                               tabIndex={focused ? 0 : -1}
-                              aria-label={`${DAY_NAMES[cell.date.getDay()]} ${formatDate(cell.date, 'long')}${
-                                isToday ? ', today' : ''
-                              }${outOfRange ? ', unavailable' : ''}`}
+                              aria-label={`${formatDate(cell.date, 'long')}${isToday ? ', today' : ''}${
+                                outOfRange ? ', unavailable' : ''
+                              }`}
                               aria-disabled={outOfRange}
                               aria-current={isToday ? 'date' : undefined}
                               onClick={() => {
