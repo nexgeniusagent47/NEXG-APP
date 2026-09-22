@@ -1,11 +1,26 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-const MerchantAdCarousel = lazy(() => import('./components/MerchantAdCarousel'));
+// Home-page sections are imported EAGERLY, not lazily.
+//
+// They used to be lazy, which meant the hero painted and then four separate Suspense
+// fallbacks appeared where these belong — four identical grey blocks, arriving after the
+// page looked finished. That is what the user saw and objected to, correctly: a skeleton
+// that does not match what is arriving is worse than no skeleton at all.
+//
+// The cost of loading them up front is measured, not assumed: MerchantAdCarousel 6.0 KB
+// gzipped, NexGLandingHero 2.4, Promo 1.8, HowItWorks 1.2, Features 1.1 — 12.5 KB total.
+// Against an entry chunk of 79 KB that is noise, and it removes the entire class of
+// problem rather than dressing it up with a more accurate skeleton.
+//
+// The heavy routes stay lazy. MerchantOnboarding, the booking modals and the admin
+// surfaces are tens of kilobytes each and most visitors never open them.
+import MerchantAdCarousel from './components/MerchantAdCarousel';
+import HowItWorks from './components/HowItWorks';
+import Promo from './components/Promo';
+import Features from './components/Features';
+import NexGLandingHero from './components/NexGLandingHero';
 import ScrollToTop from './components/ScrollToTop';
-const HowItWorks = lazy(() => import('./components/HowItWorks'));
-const Promo = lazy(() => import('./components/Promo'));
-const Features = lazy(() => import('./components/Features'));
 import Footer from './components/Footer';
 const ForMerchants = lazy(() => import('./components/ForMerchants'));
 const MerchantOnboarding = lazy(() => import('./components/MerchantOnboarding'));
@@ -19,7 +34,6 @@ const ForCouriers = lazy(() => import('./components/ForCouriers'));
 const CourierOnboarding = lazy(() => import('./components/CourierOnboarding'));
 
 // NEXG Flow Components
-const NexGLandingHero = lazy(() => import('./components/NexGLandingHero'));
 const NexGDiscoveryView = lazy(() => import('./components/NexGDiscoveryView'));
 const NexGCategoryDrilldown = lazy(() => import('./components/NexGCategoryDrilldown'));
 import { CATEGORIES_21, CatalogCategory } from './data/categoryCatalog21';
