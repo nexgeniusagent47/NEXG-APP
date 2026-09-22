@@ -143,4 +143,49 @@ describe('readMerchantDraft', () => {
     expect(result.data.selectedCategoryId).toBeNull();
     expect(result.data.currentStep).toBe(1);
   });
+
+  // The hook is shared by more than one form, so the key and version must be
+  // overridable. Without these cases the two forms would silently read each other's
+  // drafts, which is worse than either having none.
+  it('reads from a custom key when one is given', () => {
+    const HOST_KEY = 'nexg_host_onboarding_v2';
+    withStorage(
+      makeStorage({
+        [HOST_KEY]: JSON.stringify({
+          version: 3,
+          savedAt: '2026-11-01T08:00:00.000Z',
+          data: { legalName: 'Host Draft' },
+        }),
+      })
+    );
+
+    const result = readMerchantDraft({ ...FALLBACK }, { key: HOST_KEY, version: 3 });
+    expect(result.data.legalName).toBe('Host Draft');
+    expect(result.savedAt?.toISOString()).toBe('2026-11-01T08:00:00.000Z');
+  });
+
+  it('does not read another form\'s draft when the key differs', () => {
+    withStorage(
+      makeStorage({
+        [KEY]: JSON.stringify({ version: 1, savedAt: 'x', data: { legalName: 'Merchant Draft' } }),
+      })
+    );
+
+    // Asking for a different key must not fall back to the merchant one.
+    const result = readMerchantDraft({ ...FALLBACK }, { key: 'nexg_host_onboarding_v2', version: 1 });
+    expect(result.data.legalName).toBe('');
+    expect(result.savedAt).toBeNull();
+  });
+
+  it('discards a draft whose version differs from the requested one', () => {
+    withStorage(
+      makeStorage({
+        [KEY]: JSON.stringify({ version: 1, savedAt: 'x', data: { legalName: 'v1 Draft' } }),
+      })
+    );
+
+    const result = readMerchantDraft({ ...FALLBACK }, { key: KEY, version: 2 });
+    expect(result.data.legalName).toBe('');
+    expect(result.savedAt).toBeNull();
+  });
 });

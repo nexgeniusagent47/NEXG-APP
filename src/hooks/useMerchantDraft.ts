@@ -1,15 +1,22 @@
 // src/hooks/useMerchantDraft.ts
 //
-// Draft persistence for the merchant onboarding form.
+// Draft persistence for the long onboarding forms.
 //
-// WHY THIS IS A SEPARATE HOOK FROM `useDraftPersistence`
-// The generic hook owns a single state object, which suits a form written that way.
-// MerchantOnboarding is 1,930 lines with twenty-odd independent `useState` calls, and
-// collapsing those into one object to satisfy a hook would be a large, risky refactor of
-// the longest form in the product purely to enable a save.
+// SNAPSHOT STYLE, NOT OWNED STATE
+// The obvious shape for this hook is to own a single state object and hand back a
+// setter. That suits a form written that way, and it is why an earlier generic hook in
+// this repo went unused: MerchantOnboarding is 1,930 lines with twenty-odd independent
+// `useState` calls, and collapsing those into one object purely to enable a save would
+// be a large, risky refactor of the longest form in the product.
 //
 // So this inverts the arrangement: the caller keeps its own state and hands over a
-// snapshot to save. Restoring happens once, at initialisation, through a plain read.
+// snapshot to save. Restoring happens once, at initialisation, through a plain read —
+// which also means the first paint is already correct, rather than rendering an empty
+// form and replacing it.
+//
+// The key and version are options because HostOnboarding also persists a draft. Two
+// forms sharing one key would silently read each other's data, which is worse than
+// either having no draft at all.
 //
 // WHAT IS PERSISTED, AND WHAT DELIBERATELY IS NOT
 // Persisted: everything the applicant typed — step, category, profile, contacts,
@@ -26,17 +33,16 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-const STORAGE_KEY = 'nexg_merchant_onboarding_draft';
-
-/**
- * Bump when a persisted field changes shape.
+/** Bump when a persisted field changes shape.
  *
  * A stored draft from an older version is DISCARDED rather than merged. A partially
  * matching object fails in confusing ways — a field that is present but means something
  * else — whereas starting clean is merely annoying, and the applicant is still on the
  * first step either way.
  */
-const DRAFT_VERSION = 1;
+export const MERCHANT_DRAFT_VERSION = 1;
+
+const DEFAULT_KEY = 'nexg_merchant_onboarding_draft';
 
 interface StoredDraft<T> {
   version: number;
@@ -45,13 +51,18 @@ interface StoredDraft<T> {
 }
 
 /** Read a draft once, at initialisation. Never throws: storage access can fail. */
-export function readMerchantDraft<T extends object>(fallback: T): { data: T; savedAt: Date | null } {
+export function readMerchantDraft<T extends object>(
+  fallback: T,
+  options: { key?: string; version?: number } = {}
+): { data: T; savedAt: Date | null } {
+  const key = options.key ?? DEFAULT_KEY;
+  const version = options.version ?? MERCHANT_DRAFT_VERSION;
   try {
-    const raw = window.localStorage.getItem(STORAGE_KEY);
+    const raw = window.localStorage.getItem(key);
     if (!raw) return { data: fallback, savedAt: null };
 
     const parsed = JSON.parse(raw) as Partial<StoredDraft<Partial<T>>>;
-    if (parsed.version !== DRAFT_VERSION || !parsed.data || typeof parsed.data !== 'object') {
+    if (parsed.version !== version || !parsed.data || typeof parsed.data !== 'object') {
       return { data: fallback, savedAt: null };
     }
     return {
@@ -77,7 +88,13 @@ export interface MerchantDraftResult {
   available: boolean;
 }
 
-export function useMerchantDraft(restoredAt: Date | null, debounceMs = 700): MerchantDraftResult {
+export function useMerchantDraft(
+  restoredAt: Date | null,
+  options: { key?: string; version?: number; debounceMs?: number } = {}
+): MerchantDraftResult {
+  const key = options.key ?? DEFAULT_KEY;
+  const version = options.version ?? MERCHANT_DRAFT_VERSION;
+  const debounceMs = options.debounceMs ?? 700;
   const [savedAt, setSavedAt] = useState<Date | null>(restoredAt);
   const [available, setAvailable] = useState(true);
   const [restored] = useState(restoredAt !== null);
@@ -104,11 +121,11 @@ export function useMerchantDraft(restoredAt: Date | null, debounceMs = 700): Mer
       timer.current = window.setTimeout(() => {
         try {
           const payload: StoredDraft<Record<string, unknown>> = {
-            version: DRAFT_VERSION,
+            version,
             savedAt: new Date().toISOString(),
             data: latest.current ?? {},
           };
-          window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+          window.localStorage.setItem(key, JSON.stringify(payload));
           setSavedAt(new Date(payload.savedAt));
           setAvailable(true);
         } catch {
@@ -119,17 +136,17 @@ export function useMerchantDraft(restoredAt: Date | null, debounceMs = 700): Mer
         }
       }, debounceMs);
     },
-    [debounceMs]
+    [key, version, debounceMs]
   );
 
   const clear = useCallback(() => {
     try {
-      window.localStorage.removeItem(STORAGE_KEY);
+      window.localStorage.removeItem(key);
     } catch {
       // Usually called while navigating away on success; nothing useful to do.
     }
     setSavedAt(null);
-  }, []);
+  }, [key]);
 
   useEffect(
     () => () => {
