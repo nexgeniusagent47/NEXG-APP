@@ -130,11 +130,21 @@
      utilities, so a component states its intent once and the theme decides the value. */
   --color-gold: #b88728;
   --color-gold-strong: #9e721d;
+  /* Pre-mixed tints of the gold, as their own theme colours.
+     Tailwind v4 does NOT generate an opacity modifier for a colour it did not derive —
+     `bg-gold/12` compiles to nothing, silently, leaving an element with no background
+     and no error anywhere. Twenty such utilities were already in the codebase across 37
+     usages, all of them no-ops. These tokens replace them: a real colour, mixed here
+     once, that the theme flips like any other. */
+  --color-gold-tint: color-mix(in oklab, #b88728 12%, transparent);
+  --color-gold-line: color-mix(in oklab, #b88728 30%, transparent);
 }
 
 html.dark {
   --color-gold: #e5b65f;
   --color-gold-strong: #d6a54d;
+  --color-gold-tint: color-mix(in oklab, #e5b65f 12%, transparent);
+  --color-gold-line: color-mix(in oklab, #e5b65f 30%, transparent);
 }
 
 /* Headings carry Quicksand.

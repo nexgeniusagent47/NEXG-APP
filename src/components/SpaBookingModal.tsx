@@ -145,7 +145,7 @@ export default function SpaBookingModal({
             </button>
 
             <div className="absolute bottom-4 left-6 right-6 z-10">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/20 text-gold border border-gold/30 text-xs font-semibold mb-1 backdrop-blur-md">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-tint text-gold border border-gold-line text-xs font-semibold mb-1 backdrop-blur-md">
                 <Sparkles size={12} />
                 <span>District Wellness Experience</span>
               </div>
@@ -188,7 +188,7 @@ export default function SpaBookingModal({
                         onClick={() => setSelectedDuration(d.duration)}
                         className={`p-3 rounded-2xl border text-center transition cursor-pointer ${
                           selectedDuration === d.duration
-                            ? 'bg-gold/15 border-gold text-white shadow-md'
+                            ? 'bg-gold-tint border-gold text-white shadow-md'
                             : 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-100'
                         }`}
                       >
@@ -210,7 +210,7 @@ export default function SpaBookingModal({
                       onClick={() => setLocationType('in_villa')}
                       className={`p-3.5 rounded-2xl border text-left flex items-start gap-3 transition-colors cursor-pointer ${
                         locationType === 'in_villa'
-                          ? 'bg-gold/15 border-gold text-white'
+                          ? 'bg-gold-tint border-gold text-white'
                           : 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-100'
                       }`}
                     >
@@ -228,7 +228,7 @@ export default function SpaBookingModal({
                       onClick={() => setLocationType('sanctuary_pavilion')}
                       className={`p-3.5 rounded-2xl border text-left flex items-start gap-3 transition-colors cursor-pointer ${
                         locationType === 'sanctuary_pavilion'
-                          ? 'bg-gold/15 border-gold text-white'
+                          ? 'bg-gold-tint border-gold text-white'
                           : 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-100'
                       }`}
                     >
@@ -343,7 +343,7 @@ export default function SpaBookingModal({
                         onClick={() => setPressureLevel(p.key as any)}
                         className={`p-2.5 rounded-xl border text-center text-xs font-semibold transition-colors cursor-pointer ${
                           pressureLevel === p.key
-                            ? 'bg-gold/20 border-gold text-gold'
+                            ? 'bg-gold-tint border-gold text-gold'
                             : 'bg-slate-100 border-slate-200 text-slate-500 hover:bg-slate-100'
                         }`}
                       >
@@ -364,7 +364,7 @@ export default function SpaBookingModal({
                         onClick={() => setSelectedOil(oil)}
                         className={`flex items-center justify-between p-3 rounded-xl border cursor-pointer transition-colors ${
                           selectedOil === oil
-                            ? 'bg-gold/10 border-gold text-white'
+                            ? 'bg-gold-tint border-gold text-white'
                             : 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-100'
                         }`}
                       >
@@ -396,7 +396,7 @@ export default function SpaBookingModal({
                             onClick={() => toggleAddOn(addon)}
                             className={`p-3 rounded-xl border flex items-center justify-between cursor-pointer transition-colors ${
                               isAdded
-                                ? 'bg-gold/15 border-gold'
+                                ? 'bg-gold-tint border-gold'
                                 : 'bg-slate-100 border-slate-200 hover:bg-slate-100'
                             }`}
                           >
@@ -426,7 +426,7 @@ export default function SpaBookingModal({
             {/* STEP 3: Guest & Room Details */}
             {step === 3 && (
               <div className="space-y-5">
-                <div className="p-4 rounded-2xl bg-gold/10 border border-gold/20 text-xs text-gray-200">
+                <div className="p-4 rounded-2xl bg-gold-tint border border-gold-line text-xs text-gray-200">
                   <div className="font-bold text-gold mb-1 flex items-center gap-1.5 text-sm">
                     <UserCheck size={16} />
                     <span>Concierge In-Villa Service Protocol</span>

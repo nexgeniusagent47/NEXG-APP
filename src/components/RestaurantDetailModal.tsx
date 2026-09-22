@@ -135,7 +135,7 @@ export default function RestaurantDetailModal({
                 {/* Google Reviews Badge in Header */}
                 <button
                   onClick={() => setModalTab('google-reviews')}
-                  className="flex items-center gap-1.5 bg-black/75 hover:bg-black/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-slate-700 border border-slate-200 cursor-pointer transition-colors hover:border-gold/60"
+                  className="flex items-center gap-1.5 bg-black/75 hover:bg-black/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-slate-700 border border-slate-200 cursor-pointer transition-colors hover:border-gold-line"
                   title="View Google Reviews"
                 >
                   <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24">
@@ -206,7 +206,7 @@ export default function RestaurantDetailModal({
                 <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.27 2.64 1.26 6.58l4.02 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
               </svg>
               <span>Google Restaurant Reviews</span>
-              <span className="text-[11px] px-2 py-0.5 rounded-full bg-gold/20 text-gold font-semibold">
+              <span className="text-[11px] px-2 py-0.5 rounded-full bg-gold-tint text-gold font-semibold">
                 {googleReviewsCount?.toLocaleString()}
               </span>
             </button>
@@ -259,7 +259,7 @@ export default function RestaurantDetailModal({
                       <div
                         key={dish.id}
                         onClick={() => setCustomizingDish(dish)}
-                        className="p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-gold/40 hover:bg-[#242629] transition-colors duration-300 flex justify-between gap-3 group cursor-pointer relative"
+                        className="p-4 rounded-2xl bg-slate-50 border border-slate-100 hover:border-gold-line hover:bg-[#242629] transition-colors duration-300 flex justify-between gap-3 group cursor-pointer relative"
                       >
                         <div className="flex flex-col justify-between flex-grow min-w-0 pr-2">
                           <div>
@@ -268,7 +268,7 @@ export default function RestaurantDetailModal({
                                 {dish.name}
                               </h4>
                               {dish.dietary?.includes('chef_special') && (
-                                <span className="text-[10px] bg-gold/15 text-gold border border-gold/30 px-1.5 py-0.5 rounded font-bold uppercase shrink-0">
+                                <span className="text-[10px] bg-gold-tint text-gold border border-gold-line px-1.5 py-0.5 rounded font-bold uppercase shrink-0">
                                   Chef Pick
                                 </span>
                               )}
@@ -436,7 +436,7 @@ export default function RestaurantDetailModal({
                                 className="w-10 h-10 rounded-full object-cover border border-slate-300"
                               />
                             ) : (
-                              <div className="w-10 h-10 rounded-full bg-gold/20 text-gold font-bold flex items-center justify-center border border-gold/30 text-sm">
+                              <div className="w-10 h-10 rounded-full bg-gold-tint text-gold font-bold flex items-center justify-center border border-gold-line text-sm">
                                 {rev.authorName.charAt(0)}
                               </div>
                             )}

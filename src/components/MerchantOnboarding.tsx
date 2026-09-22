@@ -832,7 +832,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
             {currentStep === 1 && (
               <div className="space-y-6 no-print">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center font-bold">
+                  <div className="w-8 h-8 rounded-lg bg-gold-tint text-gold flex items-center justify-center font-bold">
                     {renderIcon('Store', 'w-4 h-4')}
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Choose Category</h2>
@@ -902,7 +902,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                         onClick={() => toggleSubcategory(sub)}
                         className={`rounded-2xl p-5 border cursor-pointer hover:shadow-md transition flex flex-col justify-between ${isSelected ? 'border-[#E5B65F] bg-amber-50/20 shadow-sm' : 'border-slate-200 bg-white'}`}
                       >
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-50 text-slate-700">
+                        <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-100 text-slate-600">
                           {renderIcon(sub.icon, "w-5 h-5")}
                         </div>
                         <div className="mt-4">
@@ -1128,7 +1128,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
             {currentStep === 4 && (
               <div className="space-y-6 no-print">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center font-bold">
+                  <div className="w-8 h-8 rounded-lg bg-gold-tint text-gold flex items-center justify-center font-bold">
                     {renderIcon('Briefcase', 'w-4 h-4')}
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Business Profile</h2>
@@ -1200,7 +1200,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
               <div className="space-y-6 no-print">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center font-bold">
+                    <div className="w-8 h-8 rounded-lg bg-gold-tint text-gold flex items-center justify-center font-bold">
                       {renderIcon('MapPin', 'w-4 h-4')}
                     </div>
                     <h2 className="text-xl md:text-2xl font-bold text-slate-950">Store Branches & Location Map</h2>
@@ -1355,7 +1355,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
             {currentStep === 6 && (
               <div className="space-y-6 no-print">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center font-bold">
+                  <div className="w-8 h-8 rounded-lg bg-gold-tint text-gold flex items-center justify-center font-bold">
                     {renderIcon('Users', 'w-4 h-4')}
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Contact &amp; Social Media</h2>
@@ -1458,7 +1458,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
             {currentStep === 7 && (
               <div className="space-y-6 no-print">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center font-bold">
+                  <div className="w-8 h-8 rounded-lg bg-gold-tint text-gold flex items-center justify-center font-bold">
                     {renderIcon('Clock', 'w-4 h-4')}
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Operations &amp; Delivery Logistics</h2>
@@ -1717,7 +1717,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
             {currentStep === 8 && (
               <div className="space-y-6 no-print">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center font-bold">
+                  <div className="w-8 h-8 rounded-lg bg-gold-tint text-gold flex items-center justify-center font-bold">
                     {renderIcon('CreditCard', 'w-4 h-4')}
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Payment Details</h2>
@@ -1805,7 +1805,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
             {currentStep === 9 && (
               <div className="space-y-6 no-print">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center font-bold">
+                  <div className="w-8 h-8 rounded-lg bg-gold-tint text-gold flex items-center justify-center font-bold">
                     {renderIcon('FileText', 'w-4 h-4')}
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Documents &amp; Brand Assets</h2>
@@ -1886,7 +1886,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
             {currentStep === 10 && (
               <div className="space-y-6">
                 <div className="flex items-center gap-3 no-print">
-                  <div className="w-8 h-8 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center font-bold">
+                  <div className="w-8 h-8 rounded-lg bg-gold-tint text-gold flex items-center justify-center font-bold">
                     {renderIcon('ShieldCheck', 'w-4 h-4')}
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Partnership Agreement Contract</h2>
@@ -2178,7 +2178,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                 <button 
                   type="button" 
                   onClick={handleConfirmMapPin}
-                  className="px-5 py-2 bg-amber-500 text-white font-bold rounded-xl hover:bg-amber-600 shadow transition-colors"
+                  className="px-5 py-2 bg-gold-tint text-gold font-bold rounded-xl hover:bg-amber-600 shadow transition-colors"
                 >
                   Confirm Coordinates
                 </button>

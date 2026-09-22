@@ -127,7 +127,7 @@ export default function TransportBookingModal({
             </button>
 
             <div className="absolute bottom-4 left-6 right-6 z-10">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/20 text-gold border border-gold/30 text-xs font-semibold mb-1 backdrop-blur-md">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-tint text-gold border border-gold-line text-xs font-semibold mb-1 backdrop-blur-md">
                 <Sparkles size={12} />
                 <span>VIP Concierge Mobility</span>
               </div>
@@ -173,7 +173,7 @@ export default function TransportBookingModal({
                         onClick={() => setServiceType(s.key as any)}
                         className={`p-3 rounded-2xl border text-center transition cursor-pointer ${
                           serviceType === s.key
-                            ? 'bg-gold/15 border-gold text-white shadow-md'
+                            ? 'bg-gold-tint border-gold text-white shadow-md'
                             : 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-100'
                         }`}
                       >
@@ -304,7 +304,7 @@ export default function TransportBookingModal({
                           onClick={() => toggleAmenity(amenity)}
                           className={`flex items-center justify-between p-3 rounded-xl border cursor-pointer transition-colors ${
                             isSelected
-                              ? 'bg-gold/15 border-gold text-white'
+                              ? 'bg-gold-tint border-gold text-white'
                               : 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-100'
                           }`}
                         >

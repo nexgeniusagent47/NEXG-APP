@@ -287,7 +287,7 @@ export default function DishCustomizerModal({
               {dish.dietary?.map((diet) => (
                 <span
                   key={diet}
-                  className="px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-black/60 text-gold border border-gold/30 backdrop-blur-md uppercase"
+                  className="px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide bg-black/60 text-gold border border-gold-line backdrop-blur-md uppercase"
                 >
                   {diet.replace('_', ' ')}
                 </span>
@@ -379,7 +379,7 @@ export default function DishCustomizerModal({
                               {group.name}
                             </h4>
                             {isRequired ? (
-                              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gold/20 text-gold border border-gold/30 uppercase">
+                              <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gold-tint text-gold border border-gold-line uppercase">
                                 Required
                               </span>
                             ) : (
@@ -399,7 +399,7 @@ export default function DishCustomizerModal({
                                   onClick={() => handleRadioSelect(group.id, choice.id, choice.name, choice.price)}
                                   className={`flex items-center justify-between p-3.5 rounded-xl border transition cursor-pointer ${
                                     isSelected
-                                      ? 'bg-gold/10 border-gold text-white shadow-sm'
+                                      ? 'bg-gold-tint border-gold text-white shadow-sm'
                                       : 'bg-slate-50 border-slate-100 hover:border-slate-300 text-slate-600'
                                   }`}
                                 >
@@ -430,7 +430,7 @@ export default function DishCustomizerModal({
                                 onClick={() => handleCheckboxToggle(group.id, choice.id, choice.name, choice.price)}
                                 className={`flex items-center justify-between p-3.5 rounded-xl border transition cursor-pointer ${
                                   isChecked
-                                    ? 'bg-gold/10 border-gold text-white shadow-sm'
+                                    ? 'bg-gold-tint border-gold text-white shadow-sm'
                                     : 'bg-slate-50 border-slate-100 hover:border-slate-300 text-slate-600'
                                 }`}
                               >
@@ -637,7 +637,7 @@ export default function DishCustomizerModal({
                       >
                         <div className="flex items-start justify-between gap-2">
                           <div className="flex items-center gap-2.5">
-                            <div className="w-8 h-8 rounded-full bg-gold/15 border border-gold/30 text-gold font-bold text-xs flex items-center justify-center">
+                            <div className="w-8 h-8 rounded-full bg-gold-tint border border-gold-line text-gold font-bold text-xs flex items-center justify-center">
                               {rev.authorName.charAt(0)}
                             </div>
                             <div>
@@ -733,7 +733,7 @@ export default function DishCustomizerModal({
             <button
               type="button"
               onClick={handleAddToCart}
-              className="flex-grow flex items-center justify-between px-6 py-3.5 rounded-full bg-gold hover:bg-gold-strong text-slate-950 font-bold text-sm sm:text-base transition transform active:scale-[0.98] shadow-lg shadow-gold/15 cursor-pointer"
+              className="flex-grow flex items-center justify-between px-6 py-3.5 rounded-full bg-gold hover:bg-gold-strong text-slate-950 font-bold text-sm sm:text-base transition transform active:scale-[0.98] shadow-lg shadow-gold-tint cursor-pointer"
             >
               <span>Add to Order</span>
               <span className="font-extrabold tracking-wide">
