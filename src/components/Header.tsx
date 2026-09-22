@@ -39,6 +39,37 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  /**
+   * Close the drawer whenever the route changes.
+   *
+   * Every navigation path funnels through `currentPage`, so this covers the ones that
+   * bypass `handleMobileNav` — the logo, the Explore button, a deep link, and any caller
+   * that forgets. Closing at the point of navigation rather than in each handler is what
+   * makes it impossible to add a menu item later that forgets to dismiss the menu.
+   */
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+    setIsPartnersExpanded(false);
+  }, [currentPage]);
+
+  /**
+   * Lock the page behind the drawer while it is open.
+   *
+   * Without this the page scrolls under an open drawer, which on a phone means the user
+   * scrolls the content they cannot see and loses their place. Restoring the previous
+   * value rather than clearing it, so a second scroll lock elsewhere is not broken.
+   */
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    if (!isMobileMenuOpen) return;
+
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [isMobileMenuOpen]);
+
   const handleMobileNav = (page: any) => {
     onNavigate(page);
     setIsMobileMenuOpen(false);

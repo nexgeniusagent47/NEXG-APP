@@ -25,6 +25,7 @@ import { useTheme } from '../../context/ThemeContext';
 import { useReducedMotion } from 'motion/react';
 import { cn } from '../../lib/utils';
 import { fetchCategories, type ApiCategory, type ApiMerchant } from '../../lib/apiClient';
+import { emojiFor, categoryEmoji } from '../../data/railEmoji';
 import { useMerchantSearch, SORT_OPTIONS, type SortKey } from '../../hooks/useMerchantSearch';
 import { DiscoveryMerchantCard } from './DiscoveryMerchantCard';
 
@@ -244,6 +245,9 @@ export default function DiscoveryScreen({
                 isLight={isLight}
                 active={subcategoryId === sub.id}
                 onClick={() => setSubcategoryId(sub.id)}
+                // Falls back to the parent category's emoji, so a subcategory with no
+                // entry of its own still shows a glyph rather than a blank leading gap.
+                emoji={emojiFor(activeCategory?.id, sub.name) ?? categoryEmoji(activeCategory?.id)}
               >
                 {sub.name}
               </Chip>
@@ -380,6 +384,7 @@ export default function DiscoveryScreen({
               active={categoryId === 'all'}
               onClick={() => handleSelectCategory('all')}
               ref={activeChipRef}
+              emoji="✨"
             >
               Everything
             </Chip>
@@ -390,6 +395,7 @@ export default function DiscoveryScreen({
                 active={categoryId === category.id}
                 onClick={() => handleSelectCategory(category.id)}
                 ref={categoryId === category.id ? activeChipRef : undefined}
+                emoji={categoryEmoji(category.id)}
               >
                 {category.name}
               </Chip>
@@ -526,8 +532,10 @@ const Chip = React.forwardRef<
     active: boolean;
     onClick: () => void;
     children: React.ReactNode;
+    /** Emoji shown before the label. See src/data/railEmoji.ts for why emoji. */
+    emoji?: string;
   }
->(({ isLight, active, onClick, children }, ref) => (
+>(({ isLight, active, onClick, children, emoji }, ref) => (
   <button
     ref={ref}
     type="button"
@@ -535,16 +543,29 @@ const Chip = React.forwardRef<
     role="tab"
     aria-selected={active}
     className={cn(
-      'flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap border transition-colors',
+      // Sized to Wolt's rail: taller than a text pill so the emoji has room to read as a
+      // glyph rather than a speck, which is what makes the rail scannable at a glance.
+      // `gap` separates the glyph from the label without a wrapper element.
+      'flex-shrink-0 inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-bold whitespace-nowrap border transition-colors',
+      // Tactile press feedback on every chip: 100-160ms is Emil's band for a press, and
+      // scale-only keeps it off the layout path.
+      'active:scale-[0.97] transition-transform',
       active
         ? isLight
           ? 'bg-[#B88728] text-white border-[#B88728]'
           : 'bg-[#E5B65F] text-slate-950 border-[#E5B65F]'
         : isLight
         ? 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
-        : 'bg-white/5 text-gray-300 border-white/10 hover:bg-white/10'
+        : 'bg-white/8 text-gray-200 border-white/12 hover:bg-white/12'
     )}
   >
+    {/* aria-hidden because the label already carries the meaning; a screen reader
+        announcing "fork and knife emoji Restaurants" is noise, not information. */}
+    {emoji && (
+      <span aria-hidden="true" className="text-sm leading-none">
+        {emoji}
+      </span>
+    )}
     {children}
   </button>
 ));
