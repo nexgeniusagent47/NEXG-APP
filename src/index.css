@@ -147,6 +147,39 @@ html.dark {
   --color-gold-line: color-mix(in oklab, #e5b65f 30%, transparent);
 }
 
+/* ---------------------------------------------------------------- hero headline ---
+   Baked from an accepted live-mode variant (scale=large, leading=snug, ink=tight) and
+   promoted out of the temporary @scope scaffolding into real CSS.
+
+   TWO LINES, DELIBERATELY. Line 1 carries the promise, line 2 the qualifier. They are
+   two separate thoughts rather than one wrapped sentence, so line 2 is forced onto its
+   own line instead of being allowed to reflow at some widths and not others.
+
+   LINE 2 IS 0.95em, NOT A FIXED SIZE. An `em` tracks the clamp() on the parent
+   automatically, so the 5% step holds at every viewport instead of needing its own
+   breakpoint ladder that would drift out of step with the line above it.
+
+   LEADING IS 0.94, TIGHTER THAN 1, because the two lines are read as a single block. At
+   88px the default leading opens a gap that splits them into two unrelated statements,
+   and the negative tracking does the same job horizontally. */
+.hero-h1 {
+  font-size: clamp(3.75rem, 6.4vw, 5.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.035em;
+  margin-bottom: 1.75rem;
+  text-shadow: 0 6px 26px rgba(0, 0, 0, 0.65);
+}
+
+.hero-h1__lead {
+  color: var(--color-gold);
+}
+
+/* `block` so it always starts a new line regardless of the width available. */
+.hero-h1__line2 {
+  display: block;
+  font-size: 0.95em;
+}
+
 /* Headings carry Quicksand.
    A rounded geometric sans: circular bowls, monolinear strokes, open apertures. It
    reads friendly and modern rather than corporate.

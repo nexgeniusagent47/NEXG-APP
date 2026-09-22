@@ -53,11 +53,13 @@ export interface HeroPod {
 }
 
 export const HERO_PODS: HeroPod[] = [
+  // Title Case on every lead: these are display words sitting directly under the
+  // headline, so they read as labels rather than as mid-sentence text.
   { id: 'relax', lead: 'Relax', support: 'spa · massage · wellness' },
   { id: 'cravings', lead: 'Cravings', support: 'food · restaurants · late-night' },
   { id: 'arrive', lead: 'Arrive', support: 'chauffeurs · transfers · airport' },
-  { id: 'stockup', lead: 'Stock up', support: 'groceries · pharmacy · butcher' },
-  { id: 'sorted', lead: 'Get sorted', support: 'laundry · repairs · vehicle care' },
+  { id: 'stockup', lead: 'Stock Up', support: 'groceries · pharmacy · butcher' },
+  { id: 'sorted', lead: 'Get Sorted', support: 'laundry · repairs · vehicle care' },
 ];
 
 /**

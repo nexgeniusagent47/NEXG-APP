@@ -119,11 +119,19 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
       <div className="container mx-auto max-w-[1400px] relative z-20 flex flex-col justify-center flex-1">
         <div className="max-w-xl lg:max-w-2xl mt-auto sm:mt-0 mb-8 sm:mb-0">
           
-          <h1 className={`font-display text-[2.5rem] leading-[1.05] sm:text-5xl md:text-6xl lg:text-[4.25rem] font-black mb-4 sm:mb-6 tracking-tight transition-colors duration-300 ${
-            isLight ? 'text-slate-900 drop-shadow-sm' : 'text-white drop-shadow-[0_4px_16px_rgba(0,0,0,0.6)]'
-          }`}>
-            <span className={isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'}>{t.hero.titleLine1}</span><br />
-            {t.hero.titleLine2}
+          {/* Hero headline. Values baked from the accepted live-mode variant:
+              scale=large, leading=snug, ink=tight. The @scope scaffolding and the
+              helper markers are gone; this is the permanent form.
+          
+              Line 2 is 0.95em, so it tracks the clamp on the h1 automatically rather
+              than needing its own breakpoint ladder. */}
+          <h1
+            className={`hero-h1 font-display font-black transition-colors duration-300 ${
+              isLight ? 'text-slate-900 drop-shadow-sm' : 'text-white'
+            }`}
+          >
+            <span className="hero-h1__lead">{t.hero.titleLine1}</span>{' '}
+            <span className="hero-h1__line2">{t.hero.titleLine2}</span>
           </h1>
 
           {/* The rotating line: a customer's word, then what that word buys.
