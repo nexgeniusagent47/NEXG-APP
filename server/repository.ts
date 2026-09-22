@@ -108,13 +108,17 @@ export function mapItem(row: any, merchant?: { id: string; name: string }, subca
 
 /** Total counts, from the database, used by /api/health. */
 export async function getCounts() {
-  const rows = await query<{ categories: string; subcategories: string; merchants: string; items: string }>(`
+  const rows = await query<{ categories: string; subcategories: string; merchants: string; items: string }>(
+    `
     SELECT
       (SELECT count(*) FROM categories)    AS categories,
       (SELECT count(*) FROM subcategories) AS subcategories,
       (SELECT count(*) FROM merchants WHERE status = 'active') AS merchants,
       (SELECT count(*) FROM items)         AS items
-  `);
+  `,
+    [],
+    'catalog.counts'
+  );
   const r = rows[0] ?? ({} as any);
   return {
     totalCategories: asNumber(r.categories, 0),
@@ -126,18 +130,26 @@ export async function getCounts() {
 
 /** 21 categories with their subcategories nested. */
 export async function listCategories() {
-  const cats = await query(`
+  const cats = await query(
+    `
     SELECT id, name, slug, description, icon_name, image_url, display_order
     FROM categories
     WHERE is_active = TRUE
     ORDER BY display_order, name
-  `);
-  const subs = await query(`
+  `,
+    [],
+    'categories.list'
+  );
+  const subs = await query(
+    `
     SELECT id, category_id, name, slug, description, image_url, display_order
     FROM subcategories
     WHERE is_active = TRUE
     ORDER BY display_order, name
-  `);
+  `,
+    [],
+    'subcategories.list'
+  );
 
   const byCategory = new Map<string, any[]>();
   for (const s of subs) {
@@ -235,7 +247,8 @@ export async function listMerchants(opts: MerchantQuery) {
   const countRows = await query<{ total: string }>(
     `SELECT count(*) AS total FROM merchants m JOIN categories c ON c.id = m.primary_category_id
      WHERE m.status = 'active'${whereSql}`,
-    params
+    params,
+    'merchants.count'
   );
   const total = asNumber(countRows[0]?.total, 0);
 
@@ -245,7 +258,8 @@ export async function listMerchants(opts: MerchantQuery) {
     `${MERCHANT_SELECT}${whereSql}
      ORDER BY ${resolveSortClause(opts.sort)}
      LIMIT $${limitParam} OFFSET $${offsetParam}`,
-    [...params, opts.limit, opts.offset]
+    [...params, opts.limit, opts.offset],
+    'merchants.list'
   );
 
   const merchants = rows.map((r) => mapMerchant(r));
@@ -275,7 +289,8 @@ export async function attachSubcategories(merchants: any[]): Promise<any[]> {
      JOIN subcategories s ON s.id = ms.subcategory_id
      WHERE ms.merchant_id = ANY($1::varchar[])
      ORDER BY ms.merchant_id, ms.is_primary DESC, s.display_order, s.name`,
-    [ids]
+    [ids],
+    'merchants.subcategories.page'
   );
 
   const byMerchant = new Map<string, any>();
@@ -311,7 +326,8 @@ export async function attachItems(merchants: any[], itemLimit = 30): Promise<any
      ) ranked
      WHERE rn <= $2
      ORDER BY merchant_id, rn`,
-    [ids, itemLimit]
+    [ids, itemLimit],
+    'items.byMerchants.page'
   );
 
   const byMerchant = new Map<string, any[]>();
@@ -332,7 +348,8 @@ export async function attachItems(merchants: any[], itemLimit = 30): Promise<any
 export async function getMerchant(idOrSlug: string, itemLimit = 60) {
   const rows = await query(
     `${MERCHANT_SELECT} AND (m.id = $1 OR m.slug = $1) LIMIT 1`,
-    [idOrSlug]
+    [idOrSlug],
+    'merchants.byIdOrSlug'
   );
   const row = rows[0];
   if (!row) return null;
@@ -344,7 +361,8 @@ export async function getMerchant(idOrSlug: string, itemLimit = 60) {
      WHERE ms.merchant_id = $1
      ORDER BY ms.is_primary DESC, s.display_order
      LIMIT 1`,
-    [row.id]
+    [row.id],
+    'merchants.primarySubcategory'
   );
 
   const itemRows = await query(
@@ -355,7 +373,8 @@ export async function getMerchant(idOrSlug: string, itemLimit = 60) {
      WHERE i.merchant_id = $1 AND i.is_available = TRUE
      ORDER BY i.is_featured DESC, i.display_order, i.name
      LIMIT $2`,
-    [row.id, itemLimit]
+    [row.id, itemLimit],
+    'items.byMerchant'
   );
 
   const merchant = mapMerchant(row, [], subRows[0]);
@@ -373,7 +392,8 @@ export async function search(term: string, limit = 20) {
     `${MERCHANT_SELECT} AND (m.name ILIKE $1 OR c.name ILIKE $1 OR m.metadata->>'area' ILIKE $1)
      ORDER BY m.is_featured DESC, m.rating DESC
      LIMIT $2`,
-    [like, limit]
+    [like, limit],
+    'search.merchants'
   );
 
   const itemRows = await query(
@@ -384,7 +404,8 @@ export async function search(term: string, limit = 20) {
      WHERE i.is_available = TRUE AND (i.name ILIKE $1 OR i.description ILIKE $1)
      ORDER BY i.is_featured DESC, i.name
      LIMIT $2`,
-    [like, limit]
+    [like, limit],
+    'search.items'
   );
 
   return {
@@ -401,7 +422,9 @@ export async function listAreas() {
     `SELECT DISTINCT metadata->>'area' AS area
      FROM merchants
      WHERE status = 'active' AND metadata->>'area' IS NOT NULL
-     ORDER BY area`
+     ORDER BY area`,
+    [],
+    'merchants.areas'
   );
   return rows.map((r) => asString(r.area)).filter(Boolean);
 }

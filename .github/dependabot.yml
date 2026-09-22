@@ -1,0 +1,87 @@
+# .github/dependabot.yml
+# Weekly dependency updates for npm and GitHub Actions.
+#
+# Ungrouped Dependabot is a PR firehose: this project has ~30 direct dependencies
+# plus transitives, and a Monday with fifteen separate "bump patch version" pull
+# requests is a Monday where nobody reads any of them. Minor and patch updates are
+# grouped into one PR per ecosystem because they are the ones that should usually
+# land unexamined; majors stay separate because each one is a decision — React 20
+# or Express 5 needs a migration, not a review approval.
+#
+# The update PRs run .github/workflows/ci.yml like any other change, so the
+# typecheck, unit tests and build gate them automatically.
+
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Africa/Nairobi
+    open-pull-requests-limit: 5
+    commit-message:
+      # Matches the repository's conventional-commit prefixes (chore(release):,
+      # feat:, fix:) so the history stays filterable.
+      prefix: chore
+      include: scope
+    groups:
+      npm-minor-patch:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: [minor, patch]
+      # Security fixes arrive on their own schedule and should not wait for the
+      # weekly batch to open a PR.
+      npm-security:
+        applies-to: security-updates
+        patterns: ["*"]
+    ignore:
+      # Vite 6 and Tailwind 4 are pinned deliberately; both majors carry breaking
+      # config changes this app has not migrated to. Remove when the migration is
+      # planned, not when Dependabot suggests it.
+      - dependency-name: vite
+        update-types: [version-update:semver-major]
+      - dependency-name: tailwindcss
+        update-types: [version-update:semver-major]
+      - dependency-name: "@tailwindcss/vite"
+        update-types: [version-update:semver-major]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Africa/Nairobi
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: chore
+      include: scope
+    groups:
+      # Actions move in lockstep (checkout, setup-node, the docker/* family).
+      # One PR per week keeps them version-aligned; the workflows are small enough
+      # that reviewing them together is cheaper than reviewing them apart.
+      actions:
+        patterns: ["*"]
+
+  # The app image is pinned to postgres:15-alpine in both Dockerfile-adjacent
+  # compose files. Dependabot tracks Dockerfiles and compose files with this
+  # ecosystem, so the base image does not rot unnoticed.
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Africa/Nairobi
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: chore
+      include: scope
+    ignore:
+      # Postgres 15 is the version .github/workflows/ci.yml and
+      # scripts/setup-postgres.ps1 both target. A major bump is a migration, and
+      # it must be planned deliberately rather than accepted from a bot PR.
+      - dependency-name: postgres
+        update-types: [version-update:semver-major]

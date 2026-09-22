@@ -13,6 +13,8 @@
 
 import { createRequire } from 'node:module';
 
+import { withSpan } from './tracing.ts';
+
 const require = createRequire(import.meta.url);
 
 type PgPool = {
@@ -70,7 +72,9 @@ export function initDb(): Promise<boolean> {
     const attempts = 5;
     for (let i = 1; i <= attempts; i++) {
       try {
-        await candidate.query('SELECT 1');
+        await withSpan('db.connect', { 'db.system': 'postgresql', 'db.attempt': i }, () =>
+          candidate.query('SELECT 1')
+        );
         pool = candidate;
         pgUnavailableReason = null;
         console.log('[NEXG db] connected to PostgreSQL');
@@ -104,11 +108,25 @@ export function getDbUnavailableReason(): string | null {
 /**
  * Run a parameterised query. Throws if the database is not ready — callers
  * must check `isDbReady()` and take the fallback path.
+ *
+ * `name` is the span name and MUST be a stable label supplied by the repository
+ * ("merchants.list"), never the statement: SQL text carries schema detail, and a
+ * statement logged for debugging is one step away from a statement logged with
+ * its parameter values inlined.
  */
-export async function query<T = any>(text: string, params: unknown[] = []): Promise<T[]> {
-  if (!pool) throw new Error('database not initialised');
-  const result = await pool.query(text, params);
-  return result.rows as T[];
+export async function query<T = any>(
+  text: string,
+  params: unknown[] = [],
+  name = 'db.query'
+): Promise<T[]> {
+  const activePool = pool;
+  if (!activePool) throw new Error('database not initialised');
+
+  return withSpan(name, { 'db.system': 'postgresql', 'db.params': params.length }, async (span) => {
+    const result = await activePool.query(text, params);
+    span.setAttribute('db.rows', result.rowCount ?? result.rows.length);
+    return result.rows as T[];
+  });
 }
 
 export async function closeDb(): Promise<void> {

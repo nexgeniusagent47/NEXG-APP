@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { responsiveProps } from './ResponsiveImage';
 import { 
   ArrowRight, 
   ArrowLeft,
@@ -32,10 +33,6 @@ import LogoIcon from './LogoIcon';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useLanguage } from '../context/LanguageContext';
 
-import couriersHeroImg from '../assets/images/couriers_hero_banner_1783931131203.jpg';
-import couriersHeroLightImg from '../assets/images/couriers_hero_light_1789911815432.jpg';
-import courierDeliveryImg from '../assets/images/courier_delivery_door_1783931148146.jpg';
-import nexgMotorbikeMockup from '../assets/images/nexg_motorbike_mockup.jpg';
 import { useTheme } from '../context/ThemeContext';
 
 interface ForCouriersProps {
@@ -243,7 +240,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-[#F8F9FA] via-[#F8F9FA]/70 to-transparent z-10"></div>
               <div className="absolute inset-0 bg-gradient-to-r from-[#F8F9FA]/95 via-[#F8F9FA]/70 to-transparent z-10"></div>
               <img 
-                src={couriersHeroLightImg} 
+                src={responsiveProps('couriers_hero_light_1789911815432.jpg', '100vw')?.src} 
                 alt="Couriers Hero Daylight Background" 
                 className="w-full h-full object-cover opacity-85 brightness-105 transition-transform duration-[10000ms] hover:scale-105" 
                 referrerPolicy="no-referrer"
@@ -254,7 +251,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-[#1a1c1c] via-[#1a1c1c]/80 to-transparent z-10"></div>
               <div className="absolute inset-0 bg-gradient-to-r from-[#1a1c1c]/95 via-[#1a1c1c]/70 to-transparent z-10"></div>
               <img 
-                src={nexgMotorbikeMockup} 
+                src={responsiveProps('nexg_motorbike_mockup.jpg', '100vw')?.src} 
                 alt="Couriers Hero Background" 
                 className="w-full h-full object-cover opacity-80 sm:opacity-90 transition-transform duration-[10000ms] hover:scale-105" 
                 referrerPolicy="no-referrer"
@@ -518,7 +515,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               <img 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
                 alt="Ambassador scanning the driver app" 
-                src={courierDeliveryImg} 
+                src={responsiveProps('courier_delivery_door_1783931148146.jpg', '100vw')?.src} 
                 referrerPolicy="no-referrer"
               />
               <div className={`absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 backdrop-blur-xl p-4 sm:p-6 rounded-2xl z-20 border shadow-lg ${
@@ -1037,7 +1034,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               <img 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
                 alt="Ambassador delivering gourmet meals" 
-                src={courierDeliveryImg} 
+                src={responsiveProps('courier_delivery_door_1783931148146.jpg', '100vw')?.src} 
                 referrerPolicy="no-referrer"
               />
               <div className={`absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 backdrop-blur-xl p-4 sm:p-6 rounded-2xl z-20 border shadow-lg ${

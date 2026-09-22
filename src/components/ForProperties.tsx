@@ -30,11 +30,8 @@ import LogoIcon from './LogoIcon';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useLanguage } from '../context/LanguageContext';
 
-import propertiesHeroImg from '../assets/images/properties_hero_1783930332445.jpg';
-import propertiesHeroLightImg from '../assets/images/properties_hero_light_1789911827135.jpg';
-import qrAdvantageImg from '../assets/images/qr_advantage_1783930346328.jpg';
-import propertiesCtaImg from '../assets/images/properties_cta_1783930356640.jpg';
 import { useTheme } from '../context/ThemeContext';
+import { responsiveProps } from './ResponsiveImage';
 
 interface ForPropertiesProps {
   onNavigate: (page: any) => void;
@@ -234,7 +231,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-[#F8F9FA] via-[#F8F9FA]/70 to-transparent z-10"></div>
               <div className="absolute inset-0 bg-gradient-to-r from-[#F8F9FA]/95 via-[#F8F9FA]/70 to-transparent z-10"></div>
               <img 
-                src={propertiesHeroLightImg} 
+                src={responsiveProps('properties_hero_light_1789911827135.jpg', '100vw')?.src} 
                 alt="Properties Daylight Hero Background" 
                 className="w-full h-full object-cover opacity-85 brightness-105 transition-transform duration-[10000ms] hover:scale-105" 
                 referrerPolicy="no-referrer"
@@ -245,7 +242,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               <div className="absolute inset-0 bg-gradient-to-t from-[#0d0e0e] via-[#0d0e0e]/80 to-transparent z-10"></div>
               <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent z-10"></div>
               <img 
-                src={propertiesHeroImg} 
+                src={responsiveProps('properties_hero_1783930332445.jpg', '100vw')?.src} 
                 alt="Properties Hero Background" 
                 className="w-full h-full object-cover opacity-65 transition-transform duration-[10000ms] hover:scale-105" 
                 referrerPolicy="no-referrer"
@@ -495,7 +492,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               <img 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
                 alt="Luxury suite with guest scanning QR code" 
-                src={qrAdvantageImg} 
+                src={responsiveProps('qr_advantage_1783930346328.jpg', '100vw')?.src} 
               />
               <div className={`absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 backdrop-blur-xl p-4 sm:p-6 rounded-2xl z-20 shadow-lg border ${
                 isLight
@@ -1113,7 +1110,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           <div className="absolute inset-0 z-0">
             <div className="absolute inset-0 bg-black/60 z-10"></div>
             <img 
-              src={propertiesCtaImg} 
+              src={responsiveProps('properties_cta_1783930356640.jpg', '100vw')?.src} 
               alt="Properties CTA Sunset Background" 
               className="w-full h-full object-cover transition-transform duration-[8000ms] hover:scale-105" 
             />

@@ -1,47 +1,50 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import MerchantAdCarousel from './components/MerchantAdCarousel';
+const MerchantAdCarousel = lazy(() => import('./components/MerchantAdCarousel'));
 import ScrollToTop from './components/ScrollToTop';
-import HowItWorks from './components/HowItWorks';
-import Promo from './components/Promo';
-import Features from './components/Features';
+const HowItWorks = lazy(() => import('./components/HowItWorks'));
+const Promo = lazy(() => import('./components/Promo'));
+const Features = lazy(() => import('./components/Features'));
 import Footer from './components/Footer';
-import ForMerchants from './components/ForMerchants';
-import MerchantOnboarding from './components/MerchantOnboarding';
-import Restaurants from './components/Restaurants';
-import Experiences from './components/Experiences';
-import SpaWellness from './components/SpaWellness';
-import TransportPage from './components/TransportPage';
-import GroceriesPage from './components/GroceriesPage';
-import ForProperties from './components/ForProperties';
-import ForCouriers from './components/ForCouriers';
-import CourierOnboarding from './components/CourierOnboarding';
+const ForMerchants = lazy(() => import('./components/ForMerchants'));
+const MerchantOnboarding = lazy(() => import('./components/MerchantOnboarding'));
+const Restaurants = lazy(() => import('./components/Restaurants'));
+const Experiences = lazy(() => import('./components/Experiences'));
+const SpaWellness = lazy(() => import('./components/SpaWellness'));
+const TransportPage = lazy(() => import('./components/TransportPage'));
+const GroceriesPage = lazy(() => import('./components/GroceriesPage'));
+const ForProperties = lazy(() => import('./components/ForProperties'));
+const ForCouriers = lazy(() => import('./components/ForCouriers'));
+const CourierOnboarding = lazy(() => import('./components/CourierOnboarding'));
 
 // NEXG Flow Components
-import NexGLandingHero from './components/NexGLandingHero';
-import NexGDiscoveryView from './components/NexGDiscoveryView';
-import NexGCategoryDrilldown from './components/NexGCategoryDrilldown';
+const NexGLandingHero = lazy(() => import('./components/NexGLandingHero'));
+const NexGDiscoveryView = lazy(() => import('./components/NexGDiscoveryView'));
+const NexGCategoryDrilldown = lazy(() => import('./components/NexGCategoryDrilldown'));
 import { CATEGORIES_21, CatalogCategory } from './data/categoryCatalog21';
-import DatabaseSqlModal from './components/DatabaseSqlModal';
+const DatabaseSqlModal = lazy(() => import('./components/DatabaseSqlModal'));
 
 // Customer Lifecycle & Cart Modals
 import { CartProvider, useCart } from './context/CartContext';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
-import DishCustomizerModal from './components/DishCustomizerModal';
-import RestaurantDetailModal from './components/RestaurantDetailModal';
-import CartDrawer from './components/CartDrawer';
-import CheckoutSimulatedModal from './components/CheckoutSimulatedModal';
-import OrderTrackingModal from './components/OrderTrackingModal';
+const DishCustomizerModal = lazy(() => import('./components/DishCustomizerModal'));
+const RestaurantDetailModal = lazy(() => import('./components/RestaurantDetailModal'));
+const CartDrawer = lazy(() => import('./components/CartDrawer'));
+const CheckoutSimulatedModal = lazy(() => import('./components/CheckoutSimulatedModal'));
+const OrderTrackingModal = lazy(() => import('./components/OrderTrackingModal'));
 import { NexGNavigationProvider, useNexGNavigation } from './components/nexg/NexGNavigationContext';
 import { NexGItemSheet } from './components/nexg/NexGItemSheet';
-import FloatingCartBar from './components/FloatingCartBar';
+const FloatingCartBar = lazy(() => import('./components/FloatingCartBar'));
 import { NexGMerchant } from './types/nexg';
-import DiscoveryScreen from './components/discovery/DiscoveryScreen';
-import { MerchantPreviewSheet } from './components/discovery/MerchantPreviewSheet';
+const DiscoveryScreen = lazy(() => import('./components/discovery/DiscoveryScreen'));
+const MerchantPreviewSheet = lazy(() =>
+  import('./components/discovery/MerchantPreviewSheet').then((m) => ({ default: m.MerchantPreviewSheet }))
+);
 import type { ApiItem, ApiMerchant } from './lib/apiClient';
-import MerchantRoute from './components/merchant/MerchantRoute';
+import RouteFallback from './components/RouteFallback';
+const MerchantRoute = lazy(() => import('./components/merchant/MerchantRoute'));
 
 /**
  * Host onboarding is split out of the main bundle on purpose. It carries Leaflet
@@ -290,8 +293,14 @@ function AppContent() {
       {/* Main View Router.
           Precedence matters. The merchant page must be reachable FROM discovery,
           so it is tested first: when a merchant is selected we render it whatever
-          else is open, and only then fall through to discovery or the site. */}
+          else is open, and only then fall through to discovery or the site.
+
+          The single Suspense boundary covers every lazily-loaded route. One boundary
+          rather than one per route because React re-suspends on each route change, so
+          a shared fallback is what keeps the shell (header, footer) mounted and only
+          the content area swapping. */}
       <main className="flex-grow">
+        <Suspense fallback={<RouteFallback isLight={isLight} />}>
         {selectedMerchant || deepLinkMerchantId ? (
           <MerchantRoute
             merchantId={selectedMerchant?.id ?? deepLinkMerchantId ?? ''}
@@ -405,18 +414,11 @@ function AppContent() {
         )}
 
         {currentPage === 'host_onboarding' && (
-          <Suspense
-            fallback={
-              <div className="min-h-screen flex items-center justify-center">
-                <span className="text-sm font-semibold opacity-60">Loading host onboarding…</span>
-              </div>
-            }
-          >
-            <HostOnboarding onNavigate={handleNavigate} />
-          </Suspense>
+          <HostOnboarding onNavigate={handleNavigate} />
         )}
           </>
         )}
+        </Suspense>
       </main>
 
       {/* Unified Global Footer (present on original site and sub-pages).

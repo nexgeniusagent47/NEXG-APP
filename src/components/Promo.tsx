@@ -1,10 +1,7 @@
 import { Apple, Play, ArrowRight } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import { responsiveProps } from './ResponsiveImage';
 import { useLanguage } from '../context/LanguageContext';
-import nexgMobileMockup from '../assets/images/NEXG  PHONE MPCKUP.png';
-import merchantImg from '../assets/images/couriers_hero_banner_1783931131203.jpg';
-import courierImg from '../assets/images/courier_delivery_door_1783931148146.jpg';
-import propertyImg from '../assets/images/properties_hero_1783930332445.jpg';
 
 interface PromoProps {
   onNavigate?: (page: 'home' | 'merchants' | 'properties' | 'restaurants' | 'experiences' | 'merchant_onboarding' | 'couriers' | 'courier_onboarding') => void;
@@ -67,7 +64,7 @@ export default function Promo({ onNavigate }: PromoProps) {
           {/* Right Content - Hand holding Phone Mockup aligned perfectly to bottom right as in the reference screenshot */}
           <div className="absolute right-0 bottom-0 top-0 w-[52%] sm:w-[54%] md:w-[56%] lg:w-[50%] xl:w-[54%] flex items-end justify-end overflow-hidden z-0 pointer-events-none">
             <img 
-              src={nexgMobileMockup} 
+              src={responsiveProps('NEXG  PHONE MPCKUP.png', '100vw')?.src} 
               alt="NEXG Concierge App Interface" 
               className="w-full h-full object-contain object-right-bottom drop-shadow-2xl translate-y-[2%] translate-x-[2%] hover:scale-[1.02] transition-transform duration-500" 
               referrerPolicy="no-referrer"
@@ -89,7 +86,7 @@ export default function Promo({ onNavigate }: PromoProps) {
           >
             <div className="w-[110px] sm:w-[130px] flex-shrink-0 relative overflow-hidden">
               <img 
-                src={merchantImg} 
+                src={responsiveProps('couriers_hero_banner_1783931131203.jpg', '100vw')?.src} 
                 alt="For Merchants" 
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                 referrerPolicy="no-referrer"
@@ -127,7 +124,7 @@ export default function Promo({ onNavigate }: PromoProps) {
           >
             <div className="w-[110px] sm:w-[130px] flex-shrink-0 relative overflow-hidden">
               <img 
-                src={courierImg} 
+                src={responsiveProps('courier_delivery_door_1783931148146.jpg', '100vw')?.src} 
                 alt="For Couriers" 
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                 referrerPolicy="no-referrer"
@@ -165,7 +162,7 @@ export default function Promo({ onNavigate }: PromoProps) {
           >
             <div className="w-[110px] sm:w-[130px] flex-shrink-0 relative overflow-hidden">
               <img 
-                src={propertyImg} 
+                src={responsiveProps('properties_hero_1783930332445.jpg', '100vw')?.src} 
                 alt="For Properties" 
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                 referrerPolicy="no-referrer"

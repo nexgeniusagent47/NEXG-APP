@@ -1,0 +1,47 @@
+# docker-compose.prod.yml
+# Production override for docker-compose.yml: the same app image, a managed database.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d
+#
+# The base file is a self-contained development stack, database container and
+# published Postgres port included. This override removes both and points the app at
+# a managed instance, while the image, env_file handling and healthcheck stay defined
+# in exactly one place.
+#
+# Prerequisite: DATABASE_URL must be present in the deployment environment or in the
+# env_file below, and should carry the provider's TLS parameter:
+#   postgresql://user:secret@host:5432/db?sslmode=require
+
+services:
+  app:
+    environment:
+      # `!reset null` removes the key instead of merging with it, so the real value
+      # can only arrive from env_file or the orchestrator's environment. A compose
+      # file that could fall back to a development connection string in production
+      # is a connection string waiting to be used.
+      #
+      # Compose merges mappings key by key, so replacing this one value leaves PORT,
+      # NODE_ENV and the rest of the base environment in place.
+      DATABASE_URL: !reset null
+    env_file:
+      # Required here, unlike the base file: a production app with no database
+      # string would quietly serve the bundled JSON fallback, which is the exact
+      # opposite of what a managed database is for.
+      - path: .env
+        required: true
+    # `!reset null` drops the dependency rather than pointing it at nothing. This is
+    # load-bearing and must come BEFORE the postgres reset below: `depends_on` is
+    # validated against the merged project, so leaving it in place makes Compose
+    # reject the file with `service "app" depends on undefined service "postgres"`.
+    depends_on: !reset null
+    ports: !override
+      # Loopback only. TLS termination and public routing belong to the reverse
+      # proxy or load balancer in front of this container, not to the container
+      # itself. Use "${PORT:-3001}:3001" only on a host that is not shared.
+      - "127.0.0.1:${PORT:-3001}:3001"
+    restart: always
+
+  # The development database container is dropped from the merged project. Two
+  # things disappear with it: the unmanaged Postgres that would otherwise sit
+  # beside production data, and the host port 5433 publication.
+  postgres: !reset null

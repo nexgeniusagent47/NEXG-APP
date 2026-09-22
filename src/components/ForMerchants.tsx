@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { responsiveProps } from './ResponsiveImage';
 import * as Icons from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import LogoIcon from './LogoIcon';
 import LanguageSwitcher from './LanguageSwitcher';
-import merchantHeroImg from '../assets/images/merchant_hero_section.29.39.jpeg';
-import merchantsHeroLightImg from '../assets/images/merchants_hero_light_1789911802167.jpg';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -178,7 +177,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
               <div className="absolute inset-0 bg-gradient-to-t from-[#F8F9FA] via-[#F8F9FA]/70 to-transparent z-10"></div>
               <div className="absolute inset-0 bg-gradient-to-r from-[#F8F9FA]/95 via-[#F8F9FA]/70 to-transparent z-10"></div>
               <img 
-                src={merchantsHeroLightImg} 
+                src={responsiveProps('merchants_hero_light_1789911802167.jpg', '100vw')?.src} 
                 alt="Merchants Hero Daylight Background" 
                 className="w-full h-full object-cover opacity-85 brightness-105 transition-transform duration-[10000ms] hover:scale-105" 
                 referrerPolicy="no-referrer"
@@ -189,7 +188,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
               <div className="absolute inset-0 bg-gradient-to-t from-[#1a1c1c] via-[#1a1c1c]/80 to-transparent z-10"></div>
               <div className="absolute inset-0 bg-gradient-to-r from-[#1a1c1c]/95 via-[#1a1c1c]/70 to-transparent z-10"></div>
               <img 
-                src={merchantHeroImg} 
+                src={responsiveProps('merchant_hero_section.29.39.jpeg', '100vw')?.src} 
                 alt="Merchants Hero Background" 
                 className="w-full h-full object-cover opacity-60 sm:opacity-80 brightness-60 sm:brightness-75 transition-transform duration-[10000ms] hover:scale-105" 
                 referrerPolicy="no-referrer"

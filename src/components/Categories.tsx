@@ -1,10 +1,7 @@
 import { ArrowRight } from 'lucide-react';
-import essentialsImg from '../assets/images/Essentials.png';
-import experiencesImg from '../assets/images/Experiences card.png';
-import restaurantsImg from '../assets/images/Restaurants.png';
-import spaImg from '../assets/images/Spa & Wellness.png';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
+import ResponsiveImage from './ResponsiveImage';
 
 export default function Categories({ onNavigate }: { onNavigate?: (page: string) => void }) {
   const { isLight } = useTheme();
@@ -15,7 +12,7 @@ export default function Categories({ onNavigate }: { onNavigate?: (page: string)
       title: t.categories.groceriesTitle,
       desc: t.categories.groceriesDesc,
       pageKey: 'groceries',
-      img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAw53uJMTAN5g7B713DIeo4axhJ_gVNRr6h1AYCSh80fnu4S1sXFM6GZ0MTM3fCulVqSsHaj2D1Q0cpLF_ir6pJ-JIMgGCivecNserzF4VM4ZXiC5D7yFuAwNTQbTVBhKyhtMAN0pgqfH27Zj2X48g8_ghttsF5EyD-BPgL3y_o6v_pJCB7HoypCfU1VfNnDV9PUkDi6Wq8LD2ARMEVoeKllu3RFVlCpXicDJO1o1IFzHb2M-sg3DuOKgrpAum8sWPRRg',
+      img: 'Essentials.png',
       width: 'w-[72%]',
       translate: 'translate(-10%, 25%)',
       mixBlend: ''
@@ -24,7 +21,7 @@ export default function Categories({ onNavigate }: { onNavigate?: (page: string)
       title: t.categories.transportTitle,
       desc: t.categories.transportDesc,
       pageKey: 'transport',
-      img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA66QRCNT4n9S7_L4Nb-RdWUMBXch2uyTZD7LuDw00SWf2VVq502GkNAk3ILv2iqftyqv78sDd5nrLq4qLUjENUk-zR9cizwqmf03_TDChN0TDJDFOS3uKNPTiL5jqZXQSVWcPGW4WTVUs50S-jAH2mAlK539NB-G1-H0Va-cn5dOHHTYdJPkLZxc7_VlxWFgiXjIM-KPGdneOvuXA-NDoBcTZSGpqI38af87kA37wSYBB3UGTXBpm0e1IIXuK_b6Luyw',
+      img: 'couriers_hero_banner_1783931131203.jpg',
       width: 'w-[82%]',
       translate: 'translate(-10%, 25%)',
       mixBlend: ''
@@ -33,7 +30,7 @@ export default function Categories({ onNavigate }: { onNavigate?: (page: string)
       title: t.categories.spaTitle,
       desc: t.categories.spaDesc,
       pageKey: 'spa',
-      img: spaImg,
+      img: 'Spa & Wellness.png',
       width: 'w-[82%]',
       translate: 'translate(-10%, 25%)',
       mixBlend: ''
@@ -42,7 +39,7 @@ export default function Categories({ onNavigate }: { onNavigate?: (page: string)
       title: t.categories.restaurantsTitle,
       desc: t.categories.restaurantsDesc,
       pageKey: 'restaurants',
-      img: restaurantsImg,
+      img: 'Restaurants.png',
       width: 'w-[75%]',
       translate: 'translate(-10%, 9%)',
       mixBlend: ''
@@ -51,7 +48,7 @@ export default function Categories({ onNavigate }: { onNavigate?: (page: string)
       title: t.categories.experiencesTitle,
       desc: t.categories.experiencesDesc,
       pageKey: 'experiences',
-      img: experiencesImg,
+      img: 'Experiences card.png',
       width: 'w-[75%]',
       translate: 'translate(-10%, 9%)',
       mixBlend: ''
@@ -60,7 +57,7 @@ export default function Categories({ onNavigate }: { onNavigate?: (page: string)
       title: t.categories.essentialsTitle,
       desc: t.categories.essentialsDesc,
       pageKey: 'groceries',
-      img: essentialsImg,
+      img: 'Essentials.png',
       width: 'w-[75%]',
       translate: 'translate(-10%, 9%)',
       mixBlend: ''
@@ -127,8 +124,12 @@ export default function Categories({ onNavigate }: { onNavigate?: (page: string)
 
             {/* Bottom-right Image */}
             <div className={`absolute bottom-0 right-0 w-full h-full pointer-events-none flex items-end justify-end overflow-hidden`}>
-              <img 
-                src={cat.img} 
+              <ResponsiveImage
+                name={cat.img}
+                // The art is capped at 75% of a card that is at most ~340px wide, so
+                // roughly 255 CSS px; the 320 step is the nearest rung and still
+                // covers a 2x phone display.
+                sizes="(min-width: 1024px) 260px, (min-width: 640px) 300px, 240px"
                 alt={cat.title}
                 className={`max-w-[75%] max-h-[75%] object-contain transition-transform duration-500 group-hover:scale-105 ${
                   isLight ? 'opacity-90 contrast-105' : 'opacity-85'

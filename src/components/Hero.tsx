@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { Search, Sun, Moon, X } from 'lucide-react';
-import heroNocturnalImage from '../assets/images/hero_nocturnal_dining_1789914100984.jpg';
-import heroDaylightImage from '../assets/images/hero_daylight_resort_1789914085669.jpg';
-import heroImageMobile from '../assets/images/mobile_landing_page_image.png';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { useReducedMotion } from 'motion/react';
 import { HeroWipeSubtitle } from './HeroRotatingSubtitle';
+import ResponsiveImage from './ResponsiveImage';
 
 interface HeroProps {
   onNavigate?: (page: string) => void;
@@ -70,14 +68,21 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
           <div className="absolute inset-0 bg-gradient-to-r from-[#111315]/95 via-[#111315]/80 to-[#111315]/30 z-10" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#111315] via-transparent to-black/30 z-10" />
           
-          <img
-            src={heroNocturnalImage}
+          {/* Full-bleed hero art: the browser picks the smallest width that covers
+              this element at the current device pixel ratio, so a phone never
+              downloads the 1920px file. `priority` because it is the first paint. */}
+          <ResponsiveImage
+            name="hero_nocturnal_dining_1789914100984.jpg"
+            sizes="100vw"
+            priority
             alt="Nocturnal Luxury Penthouse Dining & Skyline"
             className="hidden sm:block w-full h-full object-cover opacity-80 brightness-90 transition-transform duration-1000 scale-100 hover:scale-105"
             referrerPolicy="no-referrer"
           />
-          <img
-            src={heroImageMobile}
+          <ResponsiveImage
+            name="mobile_landing_page_image.png"
+            sizes="100vw"
+            priority
             alt="Nocturnal Luxury Suite Mobile"
             className="block sm:hidden w-full h-full object-cover opacity-75 brightness-80"
             referrerPolicy="no-referrer"
@@ -93,8 +98,10 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
           {/* Subtle directional scrim for optimal text contrast in daylight mode */}
           <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/20 sm:from-white/90 sm:via-white/70 sm:to-transparent z-10" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#f7f8fa] via-[#f7f8fa]/60 to-transparent z-10" />
-          <img
-            src={heroDaylightImage}
+          <ResponsiveImage
+            name="hero_daylight_resort_1789914085669.jpg"
+            sizes="100vw"
+            priority
             alt="Sunlit Luxury Penthouse Infinity Pool and Skyline"
             className="w-full h-full object-cover brightness-100 contrast-[1.03] transition-transform duration-1000 scale-100 hover:scale-105"
             referrerPolicy="no-referrer"

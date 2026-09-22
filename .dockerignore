@@ -1,0 +1,61 @@
+# .dockerignore
+#
+# The build context is what the daemon uploads before the first Dockerfile
+# instruction runs, so everything excluded here is upload time and cache
+# invalidation saved on every build.
+#
+# Two entries are deliberately absent and must stay absent:
+#   * public/fonts — Vite copies it into dist/, and the licensed webfonts are
+#     part of the shipped UI. Excluding it ships a build with no typography.
+#   * src/data/seededCatalog.json — the API's cold-start fallback catalogue, read
+#     at runtime from the image. Excluding it removes the JSON fallback.
+
+# Dependencies are installed inside the builder stage from the lockfile; a host
+# node_modules tree is the wrong platform and the wrong lifecycle.
+node_modules
+**/node_modules
+
+# Build output and logs are produced in the image or are machine-local.
+dist
+build
+logs
+coverage
+
+# Version control and editor state.
+.git
+.gitignore
+.github
+.idea
+.vscode
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# .env* is gitignored because it carries real credentials. It must never be
+# baked into a layer either — compose and the orchestrator inject env at run
+# time. `.env.example` is documentation, so excluding it costs nothing.
+.env
+.env.*
+*.pem
+
+# The source workbook generates src/db/seed_excel.sql and
+# src/data/seededCatalog.json via scripts/regenerate_catalog_seed.py. Both
+# generated artefacts are already in the context, so the 3 MB workbook is
+# regenerator input that the image never reads.
+NEXG_Nairobi_Merchant_Seed_Catalog.xlsx
+
+# Impeccable workflow scratch: screenshots, harnesses and detector payloads.
+# Machine-local working state, not project source (.gitignore excludes it too).
+.impeccable
+logs/critique
+
+# Another tool's working directory, unrelated to this app.
+.img2threejs-mascot
+
+# Local npm cache created because the global cache path is outside the sandbox.
+.npm-cache
+
+# Test and screenshot artefacts.
+test-results
+playwright-report
+bun.lock

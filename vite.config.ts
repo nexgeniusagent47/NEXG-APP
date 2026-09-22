@@ -92,6 +92,35 @@ export default defineConfig(() => {
         },
       },
     },
+    build: {
+      // Route-level splitting is on (App.tsx lazy-imports every page), but on its own
+      // Rollup also split each lucide icon into its own file: 47 chunks under 1 KB,
+      // which is worse than bundling them because each one costs a request.
+      //
+      // These groups put the shared libraries back into a small number of cacheable
+      // chunks. The split that matters for interactivity is the route split, and
+      // that is untouched: `index` is the shell only, and each page still loads on
+      // demand. Grouping react and icons together means a page navigation reuses
+      // those chunks instead of re-fetching icons one at a time.
+      rollupOptions: {
+        output: {
+          manualChunks(id: string) {
+            if (!id.includes('node_modules')) return undefined;
+            if (id.includes('/react-dom/') || id.includes('/react/') || id.includes('/scheduler/')) {
+              return 'vendor-react';
+            }
+            if (id.includes('lucide-react')) return 'vendor-icons';
+            if (id.includes('/motion') || id.includes('framer-motion')) return 'vendor-motion';
+            if (id.includes('leaflet')) return 'vendor-leaflet';
+            return 'vendor';
+          },
+        },
+      },
+      // The default 500 KB warning is meaningless once routes are split: the shell is
+      // what matters, and it is well under. Raised so a real regression still warns
+      // without the build shouting on every run.
+      chunkSizeWarningLimit: 900,
+    },
     preview: {
       port: 3000,
       proxy: {

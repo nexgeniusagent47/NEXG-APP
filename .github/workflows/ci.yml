@@ -1,64 +1,65 @@
-name: NEXG Concierge CI/CD Pipeline
+name: CI
+
+# The three gates below are exactly the ones that pass with no services attached:
+# tsc --noEmit, vitest, and the Vite production build. `npm run test:api`,
+# `test:flow` and `test:consistency` are deliberately absent — the first needs a
+# live API *and* a reachable Postgres, and the other two drive a running server.
+# A pipeline that provisions a database to run them would be testing the CI
+# harness, not the change.
+#
+# The job stays on ubuntu-latest and uses only POSIX shell. The development
+# machine is Windows, so anything platform-shaped added here would be a step that
+# cannot be reproduced locally.
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
+
+# Superseded runs are cancelled: a fix pushed while the previous run is still
+# installing dependencies should not queue behind it, and the older result is
+# describing code nobody has any more.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+# Read-only by default. Nothing in this workflow writes to the repository.
+permissions:
+  contents: read
 
 jobs:
-  build-and-test:
-    name: Lint, Test & Validate PostgreSQL Seeding
+  verify:
+    name: Lint, test, build
     runs-on: ubuntu-latest
-
-    services:
-      postgres:
-        image: postgres:15-alpine
-        env:
-          POSTGRES_USER: nexg_user
-          POSTGRES_PASSWORD: nexg_password
-          POSTGRES_DB: nexg_db
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+    timeout-minutes: 15
 
     steps:
-      - name: Checkout Code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
-          cache: 'npm'
+          # Node 24 is the runtime the app actually deploys on: `node server/index.ts`
+          # executes TypeScript directly, with no transpiler in the image. Building
+          # the SPA on 24 keeps CI honest about that.
+          node-version: 24
+          cache: npm
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+      # `npm ci` rather than `npm install`: CI must fail when package-lock.json and
+      # package.json disagree instead of silently rewriting the lockfile.
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Install Dependencies
-        run: npm ci || npm install
-
-      - name: Validate Excel Parsing & SQL Generation
-        run: python scripts/parse_excel_to_db.py
-
-      - name: Test PostgreSQL Schema & Seed Migration
-        env:
-          DATABASE_URL: postgresql://nexg_user:nexg_password@localhost:5432/nexg_db
-        run: |
-          psql $DATABASE_URL -f src/db/schema.sql
-          psql $DATABASE_URL -f src/db/seed_excel.sql
-
-      - name: Run Typecheck
+      # Gates run in this order, each one failing the job: typecheck is seconds,
+      # tests are the slowest feedback, and build is last because it is the only
+      # step that can pass while the other two are broken.
+      - name: Typecheck (tsc --noEmit)
         run: npm run lint
 
-      - name: Run Vitest Unit & Integration Tests
-        run: npm run test
+      - name: Unit tests (vitest)
+        run: npm test
 
-      - name: Production Vite Build
+      - name: Production build (vite build)
         run: npm run build

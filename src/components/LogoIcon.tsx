@@ -1,5 +1,5 @@
-import nexgLogo from '../assets/images/NEXG LOGO.png';
 import { useTheme } from '../context/ThemeContext';
+import { responsiveProps } from './ResponsiveImage';
 
 export default function LogoIcon({ className = "w-10 h-10" }: { className?: string }) {
   const { isLight } = useTheme();
@@ -7,7 +7,7 @@ export default function LogoIcon({ className = "w-10 h-10" }: { className?: stri
   return (
     <div className={`relative flex items-center justify-center shrink-0 ${className}`}>
       <img 
-        src={nexgLogo} 
+        src={responsiveProps('NEXG LOGO.png', '100vw')?.src} 
         alt="NEXG Logo" 
         className={`w-full h-full object-contain transition duration-300 ${
           isLight 

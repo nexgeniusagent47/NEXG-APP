@@ -1,0 +1,93 @@
+name: Release
+
+# Publishing is tag-driven, which is what makes scripts/release.mjs print git
+# commands instead of running them: the human who reads the changelog and pushes
+# the tag is the one who triggers this workflow.
+#
+#   node scripts/release.mjs minor
+#   git add package.json package-lock.json CHANGELOG.md
+#   git commit -m "chore(release): v2.2.0"
+#   git tag -a v2.2.0 -m "NEXG Concierge v2.2.0"
+#   git push origin main && git push origin v2.2.0
+
+on:
+  push:
+    tags: ['v*']
+
+# GHCR authentication uses the workflow's own GITHUB_TOKEN. It needs
+# `packages: write` to push; nothing here writes to the repository itself.
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  image:
+    name: Build and push image
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Derives the tags from the ref rather than from package.json: on a `v2.2.0`
+      # tag this yields 2.2.0, 2.2 and `latest`. A pre-release tag such as
+      # v2.2.0-rc.1 correctly does NOT move `latest`.
+      - name: Derive image metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=raw,value=latest,enable=${{ !contains(github.ref_name, '-') }}
+
+      # GIT_SHA and BUILT_AT are baked in as build args so the running container can
+      # answer "which commit is this?" over /api/version (server/version.ts). An
+      # image has no .git directory to read.
+      - name: Build and push
+        id: build
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            GIT_SHA=${{ github.sha }}
+            BUILT_AT=${{ github.event.head_commit.timestamp || github.run_started_at }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          # Provenance attestation and an SBOM travel with the image, so the
+          # artefact consumers pull can be traced back to this workflow run.
+          provenance: true
+          sbom: true
+
+      - name: Summary
+        run: |
+          {
+            echo "### NEXG Concierge image published"
+            echo
+            echo "| | |"
+            echo "| --- | --- |"
+            echo "| Tag | \`${GITHUB_REF_NAME}\` |"
+            echo "| Commit | \`${GITHUB_SHA}\` |"
+            echo "| Digest | \`${{ steps.build.outputs.digest }}\` |"
+            echo
+            echo "Image tags:"
+            echo '```'
+            echo "${{ steps.meta.outputs.tags }}"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

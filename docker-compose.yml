@@ -1,0 +1,101 @@
+# docker-compose.yml
+# One-command NEXG Concierge stack: API + built SPA, and PostgreSQL 15.
+#
+#   docker compose up --build        # http://localhost:3001
+#   docker compose exec -T postgres psql -U nexg_user -d nexg_db < src/db/schema.sql
+#   docker compose exec -T postgres psql -U nexg_user -d nexg_db < src/db/seed_excel.sql
+#
+# The two psql lines are the migration and seed steps, run explicitly rather than
+# hooked into the postgres container's entrypoint. Postgres init scripts only
+# execute on an empty data directory, so an auto-run seed would silently do
+# nothing after the first `up` — the worst failure mode for a demo, because the
+# stack looks provisioned while serving only the JSON fallback. Both files are
+# idempotent (`CREATE TABLE IF NOT EXISTS`, `TRUNCATE ... CASCADE` before insert),
+# so re-running them is safe.
+#
+# Credentials here match scripts/setup-postgres.ps1 and .github/workflows/ci.yml,
+# so a container stack and a host stack behave identically. They are local
+# development defaults: production injects its own DATABASE_URL from a secret
+# store (see docker-compose.prod.yml and docs/DEPLOYMENT.md).
+
+name: nexg-concierge
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: nexg_user
+      POSTGRES_PASSWORD: nexg_password
+      POSTGRES_DB: nexg_db
+      # Same UTF8/C locale as setup-postgres.ps1, so seed text sorts identically.
+      POSTGRES_INITDB_ARGS: --encoding=UTF8 --locale=C
+      # Postgres 15 refuses to initialise a data directory that is not empty, and
+      # a named volume always has a mount point. A subdirectory avoids that
+      # collision without giving up the volume.
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      # DOCUMENTED PORT MAPPING — host 5433 → container 5432.
+      # 5433 on the host is deliberate: port 5432 already belongs to the
+      # unrelated NEXG POS Go platform (containers nexg-postgres-1 and friends,
+      # see README). Publishing 5433 keeps this project from colliding with it.
+      # Remove this block in production: nothing outside the compose network
+      # needs to reach the database.
+      - "${POSTGRES_HOST_PORT:-5433}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nexg_user -d nexg_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    # Waits for a genuinely accepting database. `service_started` is not enough:
+    # initDb() retries the pool for a few seconds and then degrades to the JSON
+    # fallback, so starting early would leave the API on the fallback path for
+    # the life of the container while looking healthy.
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      # DOCUMENTED PORT MAPPING — host 3001 → container 3001.
+      # This single port serves the API and the built SPA.
+      PORT: "3001"
+      # The service name is the hostname inside the compose network, which is why
+      # this is set here rather than inherited from .env: the `.env` value points
+      # at 127.0.0.1:5433 for a server running on the host, and that address is
+      # the container's own loopback. Compose's `${...:-default}` fallback only
+      # fires when POSTGRES_HOST_PORT is unset, and it still targets the service
+      # name, so an override cannot silently break container networking.
+      DATABASE_URL: postgresql://nexg_user:nexg_password@postgres:5432/nexg_db
+      NODE_ENV: production
+    env_file:
+      # Optional, so a fresh clone that has never run `npm run db:up` still boots.
+      - path: .env
+        required: false
+    ports:
+      - "${PORT:-3001}:3001"
+    # The image already defines HEALTHCHECK; this override only shortens the
+    # start period so `docker compose up --wait` returns sooner.
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:3001/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+volumes:
+  pgdata:
+    # Named volume, so `docker compose down` keeps the catalogue and only
+    # `docker compose down -v` discards it.
+    name: nexg-concierge-pgdata
