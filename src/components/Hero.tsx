@@ -135,15 +135,21 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
           </h1>
 
           {/* The rotating line: a customer's word, then what that word buys.
-              `mt-*` rather than relying on the headline's own margin: the two sat close
-              enough that the rotating line changed almost flush under the headline, and
-              the movement read as a flicker at the top of the column rather than as a
-              caption beneath it. A small amount of space is enough to separate them,
-              because the hierarchy is already carried by size and colour. */}
+              TWO spacing decisions, both deliberate:
+
+              `pl-[0.18em]` indents it very slightly from the headline's left edge. The
+              indent is what signals that this line belongs TO the headline rather than
+              being a sibling of it — the difference is small enough to read as
+              intentional positioning rather than as a misalignment, which is the risk
+              with any indent this shallow.
+
+              `mt-6` against `mb-4` puts MORE space above than below, so the line groups
+              downward with the search bar. Equal gaps had it floating between the two,
+              belonging to neither. */}
           <HeroWipeSubtitle
             isLight={isLight}
             reduceMotion={Boolean(prefersReducedMotion)}
-            className={`mt-5 sm:mt-6 text-base sm:text-lg md:text-xl mb-7 sm:mb-8 font-semibold leading-snug transition-colors duration-300 ${
+            className={`mt-6 mb-4 pl-[0.18em] text-base sm:text-lg md:text-xl font-semibold leading-snug transition-colors duration-300 ${
               isLight ? 'text-slate-700' : 'text-gray-200 drop-shadow-sm'
             }`}
           />
