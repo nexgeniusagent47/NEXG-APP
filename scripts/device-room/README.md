@@ -21,14 +21,23 @@ real data:
 
 ## What it gives you
 
-**Every width at once.** 19 presets, from iPhone SE (320px) through the 1440px desktop.
-The three widths where defects actually appear — 320, 344 and 360 — carry a gold tier
-badge so they are never scrolled past by accident.
+**Every width at once.** 36 presets, from iPhone SE (320px) through the 1440px desktop. The
+three widths where defects actually appear — 320, 344 and 360 — carry a gold tier badge so
+they are never scrolled past by accident.
 
-**Honest scaling.** A 1440px desktop in a 300px column is scaled with a CSS transform, so
-the frame shows the real layout at the real width rather than a narrow approximation of
-it. The card reports the native size (`1440x900`) so the number you are judging is never
-ambiguous.
+**Real physical size.** In `auto` zoom the frame is drawn at the size the object actually
+is, not at its logical width. The page inside still lays out to the logical width — a 390
+CSS px viewport for an iPhone 14 — while the frame occupies the millimetres that phone
+measures, derived from `mmW` in the preset. CSS fixes 96px to one inch, so this is
+dependable: an iPhone 14 paints at 270 CSS px, which is 2.81 inches on any display, and can
+be held against the phone in your hand. A device with no `mmW` falls back to 1:1, which is
+honest about being approximate.
+
+This is why two different 360px phones paint at different widths (257px vs 289px): they are
+different physical objects. Scaling every device to its column, or drawing it at its logical
+width, both destroyed that — the first made every phone ~300px wide whatever its real size,
+the second made every device about a third larger than life. `Zoom` still offers manual
+scales when a whole page needs to be seen at once.
 
 **A real audit.** `Audit layout` measures the current screen at every visible width and
 reports, per device: page-level horizontal overflow, elements loose past the right edge,
@@ -84,9 +93,23 @@ node scripts/_verify-device-room.mjs
 | `measure-page.mjs` | Navigate-and-measure with retries for dev-server reloads |
 | `check-source.mjs` | Guards the template-literal trap described below |
 
+`scripts/_verify-device-room.mjs` is the end-to-end check for all of it:
+
+```bash
+node scripts/_verify-device-room.mjs
+```
+
+It asserts what the room claims — frames mount, they paint at physical size, the page
+declares the logical viewport, route changes reach every frame, the audit covers each
+device — and then runs both controls. **It is the fastest way to tell whether the room
+still works after a change**, because a room that silently stopped rendering looks the
+same as one with nothing to show.
+
 `scripts/device-presets.mjs` is the single list of devices and routes, shared with
 `logs/critique/_device-matrix.mjs`. Adding a device there adds it to both, which is the
-point: the two must never disagree about what was reviewed.
+point: the two must never disagree about what was reviewed. Each preset carries `w`/`h`
+(logical CSS px, what the page lays out to), `mmW` (the physical width, for real-size
+rendering), `category`, `tier` and `critical`.
 
 ## The template-literal trap
 
