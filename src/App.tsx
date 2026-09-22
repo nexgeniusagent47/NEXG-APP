@@ -49,8 +49,7 @@ const CartDrawer = lazy(() => import('./components/CartDrawer'));
 const CheckoutSimulatedModal = lazy(() => import('./components/CheckoutSimulatedModal'));
 const OrderTrackingModal = lazy(() => import('./components/OrderTrackingModal'));
 import { NexGNavigationProvider, useNexGNavigation } from './components/nexg/NexGNavigationContext';
-import { NexGItemSheet } from './components/nexg/NexGItemSheet';
-const FloatingCartBar = lazy(() => import('./components/FloatingCartBar'));
+import { NexGItemSheet } from './components/nexg/NexGItemSheet';const FloatingCartBar = lazy(() => import('./components/FloatingCartBar'));
 import { NexGMerchant } from './types/nexg';
 const DiscoveryScreen = lazy(() => import('./components/discovery/DiscoveryScreen'));
 const MerchantPreviewSheet = lazy(() =>
@@ -59,6 +58,73 @@ const MerchantPreviewSheet = lazy(() =>
 import type { ApiItem, ApiMerchant } from './lib/apiClient';
 import RouteFallback from './components/RouteFallback';
 const MerchantRoute = lazy(() => import('./components/merchant/MerchantRoute'));
+
+/**
+ * Warm the route chunks once the browser is idle.
+ *
+ * These eight pages total ~60 KB gzipped, which is too much to load eagerly the way the
+ * home-page sections now are. But leaving them cold means a visible gap on navigation,
+ * and the user has already told us what they think of the placeholder that filled it.
+ *
+ * Prefetching fixes the wait without touching the initial bundle: the chunks are fetched
+ * in the browser's idle time, so by the time anyone clicks a nav item the module is
+ * cached and the route renders on the same frame. The blank window only survives for a
+ * first click that beats the prefetch, which is what RouteFallback is now for.
+ *
+ * Sequential with a small gap rather than all at once. Eight parallel chunk requests on
+ * a slow connection compete with whatever the page is still loading, which is the
+ * opposite of the intent.
+ *
+ * Skipped entirely when the connection is metered — `saveData` and a 2G/3G `effectiveType`
+ * both mean the user has told the browser not to spend their data on pages they may never
+ * open, and that preference outranks our latency.
+ */
+const PREFETCH_ROUTES = [
+  () => import('./components/Restaurants'),
+  () => import('./components/SpaWellness'),
+  () => import('./components/TransportPage'),
+  () => import('./components/GroceriesPage'),
+  () => import('./components/Experiences'),
+  () => import('./components/ForProperties'),
+  () => import('./components/ForCouriers'),
+  () => import('./components/ForMerchants'),
+];
+
+function prefetchRoutes() {
+  if (typeof window === 'undefined') return;
+
+  const nav = navigator as Navigator & {
+    connection?: { saveData?: boolean; effectiveType?: string };
+  };
+  const conn = nav.connection;
+  if (conn?.saveData) return;
+  if (conn?.effectiveType && /(^|-)2g$|(^|-)3g$/.test(conn.effectiveType)) return;
+
+  let i = 0;
+  const next = () => {
+    if (i >= PREFETCH_ROUTES.length) return;
+    // Failure is expected and harmless — an offline user, or a chunk that no longer
+    // exists after a deploy. The route still loads on demand when it is actually needed.
+    PREFETCH_ROUTES[i++]().catch(() => {});
+    window.setTimeout(next, 250);
+  };
+
+  // Started on a timer AND handed to the idle callback, whichever comes first.
+  //
+  // `requestIdleCallback` alone was measured never firing on this page: the hero runs a
+  // looping animation, so the browser reported no idle period and the prefetch silently
+  // did nothing. An idle callback is an optimisation, not a guarantee, and code that
+  // treats it as one is code that never runs. The timer bounds the wait; the idle
+  // callback only makes it earlier when the browser genuinely is free.
+  window.setTimeout(next, 1500);
+
+  const idle = (
+    window as Window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+    }
+  ).requestIdleCallback;
+  if (idle) idle(next, { timeout: 2500 });
+}
 
 /**
  * Host onboarding is split out of the main bundle on purpose. It carries Leaflet
@@ -214,6 +280,12 @@ function AppContent() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [currentPage, nexgStage]);
+
+  // Warm the other routes once, on mount, in the browser's idle time. No dependencies:
+  // it must not re-run on navigation, or it would re-request chunks on every click.
+  useEffect(() => {
+    prefetchRoutes();
+  }, []);
 
   // Prompt for location immediately on entering the site
   useEffect(() => {

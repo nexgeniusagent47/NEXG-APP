@@ -2,15 +2,27 @@
 //
 // Shown while a lazily-loaded route chunk is being fetched.
 //
-// Deliberately a skeleton of the page shape rather than a spinner: a spinner tells
-// the user to wait, while a skeleton tells them what is arriving and keeps the
-// layout from collapsing when it does. It reserves roughly a hero plus a grid so the
-// scrollbar does not jump between the fallback and the real page — a layout shift on
-// every navigation is more noticeable than the wait itself.
+// WHY THIS NO LONGER DRAWS A SKELETON
+// It used to render a heading bar and six `h-32` rectangles for every route. The user's
+// verdict was blunt and correct: "the loading bones are heavily inaccurate... four stupid
+// rectangular bones". They were, because one generic shape was standing in for a merchant
+// grid, a courier page, a property listing and an admin dashboard — it described none of
+// them, and it appeared AFTER the user had already committed to the navigation, so it
+// read as the product being broken rather than as it being busy.
 //
-// The pulse is opacity-only. Tailwind's `animate-pulse` also scales the element,
-// which transforms on every frame of an animation that never ends; `animate-status`
-// is the token defined in src/index.css for exactly this.
+// A skeleton earns its place when it matches what is arriving, closely enough that the
+// swap is invisible. When it cannot, the honest thing is to show nothing: a brief empty
+// region is quieter than a wrong one, and it does not have to be un-learned a moment
+// later. The wait itself is addressed upstream by prefetching these chunks on idle, so
+// this file is a backstop, not the normal path.
+//
+// WHAT REMAINS
+// A single centred indicator that is deliberately small and low-contrast, plus the
+// `role="status"` announcement so assistive technology is still told the page is loading.
+// No fake content, no layout to shift out from under the arriving page.
+//
+// `min-h` is kept so the footer does not leap up and then down again — the one part of
+// the old approach that was doing real work.
 
 import React from 'react';
 import { useTheme } from '../context/ThemeContext';
@@ -27,20 +39,29 @@ export default function RouteFallback({ isLight: isLightProp }: RouteFallbackPro
   const theme = useTheme();
   const isLight = isLightProp ?? theme.isLight;
 
-  const block = cn('rounded-2xl animate-status', isLight ? 'bg-slate-200/70' : 'bg-white/[0.06]');
-
   return (
-    <div className="min-h-[70vh] px-4 sm:px-6 lg:px-8 py-10" role="status" aria-live="polite">
+    <div
+      className="min-h-[70vh] flex items-center justify-center px-4 sm:px-6 lg:px-8"
+      role="status"
+      aria-live="polite"
+    >
       <span className="sr-only">Loading page</span>
 
-      {/* Heading block */}
-      <div className={cn(block, 'h-10 w-2/3 max-w-[420px]')} />
-      <div className={cn(block, 'h-4 w-1/3 max-w-[220px] mt-3')} />
-
-      {/* Card grid */}
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className={cn(block, 'h-32')} />
+      {/* Three dots that breathe in sequence. Opacity only, and small enough to read as
+          "working" rather than as content that failed to load. The animation is the
+          existing `animate-status` token, which is opacity-only by design: Tailwind's
+          `animate-pulse` also scales the element, which transforms on every frame of an
+          animation that never ends. */}
+      <div className="flex items-center gap-1.5" aria-hidden="true">
+        {[0, 1, 2].map((i) => (
+          <span
+            key={i}
+            className={cn(
+              'h-1.5 w-1.5 rounded-full animate-status',
+              isLight ? 'bg-slate-300' : 'bg-white/25'
+            )}
+            style={{ animationDelay: `${i * 160}ms` }}
+          />
         ))}
       </div>
     </div>

@@ -197,6 +197,12 @@ html.dark {
 }
 
 .hero-h1__lead {
+  /* `block`, so line 1 starts a line of its own. Inline, it shares the first line box
+     with line 2 (which is also `block`), and the browser resolves that by placing the
+     block element on a line of its own and leaving the inline one beside the gap — the
+     two lines then start at different x positions and the headline reads as misaligned
+     against the search bar below it, which is the only other left edge in the column. */
+  display: block;
   color: var(--color-gold);
   font-weight: 700;
 }
