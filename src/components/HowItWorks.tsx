@@ -10,7 +10,17 @@ export default function HowItWorks() {
   return (
     <section className="py-20 sm:py-28 px-6 sm:px-8 xl:px-16 max-w-[1400px] mx-auto overflow-hidden bg-transparent">
       <div className="max-w-2xl mx-auto mb-16 sm:mb-20 text-center">
-        <h2 className={`text-3xl sm:text-4xl md:text-[46px] font-extrabold mb-4 tracking-tight leading-none ${
+        {/* font-bold, not font-extrabold. The heading face here resolves to Quicksand,
+            whose variable file declares `font-weight: 300 700` and has no master above
+            700 — so an 800 request does not fail, it renders SYNTHETIC bold: the 700
+            outlines dilated, which closes the counters and reads muddier rather than
+            heavier. Measured: at 40px this string paints 637.69px at 700, 800 and 900
+            alike, while 400 paints 616.67px.
+
+            This was the only element on the whole home page asking a family for a weight
+            it cannot supply. The other 82 `font-extrabold` uses are on Cooper, which
+            ships a real 800. Verified with scripts/_diag-synthetic-weights.mjs. */}
+        <h2 className={`text-3xl sm:text-4xl md:text-[46px] font-bold mb-4 tracking-tight leading-none ${
           isLight ? 'text-slate-900' : 'text-white'
         }`}>
           {t.howItWorks.heading}

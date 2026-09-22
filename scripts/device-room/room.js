@@ -154,9 +154,38 @@ function frameUrl() {
  * `Zoom` still offers manual scales when a whole page needs to be seen at once — a fractional
  * zoom should be a deliberate choice, not a silent default.
  */
-function scaleFor() {
+/**
+ * ACTUAL SIZE: the frame renders at the device's real physical width.
+ *
+ * The frame's viewport inside stays at the device's logical size — 390 CSS px for an iPhone 14 —
+ * because that is what the page must lay out to. But the frame itself is drawn at the width the
+ * object actually is, so it can be held against the phone in your hand.
+ *
+ * This is possible because CSS fixes 96px to one inch and every browser honours it, so
+ * millimetres are a trustworthy unit. A 71.5mm phone renders at 270 CSS px, which measures 2.81
+ * inches on any display.
+ *
+ * WHAT WAS WRONG BEFORE: the frame was drawn at its LOGICAL width — 390 px — which on a normal
+ * monitor is about four inches. Every device in the room was roughly a third larger than life,
+ * which is what "stupidly big, so it loses the point" describes. The dimensions were right and
+ * the object was not.
+ *
+ * The scale is applied with a transform so the page inside still sees a 390px viewport while the
+ * frame occupies 270px of the room. A device with no physical measurement falls back to 1:1,
+ * which is honest — better a frame that is merely wrong than one that silently guesses.
+ */
+const CSS_PX_PER_INCH = 96;
+const MM_PER_INCH = 25.4;
+
+/** The CSS pixel width at which this device measures its real size on screen. */
+function actualWidthPx(device) {
+  if (!device.mmW) return device.w;
+  return Math.round((device.mmW / MM_PER_INCH) * CSS_PX_PER_INCH);
+}
+
+function scaleFor(device) {
   if (state.zoom !== 'auto') return Number(state.zoom);
-  return 1;
+  return actualWidthPx(device) / device.w;
 }
 
 function buildFrame(device) {
@@ -246,7 +275,7 @@ function buildFrame(device) {
 
 /** Size the bezel from the current zoom. Called on build, zoom change and resize. */
 function layoutFrame(entry) {
-  const s = scaleFor();
+  const s = scaleFor(entry.device);
   entry.bezel.style.transform = `scale(${s})`;
   entry.bezel.style.width = `${entry.device.w}px`;
   entry.bezel.style.height = `${entry.device.h}px`;

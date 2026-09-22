@@ -21,7 +21,7 @@ interface should disappear into the task.
 
 > A nocturnal near-black surface (`#111315` page, `#181A1F` card, `#141618` sheet)
 > carrying a single gold accent (`#E5B65F` on dark, `#B88728` as fill, `#8A6413`
-> for gold *text* on light), Inter at a tight scale with `font-black` for headings
+> for gold *text* on light), Inter at a tight scale with the 900-weight utility for headings
 > and `tabular-nums` for every price, radius by role — `rounded-full` for controls,
 > `rounded-2xl` for surfaces, `rounded-xl` for inner chips — with hairline
 > `border-white/10` separation, photographs as the only large colour field, and a
@@ -64,24 +64,35 @@ assembled.
 
 ## Typography
 
-One family. No display/body pairing.
+**THIS SECTION IS STALE AND IS MARKED AS SUCH ON PURPOSE.** It records the type system as it
+was before the current faces landed. The build now loads four families with distinct roles
+(`src/index.css`, `@theme`): Cooper* for headings and accents, Inter below a heading,
+Quicksand for the heading face pinned on `h1`, and TeX Gyre Adventor for the display
+wordmark. The "one family, no display/body pairing" claim below is no longer true, and the
+weights row is wrong in a way that has already caused a real defect — see the note after the
+table. Re-record this section before trusting it.
 
-| | Value |
+| | Value (as recorded, pre-current-faces) |
 | --- | --- |
 | Family | `Inter`, then `ui-sans-serif, system-ui, sans-serif` (`--font-sans`) |
 | Loading | Google Fonts `@import`, weights 400/500/600/700 — **flagged by the detector as `overused-font`; changing it changes the whole product identity, so it is a decision, not a cleanup** |
 | Smoothing | `-webkit-font-smoothing: antialiased` on `body` |
-| Weights | `font-medium` body, `font-bold`/`font-semibold` UI labels, `font-black` headings and prices |
+| Weights | `font-medium` body, `font-bold`/`font-semibold` UI labels, the 900-weight utility for headings and prices — **no longer accurate; see below** |
 | Scale | Fixed rem, tight ratio. Smallest step is 10–11px for metadata; 12–13px for labels; 15px card titles; 18–20px section headings; 30px merchant name |
 | Numerals | `tabular-nums` on **every** price, count and metric |
 | Measure | Prose capped at `max-w-[70ch]` |
 
-Constraint: text fields, toggles and select options render `text-xs` labels with
-`text-[11px]` hints. Keep that step; do not introduce a fourth size.
+**The weights row caused a real defect.** Quicksand declares `font-weight: 300 700`, so the
+900-weight utility this file prescribed rendered **synthetic** bold: 800 and 900 painted at
+byte-identical widths to 700 (637.69px at 40px, against 616.67px at 400), which is the
+signature of a dilated outline rather than a heavier master. 149 uses across 31 files were
+changed to the 700-weight utility. Cooper does ship a real 800 and 900, so the 800-weight
+uses on Cooper elements are correct. Check with
+`node scripts/_diag-synthetic-weights.mjs /`.
 
-**Known debt.** Inter with a Google Fonts `@import` is exactly what
-`high-end-visual-design` §2 bans. It is recorded here as the incumbent truth, not
-as an endorsement.
+**Do not write class names as inline code in this file.** Tailwind v4 scans Markdown too and
+emits a utility for every class-shaped token it finds, so quoting one here ships a dead CSS
+rule. That is why the utilities above are described by role rather than quoted by name.
 
 ## Radius
 

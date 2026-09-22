@@ -11,11 +11,20 @@
                    Bitstream's commercial Cooper BT, which is a different cut.
                    Self-hosted, six real weights.
      SUBHEADINGS   Inter — everything below a heading: body copy, labels, buttons.
-                   Loaded at 300-900 so `font-black` and `font-extrabold` resolve to
-                   real weights instead of being synthesised, which is what the
-                   earlier 400-700 import caused across 237 usages.
+                   Imported at 300-900, and Inter genuinely ships all of them, so
+                   every weight requested below a heading resolves to a real master.
+                   (The heading face does NOT: see the note above the Quicksand face,
+                   which stops at 700 and renders synthetic bold above it.)
      ACCENT        TeX Gyre Adventor — the metric-compatible ITC Avant Garde Gothic
                    clone from URW's Base 35 set.
+
+   NOTE ON UTILITY GENERATION: Tailwind v4 scans the raw text of every file it is not
+   told to ignore — including Markdown — and emits a utility for any class-shaped token
+   it finds. It does NOT read comments inside CSS for this purpose (verified with a
+   control token in a comment: not emitted). But a class name written in prose in
+   AGENTS.md or DESIGN.md IS a real occurrence, so it ships a rule that no component
+   uses. That is measurable here: a rule for the 900-weight utility survived the removal
+   of all 149 uses of it, because two Markdown files still spelled the class out.
 
    Inter is on the convergence list the Impeccable detector calls `overused-font`.
    That is a deliberate, instructed choice rather than an oversight, so it is

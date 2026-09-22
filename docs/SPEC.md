@@ -212,9 +212,11 @@ storage. Consent is stored client-side and read by telemetry.
 | Display / headings | **Quicksand** variable | `wght` axis **stops at 700** |
 | Body | **Inter** | |
 
-**Weight has a ceiling.** Quicksand's axis ends at 700, which is where headings already sit.
-`font-black` (900) renders **synthetic** bold — smeared counters, uneven stroke — which reads
-*lighter*, not heavier. To go bolder, buy weight optically: scale, leading, ink.
+**Weight has a ceiling.** Quicksand's axis ends at 700. A request for 900 renders **synthetic**
+bold — smeared counters, uneven stroke — which reads *lighter*, not heavier. To go bolder, buy
+weight optically: scale, leading, ink. Measured: 800 and 900 paint at identical widths to 700,
+which is the signature of a dilated outline rather than a heavier master. The 83 uses of the
+800-weight utility on Cooper elements are correct — Cooper ships a real 800.
 
 A Material 3 type scale drives the roles: display 57px/1.12/−0.0044em, headline 28px/1.29,
 title 22px/1.27, body 1.5/+0.031em.

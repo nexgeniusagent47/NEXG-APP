@@ -83,10 +83,35 @@ exists to make that true — do not skip it, and always check for leftover
 
 ### Weight has a ceiling
 
-Quicksand's `wght` axis stops at **700**, and headings are already there. `font-black`
-(900) renders **synthetic** bold: smeared counters and an uneven stroke, which reads
-lighter rather than heavier. When asked to go "bolder", buy weight optically — scale,
-leading, ink — or propose a different typeface. Do not raise the weight number.
+Quicksand's `wght` axis stops at **700**. A request for 900 renders **synthetic** bold:
+smeared counters and an uneven stroke, which reads lighter rather than heavier. When asked
+to go "bolder", buy weight optically — scale, leading, ink — or propose a different
+typeface. Do not raise the weight number.
+
+Measured, and now fixed: the source asked for the 900-weight utility in **149 places
+across 31 files**, against a face declaring `font-weight: 300 700`. At 40px a probe string
+painted 637.69px at 700, 800 and 900 alike, while 400 painted 616.67px — 800 and 900
+identical to 700 is the signature of a synthetic step. All 149 were changed to the
+700-weight utility, which is visually identical and stops the dilation.
+
+**Cooper ships a real 800 and 900**, so the 83 uses of the 800-weight utility on Cooper
+elements are correct and were left alone. Only Quicksand and Inter-below-a-heading matter
+here. To re-check after a typeface change:
+
+```bash
+node scripts/_diag-synthetic-weights.mjs /
+```
+
+It compares painted widths per family and lists every element asking for a weight its
+family cannot supply.
+
+**One consequence worth knowing:** Tailwind v4 emits a utility for every class-shaped token
+in every file it scans — including this Markdown. Spelling a utility name in prose ships a
+rule nothing uses. That is why the weight utilities above are described by their number
+rather than quoted by name: writing one out here generated a dead CSS rule in the production
+bundle even though no component used it. Verified with a control — an invented class-shaped
+token in a comment was NOT emitted, so the cause is real occurrences in scanned files
+(Markdown included), not comments.
 
 ---
 
