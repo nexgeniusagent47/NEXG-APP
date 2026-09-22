@@ -60,24 +60,23 @@ import RouteFallback from './components/RouteFallback';
 const MerchantRoute = lazy(() => import('./components/merchant/MerchantRoute'));
 
 /**
- * Warm the route chunks once the browser is idle.
+ * Warm every route chunk the moment someone hits the site.
  *
- * These eight pages total ~60 KB gzipped, which is too much to load eagerly the way the
- * home-page sections now are. But leaving them cold means a visible gap on navigation,
- * and the user has already told us what they think of the placeholder that filled it.
+ * These pages total ~60 KB gzipped. A first version staggered them 250ms apart once the
+ * browser was idle, which was wrong twice over: the delay meant a fast click still landed
+ * on the fallback, and `requestIdleCallback` never fired at all on this page because the
+ * hero animates continuously, so the browser reported no idle period.
  *
- * Prefetching fixes the wait without touching the initial bundle: the chunks are fetched
- * in the browser's idle time, so by the time anyone clicks a nav item the module is
- * cached and the route renders on the same frame. The blank window only survives for a
- * first click that beats the prefetch, which is what RouteFallback is now for.
+ * Now they are requested together, immediately. 60 KB alongside an 87 KB entry is a
+ * rounding error, and the user's expectation is explicit: reach any page with nothing in
+ * between. Fire-and-forget, because a failed prefetch costs nothing — the route still
+ * loads on demand.
  *
- * Sequential with a small gap rather than all at once. Eight parallel chunk requests on
- * a slow connection compete with whatever the page is still loading, which is the
- * opposite of the intent.
+ * Still skipped under `saveData` or a 2G/3G `effectiveType`: the user has told the browser
+ * not to spend their data on pages they may never open, and that outranks our latency.
  *
- * Skipped entirely when the connection is metered — `saveData` and a 2G/3G `effectiveType`
- * both mean the user has told the browser not to spend their data on pages they may never
- * open, and that preference outranks our latency.
+ * DiscoveryScreen is included. It is the browse surface behind the hero search, so it is
+ * a first-class destination rather than a detail page.
  */
 const PREFETCH_ROUTES = [
   () => import('./components/Restaurants'),
@@ -88,6 +87,7 @@ const PREFETCH_ROUTES = [
   () => import('./components/ForProperties'),
   () => import('./components/ForCouriers'),
   () => import('./components/ForMerchants'),
+  () => import('./components/discovery/DiscoveryScreen'),
 ];
 
 function prefetchRoutes() {
@@ -100,30 +100,11 @@ function prefetchRoutes() {
   if (conn?.saveData) return;
   if (conn?.effectiveType && /(^|-)2g$|(^|-)3g$/.test(conn.effectiveType)) return;
 
-  let i = 0;
-  const next = () => {
-    if (i >= PREFETCH_ROUTES.length) return;
-    // Failure is expected and harmless — an offline user, or a chunk that no longer
-    // exists after a deploy. The route still loads on demand when it is actually needed.
-    PREFETCH_ROUTES[i++]().catch(() => {});
-    window.setTimeout(next, 250);
-  };
-
-  // Started on a timer AND handed to the idle callback, whichever comes first.
-  //
-  // `requestIdleCallback` alone was measured never firing on this page: the hero runs a
-  // looping animation, so the browser reported no idle period and the prefetch silently
-  // did nothing. An idle callback is an optimisation, not a guarantee, and code that
-  // treats it as one is code that never runs. The timer bounds the wait; the idle
-  // callback only makes it earlier when the browser genuinely is free.
-  window.setTimeout(next, 1500);
-
-  const idle = (
-    window as Window & {
-      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
-    }
-  ).requestIdleCallback;
-  if (idle) idle(next, { timeout: 2500 });
+  for (const load of PREFETCH_ROUTES) {
+    // Failure is expected and harmless — offline, or a chunk that no longer exists after
+    // a deploy. The route still loads on demand when it is actually needed.
+    load().catch(() => {});
+  }
 }
 
 /**

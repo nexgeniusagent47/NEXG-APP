@@ -135,14 +135,15 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
           </h1>
 
           {/* The rotating line: a customer's word, then what that word buys.
-              Restored after a live-mode cleanup removed it. It had only ever existed
-              inside a variant wrapper, so discarding that wrapper deleted the whole
-              line rather than leaving a copy behind. The reveal is left at
-              HeroRotatingSubtitle's own default (the middot treatment). */}
+              `mt-*` rather than relying on the headline's own margin: the two sat close
+              enough that the rotating line changed almost flush under the headline, and
+              the movement read as a flicker at the top of the column rather than as a
+              caption beneath it. A small amount of space is enough to separate them,
+              because the hierarchy is already carried by size and colour. */}
           <HeroWipeSubtitle
             isLight={isLight}
             reduceMotion={Boolean(prefersReducedMotion)}
-            className={`text-base sm:text-lg md:text-xl mb-7 sm:mb-8 font-semibold leading-snug transition-colors duration-300 ${
+            className={`mt-5 sm:mt-6 text-base sm:text-lg md:text-xl mb-7 sm:mb-8 font-semibold leading-snug transition-colors duration-300 ${
               isLight ? 'text-slate-700' : 'text-gray-200 drop-shadow-sm'
             }`}
           />
