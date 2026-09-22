@@ -231,7 +231,14 @@ main {
 .grid {
   display: grid;
   gap: 26px;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  /* `max-content`, not `1fr`. With `1fr` every column is forced to the same width, so a
+     320px phone's card would be stretched to match a 440px phone's — the same failure the
+     scaling had, moved from the frame to its container. `max-content` lets each column be as
+     wide as the frame inside it, so the size difference between devices survives into the
+     layout and a 440px phone visibly occupies more room than a 320px one.
+     `justify-content: start` keeps them packed left rather than spread across the row. */
+  grid-template-columns: repeat(auto-fit, max-content);
+  justify-content: start;
   align-items: start;
 }
 

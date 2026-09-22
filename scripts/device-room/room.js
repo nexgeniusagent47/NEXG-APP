@@ -134,12 +134,29 @@ function frameUrl() {
   return `${state.appOrigin}${route.path}${sep}theme=${state.theme}`;
 }
 
-function scaleFor(device) {
+/**
+ * TRUE SIZE in auto mode: every frame renders at its real CSS pixel width, so a 320px phone
+ * and a 440px phone are visibly different objects.
+ *
+ * THIS USED TO SCALE EVERY DEVICE TO FILL ITS COLUMN:
+ *
+ *   const col = grid.firstElementChild?.getBoundingClientRect().width ?? 320;
+ *   return Math.min(1, Math.max(0.24, (col - 34) / device.w));
+ *
+ * which made every phone roughly 300px wide whatever its real size. The scaling was
+ * proportional and it destroyed the single thing a device room exists to show: relative size.
+ * A 320px and a 440px phone looked identical, so the room could not answer "does this fit this
+ * screen" for any particular screen. The user's words: "everything is useless until I have an
+ * accurate real look at it."
+ *
+ * The cost is honest and worth stating rather than hiding: a 440px frame occupies 440px, so
+ * wider devices take more room and fewer fit per row. That is the information, not a defect.
+ * `Zoom` still offers manual scales when a whole page needs to be seen at once — a fractional
+ * zoom should be a deliberate choice, not a silent default.
+ */
+function scaleFor() {
   if (state.zoom !== 'auto') return Number(state.zoom);
-  const col = grid.firstElementChild?.getBoundingClientRect().width ?? 320;
-  // 34px is the bezel's own horizontal chrome (1px borders + padding), so a frame
-  // never sits flush against the column edge.
-  return Math.min(1, Math.max(0.24, (col - 34) / device.w));
+  return 1;
 }
 
 function buildFrame(device) {
@@ -229,7 +246,7 @@ function buildFrame(device) {
 
 /** Size the bezel from the current zoom. Called on build, zoom change and resize. */
 function layoutFrame(entry) {
-  const s = scaleFor(entry.device);
+  const s = scaleFor();
   entry.bezel.style.transform = `scale(${s})`;
   entry.bezel.style.width = `${entry.device.w}px`;
   entry.bezel.style.height = `${entry.device.h}px`;
@@ -386,8 +403,8 @@ function paintFrameStates(rows) {
     }
     entry.wrap.dataset.state = row.broken ? 'broken' : 'clean';
     entry.metrics.textContent = row.broken
-      ? `overflow ${row.overflowX}px / ${row.offenderCount} past edge / ${row.clipped} clipped`
-      : `clean at ${row.vw}px`;
+      ? `overflow ${row.overflowX}px / ${row.offenderCount} loose / ${row.clipped} clipped`
+      : `clean at ${row.vw}px${row.clipped ? `, ${row.clipped} clipped` : ''}`;
   }
 }
 
@@ -413,7 +430,7 @@ function renderAudit(data) {
       <thead>
         <tr>
           <th>Device</th><th class="num">W</th><th class="num">Tier</th>
-          <th class="num">Overflow</th><th class="num">Past edge</th>
+          <th class="num">Overflow</th><th class="num">Loose</th>
           <th class="num">Clipped</th><th class="num">Tap&lt;24</th>
           <th class="num">Page/VP</th><th>Detail</th>
         </tr>

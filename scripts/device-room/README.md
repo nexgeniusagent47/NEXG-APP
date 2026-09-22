@@ -31,8 +31,8 @@ it. The card reports the native size (`1440x900`) so the number you are judging 
 ambiguous.
 
 **A real audit.** `Audit layout` measures the current screen at every visible width and
-reports, per device: page-level horizontal overflow, elements painting past the right
-edge, text clipped by its own container, and tap targets under 24px. Press `A`.
+reports, per device: page-level horizontal overflow, elements loose past the right edge,
+text clipped by its own container, and tap targets under 24px. Press `A`.
 
 **Stills.** `Capture stills` renders each width to a PNG through a separate browser and
 shows them as a gallery, so a set can be captured without leaving the page. Press `S`.
@@ -100,15 +100,27 @@ literal early and the module stops parsing.** This happened twice while writing 
 
 ## What counts as broken, and what does not
 
-Two patterns are wider than the viewport **by design** and are excluded rather than
-reported:
+A bounding-box test alone cannot tell a defect from a layout doing its job, and the first
+version of this audit got that badly wrong in both directions.
 
-- **Horizontal rails.** A carousel or marquee track inside a scroller. The exclusion test
-  must include the element itself, because the rail *is* the scroller — this app puts
-  `overflow-x-auto` on the rail (19 such elements across `src/components`). Testing only
-  ancestors made every card in every carousel count as past the edge, and one marquee was
-  reported as 389 defects. That is what produced the original "37 of 72 combinations
-  broken" figure: it was measuring the marquee, not the layout.
+**Excluded, because the layout is correct:**
+
+- **Off-screen carousel slides.** The track holds several cards and the ones after the
+  first sit past the right edge on purpose, clipped by an ancestor's `overflow: hidden`
+  so they can slide in. Measured on the home page at 360px: **429 such elements, and not
+  one element in the document had `overflow-x: auto`** — this app's carousels translate a
+  track rather than scroll a container. An earlier version of this audit reported those
+  429 as "past the edge", which is what produced the original "37 of 72 combinations
+  broken" figure. It was measuring the carousel's off-screen slides, not the layout.
+- **Marquee tracks**, wider than the viewport by construction.
+
+The rule is therefore: an element is only *loose* if it is past the right edge **and** no
+ancestor clips it. Being clipped means it cannot affect the page, and the page's own
+`scrollWidth - clientWidth` is the thing a user actually experiences — that is the
+primary verdict.
+
+**Excluded, because the truncation is deliberate:**
+
 - **`line-clamp` truncation.** `-webkit-line-clamp` forces `overflow: hidden` as part of
   its own mechanism, so a deliberately clamped two-line title is indistinguishable from a
   clipped one by computed style alone. Counting it inflated every phone's clipped-text
