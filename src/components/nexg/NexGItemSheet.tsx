@@ -23,6 +23,7 @@ import { useTheme } from '../../context/ThemeContext';
 import { useCart } from '../../context/CartContext';
 import { useNexGNavigation } from './NexGNavigationContext';
 import { cn } from '../../lib/utils';
+import { DateStringField } from '../forms/DateTimeField';
 
 export type ItemSheetState =
   | 'CLOSED'
@@ -297,14 +298,15 @@ export const NexGItemSheet: React.FC = () => {
                     <label className="block text-[11px] font-bold text-slate-500 dark:text-gray-400 mb-1">
                       Preferred Date
                     </label>
-                    <input
-                      type="date"
+                    {/* Was `input[type=date]`. The last native date input in the app: the
+                        browser picker cannot be styled, is ordered month-first for a
+                        market that reads day-first, and hides which days are actually
+                        bookable. */}
+                    <DateStringField
                       value={selectedDate}
-                      onChange={(e) => setSelectedDate(e.target.value)}
-                      className={cn(
-                        'w-full px-3 py-2 rounded-xl text-xs font-bold border focus:outline-none focus:ring-1 focus:ring-[#B88728]',
-                        isLight ? 'bg-white border-slate-200 text-slate-900' : 'bg-[#121314] border-white/15 text-white'
-                      )}
+                      onChange={setSelectedDate}
+                      placeholder="Choose a date"
+                      minimumDate={new Date()}
                     />
                   </div>
                   <div>
