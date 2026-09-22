@@ -187,7 +187,7 @@ function Sparkline({ values }: { values: number[] }) {
   if (values.length < 2) {
     return (
       <p className="text-xs text-slate-500">
-        Collecting samples — the line appears after the second poll.
+        Collecting samples. The line appears after the second poll.
       </p>
     );
   }

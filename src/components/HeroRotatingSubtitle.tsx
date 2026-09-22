@@ -142,13 +142,13 @@ export const HeroWipeSubtitle: React.FC<HeroSubtitleProps> = ({
           <span className="hero-wipe__lead">{pod.lead}</span>
           {reveal !== 'plain' && (
             <>
-              {/* The em dash is the hinge of the whole line: customer's word on the
-                  left, what they can actually buy on the right. It is decorative, so
-                  it stays out of the accessibility tree — a screen reader announcing
+              {/* The separator is the hinge of the line: customer's word on the left,
+                  what they can actually buy on the right. It is decorative, so it
+                  stays out of the accessibility tree; a screen reader announcing
                   "dash" mid-sentence is noise. */}
               {reveal === 'dash' && (
                 <span className="hero-wipe__dash" aria-hidden="true">
-                  {' — '}
+                  {' · '}
                 </span>
               )}
               <span className="hero-wipe__support">{pod.support}</span>

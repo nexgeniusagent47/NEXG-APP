@@ -436,9 +436,11 @@ const FULFILLMENT_OPTIONS = [
 ] as const;
 
 const CURRENCY_OPTIONS = [
-  'KES — Kenyan Shilling',
-  'UGX — Ugandan Shilling',
-  'USD — US Dollar',
+  // Parentheses, not an em dash. The chosen separator is also part of the submitted
+  // VALUE, so it has to be plain typography rather than a stylistic choice.
+  'KES (Kenyan Shilling)',
+  'UGX (Ugandan Shilling)',
+  'USD (US Dollar)',
   'Other',
 ] as const;
 
@@ -511,7 +513,7 @@ const INITIAL_FORM: HostFormState = {
   requestChannel: '',
   requestOwner: '',
   fulfillmentTime: 'Under 15 minutes',
-  currency: 'KES — Kenyan Shilling',
+  currency: 'KES (Kenyan Shilling)',
   taxSetup: 'Prices include tax',
   bankName: '',
   accountName: '',

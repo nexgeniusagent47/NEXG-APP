@@ -709,7 +709,7 @@ export default function NexGCategoryDrilldown({
             {/* Featured Fast Items for this Merchant via ProductCarousel */}
             <section>
               <ProductCarousel
-                title={`${currentMerchant.name} — Highlight Selections`}
+                title={`${currentMerchant.name} · Highlight Selections`}
                 subtitle="Fast selections & customer favorites"
                 products={carouselProducts}
               />
