@@ -512,6 +512,27 @@ html {
   width: max-content;
   max-width: 100%;
   min-height: 1.9em; /* reserves the line so rotation cannot shift the layout below */
+  /* ONE LINE, ALWAYS. The lead word and its support line are a single unit — the point is
+     that "Relax" reads together with "Spa · Wellness · Fitness" — so allowing a wrap splits
+     one idea across two lines and doubles the block's height, which pushes the search bar
+     down and breaks the hero's alignment.
+
+     `nowrap` alone would clip the longest entry ("Rides · Chauffeurs · Rentals · Airport
+     Transfers") on a 320px screen, so the size comes down with the viewport instead. The
+     whole line is sized from `--hero-wipe-scale`, so the reduction is one number rather than
+     a rewrite of every child. */
+  white-space: nowrap;
+  text-wrap: nowrap;
+  font-size: calc(1em * var(--hero-wipe-scale, 1));
+}
+
+/* Below the first breakpoint the line has to be smaller to hold one line, and the longest
+   entry sets the ceiling. 0.78 puts that entry at roughly 88% of a 320px viewport, leaving
+   the padding it needs without crowding the edges. */
+@media (max-width: 639px) {
+  .hero-wipe {
+    --hero-wipe-scale: 0.78;
+  }
 }
 
 /* The reveal is clipped rather than cross-faded, so the gold sweeps across the line

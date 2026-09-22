@@ -20,13 +20,13 @@
 // both senses — off in the toggle, and off in consent.ts until a yes is recorded.
 
 import { useEffect, useState } from 'react';
-import { Cookie } from 'lucide-react';
 import {
   CATEGORY_LABELS,
   acceptAll,
   getConsent,
   isUndecided,
   rejectAll,
+  resetConsent,
   setConsent,
   subscribeConsent,
   type ConsentCategory,
@@ -60,22 +60,18 @@ export default function ConsentBanner() {
   }, []);
 
   if (!open) {
-    return (
-      // Lifted above the floating cart bar on small screens, the same offset
-      // ScrollToTop uses for the same reason: both are fixed to the bottom and the
-      // bar spans the width there.
-      <div className="onboarding-theme fixed bottom-20 left-3 z-[300] sm:bottom-4 sm:left-4 print:hidden">
-        <button
-          type="button"
-          data-analytics="consent-manage"
-          onClick={() => setOpen(true)}
-          className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-600 shadow-lg hover:bg-slate-100"
-        >
-          <Cookie className="h-4 w-4" aria-hidden="true" />
-          Manage cookies
-        </button>
-      </div>
-    );
+    /*
+      NOTHING FLOATS OVER THE PAGE once the choice is made.
+
+      This used to be a persistent "Manage cookies" pill pinned to the bottom-left, which on
+      a phone sits over the content permanently — visible in every screenshot the user took,
+      competing with the hero, the cards and the floating cart bar.
+
+      The recall control has not been removed, it has moved: `CookieSettingsLink` renders in
+      the footer, which is where people look for it and where it costs nothing. A floating
+      button is not what makes a choice revisitable; being somewhere findable is.
+    */
+    return null;
   }
 
   return (
@@ -182,5 +178,27 @@ export default function ConsentBanner() {
         </div>
       </section>
     </div>
+  );
+}
+
+/**
+ * The recall control, for the footer.
+ *
+ * Calls resetConsent, which returns the stored state to `unknown` — the same transition the
+ * banner already listens for — so this needs no props and no shared state.
+ *
+ * A plain text button rather than a floating pill: on a phone a fixed button sits over the
+ * content permanently, and the footer is where people look for this anyway.
+ */
+export function CookieSettingsLink({ className }: { className?: string }) {
+  return (
+    <button
+      type="button"
+      data-analytics="consent-manage"
+      onClick={() => resetConsent()}
+      className={className ?? 'transition-colors hover:underline'}
+    >
+      Cookie settings
+    </button>
   );
 }
