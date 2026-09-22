@@ -123,26 +123,47 @@
 
 /* Headings carry Quicksand.
    A rounded geometric sans: circular bowls, monolinear strokes, open apertures. It
-   reads friendly and modern rather than corporate, which suits a concierge product
-   more than the neutral grotesque it replaces.
+   reads friendly and modern rather than corporate.
 
-   WEIGHT CEILING — Quicksand's `wght` axis stops at 700, while the interface asks for
-   `font-black` (900) and `font-extrabold` (800) in 237 places. Those requests are
-   CLAMPED here rather than left to the browser: synthetic bold smears the
-   counters and destroys the even stroke weight that is the whole character of this
-   face. Clamping renders at the heaviest real weight instead, which looks
-   intentional; synthesising looks like a rendering fault. */
+   WEIGHT: 700, which is Quicksand's ceiling. The reference product resolves its
+   section headings to `700 30px/30px` — bold, not black — so 700 is the right weight
+   rather than a compromise forced by the axis ending there.
+
+   LINE-HEIGHT is what actually produces the "perfect boldness and spacing": the
+   reference runs leading-none (ratio 1.0). Ours was 1.2 on h2 and 1.375 on h3, which
+   is not just looser than the target, it is INCONSISTENT between levels — each step
+   down the hierarchy got progressively airier, so no rhythm formed. Leading is now set
+   per level with a deliberate progression instead of inheriting Tailwind's defaults:
+   display type is tightest, small headings slightly looser so two-line card titles
+   stay readable. */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 700;
   font-variation-settings: 'wght' 700;
   letter-spacing: -0.01em;
+  /* Default for the small end: 1.15 keeps stacked card titles from colliding. */
+  line-height: 1.15;
+  text-wrap: balance;
 }
 
-/* The hero headline is the one piece of type big enough to carry real tracking
-   correction; at 4.25rem the default spacing looks loose. */
+/* Display: leading-none, matching the reference. At 68px the default leading leaves a
+   visible gap between lines that reads as two separate thoughts. */
 h1 {
+  line-height: 1;
   letter-spacing: -0.03em;
+}
+
+/* Section headings: 1.1 rather than the reference's 1.0, because ours wrap to two
+   lines at the container width and a 1.0 ratio on two lines of bold type sets the
+   descenders into the ascenders of the next line. */
+h2 {
+  line-height: 1.1;
+}
+
+/* Card and item titles: 1.2. These are routinely two lines inside a fixed-height card,
+   so tightening them to display leading would clip. */
+h3, h4 {
+  line-height: 1.2;
 }
 
 @keyframes status-breathe {
