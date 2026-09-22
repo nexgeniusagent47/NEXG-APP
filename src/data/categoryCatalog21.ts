@@ -370,7 +370,7 @@ export function getCategoryMerchants(categoryId: string): CatalogMerchant[] {
     ],
     flowers_gifts: [
       'Fleur Royale Haute Floristry',
-      'Velvet Box Gift Concierge',
+      'Velvet Box Gift App',
       'Ecuadorian Rose Atelier',
       'Artisan Confectionery & Hampers',
       'Botanical Orchid Haven',
@@ -435,7 +435,7 @@ export function getCategoryMerchants(categoryId: string): CatalogMerchant[] {
       'XPEL Ceramic & Detailing Lab',
       'Mobile Valet In-Suite Fleet',
       'Motorsport Diagnostics Hub',
-      'Concierge Supercar Care',
+      'App Supercar Care',
       'Titanium Paint Restoration',
     ],
     wellness: [
@@ -493,7 +493,7 @@ export function getCategoryMerchants(categoryId: string): CatalogMerchant[] {
       'Bespoke Range Rover Fleet',
       'Prestige Self-Drive VIP',
       'Grand Tourer European Rentals',
-      'Apex Chauffeur Concierge',
+      'Apex Chauffeur App',
       'Nairobi Safari Overland Exotics',
       'Riviera Luxury Convertible Club',
     ],
@@ -615,7 +615,7 @@ export function getCategoryMerchants(categoryId: string): CatalogMerchant[] {
         'Certified Master Specialists (10+ Yrs Experience)',
         cat.defaultWorkflow === 'order' 
           ? 'White-Glove Temperature-Controlled Handover' 
-          : 'Dedicated Private VIP Concierge Host',
+          : 'Dedicated Private VIP App Host',
         'Sealed Provenance & Discretion Guarantee',
       ];
 
@@ -751,14 +751,14 @@ function getItemSpecifics(
       name: `${model} (2026)`,
       price: 45000 + (index % 10) * 12000,
       image: baseImage,
-      quantity: 'Per 24h Hire • Concierge Handover',
+      quantity: 'Per 24h Hire • App Handover',
       description: `Pristine condition ${model} serviced directly by certified master technicians. Chauffeured or insured self-drive.`,
       dynamicAttributes: {
         'Vehicle Color': index % 2 === 0 ? 'Obsidian Black Metallic' : 'Diamond White Pearl',
         'Engine Type': index % 3 === 0 ? '4.0L Twin-Turbo V8' : '6.0L Biturbo V12',
         'Current Mileage': `${(1200 + index * 340).toLocaleString()} km`,
         'Last Service Date': `March ${10 + (index % 10)}, 2026`,
-        'Deposit Required': 'Zero Deposit with VIP Concierge Black Card',
+        'Deposit Required': 'Zero Deposit with VIP App Black Card',
         'Insurance Cover': 'Full Comprehensive Zero-Deductible Platinum Coverage',
         'Transmission': 'Automatic 9-Speed Dual-Clutch',
         'Fuel Policy': 'Full-to-Full Tank Guarantee',
@@ -852,13 +852,13 @@ function getItemSpecifics(
     name: `${subcat.name} Premium Curated Selection #${index}`,
     price: 4500 + (index % 10) * 1800,
     image: baseImage,
-    quantity: 'Verified Quality • Concierge Guaranteed',
+    quantity: 'Verified Quality • App Guaranteed',
     description: `High-touch luxury offering curated by ${merchantName}. Full provenance and white-glove delivery guaranteed.`,
     dynamicAttributes: {
       'Category Group': subcat.name,
       'Fulfillment Speed': 'Direct VIP Dispatch',
       'Service Guarantee': '100% Satisfaction or Instant Replacement',
-      'Concierge Notes': 'Special handling and tailored packaging available',
+      'App Notes': 'Special handling and tailored packaging available',
     },
   };
 }

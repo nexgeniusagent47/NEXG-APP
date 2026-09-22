@@ -100,7 +100,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                   ? 'bg-white/80 hover:bg-white text-slate-800 shadow-xs'
                   : 'bg-white/10 hover:bg-white/20 text-white'
               }`}
-              title="Return to Guest Concierge"
+              title="Return to Guest App"
               aria-label="Back to Home"
             >
               <ArrowLeft className="w-5 h-5" />
@@ -1041,7 +1041,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
 
                 <div>
                   <div className="flex justify-between items-center text-xs sm:text-sm font-medium mb-2">
-                    <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>Average Concierge Spend per Stay</span>
+                    <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>Average App Spend per Stay</span>
                     <span className={`font-bold ${isLight ? 'text-amber-700' : 'text-[#E5B65F]'}`}>${guestSpend} USD</span>
                   </div>
                   <input 
@@ -1145,7 +1145,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               <LogoIcon className="w-12 h-12 text-white" />
               <div className="flex flex-col ml-1">
                 <span className="font-bold text-xl leading-none tracking-widest text-white">NEXG</span>
-                <span className="text-[9px] uppercase tracking-[0.25em] text-gray-400 mt-0.5">Concierge</span>
+                <span className="text-[9px] uppercase tracking-[0.25em] text-gray-400 mt-0.5">App</span>
               </div>
             </div>
             <p className="text-[#a0a1a1] text-sm leading-relaxed mb-6">
@@ -1211,7 +1211,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-semibold text-gray-400">
-          <p>© 2026 NEXG Concierge. All rights reserved.</p>
+          <p>© 2026 NEXG App. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5"><Globe size={14} /> Global</span>
             <span className="flex items-center gap-1.5">Secure Site</span>

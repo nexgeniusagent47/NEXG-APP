@@ -9,7 +9,7 @@ interface NexGLandingHeroProps {
   onNavigate?: (page: string) => void;
 }
 
-const HEADLINE_WORDS = ['GOURMET.', 'SUSHI.', 'SEAFOOD.', 'LUXURY.', 'CONCIERGE.'];
+const HEADLINE_WORDS = ['GOURMET.', 'SUSHI.', 'SEAFOOD.', 'LUXURY.', 'APP.'];
 
 export default function NexGLandingHero({
   onEnterDiscovery,
@@ -77,7 +77,7 @@ export default function NexGLandingHero({
           >
             <span>NEXG</span>
             <span className="text-[#FFE066] not-italic text-sm font-bold font-sans tracking-normal ml-1 px-2 py-0.5 rounded-full bg-white/20">
-              CONCIERGE
+              APP
             </span>
           </button>
 
@@ -216,7 +216,7 @@ export default function NexGLandingHero({
       {/* Bottom Footer Info Bar */}
       <footer className="relative z-10 px-6 py-4 flex items-center justify-between max-w-[1440px] mx-auto w-full text-xs text-white/70">
         <div className="flex items-center gap-4">
-          <span>© 2026 NEXG Concierge</span>
+          <span>© 2026 NEXG App</span>
           <button
             onClick={onOpenCategories}
             className="text-white hover:underline flex items-center gap-1"
@@ -227,7 +227,7 @@ export default function NexGLandingHero({
         </div>
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-status" />
-          <span>Active Concierge Fleet in Nairobi</span>
+          <span>Active App Fleet in Nairobi</span>
         </div>
       </footer>
     </div>

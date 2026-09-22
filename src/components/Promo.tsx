@@ -65,7 +65,7 @@ export default function Promo({ onNavigate }: PromoProps) {
           <div className="absolute right-0 bottom-0 top-0 w-[52%] sm:w-[54%] md:w-[56%] lg:w-[50%] xl:w-[54%] flex items-end justify-end overflow-hidden z-0 pointer-events-none">
             <img 
               src={responsiveProps('NEXG  PHONE MPCKUP.png', '100vw')?.src} 
-              alt="NEXG Concierge App Interface" 
+              alt="NEXG App App Interface" 
               className="w-full h-full object-contain object-right-bottom drop-shadow-2xl translate-y-[2%] translate-x-[2%] hover:scale-[1.02] transition-transform duration-500" 
               referrerPolicy="no-referrer"
             />

@@ -186,7 +186,7 @@ export default function CheckoutSimulatedModal() {
 
               <div className="space-y-1.5">
                 <label className={`text-xs font-bold ${isLight ? 'text-slate-600' : 'text-gray-300'}`}>
-                  Concierge Delivery Instructions
+                  App Delivery Instructions
                 </label>
                 <input
                   type="text"

@@ -181,7 +181,7 @@ export default function UnifiedItemModal({
       onAddToCart(payload);
     }
 
-    setActionConfirmedToast(`Added to your Villa Concierge request!`);
+    setActionConfirmedToast(`Added to your Villa App request!`);
     setTimeout(() => {
       setActionConfirmedToast(null);
       onClose();
@@ -279,7 +279,7 @@ export default function UnifiedItemModal({
                   <div>
                     <div className="font-bold">{item.merchantName}</div>
                     <div className={`text-[11px] ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
-                      Concierge Verified Partner • Direct Fulfillment
+                      App Verified Partner • Direct Fulfillment
                     </div>
                   </div>
                 </div>
@@ -494,7 +494,7 @@ export default function UnifiedItemModal({
               {/* Special Instructions */}
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-[#E5B65F] mb-1.5">
-                  Concierge Notes & Villa Details
+                  App Notes & Villa Details
                 </label>
                 <textarea
                   rows={2}
@@ -517,7 +517,7 @@ export default function UnifiedItemModal({
               >
                 <ShieldCheck className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
                 <div>
-                  <strong className="font-bold">Simulated Concierge Hold for Demo Purposes:</strong>{' '}
+                  <strong className="font-bold">Simulated App Hold for Demo Purposes:</strong>{' '}
                   Instant booking verification simulated locally, awaiting live connection to the payment router and banking provider.
                 </div>
               </div>
@@ -583,7 +583,7 @@ export default function UnifiedItemModal({
                 ) : (
                   <>
                     <ShoppingBag className="w-4 h-4" />
-                    <span>Add to Concierge Cart</span>
+                    <span>Add to App Cart</span>
                   </>
                 )}
               </button>

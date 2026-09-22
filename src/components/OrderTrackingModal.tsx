@@ -411,7 +411,7 @@ export default function OrderTrackingModal() {
                       <Phone size={16} />
                     </a>
                     <button
-                      onClick={() => alert(`Concierge chat with ${activeOrder.courier.name}: "Hello! I am on my way with your heated thermal pack."`)}
+                      onClick={() => alert(`App chat with ${activeOrder.courier.name}: "Hello! I am on my way with your heated thermal pack."`)}
                       className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors cursor-pointer ${
                         isLight
                           ? 'bg-[#B88728] hover:bg-[#967C3B] text-white'
@@ -544,7 +544,7 @@ export default function OrderTrackingModal() {
                       <span>${activeOrder.deliveryFee.toFixed(2)}</span>
                     </div>
                     <div className={`flex justify-between ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
-                      <span>Concierge Service</span>
+                      <span>App Service</span>
                       <span>${activeOrder.serviceFee.toFixed(2)}</span>
                     </div>
                     {activeOrder.discount > 0 && (
@@ -580,7 +580,7 @@ export default function OrderTrackingModal() {
                 }`}>
                   <span className={`font-semibold block ${isLight ? 'text-slate-800' : 'text-gray-200'}`}>Demonstration Notice:</span>
                   <p>
-                    This is an automated simulation of the client ordering lifecycle in NEXG Concierge. No actual payment provider has been billed. Once connected to the live API gateway, genuine payments will be processed via M-Pesa or Stripe.
+                    This is an automated simulation of the client ordering lifecycle in NEXG App. No actual payment provider has been billed. Once connected to the live API gateway, genuine payments will be processed via M-Pesa or Stripe.
                   </p>
                 </div>
               </div>

@@ -486,7 +486,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
       <div className="space-y-4 text-xs md:text-sm text-gray-700 leading-relaxed font-sans">
         <div className="text-center border-b pb-6 mb-6">
           <LogoIcon className="w-12 h-12 text-[#7a5821] mx-auto mb-2" />
-          <h3 className="font-bold text-lg text-gray-900 uppercase">NEXG CONCIERGE LIMITED</h3>
+          <h3 className="font-bold text-lg text-gray-900 uppercase">NEXG APP LIMITED</h3>
           <p className="text-[#7a5821] text-xs font-bold tracking-widest uppercase">
             {isDed ? 'Dedicated Rider Partner Agreement' : 'Independent Rider Logistics Agreement'}
           </p>
@@ -496,7 +496,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
         <p>This Services Agreement (the "Agreement") is executed on this date by and between:</p>
         
         <p className="pl-4 border-l-2 border-amber-300">
-          <strong>NEXG CONCIERGE LIMITED</strong>, a legal logistics platform company incorporated in Kenya (hereinafter referred to as "NEXG"); and
+          <strong>NEXG APP LIMITED</strong>, a legal logistics platform company incorporated in Kenya (hereinafter referred to as "NEXG"); and
         </p>
 
         <p className="pl-4 border-l-2 border-amber-300">
@@ -504,7 +504,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
         </p>
 
         <h4 className="font-bold text-gray-950 mt-6 text-sm">1. Scope of Fleet Services</h4>
-        <p>The Rider agrees to provide premium logistics, transportation, and white-glove errand solutions on behalf of clients booking through the NEXG Concierge Ecosystem. Active capabilities agreed upon include: <strong>{formData.services.join(', ') || 'Premium Errands'}</strong>.</p>
+        <p>The Rider agrees to provide premium logistics, transportation, and white-glove errand solutions on behalf of clients booking through the NEXG App Ecosystem. Active capabilities agreed upon include: <strong>{formData.services.join(', ') || 'Premium Errands'}</strong>.</p>
         
         <h4 className="font-bold text-gray-950 mt-4 text-sm">2. Equipment & Vehicles</h4>
         <ul className="list-disc pl-5 space-y-1">
@@ -533,7 +533,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
 
         <div className="grid grid-cols-2 gap-8 border-t border-gray-200 pt-8 mt-8">
           <div>
-            <p className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-6">For NEXG Concierge</p>
+            <p className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-6">For NEXG App</p>
             <div className="h-10 flex items-end mb-1">
               <span className="font-mono text-xs text-gray-400 font-semibold italic">NEXG Fleet Operations</span>
             </div>
@@ -579,7 +579,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
               <LogoIcon className="w-10 h-10 text-[#7a5821]" />
               <div className="flex flex-col ml-1">
                 <span className="font-bold text-lg leading-none tracking-widest text-gray-900">NEXG</span>
-                <span className="text-[8px] uppercase tracking-[0.25em] text-gray-500 mt-0.5">Concierge</span>
+                <span className="text-[8px] uppercase tracking-[0.25em] text-gray-500 mt-0.5">App</span>
               </div>
             </div>
           </div>
@@ -1293,12 +1293,12 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     <label className="border-2 rounded-2xl p-4 flex flex-col items-center gap-2 bg-white cursor-pointer select-none transition-colors text-center">
                       <input 
                         type="checkbox" 
-                        checked={formData.services.includes('Premium Concierge')}
-                        onChange={() => toggleCheckbox('services', 'Premium Concierge')}
+                        checked={formData.services.includes('Premium App')}
+                        onChange={() => toggleCheckbox('services', 'Premium App')}
                         className="accent-[#7a5821] w-4.5 h-4.5 cursor-pointer mb-2"
                       />
                       <Award className="text-[#7a5821] mb-1" size={24} />
-                      <span className="text-sm font-bold text-gray-900">Vip Concierge</span>
+                      <span className="text-sm font-bold text-gray-900">Vip App</span>
                       <span className="text-[11px] text-gray-400">Handle high-end guest requests</span>
                     </label>
 
@@ -2094,7 +2094,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     <div className="space-y-4 text-xs md:text-sm text-gray-700 leading-relaxed font-sans">
                       <div className="text-center border-b pb-6 mb-6">
                         <LogoIcon className="w-12 h-12 text-[#7a5821] mx-auto mb-2" />
-                        <h3 className="font-bold text-lg text-gray-900 uppercase">NEXG CONCIERGE LIMITED</h3>
+                        <h3 className="font-bold text-lg text-gray-900 uppercase">NEXG APP LIMITED</h3>
                         <p className="text-[#7a5821] text-xs font-bold tracking-widest uppercase">
                           Corporate Fleet Partner logistics Framework
                         </p>
@@ -2103,7 +2103,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
 
                       <p>This logistics partnership framework is executed by and between:</p>
                       <p className="pl-4 border-l-2 border-amber-300">
-                        <strong>NEXG CONCIERGE LIMITED</strong>, a leading transport and logistics concierge company in Kenya; and
+                        <strong>NEXG APP LIMITED</strong>, a leading transport and logistics concierge company in Kenya; and
                       </p>
                       <p className="pl-4 border-l-2 border-amber-300">
                         <strong>{formData.flName || '[Company Legal Name]'}</strong>, a registered agency incorporated under registration number <strong>{formData.flRegNum || '[Reg No]'}</strong> situated at <strong>{formData.flAddress || '[Business Address]'}</strong> (hereinafter referred to as "Fleet Provider").
@@ -2123,7 +2123,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
 
                       <div className="grid grid-cols-2 gap-8 border-t border-gray-200 pt-8 mt-8">
                         <div>
-                          <p className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-6">For NEXG Concierge</p>
+                          <p className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-6">For NEXG App</p>
                           <div className="h-10 flex items-end mb-1">
                             <span className="font-mono text-xs text-gray-400 font-semibold italic">NEXG Operations Admin</span>
                           </div>

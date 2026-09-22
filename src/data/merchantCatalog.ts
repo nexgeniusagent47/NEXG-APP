@@ -288,7 +288,7 @@ export const CATALOG: Category[] = [
     ]
   },
   {
-    id: 'concierge_services', name: 'Concierge Services',
+    id: 'concierge_services', name: 'App Services',
     icon: 'BellRing', color: '#b45309', bg: '#fffbeb',
     desc: 'Reservations, personal assistance, gift sourcing and VIP support',
     fulfillment_hint: 'service_coordination', workflow_hint: 'request_dispatch',
@@ -594,7 +594,7 @@ export const FIELD_DEFS: Record<string, FieldDefinition> = {
   training_specializations: { label: 'Training Specializations', type: 'multicheck', options: ['Weight Loss', 'Muscle Building', 'Athletic / Sports Performance', 'Rehabilitation', 'Prenatal Fitness', 'Senior Fitness', 'Youth / Kids'] },
   session_location:       { label: 'Training Session Locations', type: 'multicheck', options: ['In Gym', 'Home Visit', 'Outdoor / Park', 'Online / Virtual'] },
 
-  // ── Concierge ──
+  // ── App ──
   reservation_venue_types: { label: 'Reservation Types', type: 'multicheck', options: ['Restaurant Reservations', 'Hotel Bookings', 'Event Tickets', 'Travel Bookings', 'Hospitality & Experiences', 'VIP Access'] },
   dedicated_account_mgr:  { label: 'Dedicated Account Manager?', type: 'toggle' },
   corporate_clients:      { label: 'Corporate Clients Served?', type: 'toggle' },
@@ -723,7 +723,7 @@ export const SUGGESTED_SECTIONS: Record<string, string[]> = {
     "Restaurant Booking", "Event Ticket Sourcing", "Personal Assistant Hire", "Shopping Errands",
     "Gift Selection", "Travel Coordination", "Moving & Relocation", "Home Deep Clean Coord.",
     "VIP Fast Track", "Document Delivery", "Pet Sitting & Walking", "Flower Delivery Arrangement",
-    "Wine Selection Service", "Airport Meet & Greet", "Custom Concierge Request"
+    "Wine Selection Service", "Airport Meet & Greet", "Custom App Request"
   ],
   logistics_shipping: [
     "FCL (Full Container)", "LCL (Less than Container)", "Air Cargo Express",

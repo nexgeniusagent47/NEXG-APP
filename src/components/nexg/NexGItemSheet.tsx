@@ -116,7 +116,7 @@ export const NexGItemSheet: React.FC = () => {
         id: `book-${Date.now()}`,
         menuItemId: activeItem.id,
         restaurantId: activeMerchant?.id || 'nexg-experience',
-        restaurantName: activeMerchant?.name || 'Curated Concierge Experience',
+        restaurantName: activeMerchant?.name || 'Curated App Experience',
         name: `${activeItem.name} (${selectedDate} @ ${selectedTime} • ${guestCount} ${guestCount === 1 ? 'Guest' : 'Guests'})`,
         price: calculatedTotal,
         image: activeItem.image,
@@ -275,7 +275,7 @@ export const NexGItemSheet: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-1 font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg">
                   <ShieldCheck size={13} />
-                  <span>NEXG Concierge Guarantee</span>
+                  <span>NEXG App Guarantee</span>
                 </div>
               </div>
             </div>
@@ -438,10 +438,10 @@ export const NexGItemSheet: React.FC = () => {
               </div>
             )}
 
-            {/* SPECIAL CONCIERGE INSTRUCTIONS */}
+            {/* SPECIAL APP INSTRUCTIONS */}
             <div>
               <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 mb-1.5">
-                Special Concierge Notes or Dietary Preferences
+                Special App Notes or Dietary Preferences
               </label>
               <textarea
                 rows={2}

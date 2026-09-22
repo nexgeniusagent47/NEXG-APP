@@ -1900,14 +1900,14 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                 >
                   <div className="text-center mb-8 border-b pb-6">
                     <span className="font-extrabold text-2xl tracking-widest text-[#E5B65F]">NEXG</span>
-                    <h3 className="text-lg font-extrabold tracking-tight text-slate-900 mt-2">NEXG CONCIERGE LIMITED</h3>
+                    <h3 className="text-lg font-extrabold tracking-tight text-slate-900 mt-2">NEXG APP LIMITED</h3>
                     <p className="text-[#E5B65F] font-bold text-xs tracking-wider uppercase">Merchant Partnership Agreement</p>
                     <p className="text-slate-400 text-xs mt-1">Effective Date: <span className="font-bold">{new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span></p>
                   </div>
 
                   <div className="space-y-4 text-xs md:text-sm">
                     <p>This Merchant Partnership Agreement (the <strong>"Agreement"</strong>) is executed between:</p>
-                    <p><strong>NEXG Concierge Limited</strong> (hereinafter referred to as <strong>"NEXG"</strong> or <strong>"Platform"</strong>), registered in the Republic of Kenya with offices in Nairobi;</p>
+                    <p><strong>NEXG App Limited</strong> (hereinafter referred to as <strong>"NEXG"</strong> or <strong>"Platform"</strong>), registered in the Republic of Kenya with offices in Nairobi;</p>
                     <p>and</p>
                     <p>
                       <strong><span className="font-bold underline text-slate-900">{profileData.legalName || '[Legal Business Name]'}</span></strong>, 
@@ -1963,7 +1963,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                     <div className="grid grid-cols-2 gap-6 mt-8 border-t pt-6">
                       <div>
-                        <p className="font-bold text-slate-800 text-[11px] uppercase">For NEXG CONCIERGE LIMITED</p>
+                        <p className="font-bold text-slate-800 text-[11px] uppercase">For NEXG APP LIMITED</p>
                         <div className="h-12 flex items-end mb-2">
                           <span className="font-cursive text-xl text-slate-400 select-none">NEXG Legal Representative</span>
                         </div>

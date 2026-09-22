@@ -175,7 +175,7 @@ export default function GoogleReviewsModal({
 
                   <div className="space-y-1">
                     <div className="flex justify-between text-xs">
-                      <span>Concierge Service</span>
+                      <span>App Service</span>
                       <span className="font-bold">{googleAspects.service || 4.8} / 5.0</span>
                     </div>
                     <div className="h-1.5 w-full rounded-full bg-black/20 overflow-hidden">

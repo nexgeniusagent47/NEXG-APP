@@ -41,7 +41,7 @@ const TIME_SLOTS = [
   { time: '06:00 PM', label: 'Sunset Slot', popular: true },
   { time: '07:30 PM', label: 'Evening Prime', popular: true },
   { time: '09:00 PM', label: 'Night Soirée', popular: false },
-  { time: '10:30 PM', label: 'Late Concierge', popular: false },
+  { time: '10:30 PM', label: 'Late App', popular: false },
 ];
 
 export default function BookingCalendar({
@@ -139,7 +139,7 @@ export default function BookingCalendar({
             <div>
               <h3 className="font-bold text-base sm:text-lg">Dedicated Reservation Calendar</h3>
               <p className={`text-xs ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
-                {serviceTitle ? `${serviceTitle} • ${providerName || 'NEXG Concierge'}` : 'Select your preferred appointment date and time'}
+                {serviceTitle ? `${serviceTitle} • ${providerName || 'NEXG App'}` : 'Select your preferred appointment date and time'}
               </p>
             </div>
           </div>
@@ -419,7 +419,7 @@ export default function BookingCalendar({
               </div>
               {showGuestsPicker && (
                 <div className={`text-[11px] mt-0.5 ${isLight ? 'text-amber-800/80' : 'text-gray-400'}`}>
-                  {guests} {guests === 1 ? 'Guest' : 'Guests'} • Instant Concierge Hold
+                  {guests} {guests === 1 ? 'Guest' : 'Guests'} • Instant App Hold
                 </div>
               )}
             </div>

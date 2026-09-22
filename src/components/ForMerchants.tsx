@@ -212,7 +212,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
               Right Where They Are.
             </p>
             <p className={`text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-10 max-w-2xl leading-relaxed ${isLight ? 'text-slate-700 font-medium' : 'text-gray-200'}`}>
-              Partner with NEXG Concierge to serve guests directly inside premier luxury properties. We provide white-glove logistics, automated payouts, and seamless integration with your existing team.
+              Partner with NEXG App to serve guests directly inside premier luxury properties. We provide white-glove logistics, automated payouts, and seamless integration with your existing team.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <button 
@@ -530,7 +530,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
       <footer className={`border-t transition-colors duration-300 ${isLight ? 'bg-white border-slate-200 text-slate-600' : 'bg-[#1a1c1c] border-white/10 text-[#a0a1a1]'}`}>
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-10 sm:py-12 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className={`font-bold text-xl sm:text-2xl tracking-widest ${isLight ? 'text-slate-900' : 'text-white'}`}>NEXG</div>
-          <div className="text-xs sm:text-sm text-center md:text-left">© 2026 NEXG Concierge. All rights reserved.</div>
+          <div className="text-xs sm:text-sm text-center md:text-left">© 2026 NEXG App. All rights reserved.</div>
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm">
             <a href="#" className={`transition-colors py-2 px-1 min-h-[44px] flex items-center ${isLight ? 'hover:text-slate-900' : 'hover:text-white'}`}>Merchant Terms</a>
             <a href="#" className={`transition-colors py-2 px-1 min-h-[44px] flex items-center ${isLight ? 'hover:text-slate-900' : 'hover:text-white'}`}>Privacy</a>

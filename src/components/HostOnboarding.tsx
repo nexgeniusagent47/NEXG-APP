@@ -1334,7 +1334,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
         </div>
         <p>
           This Host Partnership &amp; Property Setup Agreement is between{' '}
-          <strong>NEXG Concierge Limited</strong> and the host / property represented in this submission.
+          <strong>NEXG App Limited</strong> and the host / property represented in this submission.
         </p>
         <h4 className="mb-1 mt-5 font-bold text-slate-950">1. Property representation</h4>
         <p>
@@ -1366,7 +1366,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
 
         <div className="mt-10 grid grid-cols-1 gap-8 border-t border-slate-200 pt-6 sm:grid-cols-2">
           <div>
-            <div className="text-[11px] font-bold uppercase text-slate-500">For NEXG Concierge Limited</div>
+            <div className="text-[11px] font-bold uppercase text-slate-500">For NEXG App Limited</div>
             <div className="mt-7 font-warm text-2xl text-slate-400">NEXG Operations</div>
             <div className="mt-1 h-px bg-slate-300" />
             <div className="mt-1 text-[10px] text-slate-500">Authorized representative</div>

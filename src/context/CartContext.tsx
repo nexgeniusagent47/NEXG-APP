@@ -106,7 +106,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       id: rawItem.id || `cart-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
       menuItemId: rawItem.menuItemId || rawItem.id || `item-${Date.now()}`,
       restaurantId: rawItem.restaurantId || rawItem.merchantId || (cartRestaurantId || 'nexg-concierge'),
-      restaurantName: rawItem.restaurantName || rawItem.merchantName || (cartRestaurantName || 'NEXG Concierge Partner'),
+      restaurantName: rawItem.restaurantName || rawItem.merchantName || (cartRestaurantName || 'NEXG App Partner'),
       name: rawItem.name,
       price: rawItem.price,
       image: rawItem.image || rawItem.imageUrl || '',
@@ -193,10 +193,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const clean = code.trim().toUpperCase();
     if (clean === 'NEXG20' || clean === 'WELCOME20') {
       const discountVal = +(subtotal * 0.2).toFixed(2);
-      setAppliedPromo({ code: clean, discount: discountVal, label: '20% Welcome Concierge Discount' });
+      setAppliedPromo({ code: clean, discount: discountVal, label: '20% Welcome App Discount' });
       return { success: true, message: `Applied! You saved $${discountVal.toFixed(2)}` };
     }
-    if (clean === 'VIP10' || clean === 'CONCIERGE') {
+    if (clean === 'VIP10' || clean === 'APP') {
       const discountVal = 10.0;
       setAppliedPromo({ code: clean, discount: discountVal, label: '$10 VIP Credit' });
       return { success: true, message: 'VIP Credit applied: -$10.00' };

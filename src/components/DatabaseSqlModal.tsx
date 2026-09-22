@@ -20,7 +20,7 @@ export default function DatabaseSqlModal({ isOpen, onClose }: DatabaseSqlModalPr
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const schemaSnippet = `-- PostgreSQL Schema for NEXG Concierge
+  const schemaSnippet = `-- PostgreSQL Schema for NEXG App
 -- Run on your local/cloud PostgreSQL server (PostgreSQL 14+)
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS "pg_trgm";
@@ -77,7 +77,7 @@ CREATE TABLE items (
 CREATE INDEX idx_merchants_name_trgm ON merchants USING gin (name gin_trgm_ops);
 CREATE INDEX idx_items_name_trgm ON items USING gin (name gin_trgm_ops);`;
 
-  const seedSnippet = `-- Seed script for NEXG Concierge
+  const seedSnippet = `-- Seed script for NEXG App
 -- Run: psql -U postgres -d nexg_db -f schema.sql && psql -U postgres -d nexg_db -f seed.sql
 -- Contains all 21 categories, verified merchants, and menu items with Unsplash image links.
 -- (Full files located at /src/db/schema.sql and /src/db/seed.sql)`;

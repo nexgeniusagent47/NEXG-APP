@@ -122,7 +122,7 @@ export const NEXG_EXPERIENCE_REGISTRY: NexGExperience[] = [
       {
         stepNumber: 1,
         stepName: 'Villa or Boutique Suite Check-in',
-        category: 'Concierge Services',
+        category: 'App Services',
         categoryId: 'concierge-services',
         iconName: 'Home',
         description: 'Private garden villa or luxury serviced residence with concierge greeting',

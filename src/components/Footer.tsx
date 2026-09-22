@@ -32,7 +32,7 @@ export default function Footer({ onNavigate }: FooterProps) {
                 NEXG
               </span>
               <span className="text-[9px] uppercase tracking-[0.25em] text-[#B88728] dark:text-[#E5B65F] font-bold mt-1">
-                Concierge
+                App
               </span>
             </div>
           </div>

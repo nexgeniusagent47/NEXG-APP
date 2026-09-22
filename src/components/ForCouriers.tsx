@@ -109,7 +109,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                   ? 'bg-white/80 hover:bg-white text-slate-800 shadow-xs'
                   : 'bg-white/10 hover:bg-white/20 text-white'
               }`}
-              title="Return to Guest Concierge"
+              title="Return to Guest App"
               aria-label="Back to Home"
             >
               <ArrowLeft className="w-5 h-5" />
@@ -1252,7 +1252,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               <LogoIcon className={`w-12 h-12 ${isLight ? 'text-amber-600' : 'text-white'}`} />
               <div className="flex flex-col ml-1">
                 <span className={`font-bold text-xl leading-none tracking-widest ${isLight ? 'text-slate-900' : 'text-white'}`}>NEXG</span>
-                <span className={`text-[9px] uppercase tracking-[0.25em] mt-0.5 ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>Concierge</span>
+                <span className={`text-[9px] uppercase tracking-[0.25em] mt-0.5 ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>App</span>
               </div>
             </div>
             <p className={`text-sm leading-relaxed mb-6 ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
@@ -1362,7 +1362,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
         <div className={`border-t pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-semibold ${
           isLight ? 'border-slate-200 text-slate-500' : 'border-white/10 text-gray-400'
         }`}>
-          <p>© 2026 NEXG Concierge. All rights reserved.</p>
+          <p>© 2026 NEXG App. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5"><Globe size={14} /> Global</span>
             <span className="flex items-center gap-1.5">Secure Site</span>
