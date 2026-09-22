@@ -132,38 +132,106 @@
    LINE-HEIGHT is what actually produces the "perfect boldness and spacing": the
    reference runs leading-none (ratio 1.0). Ours was 1.2 on h2 and 1.375 on h3, which
    is not just looser than the target, it is INCONSISTENT between levels — each step
-   down the hierarchy got progressively airier, so no rhythm formed. Leading is now set
-   per level with a deliberate progression instead of inheriting Tailwind's defaults:
-   display type is tightest, small headings slightly looser so two-line card titles
-   stay readable. */
+   down the hierarchy got progressively airier, so no rhythm formed.
+
+   SCALE ADOPTED FROM MATERIAL 3. M3 defines type as ROLES with an exact size,
+   line-height, weight AND tracking for each, rather than leaving components to inherit
+   whatever a utility happens to set. Its two typeface roles map cleanly onto this
+   product: Brand (Quicksand) for Display and Headline, Plain (Inter) for Title, Body
+   and Label.
+
+   TWO THINGS M3 CORRECTED:
+   1. TRACKING IS NOT NEGATIVE EVERYWHERE. M3 tightens only the largest sizes
+      (Display Large -0.25px) and adds POSITIVE tracking as text shrinks (Body Large
+      +0.5px, Label Large +0.1px). That is optical compensation: large letterforms read
+      too far apart at default spacing and small ones too close. A flat -0.01em across
+      every heading, which is what this file had, is wrong at both ends.
+   2. LEADING IS A SCALE, NOT A CONSTANT. M3 runs 1.12 at Display Large, 1.29 at
+      Headline Medium and 1.5 at Body Large. Tighter as type grows.
+
+   Applied below as custom properties so a value can be read and compared rather than
+   reverse-engineered from a utility string. */
+:root {
+  /* Display Large: 57px, leading 1.12, tracking -0.25px at 57px = -0.0044em */
+  --type-display-size: clamp(2.75rem, 5.2vw, 3.5625rem);
+  --type-display-leading: 1.12;
+  --type-display-tracking: -0.0044em;
+
+  /* Headline Medium: 28px, leading 1.29, tracking 0 */
+  --type-headline-size: clamp(1.625rem, 2.2vw, 1.75rem);
+  --type-headline-leading: 1.29;
+  --type-headline-tracking: 0em;
+
+  /* Title Large: 22px, leading 1.27, tracking 0 */
+  --type-title-size: 1.375rem;
+  --type-title-leading: 1.27;
+  --type-title-tracking: 0em;
+
+  /* Title Medium: 16px, weight 500, leading 1.5, tracking +0.15px = +0.0094em */
+  --type-subtitle-size: 1rem;
+  --type-subtitle-leading: 1.5;
+  --type-subtitle-tracking: 0.0094em;
+
+  /* Body Large: 16px, leading 1.5, tracking +0.5px = +0.031em */
+  --type-body-leading: 1.5;
+  --type-body-tracking: 0.031em;
+
+  /* Label Large: 14px, weight 500, leading 1.43, tracking +0.1px = +0.0071em */
+  --type-label-leading: 1.43;
+  --type-label-tracking: 0.0071em;
+}
+
+/* Display and Headline: the brand face, at M3 weights and spacing.
+   Weight is 700 rather than M3's 400 because the reference product this is measured
+   against resolves its headings to 700, and because 700 is Quicksand's axis ceiling —
+   the two agree, so nothing is synthesised. */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-weight: 700;
   font-variation-settings: 'wght' 700;
-  letter-spacing: -0.01em;
-  /* Default for the small end: 1.15 keeps stacked card titles from colliding. */
-  line-height: 1.15;
   text-wrap: balance;
 }
 
-/* Display: leading-none, matching the reference. At 68px the default leading leaves a
-   visible gap between lines that reads as two separate thoughts. */
+/* h1 — Display role. */
 h1 {
-  line-height: 1;
-  letter-spacing: -0.03em;
+  font-size: var(--type-display-size);
+  line-height: var(--type-display-leading);
+  letter-spacing: var(--type-display-tracking);
 }
 
-/* Section headings: 1.1 rather than the reference's 1.0, because ours wrap to two
-   lines at the container width and a 1.0 ratio on two lines of bold type sets the
-   descenders into the ascenders of the next line. */
+/* h2 — Headline role. */
 h2 {
-  line-height: 1.1;
+  font-size: var(--type-headline-size);
+  line-height: var(--type-headline-leading);
+  letter-spacing: var(--type-headline-tracking);
 }
 
-/* Card and item titles: 1.2. These are routinely two lines inside a fixed-height card,
-   so tightening them to display leading would clip. */
-h3, h4 {
-  line-height: 1.2;
+/* h3/h4 — Title role. Tighter than Headline because these are read as objects in a
+   list rather than as statements. */
+h3 {
+  font-size: var(--type-title-size);
+  line-height: var(--type-title-leading);
+  letter-spacing: var(--type-title-tracking);
+}
+
+h4 {
+  font-size: var(--type-subtitle-size);
+  line-height: var(--type-subtitle-leading);
+  letter-spacing: var(--type-subtitle-tracking);
+}
+
+/* Body and Label: the plain face, with M3's POSITIVE tracking. Without it small text
+   at 14-16px reads cramped, which is the most common way a UI looks "off" in a way
+   nobody can name. */
+body, p, li, td, th, dd, dt {
+  font-family: var(--font-sans);
+  line-height: var(--type-body-leading);
+  letter-spacing: var(--type-body-tracking);
+}
+
+label, button, input, select, textarea {
+  letter-spacing: var(--type-label-tracking);
+  line-height: var(--type-label-leading);
 }
 
 @keyframes status-breathe {
