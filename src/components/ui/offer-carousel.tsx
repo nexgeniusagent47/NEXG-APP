@@ -108,15 +108,16 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer, twoPerScreen = true
 
             <h3
               className={cn(
-                // `h-10` (40px) clipped a two-line title at 16px, so the box now grows
-                // with its content rather than cropping it — a min-height keeps the rail
-                // even while letting a long name breathe. The user asked for exactly
-                // this: expand a little, do not break the row.
+                // NO fixed height. `min-h-11` was tried first and is still wrong: 44px
+                // fits one line at 16px x 1.375 (22px) and clips the second. Measured on a
+                // 360px phone — clientHeight 44 against scrollHeight 77 — so 33px of every
+                // long title was cut off mid-word.
                 //
-                // Until the typography rules moved into `@layer base`, this element's
-                // `text-sm sm:text-base` was silently ignored and it rendered at 22px
-                // from the global h3 default.
-                "min-h-11 text-base font-bold line-clamp-2 leading-snug transition-colors",
+                // The clamp already caps a title at two lines, so the box only ever needs
+                // to fit two. Letting the height follow the content is what makes
+                // `line-clamp-2` mean anything; a fixed height and a line clamp are two
+                // different mechanisms fighting over the same box.
+                "text-base font-bold line-clamp-2 leading-snug transition-colors",
                 isLight
                   ? "text-slate-900 group-hover:text-[#B88728]"
                   : "text-white group-hover:text-[#E5B65F]"

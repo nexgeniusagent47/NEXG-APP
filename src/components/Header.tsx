@@ -119,7 +119,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
             This also fixes v1 defect D-15: the full nav needed ~1331px inside a
             1280px `xl` breakpoint, so items crowded at exactly the width where
             they first appeared. */}
-        <nav className="hidden xl:flex items-center gap-7 text-xs sm:text-[13px] font-semibold tracking-wide">
+        <nav className="hidden sm:flex items-center gap-7 text-xs sm:text-[13px] font-semibold tracking-wide">
           <button
             onClick={() => (onExplore ? onExplore() : onNavigate('home'))}
             className={`transition-colors cursor-pointer text-left bg-transparent border-none p-0 ${
@@ -245,10 +245,16 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
             )}
           </button>
 
-          {/* Mobile Hamburger Toggle */}
+          {/* Mobile Hamburger Toggle.
+              `sm:hidden`, not `xl:hidden`. The two breakpoints have to agree with the nav
+              above: with the nav appearing at `sm` and the hamburger disappearing only at
+              `xl`, every width between them showed BOTH controls — the hamburger still on
+              screen at 1280px on a desktop, which is the bug the user reported.
+
+              Below `sm` the hamburger is the only entry point, so it stays. */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`p-1.5 xl:hidden cursor-pointer ${
+            className={`p-1.5 sm:hidden cursor-pointer ${
               isLight ? 'text-slate-800 hover:text-[#B88728]' : 'text-white hover:text-[#E5B65F]'
             }`}
             aria-label="Open Mobile Menu"
