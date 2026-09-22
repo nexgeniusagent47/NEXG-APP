@@ -54,11 +54,8 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
             
             {/* Elegant brand info */}
             <div className="flex items-center gap-2 cursor-pointer py-1" onClick={() => onNavigate?.('home')}>
-              <LogoIcon className={`w-8 h-8 sm:w-9 sm:h-9 ${isLight ? 'text-amber-600' : 'text-white'}`} />
-              <div className="flex flex-col">
-                <span className={`font-bold text-xs sm:text-sm leading-none tracking-widest ${isLight ? 'text-slate-900' : 'text-white'}`}>NEXG</span>
-                <span className={`text-[7px] uppercase tracking-[0.2em] mt-0.5 ${isLight ? 'text-amber-700 font-semibold' : 'text-[#E5B65F]'}`}>{t.partnersPortal.merchantTitle}</span>
-              </div>
+              {/* The wordmark already spells NEXG, so no text sits beside it. */}
+              <LogoIcon variant="wordmark" className="h-7 w-auto" />
             </div>
           </div>
 

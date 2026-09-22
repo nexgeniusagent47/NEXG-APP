@@ -43,14 +43,19 @@ export default function LogoIcon({
   const { isLight } = useTheme();
   const isMark = variant === 'mark';
 
-  // The letters are near-black and would vanish on the dark header, so they follow
-  // currentColor, which the call sites already set.
-  const ink = isLight ? '#050606' : 'currentColor';
+  /*
+    The wordmark sets its own ink rather than inheriting currentColor.
+    Call sites pass accent colours meant for the small mark that used to sit beside a text
+    block — amber, brand brown. Inheriting those tinted the N, E and X to match, which is not
+    what the artwork looks like. The wordmark is the brand, so it renders in the brand's own
+    colours: near-black letters on light, white on dark, gold constant.
+  */
+  const ink = isMark ? (isLight ? '#050606' : 'currentColor') : isLight ? '#050606' : '#ffffff';
 
   return (
     <svg
       viewBox={isMark ? MARK_VIEW_BOX : VIEW_BOX}
-      className={`shrink-0 \${className}`}
+      className={`shrink-0 ${className}`}
       role="img"
       aria-label="NEXG"
     >

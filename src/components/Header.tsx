@@ -121,31 +121,19 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
         />
       </div>
       <div className="max-w-[1520px] mx-auto px-4 sm:px-8 flex items-center justify-between">
-        {/* Brand Logo & Name */}
+        {/* Brand — the supplied wordmark, with no text beside it.
+            The artwork already spells NEXG, so a text block next to it said the name twice.
+            Sized by height rather than a square box because the artwork is 361x137, about
+            2.6:1: it needs roughly 40px of height to stay legible, which makes it about
+            105px wide. `w-auto` is therefore load-bearing — a fixed width would squash it. */}
         <div
-          className="flex items-center gap-2 cursor-pointer select-none group"
+          className="flex items-center cursor-pointer select-none group"
           onClick={() => onNavigate('home')}
         >
-          {/*
-            The mark only. The name is set in text beside it, so passing the full wordmark
-            here rendered two wordmarks side by side.
-          */}
           <LogoIcon
-            variant="mark"
-            className="w-8 h-8 md:w-9 md:h-9 group-hover:scale-105 transition-transform"
+            variant="wordmark"
+            className="h-8 sm:h-9 md:h-10 w-auto group-hover:scale-[1.03] transition-transform origin-left"
           />
-          <div className="flex flex-col">
-            <span
-              className={`font-black text-lg md:text-xl leading-none tracking-widest ${
-                isLight ? 'text-slate-900' : 'text-white'
-              }`}
-            >
-              NEXG
-            </span>
-            <span className="text-[7.5px] md:text-[8.5px] uppercase tracking-[0.25em] text-[#B88728] dark:text-[#E5B65F] font-extrabold mt-0.5">
-              App
-            </span>
-          </div>
         </div>
 
         {/* Desktop Navigation Links

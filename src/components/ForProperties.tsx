@@ -108,11 +108,8 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             
             {/* Elegant brand info */}
             <div className="flex items-center gap-2 cursor-pointer py-1" onClick={() => onNavigate('home')}>
-              <LogoIcon className={`w-8 h-8 sm:w-9 sm:h-9 ${isLight ? 'text-amber-600' : 'text-white'}`} />
-              <div className="flex flex-col">
-                <span className={`font-bold text-xs sm:text-sm leading-none tracking-widest ${isLight ? 'text-slate-900' : 'text-white'}`}>NEXG</span>
-                <span className={`text-[7px] uppercase tracking-[0.2em] mt-0.5 ${isLight ? 'text-amber-700 font-semibold' : 'text-[#E5B65F]'}`}>{t.partnersPortal.propertiesTitle}</span>
-              </div>
+              {/* The wordmark already spells NEXG, so no text sits beside it. */}
+              <LogoIcon variant="wordmark" className="h-7 w-auto" />
             </div>
           </div>
 
@@ -1142,11 +1139,8 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
             <div className="flex items-center gap-1 cursor-pointer mb-6" onClick={() => onNavigate('home')}>
-              <LogoIcon className="w-12 h-12 text-white" />
-              <div className="flex flex-col ml-1">
-                <span className="font-bold text-xl leading-none tracking-widest text-white">NEXG</span>
-                <span className="text-[9px] uppercase tracking-[0.25em] text-gray-400 mt-0.5">App</span>
-              </div>
+              {/* The wordmark already spells NEXG, so no text sits beside it. */}
+              <LogoIcon variant="wordmark" className="h-9 w-auto" />
             </div>
             <p className="text-[#a0a1a1] text-sm leading-relaxed mb-6">
               Elevating premium hospitality across East Africa with integrated, contactless concierge ecosystems.

@@ -19,6 +19,7 @@ import {
   Flame,
   Award,
 } from 'lucide-react';
+import LogoIcon from './LogoIcon';
 import { useTheme } from '../context/ThemeContext';
 import { useCart } from '../context/CartContext';
 import {
@@ -215,11 +216,13 @@ export default function NexGCategoryDrilldown({
               <ArrowLeft size={18} className={isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'} />
             </button>
 
+            {/* The supplied wordmark, replacing NEXG set in italic serif. */}
             <button
               onClick={onBackToDiscovery}
-              className="text-2xl sm:text-3xl font-black tracking-tight text-[#B88728] dark:text-[#E5B65F] cursor-pointer hover:opacity-90 flex items-center gap-1 font-serif"
+              className="cursor-pointer hover:opacity-90 flex items-center"
+              aria-label="NEXG"
             >
-              <span>NEXG</span>
+              <LogoIcon variant="wordmark" className="h-8 w-auto" />
             </button>
 
             <div

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NEXG device room</title>
+    <!--
+      The device room. See server.mjs for why it exists and how the frames are
+      driven. Palette and type follow DESIGN.md so a defect here is not mistaken
+      for a defect in the app: one gold accent, near-black surfaces, Inter, and
+      `tabular-nums` on every measurement.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/room.css" />
+  </head>
+  <body>
+    <header class="bar">
+      <div class="bar__brand">
+        <span class="bar__mark">NEXG</span>
+        <span class="bar__sub">device room</span>
+      </div>
+      <div class="bar__fields">
+        <label class="field">
+          <span class="field__label">Screen</span>
+          <select id="route" class="field__input"></select>
+        </label>
+        <label class="field">
+          <span class="field__label">Devices</span>
+          <select id="group" class="field__input">
+            <option value="all">All 19</option>
+            <option value="phone" selected>Phones (14)</option>
+            <option value="narrow">Narrow 320–360 (6)</option>
+            <option value="tablet">Tablets (2)</option>
+            <option value="desktop">Desktop (3)</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="field__label">Theme</span>
+          <select id="theme" class="field__input">
+            <option value="dark" selected>Dark</option>
+            <option value="light">Light</option>
+          </select>
+        </label>
+        <label class="field">
+          <span class="field__label">Zoom</span>
+          <select id="zoom" class="field__input">
+            <option value="auto" selected>Auto fit</option>
+            <option value="1">100%</option>
+            <option value="0.75">75%</option>
+            <option value="0.5">50%</option>
+            <option value="0.35">35%</option>
+            <option value="0.25">25%</option>
+          </select>
+        </label>
+      </div>
+      <div class="bar__actions">
+        <button id="reload" class="btn" type="button" title="Reload every frame (R)">Reload</button>
+        <button id="audit" class="btn btn--primary" type="button" title="Measure every frame (A)">
+          Audit layout
+        </button>
+        <button id="stills" class="btn" type="button" title="Capture PNG stills (S)">Capture stills</button>
+      </div>
+    </header>
+
+    <div class="status" id="status" role="status" aria-live="polite"></div>
+
+    <main>
+      <div class="grid" id="grid"></div>
+    </main>
+
+    <aside class="panel" id="panel" hidden>
+      <div class="panel__head">
+        <h2 class="panel__title" id="panel-title">Layout audit</h2>
+        <button id="panel-close" class="btn btn--ghost" type="button" aria-label="Close panel">Close</button>
+      </div>
+      <div class="panel__body" id="panel-body"></div>
+    </aside>
+
+    <script type="module" src="/room.js"></script>
+  </body>
+</html>

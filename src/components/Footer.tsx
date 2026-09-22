@@ -26,15 +26,8 @@ export default function Footer({ onNavigate }: FooterProps) {
             onClick={() => onNavigate && onNavigate('home')}
             className={`flex items-center gap-2 mb-6 ${onNavigate ? 'cursor-pointer' : ''}`}
           >
-            <LogoIcon className="w-12 h-12" />
-            <div className="flex flex-col ml-1">
-              <span className={`font-black text-xl leading-none tracking-widest ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                NEXG
-              </span>
-              <span className="text-[9px] uppercase tracking-[0.25em] text-[#B88728] dark:text-[#E5B65F] font-bold mt-1">
-                App
-              </span>
-            </div>
+            {/* The wordmark already spells NEXG, so the text block here said it twice. */}
+            <LogoIcon variant="wordmark" className="h-9 w-auto" />
           </div>
           <p className={`text-sm sm:text-[15px] font-medium leading-relaxed max-w-sm ${
             isLight ? 'text-slate-600' : 'text-gray-400'

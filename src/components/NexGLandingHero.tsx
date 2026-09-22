@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MapPin, Crosshair, ArrowRight, ChevronDown, Sparkles, Search, Compass } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import LogoIcon from './LogoIcon';
 import { useTheme } from '../context/ThemeContext';
 
 interface NexGLandingHeroProps {
@@ -70,15 +71,17 @@ export default function NexGLandingHero({
       {/* Top Navbar */}
       <nav className="relative z-20 px-5 sm:px-10 py-5 flex items-center justify-between max-w-[1440px] mx-auto w-full">
         <div className="flex items-center gap-4 sm:gap-6">
-          {/* Logo */}
+          {/*
+            The supplied wordmark. This was a THIRD way of drawing the logo — NEXG in italic
+            serif with an "APP" pill badge beside it — which matched neither the header nor
+            the artwork. One logo, one component.
+          */}
           <button
             onClick={() => onEnterDiscovery()}
-            className="text-3xl sm:text-4xl font-black italic tracking-tighter text-white hover:opacity-90 transition-opacity cursor-pointer flex items-center gap-1 font-serif"
+            className="hover:opacity-90 transition-opacity cursor-pointer flex items-center"
+            aria-label="NEXG"
           >
-            <span>NEXG</span>
-            <span className="text-[#FFE066] not-italic text-sm font-bold font-sans tracking-normal ml-1 px-2 py-0.5 rounded-full bg-white/20">
-              APP
-            </span>
+            <LogoIcon variant="wordmark" className="h-9 sm:h-10 w-auto" />
           </button>
 
           {/* Location Selector */}

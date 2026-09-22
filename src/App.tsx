@@ -230,12 +230,42 @@ function AppContent() {
 
   // Browser Back/Forward re-reads the address bar.
   useEffect(() => {
-    const onPop = () => {
+    const syncFromUrl = () => {
       setCurrentPage(pageFromUrl());
       setDeepLinkMerchantId(merchantIdFromUrl());
     };
-    window.addEventListener('popstate', onPop);
-    return () => window.removeEventListener('popstate', onPop);
+    window.addEventListener('popstate', syncFromUrl);
+    return () => window.removeEventListener('popstate', syncFromUrl);
+  }, []);
+
+  /**
+   * A host page may re-route this document without reloading it.
+   *
+   * The device room (scripts/device-room/) frames this app once per device width and
+   * needs to show the same screen on all of them at once. Reloading every frame on
+   * each change would refetch the catalogue and re-run every entrance animation, so it
+   * rewrites the query string and asks the app to re-read it instead.
+   *
+   * Accepted only from the document's own origin: the room is same-origin by
+   * construction, and a document must not let a foreign frame steer its navigation.
+   * `event.source === window.parent` also rejects a sibling frame talking sideways.
+   */
+  useEffect(() => {
+    const onHostMessage = (event: MessageEvent) => {
+      if (event.origin !== window.location.origin) return;
+      if (event.source !== window.parent) return;
+      const data = event.data as { type?: string; search?: string } | null;
+      if (!data || data.type !== 'nexg:set-route') return;
+      // Rebuild the URL from the host's query string, keeping the path this document
+      // was served from so a mounted app is never sent to a different entry point.
+      const search = typeof data.search === 'string' ? data.search : '';
+      window.history.replaceState(null, '', `${window.location.pathname}${search}`);
+      setCurrentPage(pageFromUrl());
+      setDeepLinkMerchantId(merchantIdFromUrl());
+      (window.parent as Window).postMessage({ type: 'nexg:route-changed' }, event.origin);
+    };
+    window.addEventListener('message', onHostMessage);
+    return () => window.removeEventListener('message', onHostMessage);
   }, []);
 
   // v2 discovery flow.
