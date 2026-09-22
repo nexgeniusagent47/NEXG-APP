@@ -35,6 +35,7 @@
     "pg": "^8.13.3",
     "react": "^19.0.1",
     "react-dom": "^19.0.1",
+    "react-spring": "^10.0.4",
     "tailwind-merge": "^3.7.0",
     "vite": "^6.2.3"
   },
