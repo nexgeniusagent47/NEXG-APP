@@ -23,6 +23,26 @@
    the finding stays visible in project config instead of being silently suppressed
    inline in the stylesheet.
 --------------------------------------------------------------------------- */
+/* Quicksand: ONE variable file for the whole weight range.
+   The static download ships five separate weights (Light … Bold, ~79 KB each).
+   Declaring a single `font-weight: 300 700` range against the variable file means one
+   126 KB request instead of five, and intermediate weights become reachable.
+
+   `format('truetype')` only — NOT `truetype-variations`. The latter is a legacy hint
+   for the short-lived 2016 variable-font syntax; Chromium rejects it outright in a
+   src list, which invalidates the ENTIRE @font-face. The family then silently falls
+   through to the next font in the stack, so headings looked correct, measured
+   correct, and were not Quicksand at all. The only symptom was that
+   `document.fonts.load()` threw a NetworkError and the family never appeared in
+   `document.fonts`. */
+@font-face {
+  font-family: 'Quicksand Local';
+  src: url('/fonts/Quicksand-Variable.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @font-face {
   font-family: 'Adventor';
   src: url('/fonts/texgyreadventor-regular.otf') format('opentype');
@@ -88,26 +108,35 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   /* Display face for the hero wordmark. Adventor first, then the closest geometric
-     fallbacks. Headings elsewhere use Cooper via the base h1-h6 rule below. */
+     fallbacks. */
   --font-display: "Adventor", "TeX Gyre Adventor", "Century Gothic", "Jost",
     ui-sans-serif, system-ui, sans-serif;
-  /* Headings. The full Cooper* family, so the weight is a real choice. */
+  /* Headings. Quicksand, then geometric sans fallbacks with a similar skeleton. */
+  --font-heading: "Quicksand Local", "Quicksand", "Adventor", ui-sans-serif, system-ui,
+    sans-serif;
+  /* Warm accent. The full Cooper* family, so the weight is a real choice. */
   --font-warm: "Cooper Local", "Cooper Black", Georgia, serif;
   /* Live-status indicator. Opacity only: Tailwind's `animate-pulse` also scales the
      element, which is a transform on every frame of an animation that never ends. */
   --animate-status: status-breathe 2.4s ease-in-out infinite;
 }
 
-/* Headings carry the clean geometric sans.
-   Cooper* is a warm 1920s display serif and it earns its place as an ACCENT — the
-   rotating hero line, the host onboarding wordmark — but set across every heading it
-   makes the product read as decorative rather than clean. The reference this product
-   is measured against sets headings in a low-contrast geometric sans: heavy, tight,
-   lots of air. TeX Gyre Adventor is exactly that (it is the Avant Garde clone), so
-   headings use it and Cooper is reserved for the few places that want warmth. */
+/* Headings carry Quicksand.
+   A rounded geometric sans: circular bowls, monolinear strokes, open apertures. It
+   reads friendly and modern rather than corporate, which suits a concierge product
+   more than the neutral grotesque it replaces.
+
+   WEIGHT CEILING — Quicksand's `wght` axis stops at 700, while the interface asks for
+   `font-black` (900) and `font-extrabold` (800) in 237 places. Those requests are
+   CLAMPED here rather than left to the browser: synthetic bold smears the
+   counters and destroys the even stroke weight that is the whole character of this
+   face. Clamping renders at the heaviest real weight instead, which looks
+   intentional; synthesising looks like a rendering fault. */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display);
-  letter-spacing: -0.02em;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-variation-settings: 'wght' 700;
+  letter-spacing: -0.01em;
 }
 
 /* The hero headline is the one piece of type big enough to carry real tracking
