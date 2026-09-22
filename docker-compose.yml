@@ -43,7 +43,7 @@ services:
       # see README). Publishing 5433 keeps this project from colliding with it.
       # Remove this block in production: nothing outside the compose network
       # needs to reach the database.
-      - "${POSTGRES_HOST_PORT:-5433}:5432"
+      - "127.0.0.1:${POSTGRES_HOST_PORT:-5433}:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U nexg_user -d nexg_db"]
       interval: 5s
@@ -89,7 +89,7 @@ services:
       - path: .env
         required: false
     ports:
-      - "${PORT:-3001}:3001"
+      - "127.0.0.1:${PORT:-3001}:3001"
     # The image already defines HEALTHCHECK; this override only shortens the
     # start period so `docker compose up --wait` returns sooner.
     healthcheck:
