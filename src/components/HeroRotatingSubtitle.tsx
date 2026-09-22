@@ -60,6 +60,12 @@ export const HERO_PODS: HeroPod[] = [
   { id: 'rides', lead: 'Rides', support: 'Chauffeurs · Rentals · Airport Transfers' },
   { id: 'stockup', lead: 'Stock Up', support: 'Groceries · Pharmacy · Essentials' },
   { id: 'experiences', lead: 'Experiences', support: 'Events · Safaris' },
+  // The two the user asked for. "Exclusive 18+" carries the age gate in the lead itself
+  // rather than burying it in the support line, because it is the part that has to be
+  // unmissable — someone scrolling past needs to register the restriction, not the
+  // categories behind it.
+  { id: 'exclusive', lead: 'Exclusive 18+', support: 'Adults Only · Private · Discreet' },
+  { id: 'membership', lead: 'Membership', support: 'Privileges · Priority · Rewards' },
 ];
 
 /**
