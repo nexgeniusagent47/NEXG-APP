@@ -53,14 +53,13 @@ export interface HeroPod {
 }
 
 export const HERO_PODS: HeroPod[] = [
-  // Every lead AND every support word is capitalised. The support line reads as a set of
-  // service labels rather than as a sentence, so Title Case throughout makes it scannable
-  // instead of trailing off into lowercase.
-  { id: 'relax', lead: 'Relax', support: 'Spa · Massage · Wellness' },
-  { id: 'cravings', lead: 'Cravings', support: 'Food · Restaurants · Late-Night' },
-  { id: 'arrive', lead: 'Arrive', support: 'Chauffeurs · Transfers · Airport' },
-  { id: 'stockup', lead: 'Stock Up', support: 'Groceries · Pharmacy · Butcher' },
-  { id: 'sorted', lead: 'Get Sorted', support: 'Laundry · Repairs · Vehicle Care' },
+  // Every lead AND every support word is capitalised: these read as service labels
+  // rather than as a sentence, so Title Case throughout makes them scannable.
+  { id: 'relax', lead: 'Relax', support: 'Spa · Wellness · Fitness' },
+  { id: 'cravings', lead: 'Cravings', support: 'Restaurants · Delivery · Fine Dining' },
+  { id: 'rides', lead: 'Rides', support: 'Chauffeurs · Rentals · Airport Transfers' },
+  { id: 'stockup', lead: 'Stock Up', support: 'Groceries · Pharmacy · Essentials' },
+  { id: 'experiences', lead: 'Experiences', support: 'Events · Safaris' },
 ];
 
 /**
@@ -144,18 +143,18 @@ export const HeroWipeSubtitle: React.FC<HeroSubtitleProps> = ({
         <span key={pod.id} className={innerClass}>
           <span className="hero-wipe__lead">{pod.lead}</span>
           {reveal !== 'plain' && (
-            <>
-              {/* The separator is the hinge of the line: customer's word on the left,
-                  what they can actually buy on the right. It is decorative, so it
-                  stays out of the accessibility tree; a screen reader announcing
-                  "dash" mid-sentence is noise. */}
+            /* Wrapped so the support line's `em` resolves against the lead word rather
+               than against the shared parent. As siblings they share a font-size
+               context, and an `em` on the support compounded to 0.856 of the lead when
+               0.925 was intended. */
+            <span className="hero-wipe__tail">
               {reveal === 'dash' && (
                 <span className="hero-wipe__dash" aria-hidden="true">
                   {' · '}
                 </span>
               )}
               <span className="hero-wipe__support">{pod.support}</span>
-            </>
+            </span>
           )}
         </span>
       </span>

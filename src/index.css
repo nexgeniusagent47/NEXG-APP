@@ -175,9 +175,19 @@ html.dark {
    0.94 leading, tighter than 1: the two lines are read as one block, and at this size the
    default leading opens a gap that splits them into two unrelated statements. */
 .hero-h1 {
+  /* Pinned to the heading face explicitly. The base `h1 { font-family: … }` rule now
+     lives in `@layer base`, which loses to a utility — but `font-display` and
+     `font-heading` are BOTH utilities, so between them it comes down to emitted order,
+     and the hero's `font-display` was silently winning. Naming the family here removes
+     the ambiguity rather than depending on which class lands last. */
+  font-family: var(--font-heading);
   font-size: clamp(2.5rem, 6.9vw, 5.5rem);
-  line-height: 0.94;
-  letter-spacing: -0.035em;
+  /* 1.02, not 0.94. The tighter value set the two lines on top of one another: at this
+     size 0.94 leaves almost no gap between the descenders of line 1 and the capitals of
+     line 2. Just above 1 keeps them reading as one block without them touching. */
+  line-height: 1.02;
+  /* Relaxed from -0.035em, which at 88px pulled the glyphs into each other. */
+  letter-spacing: -0.02em;
   margin-bottom: 1.75rem;
   text-shadow: 0 6px 26px rgba(0, 0, 0, 0.65);
   /* Both of these stop a phrase breaking inside itself, so the headline is always
@@ -191,7 +201,7 @@ html.dark {
   font-weight: 700;
 }
 
-/* Line 2: its own line, 5% smaller, and set slightly lighter in feel than the gold lead
+/* Line 2: its own line, 5% smaller than the lead, and set slightly lighter in feel
    without going below the axis floor. */
 .hero-h1__line2 {
   display: block;
@@ -509,7 +519,16 @@ html {
 .hero-wipe__lead {
   font-family: var(--font-warm);
   font-weight: 700;
-  letter-spacing: 0;
+  /* 8% larger than the sentence it sits in, so the rotating word is unmistakably the
+     subject and the services beside it read as a qualifier. An `em` again, so it scales
+     with the hero rather than needing its own ladder. */
+  font-size: 1.08em;
+  /* Tracking opened up. At this size the word is display type, and at display sizes the
+     default spacing is tight enough that the letters start to read as one shape; the
+     extra space is what lets each letter be seen. The margin is the other half of
+     "better spacing" — it keeps the word from crowding the separator that follows it. */
+  letter-spacing: 0.01em;
+  margin-right: 0.08em;
   color: #e5b65f;
 }
 
@@ -525,10 +544,23 @@ html.light .hero-wipe__lead {
   font-weight: 400;
 }
 
+/* The tail carries the separator and the services. NO font-size here: it is a SIBLING
+   of the lead word, not a child, so an `em` on it resolves against the shared parent
+   rather than against the lead — which is why an earlier attempt at 0.925 landed at
+   0.856 of the lead instead. The two sizes are set independently against that shared
+   parent and the relationship between them falls out of the arithmetic. */
+.hero-wipe__tail {
+  display: inline;
+}
+
 /* The supporting line, naming the real verticals under the warm word. It clears
    4.5:1 in both themes rather than sitting at an opacity low enough to read as
-   disabled, which is what the previous `opacity: 0.9` on a lighter base did. */
+   disabled, which is what the previous `opacity: 0.9` on a lighter base did.
+
+   0.95em against the lead's 1.08em, so the services sit slightly under the word and the
+   eye lands on the word first. Relative, so the step holds at every viewport. */
 .hero-wipe__support {
+  font-size: 0.95em;
   font-weight: 500;
   color: #b4b8bd;
 }
