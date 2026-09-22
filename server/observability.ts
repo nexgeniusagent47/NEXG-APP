@@ -22,6 +22,7 @@ import { randomUUID } from 'node:crypto';
 import type { Express, NextFunction, Request, Response } from 'express';
 
 import { getDbUnavailableReason, isDbReady } from './db.ts';
+import { clientIp, deviceId, forwardedChain, rateLimiterStats } from './security.ts';
 import { logger, runWithLogContext, type LogBindings } from './logger.ts';
 import {
   formatTraceparent,
@@ -243,12 +244,27 @@ export function observabilityMiddleware(options: ObservabilityOptions = {}) {
     const traceId =
       inboundTrace?.traceId ?? (isValidTraceId(requestId) ? requestId : newTraceId());
 
+    // Resolved once, then reused for both the span and the log bindings below.
+    //
+    // Done from the REQUEST rather than from `res.locals`, because this middleware
+    // deliberately runs before the identity middleware: observability must see every
+    // request, including ones a later middleware rejects. Reading locals here would record
+    // undefined for exactly the traffic worth investigating.
+    const clientIdentity = { ip: clientIp(req), device: deviceId(req) };
+
     const span = startSpan(
       'http.request',
       {
         'http.method': req.method,
         'http.target': path,
         'http.user_agent': (req.headers['user-agent'] as string | undefined) ?? undefined,
+        // Client identity on every span, so a trace can be filtered by who caused it. That
+        // is the question actually asked during an incident — "is this one caller or
+        // many?" — and the request target alone cannot answer it.
+        'client.ip': clientIdentity.ip,
+        'client.device_id': clientIdentity.device.id,
+        'client.device_source': clientIdentity.device.source,
+        'client.forwarded_chain': forwardedChain(req) || undefined,
       },
       { traceId, parentSpanId: inboundTrace?.parentSpanId }
     );
@@ -265,6 +281,11 @@ export function observabilityMiddleware(options: ObservabilityOptions = {}) {
       spanId: span.spanId,
       method: req.method,
       path,
+      // On every request log line, so a log query can answer "which caller" without
+      // needing the trace store. The device id arrives hashed when the client did not send
+      // one, so this stays a pseudonymous identifier rather than a raw fingerprint.
+      ip: clientIdentity.ip,
+      deviceId: clientIdentity.device.id,
     };
     const requestLogger = logger.child(baseBindings);
 
@@ -612,11 +633,16 @@ export function formatPrometheus(snapshot: MetricsSnapshot): string {
 
 export function metricsHandler(req: Request, res: Response): void {
   const snapshot = metricsSnapshot();
+  // Rate limiting is a control that silently does nothing when it is misconfigured, so its
+  // live state is exposed alongside the request counters. `tracked` climbing without bound
+  // would mean the sweep is not evicting; zero tracked after real traffic would mean the
+  // middleware is not mounted. Both are otherwise invisible.
+  const withLimiter = { ...snapshot, rateLimiter: rateLimiterStats() };
   if (String(req.query.format ?? '') === 'prometheus') {
     res.type('text/plain; version=0.0.4; charset=utf-8').send(formatPrometheus(snapshot));
     return;
   }
-  res.json(snapshot);
+  res.json(withLimiter);
 }
 
 export function tracesHandler(req: Request, res: Response): void {
