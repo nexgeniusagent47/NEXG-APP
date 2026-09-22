@@ -414,11 +414,11 @@ future session starts from reality rather than from the commit titles.
 | --- | --- | --- |
 | 1 | Image optimisation | **DONE.** 14.05 MB → an 80-variant WebP ladder; a phone fetches the 960 rung and a desktop the 1280, 628 KB vs 708 KB measured |
 | 2 | Route-level code splitting | **DONE.** Initial route JS 585 KB → 76 KB gzipped; 27 lazy routes, `manualChunks` collapses the icon fragmentation |
-| 3 | Category rail + sub-category rail + top filter | **PARTIAL.** Discovery already had all three (docked vertical rail, subcategory chips, sort bar) — see §11 |
-| 4 | Infinite scroll + `image-auto-slider` | **PARTIAL.** Discovery already had IntersectionObserver infinite scroll. `InfiniteMarquee` is built and wired to the sponsored rail; **not browser-verified** |
+| 3 | Category rail + sub-category rail + top filter | **DONE, verified in a browser.** Discovery opens from the hero search, not a route, and carries a 22-category rail with merchant counts, a sort bar and a region filter; the rail docks at 108px on phone and tablet with all 23 tabs still clickable after 1800px of scroll. Clicking a category opens `NexGCategoryDrilldown`, which has its own subcategory selector and three filters |
+| 4 | Infinite scroll + `image-auto-slider` | **DONE.** Discovery already had IntersectionObserver infinite scroll. `InfiniteMarquee` is wired to the sponsored rail and browser-verified: two equal 2120px halves, linear/infinite, actually moving, duplicate `aria-hidden`, and reduced-motion degrading to a plain scrollable strip |
 | 5 | Deployment / versioning | **DONE.** Dockerfile, Compose, `scripts/release.mjs`, `docs/DEPLOYMENT.md`, `/api/version` |
 | 6 | CI/CD | **DONE.** `.github/workflows/{ci,release}.yml`, dependabot |
-| 7 | Observability | **PARTIAL.** Logs, tracing, metrics, `/api/metrics`, consent, telemetry all shipped and verified at the API. **The dashboard at `?page=metrics` has never been rendered in a browser** |
+| 7 | Observability | **DONE, verified in a browser.** Logs, tracing, metrics, consent and telemetry, plus the dashboard at `?page=metrics`: requests/min with sparkline, duration histogram, status breakdown, slowest-routes table, runtime/build panel and client telemetry, all populated from a live API with p50 2ms / p95 22ms / p99 31ms and zero page errors |
 | 8 | Session tokens + JWT | **DONE** for the API (13/13 checks). User store is in-process — see §11 |
 | 9 | Onboarding draft caching | **DONE.** `useMerchantDraft` + `readMerchantDraft` persist the merchant form (22 fields, category by id, restore verified through a reload and by 11 unit tests). HostOnboarding keeps its own inline version — see §11.2 |
 
@@ -473,19 +473,47 @@ cart.
 7. **`src/assets/images/` originals are no longer imported** — only the ladder in
    `public/images/` is. Deleting the originals would break
    `scripts/build-image-ladder.mjs`, which reads them.
+8. **Discovery is not a route, and it does not dock on desktop by design.**
+   `DiscoveryScreen` mounts from the hero search (`handleOpenNexGWorkflow` in `App.tsx`),
+   NOT from `?page=...`. `?page=discovery` and `?page=categories` are absent from
+   `DEEP_LINK_PAGES`, so both silently render the home page — a test against them would
+   "pass" while measuring a screen with no rail at all. At 1024px and above the rail is a
+   static `hidden lg:block` sidebar and the docking code is `lg:hidden`, so "rail not on
+   screen after scrolling" at desktop width is correct rather than broken. Verify docking
+   at phone or tablet width.
+9. **`src/components/nexg/CategoryPage.tsx` is dead code** (359 lines, never imported).
+   The live category surface is `NexGCategoryDrilldown`. Two components describe
+   themselves as the category page and only one is reachable; decide deliberately whether
+   to wire it or delete it.
+10. **The fixed header overlaps any page that does not clear it.** `<main>` in `App.tsx`
+    carries only `flex-grow`, so a page with too little top padding renders underneath the
+    header and silently loses its first heading, which is what happened to the metrics
+    dashboard title. Eleven components compensate individually. A shared offset on the
+    wrapper would fix all of them at once and would also shift the eleven that already do
+    it, so that change needs measuring page by page rather than applying blind.
 
 ---
 
 ## 12. Suggested first 30 minutes of the next session
 
 1. `npm run db:up && npm run server && npm run dev` — confirm the stack runs.
-2. `npm run lint && npm test && npm run test:api && npm run test:flow && npm run test:consistency`
-   — expect **113 assertions** (42 unit, 29 API, 18 flow, 24 consistency).
-3. **Render `?page=metrics` in a browser.** It is the one shipped surface never
-   verified visually; it only populates when the API is answering.
-4. **Finish the draft caching (§10 row 9)** — migrate `HostOnboarding` off its inline
-   copy and add `useDraftPersistence` to `MerchantOnboarding`. The hook is written and
-   generic; this is wiring.
-5. **Give the catalogue real menu sections (§7.1).** Still the highest-value data fix:
-   it replaces a hash with authored taxonomy and makes the merchant menu truthful.
-6. Ask which hero reveal treatment won (§7.0) and delete the other two.
+   **The API must be started fresh after any change to `server/`.** A stale process on
+   port 3001 cost real time: it answered `/api/health` while 404-ing `/api/version`,
+   `/api/metrics` and `/api/traces`, so the metrics dashboard correctly reported
+   "Metrics API unreachable" and looked broken.
+2. `npm test && npm run test:api && npm run test:flow && npm run test:consistency`
+   — expect **124 assertions** (53 unit, 29 API, 18 flow, 24 consistency).
+3. **The design pass is the open work, not the hardening brief.** The brief's nine
+   tracks are all delivered; what remains is the anti-slop sweep: roughly 230
+   uppercase-tracking eyebrow micro-labels (the cap is about one per three sections),
+   seven `window` scroll listeners that should be observers or `useScroll`, and the
+   `high-end-visual-design` pass the user asked for on top of `design-taste-frontend`.
+4. **Loading states.** 22 files use a mix of `animate-spin`, `animate-status` and only
+   three real skeletons. The user's diagnosis is that they are redundant and do not
+   resemble what replaces them. `RouteFallback` and `Skeleton` are the correct pattern;
+   `react-spring` is installed and unused, and is the right tool for skeletons that
+   settle rather than snap.
+5. **Migrate `HostOnboarding` onto `useMerchantDraft`** — and preserve its row re-keying
+   (§11.2). Not mechanical.
+6. **Give the catalogue real menu sections (§7.1).** Still the highest-value data fix:
+   it replaces a hash with authored taxonomy.
