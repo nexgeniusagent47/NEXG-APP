@@ -135,7 +135,11 @@ function AppContent() {
     CATEGORIES_21[0]
   );
   const [isSqlModalOpen, setIsSqlModalOpen] = useState(false);
-  const [selectedMerchant, setSelectedMerchant] = useState<NexGMerchant | null>(null);
+  // Typed as ApiMerchant, which is what the API returns and what MerchantRoute
+// expects. It was NexGMerchant, a legacy type for the old static-data flow; the two
+// are structurally near-identical, which is exactly why the mismatch stayed hidden
+// until React's own types were installed.
+  const [selectedMerchant, setSelectedMerchant] = useState<ApiMerchant | null>(null);
   // An identifier from the address bar, resolved to a full record by MerchantRoute.
   // Kept separate from `selectedMerchant` so a deep link never passes a partial
   // object off as a loaded merchant.

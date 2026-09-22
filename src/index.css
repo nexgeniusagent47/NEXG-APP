@@ -121,6 +121,15 @@ h1 {
   50% { opacity: 0.45; }
 }
 
+/* The marquee track. Translate-only, so the whole rail composites on the GPU instead
+   of relaying out on every frame — and no bounce or easing, because a linear pass that
+   never accelerates is what makes a seamless loop read as continuous rather than as a
+   repeating animation. */
+@keyframes nexg-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-status { animation: none; }
 }

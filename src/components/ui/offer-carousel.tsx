@@ -31,7 +31,12 @@ interface OfferCardProps {
   twoPerScreen?: boolean;
 }
 
-const OfferCard: React.FC<OfferCardProps> = ({ offer, twoPerScreen = true }) => {
+/**
+ * Exported so a caller can lay the same card out in a different container — the
+ * sponsored rail renders these in a continuous marquee rather than the paging
+ * carousel below, and duplicating the card markup would let the two drift apart.
+ */
+export const OfferCard: React.FC<OfferCardProps> = ({ offer, twoPerScreen = true }) => {
   const { isLight } = useTheme();
 
   const heroImage = offer.imageUrl || offer.imageSrc || 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80';

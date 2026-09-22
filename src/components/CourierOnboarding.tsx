@@ -848,7 +848,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">WhatsApp Mobile Number <span class="text-red-500">*</span></label>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">WhatsApp Mobile Number <span className="text-red-500">*</span></label>
                     <div className="relative">
                       <Phone className="absolute left-3.5 top-3 text-gray-400" size={16} />
                       <input 
@@ -1598,7 +1598,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Total Registered Vehicles <span class="text-red-500">*</span></label>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Total Registered Vehicles <span className="text-red-500">*</span></label>
                     <input 
                       type="number" 
                       required
@@ -1611,7 +1611,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Years in Logistics Sector <span class="text-red-500">*</span></label>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Years in Logistics Sector <span className="text-red-500">*</span></label>
                     <input 
                       type="number" 
                       required

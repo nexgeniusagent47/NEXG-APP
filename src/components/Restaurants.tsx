@@ -30,7 +30,7 @@ interface RestaurantsProps {
 }
 
 export default function Restaurants({ onNavigate }: RestaurantsProps) {
-  const { addItem, setIsCartOpen } = useCart();
+  const { addToCart, setIsCartOpen } = useCart();
   const { isLight } = useTheme();
 
   // Navigation state within Restaurants: null = merchant list; Restaurant = merchant storefront & items
@@ -808,16 +808,9 @@ export default function Restaurants({ onNavigate }: RestaurantsProps) {
         isOpen={Boolean(unifiedModalItem)}
         onClose={() => setUnifiedModalItem(null)}
         onAddToCart={(cartItem) => {
-          addItem({
-            id: cartItem.id,
-            name: cartItem.name,
-            price: cartItem.price,
-            quantity: cartItem.quantity,
-            selectedOptions: cartItem.selectedOptions,
-            specialInstructions: cartItem.specialInstructions,
-            restaurantName: cartItem.merchantName,
-            restaurantId: cartItem.merchantId || '',
-          });
+          // Forwarded verbatim: the modal already emits the cart's shape, and
+          // re-mapping it here is what previously let the two drift apart.
+          addToCart(cartItem);
           setUnifiedModalItem(null);
           setIsCartOpen(true);
         }}

@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { MapPin, Sparkles, Navigation } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useCart } from '../context/CartContext';
-import { OfferCarousel, type Offer } from './ui/offer-carousel';
+import { OfferCard, type Offer } from './ui/offer-carousel';
+import InfiniteMarquee from './ui/InfiniteMarquee';
 import { ProductCarousel, type Product } from './ui/product-carousel';
 
 interface MerchantAdCarouselProps {
@@ -399,12 +400,27 @@ export default function MerchantAdCarousel({
           </span>
         </div>
 
-        {/* Offer Carousel: Exactly two merchant cards per screen, 2s delay, bottom pagination dots */}
-        <OfferCarousel
-          offers={sponsoredOffers}
-          twoPerScreen={true}
-          autoScrollInterval={2000}
-        />
+        {/* A continuous rail rather than the paging carousel.
+            The paging version advanced every 2s and jumped from the last slide back
+            to the first, which reads as a bounce on a loop. A marquee never resets
+            visibly: the track is rendered twice and translates by exactly -50%, so
+            the wrap lands on an identical frame. It also has no end state, which is
+            what "sponsored" wants — the rail is texture, not something to finish. */}
+        <InfiniteMarquee
+          label="Sponsored partner offers"
+          pixelsPerSecond={38}
+          className={
+            isLight
+              ? '[--marquee-fade:#f7f8fa] py-1'
+              : '[--marquee-fade:#111315] py-1'
+          }
+        >
+          {sponsoredOffers.map((offer) => (
+            <div key={offer.id} className="w-[300px] sm:w-[340px] shrink-0">
+              <OfferCard offer={offer} twoPerScreen={false} />
+            </div>
+          ))}
+        </InfiniteMarquee>
       </div>
     </section>
   );

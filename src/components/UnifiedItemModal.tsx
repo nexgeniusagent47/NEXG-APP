@@ -125,16 +125,48 @@ export default function UnifiedItemModal({
   }
 
   const totalPrice = (basePrice + optionsPrice) * quantity;
+  // Per-unit price including option pricing. The cart multiplies price by quantity
+  // itself, so this — not totalPrice — is what `price` must carry or the options
+  // would vanish from the line total.
+  const unitPrice = basePrice + optionsPrice;
 
   const handleAction = () => {
+    // The payload carries BOTH the cart's field names and the modal's own, because
+    // two different consumers read it: `onAddToCart` feeds the cart, which needs
+    // `name`/`price`/`itemTotal`, while `onBookNow` keeps the descriptive
+    // `title`/`totalPrice` shape its callers already use.
+    //
+    // This is deliberate duplication across an interface boundary, not an oversight.
+    // The alternative already caused a shipped bug: the cart was fed `title` and
+    // `totalPrice` while reading `name` and `price`, so every line item was added with
+    // `undefined` for both and the cart totals came out NaN.
+    //
+    // `unitPrice` is the per-unit figure AFTER option pricing. `price` cannot carry it
+    // because the cart multiplies price by quantity itself, which would drop the
+    // options from every line total.
     const payload = {
+      // --- cart-compatible
+      id: item.id,
+      menuItemId: item.id,
+      name: item.title,
+      price: unitPrice,
+      unitPrice,
+      image: item.image,
+      quantity,
+      itemTotal: totalPrice,
+      merchantId: item.merchantId,
+      merchantName: item.merchantName,
+      selectedOptions: Object.entries(selectedOptions).map(([group, choice]) => ({
+        group,
+        choice,
+      })),
+      selectedAddons,
+      specialInstructions: specialNotes,
+      // --- booking-compatible
       itemId: item.id,
       itemType: item.type,
       title: item.title,
-      merchantName: item.merchantName,
-      image: item.image,
       totalPrice,
-      quantity,
       selectedDuration: item.durations ? item.durations[selectedDurationIndex]?.duration : undefined,
       selectedOil: selectedOil || (item.availableOils ? item.availableOils[0] : undefined),
       selectedDate: item.hasCalendarBooking ? selectedDate : undefined,

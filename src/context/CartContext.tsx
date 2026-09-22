@@ -1,12 +1,12 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { CartItem, MenuItem, Order, OrderStatus, Restaurant } from '../types';
+import { CartItem, CartItemInput, MenuItem, Order, OrderStatus, Restaurant } from '../types';
 import { RESTAURANTS_DATA } from '../data/restaurantsData';
 
 interface CartContextType {
   cart: CartItem[];
   cartRestaurantId: string | null;
   cartRestaurantName: string | null;
-  addToCart: (item: CartItem) => void;
+  addToCart: (item: CartItemInput) => void;
   updateQuantity: (cartItemId: string, delta: number) => void;
   removeFromCart: (cartItemId: string) => void;
   clearCart: () => void;
@@ -101,7 +101,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const cartRestaurantId = cart.length > 0 ? cart[0].restaurantId : null;
   const cartRestaurantName = cart.length > 0 ? cart[0].restaurantName : null;
 
-  const addToCart = (rawItem: any) => {
+  const addToCart = (rawItem: CartItemInput) => {
     const newItem: CartItem = {
       id: rawItem.id || `cart-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
       menuItemId: rawItem.menuItemId || rawItem.id || `item-${Date.now()}`,

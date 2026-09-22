@@ -61,7 +61,10 @@ export default function ConsentBanner() {
 
   if (!open) {
     return (
-      <div className="onboarding-theme fixed bottom-3 left-3 z-[300] print:hidden">
+      // Lifted above the floating cart bar on small screens, the same offset
+      // ScrollToTop uses for the same reason: both are fixed to the bottom and the
+      // bar spans the width there.
+      <div className="onboarding-theme fixed bottom-20 left-3 z-[300] sm:bottom-4 sm:left-4 print:hidden">
         <button
           type="button"
           data-analytics="consent-manage"
@@ -76,11 +79,19 @@ export default function ConsentBanner() {
   }
 
   return (
-    <div className="onboarding-theme fixed inset-x-0 bottom-0 z-[300] p-3 print:hidden">
+    // `pointer-events-none` on the positioning wrapper, `pointer-events-auto` on the
+    // card itself.
+    //
+    // The wrapper is `inset-x-0 bottom-0`, so it spans the full viewport width. Without
+    // this it swallowed every click in the bottom strip of the page, including on
+    // content that is visually nowhere near the banner — a Playwright run failed on
+    // "See all offerings" because of it, and a real user would have hit the same dead
+    // zone. A non-blocking banner must only consume events where it is actually drawn.
+    <div className="onboarding-theme fixed inset-x-0 bottom-0 z-[300] p-3 print:hidden pointer-events-none">
       <section
         role="region"
         aria-label="Cookie preferences"
-        className="mx-auto max-w-3xl rounded-2xl border border-slate-200 bg-white text-slate-900 shadow-2xl"
+        className="mx-auto max-w-3xl rounded-2xl border border-slate-200 bg-white text-slate-900 shadow-2xl pointer-events-auto"
       >
         <div className="p-4 sm:p-5">
           <h2 className="text-base font-semibold text-slate-900">Your cookie choices</h2>

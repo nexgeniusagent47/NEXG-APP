@@ -1943,7 +1943,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       onChange={(e) => setTermsAccepted(e.target.checked)}
                       className="mt-1 w-5 h-5 accent-amber-500 rounded cursor-pointer" 
                     />
-                    <label htmlFor="termsCheck" class="text-xs text-slate-600 select-none cursor-pointer">
+                    <label htmlFor="termsCheck" className="text-xs text-slate-600 select-none cursor-pointer">
                       I declare that I am authorized to bind <strong>{profileData.legalName || 'this merchant entity'}</strong>, and hereby execute this digital Partnership Agreement legally.
                     </label>
                   </div>
@@ -1968,7 +1968,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                     {renderIcon('Briefcase', 'w-4 h-4 text-[#E5B65F]')} Setup Summary highlights
                   </h4>
                   <p><strong className="text-slate-600">Trading Name:</strong> <span className="font-semibold text-slate-900">{profileData.tradingName}</span></p>
-                  <p><strong class="text-slate-600">Store Outlet:</strong> <span className="font-semibold text-slate-900">{branches.length} Location(s) Registered ({branches.map(b => b.name).join(', ')})</span></p>
+                  <p><strong className="text-slate-600">Store Outlet:</strong> <span className="font-semibold text-slate-900">{branches.length} Location(s) Registered ({branches.map(b => b.name).join(', ')})</span></p>
                   <p><strong className="text-slate-600">Operating hours:</strong> <span className="font-semibold text-slate-900">{getOperatingHoursStr()}</span></p>
                   <p><strong className="text-slate-600">Carriage Delivery:</strong> <span className="font-semibold text-slate-900">{deliveryNexg && deliveryOwn ? 'Hybrid model' : deliveryNexg ? 'NEXG Riders' : 'Own Riders'}</span></p>
                   <p><strong className="text-slate-600">Catalog Sections:</strong> <span className="font-semibold text-slate-900">{selectedCatalogSections.length > 0 ? selectedCatalogSections.map(s => s.name).join(', ') : 'Skipped / Default'}</span></p>

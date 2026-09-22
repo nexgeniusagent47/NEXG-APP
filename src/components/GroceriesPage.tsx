@@ -24,7 +24,7 @@ interface GroceriesPageProps {
 }
 
 export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
-  const { addItem, setIsCartOpen } = useCart();
+  const { addToCart, setIsCartOpen } = useCart();
   const { isLight } = useTheme();
 
   // Navigation: null = Available Purveyors / Merchants First; CellarPurveyor = Specific Purveyor Storefront & Items
@@ -487,16 +487,9 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
         isOpen={Boolean(unifiedModalItem)}
         onClose={() => setUnifiedModalItem(null)}
         onAddToCart={(cartItem) => {
-          addItem({
-            id: cartItem.id,
-            name: cartItem.name,
-            price: cartItem.price,
-            quantity: cartItem.quantity,
-            selectedOptions: cartItem.selectedOptions,
-            specialInstructions: cartItem.specialInstructions,
-            restaurantName: cartItem.merchantName,
-            restaurantId: cartItem.merchantId || '',
-          });
+          // Forwarded verbatim: the modal already emits the cart's shape, and
+          // re-mapping it here is what previously let the two drift apart.
+          addToCart(cartItem);
           setUnifiedModalItem(null);
           setIsCartOpen(true);
         }}

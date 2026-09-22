@@ -120,6 +120,41 @@ export interface CartItem {
   itemTotal: number;
 }
 
+/**
+ * What a caller must supply to `addToCart`.
+ *
+ * Only `name` and `price` are genuinely required: the context derives an id, the
+ * merchant lineage, the image, the option list and the line total, each with a
+ * fallback. `quantity` defaults to 1.
+ *
+ * This type exists because the old signature demanded a complete `CartItem`, which
+ * was both untrue — the implementation is deliberately tolerant — and actively
+ * harmful. It forced callers into `as any`, and under `as any` two live bugs hid for
+ * free: the merchant pages called a function that did not exist, and the modal's
+ * `title`/`totalPrice` were read as `name`/`price`, so every cart line arrived blank
+ * and the totals came out NaN. A type that describes what the code actually accepts
+ * is what makes those mistakes visible.
+ */
+export type CartItemInput = Partial<Omit<CartItem, 'name' | 'price'>> &
+  Pick<CartItem, 'name' | 'price'> & {
+    // Aliases the cart accepts and normalises. They are declared rather than reached
+    // through an index signature or a cast because they are a real part of the
+    // contract: `UnifiedItemModal` emits both namings deliberately so a single payload
+    // can feed the cart and the booking flow, and the legacy NEXG screens send
+    // `merchantName`/`category`. Naming them means TypeScript checks the call sites.
+    merchantId?: string;
+    merchantName?: string;
+    imageUrl?: string;
+    /** Descriptive alias for `name`; the modal sends both. */
+    title?: string;
+    /** Gross line total before normalisation. */
+    totalPrice?: number;
+    /** Free-form product grouping, kept for display. */
+    category?: string;
+    /** Chosen add-ons, recorded alongside `selectedOptions`. */
+    selectedAddons?: string[];
+  };
+
 export type OrderStatus = 'placed' | 'preparing' | 'courier_heading' | 'out_for_delivery' | 'delivered';
 
 export interface OrderTimelineStep {

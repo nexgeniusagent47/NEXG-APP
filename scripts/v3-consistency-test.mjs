@@ -14,6 +14,7 @@
 // Usage: node scripts/v3-consistency-test.mjs [baseUrl]
 
 import { chromium } from 'playwright';
+import { grantConsent } from './test-support.mjs';
 
 const BASE = process.argv[2] ?? 'http://127.0.0.1:3000';
 
@@ -92,6 +93,9 @@ async function main() {
 
   const browser = await chromium.launch();
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, locale: 'en-KE' });
+// Run as a returning user who has already answered the consent prompt, so the
+// banner does not sit over the content these assertions interact with.
+await grantConsent(context, BASE);
   const page = await context.newPage();
 
   const pageErrors = [];
