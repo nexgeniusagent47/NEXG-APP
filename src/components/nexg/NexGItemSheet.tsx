@@ -224,7 +224,7 @@ export const NexGItemSheet: React.FC = () => {
 
             {/* Context Badge */}
             <div className="absolute top-4 left-4 flex items-center gap-2">
-              <span className="bg-[#E5B65F] text-slate-950 font-black text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+              <span className="bg-[#E5B65F] text-slate-950 font-bold text-[10px] px-2.5 py-0.5 rounded-full uppercase tracking-wider">
                 {activeItem.subcategory}
               </span>
               {activeItem.discount && (
@@ -249,7 +249,7 @@ export const NexGItemSheet: React.FC = () => {
                   <ChevronRight size={13} />
                 </button>
               )}
-              <h2 className="text-xl sm:text-2xl font-black line-clamp-2 leading-tight">
+              <h2 className="text-xl sm:text-2xl font-bold line-clamp-2 leading-tight">
                 {activeItem.name}
               </h2>
             </div>
@@ -286,7 +286,7 @@ export const NexGItemSheet: React.FC = () => {
                 'p-4 rounded-2xl border space-y-4',
                 isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#181A1F] border-white/10'
               )}>
-                <h4 className="text-xs font-black uppercase tracking-wider text-[#B88728] dark:text-[#E5B65F] flex items-center gap-1.5">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#B88728] dark:text-[#E5B65F] flex items-center gap-1.5">
                   <Calendar size={14} />
                   <span>Appointment & Scheduling</span>
                 </h4>
@@ -375,7 +375,7 @@ export const NexGItemSheet: React.FC = () => {
                     >
                       <Minus size={12} />
                     </button>
-                    <span className="w-5 text-center font-black text-sm">{guestCount}</span>
+                    <span className="w-5 text-center font-bold text-sm">{guestCount}</span>
                     <button
                       type="button"
                       onClick={() => setGuestCount((g) => Math.min(12, g + 1))}
@@ -394,7 +394,7 @@ export const NexGItemSheet: React.FC = () => {
             {/* CURATED ADD-ONS & OPTIONS */}
             {mockAddons.length > 0 && (
               <div className="space-y-3">
-                <h4 className="text-xs font-black uppercase tracking-wider text-slate-500 dark:text-gray-400">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400">
                   Curated Enhancements & Add-ons
                 </h4>
                 <div className="space-y-2">
@@ -428,7 +428,7 @@ export const NexGItemSheet: React.FC = () => {
                           </div>
                           <span className="text-xs font-bold">{addon.name}</span>
                         </div>
-                        <span className="text-xs font-black text-[#B88728] dark:text-[#E5B65F]">
+                        <span className="text-xs font-bold text-[#B88728] dark:text-[#E5B65F]">
                           +KSh {addon.price.toLocaleString()}
                         </span>
                       </div>
@@ -474,7 +474,7 @@ export const NexGItemSheet: React.FC = () => {
                 >
                   <Minus size={14} />
                 </button>
-                <span className="w-6 text-center font-black text-sm">{quantity}</span>
+                <span className="w-6 text-center font-bold text-sm">{quantity}</span>
                 <button
                   type="button"
                   onClick={() => setQuantity((q) => q + 1)}
@@ -494,7 +494,7 @@ export const NexGItemSheet: React.FC = () => {
               disabled={sheetState === 'ACTION_PENDING'}
               onClick={handleAction}
               className={cn(
-                'flex-1 py-3.5 px-6 rounded-2xl font-black text-sm tracking-wide transition shadow-lg flex items-center justify-center gap-2 cursor-pointer',
+                'flex-1 py-3.5 px-6 rounded-2xl font-bold text-sm tracking-wide transition shadow-lg flex items-center justify-center gap-2 cursor-pointer',
                 sheetState === 'SUCCESS'
                   ? 'bg-emerald-600 text-white'
                   : isLight

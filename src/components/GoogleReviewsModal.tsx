@@ -137,7 +137,7 @@ export default function GoogleReviewsModal({
           >
             {/* Left Score */}
             <div className="md:col-span-4 flex flex-col items-center justify-center text-center md:border-r border-white/10 pr-0 md:pr-4">
-              <div className="text-5xl font-black text-[#E5B65F] leading-none mb-2">
+              <div className="text-5xl font-bold text-[#E5B65F] leading-none mb-2">
                 {rating.toFixed(1)}
               </div>
               <div className="flex items-center gap-1 mb-1">

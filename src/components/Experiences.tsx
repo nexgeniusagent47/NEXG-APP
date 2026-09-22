@@ -200,7 +200,7 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
                 <Sparkles size={13} />
                 <span>Bespoke Concierge Expeditions</span>
               </div>
-              <h1 className={`text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-3 ${
+              <h1 className={`text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 ${
                 isLight ? 'text-slate-900' : 'text-white'
               }`}>
                 Private Safaris, Aerial Tours & Cultural Ateliers
@@ -268,7 +268,7 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
                   </div>
 
                   <div className="p-5 flex flex-col flex-grow">
-                    <h3 className={`font-black text-lg group-hover:text-[#B88728] dark:group-hover:text-[#E5B65F] transition-colors mb-1 line-clamp-1 ${
+                    <h3 className={`font-bold text-lg group-hover:text-[#B88728] dark:group-hover:text-[#E5B65F] transition-colors mb-1 line-clamp-1 ${
                       isLight ? 'text-slate-900' : 'text-white'
                     }`}>
                       {host.name}
@@ -406,10 +406,10 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
 
               <div className="absolute bottom-6 left-6 right-6 text-white flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#E5B65F] text-black font-black text-[10px] uppercase tracking-wider mb-2 inline-block">
+                  <span className="px-2.5 py-0.5 rounded-full bg-[#E5B65F] text-black font-bold text-[10px] uppercase tracking-wider mb-2 inline-block">
                     {selectedHost.category}
                   </span>
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-2 text-white drop-shadow-md">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-2 text-white drop-shadow-md">
                     {selectedHost.name}
                   </h1>
                   <p className="text-xs sm:text-sm text-gray-200 max-w-2xl font-medium leading-relaxed drop-shadow">
@@ -469,13 +469,13 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
                     </span>
                   </div>
 
-                  <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full text-sm font-black text-[#E5B65F] border border-white/15 shadow-md">
+                  <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full text-sm font-bold text-[#E5B65F] border border-white/15 shadow-md">
                     From ${act.price}
                   </div>
                 </div>
 
                 <div className="p-5 flex flex-col flex-grow">
-                  <h3 className={`font-black text-base group-hover:text-[#B88728] dark:group-hover:text-[#E5B65F] transition-colors line-clamp-1 mb-1 ${
+                  <h3 className={`font-bold text-base group-hover:text-[#B88728] dark:group-hover:text-[#E5B65F] transition-colors line-clamp-1 mb-1 ${
                     isLight ? 'text-slate-900' : 'text-white'
                   }`}>
                     {act.title}
@@ -535,7 +535,7 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
                 <span className="text-[10px] uppercase font-bold tracking-widest text-[#B88728] dark:text-[#E5B65F]">
                   Experience Reservation
                 </span>
-                <h3 className="text-xl font-black">{bookingModalConfig.activityTitle}</h3>
+                <h3 className="text-xl font-bold">{bookingModalConfig.activityTitle}</h3>
               </div>
               <button
                 onClick={() => setBookingModalConfig((prev) => ({ ...prev, isOpen: false }))}
@@ -565,13 +565,13 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
                   <div className="mt-6 pt-4 border-t border-slate-200 dark:border-white/10 flex items-center justify-between">
                     <div>
                       <div className="text-xs text-gray-400">Date & Time</div>
-                      <div className="text-sm font-black">
+                      <div className="text-sm font-bold">
                         {bookingModalConfig.selectedDate} at {bookingModalConfig.selectedTime} • {bookingModalConfig.guests} Guest(s)
                       </div>
                     </div>
                     <button
                       onClick={() => setBookingModalConfig((prev) => ({ ...prev, isConfirmed: true }))}
-                      className="px-6 py-3 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-black text-xs uppercase tracking-wider shadow-lg transition-transform active:scale-95 cursor-pointer"
+                      className="px-6 py-3 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-bold text-xs uppercase tracking-wider shadow-lg transition-transform active:scale-95 cursor-pointer"
                     >
                       Confirm Booking
                     </button>
@@ -582,7 +582,7 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
                   <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto mb-4">
                     <CheckCircle2 size={32} />
                   </div>
-                  <h4 className="text-2xl font-black mb-2">Experience Booked!</h4>
+                  <h4 className="text-2xl font-bold mb-2">Experience Booked!</h4>
                   <p className={`text-xs max-w-md mx-auto mb-6 leading-relaxed ${
                     isLight ? 'text-slate-600' : 'text-gray-300'
                   }`}>

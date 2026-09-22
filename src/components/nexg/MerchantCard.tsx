@@ -74,7 +74,7 @@ export const MerchantCard: React.FC<MerchantCardProps> = ({
         {/* Top-Left Promo Badge */}
         {merchant.badges && merchant.badges.length > 0 && (
           <div className="absolute top-3 left-3 z-10">
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-black tracking-wide uppercase bg-[#E5B65F] text-slate-950 shadow-md">
+            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold tracking-wide uppercase bg-[#E5B65F] text-slate-950 shadow-md">
               <Sparkles size={10} className="fill-current" />
               {merchant.badges[0]}
             </span>

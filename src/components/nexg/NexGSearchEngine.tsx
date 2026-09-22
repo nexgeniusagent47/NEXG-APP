@@ -77,7 +77,7 @@ export const NexGSearchEngine: React.FC<NexGSearchEngineProps> = ({ query }) => 
       {/* Search Header Stats */}
       <div className="flex items-center justify-between border-b pb-4 border-slate-200 dark:border-white/10">
         <div>
-          <h2 className={cn('text-xl sm:text-2xl font-black tracking-tight', isLight ? 'text-slate-900' : 'text-white')}>
+          <h2 className={cn('text-xl sm:text-2xl font-bold tracking-tight', isLight ? 'text-slate-900' : 'text-white')}>
             Search Results for <span className="text-[#B88728] dark:text-[#E5B65F]">"{query}"</span>
           </h2>
           <p className={cn('text-xs mt-1', isLight ? 'text-slate-500' : 'text-gray-400')}>
@@ -101,7 +101,7 @@ export const NexGSearchEngine: React.FC<NexGSearchEngineProps> = ({ query }) => 
           {/* Matched Categories */}
           {matchedCategories.length > 0 && (
             <div className="space-y-3">
-              <h3 className="text-xs font-black uppercase tracking-wider text-slate-500 dark:text-gray-400 flex items-center gap-1.5">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 flex items-center gap-1.5">
                 <Tag size={13} />
                 <span>Relevant Categories ({matchedCategories.length})</span>
               </h3>
@@ -135,7 +135,7 @@ export const NexGSearchEngine: React.FC<NexGSearchEngineProps> = ({ query }) => 
           {/* Matched Merchants */}
           {matchedMerchants.length > 0 && (
             <div className="space-y-3">
-              <h3 className="text-xs font-black uppercase tracking-wider text-slate-500 dark:text-gray-400 flex items-center gap-1.5">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 flex items-center gap-1.5">
                 <Building2 size={13} />
                 <span>Merchants & Providers ({matchedMerchants.length})</span>
               </h3>
@@ -168,7 +168,7 @@ export const NexGSearchEngine: React.FC<NexGSearchEngineProps> = ({ query }) => 
           {/* Matched Individual Items */}
           {matchedItems.length > 0 && (
             <div className="space-y-3 pt-4">
-              <h3 className="text-xs font-black uppercase tracking-wider text-slate-500 dark:text-gray-400 flex items-center gap-1.5">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400 flex items-center gap-1.5">
                 <Sparkles size={13} />
                 <span>Curated Offerings & Experiences ({matchedItems.length})</span>
               </h3>

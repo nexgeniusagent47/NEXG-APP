@@ -534,7 +534,7 @@ export default function UnifiedItemModal({
               <div className={`text-[11px] ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
                 Total Estimate
               </div>
-              <div className="text-xl sm:text-2xl font-black text-[#E5B65F]">
+              <div className="text-xl sm:text-2xl font-bold text-[#E5B65F]">
                 ${totalPrice.toFixed(2)}{' '}
                 {item.priceUnitLabel && (
                   <span className="text-xs font-normal text-gray-400">

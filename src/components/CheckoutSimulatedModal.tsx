@@ -94,7 +94,7 @@ export default function CheckoutSimulatedModal() {
                 <CreditCard size={20} />
               </div>
               <div>
-                <h3 className={`font-black text-lg sm:text-xl tracking-tight ${
+                <h3 className={`font-bold text-lg sm:text-xl tracking-tight ${
                   isLight ? 'text-slate-900' : 'text-white'
                 }`}>
                   Finalize & Place Order
@@ -127,7 +127,7 @@ export default function CheckoutSimulatedModal() {
               ? 'bg-amber-50/90 border-amber-200 text-amber-900'
               : 'bg-amber-500/10 border-amber-500/30 text-amber-200'
           }`}>
-            <div className="w-6 h-6 rounded-full bg-[#E5B65F] text-black flex-shrink-0 flex items-center justify-center mt-0.5 font-black text-xs">
+            <div className="w-6 h-6 rounded-full bg-[#E5B65F] text-black flex-shrink-0 flex items-center justify-center mt-0.5 font-bold text-xs">
               !
             </div>
             <div className="text-xs leading-relaxed">
@@ -233,7 +233,7 @@ export default function CheckoutSimulatedModal() {
                 >
                   <div className="flex items-center justify-between w-full mb-2">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-black text-xs">
+                      <div className="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">
                         M
                       </div>
                       <span className={`font-bold text-sm ${isLight ? 'text-slate-900' : 'text-white'}`}>
@@ -267,7 +267,7 @@ export default function CheckoutSimulatedModal() {
                 >
                   <div className="flex items-center justify-between w-full mb-2">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-black text-xs">
+                      <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-xs">
                         VIP
                       </div>
                       <span className={`font-bold text-sm ${isLight ? 'text-slate-900' : 'text-white'}`}>
@@ -424,11 +424,11 @@ export default function CheckoutSimulatedModal() {
                   {cart.length} item(s)
                 </span>
               </div>
-              <div className={`flex items-center justify-between text-sm font-black pt-2 border-t ${
+              <div className={`flex items-center justify-between text-sm font-bold pt-2 border-t ${
                 isLight ? 'text-slate-900 border-slate-200' : 'text-white border-white/10'
               }`}>
                 <span>Total Demo Amount</span>
-                <span className="text-[#B88728] dark:text-[#E5B65F] text-base font-black">
+                <span className="text-[#B88728] dark:text-[#E5B65F] text-base font-bold">
                   ${finalTotal.toFixed(2)}
                 </span>
               </div>
@@ -457,7 +457,7 @@ export default function CheckoutSimulatedModal() {
               <button
                 type="button"
                 onClick={handleSimulatePayment}
-                className="w-full flex items-center justify-between px-6 py-4 rounded-full bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-black text-sm uppercase tracking-wider transition transform active:scale-[0.98] shadow-lg shadow-[#E5B65F]/20 cursor-pointer"
+                className="w-full flex items-center justify-between px-6 py-4 rounded-full bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-bold text-sm uppercase tracking-wider transition transform active:scale-[0.98] shadow-lg shadow-[#E5B65F]/20 cursor-pointer"
               >
                 <div className="flex items-center gap-2">
                   <span>Simulate Payment & Place Order</span>
@@ -465,7 +465,7 @@ export default function CheckoutSimulatedModal() {
                     DEMO ROUTER
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5 font-black text-base">
+                <div className="flex items-center gap-1.5 font-bold text-base">
                   <span>${finalTotal.toFixed(2)}</span>
                   <ArrowRight size={18} strokeWidth={2.5} />
                 </div>

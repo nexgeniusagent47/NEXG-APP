@@ -33,7 +33,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DEVICE_PRESETS, ROUTES, CRITICAL_WIDTHS } from '../device-presets.mjs';
-import { MEASURE, MEASURE_SOURCE } from './measure.mjs';
+import { MEASURE_SOURCE } from './measure.mjs';
+import { measurePage } from './measure-page.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
@@ -163,11 +164,25 @@ const server = http.createServer(async (req, res) => {
         const pageErrors = [];
         page.on('pageerror', (e) => pageErrors.push(String(e.message).slice(0, 160)));
         try {
-          await page.goto(target, { waitUntil: 'domcontentloaded' });
-          await page.waitForTimeout(SETTLE_MS);
-          const m = await page.evaluate(MEASURE, {});
-          const broken = m.overflowX > 2 || m.offenderCount > 0 || m.blank;
-          rows.push({ device, ...m, broken, pageErrors });
+          // Same helper the device matrix uses, so both retry identically when the dev
+          // server reloads a page mid-measurement instead of one of them aborting.
+          const m = await measurePage(page, {
+            url: target,
+            width: device.w,
+            height: device.h,
+            settleMs: SETTLE_MS,
+          });
+          if (!m) {
+            rows.push({
+              device,
+              error: 'every attempt to read the page failed (dev server reloaded it?)',
+              broken: null,
+              pageErrors,
+            });
+          } else {
+            const broken = m.overflowX > 2 || m.offenderCount > 0 || m.blank;
+            rows.push({ device, ...m, broken, pageErrors });
+          }
         } catch (err) {
           rows.push({ device, error: err?.message ?? String(err), broken: null, pageErrors });
         } finally {

@@ -142,7 +142,7 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
               Line 2 is 0.95em, so it tracks the clamp on the h1 automatically rather
               than needing its own breakpoint ladder. */}
           <h1
-            className={`hero-h1 font-display font-black transition-colors duration-300 ${
+            className={`hero-h1 font-display font-bold transition-colors duration-300 ${
               isLight ? 'text-slate-900 drop-shadow-sm' : 'text-white'
             }`}
           >

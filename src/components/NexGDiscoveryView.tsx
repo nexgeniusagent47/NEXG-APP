@@ -214,7 +214,7 @@ export default function NexGDiscoveryView({
                   token switch cleanly between themes. */}
               <span
                 className={cn(
-                  'font-black text-base sm:text-lg tracking-tight',
+                  'font-bold text-base sm:text-lg tracking-tight',
                   isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'
                 )}
               >
@@ -323,7 +323,7 @@ export default function NexGDiscoveryView({
             <section className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-xl sm:text-2xl font-black tracking-tight">
+                  <h2 className="text-xl sm:text-2xl font-bold tracking-tight">
                     Explore Verticals & Categories
                   </h2>
                   <p className={cn('text-xs mt-0.5', isLight ? 'text-slate-500' : 'text-gray-400')}>
@@ -450,7 +450,7 @@ export default function NexGDiscoveryView({
             <section className="space-y-6 pt-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-xl sm:text-2xl font-black tracking-tight">
+                  <h2 className="text-xl sm:text-2xl font-bold tracking-tight">
                     All Verified Partners & Merchants
                   </h2>
                   <p className={cn('text-xs mt-0.5', isLight ? 'text-slate-500' : 'text-gray-400')}>

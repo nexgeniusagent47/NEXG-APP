@@ -153,7 +153,7 @@ point this project at port 5432, and do not modify the `NEXG POS` containers.
 Local development (matches `.github/workflows/ci.yml` so local == CI):
 
 ```
-postgresql://nexg_user:nexg_password@127.0.0.1:5433/nexg_db
+postgresql://nexg_user:change_me@127.0.0.1:5433/nexg_db
 ```
 
 `npm run db:up` writes this to `.env`. `.env` is gitignored; `.env.example` is the

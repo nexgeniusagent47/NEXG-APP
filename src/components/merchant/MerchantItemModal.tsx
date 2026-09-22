@@ -155,13 +155,13 @@ export const MerchantItemModal: React.FC<MerchantItemModalProps> = ({
             <div className="flex items-start justify-between gap-3">
               <h2
                 className={cn(
-                  'text-lg font-black leading-tight tracking-tight',
+                  'text-lg font-bold leading-tight tracking-tight',
                   isLight ? 'text-slate-900' : 'text-white'
                 )}
               >
                 {item.name}
               </h2>
-              <span className="text-base font-black text-[#8A6413] dark:text-[#E5B65F] tabular-nums flex-shrink-0">
+              <span className="text-base font-bold text-[#8A6413] dark:text-[#E5B65F] tabular-nums flex-shrink-0">
                 KSh {item.price.toLocaleString()}
               </span>
             </div>
@@ -215,7 +215,7 @@ export const MerchantItemModal: React.FC<MerchantItemModalProps> = ({
             <span className={cn('text-xs font-semibold', isLight ? 'text-slate-500' : 'text-gray-400')}>
               {quantity} × KSh {item.price.toLocaleString()}
             </span>
-            <span className={cn('text-base font-black tabular-nums', isLight ? 'text-slate-900' : 'text-white')}>
+            <span className={cn('text-base font-bold tabular-nums', isLight ? 'text-slate-900' : 'text-white')}>
               KSh {lineTotal.toLocaleString()}
             </span>
           </div>
@@ -253,7 +253,7 @@ const RequirementSectionView: React.FC<{
     <div className="flex items-center gap-2">
       <h3
         className={cn(
-          'text-xs font-black uppercase tracking-[0.12em]',
+          'text-xs font-bold uppercase tracking-[0.12em]',
           isLight ? 'text-slate-500' : 'text-gray-400'
         )}
       >
@@ -291,7 +291,7 @@ const RequirementSectionView: React.FC<{
         </button>
         <span
           className={cn(
-            'w-12 text-center text-lg font-black tabular-nums',
+            'w-12 text-center text-lg font-bold tabular-nums',
             isLight ? 'text-slate-900' : 'text-white'
           )}
         >

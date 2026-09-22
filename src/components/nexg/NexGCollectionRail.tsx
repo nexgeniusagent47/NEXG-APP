@@ -39,7 +39,7 @@ export const NexGCollectionRail: React.FC<NexGCollectionRailProps> = ({
         <div>
           <div className="flex items-center gap-2 mb-1">
             {collection.badge && (
-              <span className="text-[10px] font-black uppercase tracking-wider bg-[#E5B65F] text-slate-950 px-2 py-0.5 rounded-full">
+              <span className="text-[10px] font-bold uppercase tracking-wider bg-[#E5B65F] text-slate-950 px-2 py-0.5 rounded-full">
                 {collection.badge}
               </span>
             )}
@@ -49,7 +49,7 @@ export const NexGCollectionRail: React.FC<NexGCollectionRailProps> = ({
             </span>
           </div>
           <h3 className={cn(
-            'text-xl sm:text-2xl font-black tracking-tight',
+            'text-xl sm:text-2xl font-bold tracking-tight',
             isLight ? 'text-slate-900' : 'text-white'
           )}>
             {collection.title}

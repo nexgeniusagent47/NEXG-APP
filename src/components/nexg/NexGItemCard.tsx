@@ -83,7 +83,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
               {item.subcategory}
             </span>
             {item.discount && (
-              <span className="text-[9px] font-black bg-[#E5B65F] text-slate-950 px-1.5 py-0.2 rounded-full">
+              <span className="text-[9px] font-bold bg-[#E5B65F] text-slate-950 px-1.5 py-0.2 rounded-full">
                 {item.discount}
               </span>
             )}
@@ -98,7 +98,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
           </p>
 
           <div className="flex items-center gap-3 pt-1 text-xs">
-            <span className="font-black text-sm text-slate-900 dark:text-white">
+            <span className="font-bold text-sm text-slate-900 dark:text-white">
               KSh {item.price.toLocaleString()}
             </span>
             {item.originalPrice && (
@@ -125,7 +125,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
             type="button"
             onClick={handleActionClick}
             className={cn(
-              'absolute bottom-2 right-2 px-2.5 py-1 rounded-lg text-xs font-black transition flex items-center gap-1 shadow-md cursor-pointer',
+              'absolute bottom-2 right-2 px-2.5 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1 shadow-md cursor-pointer',
               justAdded
                 ? 'bg-emerald-600 text-white'
                 : isLight
@@ -176,7 +176,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
         />
 
         {item.discount && (
-          <div className="absolute top-3 left-3 bg-[#E5B65F] text-slate-950 px-2.5 py-0.5 rounded-full text-[10px] font-black shadow-xs">
+          <div className="absolute top-3 left-3 bg-[#E5B65F] text-slate-950 px-2.5 py-0.5 rounded-full text-[10px] font-bold shadow-xs">
             {item.discount}
           </div>
         )}
@@ -221,7 +221,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
         {/* Footer & Dynamic Action */}
         <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-white/10">
           <div className="flex flex-col">
-            <span className="text-base sm:text-lg font-black tracking-tight text-slate-900 dark:text-white">
+            <span className="text-base sm:text-lg font-bold tracking-tight text-slate-900 dark:text-white">
               KSh {item.price.toLocaleString()}
             </span>
             {item.originalPrice && (
@@ -236,7 +236,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
             type="button"
             onClick={handleActionClick}
             className={cn(
-              'rounded-xl px-3.5 py-1.5 text-xs font-black transition flex items-center gap-1.5 cursor-pointer shadow-xs',
+              'rounded-xl px-3.5 py-1.5 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-xs',
               justAdded
                 ? 'bg-emerald-600 text-white border-emerald-600'
                 : item.workflowType === 'book'

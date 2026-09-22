@@ -26,8 +26,20 @@ export const MEASURE_SOURCE = `function (opts) {
   var vh = document.documentElement.clientHeight;
   var overflowX = document.documentElement.scrollWidth - vw;
 
+  // Is this element part of a deliberate horizontal rail?
+  //
+  // The check MUST include the element itself. A carousel track is not a child of a
+  // scroller, it IS the scroller: the app puts overflow-x-auto on the rail itself (19
+  // such elements across src/components). Testing only ancestors therefore returns
+  // false for every card in every carousel, and a 1880px marquee track inside a 360px
+  // viewport is reported as 389 elements past the edge. That is what these flags were:
+  // one intentional rail, counted once per descendant.
+  //
+  // NOTE: no backtick characters anywhere inside this string. MEASURE_SOURCE is a
+  // template literal, so a single backtick in a comment terminates it and the whole
+  // module stops parsing. scripts/device-room/check-source.mjs fails the build on one.
   function inScroller(el) {
-    for (var p = el.parentElement; p; p = p.parentElement) {
+    for (var p = el; p && p !== document.body; p = p.parentElement) {
       var ox = window.getComputedStyle(p).overflowX;
       if (ox === 'auto' || ox === 'scroll') return true;
     }
@@ -35,6 +47,7 @@ export const MEASURE_SOURCE = `function (opts) {
   }
 
   var offenders = [];
+  var railElements = 0; // intentionally inside a horizontal rail, reported separately
   var all = document.querySelectorAll('body *');
   for (var i = 0; i < all.length; i++) {
     var el = all[i];
@@ -44,7 +57,11 @@ export const MEASURE_SOURCE = `function (opts) {
     if (cs.visibility === 'hidden' || cs.opacity === '0') continue;
     // An element deliberately bled off both edges (marquee track, decorative radial).
     if (cs.position === 'fixed' && box.right > vw && box.left < 0) continue;
-    if (box.right > vw + 1 && box.left >= -1 && !inScroller(el)) {
+    if (box.right > vw + 1 && box.left >= -1) {
+      if (inScroller(el)) {
+        railElements++;
+        continue;
+      }
       offenders.push({
         tag: el.tagName.toLowerCase(),
         cls: String(el.className || '').split(/\\s+/).slice(0, 3).join(' ').slice(0, 60),
@@ -68,7 +85,24 @@ export const MEASURE_SOURCE = `function (opts) {
   unique.sort(function (a, b) { return b.right - a.right; });
 
   // Text clipped by its own box: overflow hidden and more content than space.
-  // This is the defect class the audit exists for — text a user cannot read.
+  //
+  // The -webkit-line-clamp property forces overflow hidden as part of its own
+  // mechanism, so a truncated product title is indistinguishable from a clipped one by
+  // computed style alone. The distinction matters and is not cosmetic: a clamped title
+  // shows two clean lines and ends in an ellipsis, which is the design working; a title
+  // in a fixed-height box is cut mid-word, which is a defect. Only the second is
+  // reported, which is why the clamp value is read back and skipped.
+  //
+  // NOTE: no backticks anywhere inside this string. MEASURE_SOURCE is a template
+  // literal, so one backtick in a comment terminates it and the file stops parsing.
+  var clampedInset = 0;
+  function isDeliberatelyClamped(el, cs) {
+    var clamp = cs.webkitLineClamp || cs['-webkit-line-clamp'];
+    if (!clamp || clamp === 'none' || clamp === '0') return false;
+    clampedInset++;
+    return true;
+  }
+
   var clippedEls = [];
   var clipped = 0;
   var candidates = document.querySelectorAll('h1,h2,h3,h4,p,span,div,button,a,li,td,th,figcaption,label');
@@ -77,17 +111,19 @@ export const MEASURE_SOURCE = `function (opts) {
     var ccs = window.getComputedStyle(c);
     if (ccs.overflow !== 'hidden') continue;
     if (c.clientHeight <= 0) continue;
-    if (c.scrollHeight > c.clientHeight + 4) {
-      clipped++;
-      if (clippedEls.length < 6) {
-        clippedEls.push({
-          tag: c.tagName.toLowerCase(),
-          cls: String(c.className || '').split(/\\s+/).slice(0, 3).join(' ').slice(0, 50),
-          text: (c.textContent || '').trim().slice(0, 32),
-          needs: c.scrollHeight,
-          has: c.clientHeight
-        });
-      }
+    if (c.scrollHeight <= c.clientHeight + 4) continue;
+
+    if (isDeliberatelyClamped(c, ccs)) continue; // deliberate truncation, not a defect
+
+    clipped++;
+    if (clippedEls.length < 6) {
+      clippedEls.push({
+        tag: c.tagName.toLowerCase(),
+        cls: String(c.className || '').split(/\\s+/).slice(0, 3).join(' ').slice(0, 50),
+        text: (c.textContent || '').trim().slice(0, 32),
+        needs: c.scrollHeight,
+        has: c.clientHeight
+      });
     }
   }
 
@@ -124,6 +160,7 @@ export const MEASURE_SOURCE = `function (opts) {
     vh: vh,
     overflowX: Math.round(overflowX),
     offenderCount: offenders.length,
+    railElements: railElements,
     worst: unique.slice(0, 5),
     clipped: clipped,
     clippedEls: clippedEls,

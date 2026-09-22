@@ -96,7 +96,7 @@ CREATE INDEX idx_items_name_trgm ON items USING gin (name gin_trgm_ops);`;
               <Database size={20} />
             </div>
             <div>
-              <h2 className="text-lg font-black tracking-tight">PostgreSQL Database Scripts</h2>
+              <h2 className="text-lg font-bold tracking-tight">PostgreSQL Database Scripts</h2>
               <p className="text-xs text-slate-500 dark:text-slate-400">
                 Optimized for speed &amp; efficiency with pg_trgm and full image links
               </p>

@@ -146,7 +146,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                       />
                     </div>
                     <div className="min-w-0">
-                      <h2 className="text-lg sm:text-xl font-black text-white leading-tight truncate">
+                      <h2 className="text-lg sm:text-xl font-bold text-white leading-tight truncate">
                         {merchant.name}
                       </h2>
                       <p className="text-xs font-semibold text-white/85 truncate">

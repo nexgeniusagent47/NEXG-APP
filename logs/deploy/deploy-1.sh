@@ -42,7 +42,7 @@ cat > "$APP/.env" <<EOF
 # the container resolves. Never 127.0.0.1 here: inside the app container that address is
 # the container itself, and the app would silently serve the bundled JSON catalogue while
 # reporting healthy.
-DATABASE_URL=postgresql://nexg_user:nexg_password@postgres:5432/nexg_db
+DATABASE_URL=postgresql://$DB_USER:$DB_PASSWORD@postgres:5432/$DB_NAME
 
 # Signs session JWTs. Unique to this environment. Rotating it invalidates every session.
 AUTH_SECRET=$SECRET

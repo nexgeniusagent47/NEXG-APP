@@ -320,7 +320,7 @@ export default function MerchantAdCarousel({
           <div>
             <div className="flex items-center gap-2">
               <h2
-                className={`text-2xl sm:text-3xl font-black tracking-tight ${
+                className={`text-2xl sm:text-3xl font-bold tracking-tight ${
                   isLight ? 'text-slate-900' : 'text-white'
                 }`}
               >
@@ -328,7 +328,7 @@ export default function MerchantAdCarousel({
               </h2>
 
               {hasLocation ? (
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-black tracking-wide bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25">
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-status" />
                   <span className="truncate max-w-[160px] sm:max-w-none">{locationName}</span>
                 </div>
@@ -354,7 +354,7 @@ export default function MerchantAdCarousel({
 
           <button
             onClick={() => onOpenCategories?.()}
-            className={`self-start sm:self-auto text-xs font-black uppercase tracking-wider transition-colors cursor-pointer hover:underline ${
+            className={`self-start sm:self-auto text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer hover:underline ${
               isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'
             }`}
           >
@@ -378,7 +378,7 @@ export default function MerchantAdCarousel({
         <div className="flex items-center justify-between">
           <div>
             <h2
-              className={`text-2xl sm:text-3xl font-black tracking-tight ${
+              className={`text-2xl sm:text-3xl font-bold tracking-tight ${
                 isLight ? 'text-slate-900' : 'text-white'
               }`}
             >
@@ -390,7 +390,7 @@ export default function MerchantAdCarousel({
           </div>
 
           <span
-            className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full border ${
+            className={`text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border ${
               isLight
                 ? 'bg-slate-100 border-slate-200 text-slate-700'
                 : 'bg-white/5 border-white/10 text-gray-300'

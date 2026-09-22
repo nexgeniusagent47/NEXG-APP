@@ -23,7 +23,8 @@ $ContainerName = 'nexg-concierge-pg'
 $Image         = 'postgres:15-alpine'
 $DbName        = 'nexg_db'
 $DbUser        = 'nexg_user'
-$DbPassword    = 'nexg_password'
+# Development-only default. Override with $env:POSTGRES_PASSWORD for anything shared.
+$DbPassword    = if ($env:POSTGRES_PASSWORD) { $env:POSTGRES_PASSWORD } else { 'nexg_dev_password' }
 
 $RepoRoot = Split-Path -Parent $PSScriptRoot
 $SchemaPath = Join-Path $RepoRoot 'src/db/schema.sql'

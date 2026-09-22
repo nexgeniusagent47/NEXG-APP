@@ -273,11 +273,11 @@ export default function NexGCategoryDrilldown({
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
           <div className="relative z-10 max-w-2xl space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-[#E5B65F]/20 text-[#E5B65F] border border-[#E5B65F]/30 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-[#E5B65F]/20 text-[#E5B65F] border border-[#E5B65F]/30 backdrop-blur-md">
               <Sparkles size={12} />
               <span>Strict Category & Subcategory Catalog</span>
             </div>
-            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
+            <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
               {category.name}
             </h1>
             <p className="text-sm text-gray-300 leading-relaxed">
@@ -290,7 +290,7 @@ export default function NexGCategoryDrilldown({
         <section className="space-y-3.5">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-xl font-black tracking-tight text-foreground flex items-center gap-2">
+              <h2 className="text-xl font-bold tracking-tight text-foreground flex items-center gap-2">
                 <span>Subcategories</span>
                 <span className="text-xs px-2 py-0.5 rounded-full font-bold bg-[#B88728]/15 dark:bg-[#E5B65F]/20 text-[#B88728] dark:text-[#E5B65F]">
                   {category.subcategories.length} Curated
@@ -354,7 +354,7 @@ export default function NexGCategoryDrilldown({
                 />
               </div>
               <div className="w-full">
-                <span className="block font-black text-xs text-foreground truncate">
+                <span className="block font-bold text-xs text-foreground truncate">
                   All Items
                 </span>
                 <span className={`text-[10px] block mt-0.5 ${isLight ? 'text-slate-400' : 'text-gray-400'}`}>
@@ -394,7 +394,7 @@ export default function NexGCategoryDrilldown({
                     )}
                   </div>
                   <div className="w-full">
-                    <span className="block font-black text-xs text-foreground truncate" title={sub.name}>
+                    <span className="block font-bold text-xs text-foreground truncate" title={sub.name}>
                       {sub.name}
                     </span>
                     <span className={`text-[10px] block mt-0.5 truncate ${isLight ? 'text-slate-400' : 'text-gray-400'}`}>
@@ -509,7 +509,7 @@ export default function NexGCategoryDrilldown({
         <section id="merchants-selection-section" className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <h2 className="text-xl font-black tracking-tight text-foreground">
+              <h2 className="text-xl font-bold tracking-tight text-foreground">
                 Merchant Providers & Partners
               </h2>
               <p className={`text-xs ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
@@ -576,7 +576,7 @@ export default function NexGCategoryDrilldown({
                     <div>
                       <div className="flex items-center gap-1.5 mb-1">
                         <span
-                          className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-md ${
+                          className={`text-[9px] font-bold uppercase px-2 py-0.5 rounded-md ${
                             isActive
                               ? isLight
                                 ? 'bg-[#B88728]/15 text-[#B88728]'
@@ -630,7 +630,7 @@ export default function NexGCategoryDrilldown({
               <div className="w-14 h-14 rounded-2xl mx-auto mb-3 bg-[#B88728]/10 dark:bg-[#E5B65F]/15 flex items-center justify-center text-[#B88728] dark:text-[#E5B65F]">
                 <Sparkles size={28} />
               </div>
-              <h3 className="text-xl sm:text-2xl font-black text-foreground">
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground">
                 Select a Merchant Provider Above
               </h3>
               <p className={`text-xs sm:text-sm max-w-lg mx-auto mt-2 leading-relaxed ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
@@ -675,14 +675,14 @@ export default function NexGCategoryDrilldown({
                 />
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="px-2 py-0.5 rounded-md text-[10px] font-black uppercase tracking-wider bg-[#B88728]/15 text-[#B88728] dark:bg-[#E5B65F]/20 dark:text-[#E5B65F]">
+                    <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-[#B88728]/15 text-[#B88728] dark:bg-[#E5B65F]/20 dark:text-[#E5B65F]">
                       {currentMerchant.cuisineOrType}
                     </span>
                     <span className="text-xs font-semibold text-slate-500 dark:text-gray-400">
                       • {currentMerchant.address}
                     </span>
                   </div>
-                  <h2 className="text-xl font-black text-foreground mt-0.5">
+                  <h2 className="text-xl font-bold text-foreground mt-0.5">
                     {currentMerchant.name}
                   </h2>
                   <p className="text-xs text-slate-500 dark:text-gray-400 mt-0.5">
@@ -702,7 +702,7 @@ export default function NexGCategoryDrilldown({
                 </div>
                 <button
                   onClick={() => setActiveMerchantId(null)}
-                  className="px-3.5 py-2 rounded-xl text-xs font-black border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
+                  className="px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
                 >
                   Switch Provider
                 </button>
@@ -722,7 +722,7 @@ export default function NexGCategoryDrilldown({
         <section className="space-y-6">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-black tracking-tight text-foreground">
+              <h2 className="text-2xl font-bold tracking-tight text-foreground">
                 {currentMerchant.name} Catalog ({filteredItems.length} Offerings)
               </h2>
               <p className={`text-xs mt-0.5 ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
@@ -775,12 +775,12 @@ export default function NexGCategoryDrilldown({
                         {item.subcategory}
                       </span>
                       {item.discount && (
-                        <span className="px-2 py-0.5 rounded-md text-[10px] font-black uppercase bg-rose-600 text-white">
+                        <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase bg-rose-600 text-white">
                           {item.discount}
                         </span>
                       )}
                     </div>
-                    <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md text-xs font-black bg-black/80 text-white backdrop-blur-md flex items-center gap-1">
+                    <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-md text-xs font-bold bg-black/80 text-white backdrop-blur-md flex items-center gap-1">
                       <Star size={12} className="fill-amber-400 text-amber-400" />
                       <span>{item.rating}</span>
                     </div>
@@ -807,7 +807,7 @@ export default function NexGCategoryDrilldown({
                             : 'bg-[#111315]/80 border-white/10 text-gray-300'
                         }`}
                       >
-                        <div className="text-[10px] font-black uppercase tracking-wider text-[#B88728] dark:text-[#E5B65F] mb-1">
+                        <div className="text-[10px] font-bold uppercase tracking-wider text-[#B88728] dark:text-[#E5B65F] mb-1">
                           Decision Specifications
                         </div>
                         {Object.entries(item.dynamicAttributes).map(([key, val]) => (
@@ -825,7 +825,7 @@ export default function NexGCategoryDrilldown({
                     <div className="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-white/5">
                       <div>
                         <div className="text-xs text-slate-400">Price</div>
-                        <div className="text-lg font-black text-foreground">
+                        <div className="text-lg font-bold text-foreground">
                           KSh {item.price.toLocaleString()}
                         </div>
                       </div>
@@ -885,7 +885,7 @@ export default function NexGCategoryDrilldown({
                 <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center mx-auto">
                   <Check size={32} />
                 </div>
-                <h3 className="text-2xl font-black">Dispatch Confirmed!</h3>
+                <h3 className="text-2xl font-bold">Dispatch Confirmed!</h3>
                 <p className={`text-sm ${isLight ? 'text-slate-600' : 'text-gray-300'}`}>
                   Your reservation for <span className="font-bold text-foreground">{selectedItemForWorkflow.item.name}</span> has been scheduled with {selectedItemForWorkflow.merchant.name}.
                 </p>
@@ -896,10 +896,10 @@ export default function NexGCategoryDrilldown({
             ) : (
               <form onSubmit={handleConfirmBooking} className="space-y-4">
                 <div>
-                  <span className="text-[10px] font-black uppercase tracking-wider text-[#B88728] dark:text-[#E5B65F]">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#B88728] dark:text-[#E5B65F]">
                     {selectedItemForWorkflow.item.workflowType === 'book' ? 'Reservation Request' : 'Priority Request'}
                   </span>
-                  <h3 className="text-xl sm:text-2xl font-black tracking-tight mt-1">
+                  <h3 className="text-xl sm:text-2xl font-bold tracking-tight mt-1">
                     {selectedItemForWorkflow.item.name}
                   </h3>
                   <p className={`text-xs mt-1 ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
@@ -967,7 +967,7 @@ export default function NexGCategoryDrilldown({
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className={`w-full py-3 rounded-xl font-black text-sm transition cursor-pointer shadow-lg active:scale-98 ${
+                    className={`w-full py-3 rounded-xl font-bold text-sm transition cursor-pointer shadow-lg active:scale-98 ${
                       isLight
                         ? 'bg-[#B88728] hover:bg-[#9e721d] text-white'
                         : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-black'

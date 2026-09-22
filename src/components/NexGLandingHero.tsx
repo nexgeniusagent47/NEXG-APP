@@ -120,7 +120,7 @@ export default function NexGLandingHero({
           </button>
           <button
             onClick={() => onEnterDiscovery()}
-            className="text-xs font-black bg-white text-[#009DE0] px-4 py-2 rounded-full hover:bg-white/90 shadow-md transition-transform active:scale-95 cursor-pointer"
+            className="text-xs font-bold bg-white text-[#009DE0] px-4 py-2 rounded-full hover:bg-white/90 shadow-md transition-transform active:scale-95 cursor-pointer"
           >
             Sign up
           </button>
@@ -149,7 +149,7 @@ export default function NexGLandingHero({
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -25, opacity: 0 }}
               transition={{ duration: 0.35, ease: 'easeOut' }}
-              className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight leading-[0.95] uppercase font-sans text-white drop-shadow-sm"
+              className="text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight leading-[0.95] uppercase font-sans text-white drop-shadow-sm"
             >
               {HEADLINE_WORDS[wordIndex]}
               <br />

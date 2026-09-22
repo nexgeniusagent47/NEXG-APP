@@ -17,6 +17,9 @@
     "test:flow": "node scripts/v2-flow-test.mjs",
     "test:consistency": "node scripts/v3-consistency-test.mjs",
     "shots": "node scripts/screenshots.mjs",
+    "room": "node scripts/device-room/server.mjs",
+    "room:check": "node scripts/device-room/check-source.mjs && node scripts/_verify-device-room.mjs",
+    "devices": "node logs/critique/_device-matrix.mjs",
     "skills:install": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/install-global-skills.ps1",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit"

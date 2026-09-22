@@ -65,7 +65,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
             referrerPolicy="no-referrer"
           />
           {entity.discount && (
-            <div className="absolute top-1.5 left-1.5 bg-[#E5B65F] text-slate-950 px-1.5 py-0.5 rounded-full text-[9px] font-black">
+            <div className="absolute top-1.5 left-1.5 bg-[#E5B65F] text-slate-950 px-1.5 py-0.5 rounded-full text-[9px] font-bold">
               {entity.discount}
             </div>
           )}
@@ -149,7 +149,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
             referrerPolicy="no-referrer"
           />
           {entity.discount && (
-            <div className="absolute top-2 left-2 bg-[#E5B65F] text-slate-950 px-2 py-0.5 rounded-full text-[9px] font-black">
+            <div className="absolute top-2 left-2 bg-[#E5B65F] text-slate-950 px-2 py-0.5 rounded-full text-[9px] font-bold">
               {entity.discount}
             </div>
           )}
@@ -199,7 +199,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
           
           {entity.discount && (
-            <div className="absolute top-4 left-4 bg-[#E5B65F] text-slate-950 px-3 py-1 rounded-full text-xs font-black flex items-center gap-1 shadow-md">
+            <div className="absolute top-4 left-4 bg-[#E5B65F] text-slate-950 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 shadow-md">
               <Sparkles className="w-3 h-3 fill-current" />
               <span>{entity.discount}</span>
             </div>
@@ -211,7 +211,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
                 {entity.category}
               </span>
             )}
-            <h3 className="text-xl sm:text-2xl font-black line-clamp-1">{entity.title}</h3>
+            <h3 className="text-xl sm:text-2xl font-bold line-clamp-1">{entity.title}</h3>
             {entity.subtitle && <p className="text-xs text-gray-200 line-clamp-1">{entity.subtitle}</p>}
           </div>
         </div>
@@ -243,7 +243,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
 
           <div className="flex items-center gap-3">
             {entity.price !== undefined && (
-              <span className="text-lg font-black tracking-tight text-slate-900 dark:text-white">
+              <span className="text-lg font-bold tracking-tight text-slate-900 dark:text-white">
                 {entity.pricePrefix} KSh {entity.price.toLocaleString()} {entity.priceSuffix}
               </span>
             )}
@@ -278,14 +278,14 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
         />
 
         {entity.discount && (
-          <div className="absolute top-3 left-3 bg-[#E5B65F] text-slate-950 px-2.5 py-0.5 rounded-full text-[10px] font-black shadow-xs">
+          <div className="absolute top-3 left-3 bg-[#E5B65F] text-slate-950 px-2.5 py-0.5 rounded-full text-[10px] font-bold shadow-xs">
             {entity.discount}
           </div>
         )}
 
         {/* Rating Floating Tag */}
         {entity.rating && (
-          <div className="absolute top-3 right-3 px-2 py-0.5 rounded-lg text-[11px] font-black bg-black/80 text-white backdrop-blur-md flex items-center gap-1 shadow-sm">
+          <div className="absolute top-3 right-3 px-2 py-0.5 rounded-lg text-[11px] font-bold bg-black/80 text-white backdrop-blur-md flex items-center gap-1 shadow-sm">
             <Star size={11} className="fill-amber-400 text-amber-400" />
             <span>{entity.rating.toFixed(1)}</span>
             {entity.reviewsCount && (
@@ -330,7 +330,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
         <div className="flex items-center justify-between pt-2.5 border-t border-slate-100 dark:border-white/10">
           <div className="flex flex-col">
             {entity.price !== undefined ? (
-              <span className="text-base sm:text-lg font-black tracking-tight text-slate-900 dark:text-white">
+              <span className="text-base sm:text-lg font-bold tracking-tight text-slate-900 dark:text-white">
                 {entity.pricePrefix} KSh {entity.price.toLocaleString()} {entity.priceSuffix}
               </span>
             ) : (

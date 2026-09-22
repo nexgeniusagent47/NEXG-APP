@@ -99,7 +99,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black tracking-wide uppercase bg-[#E5B65F]/20 text-[#B88728] dark:text-[#E5B65F] border border-[#E5B65F]/30">
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-[#E5B65F]/20 text-[#B88728] dark:text-[#E5B65F] border border-[#E5B65F]/30">
               <Sparkles size={11} className="fill-current" />
               Contextual Experience Hub
             </span>
@@ -107,7 +107,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
               Nairobi Curated
             </span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
             Curated Nairobi Worlds
           </h2>
           <p className={cn('text-xs sm:text-sm font-medium', isLight ? 'text-slate-500' : 'text-gray-400')}>
@@ -265,7 +265,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
                   )}
                 >
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="flex items-center gap-1.5 text-xs font-black text-[#B88728] dark:text-[#E5B65F]">
+                    <span className="flex items-center gap-1.5 text-xs font-bold text-[#B88728] dark:text-[#E5B65F]">
                       <span className="w-5 h-5 rounded-full bg-[#E5B65F]/20 flex items-center justify-center text-[10px]">
                         {step.stepNumber}
                       </span>
@@ -344,10 +344,10 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
             {/* Header */}
             <div className="p-6 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
               <div>
-                <span className="text-[10px] font-black uppercase tracking-wider text-[#B88728] dark:text-[#E5B65F]">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#B88728] dark:text-[#E5B65F]">
                   NEXG Experience Orchestrator
                 </span>
-                <h3 className="text-xl font-black">{activeExperience.name} Full Itinerary</h3>
+                <h3 className="text-xl font-bold">{activeExperience.name} Full Itinerary</h3>
               </div>
               <button
                 type="button"

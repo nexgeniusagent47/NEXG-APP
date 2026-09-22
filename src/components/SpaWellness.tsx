@@ -219,7 +219,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                 <Sparkles size={13} />
                 <span>District Holistic Wellness & Spa</span>
               </div>
-              <h1 className={`text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-3 ${
+              <h1 className={`text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 ${
                 isLight ? 'text-slate-900' : 'text-white'
               }`}>
                 Sanctuary Spas & In-Villa Wellness
@@ -322,7 +322,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                   </div>
 
                   <div className="p-5 flex flex-col flex-grow">
-                    <h3 className={`font-black text-lg group-hover:text-[#B88728] dark:group-hover:text-[#E5B65F] transition-colors mb-1 line-clamp-1 ${
+                    <h3 className={`font-bold text-lg group-hover:text-[#B88728] dark:group-hover:text-[#E5B65F] transition-colors mb-1 line-clamp-1 ${
                       isLight ? 'text-slate-900' : 'text-white'
                     }`}>
                       {venue.name}
@@ -488,14 +488,14 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
               <div className="absolute bottom-6 left-6 right-6 text-white flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="px-2.5 py-0.5 rounded-full bg-[#E5B65F] text-black font-black text-[10px] uppercase tracking-wider">
+                    <span className="px-2.5 py-0.5 rounded-full bg-[#E5B65F] text-black font-bold text-[10px] uppercase tracking-wider">
                       {selectedVenue.location}
                     </span>
                     <span className="px-2.5 py-0.5 rounded-full bg-white/20 backdrop-blur-md text-white font-bold text-[10px]">
                       Hours: {selectedVenue.operatingHours}
                     </span>
                   </div>
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-2 text-white drop-shadow-md">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-2 text-white drop-shadow-md">
                     {selectedVenue.name}
                   </h1>
                   <p className="text-xs sm:text-sm text-gray-200 max-w-2xl font-medium leading-relaxed drop-shadow">
@@ -541,7 +541,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
           {/* Treatments Section */}
           <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h2 className={`text-2xl font-black tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
+              <h2 className={`text-2xl font-bold tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
                 Sanctuary Treatments & In-Villa Rituals
               </h2>
               <p className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
@@ -599,13 +599,13 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                       )}
                     </div>
 
-                    <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full text-sm font-black text-[#E5B65F] border border-white/15 shadow-md">
+                    <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full text-sm font-bold text-[#E5B65F] border border-white/15 shadow-md">
                       From ${treatment.durations[0]?.price}
                     </div>
                   </div>
 
                   <div className="p-5 flex flex-col flex-grow">
-                    <h3 className={`font-black text-base group-hover:text-[#B88728] dark:group-hover:text-[#E5B65F] transition-colors line-clamp-1 mb-1 ${
+                    <h3 className={`font-bold text-base group-hover:text-[#B88728] dark:group-hover:text-[#E5B65F] transition-colors line-clamp-1 mb-1 ${
                       isLight ? 'text-slate-900' : 'text-white'
                     }`}>
                       {treatment.title}
@@ -666,7 +666,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                 <span className="text-[10px] uppercase font-bold tracking-widest text-[#B88728] dark:text-[#E5B65F]">
                   Spa Sanctuary Reservation
                 </span>
-                <h3 className="text-xl font-black">{bookingModalConfig.venueName}</h3>
+                <h3 className="text-xl font-bold">{bookingModalConfig.venueName}</h3>
               </div>
               <button
                 onClick={() => setBookingModalConfig((prev) => ({ ...prev, isOpen: false }))}
@@ -696,13 +696,13 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                   <div className="mt-6 pt-4 border-t border-slate-200 dark:border-white/10 flex items-center justify-between">
                     <div>
                       <div className="text-xs text-gray-400">Appointment</div>
-                      <div className="text-sm font-black">
+                      <div className="text-sm font-bold">
                         {bookingModalConfig.selectedDate} at {bookingModalConfig.selectedTime} • {bookingModalConfig.guests} Guest(s)
                       </div>
                     </div>
                     <button
                       onClick={() => setBookingModalConfig((prev) => ({ ...prev, isConfirmed: true }))}
-                      className="px-6 py-3 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-black text-xs uppercase tracking-wider shadow-lg transition-transform active:scale-95 cursor-pointer"
+                      className="px-6 py-3 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-bold text-xs uppercase tracking-wider shadow-lg transition-transform active:scale-95 cursor-pointer"
                     >
                       Confirm Booking
                     </button>
@@ -713,7 +713,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                   <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mx-auto mb-4">
                     <CheckCircle2 size={32} />
                   </div>
-                  <h4 className="text-2xl font-black mb-2">Spa Sanctuary Reserved!</h4>
+                  <h4 className="text-2xl font-bold mb-2">Spa Sanctuary Reserved!</h4>
                   <p className={`text-xs max-w-md mx-auto mb-6 leading-relaxed ${
                     isLight ? 'text-slate-600' : 'text-gray-300'
                   }`}>

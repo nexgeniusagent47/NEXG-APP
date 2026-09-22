@@ -162,7 +162,7 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
                 <Sparkles size={13} />
                 <span>Fine Cellar & Epicurean Purveyors</span>
               </div>
-              <h1 className={`text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-3 ${
+              <h1 className={`text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 ${
                 isLight ? 'text-slate-900' : 'text-white'
               }`}>
                 Artisanal Cellar, Caviar & Fromagerie
@@ -230,7 +230,7 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
                   </div>
 
                   <div className="p-5 flex flex-col flex-grow">
-                    <h3 className={`font-black text-lg group-hover:text-[#B88728] dark:group-hover:text-[#E5B65F] transition-colors mb-1 line-clamp-1 ${
+                    <h3 className={`font-bold text-lg group-hover:text-[#B88728] dark:group-hover:text-[#E5B65F] transition-colors mb-1 line-clamp-1 ${
                       isLight ? 'text-slate-900' : 'text-white'
                     }`}>
                       {purveyor.name}
@@ -363,10 +363,10 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
 
               <div className="absolute bottom-6 left-6 right-6 text-white flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
-                  <span className="px-2.5 py-0.5 rounded-full bg-[#E5B65F] text-black font-black text-[10px] uppercase tracking-wider mb-2 inline-block">
+                  <span className="px-2.5 py-0.5 rounded-full bg-[#E5B65F] text-black font-bold text-[10px] uppercase tracking-wider mb-2 inline-block">
                     {selectedPurveyor.deliveryTime}
                   </span>
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight mb-2 text-white drop-shadow-md">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-2 text-white drop-shadow-md">
                     {selectedPurveyor.name}
                   </h1>
                   <p className="text-xs sm:text-sm text-gray-200 max-w-2xl font-medium leading-relaxed drop-shadow">
@@ -428,13 +428,13 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
                     )}
                   </div>
 
-                  <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full text-sm font-black text-[#E5B65F] border border-white/15 shadow-md">
+                  <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full text-sm font-bold text-[#E5B65F] border border-white/15 shadow-md">
                     ${item.price}
                   </div>
                 </div>
 
                 <div className="p-5 flex flex-col flex-grow">
-                  <h3 className={`font-black text-base group-hover:text-[#B88728] dark:group-hover:text-[#E5B65F] transition-colors line-clamp-1 mb-1 ${
+                  <h3 className={`font-bold text-base group-hover:text-[#B88728] dark:group-hover:text-[#E5B65F] transition-colors line-clamp-1 mb-1 ${
                     isLight ? 'text-slate-900' : 'text-white'
                   }`}>
                     {item.name}

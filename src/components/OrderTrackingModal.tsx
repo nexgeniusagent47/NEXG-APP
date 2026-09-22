@@ -256,7 +256,7 @@ export default function OrderTrackingModal() {
                         }`}>
                           Delivery PIN
                         </span>
-                        <span className={`text-xl font-mono font-black tracking-widest ${
+                        <span className={`text-xl font-mono font-bold tracking-widest ${
                           isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'
                         }`}>
                           {activeOrder.securityPin}

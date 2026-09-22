@@ -207,7 +207,7 @@ export default function MerchantView({
               />
             </div>
             <div className="min-w-0 pb-1">
-              <h1 className="text-xl sm:text-3xl font-black text-white tracking-tight leading-tight truncate">
+              <h1 className="text-xl sm:text-3xl font-bold text-white tracking-tight leading-tight truncate">
                 {merchant.name}
               </h1>
               <p className="text-xs sm:text-sm font-semibold text-white/85 truncate">
@@ -287,7 +287,7 @@ export default function MerchantView({
         {/* Catalogue */}
         <section ref={offeringsRef} className="mt-8 scroll-mt-6">
           <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-            <h2 className={cn('text-base sm:text-lg font-black tracking-tight', isLight ? 'text-slate-900' : 'text-white')}>
+            <h2 className={cn('text-base sm:text-lg font-bold tracking-tight', isLight ? 'text-slate-900' : 'text-white')}>
               {items.length > 0 ? `${items.length} offerings` : 'Offerings'}
             </h2>
 
@@ -415,7 +415,7 @@ export default function MerchantView({
                   <div className="flex items-baseline justify-between gap-3 mb-3">
                     <h3
                       className={cn(
-                        'text-sm sm:text-base font-black tracking-tight',
+                        'text-sm sm:text-base font-bold tracking-tight',
                         isLight ? 'text-slate-900' : 'text-white'
                       )}
                     >

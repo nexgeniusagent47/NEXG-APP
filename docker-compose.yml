@@ -26,7 +26,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: nexg_user
-      POSTGRES_PASSWORD: nexg_password
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nexg_dev_password}
       POSTGRES_DB: nexg_db
       # Same UTF8/C locale as setup-postgres.ps1, so seed text sorts identically.
       POSTGRES_INITDB_ARGS: --encoding=UTF8 --locale=C
@@ -82,7 +82,7 @@ services:
       # the container's own loopback. Compose's `${...:-default}` fallback only
       # fires when POSTGRES_HOST_PORT is unset, and it still targets the service
       # name, so an override cannot silently break container networking.
-      DATABASE_URL: postgresql://nexg_user:nexg_password@postgres:5432/nexg_db
+      DATABASE_URL: postgresql://nexg_user:${POSTGRES_PASSWORD:-nexg_dev_password}@postgres:5432/nexg_db
       NODE_ENV: production
     env_file:
       # Optional, so a fresh clone that has never run `npm run db:up` still boots.

@@ -82,7 +82,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, twoPerScreen = true 
           
           {/* Discount Pill */}
           {product.discount && (
-            <div className="absolute left-3 top-3 rounded-full bg-[#E5B65F] px-2.5 py-0.5 text-[10px] font-black text-slate-950 shadow-xs">
+            <div className="absolute left-3 top-3 rounded-full bg-[#E5B65F] px-2.5 py-0.5 text-[10px] font-bold text-slate-950 shadow-xs">
               {product.discount}
             </div>
           )}
@@ -108,7 +108,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, twoPerScreen = true 
             
             <h3
               className={cn(
-                "h-10 text-sm sm:text-base font-bold line-clamp-2 leading-snug transition-colors",
+                // No fixed height. `h-10` pinned this box to 40px while a long title
+                // needed 77px at 360px wide, so two thirds of the name was cut off
+                // mid-word on every phone — the same defect already fixed in
+                // `offer-carousel.tsx`, which never got carried across to this file.
+                //
+                // `line-clamp-2` is the only height mechanism here on purpose: a clamp
+                // and a fixed height are two mechanisms fighting over one box, and the
+                // fixed height always wins the part that matters.
+                "text-sm sm:text-base font-bold line-clamp-2 leading-snug transition-colors",
                 isLight
                   ? "text-slate-900 group-hover:text-[#B88728]"
                   : "text-white group-hover:text-[#E5B65F]"
@@ -137,7 +145,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, twoPerScreen = true 
             <div className="flex flex-col">
               <span
                 className={cn(
-                  "text-base sm:text-lg font-black tracking-tight",
+                  "text-base sm:text-lg font-bold tracking-tight",
                   isLight ? "text-slate-900" : "text-white"
                 )}
               >
@@ -154,7 +162,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, twoPerScreen = true 
               whileTap={{ scale: 0.94 }}
               onClick={handleAdd}
               className={cn(
-                "rounded-xl px-4 py-2 text-xs font-black transition flex items-center gap-1.5 cursor-pointer shadow-xs",
+                "rounded-xl px-4 py-2 text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-xs",
                 isAdded
                   ? "bg-emerald-600 text-white border border-emerald-600"
                   : isLight
@@ -242,7 +250,7 @@ export const ProductCarousel = React.forwardRef<HTMLDivElement, ProductCarouselP
           <div>
             <h2
               className={cn(
-                "text-xl sm:text-2xl font-black tracking-tight",
+                "text-xl sm:text-2xl font-bold tracking-tight",
                 isLight ? "text-slate-900" : "text-white"
               )}
             >
@@ -347,12 +355,19 @@ export const ProductCarousel = React.forwardRef<HTMLDivElement, ProductCarouselP
                   key={idx}
                   onClick={() => setCurrentIndex(idx)}
                   className={cn(
-                    "h-2 rounded-full transition-colors duration-300 cursor-pointer",
+                    // The measured target was 8x8, which is not tappable on a phone.
+                    // `min-h-6 min-w-6` makes it 24x24 (the WCAG 2.2 2.5.8 minimum)
+                    // while the painted pill stays exactly its old size: size classes
+                    // set the content box, `p-2` surrounds it with transparent padding,
+                    // and `bg-clip-content` keeps the background out of that padding.
+                    // `min-h`, not `h` — a fixed height would win over the padding and
+                    // leave the target 16px tall, which is how the first attempt failed.
+                    "h-2 min-h-6 p-2 bg-clip-content rounded-full transition-colors duration-300 cursor-pointer",
                     isActive
-                      ? "w-6 bg-[#B88728] dark:bg-[#E5B65F]"
+                      ? "w-6 min-w-6 bg-[#B88728] dark:bg-[#E5B65F]"
                       : isLight
-                        ? "w-2 bg-slate-300 hover:bg-slate-400"
-                        : "w-2 bg-white/20 hover:bg-white/40"
+                        ? "w-2 min-w-6 bg-slate-300 hover:bg-slate-400"
+                        : "w-2 min-w-6 bg-white/20 hover:bg-white/40"
                   )}
                   aria-label={`Go to slide ${idx + 1}`}
                 />

@@ -70,7 +70,7 @@ export default function Categories({ onNavigate }: { onNavigate?: (page: string)
     }`}>
       <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-10 gap-3">
         <div>
-          <h2 className={`text-2xl sm:text-[28px] font-black tracking-tight ${
+          <h2 className={`text-2xl sm:text-[28px] font-bold tracking-tight ${
             isLight ? 'text-slate-900' : 'text-white'
           }`}>
             {t.categories.heading}
@@ -110,7 +110,7 @@ export default function Categories({ onNavigate }: { onNavigate?: (page: string)
               }`}>
                 Browse Partners
               </span>
-              <h3 className={`text-lg sm:text-[22px] font-black mb-1.5 tracking-tight leading-tight ${
+              <h3 className={`text-lg sm:text-[22px] font-bold mb-1.5 tracking-tight leading-tight ${
                 isLight ? 'text-slate-900' : 'text-white'
               }`}>
                 {cat.title}

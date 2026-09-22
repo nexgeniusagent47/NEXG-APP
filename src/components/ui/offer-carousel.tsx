@@ -77,7 +77,7 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer, twoPerScreen = true
           />
 
           {/* Discount Pill */}
-          <div className="absolute left-3 top-3 rounded-full bg-[#E5B65F] px-2.5 py-0.5 text-[10px] font-black text-slate-950 shadow-xs flex items-center gap-1">
+          <div className="absolute left-3 top-3 rounded-full bg-[#E5B65F] px-2.5 py-0.5 text-[10px] font-bold text-slate-950 shadow-xs flex items-center gap-1">
             <Sparkles className="w-3 h-3 fill-current" />
             <span>{displayDiscount}</span>
           </div>
@@ -176,7 +176,7 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer, twoPerScreen = true
             </div>
 
             <div className="flex items-center gap-1.5">
-              <span className="text-[11px] font-black uppercase text-[#B88728] dark:text-[#E5B65F] group-hover:underline">
+              <span className="text-[11px] font-bold uppercase text-[#B88728] dark:text-[#E5B65F] group-hover:underline">
                 View Offer
               </span>
               <div
@@ -266,7 +266,7 @@ export const OfferCarousel = React.forwardRef<HTMLDivElement, OfferCarouselProps
               {title && (
                 <h2
                   className={cn(
-                    "text-xl sm:text-2xl font-black tracking-tight",
+                    "text-xl sm:text-2xl font-bold tracking-tight",
                     isLight ? "text-slate-900" : "text-white"
                   )}
                 >
@@ -365,12 +365,17 @@ export const OfferCarousel = React.forwardRef<HTMLDivElement, OfferCarouselProps
                   key={idx}
                   onClick={() => setCurrentIndex(idx)}
                   className={cn(
-                    "h-2 rounded-full transition-colors duration-300 cursor-pointer",
+                    // Same touch-target fix as `product-carousel.tsx`: `min-h-6 min-w-6`
+                    // makes the target 24x24 (WCAG 2.2 2.5.8) while the painted pill keeps
+                    // its size, with `bg-clip-content` holding the background inside the
+                    // content box. Both carousels must agree — a visitor meets them on the
+                    // same page and the dots are the same control.
+                    "h-2 min-h-6 p-2 bg-clip-content rounded-full transition-colors duration-300 cursor-pointer",
                     isActive
-                      ? "w-6 bg-[#B88728] dark:bg-[#E5B65F]"
+                      ? "w-6 min-w-6 bg-[#B88728] dark:bg-[#E5B65F]"
                       : isLight
-                        ? "w-2 bg-slate-300 hover:bg-slate-400"
-                        : "w-2 bg-white/20 hover:bg-white/40"
+                        ? "w-2 min-w-6 bg-slate-300 hover:bg-slate-400"
+                        : "w-2 min-w-6 bg-white/20 hover:bg-white/40"
                   )}
                   aria-label={`Go to slide ${idx + 1}`}
                 />

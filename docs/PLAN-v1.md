@@ -98,7 +98,7 @@ invisible. **Resolving this is v1's first build task.**
   `nexg-postgres-1` / `nexg-api-1` / `nexg-kernel-1` containers, which belong to an
   **unrelated Go platform** at `C:\Users\limta\Desktop\NEXG POS`. Those are out of
   scope and must not be modified.
-- **Credentials match CI.** `nexg_user` / `nexg_password` / `nexg_db` mirror
+- **Credentials match CI.** `nexg_user` / `change_me` / `nexg_db` mirror
   `.github/workflows/ci.yml`, so local and CI behave identically.
 - **Vite proxies `/api`.** Avoids hardcoded hosts and CORS in the browser.
 - **The API shapes rows into the frontend's existing `NexGMerchant` contract**, so the

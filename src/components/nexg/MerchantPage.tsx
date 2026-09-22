@@ -124,10 +124,10 @@ export const MerchantPage: React.FC<MerchantPageProps> = ({
               />
             </div>
             <div className="space-y-1">
-              <span className="text-[11px] font-black uppercase tracking-wider text-[#E5B65F]">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#E5B65F]">
                 {merchant.subcategory || merchant.category}
               </span>
-              <h1 className="text-xl sm:text-3xl font-black tracking-tight">{merchant.name}</h1>
+              <h1 className="text-xl sm:text-3xl font-bold tracking-tight">{merchant.name}</h1>
               <p className="text-xs sm:text-sm text-gray-300 flex items-center gap-2">
                 <MapPin size={13} className="text-[#E5B65F]" />
                 <span>{merchant.address}</span>

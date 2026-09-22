@@ -322,7 +322,7 @@ export default function DiscoveryScreen({
           <div className="sticky top-[124px] space-y-1">
             <h2
               className={cn(
-                'px-3 pb-1.5 text-[10px] font-black uppercase tracking-[0.16em]',
+                'px-3 pb-1.5 text-[10px] font-bold uppercase tracking-[0.16em]',
                 isLight ? 'text-slate-600' : 'text-gray-400'
               )}
             >
@@ -403,7 +403,7 @@ export default function DiscoveryScreen({
           </div>
 
           <div className="flex items-baseline justify-between gap-3 mb-4">
-            <h1 className="text-lg sm:text-xl font-black tracking-tight">
+            <h1 className="text-lg sm:text-xl font-bold tracking-tight">
               {query
                 ? `Results for "${query}"`
                 : activeCategory

@@ -232,7 +232,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
               {selectedSubcatId === 'all'
                 ? category.name
                 : category.subcategories.find((s) => s.id === selectedSubcatId)?.name ||
