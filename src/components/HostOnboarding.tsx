@@ -45,6 +45,7 @@ import {
 import type { LucideIcon } from 'lucide-react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { TimeStringField } from './forms/DateTimeField';
 
 /* ---------------------------------------------------------------------------
    Host onboarding
@@ -2110,22 +2111,25 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                   </select>
                 </div>
                 <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                  {/* `Field` renders the label and points htmlFor at the control's id, so
+                      the control is named by that label. Neither value is validated
+                      (both have non-empty defaults), so no error state is invented for
+                      them here — the previous inputs read `fieldProps` too, and it
+                      produced `aria-invalid: undefined` for both. */}
                   <Field htmlFor="checkIn" label="Check-in time">
-                    <input
-                      type="time"
-                      className={fieldClass('checkIn')}
+                    <TimeStringField
+                      id="checkIn"
                       value={form.checkIn}
-                      onChange={(event) => updateField('checkIn', event.target.value)}
-                      {...fieldProps('checkIn')}
+                      onChange={(v) => updateField('checkIn', v)}
+                      timeFormat="12"
                     />
                   </Field>
                   <Field htmlFor="checkOut" label="Check-out time">
-                    <input
-                      type="time"
-                      className={fieldClass('checkOut')}
+                    <TimeStringField
+                      id="checkOut"
                       value={form.checkOut}
-                      onChange={(event) => updateField('checkOut', event.target.value)}
-                      {...fieldProps('checkOut')}
+                      onChange={(v) => updateField('checkOut', v)}
+                      timeFormat="12"
                     />
                   </Field>
                 </div>

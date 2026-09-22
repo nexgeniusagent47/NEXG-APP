@@ -5,6 +5,7 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { readMerchantDraft, useMerchantDraft } from '../hooks/useMerchantDraft';
 import LanguageSwitcher from './LanguageSwitcher';
+import { TimeStringField } from './forms/DateTimeField';
 
 interface Branch {
   id: number;
@@ -1507,24 +1508,18 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                   {hoursMode === 'same' && (
                     <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-1">
-                        <label className="block text-xs text-slate-500 font-semibold">Opening Time *</label>
-                        <input 
-                          type="time" 
-                          value={globalHours.opening} 
-                          onChange={(e) => setGlobalHours({ ...globalHours, opening: e.target.value })}
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm bg-white"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <label className="block text-xs text-slate-500 font-semibold">Closing Time *</label>
-                        <input 
-                          type="time" 
-                          value={globalHours.closing} 
-                          onChange={(e) => setGlobalHours({ ...globalHours, closing: e.target.value })}
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl text-sm bg-white"
-                        />
-                      </div>
+                      <TimeStringField
+                        label="Opening Time *"
+                        value={globalHours.opening}
+                        onChange={(v) => setGlobalHours({ ...globalHours, opening: v })}
+                        timeFormat="12"
+                      />
+                      <TimeStringField
+                        label="Closing Time *"
+                        value={globalHours.closing}
+                        onChange={(v) => setGlobalHours({ ...globalHours, closing: v })}
+                        timeFormat="12"
+                      />
                     </div>
                   )}
 
@@ -1547,18 +1542,16 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                               <span className="text-xs font-bold text-slate-700">{grp}</span>
                             </label>
                             <div className="flex items-center gap-2 flex-1 max-w-xs">
-                              <input 
-                                type="time" 
-                                value={item.open} 
-                                onChange={(e) => setGroupHours({ ...groupHours, [grp]: { ...item, open: e.target.value } })}
-                                className="w-full px-2 py-1 border rounded-lg text-xs" 
+                              <TimeStringField
+                                value={item.open}
+                                onChange={(v) => setGroupHours({ ...groupHours, [grp]: { ...item, open: v } })}
+                                timeFormat="12"
                               />
                               <span className="text-xs text-slate-400">to</span>
-                              <input 
-                                type="time" 
-                                value={item.close} 
-                                onChange={(e) => setGroupHours({ ...groupHours, [grp]: { ...item, close: e.target.value } })}
-                                className="w-full px-2 py-1 border rounded-lg text-xs" 
+                              <TimeStringField
+                                value={item.close}
+                                onChange={(v) => setGroupHours({ ...groupHours, [grp]: { ...item, close: v } })}
+                                timeFormat="12"
                               />
                             </div>
                           </div>
@@ -1586,20 +1579,18 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                               <span className="text-xs font-bold text-slate-700">{day}</span>
                             </label>
                             <div className="flex items-center gap-2 flex-1 max-w-xs">
-                              <input 
-                                type="time" 
-                                value={item.open} 
+                              <TimeStringField
+                                value={item.open}
                                 disabled={!item.active}
-                                onChange={(e) => setDailyHours({ ...dailyHours, [day]: { ...item, open: e.target.value } })}
-                                className="w-full px-2 py-1 border rounded-lg text-xs bg-white disabled:bg-slate-100" 
+                                onChange={(v) => setDailyHours({ ...dailyHours, [day]: { ...item, open: v } })}
+                                timeFormat="12"
                               />
                               <span className="text-xs text-slate-400">to</span>
-                              <input 
-                                type="time" 
-                                value={item.close} 
+                              <TimeStringField
+                                value={item.close}
                                 disabled={!item.active}
-                                onChange={(e) => setDailyHours({ ...dailyHours, [day]: { ...item, close: e.target.value } })}
-                                className="w-full px-2 py-1 border rounded-lg text-xs bg-white disabled:bg-slate-100" 
+                                onChange={(v) => setDailyHours({ ...dailyHours, [day]: { ...item, close: v } })}
+                                timeFormat="12"
                               />
                             </div>
                           </div>
@@ -1625,24 +1616,18 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                     </div>
                     {holidayMode === 'custom' && (
                       <div className="grid grid-cols-2 gap-4 pt-2">
-                        <div className="space-y-1">
-                          <label className="block text-[10px] text-slate-500">Holiday Opening Time</label>
-                          <input 
-                            type="time" 
-                            value={holidayHours.open} 
-                            onChange={(e) => setHolidayHours({ ...holidayHours, open: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="block text-[10px] text-slate-500">Holiday Closing Time</label>
-                          <input 
-                            type="time" 
-                            value={holidayHours.close} 
-                            onChange={(e) => setHolidayHours({ ...holidayHours, close: e.target.value })}
-                            className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs"
-                          />
-                        </div>
+                        <TimeStringField
+                          label="Holiday Opening Time"
+                          value={holidayHours.open}
+                          onChange={(v) => setHolidayHours({ ...holidayHours, open: v })}
+                          timeFormat="12"
+                        />
+                        <TimeStringField
+                          label="Holiday Closing Time"
+                          value={holidayHours.close}
+                          onChange={(v) => setHolidayHours({ ...holidayHours, close: v })}
+                          timeFormat="12"
+                        />
                       </div>
                     )}
                   </div>

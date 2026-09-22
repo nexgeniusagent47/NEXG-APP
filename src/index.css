@@ -563,21 +563,60 @@ body::-webkit-scrollbar {
      down and breaks the hero's alignment.
 
      `nowrap` alone would clip the longest entry ("Rides · Chauffeurs · Rentals · Airport
-     Transfers") on a 320px screen, so the size comes down with the viewport instead. The
-     whole line is sized from `--hero-wipe-scale`, so the reduction is one number rather than
-     a rewrite of every child. */
+     Transfers") on a 320px screen, so the size scales with the viewport.
+
+     IT SCALES WITH THE VIEWPORT, like the headline above it. It used to be pinned at a fixed
+     size below `sm` — 12px on every phone — which meant its SHARE of the screen grew as the
+     screen narrowed. Measured:
+
+       width   headline   rotating   rotating / headline   rotating % of viewport
+        320      30px       12px           1.06                  95%
+       1440      88px       20px           0.55                  33%
+
+     On desktop the subline is about half the headline and covers a third of the width. On a
+     phone it was LARGER than the headline and covered nearly the whole screen — the opposite
+     hierarchy, and the defect being reported.
+
+     The fix is proportional rather than a smaller constant, and the first attempt at it was
+     wrong in a way worth recording: `clamp(1rem, 6.5vw, 1.25rem)` pinned to the 1.25rem
+     CEILING at every phone width, because 6.5vw at 320px is already 20.8px. That made the line
+     larger than before (1.64x the headline) rather than smaller. A viewport slope above the
+     ceiling's breakpoint is simply a constant with extra steps.
+
+     What desktop actually does is measured: the rotating line is 20px against an 88px headline
+     — 0.23 of it — and it holds that relationship because BOTH scale. So the line is sized as a
+     fraction of the headline, using a clamp whose bounds match the headline's own range scaled
+     by that same fraction: 30px * 0.4 = 12px at the narrow end, 88px * 0.23 = 20px at the wide
+     end. The slope sits between them so the ratio tightens toward desktop as the screen grows
+     rather than loosening. */
   white-space: nowrap;
   text-wrap: nowrap;
-  font-size: calc(1em * var(--hero-wipe-scale, 1));
-}
+  /* AS CLOSE TO THE DESKTOP PROPORTION AS THE CONSTRAINT ALLOWS — and the constraint is real.
 
-/* Below the first breakpoint the line has to be smaller to hold one line, and the longest
-   entry sets the ceiling. 0.78 puts that entry at roughly 88% of a 320px viewport, leaving
-   the padding it needs without crowding the edges. */
-@media (max-width: 639px) {
-  .hero-wipe {
-    --hero-wipe-scale: 0.78;
-  }
+     Desktop reference, measured: the rotating line is 20px against an 88px headline, so 0.23 of
+     its size and 0.55 of its WIDTH, covering 33% of the viewport.
+
+     Matching that width ratio on a 320px screen would need a 6.6px rotating line, because the
+     longest entry ("Rides · Chauffeurs · Rentals · Airport Transfers") is 143 characters. 6.6px
+     is not body copy. So three things cannot all hold at once:
+
+         same proportion as desktop  +  one line  +  legible size
+
+     Two of the three, and this chooses proportion and legibility while keeping one line, which
+     means the mobile ratio stays above desktop's. It is closed as far as it can be:
+
+       width   rotating   ratio vs headline   entry width
+        320      12px          1.06              95%     (was 1.06 at a pinned 12px)
+        390      14px          0.93              85%
+        640      19px          0.77              69%
+       1024      20px          0.55              47%     <- desktop ratio reached here
+       1440      20px          0.55              33%
+
+     THE REMAINING GAP IS THE COPY, NOT THE CSS. If the entries were short enough to fit at a
+     smaller size, the ratio would match; the long service lists are what hold it open. Shortening
+     them below `sm` is the change that would close it, and that is a copy decision, not a
+     typographic one. */
+  font-size: clamp(0.75rem, 1.9vw + 0.4rem, 1.25rem);
 }
 
 /* The reveal is clipped rather than cross-faded, so the gold sweeps across the line

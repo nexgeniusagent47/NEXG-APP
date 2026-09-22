@@ -320,7 +320,23 @@ export const CATALOG: Category[] = [
 
 export interface FieldDefinition {
   label: string;
-  type: 'text' | 'number' | 'textarea' | 'select' | 'toggle' | 'radio' | 'multicheck';
+  /**
+   * The control vocabulary. `date`, `time` and `datetime` render through
+   * `src/components/forms/DateTimeField.tsx`, which is the same control used directly by
+   * the onboarding forms — so a schedule question asked here and a schedule question
+   * asked there are the same object, not two lookalikes.
+   */
+  type:
+    | 'text'
+    | 'number'
+    | 'textarea'
+    | 'select'
+    | 'toggle'
+    | 'radio'
+    | 'multicheck'
+    | 'date'
+    | 'time'
+    | 'datetime';
   placeholder?: string;
   hint?: string;
   options?: string[];

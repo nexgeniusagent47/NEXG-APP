@@ -31,6 +31,7 @@ import {
 } from 'lucide-react';
 import LogoIcon from './LogoIcon';
 import LanguageSwitcher from './LanguageSwitcher';
+import { DateStringField } from './forms/DateTimeField';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -810,16 +811,16 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Date of Birth <span className="text-red-500">*</span></label>
-                    <input 
-                      type="date" 
-                      required
-                      value={formData.dob}
-                      onChange={(e) => handleChange('dob', e.target.value)}
-                      className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
-                    />
-                  </div>
+                  <DateStringField
+                    label="Date of Birth *"
+                    value={formData.dob}
+                    onChange={(v) => handleChange('dob', v)}
+                    placeholder="Choose your date of birth"
+                    // A date of birth cannot be in the future. Enforced in the calendar
+                    // rather than by a validation message after submission, so the
+                    // impossible choice is never offered.
+                    maximumDate={new Date()}
+                  />
 
                   <div>
                     <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Gender <span className="text-red-500">*</span></label>
@@ -972,16 +973,16 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     />
                   </div>
 
-                  <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Driver's License Expiry Date <span className="text-red-500">*</span></label>
-                    <input 
-                      type="date" 
-                      required
-                      value={formData.dlExpiry}
-                      onChange={(e) => handleChange('dlExpiry', e.target.value)}
-                      className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
-                    />
-                  </div>
+                  <DateStringField
+                    label="Driver's License Expiry Date *"
+                    value={formData.dlExpiry}
+                    onChange={(v) => handleChange('dlExpiry', v)}
+                    placeholder="Choose the expiry date"
+                    // A licence that has already expired cannot be used to onboard, so the
+                    // calendar does not offer it. The alternative is accepting the date and
+                    // rejecting the courier at review, which wastes their time.
+                    minimumDate={new Date()}
+                  />
                 </div>
 
                 {/* Vehicle Setup section (Hidden/Dimmed for Dedicated, required for Independent) */}

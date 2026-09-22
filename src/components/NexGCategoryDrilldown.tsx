@@ -30,6 +30,7 @@ import {
   getCategoryMerchants,
 } from '../data/categoryCatalog21';
 import { ProductCarousel, type Product } from './ui/product-carousel';
+import { DateStringField, TimeStringField } from './forms/DateTimeField';
 
 interface NexGCategoryDrilldownProps {
   category: CatalogCategory;
@@ -925,26 +926,24 @@ export default function NexGCategoryDrilldown({
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs font-bold mb-1 text-slate-500">Scheduled Date</label>
-                    <input
-                      type="date"
+                    {/* Was `input[type=date]`: the native picker cannot be styled, is
+                        ordered month-first for a market that reads day-first, and shows
+                        a different control in every browser. */}
+                    <DateStringField
                       value={bookingDate}
-                      onChange={(e) => setBookingDate(e.target.value)}
-                      required
-                      className={`w-full px-3 py-2 rounded-xl text-xs border outline-none font-medium ${
-                        isLight ? 'bg-white border-slate-200' : 'bg-[#111315] border-white/10 text-white'
-                      }`}
+                      onChange={setBookingDate}
+                      placeholder="Choose a date"
+                      minimumDate={new Date()}
                     />
                   </div>
                   <div>
                     <label className="block text-xs font-bold mb-1 text-slate-500">Preferred Time</label>
-                    <input
-                      type="time"
+                    <TimeStringField
                       value={bookingTime}
-                      onChange={(e) => setBookingTime(e.target.value)}
-                      required
-                      className={`w-full px-3 py-2 rounded-xl text-xs border outline-none font-medium ${
-                        isLight ? 'bg-white border-slate-200' : 'bg-[#111315] border-white/10 text-white'
-                      }`}
+                      onChange={setBookingTime}
+                      placeholder="Choose a time"
+                      timeFormat="12"
+                      minuteStep={15}
                     />
                   </div>
                 </div>

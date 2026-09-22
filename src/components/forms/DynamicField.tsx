@@ -8,13 +8,20 @@
 // three different text fields and two different toggle styles.
 //
 // Control types come from FIELD_DEFS in src/data/merchantCatalog.ts:
-//   text | number | textarea | select | toggle | radio | multicheck
+//   text | number | textarea | select | toggle | radio | multicheck | date | time | datetime
+//
+// The three date/time kinds render through the shared DateTimeField rather than a
+// native input, so a schedule question in an order form and a schedule question in
+// onboarding are the same control. A requirement's `hint` is passed through as the
+// field's hint, which is where a booking window or a blackout rule belongs.
 
 import React from 'react';
 import { AlertCircle } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { cn } from '../../lib/utils';
 import type { OrderRequirement } from '../../data/orderRequirements';
+import { DateTimeField } from './DateTimeField';
+import { fromISODate, toISODate } from '../../lib/datetime';
 
 interface DynamicFieldProps {
   requirement: OrderRequirement;
@@ -269,6 +276,51 @@ export const DynamicField: React.FC<DynamicFieldProps> = ({
               );
             })}
           </div>
+        );
+      }
+
+      case 'date':
+      case 'time':
+      case 'datetime': {
+        // The value is the `YYYY-MM-DD` (or `HH:MM`) string a native input used to
+        // produce, and stays that way in the form state and the submitted payload.
+        // The conversion is here at the boundary so nothing downstream changes.
+        const raw = typeof value === 'string' ? value : '';
+        const asDate =
+          requirement.control === 'time'
+            ? (() => {
+                const match = /^(\d{1,2}):(\d{2})/.exec(raw.trim());
+                if (!match) return null;
+                const hours = Number(match[1]);
+                const minutes = Number(match[2]);
+                if (hours > 23 || minutes > 59) return null;
+                const d = new Date();
+                d.setHours(hours, minutes, 0, 0);
+                return d;
+              })()
+            : fromISODate(raw);
+
+        const serialize = (next: Date | undefined): string => {
+          if (!next) return '';
+          const hh = String(next.getHours()).padStart(2, '0');
+          const mm = String(next.getMinutes()).padStart(2, '0');
+          if (requirement.control === 'time') return `${hh}:${mm}`;
+          if (requirement.control === 'datetime') return `${toISODate(next)}T${hh}:${mm}`;
+          return toISODate(next);
+        };
+
+        return (
+          <DateTimeField
+            id={requirement.id}
+            mode={requirement.control}
+            value={asDate}
+            onChange={(next) => onChange(requirement.id, serialize(next))}
+            placeholder={requirement.placeholder}
+            aria-labelledby={labelIdFor ?? labelId}
+            aria-describedby={describedBy}
+            suppressMessages
+            error={error}
+          />
         );
       }
 
