@@ -26,28 +26,45 @@ export const MEASURE_SOURCE = `function (opts) {
   var vh = document.documentElement.clientHeight;
   var overflowX = document.documentElement.scrollWidth - vw;
 
-  // Is this element part of a deliberate horizontal rail?
+  // Is this element clipped by an ancestor, and therefore unable to affect the page?
   //
-  // The check MUST include the element itself. A carousel track is not a child of a
-  // scroller, it IS the scroller: the app puts overflow-x-auto on the rail itself (19
-  // such elements across src/components). Testing only ancestors therefore returns
-  // false for every card in every carousel, and a 1880px marquee track inside a 360px
-  // viewport is reported as 389 elements past the edge. That is what these flags were:
-  // one intentional rail, counted once per descendant.
+  // The test must include the element ITSELF: a carousel track carries overflow-x auto
+  // in other codebases, and an element that clips its own content cannot push the page
+  // sideways either. The hidden and clip values both count — both mean overflowing
+  // content is not painted outside the box.
   //
   // NOTE: no backtick characters anywhere inside this string. MEASURE_SOURCE is a
   // template literal, so a single backtick in a comment terminates it and the whole
   // module stops parsing. scripts/device-room/check-source.mjs fails the build on one.
-  function inScroller(el) {
+  function isClipped(el) {
     for (var p = el; p && p !== document.body; p = p.parentElement) {
       var ox = window.getComputedStyle(p).overflowX;
-      if (ox === 'auto' || ox === 'scroll') return true;
+      if (ox === 'hidden' || ox === 'clip' || ox === 'auto' || ox === 'scroll') return true;
     }
     return false;
   }
 
+  // Elements positioned beyond the viewport.
+  //
+  // THE DECISION THAT MATTERS: is this a defect?
+  //
+  // A "past the right edge" element is only a defect if it makes the PAGE scroll
+  // sideways or is visible while unusable. Everything else is a layout doing its job.
+  // Two patterns here look identical to a bounding-box test and are both correct:
+  //
+  //   1. An off-screen carousel slide. The track holds several cards and the ones after
+  //      the first sit past the right edge on purpose, clipped by an ancestor's
+  //      overflow hidden so they can slide in. Measured on the home page at 360px:
+  //      388 of these, and NOT ONE element in the document had overflow-x auto,
+  //      because this app's carousels translate a track rather than scroll a container.
+  //   2. A marquee, whose track is wider than the viewport by construction.
+  //
+  // So the primary verdict is the page's own horizontal overflow, which is the thing a
+  // user actually experiences. An element is only reported as past the edge when it is
+  // NOT clipped by any ancestor — that is, when it is genuinely loose on the page.
+  // Diagnosis only: these are counted and reported, never treated as defects on their own.
+  var clippedByAncestor = 0;
   var offenders = [];
-  var railElements = 0; // intentionally inside a horizontal rail, reported separately
   var all = document.querySelectorAll('body *');
   for (var i = 0; i < all.length; i++) {
     var el = all[i];
@@ -55,21 +72,20 @@ export const MEASURE_SOURCE = `function (opts) {
     if (box.width === 0 || box.height === 0) continue;
     var cs = window.getComputedStyle(el);
     if (cs.visibility === 'hidden' || cs.opacity === '0') continue;
-    // An element deliberately bled off both edges (marquee track, decorative radial).
     if (cs.position === 'fixed' && box.right > vw && box.left < 0) continue;
-    if (box.right > vw + 1 && box.left >= -1) {
-      if (inScroller(el)) {
-        railElements++;
-        continue;
-      }
-      offenders.push({
-        tag: el.tagName.toLowerCase(),
-        cls: String(el.className || '').split(/\\s+/).slice(0, 3).join(' ').slice(0, 60),
-        right: Math.round(box.right),
-        width: Math.round(box.width),
-        text: (el.textContent || '').trim().slice(0, 30)
-      });
+    if (!(box.right > vw + 1 && box.left >= -1)) continue;
+
+    if (isClipped(el)) {
+      clippedByAncestor++;
+      continue;
     }
+    offenders.push({
+      tag: el.tagName.toLowerCase(),
+      cls: String(el.className || '').split(/\\s+/).slice(0, 3).join(' ').slice(0, 60),
+      right: Math.round(box.right),
+      width: Math.round(box.width),
+      text: (el.textContent || '').trim().slice(0, 30)
+    });
   }
 
   // Deduplicate near-identical entries so the output stays readable.
@@ -160,7 +176,7 @@ export const MEASURE_SOURCE = `function (opts) {
     vh: vh,
     overflowX: Math.round(overflowX),
     offenderCount: offenders.length,
-    railElements: railElements,
+    clippedByAncestor: clippedByAncestor,
     worst: unique.slice(0, 5),
     clipped: clipped,
     clippedEls: clippedEls,

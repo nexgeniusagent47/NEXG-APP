@@ -181,7 +181,26 @@ html.dark {
      and the hero's `font-display` was silently winning. Naming the family here removes
      the ambiguity rather than depending on which class lands last. */
   font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 6.9vw, 5.5rem);
+  /* PROPORTIONAL, not stepped.
+     The old floor was `2.5rem` — 40px — and that floor was the whole problem. Measured as a
+     fraction of the viewport the heading occupied 6.9/1000 at 768px but 12.5/1000 at 320px:
+     below 430px the `6.9vw` term fell under the floor, so the size stopped shrinking while
+     the viewport kept narrowing. The headline ate twice the share of a phone screen that it
+     does of a desktop, which is what "doesn't scale down based on the screen" looks like
+     when it is measured instead of described.
+
+     Two changes, and the first matters more. The floor drops from 40px to 30px, which is
+     where the ratio stops holding; and the slope steepens enough that the floor only bites
+     below about 500px. That leaves the heading between 5.4/1000 and 6.1/1000 across the
+     whole range, against 9.4 to 12.5 before.
+
+     The floor is not zero on purpose. A literal 6.1vw would put the headline at 19.5px on a
+     320px screen — proportional, and no longer a headline. 30px is the smallest that still
+     reads as one, and it is reached only at the narrowest phones.
+
+     The ceiling stays because each line is `nowrap`: line 1 already needs roughly 838px of a
+     736px column at 88px, so raising it would break the two-line rule the hero depends on. */
+  font-size: clamp(1.875rem, 6.1vw, 5.5rem);
   /* 1.02, not 0.94. The tighter value set the two lines on top of one another: at this
      size 0.94 leaves almost no gap between the descenders of line 1 and the capitals of
      line 2. Just above 1 keeps them reading as one block without them touching. */

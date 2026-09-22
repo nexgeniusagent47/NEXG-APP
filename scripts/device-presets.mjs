@@ -36,9 +36,37 @@ export const DEVICE_PRESETS = [
   { id: 'ip14pm', name: 'iPhone 14/15 Pro Max', w: 430, h: 932, tier: 'xs', category: 'phone' },
   { id: 'ip16pm', name: 'iPhone 16 Pro Max', w: 440, h: 956, tier: 'xs', category: 'phone' },
 
+  // ---- Samsung Galaxy A series. The A series is what most Samsung owners in this
+  // market actually hold, not the S or Ultra, and it is the brand the user named
+  // explicitly. Widths differ from the S series at the same nominal size, so they
+  // earn their own entries rather than being folded into the S rows.
+  { id: 'a03', name: 'Galaxy A03/A04', w: 360, h: 800, tier: 'xs', category: 'phone', critical: true },
+  { id: 'a13', name: 'Galaxy A13/A14', w: 360, h: 800, tier: 'xs', category: 'phone' },
+  { id: 'a24', name: 'Galaxy A24/A25', w: 393, h: 873, tier: 'xs', category: 'phone' },
+  { id: 'a34', name: 'Galaxy A34/A35', w: 393, h: 873, tier: 'xs', category: 'phone' },
+  { id: 'a54', name: 'Galaxy A54/A55', w: 412, h: 915, tier: 'xs', category: 'phone' },
+
+  // ---- Redmi and the wider Xiaomi family. Redmi Note and the POCO rebrands are the
+  // highest-volume Android phones in Kenya, so they carry more weight here than any
+  // flagship.
+  { id: 'redmi9', name: 'Redmi 9/9A', w: 360, h: 800, tier: 'xs', category: 'phone', critical: true },
+  { id: 'redmi10', name: 'Redmi 10/10A', w: 360, h: 800, tier: 'xs', category: 'phone' },
+  { id: 'redmi12', name: 'Redmi 12/12C', w: 393, h: 851, tier: 'xs', category: 'phone' },
+  { id: 'redmi13c', name: 'Redmi 13C', w: 360, h: 800, tier: 'xs', category: 'phone' },
+  { id: 'note12', name: 'Redmi Note 12/13', w: 393, h: 873, tier: 'xs', category: 'phone' },
+  { id: 'note13pro', name: 'Redmi Note 13 Pro', w: 412, h: 915, tier: 'xs', category: 'phone' },
+  { id: 'poco', name: 'POCO M/X series', w: 393, h: 873, tier: 'xs', category: 'phone' },
+
+  // ---- The other Android brands with real share here.
+  { id: 'oppo', name: 'Oppo A series', w: 360, h: 800, tier: 'xs', category: 'phone' },
+  { id: 'vivo', name: 'Vivo Y series', w: 360, h: 800, tier: 'xs', category: 'phone' },
+  { id: 'realme', name: 'Realme C series', w: 360, h: 800, tier: 'xs', category: 'phone' },
+  { id: 'nokia', name: 'Nokia G/C series', w: 360, h: 800, tier: 'xs', category: 'phone' },
+
   // ---- tablet: first size at or above `sm` (640) and `md` (768).
   { id: 'ipad-mini', name: 'iPad mini', w: 744, h: 1133, tier: 'sm', category: 'tablet' },
   { id: 'ipad', name: 'iPad 10.9', w: 820, h: 1180, tier: 'md', category: 'tablet' },
+  { id: 'tab-a9', name: 'Galaxy Tab A9', w: 800, h: 1280, tier: 'md', category: 'tablet' },
 
   // ---- desktop: `lg` (1024) and `xl` (1280). The nav switches to its full
   // horizontal form at `xl`, which is why both are kept.
