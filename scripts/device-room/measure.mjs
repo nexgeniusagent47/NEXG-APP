@@ -124,6 +124,12 @@ export const MEASURE_SOURCE = `function (opts) {
   var candidates = document.querySelectorAll('h1,h2,h3,h4,p,span,div,button,a,li,td,th,figcaption,label');
   for (var m = 0; m < candidates.length; m++) {
     var c = candidates[m];
+    // Only elements that RENDER TEXT. An empty decorative box (a gradient overlay, a
+    // hairline) has nothing to read, so calling it "clipped text" is a false positive
+    // that buries the real findings in noise. innerText is the right test rather than
+    // textContent: it is empty for a hidden subtree, so off-screen decorative markup
+    // cannot be counted either.
+    if (!(c.innerText || '').trim()) continue;
     var ccs = window.getComputedStyle(c);
     if (ccs.overflow !== 'hidden') continue;
     if (c.clientHeight <= 0) continue;

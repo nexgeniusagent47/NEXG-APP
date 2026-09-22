@@ -15,6 +15,7 @@
 // Usage: node scripts/device-room/check-source.mjs
 // Exit 0 = safe. Exit 1 = the module is broken.
 
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -23,7 +24,29 @@ const FILE = path.join(HERE, 'measure.mjs');
 
 const problems = [];
 
-// The module has to load, which is what a stray backtick breaks first.
+// The mistake this catches: a backtick typed inside the template literal, almost always
+// inside a comment while naming a CSS property or a DOM property. It happened four times
+// while this file was being written. The line-level test is exact — everything BETWEEN
+// the opening and closing delimiter must contain no backtick — and unlike counting
+// backticks in the whole file, prose that merely names the character cannot confuse it.
+const lines = fs.readFileSync(FILE, 'utf8').split(/\r?\n/);
+const openAt = lines.findIndex((l) => l.includes('MEASURE_SOURCE = `'));
+const closeAt = lines.findIndex((l, i) => i > openAt && /^\}`;\s*$/.test(l));
+
+if (openAt === -1) problems.push('could not find the MEASURE_SOURCE opening delimiter');
+else if (closeAt === -1) problems.push('could not find the MEASURE_SOURCE closing delimiter');
+else {
+  for (let i = openAt + 1; i < closeAt; i++) {
+    if (lines[i].includes('`')) {
+      problems.push(
+        `line ${i + 1} has a backtick inside the template literal, which terminates it ` +
+          `early: ${lines[i].trim().slice(0, 80)}`
+      );
+    }
+  }
+}
+
+// And the module has to load, which is what a stray backtick breaks first.
 try {
   const mod = await import(`./measure.mjs?cachebust=${Date.now()}`);
 
