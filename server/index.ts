@@ -19,6 +19,9 @@ import { fileURLToPath } from 'node:url';
 
 import { initDb, isDbReady, getDbUnavailableReason, closeDb } from './db.ts';
 import * as repo from './repository.ts';
+import { registerAuthRoutes } from './auth/routes.ts';
+import { observabilityMiddleware, registerObservabilityRoutes } from './observability.ts';
+import { versionInfo } from './version.ts';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..');
@@ -26,13 +29,20 @@ const REPO_ROOT = path.resolve(__dirname, '..');
 const app = express();
 const PORT = Number(process.env.PORT ?? 3001);
 
+// Observability is mounted ahead of everything else, including the body parser and
+// the CORS handler. Mounting it after `express.json()` would drop every request the
+// parser rejects from the counts, and mounting it after CORS would drop every
+// preflight — the two categories of traffic that are hardest to reason about from
+// application logs alone.
+app.use(observabilityMiddleware());
+
 app.use(express.json({ limit: '1mb' }));
 
 // CORS. Only the methods that actually exist are advertised (defect D-08).
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   if (req.method === 'OPTIONS') return res.sendStatus(204);
   next();
 });
@@ -98,6 +108,19 @@ function requireDbOrFallback(res: Response): boolean {
   }
   return false;
 }
+
+// ------------------------------------------------- observability + version
+// Registered after `express.json()` because /api/telemetry reads the browser's event
+// batch from the request body, and before the static/404 handlers below so these
+// paths are never answered by the SPA catch-all.
+registerObservabilityRoutes(app);
+
+// Identity of the running build. Flat `versionInfo()` rather than a wrapper: every
+// field is already named for what it is, and a deploy check reads this instead of
+// scraping a log line.
+app.get('/api/version', (_req: Request, res: Response) => {
+  res.json(versionInfo());
+});
 
 // --------------------------------------------------------------------- routes
 
@@ -254,6 +277,12 @@ app.get('/api/areas', async (_req: Request, res: Response) => {
   res.json({ areas });
 });
 
+// ------------------------------------------------------------------- auth
+// Mounted before the static handler below, so /api/auth/* can never be answered by
+// the SPA fallback. registerAuthRoutes calls assertAuthConfigured() internally, which
+// fails the BOOT when AUTH_SECRET is missing rather than failing the first login.
+registerAuthRoutes(app);
+
 // ------------------------------------------------------------ static + errors
 
 // Serve the built SPA when it exists, so `npm run build && npm run server`
@@ -272,6 +301,16 @@ app.use((_req: Request, res: Response) => {
 
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   console.error('[NEXG] unhandled error:', err);
+  // A body the parser rejects is the caller's fault and body-parser already labels it
+  // (status 400). Answering 500 would mislead the caller AND put a permanent floor
+  // under the error rate /api/metrics reports, which separates 4xx from 5xx on purpose.
+  // 4xx errors are only reachable now that /api/telemetry accepts POST.
+  const status = Number(err?.status ?? err?.statusCode);
+  if (Number.isInteger(status) && status >= 400 && status < 500) {
+    // The parser's message can quote the payload; it is logged above, not echoed.
+    res.status(status).json({ error: 'Bad request' });
+    return;
+  }
   res.status(500).json({ error: 'Internal server error' });
 });
 

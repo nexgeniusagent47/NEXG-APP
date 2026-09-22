@@ -53,6 +53,12 @@ const MerchantRoute = lazy(() => import('./components/merchant/MerchantRoute'));
  */
 const HostOnboarding = lazy(() => import('./components/HostOnboarding'));
 
+/**
+ * The operations dashboard, also split out. It is a developer surface reached by
+ * `?page=metrics`, so no customer journey should download its charts.
+ */
+const MetricsDashboard = lazy(() => import('./components/observability/MetricsDashboard'));
+
 export type AppCurrentPage =
   | 'home'
   | 'merchants'
@@ -65,7 +71,8 @@ export type AppCurrentPage =
   | 'properties'
   | 'couriers'
   | 'courier_onboarding'
-  | 'host_onboarding';
+  | 'host_onboarding'
+  | 'metrics';
 
 /**
  * Pages addressable through `?page=`.
@@ -88,6 +95,7 @@ const DEEP_LINK_PAGES: readonly AppCurrentPage[] = [
   'couriers',
   'courier_onboarding',
   'host_onboarding',
+  'metrics',
 ];
 
 function pageFromUrl(): AppCurrentPage {
@@ -415,6 +423,13 @@ function AppContent() {
 
         {currentPage === 'host_onboarding' && (
           <HostOnboarding onNavigate={handleNavigate} />
+        )}
+
+        {/* Developer surface: live request metrics, traces and build identity.
+            Reached by `?page=metrics` and rendered inside the existing Suspense
+            boundary above, like every other lazily-loaded page. */}
+        {currentPage === 'metrics' && (
+          <MetricsDashboard />
         )}
           </>
         )}

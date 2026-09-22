@@ -237,6 +237,20 @@ re-measured since.
    - **The double-encoding is cp1252, not Latin-1.** Bytes `0x80`-`0x9F` map to
      `U+0150`-`U+017F` (`ž`, `œ`), so a Latin-1 round-trip fails on exactly those.
 
+7. **Server-side TypeScript is STRIP-ONLY under Node 24.** `node server/index.ts`
+   erases types but does **not transform syntax**, so anything that emits runtime
+   code throws `ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX` **at import time** and takes the
+   whole server down — not a type error, a dead process. Forbidden in `server/`:
+
+   - constructor parameter properties — `constructor(private x: T) {}`. **This
+     actually happened** and crashed the boot; declare the field and assign it in
+     the body instead.
+   - `enum`, `namespace`, decorators, and `import x = require()`.
+
+   Type annotations, `interface`, `type`, `as`, and `satisfies` are all fine — they
+   are erasures. When adding server code, always run `node server/index.ts` and
+   confirm it boots; `tsc --noEmit` will pass on code that cannot run.
+
 ---
 
 ## 6. The catalogue is generated, not authored
