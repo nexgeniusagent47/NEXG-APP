@@ -114,12 +114,32 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
           {/* Subtle directional scrim for optimal text contrast in daylight mode */}
           <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/20 sm:from-white/90 sm:via-white/70 sm:to-transparent z-10" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#f7f8fa] via-[#f7f8fa]/60 to-transparent z-10" />
+          {/*
+            LIGHT MODE HAS NO MOBILE IMAGE, so this one has to work at every size.
+
+            Dark mode swaps between a landscape desktop shot and `mobile_landing_page_image`
+            at the `sm` breakpoint. Light mode has no equivalent — there is only
+            `hero_daylight_resort`, a landscape composition — so on a phone it was being
+            stretched into a portrait frame and cropped wherever `object-cover` happened to
+            land. That is what the user saw: the light-mode image reading differently on a
+            phone than on a desktop, with the subject lost off the edge.
+
+            `object-position` is the honest fix available with one asset. A 16:9 frame squeezed
+            into 9:19.5 keeps only about 29% of its width, so the centre is the wrong default:
+            it discards the pool and the terrace on both sides. Anchoring mobile to 62%
+            horizontal keeps the pool edge and the skyline, which are the parts that carry the
+            image, and leaves the desktop framing untouched at 50%.
+
+            If a portrait light-mode shot is ever supplied, add it here as a second
+            ResponsiveImage with the same `sm` split dark mode already uses — that is the real
+            fix, and this is the best that one landscape asset can do.
+          */}
           <ResponsiveImage
             name="hero_daylight_resort_1789914085669.jpg"
             sizes="100vw"
             priority
             alt="Sunlit Luxury Penthouse Infinity Pool and Skyline"
-            className="w-full h-full object-cover brightness-100 contrast-[1.03] transition-transform duration-1000 scale-100 hover:scale-105"
+            className="w-full h-full object-cover brightness-100 contrast-[1.03] transition-transform duration-1000 scale-100 hover:scale-105 object-[62%_center] sm:object-center"
             referrerPolicy="no-referrer"
           />
         </div>
