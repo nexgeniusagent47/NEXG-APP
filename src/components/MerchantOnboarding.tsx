@@ -3,6 +3,7 @@ import * as Icons from 'lucide-react';
 import { CATALOG, FIELD_DEFS, SUGGESTED_SECTIONS, Category, Subcategory } from '../data/merchantCatalog';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
+import { readMerchantDraft, useMerchantDraft } from '../hooks/useMerchantDraft';
 import LanguageSwitcher from './LanguageSwitcher';
 
 interface Branch {
@@ -22,22 +23,61 @@ interface ForMerchantsProps {
 export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
   const { isLight } = useTheme();
   const { t } = useLanguage();
+
+  /**
+   * Restore the draft ONCE, synchronously, before any state is created.
+   *
+   * `useState(() => ...)` lazy initialisers read from this, so the first paint already
+   * shows the restored form. Restoring in an effect instead would render an empty form
+   * and then replace it, which flashes and moves the caret out from under anyone who
+   * had already started typing.
+   *
+   * The read happens through a ref so it runs exactly once even under StrictMode's
+   * double-invoke, and so no storage call happens on later renders.
+   */
+  const draftRef = useRef<ReturnType<typeof readMerchantDraft<Record<string, unknown>>> | null>(null);
+  if (draftRef.current === null) {
+    draftRef.current = readMerchantDraft<Record<string, unknown>>({});
+  }
+  const draft = (draftRef.current.data ?? {}) as Record<string, any>;
+
+  const { save: saveDraft, clear: clearDraft, savedAt, restored, available: draftAvailable } =
+    useMerchantDraft(draftRef.current.savedAt);
+
+
+
   // Stepper state
-  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [currentStep, setCurrentStep] = useState<number>(() => {
+    const step = Number(draft.currentStep);
+    return Number.isFinite(step) && step >= 1 && step <= 11 ? step : 1;
+  });
   const totalSteps = 11;
 
   // Search filter for Category Grid
   const [categorySearch, setCategorySearch] = useState<string>('');
 
-  // Selected Category and Subcategories
-  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
-  const [selectedSubcategories, setSelectedSubcategories] = useState<Subcategory[]>([]);
+  // Selected Category and Subcategories.
+  // Stored as IDS, not objects: the catalogue is static, so an id re-resolves to the
+  // current record. Persisting the object would freeze a copy that silently diverges
+  // the next time a category is renamed or its fields change.
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(() =>
+    draft.selectedCategoryId ? CATALOG.find((c) => c.id === draft.selectedCategoryId) ?? null : null
+  );
+  const [selectedSubcategories, setSelectedSubcategories] = useState<Subcategory[]>(() => {
+    if (!Array.isArray(draft.selectedSubcategoryIds) || !draft.selectedCategoryId) return [];
+    const cat = CATALOG.find((c) => c.id === draft.selectedCategoryId);
+    if (!cat) return [];
+    const ids = new Set<string>(draft.selectedSubcategoryIds);
+    return cat.subcategories.filter((s) => ids.has(s.id));
+  });
 
   // Dynamic details state
-  const [dynamicFields, setDynamicFields] = useState<Record<string, any>>({});
+  const [dynamicFields, setDynamicFields] = useState<Record<string, any>>(() => draft.dynamicFields ?? {});
 
   // Catalog Sections State
-  const [selectedCatalogSections, setSelectedCatalogSections] = useState<Array<{ original: string | null; name: string; custom: boolean }>>([]);
+  const [selectedCatalogSections, setSelectedCatalogSections] = useState<
+    Array<{ original: string | null; name: string; custom: boolean }>
+  >(() => (Array.isArray(draft.selectedCatalogSections) ? draft.selectedCatalogSections : []));
   const [customSectionInput, setCustomSectionInput] = useState<string>('');
 
   // Business Profile
@@ -46,13 +86,16 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
     tradingName: '',
     kraPin: '',
     website: '',
-    shortDesc: ''
+    shortDesc: '',
+    ...(draft.profileData ?? {}),
   });
 
   // Locations & Branches
-  const [branches, setBranches] = useState<Branch[]>([
-    { id: Date.now(), name: '', city: '', address: '', mapLink: '', contactName: '', contactPhone: '' }
-  ]);
+  const [branches, setBranches] = useState<Branch[]>(() =>
+    Array.isArray(draft.branches) && draft.branches.length > 0
+      ? draft.branches
+      : [{ id: Date.now(), name: '', city: '', address: '', mapLink: '', contactName: '', contactPhone: '' }]
+  );
   const [activeBranchMapId, setActiveBranchMapId] = useState<number | null>(null);
 
   // Maps Modal Leaflet state
@@ -71,13 +114,20 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
     whatsapp: '',
     instagram: '',
     facebook: '',
-    tiktok: ''
+    tiktok: '',
+    ...(draft.contactData ?? {}),
   });
 
   // Operations & Delivery
-  const [operatingDays, setOperatingDays] = useState<string[]>(['Mon', 'Tue', 'Wed', 'Thu', 'Fri']);
-  const [hoursMode, setHoursMode] = useState<'same' | 'split' | 'custom'>('same');
-  const [globalHours, setGlobalHours] = useState({ opening: '08:00', closing: '20:00' });
+  const [operatingDays, setOperatingDays] = useState<string[]>(() =>
+    Array.isArray(draft.operatingDays) ? draft.operatingDays : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri']
+  );
+  const [hoursMode, setHoursMode] = useState<'same' | 'split' | 'custom'>(() => draft.hoursMode ?? 'same');
+  const [globalHours, setGlobalHours] = useState(() => ({
+    opening: '08:00',
+    closing: '20:00',
+    ...(draft.globalHours ?? {}),
+  }));
   const [groupHours, setGroupHours] = useState({
     Weekdays: { active: true, open: '08:00', close: '20:00' },
     Weekends: { active: true, open: '09:00', close: '16:00' }
@@ -91,13 +141,17 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
     Sat: { active: false, open: '09:00', close: '18:00' },
     Sun: { active: false, open: '09:00', close: '16:00' }
   });
-  const [holidayMode, setHolidayMode] = useState<'closed' | 'same' | 'custom'>('closed');
-  const [holidayHours, setHolidayHours] = useState({ open: '09:00', close: '16:00' });
+  const [holidayMode, setHolidayMode] = useState<'closed' | 'same' | 'custom'>(() => draft.holidayMode ?? 'closed');
+  const [holidayHours, setHolidayHours] = useState(() => ({
+    open: '09:00',
+    close: '16:00',
+    ...(draft.holidayHours ?? {}),
+  }));
 
-  const [deliveryNexg, setDeliveryNexg] = useState<boolean>(true);
-  const [deliveryOwn, setDeliveryOwn] = useState<boolean>(false);
-  const [prepTime, setPrepTime] = useState<string>('30 - 45 minutes');
-  const [deliveryRadius, setDeliveryRadius] = useState<number>(15);
+  const [deliveryNexg, setDeliveryNexg] = useState<boolean>(() => draft.deliveryNexg ?? true);
+  const [deliveryOwn, setDeliveryOwn] = useState<boolean>(() => draft.deliveryOwn ?? false);
+  const [prepTime, setPrepTime] = useState<string>(() => draft.prepTime ?? '30 - 45 minutes');
+  const [deliveryRadius, setDeliveryRadius] = useState<number>(() => draft.deliveryRadius ?? 15);
 
   // Payments
   const [paymentData, setPaymentData] = useState({
@@ -106,7 +160,8 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
     accountNumber: '',
     mpesaTill: '',
     mpesaPaybill: '',
-    mpesaPaybillAcc: ''
+    mpesaPaybillAcc: '',
+    ...(draft.paymentData ?? {}),
   });
 
   // Documents & Branding
@@ -118,13 +173,76 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
   const [bannerPreview, setBannerPreview] = useState<string>('');
 
   // Agreement
-  const [sigMode, setSigMode] = useState<'draw' | 'type'>('draw');
-  const [signatoryName, setSignatoryName] = useState<string>('');
+  const [sigMode, setSigMode] = useState<'draw' | 'type'>(() => draft.sigMode ?? 'draw');
+  const [signatoryName, setSignatoryName] = useState<string>(() => draft.signatoryName ?? '');
   const [termsAccepted, setTermsAccepted] = useState<boolean>(false);
   const [signatureImage, setSignatureImage] = useState<string>('');
 
   // Drawing signature canvas refs
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  /**
+   * Persist the applicant's work as they go.
+   *
+   * A fixed list, deliberately. Spreading all state would make any field added later
+   * persist by default, including transient view state — and the failure mode is a
+   * draft that restores with a modal open and a search term still in the box.
+   *
+   * `termsAccepted`, the signature image and the uploaded documents are NOT here:
+   * consent to terms must be given in the session it applies to, a drawn signature is
+   * an image payload that would exhaust the storage quota, and a File cannot be
+   * serialised at all. The agreement step re-prompts, which is correct.
+   */
+  useEffect(() => {
+    saveDraft({
+      currentStep,
+      selectedCategoryId: selectedCategory?.id ?? null,
+      selectedSubcategoryIds: selectedSubcategories.map((s) => s.id),
+      dynamicFields,
+      selectedCatalogSections,
+      profileData,
+      branches,
+      contactData,
+      operatingDays,
+      hoursMode,
+      globalHours,
+      holidayMode,
+      holidayHours,
+      deliveryNexg,
+      deliveryOwn,
+      prepTime,
+      deliveryRadius,
+      paymentData,
+      sigMode,
+      signatoryName,
+      uploadedFiles,
+      logoPreview,
+    });
+  }, [
+    saveDraft,
+    currentStep,
+    selectedCategory,
+    selectedSubcategories,
+    dynamicFields,
+    selectedCatalogSections,
+    profileData,
+    branches,
+    contactData,
+    operatingDays,
+    hoursMode,
+    globalHours,
+    holidayMode,
+    holidayHours,
+    deliveryNexg,
+    deliveryOwn,
+    prepTime,
+    deliveryRadius,
+    paymentData,
+    sigMode,
+    signatoryName,
+    uploadedFiles,
+    logoPreview,
+  ]);
+
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
 
   // Map initialization ref
