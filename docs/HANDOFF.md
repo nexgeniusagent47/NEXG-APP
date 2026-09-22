@@ -386,19 +386,75 @@ blames the search term rather than the scope.
 
 ---
 
-## 9. Suggested first 30 minutes of v3
+
+## 10. Hardening brief — status at the last session
+
+Nine tracks were requested in one brief. This is the honest state of each, so a
+future session starts from reality rather than from the commit titles.
+
+| # | Track | State |
+| --- | --- | --- |
+| 1 | Image optimisation | **DONE.** 14.05 MB → an 80-variant WebP ladder; a phone fetches the 960 rung and a desktop the 1280, 628 KB vs 708 KB measured |
+| 2 | Route-level code splitting | **DONE.** Initial route JS 585 KB → 76 KB gzipped; 27 lazy routes, `manualChunks` collapses the icon fragmentation |
+| 3 | Category rail + sub-category rail + top filter | **PARTIAL.** Discovery already had all three (docked vertical rail, subcategory chips, sort bar) — see §11 |
+| 4 | Infinite scroll + `image-auto-slider` | **PARTIAL.** Discovery already had IntersectionObserver infinite scroll. `InfiniteMarquee` is built and wired to the sponsored rail; **not browser-verified** |
+| 5 | Deployment / versioning | **DONE.** Dockerfile, Compose, `scripts/release.mjs`, `docs/DEPLOYMENT.md`, `/api/version` |
+| 6 | CI/CD | **DONE.** `.github/workflows/{ci,release}.yml`, dependabot |
+| 7 | Observability | **PARTIAL.** Logs, tracing, metrics, `/api/metrics`, consent, telemetry all shipped and verified at the API. **The dashboard at `?page=metrics` has never been rendered in a browser** |
+| 8 | Session tokens + JWT | **DONE** for the API (13/13 checks). User store is in-process — see §11 |
+| 9 | Onboarding draft caching | **PARTIAL.** `useDraftPersistence` is written and generic; **HostOnboarding still uses its own inline copy and MerchantOnboarding has none** |
+
+### 10.1 The highest-value thing this session found
+
+Installing `@types/react` and `@types/react-dom` turned `tsc --noEmit` from a weak
+check into a real one and immediately exposed **19 live defects**, including:
+
+- **Add-to-cart was dead on five pages.** Restaurants, Spa, Transport, Groceries and
+  Experiences destructured `addItem` from `useCart()`, but the context exports
+  `addToCart` — so the function was `undefined` and clicking threw.
+- **A second break behind it:** `UnifiedItemModal` sent `title`/`totalPrice` while
+  those call sites read `name`/`price`, so every line arrived blank with NaN totals.
+- **Five dead styles** from `class=` instead of `className=`.
+- **The consent banner swallowed clicks** across the full bottom strip of every page.
+
+**Do not remove those two dev dependencies.** Without them `tsc` infers React's types
+from JavaScript, real errors vanish, and the gates report a clean build on a broken
+cart.
+
+## 11. Notes that will save a future session real time
+
+1. **The discovery screen is further along than the brief assumed.** It already has a
+   docked vertical rail, subcategory chips with an `all` option, a region/sort bar and
+   pagination with an IntersectionObserver sentinel. There is no separate "category
+   page" — categories filter the one browse surface. If the brief's category page is
+   still wanted, it is a NEW surface, not a fix to this one.
+2. **`useDraftPersistence` is generic and unused.** Migrating `HostOnboarding` to it
+   means deleting its inline copy (search `loadDraft`/`removeDraft`); adding it to
+   `MerchantOnboarding` is new work. Neither is done.
+3. **The user store is a `Map`.** Auth is complete and verified, but does not survive
+   a restart or scale past one process. The table and `citext` note are in
+   `docs/AUTH.md`; only four functions change.
+4. **Signup returns the verification token.** That is a deliberate placeholder until a
+   mailer exists, and it **must stop** before this is public — returning a verification
+   token to the caller defeats verification.
+5. **`AUTH_SECRET` has no default and the server refuses to boot without it.** That is
+   intentional. Generate one per environment.
+6. **`src/assets/images/` originals are no longer imported** — only the ladder in
+   `public/images/` is. Deleting the originals would break
+   `scripts/build-image-ladder.mjs`, which reads them.
+
+---
+
+## 12. Suggested first 30 minutes of the next session
 
 1. `npm run db:up && npm run server && npm run dev` — confirm the stack runs.
 2. `npm run lint && npm test && npm run test:api && npm run test:flow && npm run test:consistency`
-   — expect **110 assertions** (42 unit, 29 API, 18 flow, 21 consistency).
-3. **Ask the user which hero reveal treatment won (§7.0), delete the other two,
-   commit.** The tree is dirty until this happens, so do it before layering more
-   work on top.
-4. **Give the catalogue real menu sections (§7.1).** This is the highest-value data
-   fix: it replaces a hash with authored taxonomy and makes the merchant menu
-   truthful. Fix the doubled-modifier item names in the same pass (§7.2).
-5. Raise `SQL_ITEM_LIMIT` in `scripts/regenerate_catalog_seed.py`, regenerate,
-   re-apply, and confirm `/api/health` reports a much larger `totalItems`.
-6. Pick one static vertical (`Restaurants.tsx` is the largest) and migrate it to
-   `/api/merchants?category=restaurants-food`, using the discovery screen as the
-   worked example.
+   — expect **113 assertions** (42 unit, 29 API, 18 flow, 24 consistency).
+3. **Render `?page=metrics` in a browser.** It is the one shipped surface never
+   verified visually; it only populates when the API is answering.
+4. **Finish the draft caching (§10 row 9)** — migrate `HostOnboarding` off its inline
+   copy and add `useDraftPersistence` to `MerchantOnboarding`. The hook is written and
+   generic; this is wiring.
+5. **Give the catalogue real menu sections (§7.1).** Still the highest-value data fix:
+   it replaces a hash with authored taxonomy and makes the merchant menu truthful.
+6. Ask which hero reveal treatment won (§7.0) and delete the other two.
