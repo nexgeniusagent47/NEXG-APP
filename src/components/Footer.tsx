@@ -14,7 +14,7 @@ export default function Footer({ onNavigate }: FooterProps) {
 
   return (
     <footer
-      className={`pt-16 sm:pt-24 pb-12 px-6 sm:px-8 xl:px-16 border-t transition-colors duration-300 ${
+      className={`pt-16 sm:pt-24 pb-safe px-6 sm:px-8 xl:px-16 px-safe border-t transition-colors duration-300 ${
         isLight
           ? 'bg-slate-100 text-slate-800 border-slate-200'
           : 'bg-[#0e1012] text-[#f2f2f2] border-white/10'

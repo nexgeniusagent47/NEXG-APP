@@ -30,7 +30,8 @@ export default function FloatingCartBar() {
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: 80, opacity: 0 }}
         transition={{ type: 'spring', damping: 24, stiffness: 280 }}
-        className="fixed bottom-5 left-0 right-0 z-40 px-4 max-w-xl mx-auto pointer-events-none"
+        className="fixed left-0 right-0 z-40 px-4 max-w-xl mx-auto pointer-events-none"
+        style={{ bottom: 'calc(1.25rem + env(safe-area-inset-bottom, 0px))' }}
       >
         <button
           type="button"

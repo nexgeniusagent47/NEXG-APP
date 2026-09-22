@@ -690,3 +690,50 @@ html.light .hero-wipe__support {
   }
 }
 
+
+/* ---------------------------------------------------------------------------
+   Safe areas
+
+   A phone's usable screen is not its full screen. The home indicator occupies roughly the
+   bottom 34px on a modern iPhone and the notch or Dynamic Island occupies the top, and with
+   `viewport-fit=cover` set in index.html the layout is allowed to extend under both. That is
+   the right behaviour — a coloured bar should reach the physical edge — but it means anything
+   the user must SEE or TAP has to be inset back out.
+
+   Measured before this existed: the footer used `pb-12` (48px), of which the home indicator
+   took about 34px, leaving 14px of real breathing room. That is the "everything is too
+   cramped at the bottom" the user reported, and on the narrowest phones it is worse because
+   the same 48px is a larger fraction of a shorter screen.
+
+   `env()` falls back to 0 on devices without an inset, so these are safe everywhere; the
+   `max()` guards against a browser reporting an inset smaller than the design's own minimum.
+   --------------------------------------------------------------------------- */
+
+:root {
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+
+/* For the last block on a page: the design's own padding PLUS whatever the hardware takes. */
+.pb-safe {
+  padding-bottom: calc(3rem + var(--safe-bottom));
+}
+
+/* For the viewport edges, where the inset replaces padding rather than adding to it. */
+.px-safe {
+  padding-left: max(1rem, var(--safe-left));
+  padding-right: max(1rem, var(--safe-right));
+}
+
+/* For a fixed bar sitting on the bottom edge: it needs its own height plus the inset, or the
+   hardware covers the bottom of the bar's contents. */
+.pb-safe-bar {
+  padding-bottom: max(0.75rem, var(--safe-bottom));
+}
+
+/* Anything pinned to the bottom edge must lift clear of the indicator AND of the cart bar. */
+.bottom-safe {
+  bottom: calc(var(--safe-bottom) + 0.5rem);
+}

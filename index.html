@@ -2,7 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- `viewport-fit=cover` is REQUIRED for safe-area insets to work at all.
+         Without it `env(safe-area-inset-bottom)` resolves to 0 on every device, so the app
+         cannot avoid the home indicator or the notch no matter what CSS asks for. This is the
+         switch that makes the insets available; the CSS consumes them. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>NEXG App</title>
     <meta name="description" content="On-demand luxury concierge & gourmet discovery with NEXG bespoke experience and PostgreSQL database." />
     <meta property="og:title" content="NEXG App" />
@@ -29,6 +33,9 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+<!-- impeccable-live-start -->
+<script src="http://localhost:8400/live.js?token=05f81c07-60f1-4e28-92f4-261ea63fadd5"></script>
+<!-- impeccable-live-end -->
 </body>
 </html>
 
