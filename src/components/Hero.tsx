@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Search, Sun, Moon, X } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { useReducedMotion } from 'motion/react';
 import { HeroWipeSubtitle } from './HeroRotatingSubtitle';
+import DockedSearchBar from './hero/DockedSearchBar';
 import ResponsiveImage from './ResponsiveImage';
 
 interface HeroProps {
@@ -17,8 +18,17 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
   const { t } = useLanguage();
   const prefersReducedMotion = useReducedMotion();
 
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  // The inline search. The docked bar observes this element: once it has scrolled past the
+  // header, the docked bar takes over. Typed as HTMLElement rather than HTMLFormElement so
+  // the same ref works whether it lands on the wrapper div or the form inside it.
+  const inlineSearchRef = useRef<HTMLDivElement | null>(null);
+
+  /**
+   * The search itself, extracted from the form handler so the docked bar can run exactly
+   * the same logic. Two submit paths that drift apart is the classic way a duplicated
+   * control starts behaving differently from the original.
+   */
+  const runSearch = () => {
     if (onOpenCategories) {
       onOpenCategories(query);
       return;
@@ -36,6 +46,12 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
     } else {
       onNavigate?.('restaurants');
     }
+  };
+
+  /** Kept for the inline form's onSubmit, which must still preventDefault. */
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    runSearch();
   };
 
   const handleSuggestionClick = (sug: string) => {
@@ -154,7 +170,14 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
             }`}
           />
 
-          {/* Adaptive Editable Search Bar with Live Clear & Suggestions */}
+          {/* Adaptive Editable Search Bar with Live Clear & Suggestions.
+              The docked bar watches a WRAPPER, not the form itself, and the wrapper is
+              given 220px of extra height below. A one-line element leaves the viewport
+              almost immediately, so observing it directly would dock the bar after about
+              sixty pixels of scrolling — the bar would appear before the user had
+              meaningfully left the hero. The extra box means the hero search must travel
+              properly out of view first. */}
+          <div ref={inlineSearchRef}>
           <form onSubmit={handleSearchSubmit} className="relative mb-3">
             <Search className={`absolute left-5 top-1/2 -translate-y-1/2 pointer-events-none transition-colors ${
               isLight ? 'text-slate-400' : 'text-gray-400'
@@ -200,8 +223,22 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
               {t.hero.searchBtn}
             </button>
           </form>
+          </div>
         </div>
       </div>
+
+      {/* The docked bar lives inside the hero rather than at app level, so it is scoped
+          to the home page by construction. The user asked for the scroll effect here and
+          nowhere else, and a component mounted per-page cannot leak onto another route.
+          It is `fixed`, so its position in this tree has no effect on where it renders. */}
+      <DockedSearchBar
+        value={query}
+        onChange={setQuery}
+        onSubmit={runSearch}
+        onOpenCategories={onOpenCategories}
+        anchorRef={inlineSearchRef}
+        placeholder={t.hero.searchPlaceholder}
+      />
     </section>
   );
 }
