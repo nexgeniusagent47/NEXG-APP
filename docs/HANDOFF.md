@@ -251,6 +251,24 @@ re-measured since.
    are erasures. When adding server code, always run `node server/index.ts` and
    confirm it boots; `tsc --noEmit` will pass on code that cannot run.
 
+8. **A font added to `public/` while the dev server is running is NOT served.**
+   Vite builds its public-directory index at startup. A newly added file then returns
+   the **SPA fallback**: status 200, `content-type: text/html`, ~1370 bytes — for a
+   file that exists on disk with valid magic bytes. Because the response is a 200 this
+   looks like success everywhere except the browser, where the font silently falls back
+   and `document.fonts.load()` throws a NetworkError.
+
+   **This has now bitten twice** (Cooper, then Quicksand). After adding or replacing
+   anything under `public/`, restart the dev server. The diagnosis that always works:
+   compare the response for the real path against one you know is missing —
+   byte-identical responses mean the fallback is answering both.
+
+   Corollary: when a font looks applied, **measure it**. A family name in computed
+   style only means the stack was consulted. `document.fonts.load()` plus a width
+   comparison against a fallback is what proves the glyphs are the intended face —
+   Quicksand's headings measured "distinct from system sans" while actually rendering
+   Adventor.
+
 ---
 
 ## 6. The catalogue is generated, not authored
