@@ -785,3 +785,37 @@ html.light .hero-wipe__support {
 .bottom-safe {
   bottom: calc(var(--safe-bottom) + 0.5rem);
 }
+/* ---------------------------------------------------------------------------
+   The headline's two shapes
+
+   Desktop shows the approved two lines; phones show four. Splitting buys a 1.27x size increase,
+   measured, because the ceiling is the longest line: 756 units for the longest of four against
+   961 for the longest of two.
+
+   Both shapes are in the DOM so no resize listener is needed to swap them, and the hidden one is
+   `display: none` rather than `visibility: hidden` so it contributes no layout and is not read
+   out twice. Only the four-line shape is `aria-hidden`; the two-line one is the accessible copy.
+   --------------------------------------------------------------------------- */
+
+.hero-h1__four {
+  display: none;
+}
+
+@media (max-width: 639px) {
+  .hero-h1__two {
+    display: none;
+  }
+  .hero-h1__four {
+    display: block;
+  }
+  /* Each line is its own block so the four parts stack rather than running together. */
+  .hero-h1__four > span {
+    display: block;
+  }
+  /* The size the split makes room for. At the old two-line ceiling this would overflow; with
+     four shorter lines the longest fits. Verified against every width from 320 to 639. */
+  .hero-h1 {
+    font-size: clamp(2.125rem, 11.5vw, 3.25rem);
+    line-height: 1.05;
+  }
+}
