@@ -34,7 +34,31 @@
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
 <!-- impeccable-live-start -->
-<script src="http://localhost:8400/live.js?token=05f81c07-60f1-4e28-92f4-261ea63fadd5"></script>
+<!--
+  Impeccable live mode, LOADED ONLY IN THE TAB THAT ASKS FOR IT.
+
+  This was an unconditional <script src="http://localhost:8400/live.js?...">. The device room
+  loads 30 iframes of this page, so thirty copies of the editing overlay loaded inside it, and
+  whichever lost the race rendered the toolbar shell instead of the app — frames came back empty
+  and pale while the app itself was fine.
+
+  Guarded on `?live=1` so the two can coexist: add the parameter to the tab you want to edit in,
+  and every other consumer of this page — the device room's frames, the audit's own browser,
+  screenshots — gets the real application with nothing injected.
+
+  The token stays in the block because the Impeccable tooling reads and rewrites it. The build
+  strips this whole range, so none of it reaches production.
+-->
+<script>
+  (function () {
+    var params = new URLSearchParams(window.location.search);
+    // `live=1` on this tab only. A frame inside the room never carries it.
+    if (params.get('live') !== '1') return;
+    var s = document.createElement('script');
+    s.src = 'http://localhost:8400/live.js?token=05f81c07-60f1-4e28-92f4-261ea63fadd5';
+    document.body.appendChild(s);
+  })();
+</script>
 <!-- impeccable-live-end -->
 </body>
 </html>

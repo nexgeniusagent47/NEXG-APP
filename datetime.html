@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>NEXG App - date and time controls</title>
+    <!--
+      A component gallery for date/time controls, reachable at /datetime.html.
+
+      WHY THIS PAGE EXISTS. The control is used deep inside a 7-step onboarding wizard
+      and inside the booking sheet, so before this page the only way to see it, compare
+      its modes, or check its keyboard and constraint behaviour was to complete a form.
+      Anything that cannot be looked at cannot be reviewed, and a control nobody reviews
+      is where the defects live.
+
+      It is a real page in this app rather than a mock: it mounts the same providers, the
+      same ThemeContext and the same stylesheet, so what it renders is what ships. It is
+      also the surface scripts/_verify-datetime-field.mjs drives.
+
+      It is NOT part of the product. Vite builds only index.html into dist/, so this file
+      is a development surface and is never served in production. Do not add a link to it
+      from the app.
+    -->
+    <link rel="stylesheet" href="/src/index.css" />
+  </head>
+  <body>
+    <div id="datetime-gallery"></div>
+    <script type="module" src="/src/datetime-gallery.tsx"></script>
+  </body>
+</html>

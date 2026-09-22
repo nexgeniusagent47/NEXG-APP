@@ -245,16 +245,28 @@ main {
 }
 
 .frame {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: border-color 180ms ease-out;
-  /* The card is exactly as wide as its phone, never wider. Without this the card stretches to
-     its flex line and the difference between card and phone shows as a dark strip down the
-     right edge — the reported defect. */
+  /* BARE. No card, no border, no radius, no header.
+     The user asked for "only the device proportions and its exact screen" — a frame is the
+     phone and nothing around it. The card background was #181a1f, which on a dark page read as
+     a black rectangle the size of the layout box rather than the size of the device, so a 270px
+     phone sat inside a 300px dark block and the extra 30px looked like part of the screen.
+     That is the "black background thing" being reported, and removing it means the only dark
+     area on screen is the device itself. */
+  background: none;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
   width: max-content;
   flex: 0 0 auto;
+}
+
+
+/* A hairline outline so a device whose screen is dark does not bleed into a dark page. It is
+   1px on the device's own edge, not a box around it, so it does not affect the proportions. */
+.frame__box {
+  outline: 1px solid rgb(255 255 255 / 0.14);
+  outline-offset: 0;
+  border-radius: 2px;
 }
 
 .frame[data-state='broken'] {
@@ -265,13 +277,13 @@ main {
   border-color: rgb(52 211 153 / 0.32);
 }
 
+/* The per-frame header is hidden, and this rule is the one that decides it.
+   An earlier attempt added a `display: none` block above this one and it had no effect, because
+   this block comes later in the file and CSS resolves equal specificity by source order. The
+   measurement caught it — the header still reported `display: flex` — which is the reason the
+   verification compares computed style rather than trusting that an edit took. */
 .frame__head {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 9px 11px;
-  border-bottom: 1px solid var(--line);
-  background: #1b1e24;
+  display: none;
 }
 
 .frame__name {
