@@ -267,6 +267,27 @@ await grantConsent(context, BASE);
   console.log(`        persisted cart lines: ${persisted.length} (qty ${persisted[0]?.quantity ?? 0})`);
   check('a completed line is persisted to the cart', persisted.length > 0);
 
+  // A line that EXISTS but carries an undefined name or price is still a broken cart:
+  // it renders blank and its totals come out NaN. The previous assertion only checked
+  // length, so a whole class of defect passed this suite — the modal used to send
+  // `title`/`totalPrice` while the cart read `name`/`price`, and nothing caught it.
+  const line = persisted[0] ?? {};
+  check(
+    'the persisted line has a real name',
+    typeof line.name === 'string' && line.name.trim().length > 0
+  );
+  check(
+    'the persisted line has a positive numeric price',
+    typeof line.price === 'number' && Number.isFinite(line.price) && line.price > 0
+  );
+  check(
+    'the persisted line has a finite line total',
+    typeof line.itemTotal === 'number' && Number.isFinite(line.itemTotal) && line.itemTotal > 0
+  );
+  console.log(
+    `        line: name=${JSON.stringify(line.name)} price=${line.price} qty=${line.quantity} itemTotal=${line.itemTotal}`
+  );
+
   await page.goto(BASE, { waitUntil: 'domcontentloaded' });
   await settle(page, 1800);
   const badge = ((await page.locator('button[aria-label="View Cart"]').first().textContent().catch(() => '')) ?? '').trim();
