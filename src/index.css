@@ -243,7 +243,14 @@ html.dark {
 
 @media (min-width: 1024px) {
   .hero-copy {
-    max-width: 46rem;
+    /* 54rem, not 46rem. Line 1 of the headline is `nowrap` and needs about 840px at its 88px
+       ceiling, so a 736px column made it paint outside its own box — 104px of overflow at
+       1440px. The column is widened to 864px, which clears the requirement with room for the
+       letter-spacing rather than sitting exactly on the boundary.
+
+       Widening rather than shrinking the type: the user said desktop is perfect, so the
+       headline stays the size they approved and the container moves instead. */
+    max-width: 54rem;
   }
 }
 
@@ -495,6 +502,35 @@ html {
 .no-scrollbar {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+/*
+  The page scrollbar, hidden.
+
+  This is not only a visual preference. EVERY target device for this product is a phone or a
+  tablet, and neither iOS nor Android draws a persistent scrollbar on a page — the indicator
+  is a transient overlay that fades. So a 15px gutter down the right edge is an artefact of
+  viewing the app in a desktop browser, and it is widest exactly where it does the most harm:
+  on a 320px screen it takes 5% of the width and makes a correct layout look cramped.
+
+  It also made the device room lie. Each frame rendered a scrollbar the real device would
+  never show, which is why every phone in the room had a stripe down its right edge. The
+  frames are cross-origin, so the room cannot style inside them — the only place to fix it is
+  here, at the source, which is where it belongs anyway.
+
+  Hide only the PAGE scrollbar. Horizontal rails keep their behaviour, and anything that
+  genuinely needs a visible scrollbar can still opt in with `.no-scrollbar` removed.
+*/
+html {
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* legacy Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;                /* Chrome, Safari, and the Edge that matters */
 }
 
 /* ---------------------------------------------------------------------------
