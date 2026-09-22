@@ -561,7 +561,16 @@ export default function MetricsDashboard() {
   const errorRate = requests?.errorRate ?? 0;
 
   return (
-    <div className="onboarding-theme min-h-screen bg-slate-50 px-4 py-8 text-slate-900 sm:px-6 lg:px-8">
+    // `pt-28` (112px) rather than `py-8`, because the site header is FIXED and is 107px
+    // tall at this breakpoint. `<main>` in App.tsx carries only `flex-grow`, so a page
+    // that does not clear the header itself renders underneath it: the "Service metrics"
+    // heading was clipped in half in the browser.
+    //
+    // The bottom stays at 32px; only the top needs the offset. Pages with no top padding
+    // are unaffected, which is deliberate — this is a local fix rather than a change to
+    // the shared wrapper, because eleven components already compensate for the header
+    // individually and altering the wrapper would shift all of them at once.
+    <div className="onboarding-theme min-h-screen bg-slate-50 px-4 pt-28 pb-8 text-slate-900 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
         <header className="flex flex-wrap items-end justify-between gap-3">
           <div>
