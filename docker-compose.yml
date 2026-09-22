@@ -67,6 +67,15 @@ services:
       # DOCUMENTED PORT MAPPING — host 3001 → container 3001.
       # This single port serves the API and the built SPA.
       PORT: "3001"
+      # `${AUTH_SECRET:?...}` is REQUIRED-on-pain-of-failure, not a default. The server
+      # calls assertAuthConfigured() during boot and throws — verified by running the
+      # built image with no secret:
+      #   Error: AUTH_SECRET must be set to at least 32 characters.
+      #       at assertAuthConfigured (server/auth/crypto.ts:165)
+      # A plain `${AUTH_SECRET}` would pass that failure through to the container, where
+      # it becomes a restart loop whose cause is buried in `docker compose logs`. Failing
+      # here instead stops the deploy immediately and names the missing variable.
+      AUTH_SECRET: "${AUTH_SECRET:?AUTH_SECRET is required. Generate one with: node -e \"console.log(require('node:crypto').randomBytes(32).toString('base64url'))\"}"
       # The service name is the hostname inside the compose network, which is why
       # this is set here rather than inherited from .env: the `.env` value points
       # at 127.0.0.1:5433 for a server running on the host, and that address is
