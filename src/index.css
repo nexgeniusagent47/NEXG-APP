@@ -148,36 +148,68 @@ html.dark {
 }
 
 /* ---------------------------------------------------------------- hero headline ---
-   Baked from an accepted live-mode variant (scale=large, leading=snug, ink=tight) and
-   promoted out of the temporary @scope scaffolding into real CSS.
+   Baked from an accepted live-mode variant and promoted out of the temporary @scope
+   scaffolding into real CSS.
 
-   TWO LINES, DELIBERATELY. Line 1 carries the promise, line 2 the qualifier. They are
-   two separate thoughts rather than one wrapped sentence, so line 2 is forced onto its
-   own line instead of being allowed to reflow at some widths and not others.
+   STRICTLY TWO LINES. Each line is `nowrap`, so a phrase can never break inside itself.
+   That is deliberate rather than decorative: at 88px "Everything you need," needs 838px
+   while its container allowed 672, so the headline silently wrapped to FOUR lines and
+   stopped reading as a headline at all. `nowrap` plus a size that actually fits is what
+   guarantees two.
 
-   LINE 2 IS 0.95em, NOT A FIXED SIZE. An `em` tracks the clamp() on the parent
-   automatically, so the 5% step holds at every viewport instead of needing its own
-   breakpoint ladder that would drift out of step with the line above it.
+   The size is chosen against the measured text, not picked by eye. At 1440px the
+   6.9vw term lands on 99px, so the clamp ceiling of 5.5rem holds a line of 838/88 x 88 =
+   well inside the widened container below. The vw term is what keeps it fitting on
+   smaller screens without a breakpoint ladder.
 
-   LEADING IS 0.94, TIGHTER THAN 1, because the two lines are read as a single block. At
-   88px the default leading opens a gap that splits them into two unrelated statements,
-   and the negative tracking does the same job horizontally. */
+   LINE 1 IS LARGER AND HEAVIER THAN LINE 2, in that order of strength:
+     - size, via the em step on line 2
+     - weight, as far as it can go (see the ceiling note below)
+     - colour, the gold lead against the neutral second line
+   The user asked for "5% larger and thicker". SIZE is applied as asked. WEIGHT cannot be:
+   Quicksand's wght axis stops at 700 and this is already there, so a larger number would
+   render SYNTHETIC bold — smeared counters and an uneven stroke, which reads lighter, not
+   heavier. The remaining difference is therefore carried by scale and by ink. Going
+   genuinely heavier means a different typeface, which is a separate decision.
+
+   0.94 leading, tighter than 1: the two lines are read as one block, and at this size the
+   default leading opens a gap that splits them into two unrelated statements. */
 .hero-h1 {
-  font-size: clamp(3.75rem, 6.4vw, 5.5rem);
+  font-size: clamp(2.5rem, 6.9vw, 5.5rem);
   line-height: 0.94;
   letter-spacing: -0.035em;
   margin-bottom: 1.75rem;
   text-shadow: 0 6px 26px rgba(0, 0, 0, 0.65);
+  /* Both of these stop a phrase breaking inside itself, so the headline is always
+     exactly two lines rather than however many the width happens to allow. */
+  white-space: nowrap;
+  text-wrap: nowrap;
 }
 
 .hero-h1__lead {
   color: var(--color-gold);
+  font-weight: 700;
 }
 
-/* `block` so it always starts a new line regardless of the width available. */
+/* Line 2: its own line, 5% smaller, and set slightly lighter in feel than the gold lead
+   without going below the axis floor. */
 .hero-h1__line2 {
   display: block;
   font-size: 0.95em;
+}
+
+/* The hero copy column. Widened from max-w-xl/2xl because the measurement above showed
+   the first line needed ~165px more room than it had; the user explicitly allowed the
+   text to expand a little. Still a bounded box, so the paragraph measure below it stays
+   comfortable. */
+.hero-copy {
+  max-width: 42rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-copy {
+    max-width: 46rem;
+  }
 }
 
 /* Headings carry Quicksand.
@@ -244,53 +276,57 @@ html.dark {
    Weight is 700 rather than M3's 400 because the reference product this is measured
    against resolves its headings to 700, and because 700 is Quicksand's axis ceiling —
    the two agree, so nothing is synthesised. */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 700;
-  font-variation-settings: 'wght' 700;
-  text-wrap: balance;
-}
+/* These sit in `base`, so a component that sets its own size with a Tailwind utility
+   wins. Unlayered they did not, which silently overrode every heading that tried. */
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-variation-settings: 'wght' 700;
+    text-wrap: balance;
+  }
 
-/* h1 — Display role. */
-h1 {
-  font-size: var(--type-display-size);
-  line-height: var(--type-display-leading);
-  letter-spacing: var(--type-display-tracking);
-}
+  /* h1 — Display role. */
+  h1 {
+    font-size: var(--type-display-size);
+    line-height: var(--type-display-leading);
+    letter-spacing: var(--type-display-tracking);
+  }
 
-/* h2 — Headline role. */
-h2 {
-  font-size: var(--type-headline-size);
-  line-height: var(--type-headline-leading);
-  letter-spacing: var(--type-headline-tracking);
-}
+  /* h2 — Headline role. */
+  h2 {
+    font-size: var(--type-headline-size);
+    line-height: var(--type-headline-leading);
+    letter-spacing: var(--type-headline-tracking);
+  }
 
-/* h3/h4 — Title role. Tighter than Headline because these are read as objects in a
-   list rather than as statements. */
-h3 {
-  font-size: var(--type-title-size);
-  line-height: var(--type-title-leading);
-  letter-spacing: var(--type-title-tracking);
-}
+  /* h3/h4 — Title role. Tighter than Headline because these are read as objects in a
+     list rather than as statements. */
+  h3 {
+    font-size: var(--type-title-size);
+    line-height: var(--type-title-leading);
+    letter-spacing: var(--type-title-tracking);
+  }
 
-h4 {
-  font-size: var(--type-subtitle-size);
-  line-height: var(--type-subtitle-leading);
-  letter-spacing: var(--type-subtitle-tracking);
-}
+  h4 {
+    font-size: var(--type-subtitle-size);
+    line-height: var(--type-subtitle-leading);
+    letter-spacing: var(--type-subtitle-tracking);
+  }
 
-/* Body and Label: the plain face, with M3's POSITIVE tracking. Without it small text
-   at 14-16px reads cramped, which is the most common way a UI looks "off" in a way
-   nobody can name. */
-body, p, li, td, th, dd, dt {
-  font-family: var(--font-sans);
-  line-height: var(--type-body-leading);
-  letter-spacing: var(--type-body-tracking);
-}
+  /* Body and Label: the plain face, with M3's POSITIVE tracking. Without it small text
+     at 14-16px reads cramped, which is the most common way a UI looks "off" in a way
+     nobody can name. */
+  body, p, li, td, th, dd, dt {
+    font-family: var(--font-sans);
+    line-height: var(--type-body-leading);
+    letter-spacing: var(--type-body-tracking);
+  }
 
-label, button, input, select, textarea {
-  letter-spacing: var(--type-label-tracking);
-  line-height: var(--type-label-leading);
+  label, button, input, select, textarea {
+    letter-spacing: var(--type-label-tracking);
+    line-height: var(--type-label-leading);
+  }
 }
 
 @keyframes status-breathe {

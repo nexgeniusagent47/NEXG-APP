@@ -108,7 +108,15 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer, twoPerScreen = true
 
             <h3
               className={cn(
-                "h-10 text-sm sm:text-base font-bold line-clamp-2 leading-snug transition-colors",
+                // `h-10` (40px) clipped a two-line title at 16px, so the box now grows
+                // with its content rather than cropping it — a min-height keeps the rail
+                // even while letting a long name breathe. The user asked for exactly
+                // this: expand a little, do not break the row.
+                //
+                // Until the typography rules moved into `@layer base`, this element's
+                // `text-sm sm:text-base` was silently ignored and it rendered at 22px
+                // from the global h3 default.
+                "min-h-11 text-base font-bold line-clamp-2 leading-snug transition-colors",
                 isLight
                   ? "text-slate-900 group-hover:text-[#B88728]"
                   : "text-white group-hover:text-[#E5B65F]"

@@ -117,7 +117,7 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
       </div>
 
       <div className="container mx-auto max-w-[1400px] relative z-20 flex flex-col justify-center flex-1">
-        <div className="max-w-xl lg:max-w-2xl mt-auto sm:mt-0 mb-8 sm:mb-0">
+        <div className="hero-copy mt-auto sm:mt-0 mb-8 sm:mb-0">
           
           {/* Hero headline. Values baked from the accepted live-mode variant:
               scale=large, leading=snug, ink=tight. The @scope scaffolding and the
