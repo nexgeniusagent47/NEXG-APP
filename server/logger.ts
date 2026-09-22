@@ -223,7 +223,17 @@ export function getLogContext(): LogBindings | undefined {
 const RESERVED = new Set(['timestamp', 'level', 'msg', 'message']);
 
 export class Logger {
-  constructor(private readonly bindings: LogBindings = {}) {}
+  // Declared and assigned explicitly rather than as a constructor parameter property.
+  // Node 24 executes TypeScript in strip-only mode: it erases types but cannot
+  // TRANSFORM syntax, and a parameter property is a transform. Writing
+  // `constructor(private readonly bindings: ...)` crashes the server on boot with
+  // ERR_UNSUPPORTED_TYPESCRIPT_SYNTAX, which is exactly what happened here. The same
+  // restriction rules out enums, namespaces and decorators in server/ code.
+  private readonly bindings: LogBindings;
+
+  constructor(bindings: LogBindings = {}) {
+    this.bindings = bindings;
+  }
 
   /** A logger that always carries `bindings`, without mutating this one. */
   child(bindings: LogBindings): Logger {
