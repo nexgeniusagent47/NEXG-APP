@@ -114,40 +114,40 @@ export default function TransportBookingModal({
           initial={{ opacity: 0, scale: 0.95, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
-          className="relative w-full max-w-2xl bg-[#141618] border border-white/15 rounded-3xl shadow-2xl overflow-hidden flex flex-col my-auto max-h-[92vh] text-white"
+          className="onboarding-theme relative w-full max-w-2xl bg-white border border-slate-200 rounded-3xl shadow-2xl overflow-hidden flex flex-col my-auto max-h-[92vh] text-white"
         >
           {/* Header Banner */}
           <div className="relative h-44 bg-cover bg-center flex-shrink-0" style={{ backgroundImage: `url(${vehicle.image})` }}>
             <div className="absolute inset-0 bg-gradient-to-t from-[#141618] via-[#141618]/70 to-transparent" />
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-md border border-white/20 transition-colors cursor-pointer"
+              className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-md border border-slate-300 transition-colors cursor-pointer"
             >
               <X size={18} />
             </button>
 
             <div className="absolute bottom-4 left-6 right-6 z-10">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#E5B65F]/20 text-[#E5B65F] border border-[#E5B65F]/30 text-xs font-semibold mb-1 backdrop-blur-md">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold/20 text-gold border border-gold/30 text-xs font-semibold mb-1 backdrop-blur-md">
                 <Sparkles size={12} />
                 <span>VIP Concierge Mobility</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">{vehicle.name}</h2>
-              <div className="flex items-center gap-4 text-xs text-gray-300 mt-0.5">
+              <div className="flex items-center gap-4 text-xs text-slate-600 mt-0.5">
                 <span className="flex items-center gap-1"><Users size={12} /> {vehicle.passengers} Guests</span>
                 <span className="flex items-center gap-1"><Briefcase size={12} /> {vehicle.luggage} Luggage</span>
-                <span className="text-[#E5B65F] font-bold">★ {vehicle.driverRating}</span>
+                <span className="text-gold font-bold">★ {vehicle.driverRating}</span>
               </div>
             </div>
           </div>
 
           {/* Stepper Indicator */}
           {step < 3 && (
-            <div className="flex items-center justify-between px-6 py-2.5 bg-[#1a1d20] border-b border-white/10 text-xs text-gray-400">
-              <span className={step === 1 ? 'text-[#E5B65F] font-bold' : 'text-gray-400'}>
+            <div className="flex items-center justify-between px-6 py-2.5 bg-slate-50 border-b border-slate-200 text-xs text-slate-500">
+              <span className={step === 1 ? 'text-gold font-bold' : 'text-slate-500'}>
                 1. Service & Itinerary
               </span>
               <ChevronRight size={14} />
-              <span className={step === 2 ? 'text-[#E5B65F] font-bold' : 'text-gray-400'}>
+              <span className={step === 2 ? 'text-gold font-bold' : 'text-slate-500'}>
                 2. Amenities & Guest
               </span>
             </div>
@@ -158,7 +158,7 @@ export default function TransportBookingModal({
             {step === 1 && (
               <div className="space-y-5">
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-2">
+                  <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">
                     Service Type
                   </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
@@ -173,12 +173,12 @@ export default function TransportBookingModal({
                         onClick={() => setServiceType(s.key as any)}
                         className={`p-3 rounded-2xl border text-center transition cursor-pointer ${
                           serviceType === s.key
-                            ? 'bg-[#E5B65F]/15 border-[#E5B65F] text-white shadow-md'
-                            : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
+                            ? 'bg-gold/15 border-gold text-white shadow-md'
+                            : 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-100'
                         }`}
                       >
                         <div className="text-xs font-bold">{s.label}</div>
-                        <div className="text-xs text-[#E5B65F] font-semibold mt-0.5">{s.badge}</div>
+                        <div className="text-xs text-gold font-semibold mt-0.5">{s.badge}</div>
                       </button>
                     ))}
                   </div>
@@ -186,7 +186,7 @@ export default function TransportBookingModal({
 
                 {serviceType === 'hourly_chauffeur' && (
                   <div>
-                    <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
                       Dedicated Chauffeur Hours
                     </label>
                     <div className="flex gap-2">
@@ -197,8 +197,8 @@ export default function TransportBookingModal({
                           onClick={() => setHours(h)}
                           className={`flex-1 py-2 rounded-xl text-xs font-bold border transition-colors ${
                             hours === h
-                              ? 'bg-[#E5B65F] text-black border-[#E5B65F]'
-                              : 'bg-white/5 text-gray-300 border-white/10 hover:bg-white/10'
+                              ? 'bg-gold text-slate-950 border-gold'
+                              : 'bg-slate-100 text-slate-600 border-slate-200 hover:bg-slate-100'
                           }`}
                         >
                           {h}h
@@ -210,36 +210,36 @@ export default function TransportBookingModal({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-1.5 flex items-center gap-1">
-                      <MapPin size={13} className="text-[#E5B65F]" />
+                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5 flex items-center gap-1">
+                      <MapPin size={13} className="text-gold" />
                       <span>Pickup Location</span>
                     </label>
                     <input
                       type="text"
                       value={pickupLocation}
                       onChange={(e) => setPickupLocation(e.target.value)}
-                      className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-[#E5B65F] outline-none"
+                      className="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-gold outline-none"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-1.5 flex items-center gap-1">
-                      <Navigation size={13} className="text-[#E5B65F]" />
+                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5 flex items-center gap-1">
+                      <Navigation size={13} className="text-gold" />
                       <span>Destination</span>
                     </label>
                     <input
                       type="text"
                       value={dropoffLocation}
                       onChange={(e) => setDropoffLocation(e.target.value)}
-                      className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-[#E5B65F] outline-none"
+                      className="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-gold outline-none"
                     />
                   </div>
                 </div>
 
                 {serviceType === 'airport_transfer' && (
                   <div>
-                    <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-1.5 flex items-center gap-1">
-                      <Plane size={13} className="text-[#E5B65F]" />
+                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5 flex items-center gap-1">
+                      <Plane size={13} className="text-gold" />
                       <span>Flight Number / Departure Code</span>
                     </label>
                     <input
@@ -247,20 +247,20 @@ export default function TransportBookingModal({
                       value={flightNumber}
                       onChange={(e) => setFlightNumber(e.target.value)}
                       placeholder="e.g. EK 704 or VistaJet VJT-89"
-                      className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-[#E5B65F] outline-none"
+                      className="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-gold outline-none"
                     />
                   </div>
                 )}
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
                       Schedule Date
                     </label>
                     <select
                       value={bookingDate}
                       onChange={(e) => setBookingDate(e.target.value)}
-                      className="w-full bg-[#181a1d] border border-white/15 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-white focus:border-[#E5B65F] outline-none"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-white focus:border-gold outline-none"
                     >
                       <option value="Today">Today</option>
                       <option value="Tomorrow">Tomorrow</option>
@@ -269,14 +269,14 @@ export default function TransportBookingModal({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
                       Pickup Time
                     </label>
                     <input
                       type="text"
                       value={bookingTime}
                       onChange={(e) => setBookingTime(e.target.value)}
-                      className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-[#E5B65F] outline-none"
+                      className="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-gold outline-none"
                     />
                   </div>
                 </div>
@@ -286,7 +286,7 @@ export default function TransportBookingModal({
             {step === 2 && (
               <div className="space-y-5">
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-2">
+                  <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">
                     Complimentary On-Board Amenities
                   </h3>
                   <div className="space-y-2">
@@ -304,17 +304,17 @@ export default function TransportBookingModal({
                           onClick={() => toggleAmenity(amenity)}
                           className={`flex items-center justify-between p-3 rounded-xl border cursor-pointer transition-colors ${
                             isSelected
-                              ? 'bg-[#E5B65F]/15 border-[#E5B65F] text-white'
-                              : 'bg-white/5 border-white/10 text-gray-300 hover:bg-white/10'
+                              ? 'bg-gold/15 border-gold text-white'
+                              : 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-100'
                           }`}
                         >
                           <span className="text-xs sm:text-sm">{amenity}</span>
                           <div
                             className={`w-4 h-4 rounded-md border flex items-center justify-center ${
-                              isSelected ? 'bg-[#E5B65F] border-[#E5B65F] text-black' : 'border-gray-500'
+                              isSelected ? 'bg-gold border-gold text-slate-950' : 'border-gray-500'
                             }`}
                           >
-                            {isSelected && <CheckCircle2 size={13} className="text-black" />}
+                            {isSelected && <CheckCircle2 size={13} className="text-slate-950" />}
                           </div>
                         </label>
                       );
@@ -324,43 +324,43 @@ export default function TransportBookingModal({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
                       Guest Name
                     </label>
                     <input
                       type="text"
                       value={guestName}
                       onChange={(e) => setGuestName(e.target.value)}
-                      className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-[#E5B65F] outline-none"
+                      className="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-gold outline-none"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-gray-300 uppercase tracking-wider mb-1.5">
+                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
                       Villa / Suite Room
                     </label>
                     <input
                       type="text"
                       value={roomOrVilla}
                       onChange={(e) => setRoomOrVilla(e.target.value)}
-                      className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-[#E5B65F] outline-none"
+                      className="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white focus:border-gold outline-none"
                     />
                   </div>
                 </div>
 
                 {/* Summary Card */}
-                <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2 text-xs">
-                  <div className="flex justify-between text-gray-300">
+                <div className="p-4 rounded-2xl bg-slate-100 border border-slate-200 space-y-2 text-xs">
+                  <div className="flex justify-between text-slate-600">
                     <span>{vehicle.name} ({serviceType.replace('_', ' ').toUpperCase()})</span>
                     <span>${calculatedPrice}</span>
                   </div>
-                  <div className="flex justify-between text-gray-400">
+                  <div className="flex justify-between text-slate-500">
                     <span>VIP Meet & Greet + Airport Flight Sync</span>
                     <span className="text-emerald-400">Included</span>
                   </div>
-                  <div className="border-t border-white/10 pt-2 flex justify-between font-bold text-sm text-white">
+                  <div className="border-t border-slate-200 pt-2 flex justify-between font-bold text-sm text-white">
                     <span>Total Concierge Fee</span>
-                    <span className="text-[#E5B65F]">${calculatedPrice}</span>
+                    <span className="text-gold">${calculatedPrice}</span>
                   </div>
                 </div>
               </div>
@@ -378,8 +378,8 @@ export default function TransportBookingModal({
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-xs text-gray-400">Scheduled Departure</div>
-                    <div className="text-sm font-bold text-[#E5B65F]">
+                    <div className="text-xs text-slate-500">Scheduled Departure</div>
+                    <div className="text-sm font-bold text-gold">
                       {confirmedBooking.date} at {confirmedBooking.time}
                     </div>
                   </div>
@@ -387,18 +387,18 @@ export default function TransportBookingModal({
 
                 {/* Assigned Chauffeur Card */}
                 {confirmedBooking.driver && (
-                  <div className="p-4 rounded-2xl bg-[#1d2023] border border-white/10 flex items-center justify-between">
+                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <img
                         src={confirmedBooking.driver.photoUrl}
                         alt="Chauffeur"
-                        className="w-12 h-12 rounded-full object-cover border-2 border-[#E5B65F]"
+                        className="w-12 h-12 rounded-full object-cover border-2 border-gold"
                         referrerPolicy="no-referrer"
                       />
                       <div>
-                        <div className="text-xs text-gray-400">Assigned Chauffeur</div>
+                        <div className="text-xs text-slate-500">Assigned Chauffeur</div>
                         <div className="font-bold text-sm text-white">{confirmedBooking.driver.name}</div>
-                        <div className="text-[11px] text-[#E5B65F] flex items-center gap-2 mt-0.5">
+                        <div className="text-[11px] text-gold flex items-center gap-2 mt-0.5">
                           <span>Plate: {confirmedBooking.driver.vehiclePlate}</span>
                           <span>•</span>
                           <span>★ {confirmedBooking.driver.rating}</span>
@@ -407,7 +407,7 @@ export default function TransportBookingModal({
                     </div>
                     <a
                       href={`tel:${confirmedBooking.driver.phone}`}
-                      className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-colors cursor-pointer"
+                      className="p-2.5 rounded-full bg-slate-100 hover:bg-slate-200 text-white border border-slate-300 transition-colors cursor-pointer"
                       title="Call Chauffeur"
                     >
                       <Phone size={16} />
@@ -418,19 +418,19 @@ export default function TransportBookingModal({
                 {/* Live Simulation Stepper */}
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-xs font-bold text-gray-300 uppercase tracking-wider">
+                    <h4 className="text-xs font-bold text-slate-600 uppercase tracking-wider">
                       Live Dispatch Status
                     </h4>
                     <button
                       type="button"
                       onClick={() => setSimulationIndex((prev) => Math.min(prev + 1, simulationSteps.length - 1))}
-                      className="text-[11px] text-[#E5B65F] hover:underline font-semibold cursor-pointer"
+                      className="text-[11px] text-gold hover:underline font-semibold cursor-pointer"
                     >
                       Advance Simulation Step ({simulationIndex + 1}/{simulationSteps.length})
                     </button>
                   </div>
 
-                  <div className="space-y-3 border-l-2 border-white/15 pl-4 ml-2">
+                  <div className="space-y-3 border-l-2 border-slate-200 pl-4 ml-2">
                     {simulationSteps.map((s, idx) => {
                       const isDone = idx <= simulationIndex;
                       const isCurrent = idx === simulationIndex;
@@ -439,14 +439,14 @@ export default function TransportBookingModal({
                           <div
                             className={`absolute -left-[23px] top-1 w-3.5 h-3.5 rounded-full border-2 ${
                               isDone
-                                ? 'bg-[#E5B65F] border-[#E5B65F]'
-                                : 'bg-[#141618] border-gray-600'
+                                ? 'bg-gold border-gold'
+                                : 'bg-white border-gray-600'
                             }`}
                           />
-                          <div className={`text-xs font-bold ${isCurrent ? 'text-[#E5B65F]' : isDone ? 'text-white' : 'text-gray-500'}`}>
+                          <div className={`text-xs font-bold ${isCurrent ? 'text-gold' : isDone ? 'text-white' : 'text-slate-500'}`}>
                             {s.title}
                           </div>
-                          <p className="text-[11px] text-gray-400 mt-0.5">{s.desc}</p>
+                          <p className="text-[11px] text-slate-500 mt-0.5">{s.desc}</p>
                         </div>
                       );
                     })}
@@ -457,7 +457,7 @@ export default function TransportBookingModal({
                   <button
                     type="button"
                     onClick={onClose}
-                    className="w-full py-3 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-bold text-sm transition cursor-pointer shadow-lg"
+                    className="w-full py-3 rounded-xl bg-gold hover:bg-gold-strong text-slate-950 font-bold text-sm transition cursor-pointer shadow-lg"
                   >
                     Done & Return to App
                   </button>
@@ -468,10 +468,10 @@ export default function TransportBookingModal({
 
           {/* Footer Controls */}
           {step < 3 && (
-            <div className="p-4 sm:p-5 bg-[#171a1d] border-t border-white/10 flex items-center justify-between">
+            <div className="p-4 sm:p-5 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
               <div>
-                <div className="text-[11px] text-gray-400">Total Rate</div>
-                <div className="text-lg sm:text-xl font-bold text-[#E5B65F]">${calculatedPrice}</div>
+                <div className="text-[11px] text-slate-500">Total Rate</div>
+                <div className="text-lg sm:text-xl font-bold text-gold">${calculatedPrice}</div>
               </div>
 
               <div className="flex gap-2">
@@ -479,7 +479,7 @@ export default function TransportBookingModal({
                   <button
                     type="button"
                     onClick={() => setStep((prev) => (prev - 1) as any)}
-                    className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-colors cursor-pointer"
+                    className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-white text-xs font-bold transition-colors cursor-pointer"
                   >
                     Back
                   </button>
@@ -489,7 +489,7 @@ export default function TransportBookingModal({
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="px-6 py-2.5 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black text-xs sm:text-sm font-bold transition cursor-pointer shadow-md"
+                    className="px-6 py-2.5 rounded-xl bg-gold hover:bg-gold-strong text-slate-950 text-xs sm:text-sm font-bold transition cursor-pointer shadow-md"
                   >
                     Continue to Amenities
                   </button>
@@ -497,7 +497,7 @@ export default function TransportBookingModal({
                   <button
                     type="button"
                     onClick={handleConfirm}
-                    className="px-6 py-2.5 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black text-xs sm:text-sm font-bold transition cursor-pointer shadow-lg"
+                    className="px-6 py-2.5 rounded-xl bg-gold hover:bg-gold-strong text-slate-950 text-xs sm:text-sm font-bold transition cursor-pointer shadow-lg"
                   >
                     Confirm VIP Chauffeur
                   </button>

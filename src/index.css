@@ -119,6 +119,22 @@
   /* Live-status indicator. Opacity only: Tailwind's `animate-pulse` also scales the
      element, which is a transform on every frame of an animation that never ends. */
   --animate-status: status-breathe 2.4s ease-in-out infinite;
+
+  /* THE BRAND GOLD, AS A THEME COLOUR.
+     The palette needs two golds and this is why they must be tokens rather than
+     literals: #E5B65F is 9.92:1 on the dark page but only 1.77:1 on the light one, and
+     #B88728 is 5.05:1 on light. A component that hardcodes #E5B65F is therefore
+     correct in dark mode and unreadable in light — which is exactly what had happened
+     across every booking and item modal.
+     Declaring it in @theme makes `bg-gold`, `text-gold` and `border-gold` available as
+     utilities, so a component states its intent once and the theme decides the value. */
+  --color-gold: #b88728;
+  --color-gold-strong: #9e721d;
+}
+
+html.dark {
+  --color-gold: #e5b65f;
+  --color-gold-strong: #d6a54d;
 }
 
 /* Headings carry Quicksand.
