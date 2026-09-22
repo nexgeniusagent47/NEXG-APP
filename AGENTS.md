@@ -1,6 +1,14 @@
-# AGENTS.md — NEXG Concierge
+# AGENTS.md — NEXG App
 
 Durable instructions for any agent working in this repository. Read this before acting.
+
+**Start with [`docs/HANDOFF-2026-09-22.md`](docs/HANDOFF-2026-09-22.md).** It carries the
+current state, the live server, six traps that have already cost real time, and the open
+work in priority order. `docs/HANDOFF.md` is a redirect stub — the older handoffs describe
+the pre-rebrand state and a deployment model that no longer exists.
+
+The product was rebranded from **NEXG Concierge** to **NEXG App**. Only the lowercase common
+noun "concierge" survives, deliberately, in copy like "swift concierge delivery".
 
 ---
 
@@ -113,6 +121,19 @@ Full sequence in `docs/DEPLOY-STEP-BY-STEP.md`. Three facts that cause silent fa
   **built** CSS in `dist/assets/`, not the source.
 - **Two unrelated Postgres stacks run on this machine.** This project's is on **5433**;
   ports 5432 and 8080 belong to the separate NEXG POS Go platform. Do not touch them.
+- **`skip-worktree` hides a change from `git status` AND from `git archive`.** `index.html`
+  carried the `S` flag, so a rebrand edit lived only in the working copy and **every deploy
+  shipped stale HTML while all gates stayed green**. If a deploy serves the wrong content
+  but the source looks correct, run `git ls-files -v <file>` first. Do not re-add the flag.
+- **PowerShell's `>` re-encodes binary as UTF-16.** Streaming a tar through `pwsh >` produced
+  `FF FE 1F 00` instead of `1F 8B 08` and inflated 63 MB to 120 MB. Use `cmd /c "... > file"`.
+  Its `-m` also dies on em-dashes, arrows and nested quotes — **write commit messages to a
+  file and use `git commit -F`.**
+- **Node 24 runs `server/*.ts` in STRIP-ONLY mode.** Constructor parameter properties,
+  `enum`, `namespace` and decorators throw at import time and **kill the process**, while
+  `tsc --noEmit` passes happily. After any `server/` change, actually boot it.
+- **Canvas returns opaque black for `oklch()`.** Two colour probes gave confidently wrong
+  results this way. Read raw computed values instead of painting to a canvas.
 
 ---
 
