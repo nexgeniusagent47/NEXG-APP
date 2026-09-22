@@ -149,7 +149,7 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
           <HeroWipeSubtitle
             isLight={isLight}
             reduceMotion={Boolean(prefersReducedMotion)}
-            className={`mt-6 mb-4 pl-[0.18em] text-base sm:text-lg md:text-xl font-semibold leading-snug transition-colors duration-300 ${
+            className={`mt-6 mb-4 pl-[0.26em] text-base sm:text-lg md:text-xl font-semibold leading-snug transition-colors duration-300 ${
               isLight ? 'text-slate-700' : 'text-gray-200 drop-shadow-sm'
             }`}
           />
