@@ -420,7 +420,7 @@ future session starts from reality rather than from the commit titles.
 | 6 | CI/CD | **DONE.** `.github/workflows/{ci,release}.yml`, dependabot |
 | 7 | Observability | **PARTIAL.** Logs, tracing, metrics, `/api/metrics`, consent, telemetry all shipped and verified at the API. **The dashboard at `?page=metrics` has never been rendered in a browser** |
 | 8 | Session tokens + JWT | **DONE** for the API (13/13 checks). User store is in-process — see §11 |
-| 9 | Onboarding draft caching | **PARTIAL.** `useDraftPersistence` is written and generic; **HostOnboarding still uses its own inline copy and MerchantOnboarding has none** |
+| 9 | Onboarding draft caching | **DONE.** `useMerchantDraft` + `readMerchantDraft` persist the merchant form (22 fields, category by id, restore verified through a reload and by 11 unit tests). HostOnboarding keeps its own inline version — see §11.2 |
 
 ### 10.1 The highest-value thing this session found
 
@@ -446,18 +446,31 @@ cart.
    pagination with an IntersectionObserver sentinel. There is no separate "category
    page" — categories filter the one browse surface. If the brief's category page is
    still wanted, it is a NEW surface, not a fix to this one.
-2. **`useDraftPersistence` is generic and unused.** Migrating `HostOnboarding` to it
-   means deleting its inline copy (search `loadDraft`/`removeDraft`); adding it to
-   `MerchantOnboarding` is new work. Neither is done.
-3. **The user store is a `Map`.** Auth is complete and verified, but does not survive
+2. **`useMerchantDraft` is the only draft implementation.** An earlier generic
+   `useDraftPersistence` was deleted: it was never wired to anything and both forms
+   carried inline copies, which is the worst of both. The live hook takes `{ key,
+   version }` so more than one form can use it without sharing a storage slot — two
+   forms on one key would silently read each other's drafts. HostOnboarding still has
+   its own inline copy, and **migrating it is not a mechanical swap**: its restore
+   re-keys dynamic rows, because stored row ids collide with the first row added after
+   a reload and a duplicate key makes removal delete both rows. That bug has been fixed
+   once; preserve and test that logic if you move it.
+3. **Tailwind v4 does not generate opacity modifiers for custom theme colours.**
+   `bg-gold/12` compiled to nothing — silently, with no build warning — leaving
+   elements with no background. Thirty-nine usages across twenty utilities were dead
+   until they were replaced with real tokens (`--color-gold-tint`, `--color-gold-line`).
+   **Any new theme colour must be declared, then verified by grepping the BUILT CSS**,
+   not the source: `dist/assets/index-*.css`. A missing tint is easy to misread as a
+   deliberate flat design.
+4. **The user store is a `Map`.** Auth is complete and verified, but does not survive
    a restart or scale past one process. The table and `citext` note are in
    `docs/AUTH.md`; only four functions change.
-4. **Signup returns the verification token.** That is a deliberate placeholder until a
+5. **Signup returns the verification token.** That is a deliberate placeholder until a
    mailer exists, and it **must stop** before this is public — returning a verification
    token to the caller defeats verification.
-5. **`AUTH_SECRET` has no default and the server refuses to boot without it.** That is
+6. **`AUTH_SECRET` has no default and the server refuses to boot without it.** That is
    intentional. Generate one per environment.
-6. **`src/assets/images/` originals are no longer imported** — only the ladder in
+7. **`src/assets/images/` originals are no longer imported** — only the ladder in
    `public/images/` is. Deleting the originals would break
    `scripts/build-image-ladder.mjs`, which reads them.
 
