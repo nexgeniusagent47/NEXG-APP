@@ -126,7 +126,14 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
           className="flex items-center gap-2 cursor-pointer select-none group"
           onClick={() => onNavigate('home')}
         >
-          <LogoIcon className="w-9 h-9 md:w-10 md:h-10 group-hover:scale-105 transition-transform" />
+          {/*
+            The mark only. The name is set in text beside it, so passing the full wordmark
+            here rendered two wordmarks side by side.
+          */}
+          <LogoIcon
+            variant="mark"
+            className="w-8 h-8 md:w-9 md:h-9 group-hover:scale-105 transition-transform"
+          />
           <div className="flex flex-col">
             <span
               className={`font-black text-lg md:text-xl leading-none tracking-widest ${
@@ -136,7 +143,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
               NEXG
             </span>
             <span className="text-[7.5px] md:text-[8.5px] uppercase tracking-[0.25em] text-[#B88728] dark:text-[#E5B65F] font-extrabold mt-0.5">
-              Concierge
+              App
             </span>
           </div>
         </div>
