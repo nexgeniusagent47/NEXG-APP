@@ -37,7 +37,7 @@ export default function Stats() {
               isLight ? 'border-slate-200' : 'border-gray-800/80'
             }`}>
               <div className="flex items-start gap-3 sm:gap-4">
-                 <Building2 className={`${isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'} shrink-0`} size={28} strokeWidth={1.5} />
+                 <Building2 className={`${isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'} shrink-0`} size={28} strokeWidth={1.5} />
                  <div>
                    <div className="text-xl sm:text-[26px] font-bold mb-0.5 leading-none">50+</div>
                    <div className={`text-xs sm:text-[13px] font-medium mt-1 ${
@@ -46,7 +46,7 @@ export default function Stats() {
                  </div>
               </div>
               <div className="flex items-start gap-3 sm:gap-4">
-                 <Store className={`${isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'} shrink-0`} size={28} strokeWidth={1.5} />
+                 <Store className={`${isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'} shrink-0`} size={28} strokeWidth={1.5} />
                  <div>
                    <div className="text-xl sm:text-[26px] font-bold mb-0.5 leading-none">1,000+</div>
                    <div className={`text-xs sm:text-[13px] font-medium mt-1 ${
@@ -55,7 +55,7 @@ export default function Stats() {
                  </div>
               </div>
               <div className="flex items-start gap-3 sm:gap-4">
-                 <MapPin className={`${isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'} shrink-0`} size={28} strokeWidth={1.5} />
+                 <MapPin className={`${isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'} shrink-0`} size={28} strokeWidth={1.5} />
                  <div>
                    <div className="text-xl sm:text-[26px] font-bold mb-0.5 leading-none">6</div>
                    <div className={`text-xs sm:text-[13px] font-medium mt-1 ${
@@ -64,7 +64,7 @@ export default function Stats() {
                  </div>
               </div>
               <div className="flex items-start gap-3 sm:gap-4">
-                 <Clock className={`${isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'} shrink-0`} size={28} strokeWidth={1.5} />
+                 <Clock className={`${isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'} shrink-0`} size={28} strokeWidth={1.5} />
                  <div>
                    <div className="text-xl sm:text-[26px] font-bold mb-0.5 leading-none">24/7</div>
                    <div className={`text-xs sm:text-[13px] font-medium mt-1 leading-tight ${

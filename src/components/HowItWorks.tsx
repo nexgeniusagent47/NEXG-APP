@@ -42,10 +42,10 @@ export default function HowItWorks() {
                 ? 'border-[#B88728]/35 bg-white shadow-[0_8px_25px_rgba(0,0,0,0.06)]'
                 : 'border-[#E5B65F]/30 bg-[#161819] shadow-[0_8px_25px_rgba(0,0,0,0.6)]'
             }`}>
-              <QrCode size={28} className={isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'} />
+              <QrCode size={28} className={isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'} />
               <div className={`absolute -top-1 -right-1 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-extrabold text-xs sm:text-sm border-2 shadow-sm ${
                 isLight
-                  ? 'bg-[#B88728] text-white border-white'
+                  ? 'bg-[#B88728] text-slate-950 border-white'
                   : 'bg-[#E5B65F] text-black border-[#161819]'
               }`}>
                 1
@@ -81,10 +81,10 @@ export default function HowItWorks() {
                 ? 'border-[#B88728]/35 bg-white shadow-[0_8px_25px_rgba(0,0,0,0.06)]'
                 : 'border-[#E5B65F]/30 bg-[#161819] shadow-[0_8px_25px_rgba(0,0,0,0.6)]'
             }`}>
-              <ShoppingBag size={28} className={isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'} />
+              <ShoppingBag size={28} className={isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'} />
               <div className={`absolute -top-1 -right-1 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-extrabold text-xs sm:text-sm border-2 shadow-sm ${
                 isLight
-                  ? 'bg-[#B88728] text-white border-white'
+                  ? 'bg-[#B88728] text-slate-950 border-white'
                   : 'bg-[#E5B65F] text-black border-[#161819]'
               }`}>
                 2
@@ -120,10 +120,10 @@ export default function HowItWorks() {
                 ? 'border-[#B88728]/35 bg-white shadow-[0_8px_25px_rgba(0,0,0,0.06)]'
                 : 'border-[#E5B65F]/30 bg-[#161819] shadow-[0_8px_25px_rgba(0,0,0,0.6)]'
             }`}>
-              <ShoppingCart size={28} className={isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'} />
+              <ShoppingCart size={28} className={isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'} />
               <div className={`absolute -top-1 -right-1 w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-extrabold text-xs sm:text-sm border-2 shadow-sm ${
                 isLight
-                  ? 'bg-[#B88728] text-white border-white'
+                  ? 'bg-[#B88728] text-slate-950 border-white'
                   : 'bg-[#E5B65F] text-black border-[#161819]'
               }`}>
                 3
@@ -169,10 +169,10 @@ export default function HowItWorks() {
                 ? 'border-[#B88728]/35 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)]'
                 : 'border-[#E5B65F]/30 bg-[#161819] shadow-[0_8px_30px_rgba(0,0,0,0.6)]'
             }`}>
-              <QrCode size={28} className={isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'} />
+              <QrCode size={28} className={isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'} />
               <div className={`absolute -top-1 -right-1 w-8 h-8 rounded-full flex items-center justify-center font-extrabold text-sm border-2 shadow-md ${
                 isLight
-                  ? 'bg-[#B88728] text-white border-white'
+                  ? 'bg-[#B88728] text-slate-950 border-white'
                   : 'bg-[#E5B65F] text-black border-[#161819]'
               }`}>
                 1
@@ -197,10 +197,10 @@ export default function HowItWorks() {
                 ? 'border-[#B88728]/35 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)]'
                 : 'border-[#E5B65F]/30 bg-[#161819] shadow-[0_8px_30px_rgba(0,0,0,0.6)]'
             }`}>
-              <ShoppingBag size={28} className={isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'} />
+              <ShoppingBag size={28} className={isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'} />
               <div className={`absolute -top-1 -right-1 w-8 h-8 rounded-full flex items-center justify-center font-extrabold text-sm border-2 shadow-md ${
                 isLight
-                  ? 'bg-[#B88728] text-white border-white'
+                  ? 'bg-[#B88728] text-slate-950 border-white'
                   : 'bg-[#E5B65F] text-black border-[#161819]'
               }`}>
                 2
@@ -225,10 +225,10 @@ export default function HowItWorks() {
                 ? 'border-[#B88728]/35 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)]'
                 : 'border-[#E5B65F]/30 bg-[#161819] shadow-[0_8px_30px_rgba(0,0,0,0.6)]'
             }`}>
-              <ShoppingCart size={28} className={isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'} />
+              <ShoppingCart size={28} className={isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'} />
               <div className={`absolute -top-1 -right-1 w-8 h-8 rounded-full flex items-center justify-center font-extrabold text-sm border-2 shadow-md ${
                 isLight
-                  ? 'bg-[#B88728] text-white border-white'
+                  ? 'bg-[#B88728] text-slate-950 border-white'
                   : 'bg-[#E5B65F] text-black border-[#161819]'
               }`}>
                 3

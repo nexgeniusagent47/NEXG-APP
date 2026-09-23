@@ -552,7 +552,7 @@ const Chip = React.forwardRef<
       'active:scale-[0.97] transition-transform',
       active
         ? isLight
-          ? 'bg-[#B88728] text-white border-[#B88728]'
+          ? 'bg-[#B88728] text-slate-950 border-[#B88728]'
           : 'bg-[#E5B65F] text-slate-950 border-[#E5B65F]'
         : isLight
         ? 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'

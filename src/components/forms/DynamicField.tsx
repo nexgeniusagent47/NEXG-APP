@@ -264,7 +264,7 @@ export const DynamicField: React.FC<DynamicFieldProps> = ({
                     'px-3 py-1.5 rounded-full border text-xs font-bold transition-colors duration-150 ease-out cursor-pointer',
                     selected
                       ? isLight
-                        ? 'border-[#B88728] bg-[#B88728] text-white'
+                        ? 'border-[#B88728] bg-[#B88728] text-slate-950'
                         : 'border-[#E5B65F] bg-[#E5B65F] text-slate-950'
                       : isLight
                       ? 'border-slate-200 bg-white text-slate-600 hover:border-slate-300'

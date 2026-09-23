@@ -80,7 +80,7 @@ export default function CartDrawer() {
             }`}>
               <div>
                 <span className={`text-[10px] uppercase font-bold tracking-widest block mb-0.5 ${
-                  isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'
+                  isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'
                 }`}>
                   Your Order Cart
                 </span>
@@ -126,7 +126,7 @@ export default function CartDrawer() {
                 <div className="flex items-center justify-between text-xs mb-1.5 font-medium">
                   {remainingForFreeDelivery > 0 ? (
                     <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>
-                      Add <strong className={isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'}>${remainingForFreeDelivery.toFixed(2)}</strong> for Free Delivery
+                      Add <strong className={isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'}>${remainingForFreeDelivery.toFixed(2)}</strong> for Free Delivery
                     </span>
                   ) : (
                     <span className={`font-semibold flex items-center gap-1 ${
@@ -180,7 +180,7 @@ export default function CartDrawer() {
                   onClick={() => setIsCartOpen(false)}
                   className={`px-6 py-2.5 rounded-full font-semibold text-sm transition-colors cursor-pointer ${
                     isLight
-                      ? 'bg-[#B88728] text-white hover:bg-[#967C3B]'
+                      ? 'bg-[#B88728] text-slate-950 hover:bg-[#967C3B]'
                       : 'bg-[#E5B65F] text-black hover:bg-[#d6a54d]'
                   }`}
                 >
@@ -218,7 +218,7 @@ export default function CartDrawer() {
                             {item.name}
                           </h5>
                           <span className={`text-sm font-bold whitespace-nowrap ${
-                            isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'
+                            isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'
                           }`}>
                             ${item.itemTotal.toFixed(2)}
                           </span>
@@ -371,7 +371,7 @@ export default function CartDrawer() {
                 }`}>
                   <div className="flex justify-between items-center text-xs">
                     <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>Courier Concierge Tip</span>
-                    <span className={`font-bold ${isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'}`}>
+                    <span className={`font-bold ${isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'}`}>
                       ${tipAmount.toFixed(2)}
                     </span>
                   </div>
@@ -384,7 +384,7 @@ export default function CartDrawer() {
                         className={`py-2 rounded-lg text-xs font-semibold transition-colors cursor-pointer border ${
                           tipAmount === amount
                             ? isLight
-                              ? 'bg-[#B88728] text-white border-[#B88728]'
+                              ? 'bg-[#B88728] text-slate-950 border-[#B88728]'
                               : 'bg-[#E5B65F] text-black border-[#E5B65F]'
                             : isLight
                             ? 'bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-300'
@@ -442,7 +442,7 @@ export default function CartDrawer() {
                       : 'border-white/10 text-white'
                   }`}>
                     <span>Total</span>
-                    <span className={isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'}>
+                    <span className={isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'}>
                       ${finalTotal.toFixed(2)}
                     </span>
                   </div>
@@ -473,7 +473,7 @@ export default function CartDrawer() {
                 <div className={`flex items-center justify-center gap-1.5 text-[11px] mt-3 ${
                   isLight ? 'text-slate-500' : 'text-gray-400'
                 }`}>
-                  <ShieldCheck size={13} className={isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'} />
+                  <ShieldCheck size={13} className={isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'} />
                   <span>Simulated checkout & instant confirmation</span>
                 </div>
               </div>

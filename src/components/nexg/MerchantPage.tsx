@@ -155,13 +155,13 @@ export const MerchantPage: React.FC<MerchantPageProps> = ({
 
             {/* Delivery Time */}
             <div className="flex items-center gap-1.5 text-slate-600 dark:text-gray-300">
-              <Clock size={14} className="text-[#B88728] dark:text-[#E5B65F]" />
+              <Clock size={14} className="text-[#8A6413] dark:text-[#E5B65F]" />
               <span>{merchant.deliveryTime}</span>
             </div>
 
             {/* Delivery Fee */}
             <div className="flex items-center gap-1.5 text-slate-600 dark:text-gray-300">
-              <Bike size={14} className="text-[#B88728] dark:text-[#E5B65F]" />
+              <Bike size={14} className="text-[#8A6413] dark:text-[#E5B65F]" />
               <span>
                 {merchant.deliveryFee === 0 ? 'Free delivery' : `KSh ${merchant.deliveryFee} delivery`}
               </span>
@@ -213,7 +213,7 @@ export const MerchantPage: React.FC<MerchantPageProps> = ({
                   'px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-colors cursor-pointer border',
                   isActive
                     ? isLight
-                      ? 'bg-[#B88728] text-white border-[#B88728] shadow-xs'
+                      ? 'bg-[#B88728] text-slate-950 border-[#B88728] shadow-xs'
                       : 'bg-[#E5B65F] text-slate-950 border-[#E5B65F] shadow-xs'
                     : isLight
                     ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
@@ -272,7 +272,7 @@ export const MerchantPage: React.FC<MerchantPageProps> = ({
                       {item.description}
                     </p>
                     <div className="pt-1 flex items-center gap-2">
-                      <span className="text-sm font-extrabold text-[#B88728] dark:text-[#E5B65F]">
+                      <span className="text-sm font-extrabold text-[#8A6413] dark:text-[#E5B65F]">
                         KSh {item.price.toLocaleString()}
                       </span>
                       {item.originalPrice && (

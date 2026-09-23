@@ -152,7 +152,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
               {selectedSubcatId !== 'all' && (
                 <>
                   <ChevronRight size={12} />
-                  <span className="text-[#B88728] dark:text-[#E5B65F] font-bold">
+                  <span className="text-[#8A6413] dark:text-[#E5B65F] font-bold">
                     {category.subcategories.find((s) => s.id === selectedSubcatId)?.name ||
                       selectedSubcatId}
                   </span>
@@ -193,7 +193,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
               'px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-colors cursor-pointer border',
               selectedSubcatId === 'all'
                 ? isLight
-                  ? 'bg-[#B88728] text-white border-[#B88728] shadow-xs'
+                  ? 'bg-[#B88728] text-slate-950 border-[#B88728] shadow-xs'
                   : 'bg-[#E5B65F] text-slate-950 border-[#E5B65F] shadow-xs'
                 : isLight
                 ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
@@ -214,7 +214,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
                   'px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-colors cursor-pointer border',
                   isActive
                     ? isLight
-                      ? 'bg-[#B88728] text-white border-[#B88728] shadow-xs'
+                      ? 'bg-[#B88728] text-slate-950 border-[#B88728] shadow-xs'
                       : 'bg-[#E5B65F] text-slate-950 border-[#E5B65F] shadow-xs'
                     : isLight
                     ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
@@ -331,7 +331,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
                     {item.name}
                   </h4>
                   <p className="text-[11px] text-slate-400 truncate">{item.merchantName}</p>
-                  <span className="text-xs font-extrabold text-[#B88728] dark:text-[#E5B65F] mt-1 block">
+                  <span className="text-xs font-extrabold text-[#8A6413] dark:text-[#E5B65F] mt-1 block">
                     KSh {item.price.toLocaleString()}
                   </span>
                 </div>
@@ -361,7 +361,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
                   setFilterFreeDelivery(false);
                   setFilterPriceLevel(null);
                 }}
-                className="text-xs font-bold text-[#B88728] dark:text-[#E5B65F] hover:underline"
+                className="text-xs font-bold text-[#8A6413] dark:text-[#E5B65F] hover:underline"
               >
                 Reset all filters
               </button>

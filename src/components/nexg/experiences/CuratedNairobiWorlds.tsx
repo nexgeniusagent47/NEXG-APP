@@ -99,7 +99,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-[#E5B65F]/20 text-[#B88728] dark:text-[#E5B65F] border border-[#E5B65F]/30">
+            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-[#E5B65F]/20 text-[#8A6413] dark:text-[#E5B65F] border border-[#E5B65F]/30">
               <Sparkles size={11} className="fill-current" />
               Contextual Experience Hub
             </span>
@@ -126,7 +126,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
               : 'bg-[#181A1F] hover:bg-white/10 border-white/10 text-gray-200'
           )}
         >
-          <SlidersHorizontal size={13} className="text-[#B88728] dark:text-[#E5B65F]" />
+          <SlidersHorizontal size={13} className="text-[#8A6413] dark:text-[#E5B65F]" />
           <span>Full Experience Builder</span>
           <ChevronRight size={13} />
         </button>
@@ -148,7 +148,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
                 'px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition duration-200 flex items-center gap-2 cursor-pointer border shadow-2xs',
                 isSelected
                   ? isLight
-                    ? 'bg-[#B88728] text-white border-[#B88728] shadow-md scale-102'
+                    ? 'bg-[#B88728] text-slate-950 border-[#B88728] shadow-md scale-102'
                     : 'bg-[#E5B65F] text-slate-950 border-[#E5B65F] shadow-md scale-102'
                   : isLight
                   ? 'bg-white hover:bg-slate-50 border-slate-200 text-slate-700'
@@ -210,7 +210,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
 
           {/* Area Filter Selector inside Active World */}
           <div className="flex items-center gap-2 self-start lg:self-center">
-            <MapPin size={14} className="text-[#B88728] dark:text-[#E5B65F]" />
+            <MapPin size={14} className="text-[#8A6413] dark:text-[#E5B65F]" />
             <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none">
               {availableAreas.map((area) => (
                 <button
@@ -241,7 +241,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
             <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400">
               Orchestrated Journey ({activeExperience.steps.length} Phases)
             </span>
-            <span className="text-[11px] font-semibold text-[#B88728] dark:text-[#E5B65F]">
+            <span className="text-[11px] font-semibold text-[#8A6413] dark:text-[#E5B65F]">
               Click step to explore offerings
             </span>
           </div>
@@ -265,7 +265,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
                   )}
                 >
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="flex items-center gap-1.5 text-xs font-bold text-[#B88728] dark:text-[#E5B65F]">
+                    <span className="flex items-center gap-1.5 text-xs font-bold text-[#8A6413] dark:text-[#E5B65F]">
                       <span className="w-5 h-5 rounded-full bg-[#E5B65F]/20 flex items-center justify-center text-[10px]">
                         {step.stepNumber}
                       </span>
@@ -312,7 +312,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
                 onSelectCategory(activeStep.categoryId);
               }
             }}
-            className="text-xs font-bold text-[#B88728] dark:text-[#E5B65F] hover:underline flex items-center gap-1 cursor-pointer"
+            className="text-xs font-bold text-[#8A6413] dark:text-[#E5B65F] hover:underline flex items-center gap-1 cursor-pointer"
           >
             <span>See all {activeStep.category}</span>
             <ArrowRight size={13} />
@@ -344,7 +344,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
             {/* Header */}
             <div className="p-6 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#B88728] dark:text-[#E5B65F]">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#8A6413] dark:text-[#E5B65F]">
                   NEXG Experience Orchestrator
                 </span>
                 <h3 className="text-xl font-bold">{activeExperience.name} Full Itinerary</h3>
@@ -374,7 +374,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
                       )}
                     >
                       <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-xl bg-[#E5B65F]/20 text-[#B88728] dark:text-[#E5B65F] flex items-center justify-center font-bold">
+                        <div className="w-9 h-9 rounded-xl bg-[#E5B65F]/20 text-[#8A6413] dark:text-[#E5B65F] flex items-center justify-center font-bold">
                           {step.stepNumber}
                         </div>
                         <div>

@@ -214,7 +214,7 @@ export default function NexGCategoryDrilldown({
               }`}
               title="Back to Discovery"
             >
-              <ArrowLeft size={18} className={isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'} />
+              <ArrowLeft size={18} className={isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'} />
             </button>
 
             {/* The supplied wordmark, replacing NEXG set in italic serif. */}
@@ -231,7 +231,7 @@ export default function NexGCategoryDrilldown({
                 isLight ? 'bg-white border-slate-200 text-slate-700' : 'bg-[#181a1b] border-white/10 text-gray-300'
               }`}
             >
-              <MapPin size={12} className={isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'} />
+              <MapPin size={12} className={isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'} />
               <span>Nairobi Luxury District</span>
             </div>
           </div>
@@ -293,7 +293,7 @@ export default function NexGCategoryDrilldown({
             <div>
               <h2 className="text-xl font-bold tracking-tight text-foreground flex items-center gap-2">
                 <span>Subcategories</span>
-                <span className="text-xs px-2 py-0.5 rounded-full font-bold bg-[#B88728]/15 dark:bg-[#E5B65F]/20 text-[#B88728] dark:text-[#E5B65F]">
+                <span className="text-xs px-2 py-0.5 rounded-full font-bold bg-[#B88728]/15 dark:bg-[#E5B65F]/20 text-[#8A6413] dark:text-[#E5B65F]">
                   {category.subcategories.length} Curated
                 </span>
               </h2>
@@ -426,7 +426,7 @@ export default function NexGCategoryDrilldown({
               className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer flex items-center gap-1.5 ${
                 filterRating45
                   ? isLight
-                    ? 'bg-[#B88728] text-white border-[#B88728]'
+                    ? 'bg-[#B88728] text-slate-950 border-[#B88728]'
                     : 'bg-[#E5B65F] text-black border-[#E5B65F]'
                   : isLight
                   ? 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
@@ -443,7 +443,7 @@ export default function NexGCategoryDrilldown({
               className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer flex items-center gap-1.5 ${
                 filterFastDelivery
                   ? isLight
-                    ? 'bg-[#B88728] text-white border-[#B88728]'
+                    ? 'bg-[#B88728] text-slate-950 border-[#B88728]'
                     : 'bg-[#E5B65F] text-black border-[#E5B65F]'
                   : isLight
                   ? 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
@@ -460,7 +460,7 @@ export default function NexGCategoryDrilldown({
               className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors cursor-pointer flex items-center gap-1.5 ${
                 filterDiscountOnly
                   ? isLight
-                    ? 'bg-[#B88728] text-white border-[#B88728]'
+                    ? 'bg-[#B88728] text-slate-950 border-[#B88728]'
                     : 'bg-[#E5B65F] text-black border-[#E5B65F]'
                   : isLight
                   ? 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
@@ -520,7 +520,7 @@ export default function NexGCategoryDrilldown({
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-[#B88728] dark:text-[#E5B65F]">
+              <span className="text-xs font-bold text-[#8A6413] dark:text-[#E5B65F]">
                 {displayedMerchants.length} Partners
               </span>
               {currentMerchant && (
@@ -601,7 +601,7 @@ export default function NexGCategoryDrilldown({
                         {merchant.address}
                       </span>
                       {isActive ? (
-                        <span className="text-[#B88728] dark:text-[#E5B65F] flex items-center gap-1 flex-shrink-0">
+                        <span className="text-[#8A6413] dark:text-[#E5B65F] flex items-center gap-1 flex-shrink-0">
                           <Check size={12} className="stroke-[3]" />
                           <span>Active</span>
                         </span>
@@ -628,7 +628,7 @@ export default function NexGCategoryDrilldown({
                 isLight ? 'bg-white border-slate-300 shadow-xs' : 'bg-[#181a1b] border-white/15'
               }`}
             >
-              <div className="w-14 h-14 rounded-2xl mx-auto mb-3 bg-[#B88728]/10 dark:bg-[#E5B65F]/15 flex items-center justify-center text-[#B88728] dark:text-[#E5B65F]">
+              <div className="w-14 h-14 rounded-2xl mx-auto mb-3 bg-[#B88728]/10 dark:bg-[#E5B65F]/15 flex items-center justify-center text-[#8A6413] dark:text-[#E5B65F]">
                 <Sparkles size={28} />
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-foreground">
@@ -747,7 +747,7 @@ export default function NexGCategoryDrilldown({
                   setFilterFastDelivery(false);
                   setFilterDiscountOnly(false);
                 }}
-                className="mt-3 px-4 py-2 rounded-xl text-xs font-bold bg-[#B88728] text-white cursor-pointer"
+                className="mt-3 px-4 py-2 rounded-xl text-xs font-bold bg-[#B88728] text-slate-950 cursor-pointer"
               >
                 Reset All Filters
               </button>
@@ -808,7 +808,7 @@ export default function NexGCategoryDrilldown({
                             : 'bg-[#111315]/80 border-white/10 text-gray-300'
                         }`}
                       >
-                        <div className="text-[10px] font-bold uppercase tracking-wider text-[#B88728] dark:text-[#E5B65F] mb-1">
+                        <div className="text-[10px] font-bold uppercase tracking-wider text-[#8A6413] dark:text-[#E5B65F] mb-1">
                           Decision Specifications
                         </div>
                         {Object.entries(item.dynamicAttributes).map(([key, val]) => (
@@ -897,7 +897,7 @@ export default function NexGCategoryDrilldown({
             ) : (
               <form onSubmit={handleConfirmBooking} className="space-y-4">
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#B88728] dark:text-[#E5B65F]">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#8A6413] dark:text-[#E5B65F]">
                     {selectedItemForWorkflow.item.workflowType === 'book' ? 'Reservation Request' : 'Priority Request'}
                   </span>
                   <h3 className="text-xl sm:text-2xl font-bold tracking-tight mt-1">

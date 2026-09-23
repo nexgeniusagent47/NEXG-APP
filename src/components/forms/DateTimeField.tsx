@@ -564,7 +564,7 @@ export function DateTimeField(props: DateTimeFieldProps) {
                         'transition-colors duration-150 ease-out',
                         y === visibleMonth.getFullYear()
                           ? isLight
-                            ? 'bg-[#B88728] text-white'
+                            ? 'bg-[#B88728] text-slate-950'
                             : 'bg-[#E5B65F] text-slate-950'
                           : isLight
                             ? 'text-slate-700 hover:bg-slate-100'
@@ -634,7 +634,7 @@ export function DateTimeField(props: DateTimeFieldProps) {
                                 !selected && !outOfRange && inRange && (isLight ? 'bg-[#B88728]/12 text-slate-900' : 'bg-[#E5B65F]/15 text-white'),
                                 selected
                                   ? isLight
-                                    ? 'bg-[#B88728] text-white font-bold'
+                                    ? 'bg-[#B88728] text-slate-950 font-bold'
                                     : 'bg-[#E5B65F] text-slate-950 font-bold'
                                   : !outOfRange &&
                                     !inRange &&
@@ -893,7 +893,7 @@ function TimeColumns({
       isLight ? 'focus-visible:ring-[#B88728]' : 'focus-visible:ring-[#E5B65F]',
       active
         ? isLight
-          ? 'bg-[#B88728] text-white'
+          ? 'bg-[#B88728] text-slate-950'
           : 'bg-[#E5B65F] text-slate-950'
         : isLight
           ? 'text-slate-700 hover:bg-white'

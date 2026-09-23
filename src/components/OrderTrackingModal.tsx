@@ -239,7 +239,7 @@ export default function OrderTrackingModal() {
                       <p className={`text-xs mt-2 flex items-center gap-1.5 ${
                         isLight ? 'text-slate-600' : 'text-gray-400'
                       }`}>
-                        <MapPin size={13} className={isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'} />
+                        <MapPin size={13} className={isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'} />
                         <span>Delivering to {activeOrder.unitOrRoom}, {activeOrder.deliveryAddress}</span>
                       </p>
                     </div>
@@ -257,7 +257,7 @@ export default function OrderTrackingModal() {
                           Delivery PIN
                         </span>
                         <span className={`text-xl font-mono font-bold tracking-widest ${
-                          isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'
+                          isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'
                         }`}>
                           {activeOrder.securityPin}
                         </span>
@@ -346,7 +346,7 @@ export default function OrderTrackingModal() {
                       <div className="relative">
                         <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${
                           isLight
-                            ? 'bg-[#B88728] text-white shadow-[0_0_20px_rgba(184,135,40,0.4)]'
+                            ? 'bg-[#B88728] text-slate-950 shadow-[0_0_20px_rgba(184,135,40,0.4)]'
                             : 'bg-[#E5B65F] text-black shadow-[0_0_20px_rgba(229,182,95,0.6)]'
                         }`}>
                           <Bike size={20} />
@@ -384,7 +384,7 @@ export default function OrderTrackingModal() {
                           {activeOrder.courier.name}
                         </h5>
                         <span className={`text-xs font-semibold flex items-center ${
-                          isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'
+                          isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'
                         }`}>
                           ★ {activeOrder.courier.rating}
                         </span>
@@ -442,7 +442,7 @@ export default function OrderTrackingModal() {
                           className={`absolute -left-6 top-0.5 w-5 h-5 rounded-full flex items-center justify-center transition-colors ${
                             step.completed
                               ? isLight
-                                ? 'bg-[#B88728] text-white ring-4 ring-[#B88728]/20'
+                                ? 'bg-[#B88728] text-slate-950 ring-4 ring-[#B88728]/20'
                                 : 'bg-[#E5B65F] text-black ring-4 ring-[#E5B65F]/20'
                               : step.current
                               ? isLight
@@ -499,7 +499,7 @@ export default function OrderTrackingModal() {
                     </div>
                     <div className="text-right">
                       <span className={`block ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>Simulated Payment Method</span>
-                      <span className={`font-semibold ${isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'}`}>
+                      <span className={`font-semibold ${isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'}`}>
                         {activeOrder.paymentDetails.label}
                       </span>
                     </div>
@@ -511,7 +511,7 @@ export default function OrderTrackingModal() {
                       <div key={it.id} className="flex justify-between text-xs sm:text-sm">
                         <div>
                           <div className="flex items-center gap-2">
-                            <span className={`font-bold ${isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'}`}>
+                            <span className={`font-bold ${isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'}`}>
                               {it.quantity}x
                             </span>
                             <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>
@@ -565,7 +565,7 @@ export default function OrderTrackingModal() {
                       isLight ? 'border-slate-200 text-slate-900' : 'border-white/10 text-white'
                     }`}>
                       <span>Total Paid (Simulated)</span>
-                      <span className={isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'}>
+                      <span className={isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'}>
                         ${activeOrder.total.toFixed(2)}
                       </span>
                     </div>

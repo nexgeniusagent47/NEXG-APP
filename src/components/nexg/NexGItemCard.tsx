@@ -79,7 +79,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
       >
         <div className="flex-1 min-w-0 pr-2 space-y-1">
           <div className="flex items-center gap-2">
-            <span className="text-[10px] uppercase font-extrabold tracking-wider text-[#B88728] dark:text-[#E5B65F]">
+            <span className="text-[10px] uppercase font-extrabold tracking-wider text-[#8A6413] dark:text-[#E5B65F]">
               {item.subcategory}
             </span>
             {item.discount && (
@@ -107,7 +107,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
               </span>
             )}
             <span className="flex items-center gap-1 text-[11px] text-slate-500 dark:text-gray-400">
-              <Clock size={11} className="text-[#B88728] dark:text-[#E5B65F]" />
+              <Clock size={11} className="text-[#8A6413] dark:text-[#E5B65F]" />
               {item.deliveryTime}
             </span>
           </div>
@@ -197,11 +197,11 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
       <div className="flex flex-col justify-between flex-grow p-4 space-y-3">
         <div className="space-y-1.5">
           <div className="flex items-center justify-between text-[11px] font-semibold text-slate-500 dark:text-gray-400">
-            <span className="uppercase tracking-wider text-[10px] font-bold text-[#B88728] dark:text-[#E5B65F] truncate">
+            <span className="uppercase tracking-wider text-[10px] font-bold text-[#8A6413] dark:text-[#E5B65F] truncate">
               {item.subcategory}
             </span>
             <span className="flex items-center gap-1 flex-shrink-0">
-              <Clock size={11} className="text-[#B88728] dark:text-[#E5B65F]" />
+              <Clock size={11} className="text-[#8A6413] dark:text-[#E5B65F]" />
               {item.deliveryTime}
             </span>
           </div>
@@ -241,7 +241,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
                 ? 'bg-emerald-600 text-white border-emerald-600'
                 : item.workflowType === 'book'
                 ? isLight
-                  ? 'bg-[#B88728] text-white hover:bg-[#967C3B]'
+                  ? 'bg-[#B88728] text-slate-950 hover:bg-[#967C3B]'
                   : 'bg-[#E5B65F] text-black hover:bg-[#d6a54d]'
                 : isLight
                 ? 'bg-slate-100 hover:bg-[#B88728] text-slate-900 hover:text-white border border-slate-200'

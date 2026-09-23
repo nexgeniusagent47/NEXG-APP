@@ -187,7 +187,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                 <span>Explore Home</span>
               </button>
               <span className={isLight ? 'text-slate-300' : 'text-gray-600'}>/</span>
-              <span className={`text-xs sm:text-sm font-extrabold ${isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'}`}>
+              <span className={`text-xs sm:text-sm font-extrabold ${isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'}`}>
                 Spa & Wellness Sanctuaries
               </span>
             </div>
@@ -215,7 +215,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
             }`} />
 
             <div className="relative z-10 p-6 sm:p-12 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-3 bg-[#E5B65F]/20 text-[#B88728] dark:text-[#E5B65F]">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-3 bg-[#E5B65F]/20 text-[#8A6413] dark:text-[#E5B65F]">
                 <Sparkles size={13} />
                 <span>District Holistic Wellness & Spa</span>
               </div>
@@ -264,7 +264,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                 className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold border transition-colors cursor-pointer ${
                   inVillaOnly
                     ? isLight
-                      ? 'bg-[#B88728] text-white border-[#B88728]'
+                      ? 'bg-[#B88728] text-slate-950 border-[#B88728]'
                       : 'bg-[#E5B65F] text-black border-[#E5B65F]'
                     : isLight
                     ? 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'
@@ -358,7 +358,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                           <span className="font-bold">{gRating}</span>
                           <span className="text-[11px] opacity-75">({gCount.toLocaleString()} Google reviews)</span>
                         </div>
-                        <span className="text-[10px] font-bold text-[#B88728] dark:text-[#E5B65F]">
+                        <span className="text-[10px] font-bold text-[#8A6413] dark:text-[#E5B65F]">
                           View Reviews →
                         </span>
                       </button>
@@ -374,7 +374,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                             : 'bg-white/10 hover:bg-white/20 text-white border-white/15'
                         }`}
                       >
-                        <CalendarIcon size={12} className="text-[#B88728] dark:text-[#E5B65F]" />
+                        <CalendarIcon size={12} className="text-[#8A6413] dark:text-[#E5B65F]" />
                         <span>Book Session</span>
                       </button>
 
@@ -425,7 +425,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                     <div className="mt-3">
                       <div className={`w-full py-2.5 rounded-xl font-bold text-xs text-center flex items-center justify-center gap-1.5 transition-colors ${
                         isLight
-                          ? 'bg-[#B88728] text-white group-hover:bg-[#916719]'
+                          ? 'bg-[#B88728] text-slate-950 group-hover:bg-[#916719]'
                           : 'bg-white/10 group-hover:bg-[#E5B65F] text-white group-hover:text-black'
                       }`}>
                         <span>Explore Rituals ({venue.treatments.length} Available)</span>
@@ -627,7 +627,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                       </div>
 
                       <span className={`text-xs font-bold flex items-center gap-1 ${
-                        isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'
+                        isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'
                       }`}>
                         <span>Select Ritual</span>
                         <ChevronRight size={13} />
@@ -663,7 +663,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
           >
             <div className="p-6 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
               <div>
-                <span className="text-[10px] uppercase font-bold tracking-widest text-[#B88728] dark:text-[#E5B65F]">
+                <span className="text-[10px] uppercase font-bold tracking-widest text-[#8A6413] dark:text-[#E5B65F]">
                   Spa Sanctuary Reservation
                 </span>
                 <h3 className="text-xl font-bold">{bookingModalConfig.venueName}</h3>

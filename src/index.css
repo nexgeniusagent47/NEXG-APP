@@ -156,6 +156,36 @@ html.dark {
   --color-gold-line: color-mix(in oklab, #e5b65f 30%, transparent);
 }
 
+/* ------------------------------------------------------------ the dark: variant ---
+   `dark:` MUST follow the class this app writes, not the operating system.
+
+   Tailwind v4's bare `dark:` compiles to `@media (prefers-color-scheme: dark)`. The app
+   sets its own theme by writing `html.dark` / `html.light` from ThemeContext, which is a
+   DIFFERENT axis from the OS preference. With no variant declared, those two axes were
+   silently crossed, and the failure only appeared when they disagreed:
+
+     app=dark  os=dark    0 of 101 elements failed    dark: rules fired, as intended
+     app=dark  os=light  27 of 101                    dark: rules dormant on a dark page
+     app=light os=light  12 of  42                    the gold-on-light failures
+     app=light os=dark   39 of  42                    dark: rules fired on a light page
+
+   Read that as: a visitor whose laptop is in light mode, using the app's dark theme, got
+   light-mode colours on dark surfaces — and a visitor in OS dark mode using the app's
+   light theme got gold-on-white at 1.77:1. Neither is a token that is "wrong"; both are
+   this variant pointing at the wrong signal.
+
+   `&:where(.dark, .dark *)` is the documented class strategy and is what makes the 51
+   `dark:` utilities in this codebase mean what they say. `:where()` keeps specificity at
+   zero so a `dark:` utility still loses to a plain utility in the same layer, which is
+   the behaviour every call site already assumes.
+
+   FIXING THIS AT THE VARIANT IS ALSO THE CHEAP FIX. The alternative was editing ~300
+   component class strings to branch on `isLight`, which is the same change written 300
+   times, and which had already been attempted twice in this session with worse results
+   each time (65 -> 58 -> 71 failures) because the tokens were being changed while the
+   signal stayed broken. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ---------------------------------------------------------------- hero headline ---
    Baked from an accepted live-mode variant and promoted out of the temporary @scope
    scaffolding into real CSS.

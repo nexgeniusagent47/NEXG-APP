@@ -336,7 +336,7 @@ export default function MerchantAdCarousel({
                 <button
                   onClick={requestLocation}
                   disabled={isLocating}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#B88728]/10 dark:bg-[#E5B65F]/15 text-[#B88728] dark:text-[#E5B65F] border border-[#B88728]/25 dark:border-[#E5B65F]/35 hover:bg-[#B88728]/20 transition-colors cursor-pointer"
+                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#B88728]/10 dark:bg-[#E5B65F]/15 text-[#8A6413] dark:text-[#E5B65F] border border-[#B88728]/25 dark:border-[#E5B65F]/35 hover:bg-[#B88728]/20 transition-colors cursor-pointer"
                   title="Enable location to see trending offerings near you"
                 >
                   <Navigation size={12} className={isLocating ? 'animate-spin' : ''} />
@@ -355,7 +355,7 @@ export default function MerchantAdCarousel({
           <button
             onClick={() => onOpenCategories?.()}
             className={`self-start sm:self-auto text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer hover:underline ${
-              isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'
+              isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'
             }`}
           >
             Explore all items &gt;

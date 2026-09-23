@@ -45,7 +45,7 @@ export default function FloatingCartBar() {
           {/* Left: Cart Badge & Details */}
           <div className="flex items-center gap-3">
             <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm shadow-md group-hover:scale-105 transition-transform ${
-              isLight ? 'bg-[#B88728] text-white' : 'bg-[#E5B65F] text-black'
+              isLight ? 'bg-[#B88728] text-slate-950' : 'bg-[#E5B65F] text-black'
             }`}>
               <ShoppingBag size={18} strokeWidth={2.5} />
             </div>
@@ -61,7 +61,7 @@ export default function FloatingCartBar() {
                 </span>
               </div>
               <p className={`text-[11px] font-medium truncate max-w-[180px] sm:max-w-[260px] ${
-                isLight ? 'text-[#B88728]' : 'text-[#E5B65F]'
+                isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'
               }`}>
                 {cartRestaurantName || 'Concierge Order'}
               </p>
@@ -71,7 +71,7 @@ export default function FloatingCartBar() {
           {/* Right: Total and Proceed Pill */}
           <div className={`flex items-center gap-2 px-4 py-2.5 rounded-full font-bold text-sm tracking-wide transition-colors ${
             isLight
-              ? 'bg-[#B88728] text-white group-hover:bg-[#967C3B]'
+              ? 'bg-[#B88728] text-slate-950 group-hover:bg-[#967C3B]'
               : 'bg-[#E5B65F] text-black group-hover:bg-[#d6a54d]'
           }`}>
             <span>${finalTotal.toFixed(2)}</span>

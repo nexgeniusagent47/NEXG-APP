@@ -102,7 +102,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, twoPerScreen = true 
                 isLight ? "text-slate-500" : "text-gray-400"
               )}
             >
-              <Clock className="h-3.5 w-3.5 text-[#B88728] dark:text-[#E5B65F]" />
+              <Clock className="h-3.5 w-3.5 text-[#8A6413] dark:text-[#E5B65F]" />
               <span>{product.deliveryTime}</span>
             </div>
             
@@ -270,7 +270,7 @@ export const ProductCarousel = React.forwardRef<HTMLDivElement, ProductCarouselP
           {viewAllHref && (
             <a
               href={viewAllHref}
-              className="text-xs font-bold text-[#B88728] dark:text-[#E5B65F] hover:underline"
+              className="text-xs font-bold text-[#8A6413] dark:text-[#E5B65F] hover:underline"
             >
               View All &rarr;
             </a>

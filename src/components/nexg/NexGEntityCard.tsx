@@ -75,7 +75,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
           <div className="space-y-1">
             <div className="flex items-center justify-between gap-1">
               {entity.category && (
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#B88728] dark:text-[#E5B65F] truncate">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#8A6413] dark:text-[#E5B65F] truncate">
                   {entity.category}
                 </span>
               )}
@@ -105,13 +105,13 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
             <div className="flex items-center gap-3 text-xs">
               {entity.deliveryTime && (
                 <span className="flex items-center gap-1 text-[11px] font-medium text-slate-500 dark:text-gray-400">
-                  <Clock size={11} className="text-[#B88728] dark:text-[#E5B65F]" />
+                  <Clock size={11} className="text-[#8A6413] dark:text-[#E5B65F]" />
                   {entity.deliveryTime}
                 </span>
               )}
               {entity.duration && (
                 <span className="flex items-center gap-1 text-[11px] font-medium text-slate-500 dark:text-gray-400">
-                  <Clock size={11} className="text-[#B88728] dark:text-[#E5B65F]" />
+                  <Clock size={11} className="text-[#8A6413] dark:text-[#E5B65F]" />
                   {entity.duration}
                 </span>
               )}
@@ -166,7 +166,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
               </div>
             )}
             {entity.price !== undefined && (
-              <p className="font-extrabold text-[#B88728] dark:text-[#E5B65F]">
+              <p className="font-extrabold text-[#8A6413] dark:text-[#E5B65F]">
                 KSh {entity.price.toLocaleString()}
               </p>
             )}
@@ -229,13 +229,13 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
             )}
             {entity.deliveryTime && (
               <div className="flex items-center gap-1 font-medium text-slate-500 dark:text-gray-400">
-                <Clock className="w-3.5 h-3.5 text-[#B88728] dark:text-[#E5B65F]" />
+                <Clock className="w-3.5 h-3.5 text-[#8A6413] dark:text-[#E5B65F]" />
                 <span>{entity.deliveryTime}</span>
               </div>
             )}
             {entity.duration && (
               <div className="flex items-center gap-1 font-medium text-slate-500 dark:text-gray-400">
-                <Clock className="w-3.5 h-3.5 text-[#B88728] dark:text-[#E5B65F]" />
+                <Clock className="w-3.5 h-3.5 text-[#8A6413] dark:text-[#E5B65F]" />
                 <span>{entity.duration}</span>
               </div>
             )}
@@ -307,7 +307,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
       <div className="flex flex-col justify-between flex-grow p-4 space-y-2.5">
         <div className="space-y-1">
           {entity.category && (
-            <span className="uppercase tracking-wider text-[10px] font-bold text-[#B88728] dark:text-[#E5B65F] block truncate">
+            <span className="uppercase tracking-wider text-[10px] font-bold text-[#8A6413] dark:text-[#E5B65F] block truncate">
               {entity.category}
             </span>
           )}

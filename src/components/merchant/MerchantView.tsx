@@ -386,7 +386,7 @@ export default function MerchantView({
                             'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B88728]',
                             active
                               ? isLight
-                                ? 'bg-[#B88728] text-white'
+                                ? 'bg-[#B88728] text-slate-950'
                                 : 'bg-[#E5B65F] text-black'
                               : isLight
                                 ? 'bg-white text-slate-700 border border-slate-200 hover:border-[#B88728]/60'
