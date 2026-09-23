@@ -156,7 +156,7 @@ export default function DockedSearchBar({
             className={cn(
               'absolute right-1.5 top-1/2 -translate-y-1/2 px-4 py-2 rounded-lg font-bold text-xs transition cursor-pointer shadow-sm active:scale-95',
               isLight
-                ? 'bg-[#B88728] hover:bg-[#9e721d] text-white'
+                ? 'bg-[#B88728] hover:bg-[#9e721d] text-slate-950'
                 : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-black'
             )}
           >

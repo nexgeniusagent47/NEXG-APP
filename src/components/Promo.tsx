@@ -105,7 +105,7 @@ export default function Promo({ onNavigate }: PromoProps) {
               </p>
               <span className={`font-semibold flex items-center gap-1.5 text-[12px] sm:text-xs transition-colors ${
                 isLight
-                  ? 'text-[#B88728] group-hover:text-[#967C3B]'
+                  ? 'text-[#8A6413] group-hover:text-[#967C3B]'
                   : 'text-[#E5B65F] group-hover:text-[#ffddb1]'
               }`}>
                 {t.promo.merchantsCta} <ArrowRight size={14} />
@@ -143,7 +143,7 @@ export default function Promo({ onNavigate }: PromoProps) {
               </p>
               <span className={`font-semibold flex items-center gap-1.5 text-[12px] sm:text-xs transition-colors ${
                 isLight
-                  ? 'text-[#B88728] group-hover:text-[#967C3B]'
+                  ? 'text-[#8A6413] group-hover:text-[#967C3B]'
                   : 'text-[#E5B65F] group-hover:text-[#ffddb1]'
               }`}>
                 {t.promo.couriersCta} <ArrowRight size={14} />
@@ -181,7 +181,7 @@ export default function Promo({ onNavigate }: PromoProps) {
               </p>
               <span className={`font-semibold flex items-center gap-1.5 text-[12px] sm:text-xs transition-colors ${
                 isLight
-                  ? 'text-[#B88728] group-hover:text-[#967C3B]'
+                  ? 'text-[#8A6413] group-hover:text-[#967C3B]'
                   : 'text-[#E5B65F] group-hover:text-[#ffddb1]'
               }`}>
                 {t.promo.propertiesCta} <ArrowRight size={14} />

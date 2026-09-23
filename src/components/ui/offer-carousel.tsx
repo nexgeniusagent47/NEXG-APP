@@ -181,7 +181,7 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer, twoPerScreen = true
               </span>
               <div
                 className={cn(
-                  "w-7 h-7 rounded-full flex items-center justify-center transform transition duration-300 group-hover:rotate-[-45deg] group-hover:bg-[#B88728] group-hover:text-white flex-shrink-0",
+                  "w-7 h-7 rounded-full flex items-center justify-center transform transition duration-300 group-hover:rotate-[-45deg] group-hover:bg-[#B88728] group-hover:text-slate-950 flex-shrink-0",
                   isLight ? "bg-slate-100 text-slate-800" : "bg-white/10 text-white"
                 )}
               >

@@ -422,7 +422,7 @@ export const NexGItemSheet: React.FC = () => {
                             className={cn(
                               'w-5 h-5 rounded-md flex items-center justify-center text-xs font-bold border transition-colors',
                               isChecked
-                                ? 'bg-[#B88728] dark:bg-[#E5B65F] text-white dark:text-black border-transparent'
+                                ? 'bg-[#B88728] dark:bg-[#E5B65F] text-slate-950 dark:text-black border-transparent'
                                 : 'border-slate-300 dark:border-white/20'
                             )}
                           >
@@ -500,7 +500,7 @@ export const NexGItemSheet: React.FC = () => {
                 sheetState === 'SUCCESS'
                   ? 'bg-emerald-600 text-white'
                   : isLight
-                  ? 'bg-[#B88728] hover:bg-[#967C3B] text-white'
+                  ? 'bg-[#B88728] hover:bg-[#967C3B] text-slate-950'
                   : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-black'
               )}
             >

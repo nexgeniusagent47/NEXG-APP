@@ -82,7 +82,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
               onClick={() => onNavigate?.('merchant_onboarding')}
               className={`px-4 py-2 rounded-full font-bold text-xs transition cursor-pointer shadow-xs active:scale-95 ${
                 isLight 
-                  ? 'bg-[#B88728] hover:bg-[#9e721d] text-white'
+                  ? 'bg-[#B88728] hover:bg-[#9e721d] text-slate-950'
                   : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-[#291800]'
               }`}
             >
@@ -205,7 +205,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
             <h1 className={`font-bold text-3xl sm:text-5xl lg:text-6xl mb-3 sm:mb-4 leading-[1.15] tracking-tight ${isLight ? 'text-slate-900 drop-shadow-sm' : 'text-white'}`}>
               Reach Customers.
             </h1>
-            <p className="text-[#E5B65F] text-lg sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6 tracking-tight">
+            <p className={`text-lg sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6 tracking-tight ${isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'}`}>
               Right Where They Are.
             </p>
             <p className={`text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-10 max-w-2xl leading-relaxed ${isLight ? 'text-slate-700 font-medium' : 'text-gray-200'}`}>
@@ -227,7 +227,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
       <section className={`border-y transition-colors duration-300 ${isLight ? 'bg-white border-slate-200 shadow-sm' : 'bg-white/[0.02] border-white/5'}`}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 py-10 sm:py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           <div className="text-center sm:text-left">
-            <div className="font-bold text-3xl sm:text-4xl text-[#E5B65F] mb-1">3x</div>
+            <div className={`font-bold text-3xl sm:text-4xl mb-1 ${isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'}`}>3x</div>
             <div className={`text-[10px] sm:text-xs uppercase tracking-wider font-semibold ${isLight ? 'text-slate-500' : 'text-[#a0a1a1]'}`}>Higher Avg. Order Value</div>
           </div>
           <div className="text-center sm:text-left">
@@ -266,7 +266,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
               Verified Properties
             </span>
             <span className={`hidden sm:inline font-light ${isLight ? 'text-slate-300' : 'text-gray-600'}`}>|</span>
-            <span className="text-xs sm:text-sm md:text-base font-bold text-[#E5B65F] tracking-tight flex items-center gap-1.5">
+            <span className={`text-xs sm:text-sm md:text-base font-bold tracking-tight flex items-center gap-1.5 ${isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'}`}>
               <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>
               Consistent Orders
             </span>

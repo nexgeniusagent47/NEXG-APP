@@ -166,7 +166,7 @@ export default function OrderTrackingModal() {
                 onClick={advanceOrderSimulation}
                 className={`flex items-center gap-1.5 px-3 py-1 rounded-full font-bold text-[11px] transition-colors cursor-pointer shadow-sm ${
                   isLight
-                    ? 'bg-[#B88728] hover:bg-[#967C3B] text-white'
+                    ? 'bg-[#B88728] hover:bg-[#967C3B] text-slate-950'
                     : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-black'
                 }`}
                 title="Fast forward simulation to next lifecycle stage"
@@ -414,7 +414,7 @@ export default function OrderTrackingModal() {
                       onClick={() => alert(`App chat with ${activeOrder.courier.name}: "Hello! I am on my way with your heated thermal pack."`)}
                       className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors cursor-pointer ${
                         isLight
-                          ? 'bg-[#B88728] hover:bg-[#967C3B] text-white'
+                          ? 'bg-[#B88728] hover:bg-[#967C3B] text-slate-950'
                           : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-black'
                       }`}
                       title="Message Courier"

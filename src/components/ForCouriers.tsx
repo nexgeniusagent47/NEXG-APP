@@ -145,7 +145,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               onClick={() => onNavigate('courier_onboarding')}
               className={`px-4 py-2 rounded-full font-bold text-xs transition cursor-pointer shadow-xs active:scale-95 ${
                 isLight 
-                  ? 'bg-[#B88728] hover:bg-[#9e721d] text-white'
+                  ? 'bg-[#B88728] hover:bg-[#9e721d] text-slate-950'
                   : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-[#291800]'
               }`}
             >
@@ -1343,7 +1343,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               />
               <button className={`rounded-r-xl px-4 flex items-center justify-center transition-colors cursor-pointer ${
                 isLight
-                  ? 'bg-[#B88728] hover:bg-[#9e721d] text-white'
+                  ? 'bg-[#B88728] hover:bg-[#9e721d] text-slate-950'
                   : 'bg-[#E5B65F] hover:bg-[#ffddb1] text-[#291800]'
               }`}>
                 <ArrowRight size={18} />

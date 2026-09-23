@@ -247,7 +247,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
                 {entity.pricePrefix} KSh {entity.price.toLocaleString()} {entity.priceSuffix}
               </span>
             )}
-            <div className="w-8 h-8 rounded-full bg-[#B88728] dark:bg-[#E5B65F] text-white dark:text-black flex items-center justify-center transition-transform group-hover:scale-110">
+            <div className="w-8 h-8 rounded-full bg-[#B88728] dark:bg-[#E5B65F] text-slate-950 dark:text-black flex items-center justify-center transition-transform group-hover:scale-110">
               <ArrowRight className="w-4 h-4" />
             </div>
           </div>
@@ -348,7 +348,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
 
           <div
             className={cn(
-              'w-7 h-7 rounded-full flex items-center justify-center transform transition duration-300 group-hover:translate-x-0.5 group-hover:bg-[#B88728] group-hover:text-white',
+              'w-7 h-7 rounded-full flex items-center justify-center transform transition duration-300 group-hover:translate-x-0.5 group-hover:bg-[#B88728] group-hover:text-slate-950',
               isLight ? 'bg-slate-100 text-slate-700' : 'bg-white/10 text-gray-200'
             )}
           >

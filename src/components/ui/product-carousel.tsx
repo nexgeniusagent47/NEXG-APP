@@ -166,7 +166,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, twoPerScreen = true 
                 isAdded
                   ? "bg-emerald-600 text-white border border-emerald-600"
                   : isLight
-                    ? "border border-slate-200 bg-[#B88728]/10 text-[#B88728] hover:bg-[#B88728] hover:text-white"
+                    ? // #8A6413, not #B88728: the fill gold is 3.21:1 as text on white and
+                      // DESIGN.md records #8A6413 as the 5.37:1 alternative for exactly this.
+                      // The hover fill is #B88728, where white text is 3.21:1; slate-950 on the
+                      // same fill is 5.55:1 and is DESIGN.md's documented inverse on accent.
+                      "border border-slate-200 bg-[#B88728]/10 text-[#8A6413] hover:bg-[#B88728] hover:text-slate-950"
                     : "border border-white/15 bg-[#E5B65F]/15 text-[#E5B65F] hover:bg-[#E5B65F] hover:text-black"
               )}
             >

@@ -460,7 +460,7 @@ export default function CartDrawer() {
                   onClick={handleProceedToCheckout}
                   className={`w-full flex items-center justify-between px-6 py-4 rounded-full font-bold text-base transition transform active:scale-[0.98] shadow-lg cursor-pointer ${
                     isLight
-                      ? 'bg-[#B88728] hover:bg-[#967C3B] text-white shadow-[#B88728]/20'
+                      ? 'bg-[#B88728] hover:bg-[#967C3B] text-slate-950 shadow-[#B88728]/20'
                       : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-black shadow-[#E5B65F]/20'
                   }`}
                 >

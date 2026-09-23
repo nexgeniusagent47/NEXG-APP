@@ -136,7 +136,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               onClick={() => onNavigate('merchant_onboarding')}
               className={`px-4 py-2 rounded-full font-bold text-xs transition cursor-pointer shadow-xs active:scale-95 ${
                 isLight 
-                  ? 'bg-[#B88728] hover:bg-[#9e721d] text-white'
+                  ? 'bg-[#B88728] hover:bg-[#9e721d] text-slate-950'
                   : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-[#291800]'
               }`}
             >

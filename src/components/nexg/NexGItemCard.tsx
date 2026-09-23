@@ -129,7 +129,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
               justAdded
                 ? 'bg-emerald-600 text-white'
                 : isLight
-                ? 'bg-white/95 text-slate-900 hover:bg-[#B88728] hover:text-white'
+                ? 'bg-white/95 text-slate-900 hover:bg-[#B88728] hover:text-slate-950'
                 : 'bg-black/90 text-white hover:bg-[#E5B65F] hover:text-black'
             )}
           >
@@ -244,7 +244,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
                   ? 'bg-[#B88728] text-slate-950 hover:bg-[#967C3B]'
                   : 'bg-[#E5B65F] text-black hover:bg-[#d6a54d]'
                 : isLight
-                ? 'bg-slate-100 hover:bg-[#B88728] text-slate-900 hover:text-white border border-slate-200'
+                ? 'bg-slate-100 hover:bg-[#B88728] text-slate-900 hover:text-slate-950 border border-slate-200'
                 : 'bg-white/10 hover:bg-[#E5B65F] text-white hover:text-black border border-white/10'
             )}
           >

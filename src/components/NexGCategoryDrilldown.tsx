@@ -836,7 +836,7 @@ export default function NexGCategoryDrilldown({
                         className={`px-4 py-2.5 rounded-xl font-bold text-xs flex items-center gap-1.5 transition cursor-pointer shadow-md active:scale-95 ${
                           item.workflowType === 'order'
                             ? isLight
-                              ? 'bg-[#B88728] hover:bg-[#9e721d] text-white'
+                              ? 'bg-[#B88728] hover:bg-[#9e721d] text-slate-950'
                               : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-black'
                             : isLight
                             ? 'bg-slate-900 hover:bg-black text-white'
@@ -968,7 +968,7 @@ export default function NexGCategoryDrilldown({
                     type="submit"
                     className={`w-full py-3 rounded-xl font-bold text-sm transition cursor-pointer shadow-lg active:scale-98 ${
                       isLight
-                        ? 'bg-[#B88728] hover:bg-[#9e721d] text-white'
+                        ? 'bg-[#B88728] hover:bg-[#9e721d] text-slate-950'
                         : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-black'
                     }`}
                   >
