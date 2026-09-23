@@ -123,7 +123,7 @@ export default function LanguageSwitcher({
           className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border text-xs font-semibold transition cursor-pointer backdrop-blur-md ${
             isLight
               ? 'bg-white/80 hover:bg-white border-slate-200 text-slate-700 shadow-xs'
-              : 'bg-white/10 hover:bg-white/15 border-white/15 text-gray-200 shadow-xs'
+              : 'bg-white/10 hover:bg-white/15 border-white/15 text-gray-200 onboarding-text-muted shadow-xs'
           }`}
           aria-expanded={isOpen}
           aria-label="Select Regional Language"
@@ -224,7 +224,7 @@ export default function LanguageSwitcher({
         className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl border text-xs font-bold transition cursor-pointer backdrop-blur-md active:scale-95 ${
           isLight
             ? 'bg-slate-100/90 hover:bg-slate-200/90 border-slate-200 text-slate-800 shadow-2xs'
-            : 'bg-white/10 hover:bg-white/20 border-white/15 text-gray-200 shadow-2xs'
+            : 'bg-white/10 hover:bg-white/20 border-white/15 text-gray-200 onboarding-text-muted shadow-2xs'
         }`}
         aria-expanded={isOpen}
         aria-label="Language Selector"

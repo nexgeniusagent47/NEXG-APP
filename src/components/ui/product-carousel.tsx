@@ -152,7 +152,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, twoPerScreen = true 
                 KSh {product.price.toLocaleString()}
               </span>
               {product.originalPrice && (
-                <span className="text-xs text-slate-600 line-through">
+                /* Theme-aware, unlike this line until now. The card branches on `isLight`
+                   everywhere else and this one did not, so it rendered #475569 - a dark slate -
+                   on the dark card at 2.3:1 while the actual price beside it was correctly white.
+                   It is the "was" figure: secondary, but still a price, and 2.3:1 is not legible.
+                   slate-400 is the dark-mode floor DESIGN.md documents at 6.86:1 on the card;
+                   slate-600 is 7.58:1 on white. */
+                <span className={cn('text-xs line-through', isLight ? 'text-slate-600' : 'text-slate-400')}>
                   KSh {product.originalPrice.toLocaleString()}
                 </span>
               )}

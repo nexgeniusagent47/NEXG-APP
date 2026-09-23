@@ -795,7 +795,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
             <LanguageSwitcher />
             <button
               onClick={() => onNavigate?.('home')}
-              className="text-xs font-bold uppercase tracking-wider text-amber-800 hover:text-[#B88728] transition-colors flex items-center gap-1.5 cursor-pointer bg-slate-50 hover:bg-amber-50 border border-slate-200 hover:border-amber-200 px-3 py-1.5 rounded-xl"
+              className="text-xs font-bold uppercase tracking-wider text-amber-800 onboarding-text-amber hover:text-[#B88728] transition-colors flex items-center gap-1.5 cursor-pointer bg-slate-50 hover:bg-amber-50 border border-slate-200 hover:border-amber-200 px-3 py-1.5 rounded-xl"
             >
               {renderIcon('ArrowLeft', 'w-3.5 h-3.5')} {t.partnersPortal.backToSite}
             </button>

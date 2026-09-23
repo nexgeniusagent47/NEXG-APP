@@ -849,3 +849,49 @@ html.light .hero-wipe__support {
     line-height: 1.05;
   }
 }
+
+/* ---------------------------------------------------------- onboarding text roles ---
+   A ROLE, not a step on a scale.
+
+   `.onboarding-theme` inverts the whole neutral scale, so `--color-slate-200` is #23282f inside
+   it - a DARK value - while the same token outside that scope is the ordinary light #e2e8f0. A
+   component that renders in BOTH scopes therefore cannot name a scale step and be correct in
+   both, and one does exactly that today: the language switcher lives in the onboarding header
+   AND in the site header on every other route.
+
+   Swapping its token to `text-slate-600` was tried. It measured 9.01:1 inside onboarding and took
+   the app from 4 contrast failures to 20, because outside that scope slate-600 is #475569 -
+   2.27:1 on the home header. Correct in one scope, wrong in the other. That is why this defect
+   survived three rounds of token work: every earlier fix was a token wrong everywhere, and this
+   one is not.
+
+   So the surface declares what it MEANS rather than which step it wants:
+
+     .onboarding-text-muted   secondary text on an onboarding surface
+
+   Scoped to the DARK onboarding theme, where the inversion is what makes it necessary. In the
+   light onboarding theme and everywhere else these classes are inert, so adding one to an
+   element is safe regardless of which scope renders it - the property a component shared across
+   scopes actually needs.
+
+   #b3bac3 is the dark table's slate-600, chosen because it clears AA on every surface the
+   onboarding pages use: 9.01:1 on the header (#16191d), 9.59:1 on the page (#0f1216). The next
+   step down, slate-500 at 6.74:1, also passes but is the muted step and this role is for text
+   that has to be read. */
+html.dark .onboarding-theme .onboarding-text-muted {
+  color: #b3bac3;
+}
+
+/* The same problem, for a SEMANTIC colour rather than a neutral.
+   `text-amber-800` is #92400e. On the light amber pill it sits on (#fef3c7) that is 6.37:1 and
+   correct; on the dark onboarding page it is 2.65:1 and unreadable. The token is not wrong - the
+   surface under it is inverted while the semantic colour is not, so one value cannot serve both.
+
+   amber-500 (#f59e0b) is the palette's own dark-mode step and measures 8.74:1 on the page and
+   8.21:1 on the header. Applied ONLY to the standalone text use, via this class; the pill keeps
+   amber-800 and its 6.37:1, because the pill's background is light in both themes.
+
+   Scoped to the dark onboarding theme again, so adding the class anywhere is inert outside it. */
+html.dark .onboarding-theme .onboarding-text-amber {
+  color: #f59e0b;
+}
