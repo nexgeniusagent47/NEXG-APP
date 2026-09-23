@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { 
   X, 
   Star, 
@@ -81,6 +82,7 @@ export default function UnifiedItemModal({
   onAddToCart,
   onBookNow,
 }: UnifiedItemModalProps) {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
 
   // State
@@ -322,17 +324,13 @@ export default function UnifiedItemModal({
                   <button
                     onClick={() => setShowGoogleReviewsModal(true)}
                     className="px-2.5 py-1 rounded-lg bg-[#E5B65F]/15 text-[#E5B65F] font-bold text-[11px] hover:bg-[#E5B65F]/25 transition-colors cursor-pointer"
-                  >
-                    View All Reviews
-                  </button>
+                  >{t.ui.unifiedItemModal.s_0125ec}</button>
                 </div>
               </div>
 
               {/* Description */}
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#E5B65F] mb-1.5">
-                  About this offering
-                </h4>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#E5B65F] mb-1.5">{t.ui.unifiedItemModal.s_ee3e2e}</h4>
                 <p
                   className={`text-sm leading-relaxed ${
                     isLight ? 'text-slate-700' : 'text-gray-300'
@@ -363,9 +361,7 @@ export default function UnifiedItemModal({
               {/* Dynamic Durations (For Spa) */}
               {item.durations && item.durations.length > 0 && (
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#E5B65F] mb-2">
-                    Select Ritual Duration
-                  </label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#E5B65F] mb-2">{t.ui.unifiedItemModal.s_a027ba}</label>
                   <div className="grid grid-cols-3 gap-3">
                     {item.durations.map((d, index) => (
                       <button
@@ -391,9 +387,7 @@ export default function UnifiedItemModal({
               {/* Essential Oils (For Spa) */}
               {item.availableOils && item.availableOils.length > 0 && (
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#E5B65F] mb-2">
-                    Aromatherapy Essential Oil
-                  </label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#E5B65F] mb-2">{t.ui.unifiedItemModal.s_1cc3d0}</label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {item.availableOils.map((oil) => (
                       <button
@@ -463,9 +457,7 @@ export default function UnifiedItemModal({
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-1.5">
                       <CalendarIcon className="w-4 h-4 text-[#E5B65F]" />
-                      <span className="text-xs font-bold uppercase tracking-wider text-[#E5B65F]">
-                        Dedicated Appointment Calendar
-                      </span>
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#E5B65F]">{t.ui.unifiedItemModal.s_3c0047}</span>
                     </div>
                     <button
                       type="button"
@@ -493,14 +485,12 @@ export default function UnifiedItemModal({
 
               {/* Special Instructions */}
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#E5B65F] mb-1.5">
-                  App Notes & Villa Details
-                </label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#E5B65F] mb-1.5">{t.ui.unifiedItemModal.s_4c13f0}</label>
                 <textarea
                   rows={2}
                   value={specialNotes}
                   onChange={(e) => setSpecialNotes(e.target.value)}
-                  placeholder="E.g. Villa Suite 402, gate access code, dietary allergies, or arrival notes..."
+                  placeholder={t.ui.unifiedItemModal.s_5d14d6}
                   className={`w-full p-3 rounded-xl border text-xs outline-none transition-colors ${
                     isLight
                       ? 'bg-slate-50 border-slate-200 text-slate-900 focus:border-[#E5B65F]'
@@ -531,9 +521,7 @@ export default function UnifiedItemModal({
             }`}
           >
             <div>
-              <div className={`text-[11px] ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                Total Estimate
-              </div>
+              <div className={`text-[11px] ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.unifiedItemModal.s_ee749a}</div>
               <div className="text-xl sm:text-2xl font-bold text-[#E5B65F]">
                 ${totalPrice.toFixed(2)}{' '}
                 {item.priceUnitLabel && (
@@ -578,12 +566,12 @@ export default function UnifiedItemModal({
                 {item.hasCalendarBooking ? (
                   <>
                     <CalendarIcon className="w-4 h-4" />
-                    <span>Confirm Calendar Reservation</span>
+                    <span>{t.ui.unifiedItemModal.s_94c578}</span>
                   </>
                 ) : (
                   <>
                     <ShoppingBag className="w-4 h-4" />
-                    <span>Add to App Cart</span>
+                    <span>{t.ui.unifiedItemModal.s_bf3b18}</span>
                   </>
                 )}
               </button>

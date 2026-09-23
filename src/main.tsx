@@ -1,6 +1,6 @@
 import {StrictMode, useEffect} from 'react';
 import {createRoot} from 'react-dom/client';
-import App from './App.tsx';
+import { AppProviders, AppContent } from './App.tsx';
 import ConsentBanner from './components/consent/ConsentBanner.tsx';
 import {useAnalytics} from './hooks/useAnalytics.ts';
 import {flushTelemetry} from './lib/telemetry.ts';
@@ -31,7 +31,14 @@ function ConsentAndTelemetry() {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
-    <ConsentAndTelemetry />
+    {/* The providers wrap BOTH children, not just the application.
+        The banner is deliberately a sibling of <App /> — it has to outlive route changes and its
+        click capture must be installed before the first lazy page loads. With the providers inside
+        <App />, that sibling sat outside them, and when the banner gained a useLanguage() call the
+        hook threw and the whole application rendered blank. The provider belongs above both. */}
+    <AppProviders>
+      <AppContent />
+      <ConsentAndTelemetry />
+    </AppProviders>
   </StrictMode>,
 );

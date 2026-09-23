@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { ArrowUp } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useTheme } from '../context/ThemeContext';
 
 export default function ScrollToTop() {
+  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   const { isLight } = useTheme();
 
@@ -37,7 +39,7 @@ export default function ScrollToTop() {
           exit={{ opacity: 0, scale: 0.8, y: 20 }}
           transition={{ duration: 0.2 }}
           onClick={scrollToTop}
-          aria-label="Scroll to top"
+          aria-label={t.ui.scrollToTop.s_f07710}
           className={`fixed right-6 sm:right-8 z-40 p-3 rounded-full shadow-xl backdrop-blur-xl border transition cursor-pointer group hover:scale-110 active:scale-95 ${
             isLight
               ? 'bg-white/90 hover:bg-white text-[#B88728] border-amber-300/80 shadow-amber-900/10'

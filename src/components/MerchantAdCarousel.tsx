@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { MapPin, Sparkles, Navigation } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useCart } from '../context/CartContext';
@@ -15,6 +16,7 @@ export default function MerchantAdCarousel({
   onNavigate,
   onOpenCategories,
 }: MerchantAdCarouselProps) {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
   const { addToCart, setIsCartOpen } = useCart();
 
@@ -337,7 +339,7 @@ export default function MerchantAdCarousel({
                   onClick={requestLocation}
                   disabled={isLocating}
                   className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#B88728]/10 dark:bg-[#E5B65F]/15 text-[#7d5a11] dark:text-[#E5B65F] border border-[#B88728]/25 dark:border-[#E5B65F]/35 hover:bg-[#B88728]/20 transition-colors cursor-pointer"
-                  title="Enable location to see trending offerings near you"
+                  title={t.ui.merchantAdCarousel.s_430fac}
                 >
                   <Navigation size={12} className={isLocating ? 'animate-spin' : ''} />
                   <span>{isLocating ? 'Detecting...' : 'Enable location'}</span>
@@ -384,9 +386,7 @@ export default function MerchantAdCarousel({
             >
               Sponsored
             </h2>
-            <p className={`text-xs mt-0.5 font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-              Exclusive host and verified partner privileges
-            </p>
+            <p className={`text-xs mt-0.5 font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.merchantAdCarousel.s_3340de}</p>
           </div>
 
           <span
@@ -395,9 +395,7 @@ export default function MerchantAdCarousel({
                 ? 'bg-slate-100 border-slate-200 text-slate-700'
                 : 'bg-white/5 border-white/10 text-gray-300'
             }`}
-          >
-            PARTNER SPOTLIGHT
-          </span>
+          >{t.ui.merchantAdCarousel.s_2d4e52}</span>
         </div>
 
         {/* A continuous rail rather than the paging carousel.
@@ -407,7 +405,7 @@ export default function MerchantAdCarousel({
             the wrap lands on an identical frame. It also has no end state, which is
             what "sponsored" wants — the rail is texture, not something to finish. */}
         <InfiniteMarquee
-          label="Sponsored partner offers"
+          label={t.ui.merchantAdCarousel.s_297522}
           pixelsPerSecond={38}
           className={
             isLight

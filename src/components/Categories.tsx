@@ -107,9 +107,7 @@ export default function Categories({ onNavigate }: { onNavigate?: (page: string)
             <div className="absolute top-0 left-0 p-6 sm:p-7 z-10 w-4/5">
               <span className={`text-[10px] uppercase font-extrabold tracking-widest px-2.5 py-0.5 rounded-full inline-block mb-2 border ${
                 isLight ? 'bg-amber-50/90 text-[#B88728] border-amber-200 shadow-2xs' : 'bg-white/10 text-[#E5B65F] border-white/10'
-              }`}>
-                Browse Partners
-              </span>
+              }`}>{t.ui.categories.s_1a9863}</span>
               <h3 className={`text-lg sm:text-[22px] font-bold mb-1.5 tracking-tight leading-tight ${
                 isLight ? 'text-slate-900' : 'text-white'
               }`}>

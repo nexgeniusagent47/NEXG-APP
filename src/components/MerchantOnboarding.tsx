@@ -789,7 +789,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                 theme needs its own, which is what DESIGN.md documents. */}
             <span className="font-extrabold text-2xl tracking-widest font-sans hover:text-amber-500 transition-colors text-[#7d5a11] dark:text-[#E5B65F] shrink-0">NEXG</span>
             <span className="text-slate-300 font-light shrink-0">|</span>
-            <span className="text-sm font-semibold tracking-wide uppercase text-slate-600 hover:text-slate-900 transition-colors truncate">Merchant Portal</span>
+            <span className="text-sm font-semibold tracking-wide uppercase text-slate-600 hover:text-slate-900 transition-colors truncate">{t.ui.merchantOnboarding.s_d33bf6}</span>
           </div>
           <div className="flex items-center gap-4 shrink-0">
             <LanguageSwitcher />
@@ -837,8 +837,8 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
           {/* Main Card Hero/Title banner */}
           <div className="bg-gradient-to-r from-slate-950 to-slate-900 px-8 py-8 md:px-10 text-white relative overflow-hidden">
             <div className="absolute right-0 top-0 w-32 h-32 bg-gradient-to-tr from-[#E5B65F] to-amber-500 opacity-20 rounded-full blur-2xl"></div>
-            <h1 className="text-2xl md:text-3xl font-extrabold font-sans tracking-tight">Expand Your Business with NEXG</h1>
-            <p className="text-slate-300 mt-2 text-xs md:text-sm">Provide premium white-glove deliveries & concierge orders to luxury customers in Kenya.</p>
+            <h1 className="text-2xl md:text-3xl font-extrabold font-sans tracking-tight">{t.ui.merchantOnboarding.s_a03653}</h1>
+            <p className="text-slate-300 mt-2 text-xs md:text-sm">{t.ui.merchantOnboarding.s_67de19}</p>
           </div>
 
           <div className="px-6 py-8 md:px-10">
@@ -850,9 +850,9 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   <div className="w-8 h-8 rounded-lg bg-gold-tint text-gold flex items-center justify-center font-bold">
                     {renderIcon('Store', 'w-4 h-4')}
                   </div>
-                  <h2 className="text-xl md:text-2xl font-bold text-slate-950">Choose Category</h2>
+                  <h2 className="text-xl md:text-2xl font-bold text-slate-950">{t.ui.merchantOnboarding.s_b9084a}</h2>
                 </div>
-                <p className="text-slate-600 text-sm">Choose the category that best aligns with your merchant store operations. Use search or filter down instantly.</p>
+                <p className="text-slate-600 text-sm">{t.ui.merchantOnboarding.s_c05283}</p>
 
                 {/* Filter Search */}
                 <div className="relative max-w-md">
@@ -864,7 +864,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                     value={categorySearch}
                     onChange={(e) => setCategorySearch(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 border border-slate-200 rounded-2xl text-sm focus:ring-2 focus:ring-[#E5B65F] focus:outline-none focus:border-transparent transition-colors"
-                    placeholder="Search categories e.g. Food, Safe, Spa, Flight..."
+                    placeholder={t.ui.merchantOnboarding.s_a0b2cf}
                   />
                 </div>
 
@@ -923,7 +923,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Select Business Type in {selectedCategory.name}</h2>
                 </div>
-                <p className="text-slate-600 text-sm">You can select multiple specific types if your outlet handles different luxury segments.</p>
+                <p className="text-slate-600 text-sm">{t.ui.merchantOnboarding.s_5fa789}</p>
 
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {selectedCategory.subcategories.map(sub => {
@@ -942,7 +942,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           {isSelected ? (
                             <span className="text-[10px] text-amber-800 font-extrabold mt-1 block">✓ Added</span>
                           ) : (
-                            <span className="text-[10px] text-slate-400 mt-1 block">Click to add</span>
+                            <span className="text-[10px] text-slate-400 mt-1 block">{t.ui.merchantOnboarding.s_a133eb}</span>
                           )}
                         </div>
                       </div>
@@ -962,7 +962,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       {renderIcon(selectedCategory.icon, "w-5 h-5")}
                     </div>
                     <div>
-                      <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">You selected</p>
+                      <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">{t.ui.merchantOnboarding.s_3fa081}</p>
                       <h4 className="font-extrabold text-base">{selectedCategory.name}</h4>
                       <p className="text-xs text-amber-400 font-medium">{selectedSubcategories.map(s => s.name).join(', ')}</p>
                     </div>
@@ -1085,12 +1085,12 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                     <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
                       {renderIcon('Briefcase', 'w-4 h-4 text-amber-500')} Catalog Sections Setup
                     </h3>
-                    <p className="text-xs text-slate-600 mt-1">Based on your category, select common sections to organize your items or add custom ones.</p>
+                    <p className="text-xs text-slate-600 mt-1">{t.ui.merchantOnboarding.s_26a2ff}</p>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50 p-6 rounded-2xl border border-slate-100">
                     <div className="space-y-4">
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-slate-600">Suggested Sections</h4>
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-slate-600">{t.ui.merchantOnboarding.s_540d0d}</h4>
                       <div className="flex flex-wrap gap-1.5">
                         {SUGGESTED_SECTIONS[selectedCategory.id]?.map(secName => {
                           const isSelected = selectedCatalogSections.some(s => s.name === secName);
@@ -1112,7 +1112,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       <h4 className="text-xs font-bold uppercase tracking-wider text-slate-600">Active Sections ({selectedCatalogSections.length})</h4>
                       <div className="space-y-2 max-h-[220px] overflow-y-auto pr-2">
                         {selectedCatalogSections.length === 0 ? (
-                          <p className="text-xs italic text-slate-400">None selected yet. Choose suggestions or add a custom one below.</p>
+                          <p className="text-xs italic text-slate-400">{t.ui.merchantOnboarding.s_411097}</p>
                         ) : (
                           selectedCatalogSections.map((sec, idx) => (
                             <div key={idx} className="flex items-center gap-2 bg-white p-1.5 rounded-xl border border-slate-200">
@@ -1146,9 +1146,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           type="button"
                           onClick={addCustomSection}
                           className="px-4 py-1.5 bg-slate-900 text-white font-bold rounded-xl text-xs hover:bg-black transition-colors"
-                        >
-                          Add Section
-                        </button>
+                        >{t.ui.merchantOnboarding.s_b639de}</button>
                       </div>
                     </div>
                   </div>
@@ -1163,9 +1161,9 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   <div className="w-8 h-8 rounded-lg bg-gold-tint text-gold flex items-center justify-center font-bold">
                     {renderIcon('Briefcase', 'w-4 h-4')}
                   </div>
-                  <h2 className="text-xl md:text-2xl font-bold text-slate-950">Business Profile</h2>
+                  <h2 className="text-xl md:text-2xl font-bold text-slate-950">{t.ui.merchantOnboarding.s_7122f5}</h2>
                 </div>
-                <p className="text-slate-600 text-sm">Please register the legal trading entities. Correct tax identifiers help guarantee smooth fast payouts.</p>
+                <p className="text-slate-600 text-sm">{t.ui.merchantOnboarding.s_012a51}</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
@@ -1202,7 +1200,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Website URL</label>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">{t.ui.merchantOnboarding.s_b32233}</label>
                     <input 
                       type="url"
                       value={profileData.website}
@@ -1214,12 +1212,12 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Short Business Description</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">{t.ui.merchantOnboarding.s_4baf91}</label>
                   <textarea 
                     value={profileData.shortDesc}
                     onChange={(e) => setProfileData({ ...profileData, shortDesc: e.target.value })}
                     rows={3}
-                    placeholder="Provide a brief summary of specialties, offerings, or history (max 150 characters)"
+                    placeholder={t.ui.merchantOnboarding.s_22691e}
                     maxLength={150}
                     className="w-full px-4 py-3 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-[#E5B65F]"
                   />
@@ -1235,7 +1233,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                     <div className="w-8 h-8 rounded-lg bg-gold-tint text-gold flex items-center justify-center font-bold">
                       {renderIcon('MapPin', 'w-4 h-4')}
                     </div>
-                    <h2 className="text-xl md:text-2xl font-bold text-slate-950">Store Branches & Location Map</h2>
+                    <h2 className="text-xl md:text-2xl font-bold text-slate-950">{t.ui.merchantOnboarding.s_e79369}</h2>
                   </div>
                   <button 
                     type="button"
@@ -1245,16 +1243,14 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                     {renderIcon('Plus', 'w-3.5 h-3.5')} Add Branch
                   </button>
                 </div>
-                <p className="text-slate-600 text-sm">Input branch parameters. You can search using Nominatim autocomplete finder or drop coordinates via the map.</p>
+                <p className="text-slate-600 text-sm">{t.ui.merchantOnboarding.s_02aa9a}</p>
 
                 <div className="space-y-6">
                   {branches.map((branch, idx) => (
                     <div key={branch.id} className="border border-slate-200 bg-white p-6 rounded-3xl relative space-y-4 shadow-sm hover:shadow-md transition">
                       <div className="flex justify-between items-center border-b border-slate-100 pb-3">
                         <span className="font-extrabold text-sm text-slate-800 flex items-center gap-2">
-                          <span className="w-6 h-6 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-xs font-bold">{idx + 1}</span>
-                          Branch Location
-                        </span>
+                          <span className="w-6 h-6 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-xs font-bold">{idx + 1}</span>{t.ui.merchantOnboarding.s_d890b7}</span>
                         {branches.length > 1 && (
                           <button 
                             type="button" 
@@ -1268,7 +1264,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                       {/* Search / Map Picker */}
                       <div className="space-y-2">
-                        <label className="block text-xs font-bold tracking-wider text-slate-600 uppercase">Search Location Finder</label>
+                        <label className="block text-xs font-bold tracking-wider text-slate-600 uppercase">{t.ui.merchantOnboarding.s_01edab}</label>
                         <div className="flex gap-2 relative">
                           <div className="relative flex-1">
                             <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
@@ -1276,7 +1272,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                             </span>
                             <input 
                               type="text"
-                              placeholder="Type landmark e.g. Yaya Centre, Westlands, Sarit..."
+                              placeholder={t.ui.merchantOnboarding.s_91091f}
                               onChange={(e) => {
                                 setSearchingBranchId(branch.id);
                                 searchNominatimPlaces(e.target.value, branch.id);
@@ -1345,19 +1341,19 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       </div>
 
                       <div className="space-y-1">
-                        <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-600">Coordinates Map Link</label>
+                        <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-600">{t.ui.merchantOnboarding.s_928d67}</label>
                         <input 
                           type="text"
                           value={branch.mapLink}
                           readOnly
-                          placeholder="Generated via map picker"
+                          placeholder={t.ui.merchantOnboarding.s_1cf31b}
                           className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-slate-50 text-slate-600 cursor-default focus:outline-none"
                         />
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-100 pt-4">
                         <div className="space-y-1">
-                          <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-600">Branch Manager / Contact Person</label>
+                          <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-600">{t.ui.merchantOnboarding.s_9441e0}</label>
                           <input 
                             type="text"
                             value={branch.contactName}
@@ -1367,7 +1363,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-600">Branch Contact Phone</label>
+                          <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-600">{t.ui.merchantOnboarding.s_d7a397}</label>
                           <input 
                             type="tel"
                             value={branch.contactPhone}
@@ -1392,7 +1388,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Contact &amp; Social Media</h2>
                 </div>
-                <p className="text-slate-600 text-sm">Register primary coordinates. Authorized officers receive system orders, accounts payouts auditing details, and alerts.</p>
+                <p className="text-slate-600 text-sm">{t.ui.merchantOnboarding.s_550c6f}</p>
 
                 <div className="bg-slate-50 p-6 rounded-3xl space-y-4 border border-slate-100">
                   <h3 className="font-bold text-slate-800 text-sm flex items-center gap-2">
@@ -1434,7 +1430,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="block text-xs font-semibold text-slate-600">WhatsApp Dispatch No.</label>
+                      <label className="block text-xs font-semibold text-slate-600">{t.ui.merchantOnboarding.s_eab952}</label>
                       <input 
                         type="tel"
                         value={contactData.whatsapp}
@@ -1457,7 +1453,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                         type="text"
                         value={contactData.instagram}
                         onChange={(e) => setContactData({ ...contactData, instagram: e.target.value })}
-                        placeholder="Instagram profile"
+                        placeholder={t.ui.merchantOnboarding.s_8c1404}
                         className="flex-1 bg-transparent border-none text-xs focus:outline-none"
                       />
                     </div>
@@ -1467,7 +1463,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                         type="text"
                         value={contactData.facebook}
                         onChange={(e) => setContactData({ ...contactData, facebook: e.target.value })}
-                        placeholder="Facebook page"
+                        placeholder={t.ui.merchantOnboarding.s_21f543}
                         className="flex-1 bg-transparent border-none text-xs focus:outline-none"
                       />
                     </div>
@@ -1477,7 +1473,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                         type="text"
                         value={contactData.tiktok}
                         onChange={(e) => setContactData({ ...contactData, tiktok: e.target.value })}
-                        placeholder="TikTok profile"
+                        placeholder={t.ui.merchantOnboarding.s_91dd0b}
                         className="flex-1 bg-transparent border-none text-xs focus:outline-none"
                       />
                     </div>
@@ -1499,7 +1495,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                 {/* Operating Days */}
                 <div className="space-y-2">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Operating Days</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">{t.ui.merchantOnboarding.s_b9f2b1}</label>
                   <div className="grid grid-cols-4 md:grid-cols-7 gap-2">
                     {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(day => {
                       const isChecked = operatingDays.includes(day);
@@ -1522,7 +1518,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                 {/* Operating Hours Scheduler */}
                 <div className="bg-slate-50 p-6 rounded-3xl border border-slate-100 space-y-4">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-3">
-                    <label className="text-sm font-semibold text-slate-700">Hours Configuration Template</label>
+                    <label className="text-sm font-semibold text-slate-700">{t.ui.merchantOnboarding.s_89ac4c}</label>
                     <div className="flex bg-slate-200 p-1 rounded-xl text-xs">
                       {(['same', 'split', 'custom'] as const).map(mode => (
                         <button
@@ -1540,13 +1536,13 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   {hoursMode === 'same' && (
                     <div className="grid grid-cols-2 gap-4">
                       <TimeStringField
-                        label="Opening Time *"
+                        label={t.ui.merchantOnboarding.s_c5955e}
                         value={globalHours.opening}
                         onChange={(v) => setGlobalHours({ ...globalHours, opening: v })}
                         timeFormat="12"
                       />
                       <TimeStringField
-                        label="Closing Time *"
+                        label={t.ui.merchantOnboarding.s_20f7df}
                         value={globalHours.closing}
                         onChange={(v) => setGlobalHours({ ...globalHours, closing: v })}
                         timeFormat="12"
@@ -1632,7 +1628,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                   {/* Public Holidays */}
                   <div className="border-t border-slate-200 pt-4 mt-4 space-y-2">
-                    <label className="block text-xs font-semibold text-slate-700">Kenyan Public Holidays Availability</label>
+                    <label className="block text-xs font-semibold text-slate-700">{t.ui.merchantOnboarding.s_d1bf6b}</label>
                     <div className="grid grid-cols-3 gap-2">
                       {(['closed', 'same', 'custom'] as const).map(mode => (
                         <button
@@ -1648,13 +1644,13 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                     {holidayMode === 'custom' && (
                       <div className="grid grid-cols-2 gap-4 pt-2">
                         <TimeStringField
-                          label="Holiday Opening Time"
+                          label={t.ui.merchantOnboarding.s_ed6a3f}
                           value={holidayHours.open}
                           onChange={(v) => setHolidayHours({ ...holidayHours, open: v })}
                           timeFormat="12"
                         />
                         <TimeStringField
-                          label="Holiday Closing Time"
+                          label={t.ui.merchantOnboarding.s_4331e0}
                           value={holidayHours.close}
                           onChange={(v) => setHolidayHours({ ...holidayHours, close: v })}
                           timeFormat="12"
@@ -1666,14 +1662,14 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                 {/* Delivery Options */}
                 <div className="space-y-4">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Delivery Carriage Modes</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">{t.ui.merchantOnboarding.s_eab077}</label>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div 
                       onClick={() => setDeliveryNexg(!deliveryNexg)}
                       className={`border p-5 rounded-3xl cursor-pointer transition ${deliveryNexg ? 'border-amber-500 bg-amber-50/25 shadow-sm' : 'border-slate-200 bg-white hover:border-amber-300'}`}
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-extrabold text-slate-900 text-sm">NEXG Riders Fleet</span>
+                        <span className="font-extrabold text-slate-900 text-sm">{t.ui.merchantOnboarding.s_108c09}</span>
                         <input 
                           type="checkbox" 
                           checked={deliveryNexg} 
@@ -1681,7 +1677,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           className="w-4 h-4 accent-amber-500"
                         />
                       </div>
-                      <p className="text-xs text-slate-600 mt-2">NEXG operates logistics carriage from your store using our background-checked professional couriers.</p>
+                      <p className="text-xs text-slate-600 mt-2">{t.ui.merchantOnboarding.s_a4d472}</p>
                     </div>
 
                     <div 
@@ -1689,7 +1685,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       className={`border p-5 rounded-3xl cursor-pointer transition ${deliveryOwn ? 'border-amber-500 bg-amber-50/25 shadow-sm' : 'border-slate-200 bg-white hover:border-amber-300'}`}
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-extrabold text-slate-900 text-sm">Own Store Riders</span>
+                        <span className="font-extrabold text-slate-900 text-sm">{t.ui.merchantOnboarding.s_87a51d}</span>
                         <input 
                           type="checkbox" 
                           checked={deliveryOwn} 
@@ -1704,7 +1700,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="block text-xs font-semibold text-slate-600">Average Preparation Time</label>
+                    <label className="block text-xs font-semibold text-slate-600">{t.ui.merchantOnboarding.s_963f97}</label>
                     <select 
                       value={prepTime}
                       onChange={(e) => setPrepTime(e.target.value)}
@@ -1713,7 +1709,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       <option value="15 - 30 minutes">15 - 30 minutes</option>
                       <option value="30 - 45 minutes">30 - 45 minutes</option>
                       <option value="45 - 60 minutes">45 - 60 minutes</option>
-                      <option value="Above 60 minutes">Above 60 minutes</option>
+                      <option value="Above 60 minutes">{t.ui.merchantOnboarding.s_197803}</option>
                     </select>
                   </div>
                   <div className="space-y-2">
@@ -1736,13 +1732,13 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   <div className="w-8 h-8 rounded-lg bg-gold-tint text-gold flex items-center justify-center font-bold">
                     {renderIcon('CreditCard', 'w-4 h-4')}
                   </div>
-                  <h2 className="text-xl md:text-2xl font-bold text-slate-950">Payment Details</h2>
+                  <h2 className="text-xl md:text-2xl font-bold text-slate-950">{t.ui.merchantOnboarding.s_b8579d}</h2>
                 </div>
-                <p className="text-slate-600 text-sm">Nominate your payouts destinations. Weekly settlements are transferred directly every Monday morning.</p>
+                <p className="text-slate-600 text-sm">{t.ui.merchantOnboarding.s_3e95c1}</p>
 
                 <div className="space-y-4">
                   <div className="space-y-1">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Bank Name</label>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">{t.ui.merchantOnboarding.s_312631}</label>
                     <input 
                       type="text"
                       value={paymentData.bankName}
@@ -1754,7 +1750,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-1">
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Account Name</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">{t.ui.merchantOnboarding.s_db3b79}</label>
                       <input 
                         type="text"
                         value={paymentData.accountName}
@@ -1764,7 +1760,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Account Number</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">{t.ui.merchantOnboarding.s_0bd62e}</label>
                       <input 
                         type="text"
                         value={paymentData.accountNumber}
@@ -1783,7 +1779,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="space-y-1">
-                      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600">Buy Goods Till No.</label>
+                      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600">{t.ui.merchantOnboarding.s_f1dd4c}</label>
                       <input 
                         type="text"
                         value={paymentData.mpesaTill}
@@ -1793,7 +1789,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600">Business Paybill No.</label>
+                      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600">{t.ui.merchantOnboarding.s_676418}</label>
                       <input 
                         type="text"
                         value={paymentData.mpesaPaybill}
@@ -1803,7 +1799,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600">Paybill Account Name</label>
+                      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600">{t.ui.merchantOnboarding.s_ebaf4a}</label>
                       <input 
                         type="text"
                         value={paymentData.mpesaPaybillAcc}
@@ -1826,13 +1822,13 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Documents &amp; Brand Assets</h2>
                 </div>
-                <p className="text-slate-600 text-sm">Upload business certificates and company logos. These will be used to dynamically set up your store theme inside the NEXG customer application.</p>
+                <p className="text-slate-600 text-sm">{t.ui.merchantOnboarding.s_00b623}</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="border border-slate-200 bg-slate-50 p-5 rounded-3xl flex flex-col justify-between">
                     <div>
-                      <p className="font-bold text-slate-800 text-sm">Certificate of Registration</p>
-                      <p className="text-slate-600 text-xs mt-1">Upload business registration scan PDF or image.</p>
+                      <p className="font-bold text-slate-800 text-sm">{t.ui.merchantOnboarding.s_a5d0ab}</p>
+                      <p className="text-slate-600 text-xs mt-1">{t.ui.merchantOnboarding.s_8242a9}</p>
                     </div>
                     <div className="mt-4">
                       <label className={`w-full py-2.5 px-4 border text-center font-semibold rounded-2xl text-xs flex items-center justify-center gap-2 cursor-pointer transition-colors ${uploadedFiles.certFile ? 'bg-emerald-50 border-emerald-300 text-emerald-700' : 'bg-white border-slate-300 text-slate-700 hover:border-amber-400 hover:bg-slate-50'}`}>
@@ -1845,8 +1841,8 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                   <div className="border border-slate-200 bg-slate-50 p-5 rounded-3xl flex flex-col justify-between">
                     <div>
-                      <p className="font-bold text-slate-800 text-sm">Director ID / Passport Scan</p>
-                      <p className="text-slate-600 text-xs mt-1">Upload ID or passport of major primary director.</p>
+                      <p className="font-bold text-slate-800 text-sm">{t.ui.merchantOnboarding.s_721462}</p>
+                      <p className="text-slate-600 text-xs mt-1">{t.ui.merchantOnboarding.s_b62775}</p>
                     </div>
                     <div className="mt-4">
                       <label className={`w-full py-2.5 px-4 border text-center font-semibold rounded-2xl text-xs flex items-center justify-center gap-2 cursor-pointer transition-colors ${uploadedFiles.idFile ? 'bg-emerald-50 border-emerald-300 text-emerald-700' : 'bg-white border-slate-300 text-slate-700 hover:border-amber-400 hover:bg-slate-50'}`}>
@@ -1869,7 +1865,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       <div className="border-2 border-dashed border-slate-200 rounded-2xl aspect-square flex flex-col items-center justify-center p-4 bg-white relative cursor-pointer group hover:border-amber-400 transition-colors">
                         <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setLogoPreview)} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" />
                         {logoPreview ? (
-                          <img src={logoPreview} className="absolute inset-0 w-full h-full object-cover rounded-2xl z-10" alt="Logo preview" />
+                          <img src={logoPreview} className="absolute inset-0 w-full h-full object-cover rounded-2xl z-10" alt={t.ui.merchantOnboarding.s_1c7169} />
                         ) : (
                           <div className="text-center group-hover:scale-105 transition-transform">
                             {renderIcon('Camera', 'w-8 h-8 text-slate-300 mx-auto group-hover:text-amber-500')}
@@ -1884,11 +1880,11 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       <div className="border-2 border-dashed border-slate-200 rounded-2xl aspect-[16/9] flex flex-col items-center justify-center p-4 bg-white relative cursor-pointer group hover:border-amber-400 transition-colors">
                         <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setBannerPreview)} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" />
                         {bannerPreview ? (
-                          <img src={bannerPreview} className="absolute inset-0 w-full h-full object-cover rounded-2xl z-10" alt="Banner preview" />
+                          <img src={bannerPreview} className="absolute inset-0 w-full h-full object-cover rounded-2xl z-10" alt={t.ui.merchantOnboarding.s_abf9f4} />
                         ) : (
                           <div className="text-center group-hover:scale-105 transition-transform">
                             {renderIcon('Camera', 'w-8 h-8 text-slate-300 mx-auto group-hover:text-amber-500')}
-                            <p className="text-xs font-semibold text-slate-600 mt-2">Upload Banner Image</p>
+                            <p className="text-xs font-semibold text-slate-600 mt-2">{t.ui.merchantOnboarding.s_59c22e}</p>
                           </div>
                         )}
                       </div>
@@ -1905,9 +1901,9 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   <div className="w-8 h-8 rounded-lg bg-gold-tint text-gold flex items-center justify-center font-bold">
                     {renderIcon('ShieldCheck', 'w-4 h-4')}
                   </div>
-                  <h2 className="text-xl md:text-2xl font-bold text-slate-950">Partnership Agreement Contract</h2>
+                  <h2 className="text-xl md:text-2xl font-bold text-slate-950">{t.ui.merchantOnboarding.s_2eabdb}</h2>
                 </div>
-                <p className="text-slate-600 text-sm no-print">Review the pre-drafted legal contract. Ensure all merchant parameters, locations, and banking details are correct.</p>
+                <p className="text-slate-600 text-sm no-print">{t.ui.merchantOnboarding.s_7308b8}</p>
 
                 {/* Agreement Layout Contract Area */}
                 <div 
@@ -1916,14 +1912,14 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                 >
                   <div className="text-center mb-8 border-b pb-6">
                     <span className="font-extrabold text-2xl tracking-widest text-[#E5B65F]">NEXG</span>
-                    <h3 className="text-lg font-extrabold tracking-tight text-slate-900 mt-2">NEXG APP LIMITED</h3>
-                    <p className="text-[#E5B65F] font-bold text-xs tracking-wider uppercase">Merchant Partnership Agreement</p>
+                    <h3 className="text-lg font-extrabold tracking-tight text-slate-900 mt-2">{t.ui.merchantOnboarding.s_71c904}</h3>
+                    <p className="text-[#E5B65F] font-bold text-xs tracking-wider uppercase">{t.ui.merchantOnboarding.s_b9ffbd}</p>
                     <p className="text-slate-400 text-xs mt-1">Effective Date: <span className="font-bold">{new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span></p>
                   </div>
 
                   <div className="space-y-4 text-xs md:text-sm">
                     <p>This Merchant Partnership Agreement (the <strong>"Agreement"</strong>) is executed between:</p>
-                    <p><strong>NEXG App Limited</strong> (hereinafter referred to as <strong>"NEXG"</strong> or <strong>"Platform"</strong>), registered in the Republic of Kenya with offices in Nairobi;</p>
+                    <p><strong>{t.ui.merchantOnboarding.s_faea7e}</strong> (hereinafter referred to as <strong>"NEXG"</strong> or <strong>"Platform"</strong>), registered in the Republic of Kenya with offices in Nairobi;</p>
                     <p>and</p>
                     <p>
                       <strong><span className="font-bold underline text-slate-900">{profileData.legalName || '[Legal Business Name]'}</span></strong>, 
@@ -1942,20 +1938,20 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                         <p className="font-bold text-slate-800">Special Logistics Carriage &amp; Warehousing Addendum:</p>
                         <p>1. <strong>Carriage Responsibility:</strong> The Merchant represents that they hold all valid licenses and permits required for shipping and logistics operations under the Laws of Kenya, including NTSA, KRA, and Kenya Ports Authority (KPA) approvals.</p>
                         <p>2. <strong>Cargo Insurance &amp; Liability:</strong> The Merchant agrees to maintain standard Goods In Transit (GIT) insurance and warehouse keepers liability insurance, and holds NEXG harmless against cargo losses, demurrage, or transit damage.</p>
-                        <p>3. <strong>Customs and Tariff Compliance:</strong> The Merchant is solely responsible for clearing customs duties, port levies, and ensuring all shipping cargo meets international and local compliance standards.</p>
+                        <p>3. <strong>Customs and Tariff Compliance:</strong>{t.ui.merchantOnboarding.s_5664e0}</p>
                       </div>
                     )}
 
                     <h4 className="font-bold text-slate-950 mt-6 border-b pb-1">2. Core Platform Service Delivery</h4>
                     <ul className="list-disc pl-5 space-y-1">
-                      <li>Interactive catalog listing on the premium NEXG Client App.</li>
-                      <li>Collection and processing of accounts charges from guests, tourists, and corporate networks.</li>
-                      <li>Logistics carriage orchestration based on requested parameters.</li>
+                      <li>{t.ui.merchantOnboarding.s_39e42f}</li>
+                      <li>{t.ui.merchantOnboarding.s_d1d21f}</li>
+                      <li>{t.ui.merchantOnboarding.s_e0a26d}</li>
                     </ul>
 
                     <h4 className="font-bold text-slate-950 mt-6 border-b pb-1">3. Merchant Standard Operating Times</h4>
                     <ul className="list-disc pl-5 space-y-1">
-                      <li>Maintain exact availability schedules, correct pricing, and stock sync lists.</li>
+                      <li>{t.ui.merchantOnboarding.s_4f2047}</li>
                       <li>Commit to operating readiness within the scheduled periods of: <strong>{getOperatingHoursStr()}</strong></li>
                     </ul>
 
@@ -1979,19 +1975,19 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                     <div className="grid grid-cols-2 gap-6 mt-8 border-t pt-6">
                       <div>
-                        <p className="font-bold text-slate-800 text-[11px] uppercase">For NEXG APP LIMITED</p>
+                        <p className="font-bold text-slate-800 text-[11px] uppercase">{t.ui.merchantOnboarding.s_959d0c}</p>
                         <div className="h-12 flex items-end mb-2">
-                          <span className="font-cursive text-xl text-slate-400 select-none">NEXG Legal Representative</span>
+                          <span className="font-cursive text-xl text-slate-400 select-none">{t.ui.merchantOnboarding.s_869b48}</span>
                         </div>
                         <div className="h-px bg-slate-300 w-full mb-1"></div>
-                        <p className="text-[10px] text-slate-600">Authorized Officer Signature</p>
+                        <p className="text-[10px] text-slate-600">{t.ui.merchantOnboarding.s_0cb1d6}</p>
                         <p className="text-[10px] text-slate-600">Date: {new Date().toLocaleDateString('en-GB')}</p>
                       </div>
                       <div>
-                        <p className="font-bold text-slate-800 text-[11px] uppercase">For THE MERCHANT</p>
+                        <p className="font-bold text-slate-800 text-[11px] uppercase">{t.ui.merchantOnboarding.s_bb20e3}</p>
                         <div className="h-12 flex items-end mb-2 relative">
                           {sigMode === 'draw' && signatureImage ? (
-                            <img src={signatureImage} className="h-12 max-w-[150px] object-contain" alt="Signature drawing" />
+                            <img src={signatureImage} className="h-12 max-w-[150px] object-contain" alt={t.ui.merchantOnboarding.s_c6846b} />
                           ) : sigMode === 'type' && signatoryName ? (
                             <span className="font-cursive text-2xl text-[#E5B65F]">{signatoryName}</span>
                           ) : (
@@ -2032,7 +2028,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       type="text"
                       value={signatoryName}
                       onChange={(e) => setSignatoryName(e.target.value)}
-                      placeholder="Type your full legal name"
+                      placeholder={t.ui.merchantOnboarding.s_9d4f8b}
                       className="w-full px-4 py-2.5 border border-slate-200 rounded-2xl text-sm bg-white"
                     />
                   </div>
@@ -2060,7 +2056,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                   {sigMode === 'type' && (
                     <div className="space-y-2">
-                      <label className="block text-xs font-bold tracking-wider text-slate-600 uppercase">Handwriting Style Preview</label>
+                      <label className="block text-xs font-bold tracking-wider text-slate-600 uppercase">{t.ui.merchantOnboarding.s_e58331}</label>
                       <div className="border border-slate-200 bg-white p-6 rounded-2xl text-center shadow-inner">
                         <p className="font-cursive text-4xl text-[#E5B65F] select-none">
                           {signatoryName || '- Your Signature -'}
@@ -2094,7 +2090,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                 
                 <div className="space-y-2">
                   <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">Application Submitted Successfully!</h2>
-                  <p className="text-slate-600 text-sm max-w-lg mx-auto">Your premium merchant onboarding is complete. Our partnership audit committee will complete verify checks and activate your store front within 24 hours.</p>
+                  <p className="text-slate-600 text-sm max-w-lg mx-auto">{t.ui.merchantOnboarding.s_b03404}</p>
                 </div>
 
                 <div className="bg-slate-50 p-6 rounded-3xl max-w-lg mx-auto border border-slate-100 text-left text-xs md:text-sm space-y-3 shadow-inner">
@@ -2120,9 +2116,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                     type="button" 
                     onClick={resetOnboarding}
                     className="px-6 py-3 bg-slate-100 text-slate-700 font-bold border border-slate-200 rounded-2xl text-xs hover:bg-slate-200 transition-colors"
-                  >
-                    Onboard Another Store
-                  </button>
+                  >{t.ui.merchantOnboarding.s_f7c245}</button>
                 </div>
               </div>
             )}
@@ -2195,9 +2189,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   type="button" 
                   onClick={handleConfirmMapPin}
                   className="px-5 py-2 bg-gold-tint text-gold font-bold rounded-xl hover:bg-amber-600 shadow transition-colors"
-                >
-                  Confirm Coordinates
-                </button>
+                >{t.ui.merchantOnboarding.s_85273b}</button>
               </div>
             </div>
           </div>

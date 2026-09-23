@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import {
   X,
   Plus,
@@ -29,6 +30,7 @@ export default function DishCustomizerModal({
   restaurantName,
   onClose,
 }: DishCustomizerModalProps) {
+  const { t } = useLanguage();
   const { addToCart, setIsCartOpen } = useCart();
   const [activeTab, setActiveTab] = useState<'customize' | 'reviews'>('customize');
   const [quantity, setQuantity] = useState(1);
@@ -277,7 +279,7 @@ export default function DishCustomizerModal({
             <button
               onClick={onClose}
               className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center backdrop-blur-md transition-transform hover:scale-105 cursor-pointer border border-slate-200"
-              aria-label="Close modal"
+              aria-label={t.ui.dishCustomizerModal.s_70d3a5}
             >
               <X size={18} />
             </button>
@@ -347,7 +349,7 @@ export default function DishCustomizerModal({
                   : 'border-transparent text-slate-600 hover:text-slate-900'
               }`}
             >
-              <span>Customize & Options</span>
+              <span>{t.ui.dishCustomizerModal.s_a196bb}</span>
             </button>
 
             <button
@@ -461,15 +463,13 @@ export default function DishCustomizerModal({
 
               {/* Special Instructions */}
               <div className="space-y-2 pt-2 border-t border-slate-200">
-                <label htmlFor="dish-instructions" className="text-sm font-semibold text-white block">
-                  Special Kitchen Instructions
-                </label>
+                <label htmlFor="dish-instructions" className="text-sm font-semibold text-white block">{t.ui.dishCustomizerModal.s_ece1f0}</label>
                 <textarea
                   id="dish-instructions"
                   rows={2}
                   value={specialInstructions}
                   onChange={(e) => setSpecialInstructions(e.target.value)}
-                  placeholder="Any preferences? e.g. Extra dressing on side, cutlery needed..."
+                  placeholder={t.ui.dishCustomizerModal.s_2db328}
                   className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-gold transition-colors resize-none"
                 />
               </div>
@@ -497,16 +497,14 @@ export default function DishCustomizerModal({
                     </div>
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-white">Guest Satisfaction</h4>
+                    <h4 className="text-sm font-bold text-white">{t.ui.dishCustomizerModal.s_052b34}</h4>
                     <p className="text-xs text-slate-600">
                       Based on {reviewsList.length} verified ratings for this dish
                     </p>
                   </div>
                 </div>
                 <div className="text-right">
-                  <span className="text-xs font-bold text-emerald-400 bg-emerald-500/15 px-2.5 py-1 rounded-full border border-emerald-500/20">
-                    Verified Diners Only
-                  </span>
+                  <span className="text-xs font-bold text-emerald-400 bg-emerald-500/15 px-2.5 py-1 rounded-full border border-emerald-500/20">{t.ui.dishCustomizerModal.s_1c711d}</span>
                 </div>
               </div>
 
@@ -514,7 +512,7 @@ export default function DishCustomizerModal({
               <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
                 <h4 className="text-sm font-bold text-white flex items-center gap-2">
                   <Sparkles size={14} className="text-gold" />
-                  <span>Leave Your Dining Review</span>
+                  <span>{t.ui.dishCustomizerModal.s_d0fac0}</span>
                 </h4>
 
                 {reviewSubmitted ? (
@@ -559,14 +557,14 @@ export default function DishCustomizerModal({
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       <input
                         type="text"
-                        placeholder="Your Name (e.g. Eleanor V.)"
+                        placeholder={t.ui.dishCustomizerModal.s_bfae0e}
                         value={newAuthorName}
                         onChange={(e) => setNewAuthorName(e.target.value)}
                         className="w-full bg-slate-100 border border-slate-200 rounded-xl px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-gold"
                       />
                       <input
                         type="text"
-                        placeholder="Suite / Villa (e.g. Penthouse 402)"
+                        placeholder={t.ui.dishCustomizerModal.s_9c0406}
                         value={newRoomNumber}
                         onChange={(e) => setNewRoomNumber(e.target.value)}
                         className="w-full bg-slate-100 border border-slate-200 rounded-xl px-3 py-2 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-gold"
@@ -597,7 +595,7 @@ export default function DishCustomizerModal({
                     {/* Comment Area */}
                     <textarea
                       rows={2}
-                      placeholder="Share what made this dish memorable..."
+                      placeholder={t.ui.dishCustomizerModal.s_594a3d}
                       value={newComment}
                       onChange={(e) => setNewComment(e.target.value)}
                       required
@@ -609,7 +607,7 @@ export default function DishCustomizerModal({
                       className="w-full py-2.5 rounded-xl bg-gold hover:bg-gold-strong text-slate-950 font-bold text-xs flex items-center justify-center gap-1.5 transition cursor-pointer shadow-md"
                     >
                       <Send size={13} />
-                      <span>Submit Verified Review</span>
+                      <span>{t.ui.dishCustomizerModal.s_84ab4b}</span>
                     </button>
                   </form>
                 )}
@@ -712,7 +710,7 @@ export default function DishCustomizerModal({
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                 disabled={quantity <= 1}
                 className="w-8 h-8 rounded-full flex items-center justify-center text-slate-600 hover:text-slate-900 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
-                aria-label="Decrease quantity"
+                aria-label={t.ui.dishCustomizerModal.s_6c02ab}
               >
                 <Minus size={15} />
               </button>
@@ -723,7 +721,7 @@ export default function DishCustomizerModal({
                 type="button"
                 onClick={() => setQuantity((q) => Math.min(20, q + 1))}
                 className="w-8 h-8 rounded-full flex items-center justify-center text-slate-600 hover:text-slate-900 transition-colors cursor-pointer"
-                aria-label="Increase quantity"
+                aria-label={t.ui.dishCustomizerModal.s_062e79}
               >
                 <Plus size={15} />
               </button>
@@ -735,7 +733,7 @@ export default function DishCustomizerModal({
               onClick={handleAddToCart}
               className="flex-grow flex items-center justify-between px-6 py-3.5 rounded-full bg-gold hover:bg-gold-strong text-slate-950 font-bold text-sm sm:text-base transition transform active:scale-[0.98] shadow-lg shadow-gold-tint cursor-pointer"
             >
-              <span>Add to Order</span>
+              <span>{t.ui.dishCustomizerModal.s_492026}</span>
               <span className="font-extrabold tracking-wide">
                 ${totalPrice.toFixed(2)}
               </span>

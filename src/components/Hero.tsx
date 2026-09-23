@@ -92,7 +92,7 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
             name="hero_nocturnal_dining_1789914100984.jpg"
             sizes="100vw"
             priority
-            alt="Nocturnal Luxury Penthouse Dining & Skyline"
+            alt={t.ui.hero.s_7ecda2}
             className="hidden sm:block w-full h-full object-cover opacity-80 brightness-90 transition-transform duration-1000 scale-100 hover:scale-105"
             referrerPolicy="no-referrer"
           />
@@ -100,7 +100,7 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
             name="mobile_landing_page_image.png"
             sizes="100vw"
             priority
-            alt="Nocturnal Luxury Suite Mobile"
+            alt={t.ui.hero.s_ece6e2}
             className="block sm:hidden w-full h-full object-cover opacity-75 brightness-80"
             referrerPolicy="no-referrer"
           />
@@ -139,7 +139,7 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
             name="hero_daylight_resort_1789914085669.jpg"
             sizes="100vw"
             priority
-            alt="Sunlit Luxury Penthouse Infinity Pool and Skyline"
+            alt={t.ui.hero.s_c75a68}
             className="w-full h-full object-cover brightness-100 contrast-[1.03] transition-transform duration-1000 scale-100 hover:scale-105 object-[62%_center] sm:object-center"
             referrerPolicy="no-referrer"
           />
@@ -254,7 +254,7 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
                 className={`absolute right-24 sm:right-28 top-1/2 -translate-y-1/2 p-1 rounded-full transition-colors cursor-pointer ${
                   isLight ? 'text-slate-400 hover:text-slate-700 hover:bg-slate-100' : 'text-gray-400 hover:text-white hover:bg-white/10'
                 }`}
-                title="Clear search"
+                title={t.ui.hero.s_67300d}
               >
                 <X size={16} />
               </button>

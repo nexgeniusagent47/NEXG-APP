@@ -109,8 +109,8 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                   ? 'bg-white/80 hover:bg-white text-slate-800 shadow-xs'
                   : 'bg-white/10 hover:bg-white/20 text-white'
               }`}
-              title="Return to Guest App"
-              aria-label="Back to Home"
+              title={t.ui.forCouriers.s_75dde0}
+              aria-label={t.ui.forCouriers.s_ce7472}
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
@@ -164,7 +164,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                   ? 'bg-white/80 hover:bg-white border-slate-200 text-amber-800 shadow-2xs'
                   : 'bg-white/10 hover:bg-white/20 border-white/15 text-[#E5B65F]'
               }`}
-              aria-label="Toggle Theme"
+              aria-label={t.ui.forCouriers.s_b74c4e}
               title={isLight ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
             >
               {isLight ? <Moon size={16} /> : <Sun size={16} />}
@@ -182,7 +182,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                   ? 'bg-white border-slate-200 text-amber-800'
                   : 'bg-white/10 border-white/15 text-[#E5B65F]'
               }`}
-              title="Toggle Theme"
+              title={t.ui.forCouriers.s_b74c4e}
             >
               {isLight ? <Moon size={15} /> : <Sun size={15} />}
             </button>
@@ -211,18 +211,16 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               }`}
             >
               <div className="flex flex-col gap-3 font-semibold text-sm">
-                <button onClick={() => handleMobileNav('home')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">Explore Home</button>
-                <button onClick={() => handleMobileNav('properties')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">For Properties</button>
-                <button onClick={() => handleMobileNav('merchants')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">For Partners</button>
-                <button onClick={() => handleMobileNav('couriers')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors text-[#E5B65F]">Elite Fleet</button>
+                <button onClick={() => handleMobileNav('home')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">{t.ui.forCouriers.s_a1e9f9}</button>
+                <button onClick={() => handleMobileNav('properties')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">{t.ui.forCouriers.s_38769a}</button>
+                <button onClick={() => handleMobileNav('merchants')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">{t.ui.forCouriers.s_52a6f3}</button>
+                <button onClick={() => handleMobileNav('couriers')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors text-[#E5B65F]">{t.ui.forCouriers.s_18414d}</button>
                 <button onClick={() => handleMobileNav('experiences')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">Experiences</button>
               </div>
               <button 
                 onClick={() => handleMobileNav('courier_onboarding')}
                 className="w-full text-center text-sm font-bold bg-[#E5B65F] text-[#291800] rounded-xl py-3 hover:bg-[#ffddb1] transition-colors"
-              >
-                Apply to Fleet
-              </button>
+              >{t.ui.forCouriers.s_9b1690}</button>
             </motion.div>
           )}
         </AnimatePresence>
@@ -238,7 +236,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               <div className="absolute inset-0 bg-gradient-to-r from-[#F8F9FA]/95 via-[#F8F9FA]/70 to-transparent z-10"></div>
               <img 
                 src={responsiveProps('couriers_hero_light_1789911815432.jpg', '100vw')?.src} 
-                alt="Couriers Hero Daylight Background" 
+                alt={t.ui.forCouriers.s_ff2382} 
                 className="w-full h-full object-cover opacity-85 brightness-105 transition-transform duration-[10000ms] hover:scale-105" 
                 referrerPolicy="no-referrer"
               />
@@ -249,7 +247,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               <div className="absolute inset-0 bg-gradient-to-r from-[#1a1c1c]/95 via-[#1a1c1c]/70 to-transparent z-10"></div>
               <img 
                 src={responsiveProps('nexg_motorbike_mockup.jpg', '100vw')?.src} 
-                alt="Couriers Hero Background" 
+                alt={t.ui.forCouriers.s_d44881} 
                 className="w-full h-full object-cover opacity-80 sm:opacity-90 transition-transform duration-[10000ms] hover:scale-105" 
                 referrerPolicy="no-referrer"
               />
@@ -265,9 +263,8 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
         {/* Content Container */}
         <div className="container mx-auto max-w-[1400px] relative z-20 px-4 sm:px-8 xl:px-16 w-full">
           <div className="max-w-3xl">
-            <h1 className={`font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
-              Redefining Delivery.<br />
-              <span className="text-[#E5B65F]">Own Your Earnings.</span>
+            <h1 className={`font-bold text-3xl sm:text-5xl md:text-6xl lg:text-7xl mb-6 leading-tight tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_a08321}<br />
+              <span className="text-[#E5B65F]">{t.ui.forCouriers.s_ce60db}</span>
             </h1>
             <p className={`text-sm sm:text-base md:text-lg lg:text-xl mb-8 sm:mb-10 max-w-2xl leading-relaxed ${isLight ? 'text-slate-700 font-medium' : 'text-[#d1d5db]'}`}>
               Increase your earnings by delivering to premium guests and luxury residents. Enjoy higher payouts and 100% of your tips.
@@ -276,9 +273,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               <button 
                 onClick={() => onNavigate('courier_onboarding')}
                 className="w-full sm:w-auto bg-[#E5B65F] text-[#291800] px-8 py-4 rounded-full font-bold text-base hover:bg-[#ffddb1] transition-colors shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 text-center cursor-pointer min-h-[48px]"
-              >
-                Join the Elite Fleet
-              </button>
+              >{t.ui.forCouriers.s_33b4c6}</button>
               <button 
                 onClick={() => {
                   const el = document.getElementById('earnings-calculator');
@@ -289,9 +284,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     ? 'border-slate-300 text-slate-800 hover:bg-slate-100 bg-white/70 shadow-sm'
                     : 'border-white/20 text-white hover:bg-white/5'
                 }`}
-              >
-                Estimate Earnings
-              </button>
+              >{t.ui.forCouriers.s_38df83}</button>
             </div>
           </div>
         </div>
@@ -303,9 +296,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
         <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
           <span className={`font-bold tracking-widest text-xs uppercase px-3.5 py-1.5 rounded-full border ${
             isLight ? 'bg-amber-100 text-amber-800 border-amber-300' : 'bg-[#E5B65F]/10 text-[#E5B65F] border-[#E5B65F]/20'
-          }`}>
-            ELITE STANDARDS
-          </span>
+          }`}>{t.ui.forCouriers.s_df9144}</span>
           <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mt-4 mb-3 sm:mb-4 tracking-tight ${
             isLight ? 'text-slate-900' : 'text-white'
           }`}>
@@ -331,9 +322,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               <Award size={28} />
             </div>
             <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>White-Glove Service</h3>
-            <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
-              Deliver high-end products and culinary creations with meticulous care. Be dressed in custom-designed NEXG apparel to reflect elite standards.
-            </p>
+            <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_7f255f}</p>
           </div>
 
           {/* Card 2 */}
@@ -347,10 +336,8 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             }`}>
               <ShieldCheck size={28} />
             </div>
-            <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>Premium Fleet Support</h3>
-            <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
-              We provide access to high-quality vehicle maintenance programs, comprehensive courier insurance plans, and dedicated dispatch teams assisting you 24/7.
-            </p>
+            <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_981b01}</h3>
+            <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_08c1c3}</p>
           </div>
 
           {/* Card 3 */}
@@ -364,10 +351,8 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             }`}>
               <Navigation size={28} />
             </div>
-            <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>Priority Routing Tech</h3>
-            <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
-              Our advanced routing algorithms guide you efficiently to high-value destinations, minimizing idle mileage and maximizing deliveries per hour.
-            </p>
+            <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_5150fd}</h3>
+            <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_9d3f52}</p>
           </div>
 
           {/* Card 4 */}
@@ -381,10 +366,8 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             }`}>
               <DollarSign size={28} />
             </div>
-            <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>Guaranteed Weekly Payouts</h3>
-            <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
-              Receive clear, automated settlements straight to your bank or mobile wallet without delay, backed by detailed electronic statements.
-            </p>
+            <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_530246}</h3>
+            <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_4748c1}</p>
           </div>
 
           {/* Card 5 */}
@@ -398,10 +381,8 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             }`}>
               <Clock size={28} />
             </div>
-            <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>Empowered Scheduling</h3>
-            <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
-              Take complete control over your working hours. Plan your deliveries around peak fine-dining periods to lock in dynamic high fares.
-            </p>
+            <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_93fef0}</h3>
+            <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_95e986}</p>
           </div>
 
           {/* Card 6 */}
@@ -415,10 +396,8 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             }`}>
               <Briefcase size={28} />
             </div>
-            <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>Career Advancement</h3>
-            <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
-              Gain exclusive professional training in hospitality service, client management, and path leadership with certificates of excellence.
-            </p>
+            <h3 className={`text-lg sm:text-xl font-bold mb-3 sm:mb-4 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_2d816d}</h3>
+            <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_97b846}</p>
           </div>
         </div>
       </section>
@@ -442,9 +421,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                   <Zap size={24} />
                 </div>
                 <div>
-                  <h3 className={`text-xl sm:text-2xl font-bold tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                    The NEXG Driver App
-                  </h3>
+                  <h3 className={`text-xl sm:text-2xl font-bold tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_440245}</h3>
                   <p className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                     Next-gen courier utility for maximum efficiency
                   </p>
@@ -462,9 +439,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     <h4 className={`font-bold text-base sm:text-lg mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>
                       Room-Specific Delivery Guidance
                     </h4>
-                    <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
-                      Our app guides you right up to the designated suite or property zone, avoiding lobby confusion and ensuring frictionless drop-offs.
-                    </p>
+                    <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_f370c7}</p>
                   </div>
                 </div>
 
@@ -478,9 +453,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     <h4 className={`font-bold text-base sm:text-lg mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>
                       Zero-Lag Cashouts
                     </h4>
-                    <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
-                      No waiting for week-ends. Complete premium tasks and trigger instant payouts directly into your mobile wallet.
-                    </p>
+                    <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_85cf78}</p>
                   </div>
                 </div>
 
@@ -491,12 +464,8 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     3
                   </div>
                   <div>
-                    <h4 className={`font-bold text-base sm:text-lg mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                      Premium Integrated Hub
-                    </h4>
-                    <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
-                      Access culinary deliveries, spa wellness packages, and executive courier jobs cleanly integrated under a single, highly intuitive screen.
-                    </p>
+                    <h4 className={`font-bold text-base sm:text-lg mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_fbe3b3}</h4>
+                    <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_c88176}</p>
                   </div>
                 </div>
               </div>
@@ -511,7 +480,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500 z-10"></div>
               <img 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                alt="Ambassador scanning the driver app" 
+                alt={t.ui.forCouriers.s_befa37} 
                 src={responsiveProps('courier_delivery_door_1783931148146.jpg', '100vw')?.src} 
                 referrerPolicy="no-referrer"
               />
@@ -519,9 +488,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                 isLight ? 'bg-white/95 text-slate-900 border-slate-200 shadow-xl' : 'bg-[#131515]/95 text-white border-white/10 shadow-lg'
               }`}>
                 <p className={`text-xl sm:text-2xl font-bold mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>98% Order Completion</p>
-                <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600 font-medium' : 'text-gray-300'}`}>
-                  Ambassadors utilizing our suite-specific integrated routing enjoy significantly higher success ratings and earn double the average industry tips.
-                </p>
+                <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600 font-medium' : 'text-gray-300'}`}>{t.ui.forCouriers.s_1bedd8}</p>
               </div>
             </div>
           </div>
@@ -540,14 +507,10 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             <div>
               <span className={`font-bold tracking-widest text-xs uppercase px-3.5 py-1.5 rounded-full border ${
                 isLight ? 'bg-amber-100 text-amber-800 border-amber-300' : 'bg-[#E5B65F]/10 text-[#E5B65F] border-[#E5B65F]/20'
-              }`}>
-                TRANSPARENT EARNINGS
-              </span>
+              }`}>{t.ui.forCouriers.s_765f2b}</span>
               <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mt-4 mb-4 sm:mb-6 tracking-tight leading-tight ${
                 isLight ? 'text-slate-900' : 'text-white'
-              }`}>
-                Premium Payouts for Professional Ambassadors.
-              </h2>
+              }`}>{t.ui.forCouriers.s_2ed1ed}</h2>
               <p className={`text-sm sm:text-base md:text-lg mb-6 sm:mb-8 leading-relaxed ${
                 isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'
               }`}>
@@ -562,8 +525,8 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     <TrendingUp size={20} />
                   </div>
                   <div>
-                    <h4 className={`font-bold text-sm mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>Weekly Payout Settlements</h4>
-                    <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>Direct payments made straight to your account every single week, with zero hidden fees.</p>
+                    <h4 className={`font-bold text-sm mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_8049d9}</h4>
+                    <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_e3a7a2}</p>
                   </div>
                 </div>
 
@@ -575,7 +538,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                   </div>
                   <div>
                     <h4 className={`font-bold text-sm mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>5-Star Excellence Boost</h4>
-                    <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>Maintain exceptional ratings and receive daily performance multipliers and exclusive priority dispatcher pairing.</p>
+                    <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_42475b}</p>
                   </div>
                 </div>
 
@@ -586,8 +549,8 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     <Clock size={20} />
                   </div>
                   <div>
-                    <h4 className={`font-bold text-sm mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>Empowered Flexibility</h4>
-                    <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>Work according to your personal schedule. Take shifts during peak fine-dining hours for maximized yield.</p>
+                    <h4 className={`font-bold text-sm mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_bc89aa}</h4>
+                    <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_a7acb1}</p>
                   </div>
                 </div>
               </div>
@@ -602,14 +565,12 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               <h3 className={`text-lg sm:text-xl font-bold mb-6 sm:mb-8 flex items-center gap-2 ${
                 isLight ? 'text-slate-900' : 'text-white'
               }`}>
-                <DollarSign size={22} className={isLight ? 'text-amber-800' : 'text-[#E5B65F]'} />
-                Courier Earnings Estimator
-              </h3>
+                <DollarSign size={22} className={isLight ? 'text-amber-800' : 'text-[#E5B65F]'} />{t.ui.forCouriers.s_e18d8e}</h3>
 
               <div className="space-y-6 sm:space-y-8 mb-6 sm:mb-8">
                 {/* Vehicle Selection */}
                 <div>
-                  <label className={`block text-sm font-bold mb-3 ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>Your Vehicle Type</label>
+                  <label className={`block text-sm font-bold mb-3 ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>{t.ui.forCouriers.s_39bc68}</label>
                   <div className="grid grid-cols-3 gap-2 sm:gap-3">
                     <button
                       onClick={() => setVehicleType('motorbike')}
@@ -636,9 +597,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                             ? 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
                             : 'border-white/10 hover:border-white/20 text-gray-300 hover:text-white'
                       }`}
-                    >
-                      Exec Car
-                    </button>
+                    >{t.ui.forCouriers.s_93a5bc}</button>
                     <button
                       onClick={() => setVehicleType('bicycle')}
                       className={`py-3 px-1 sm:px-2 rounded-xl text-[10px] xs:text-xs font-bold text-center border transition cursor-pointer ${
@@ -659,7 +618,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                 {/* Slider: Deliveries */}
                 <div>
                   <div className="flex justify-between items-center text-xs sm:text-sm font-medium mb-2">
-                    <span className={`font-semibold ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>Deliveries per Day</span>
+                    <span className={`font-semibold ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>{t.ui.forCouriers.s_355ac2}</span>
                     <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>{deliveriesPerDay} orders</span>
                   </div>
                   <input 
@@ -677,7 +636,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                 {/* Slider: Tip */}
                 <div>
                   <div className="flex justify-between items-center text-xs sm:text-sm font-medium mb-2">
-                    <span className={`font-semibold ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>Average Tip per Delivery</span>
+                    <span className={`font-semibold ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>{t.ui.forCouriers.s_f6e64a}</span>
                     <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>${avgTip} USD</span>
                   </div>
                   <input 
@@ -722,17 +681,14 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     : 'bg-[#E5B65F]/10 border-[#E5B65F]/20 text-[#E5B65F]'
                 }`}>
                   <Zap size={16} className={`flex-shrink-0 mt-0.5 ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`} />
-                  <span>
-                    Based on an average base fee of <strong>${baseFare.toFixed(2)}</strong> for {vehicleType.replace('_', ' ')}s in Nairobi. Actual earnings vary based on distance, surge peak, and promotional missions.
+                  <span>{t.ui.forCouriers.s_e10068}<strong>${baseFare.toFixed(2)}</strong> for {vehicleType.replace('_', ' ')}s in Nairobi. Actual earnings vary based on distance, surge peak, and promotional missions.
                   </span>
                 </div>
 
                 <button 
                   onClick={() => onNavigate('courier_onboarding')}
                   className="w-full py-4 bg-[#E5B65F] hover:bg-[#ffddb1] text-[#291800] rounded-xl font-bold transition text-sm tracking-wide shadow-md cursor-pointer"
-                >
-                  Apply to Drive
-                </button>
+                >{t.ui.forCouriers.s_06816c}</button>
               </div>
             </div>
 
@@ -748,19 +704,13 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
           <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
             <span className={`font-bold tracking-widest text-xs uppercase px-3.5 py-1.5 rounded-full border ${
               isLight ? 'bg-amber-100 text-amber-800 border-amber-300' : 'bg-[#E5B65F]/10 text-[#E5B65F] border-[#E5B65F]/20'
-            }`}>
-              DATA INTELLIGENCE
-            </span>
+            }`}>{t.ui.forCouriers.s_53cdfb}</span>
             <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mt-4 mb-4 sm:mb-6 tracking-tight ${
               isLight ? 'text-slate-900' : 'text-white'
-            }`}>
-              Powerful Analytics for Elite Drivers
-            </h2>
+            }`}>{t.ui.forCouriers.s_78df83}</h2>
             <p className={`text-xs sm:text-sm md:text-base lg:text-lg ${
               isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'
-            }`}>
-              Track your daily performance, optimize your delivery times, and master Swahili & English hospitality tips with our smart companion analytics dashboard.
-            </p>
+            }`}>{t.ui.forCouriers.s_4f555f}</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -779,18 +729,16 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     <TrendingUp size={24} />
                   </div>
                   <div className="text-right">
-                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Average Earnings Growth</p>
+                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.forCouriers.s_209f63}</p>
                     <p className={`text-xl sm:text-2xl font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>+35%</p>
                   </div>
                 </div>
-                <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Earnings Analytics</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
-                  Understand your daily yields. Monitor peak areas, identify high-tipping zones, and learn the best hours to go online.
-                </p>
+                <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_e72e94}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_8b1193}</p>
               </div>
               <div className={`mt-8 pt-6 border-t ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
                 <div className="flex items-center justify-between text-xs font-semibold">
-                  <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>Weekly Target Reached</span>
+                  <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>{t.ui.forCouriers.s_c71f96}</span>
                   <span className={isLight ? 'text-slate-900' : 'text-white'}>96.5%</span>
                 </div>
                 <div className={`w-full h-1.5 rounded-full mt-2 overflow-hidden ${isLight ? 'bg-slate-200' : 'bg-white/10'}`}>
@@ -813,18 +761,16 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     <Star size={24} />
                   </div>
                   <div className="text-right">
-                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Ambassador Rating</p>
+                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.forCouriers.s_4d5b64}</p>
                     <p className={`text-xl sm:text-2xl font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>4.95 / 5</p>
                   </div>
                 </div>
-                <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Guest Rating Profiles</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
-                  Earn stars and secure exclusive bonuses. Build private, anonymous reviews that reinforce your stellar reputation with premium hotels.
-                </p>
+                <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_5b8964}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_6d1c48}</p>
               </div>
               <div className={`mt-8 pt-6 border-t ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
                 <div className="flex items-center justify-between text-xs font-semibold">
-                  <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>Elite Rank Status</span>
+                  <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>{t.ui.forCouriers.s_c38c49}</span>
                   <span className={isLight ? 'text-slate-900' : 'text-white'}>Top 2%</span>
                 </div>
                 <div className={`w-full h-1.5 rounded-full mt-2 overflow-hidden ${isLight ? 'bg-slate-200' : 'bg-white/10'}`}>
@@ -847,18 +793,16 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     <Navigation size={24} />
                   </div>
                   <div className="text-right">
-                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Idle Reduction</p>
+                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.forCouriers.s_153ab5}</p>
                     <p className={`text-xl sm:text-2xl font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>-45%</p>
                   </div>
                 </div>
-                <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Operational Mapping</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
-                  Our dispatch systems minimize your empty miles. Pre-book orders or follow integrated corridors to stack high-paying jobs in a row.
-                </p>
+                <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_d781b4}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_f582d4}</p>
               </div>
               <div className={`mt-8 pt-6 border-t ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
                 <div className="flex items-center justify-between text-xs font-semibold">
-                  <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>Route Efficiency Score</span>
+                  <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>{t.ui.forCouriers.s_677710}</span>
                   <span className={isLight ? 'text-slate-900' : 'text-white'}>95.4%</span>
                 </div>
                 <div className={`w-full h-1.5 rounded-full mt-2 overflow-hidden ${isLight ? 'bg-slate-200' : 'bg-white/10'}`}>
@@ -876,9 +820,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className={`font-bold tracking-widest text-xs uppercase px-3.5 py-1.5 rounded-full border ${
             isLight ? 'bg-amber-100 text-amber-800 border-amber-300' : 'bg-[#E5B65F]/10 text-[#E5B65F] border-[#E5B65F]/20'
-          }`}>
-            SETUP TIMELINE
-          </span>
+          }`}>{t.ui.forCouriers.s_4c36e1}</span>
           <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mt-4 mb-4 sm:mb-6 tracking-tight ${
             isLight ? 'text-slate-900' : 'text-white'
           }`}>
@@ -886,9 +828,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
           </h2>
           <p className={`text-xs sm:text-sm leading-relaxed font-medium ${
             isLight ? 'text-slate-600' : 'text-[#a0a1a1]'
-          }`}>
-            Quick online onboarding. Submit details, attend orientation, retrieve your custom elite starter kit, and take your first order in under 48 hours.
-          </p>
+          }`}>{t.ui.forCouriers.s_7e32e7}</p>
         </div>
 
         {/* Timeline track wrapper */}
@@ -914,9 +854,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     isLight
                       ? 'bg-amber-100 text-amber-800 border-amber-300'
                       : 'bg-[#E5B65F]/10 text-[#E5B65F] border-[#E5B65F]/20'
-                  }`}>
-                    STEP 01
-                  </span>
+                  }`}>{t.ui.forCouriers.s_2bf27f}</span>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shadow-inner ${
                     isLight
                       ? 'bg-amber-100 border border-amber-300 text-amber-800'
@@ -925,10 +863,8 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     1
                   </div>
                 </div>
-                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>Apply Online</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-                  Submit your vehicle registration and documents online in under 5 minutes through our secure, mobile-friendly onboarding portal.
-                </p>
+                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_0c343a}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_2a7274}</p>
               </div>
             </div>
 
@@ -944,9 +880,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     isLight
                       ? 'bg-amber-100 text-amber-800 border-amber-300'
                       : 'bg-[#E5B65F]/10 text-[#E5B65F] border-[#E5B65F]/20'
-                  }`}>
-                    STEP 02
-                  </span>
+                  }`}>{t.ui.forCouriers.s_c24cae}</span>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shadow-inner ${
                     isLight
                       ? 'bg-amber-100 border border-amber-300 text-amber-800'
@@ -955,10 +889,8 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     2
                   </div>
                 </div>
-                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>Fast Verification</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-                  Our professional partner compliance team validates your records and issues a secure orientation invitation within 48 hours.
-                </p>
+                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_5ce9fd}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_5e7925}</p>
               </div>
             </div>
 
@@ -974,9 +906,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     isLight
                       ? 'bg-amber-100 text-amber-800 border-amber-300'
                       : 'bg-[#E5B65F]/10 text-[#E5B65F] border-[#E5B65F]/20'
-                  }`}>
-                    STEP 03
-                  </span>
+                  }`}>{t.ui.forCouriers.s_4d81b2}</span>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shadow-inner ${
                     isLight
                       ? 'bg-amber-100 border border-amber-300 text-amber-800'
@@ -985,10 +915,8 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     3
                   </div>
                 </div>
-                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>Collect Starter Kit</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-                  Retrieve your tailored NEXG jackets, insulated food packs, smartphone bracket, and secure driver login credentials.
-                </p>
+                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_928714}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_fcf600}</p>
               </div>
             </div>
 
@@ -1000,17 +928,13 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             }`}>
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-bold tracking-widest uppercase bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">
-                    STEP 04
-                  </span>
+                  <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-bold tracking-widest uppercase bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">{t.ui.forCouriers.s_e3b925}</span>
                   <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-700 dark:text-emerald-400 font-bold text-xs shadow-inner">
                     ✓
                   </div>
                 </div>
-                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>Pocket High Tips</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-                  Go online in the driver app, navigate to hot premium spots, complete high-end orders, and watch your mobile wallet balance swell.
-                </p>
+                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_0e840b}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_45b640}</p>
               </div>
             </div>
 
@@ -1030,17 +954,15 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500 z-10"></div>
               <img 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                alt="Ambassador delivering gourmet meals" 
+                alt={t.ui.forCouriers.s_777b12} 
                 src={responsiveProps('courier_delivery_door_1783931148146.jpg', '100vw')?.src} 
                 referrerPolicy="no-referrer"
               />
               <div className={`absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 backdrop-blur-xl p-4 sm:p-6 rounded-2xl z-20 border shadow-lg ${
                 isLight ? 'bg-white/95 text-slate-900 border-slate-200 shadow-xl' : 'bg-[#131515]/95 text-white border-white/10 shadow-lg'
               }`}>
-                <p className={`text-xl sm:text-2xl font-bold mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>Join the Elite</p>
-                <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
-                  Join a community built on premium status and mutual respect. We support your career path and help you develop unmatched service skills.
-                </p>
+                <p className={`text-xl sm:text-2xl font-bold mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_41493f}</p>
+                <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_3500ab}</p>
               </div>
             </div>
           </div>
@@ -1049,14 +971,10 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
           <div>
             <span className={`font-bold tracking-widest text-xs uppercase px-3 py-1.5 rounded-full border ${
               isLight ? 'bg-amber-100 text-amber-800 border-amber-300' : 'bg-[#E5B65F]/10 text-[#E5B65F] border-[#E5B65F]/20'
-            }`}>
-              FLEET REQUIREMENTS
-            </span>
+            }`}>{t.ui.forCouriers.s_2e6151}</span>
             <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mt-4 mb-4 sm:mb-6 tracking-tight leading-tight ${
               isLight ? 'text-slate-900' : 'text-white'
-            }`}>
-              What it Takes to Be a NEXG Ambassador.
-            </h2>
+            }`}>{t.ui.forCouriers.s_933192}</h2>
             <p className={`text-sm sm:text-base mb-6 sm:mb-10 leading-relaxed ${
               isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'
             }`}>
@@ -1071,10 +989,8 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                   <Check size={14} strokeWidth={3} />
                 </div>
                 <div>
-                  <h4 className={`font-bold text-sm sm:text-base mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>Valid Documents & Licenses</h4>
-                  <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
-                    Must possess a clean driving record, valid local driver's license for your specified vehicle, and active comprehensive third-party insurance coverage.
-                  </p>
+                  <h4 className={`font-bold text-sm sm:text-base mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_c18810}</h4>
+                  <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_aed5c5}</p>
                 </div>
               </div>
 
@@ -1085,7 +1001,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                   <Check size={14} strokeWidth={3} />
                 </div>
                 <div>
-                  <h4 className={`font-bold text-sm sm:text-base mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>Flawless Modern Vehicle</h4>
+                  <h4 className={`font-bold text-sm sm:text-base mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_c10fec}</h4>
                   <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
                     Your motorbike, scooter, or car must be in exemplary visual and technical working condition (no visible dents or severe mechanical issues).
                   </p>
@@ -1099,7 +1015,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                   <Check size={14} strokeWidth={3} />
                 </div>
                 <div>
-                  <h4 className={`font-bold text-sm sm:text-base mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>Exceptional Presentation</h4>
+                  <h4 className={`font-bold text-sm sm:text-base mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forCouriers.s_54c4b5}</h4>
                   <p className={`leading-relaxed text-xs sm:text-sm ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
                     An open, positive mindset with excellent hospitality manners is critical. Fluency in English (or Swahili) is required to interact with premium international guests.
                   </p>
@@ -1119,14 +1035,10 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
             <span className={`font-bold tracking-widest text-xs uppercase px-3 py-1.5 rounded-full border ${
               isLight ? 'bg-amber-100 text-amber-800 border-amber-300' : 'bg-[#E5B65F]/10 text-[#E5B65F] border-[#E5B65F]/20'
-            }`}>
-              KNOWLEDGE BASE
-            </span>
+            }`}>{t.ui.forCouriers.s_ad6c0d}</span>
             <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mt-4 mb-3 sm:mb-4 tracking-tight ${
               isLight ? 'text-slate-900' : 'text-white'
-            }`}>
-              Courier Partner FAQs
-            </h2>
+            }`}>{t.ui.forCouriers.s_b53080}</h2>
             <p className={`text-xs sm:text-sm md:text-base ${
               isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'
             }`}>
@@ -1146,9 +1058,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                 <HelpCircle size={18} className={`flex-shrink-0 ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`} />
                 How soon can I start delivering?
               </h4>
-              <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
-                Once you submit your application online, our onboarding team reviews documents within 48 hours. If qualified, you'll be invited for a brief physical assessment and standard white-glove training before your account goes active.
-              </p>
+              <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_22d1d3}</p>
             </div>
 
             <div className={`rounded-2xl p-5 sm:p-6 border transition ${
@@ -1178,9 +1088,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                 <HelpCircle size={18} className={`flex-shrink-0 ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`} />
                 What areas do you currently cover?
               </h4>
-              <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
-                We currently support major high-end neighborhoods and coastal luxury zones across Nairobi, Mombasa, and Diani, expanding quickly to other East African metropolitan areas.
-              </p>
+              <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_653ccb}</p>
             </div>
 
             <div className={`rounded-2xl p-5 sm:p-6 border transition ${
@@ -1194,9 +1102,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                 <HelpCircle size={18} className={`flex-shrink-0 ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`} />
                 What is the NEXG courier dress code?
               </h4>
-              <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>
-                To guarantee top status, NEXG provides all approved couriers with premium tailored jackets, clean polo shirts, and custom-insulated delivery bags. Black trousers and clean black shoes are required on duty.
-              </p>
+              <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_eeb176}</p>
             </div>
           </div>
         </div>
@@ -1218,15 +1124,11 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             </h2>
             <p className={`text-xs sm:text-sm md:text-base mb-6 sm:mb-10 leading-relaxed max-w-2xl mx-auto ${
               isLight ? 'text-slate-600 font-medium' : 'text-[#a0a1a1]'
-            }`}>
-              Start your application today. Complete the secure onboarding questions and step into a new tier of professional independence and respect.
-            </p>
+            }`}>{t.ui.forCouriers.s_eb35f1}</p>
             <button 
               onClick={() => onNavigate('courier_onboarding')}
               className="bg-[#E5B65F] hover:bg-[#ffddb1] text-[#291800] px-8 sm:px-10 py-3.5 sm:py-5 rounded-full font-bold text-sm sm:text-lg transition-transform hover:scale-105 active:scale-95 shadow-xl cursor-pointer"
-            >
-              Apply Online Now
-            </button>
+            >{t.ui.forCouriers.s_6bde0a}</button>
             <p className={`mt-6 text-[10px] sm:text-xs tracking-wider uppercase font-semibold ${
               isLight ? 'text-slate-600' : 'text-gray-400'
             }`}>
@@ -1249,9 +1151,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               {/* The wordmark already spells NEXG, so no text sits beside it. */}
               <LogoIcon variant="wordmark" className="h-9 w-auto" />
             </div>
-            <p className={`text-sm leading-relaxed mb-6 ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-              Elevating premium hospitality across East Africa with integrated, contactless concierge ecosystems.
-            </p>
+            <p className={`text-sm leading-relaxed mb-6 ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forCouriers.s_89bdbf}</p>
             <div className="flex space-x-4">
               <button className={`w-9 h-9 rounded-full border flex items-center justify-center transition-colors cursor-pointer ${
                 isLight
@@ -1282,7 +1182,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             <div className="flex flex-col space-y-3">
               <button onClick={() => onNavigate('home')} className={`text-sm font-semibold text-left bg-transparent border-none cursor-pointer transition-colors ${
                 isLight ? 'text-slate-600 hover:text-[#B88728]' : 'text-gray-400 hover:text-[#E5B65F]'
-              }`}>About Us</button>
+              }`}>{t.ui.forCouriers.s_c887b9}</button>
               <button onClick={() => onNavigate('home')} className={`text-sm font-semibold text-left bg-transparent border-none cursor-pointer transition-colors ${
                 isLight ? 'text-slate-600 hover:text-[#B88728]' : 'text-gray-400 hover:text-[#E5B65F]'
               }`}>Careers</button>
@@ -1300,16 +1200,16 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             <div className="flex flex-col space-y-3">
               <button onClick={() => onNavigate('home')} className={`text-sm font-semibold text-left bg-transparent border-none cursor-pointer transition-colors ${
                 isLight ? 'text-slate-600 hover:text-[#B88728]' : 'text-gray-400 hover:text-[#E5B65F]'
-              }`}>Help Center</button>
+              }`}>{t.ui.forCouriers.s_110158}</button>
               <button onClick={() => onNavigate('home')} className={`text-sm font-semibold text-left bg-transparent border-none cursor-pointer transition-colors ${
                 isLight ? 'text-slate-600 hover:text-[#B88728]' : 'text-gray-400 hover:text-[#E5B65F]'
-              }`}>Contact Us</button>
+              }`}>{t.ui.forCouriers.s_9ad0cc}</button>
               <button onClick={() => onNavigate('home')} className={`text-sm font-semibold text-left bg-transparent border-none cursor-pointer transition-colors ${
                 isLight ? 'text-slate-600 hover:text-[#B88728]' : 'text-gray-400 hover:text-[#E5B65F]'
               }`}>FAQs</button>
               <button onClick={() => onNavigate('home')} className={`text-sm font-semibold text-left bg-transparent border-none cursor-pointer transition-colors ${
                 isLight ? 'text-slate-600 hover:text-[#B88728]' : 'text-gray-400 hover:text-[#E5B65F]'
-              }`}>Safety Guidelines</button>
+              }`}>{t.ui.forCouriers.s_1d2be9}</button>
             </div>
           </div>
 
@@ -1318,19 +1218,19 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
             <div className="flex flex-col space-y-3">
               <button onClick={() => onNavigate('home')} className={`text-sm font-semibold text-left bg-transparent border-none cursor-pointer transition-colors ${
                 isLight ? 'text-slate-600 hover:text-[#B88728]' : 'text-gray-400 hover:text-[#E5B65F]'
-              }`}>Terms of Service</button>
+              }`}>{t.ui.forCouriers.s_0c8a9a}</button>
               <button onClick={() => onNavigate('home')} className={`text-sm font-semibold text-left bg-transparent border-none cursor-pointer transition-colors ${
                 isLight ? 'text-slate-600 hover:text-[#B88728]' : 'text-gray-400 hover:text-[#E5B65F]'
-              }`}>Privacy Policy</button>
+              }`}>{t.ui.forCouriers.s_9db108}</button>
               <button onClick={() => onNavigate('home')} className={`text-sm font-semibold text-left bg-transparent border-none cursor-pointer transition-colors ${
                 isLight ? 'text-slate-600 hover:text-[#B88728]' : 'text-gray-400 hover:text-[#E5B65F]'
-              }`}>Cookie Policy</button>
+              }`}>{t.ui.forCouriers.s_e6e178}</button>
             </div>
           </div>
 
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
             <h4 className={`text-xs font-bold uppercase tracking-wider mb-5 ${isLight ? 'text-slate-900' : 'text-gray-400'}`}>Newsletter</h4>
-            <p className={`text-sm mb-4 ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Stay updated with premier hospitality tips and trends.</p>
+            <p className={`text-sm mb-4 ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.forCouriers.s_ec3c35}</p>
             <div className="flex">
               <input 
                 type="email" 
@@ -1359,7 +1259,7 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
           <p>© 2026 NEXG App. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5"><Globe size={14} /> Global</span>
-            <span className="flex items-center gap-1.5">Secure Site</span>
+            <span className="flex items-center gap-1.5">{t.ui.forCouriers.s_a9577d}</span>
           </div>
         </div>
       </footer>

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { X, CreditCard, Check, Loader2, Building2, MapPin, ArrowRight, ShieldCheck, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useCart } from '../context/CartContext';
 import { useTheme } from '../context/ThemeContext';
 
 export default function CheckoutSimulatedModal() {
+  const { t } = useLanguage();
   const {
     isCheckoutOpen,
     setIsCheckoutOpen,
@@ -96,14 +98,10 @@ export default function CheckoutSimulatedModal() {
               <div>
                 <h3 className={`font-bold text-lg sm:text-xl tracking-tight ${
                   isLight ? 'text-slate-900' : 'text-white'
-                }`}>
-                  Finalize & Place Order
-                </h3>
+                }`}>{t.ui.checkoutSimulatedModal.s_19e2a2}</h3>
                 <span className={`text-[10px] uppercase font-bold tracking-widest block mt-0.5 ${
                   isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'
-                }`}>
-                  Simulated Demo Checkout
-                </span>
+                }`}>{t.ui.checkoutSimulatedModal.s_bac774}</span>
               </div>
             </div>
 
@@ -115,7 +113,7 @@ export default function CheckoutSimulatedModal() {
                   ? 'bg-white hover:bg-slate-200 text-slate-700 border-slate-200'
                   : 'bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border-white/10'
               }`}
-              aria-label="Close checkout"
+              aria-label={t.ui.checkoutSimulatedModal.s_846466}
             >
               <X size={18} />
             </button>
@@ -134,8 +132,7 @@ export default function CheckoutSimulatedModal() {
               <span className="font-extrabold uppercase tracking-wider text-[11px] block text-amber-700 dark:text-[#E5B65F]">
                 Simulated Payment Demo (Waiting for Live Payment Router & Provider Connection)
               </span>
-              <p className={`mt-0.5 font-medium ${isLight ? 'text-amber-800' : 'text-gray-200'}`}>
-                This payment is <strong>strictly for demo & testing purposes</strong> while waiting for connection to the production payment router and provider (M-Pesa Daraja, Stripe, or Adyen). <strong>No real funds or accounts will be debited.</strong>
+              <p className={`mt-0.5 font-medium ${isLight ? 'text-amber-800' : 'text-gray-200'}`}>{t.ui.checkoutSimulatedModal.s_119c2f}<strong>strictly for demo & testing purposes</strong> while waiting for connection to the production payment router and provider (M-Pesa Daraja, Stripe, or Adyen). <strong>{t.ui.checkoutSimulatedModal.s_b79126}</strong>
               </p>
             </div>
           </div>
@@ -148,14 +145,12 @@ export default function CheckoutSimulatedModal() {
                 isLight ? 'text-slate-900' : 'text-white'
               }`}>
                 <MapPin size={16} className="text-[#7d5a11] dark:text-[#E5B65F]" />
-                <span>Delivery Address & Location</span>
+                <span>{t.ui.checkoutSimulatedModal.s_e5297b}</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="sm:col-span-2 space-y-1.5">
-                  <label className={`text-xs font-bold ${isLight ? 'text-slate-600' : 'text-gray-300'}`}>
-                    Hotel / Villa / Street Address
-                  </label>
+                  <label className={`text-xs font-bold ${isLight ? 'text-slate-600' : 'text-gray-300'}`}>{t.ui.checkoutSimulatedModal.s_7db213}</label>
                   <input
                     type="text"
                     value={deliveryAddress}
@@ -185,9 +180,7 @@ export default function CheckoutSimulatedModal() {
               </div>
 
               <div className="space-y-1.5">
-                <label className={`text-xs font-bold ${isLight ? 'text-slate-600' : 'text-gray-300'}`}>
-                  App Delivery Instructions
-                </label>
+                <label className={`text-xs font-bold ${isLight ? 'text-slate-600' : 'text-gray-300'}`}>{t.ui.checkoutSimulatedModal.s_55e54d}</label>
                 <input
                   type="text"
                   value={instructions}
@@ -209,11 +202,9 @@ export default function CheckoutSimulatedModal() {
                   isLight ? 'text-slate-900' : 'text-white'
                 }`}>
                   <CreditCard size={16} className="text-[#7d5a11] dark:text-[#E5B65F]" />
-                  <span>Choose Simulated Payment Method</span>
+                  <span>{t.ui.checkoutSimulatedModal.s_635949}</span>
                 </div>
-                <span className="text-[11px] font-bold px-2 py-0.5 rounded border bg-amber-500/10 border-amber-500/30 text-[#7d5a11] dark:text-[#E5B65F]">
-                  Sandbox Router Active
-                </span>
+                <span className="text-[11px] font-bold px-2 py-0.5 rounded border bg-amber-500/10 border-amber-500/30 text-[#7d5a11] dark:text-[#E5B65F]">{t.ui.checkoutSimulatedModal.s_ee343f}</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -246,9 +237,7 @@ export default function CheckoutSimulatedModal() {
                       </div>
                     )}
                   </div>
-                  <p className={`text-[11px] font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                    Simulates instant STK push prompt directly on mobile handset.
-                  </p>
+                  <p className={`text-[11px] font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.checkoutSimulatedModal.s_882f46}</p>
                 </button>
 
                 {/* Credit Card Option */}
@@ -304,9 +293,7 @@ export default function CheckoutSimulatedModal() {
                       <div className="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center font-bold text-xs border border-white/20">
                         
                       </div>
-                      <span className={`font-bold text-sm ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                        Apple Pay
-                      </span>
+                      <span className={`font-bold text-sm ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.checkoutSimulatedModal.s_3a7a99}</span>
                     </div>
                     {paymentMethod === 'apple_pay' && (
                       <div className="w-5 h-5 rounded-full bg-[#E5B65F] text-black flex items-center justify-center">
@@ -314,9 +301,7 @@ export default function CheckoutSimulatedModal() {
                       </div>
                     )}
                   </div>
-                  <p className={`text-[11px] font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                    Simulates one-touch FaceID / TouchID authorization.
-                  </p>
+                  <p className={`text-[11px] font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.checkoutSimulatedModal.s_ea4478}</p>
                 </button>
 
                 {/* Room Folio Option */}
@@ -338,9 +323,7 @@ export default function CheckoutSimulatedModal() {
                       <div className="w-8 h-8 rounded-lg bg-purple-600 text-white flex items-center justify-center font-bold text-xs">
                         <Building2 size={14} />
                       </div>
-                      <span className={`font-bold text-sm ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                        Room Folio / Cash
-                      </span>
+                      <span className={`font-bold text-sm ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.checkoutSimulatedModal.s_ea3289}</span>
                     </div>
                     {paymentMethod === 'cash' && (
                       <div className="w-5 h-5 rounded-full bg-[#E5B65F] text-black flex items-center justify-center">
@@ -348,9 +331,7 @@ export default function CheckoutSimulatedModal() {
                       </div>
                     )}
                   </div>
-                  <p className={`text-[11px] font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                    Billed directly to your hotel master room folio upon delivery.
-                  </p>
+                  <p className={`text-[11px] font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.checkoutSimulatedModal.s_eb034a}</p>
                 </button>
               </div>
 
@@ -363,7 +344,7 @@ export default function CheckoutSimulatedModal() {
                     isLight ? 'text-slate-700' : 'text-gray-300'
                   }`}>
                     <span>M-Pesa Phone Number (for simulated prompt)</span>
-                    <span className="text-[11px] text-emerald-700 dark:text-emerald-400 font-semibold">Router Demo Validated</span>
+                    <span className="text-[11px] text-emerald-700 dark:text-emerald-400 font-semibold">{t.ui.checkoutSimulatedModal.s_dd0a60}</span>
                   </label>
                   <input
                     type="tel"
@@ -384,16 +365,14 @@ export default function CheckoutSimulatedModal() {
                   isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#202224] border-white/10'
                 }`}>
                   <div className="flex items-center justify-between text-xs">
-                    <span className={`font-bold ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>
-                      Preloaded Demo Card
-                    </span>
+                    <span className={`font-bold ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>{t.ui.checkoutSimulatedModal.s_cecb67}</span>
                     <span className="font-bold text-[#7d5a11] dark:text-[#E5B65F]">Visa Infinite • 8492</span>
                   </div>
                   <input
                     type="text"
                     value={cardHolder}
                     onChange={(e) => setCardHolder(e.target.value)}
-                    placeholder="Cardholder Name"
+                    placeholder={t.ui.checkoutSimulatedModal.s_ac51d0}
                     className={`w-full border rounded-xl px-3.5 py-2 text-sm focus:outline-none focus:border-[#E5B65F] font-medium ${
                       isLight
                         ? 'bg-white border-slate-200 text-slate-900'
@@ -411,7 +390,7 @@ export default function CheckoutSimulatedModal() {
               <div className={`flex items-center justify-between text-xs font-semibold ${
                 isLight ? 'text-slate-600' : 'text-gray-400'
               }`}>
-                <span>Merchant Partner</span>
+                <span>{t.ui.checkoutSimulatedModal.s_fee23b}</span>
                 <span className={`font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>
                   {cartRestaurantName}
                 </span>
@@ -419,7 +398,7 @@ export default function CheckoutSimulatedModal() {
               <div className={`flex items-center justify-between text-xs font-semibold ${
                 isLight ? 'text-slate-600' : 'text-gray-400'
               }`}>
-                <span>Selected Items</span>
+                <span>{t.ui.checkoutSimulatedModal.s_6aa79c}</span>
                 <span className={`font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>
                   {cart.length} item(s)
                 </span>
@@ -427,7 +406,7 @@ export default function CheckoutSimulatedModal() {
               <div className={`flex items-center justify-between text-sm font-bold pt-2 border-t ${
                 isLight ? 'text-slate-900 border-slate-200' : 'text-white border-white/10'
               }`}>
-                <span>Total Demo Amount</span>
+                <span>{t.ui.checkoutSimulatedModal.s_9ad55a}</span>
                 <span className="text-[#7d5a11] dark:text-[#E5B65F] text-base font-bold">
                   ${finalTotal.toFixed(2)}
                 </span>
@@ -445,7 +424,7 @@ export default function CheckoutSimulatedModal() {
               }`}>
                 <div className="flex items-center gap-2 text-sm font-bold text-[#7d5a11] dark:text-[#E5B65F]">
                   <Loader2 size={18} className="animate-spin" />
-                  <span>Processing Demo Payment...</span>
+                  <span>{t.ui.checkoutSimulatedModal.s_e569ab}</span>
                 </div>
                 <p className={`text-xs font-semibold animate-status ${
                   isLight ? 'text-slate-600' : 'text-gray-400'
@@ -460,10 +439,8 @@ export default function CheckoutSimulatedModal() {
                 className="w-full flex items-center justify-between px-6 py-4 rounded-full bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-bold text-sm uppercase tracking-wider transition transform active:scale-[0.98] shadow-lg shadow-[#E5B65F]/20 cursor-pointer"
               >
                 <div className="flex items-center gap-2">
-                  <span>Simulate Payment & Place Order</span>
-                  <span className="text-[10px] bg-black/20 px-2 py-0.5 rounded font-mono font-bold">
-                    DEMO ROUTER
-                  </span>
+                  <span>{t.ui.checkoutSimulatedModal.s_63da07}</span>
+                  <span className="text-[10px] bg-black/20 px-2 py-0.5 rounded font-mono font-bold">{t.ui.checkoutSimulatedModal.s_bb36a9}</span>
                 </div>
                 <div className="flex items-center gap-1.5 font-bold text-base">
                   <span>${finalTotal.toFixed(2)}</span>

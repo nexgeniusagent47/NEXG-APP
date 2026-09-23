@@ -287,7 +287,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
                 ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-800'
                 : 'bg-white/10 hover:bg-white/20 border-white/15 text-white'
             }`}
-            aria-label="View Cart"
+            aria-label={t.ui.header.s_7abd6c}
           >
             <ShoppingBag size={17} />
             {itemsCount > 0 && (
@@ -358,7 +358,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
                     ? 'bg-slate-100 border-slate-200 text-amber-800'
                     : 'bg-white/10 border-white/15 text-[#E5B65F]'
                 }`}
-                title="Toggle Light/Dark Theme"
+                title={t.ui.header.s_64f892}
               >
                 {isLight ? <Moon size={15} /> : <Sun size={15} />}
                 <span>{isLight ? 'Dark' : 'Light'}</span>

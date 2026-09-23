@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import {
   ArrowLeft,
   Search,
@@ -27,6 +28,7 @@ interface SpaWellnessProps {
 }
 
 export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
+  const { t } = useLanguage();
   const { addToCart, setIsCartOpen } = useCart();
   const { isLight } = useTheme();
 
@@ -184,12 +186,10 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                 }`}
               >
                 <ArrowLeft size={16} />
-                <span>Explore Home</span>
+                <span>{t.ui.spaWellness.s_a1e9f9}</span>
               </button>
               <span className={isLight ? 'text-slate-300' : 'text-gray-600'}>/</span>
-              <span className={`text-xs sm:text-sm font-extrabold ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>
-                Spa & Wellness Sanctuaries
-              </span>
+              <span className={`text-xs sm:text-sm font-extrabold ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>{t.ui.spaWellness.s_5dfb4e}</span>
             </div>
 
             <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${
@@ -217,18 +217,14 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
             <div className="relative z-10 p-6 sm:p-12 max-w-2xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-3 bg-[#E5B65F]/20 text-[#7d5a11] dark:text-[#E5B65F]">
                 <Sparkles size={13} />
-                <span>District Holistic Wellness & Spa</span>
+                <span>{t.ui.spaWellness.s_69d23c}</span>
               </div>
               <h1 className={`text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 ${
                 isLight ? 'text-slate-900' : 'text-white'
-              }`}>
-                Sanctuary Spas & In-Villa Wellness
-              </h1>
+              }`}>{t.ui.spaWellness.s_c1c2fb}</h1>
               <p className={`text-sm sm:text-base leading-relaxed mb-6 font-medium ${
                 isLight ? 'text-slate-600' : 'text-gray-300'
-              }`}>
-                Select a wellness sanctuary to browse certified therapists, in-villa Balinese massages, Ayurvedic Shirodhara, and hydrothermal rituals.
-              </p>
+              }`}>{t.ui.spaWellness.s_fda6e0}</p>
 
               {/* Search Bar */}
               <div className={`flex items-center rounded-2xl p-1.5 border shadow-lg ${
@@ -237,7 +233,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                 <Search className={`ml-3 w-5 h-5 ${isLight ? 'text-slate-400' : 'text-[#E5B65F]'}`} />
                 <input
                   type="text"
-                  placeholder="Search spa sanctuaries, Balinese, deep tissue, sauna..."
+                  placeholder={t.ui.spaWellness.s_659a92}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className={`w-full bg-transparent border-none px-3 text-sm outline-none font-medium ${
@@ -375,7 +371,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                         }`}
                       >
                         <CalendarIcon size={12} className="text-[#7d5a11] dark:text-[#E5B65F]" />
-                        <span>Book Session</span>
+                        <span>{t.ui.spaWellness.s_9aabe9}</span>
                       </button>
 
                       {venue.socials && (
@@ -449,7 +445,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
               }`}
             >
               <ArrowLeft size={16} />
-              <span>Back to all Sanctuary Partners</span>
+              <span>{t.ui.spaWellness.s_689bea}</span>
             </button>
 
             <div className="flex items-center gap-2">
@@ -468,7 +464,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                 className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl text-xs font-bold bg-[#E5B65F] hover:bg-[#d6a54d] text-black shadow-md cursor-pointer transition-colors"
               >
                 <CalendarIcon size={14} />
-                <span>Book Calendar</span>
+                <span>{t.ui.spaWellness.s_3669be}</span>
               </button>
             </div>
           </div>
@@ -541,12 +537,8 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
           {/* Treatments Section */}
           <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h2 className={`text-2xl font-bold tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                Sanctuary Treatments & In-Villa Rituals
-              </h2>
-              <p className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                Select duration, botanical essential oils, and schedule an immediate in-villa or pavilion appointment
-              </p>
+              <h2 className={`text-2xl font-bold tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.spaWellness.s_fe0476}</h2>
+              <p className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.spaWellness.s_f2937f}</p>
             </div>
 
             <div className={`flex items-center rounded-xl p-1.5 border w-full sm:w-72 ${
@@ -555,7 +547,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
               <Search size={16} className={`ml-2 ${isLight ? 'text-slate-400' : 'text-gray-400'}`} />
               <input
                 type="text"
-                placeholder="Search rituals & massages..."
+                placeholder={t.ui.spaWellness.s_d02cb4}
                 value={treatmentSearch}
                 onChange={(e) => setTreatmentSearch(e.target.value)}
                 className={`w-full bg-transparent border-none px-2 text-xs outline-none font-medium ${
@@ -629,7 +621,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                       <span className={`text-xs font-bold flex items-center gap-1 ${
                         isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'
                       }`}>
-                        <span>Select Ritual</span>
+                        <span>{t.ui.spaWellness.s_120405}</span>
                         <ChevronRight size={13} />
                       </span>
                     </div>
@@ -663,9 +655,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
           >
             <div className="p-6 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
               <div>
-                <span className="text-[10px] uppercase font-bold tracking-widest text-[#7d5a11] dark:text-[#E5B65F]">
-                  Spa Sanctuary Reservation
-                </span>
+                <span className="text-[10px] uppercase font-bold tracking-widest text-[#7d5a11] dark:text-[#E5B65F]">{t.ui.spaWellness.s_f212ea}</span>
                 <h3 className="text-xl font-bold">{bookingModalConfig.venueName}</h3>
               </div>
               <button
@@ -703,9 +693,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                     <button
                       onClick={() => setBookingModalConfig((prev) => ({ ...prev, isConfirmed: true }))}
                       className="px-6 py-3 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-bold text-xs uppercase tracking-wider shadow-lg transition-transform active:scale-95 cursor-pointer"
-                    >
-                      Confirm Booking
-                    </button>
+                    >{t.ui.spaWellness.s_eb9e1e}</button>
                   </div>
                 </>
               ) : (
@@ -716,8 +704,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                   <h4 className="text-2xl font-bold mb-2">Spa Sanctuary Reserved!</h4>
                   <p className={`text-xs max-w-md mx-auto mb-6 leading-relaxed ${
                     isLight ? 'text-slate-600' : 'text-gray-300'
-                  }`}>
-                    Your appointment at <span className="font-bold">{bookingModalConfig.venueName}</span> has been confirmed for {bookingModalConfig.selectedDate} at {bookingModalConfig.selectedTime}. Your therapist will prepare organic botanicals and arrival essentials.
+                  }`}>{t.ui.spaWellness.s_5276ac}<span className="font-bold">{bookingModalConfig.venueName}</span> has been confirmed for {bookingModalConfig.selectedDate} at {bookingModalConfig.selectedTime}. Your therapist will prepare organic botanicals and arrival essentials.
                   </p>
                   <button
                     onClick={() => setBookingModalConfig((prev) => ({ ...prev, isOpen: false }))}

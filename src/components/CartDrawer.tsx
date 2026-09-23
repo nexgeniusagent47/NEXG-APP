@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { X, Trash2, Plus, Minus, Tag, ShieldCheck, ArrowRight, Utensils, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useCart } from '../context/CartContext';
 import { useTheme } from '../context/ThemeContext';
 
 export default function CartDrawer() {
+  const { t } = useLanguage();
   const {
     cart,
     isCartOpen,
@@ -93,7 +95,7 @@ export default function CartDrawer() {
         className="fixed inset-0 z-50 overflow-hidden"
         role="dialog"
         aria-modal="true"
-        aria-label="Your order"
+        aria-label={t.ui.cartDrawer.s_d2467b}
       >
         {/* Backdrop */}
         <motion.div
@@ -123,9 +125,7 @@ export default function CartDrawer() {
               <div>
                 <span className={`text-[10px] uppercase font-bold tracking-widest block mb-0.5 ${
                   isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'
-                }`}>
-                  Your Order Cart
-                </span>
+                }`}>{t.ui.cartDrawer.s_643b96}</span>
                 <h3 className={`font-bold text-lg sm:text-xl tracking-tight truncate max-w-[240px] ${
                   isLight ? 'text-slate-900' : 'text-white'
                 }`}>
@@ -141,7 +141,7 @@ export default function CartDrawer() {
                         ? 'text-slate-600 hover:text-rose-600'
                         : 'text-gray-400 hover:text-rose-400'
                     }`}
-                    title="Clear entire cart"
+                    title={t.ui.cartDrawer.s_237e47}
                   >
                     Clear
                   </button>
@@ -153,7 +153,7 @@ export default function CartDrawer() {
                       ? 'bg-slate-100 hover:bg-slate-200 text-slate-700 border-slate-200'
                       : 'bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border-white/5'
                   }`}
-                  aria-label="Close cart"
+                  aria-label={t.ui.cartDrawer.s_42cb61}
                 >
                   <X size={18} />
                 </button>
@@ -212,12 +212,8 @@ export default function CartDrawer() {
                 }`}>
                   <Utensils size={32} />
                 </div>
-                <h4 className={`text-lg font-bold mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                  Your cart is empty
-                </h4>
-                <p className={`text-sm max-w-xs mb-6 ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                  Explore our curated restaurants and add artisanal dishes or concierge dining to get started.
-                </p>
+                <h4 className={`text-lg font-bold mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.cartDrawer.s_2303a3}</h4>
+                <p className={`text-sm max-w-xs mb-6 ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.cartDrawer.s_ab8546}</p>
                 <button
                   onClick={() => setIsCartOpen(false)}
                   className={`px-6 py-2.5 rounded-full font-semibold text-sm transition-colors cursor-pointer ${
@@ -225,9 +221,7 @@ export default function CartDrawer() {
                       ? 'bg-[#B88728] text-slate-950 hover:bg-[#967C3B]'
                       : 'bg-[#E5B65F] text-black hover:bg-[#d6a54d]'
                   }`}
-                >
-                  Explore Menus
-                </button>
+                >{t.ui.cartDrawer.s_11a9f0}</button>
               </div>
             ) : (
               <div className="flex-grow overflow-y-auto p-5 sm:p-6 space-y-5 custom-scrollbar">
@@ -303,7 +297,7 @@ export default function CartDrawer() {
                                 ? 'text-slate-400 hover:text-rose-600'
                                 : 'text-gray-400 hover:text-rose-400'
                             }`}
-                            title="Remove item"
+                            title={t.ui.cartDrawer.s_76ecba}
                           >
                             <Trash2 size={14} />
                           </button>
@@ -374,7 +368,7 @@ export default function CartDrawer() {
                           type="text"
                           value={promoInput}
                           onChange={(e) => setPromoInput(e.target.value)}
-                          placeholder="Promo code (try NEXG20)"
+                          placeholder={t.ui.cartDrawer.s_1fc724}
                           className={`w-full pl-9 pr-3 py-2 border rounded-xl text-xs focus:outline-none ${
                             isLight
                               ? 'bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-400 focus:border-[#B88728]'
@@ -412,7 +406,7 @@ export default function CartDrawer() {
                   isLight ? 'border-slate-200' : 'border-white/10'
                 }`}>
                   <div className="flex justify-between items-center text-xs">
-                    <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>Courier Concierge Tip</span>
+                    <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.cartDrawer.s_c7085d}</span>
                     <span className={`font-bold ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>
                       ${tipAmount.toFixed(2)}
                     </span>
@@ -448,7 +442,7 @@ export default function CartDrawer() {
                     <span>${subtotal.toFixed(2)}</span>
                   </div>
                   <div className={`flex justify-between ${isLight ? 'text-slate-600' : 'text-gray-300'}`}>
-                    <span>Delivery fee</span>
+                    <span>{t.ui.cartDrawer.s_733b61}</span>
                     <span>
                       {remainingForFreeDelivery === 0 ? (
                         <span className={`font-semibold line-through mr-1.5 ${
@@ -461,7 +455,7 @@ export default function CartDrawer() {
                     </span>
                   </div>
                   <div className={`flex justify-between ${isLight ? 'text-slate-600' : 'text-gray-300'}`}>
-                    <span>Concierge service fee</span>
+                    <span>{t.ui.cartDrawer.s_d6ea26}</span>
                     <span>${serviceFee.toFixed(2)}</span>
                   </div>
                   {appliedPromo && (
@@ -474,7 +468,7 @@ export default function CartDrawer() {
                   )}
                   {tipAmount > 0 && (
                     <div className={`flex justify-between ${isLight ? 'text-slate-600' : 'text-gray-300'}`}>
-                      <span>Courier tip</span>
+                      <span>{t.ui.cartDrawer.s_44951e}</span>
                       <span>${tipAmount.toFixed(2)}</span>
                     </div>
                   )}
@@ -506,7 +500,7 @@ export default function CartDrawer() {
                       : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-black shadow-[#E5B65F]/20'
                   }`}
                 >
-                  <span>Proceed to Checkout</span>
+                  <span>{t.ui.cartDrawer.s_d2f4d4}</span>
                   <div className="flex items-center gap-1.5">
                     <span className="font-extrabold">${finalTotal.toFixed(2)}</span>
                     <ArrowRight size={18} strokeWidth={2.5} />
@@ -516,7 +510,7 @@ export default function CartDrawer() {
                   isLight ? 'text-slate-600' : 'text-gray-400'
                 }`}>
                   <ShieldCheck size={13} className={isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'} />
-                  <span>Simulated checkout & instant confirmation</span>
+                  <span>{t.ui.cartDrawer.s_2c7952}</span>
                 </div>
               </div>
             )}

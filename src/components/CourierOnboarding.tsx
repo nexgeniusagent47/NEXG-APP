@@ -487,7 +487,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
       <div className="space-y-4 text-xs md:text-sm text-gray-700 leading-relaxed font-sans">
         <div className="text-center border-b pb-6 mb-6">
           <LogoIcon className="w-12 h-12 text-[#7a5821] mx-auto mb-2" />
-          <h3 className="font-bold text-lg text-gray-900 uppercase">NEXG APP LIMITED</h3>
+          <h3 className="font-bold text-lg text-gray-900 uppercase">{t.ui.courierOnboarding.s_71c904}</h3>
           <p className="text-[#7a5821] text-xs font-bold tracking-widest uppercase">
             {isDed ? 'Dedicated Rider Partner Agreement' : 'Independent Rider Logistics Agreement'}
           </p>
@@ -497,7 +497,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
         <p>This Services Agreement (the "Agreement") is executed on this date by and between:</p>
         
         <p className="pl-4 border-l-2 border-amber-300">
-          <strong>NEXG APP LIMITED</strong>, a legal logistics platform company incorporated in Kenya (hereinafter referred to as "NEXG"); and
+          <strong>{t.ui.courierOnboarding.s_71c904}</strong>, a legal logistics platform company incorporated in Kenya (hereinafter referred to as "NEXG"); and
         </p>
 
         <p className="pl-4 border-l-2 border-amber-300">
@@ -527,23 +527,23 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
         </p>
 
         <h4 className="font-bold text-gray-950 mt-4 text-sm">4. Standard Code of Conduct & Integrity</h4>
-        <p>Rider agrees to strictly wear the customized NEXG apparel on duty, maintain exemplary clean vehicle hygiene, arrive within specified time slots, and respect international hospitality guests' absolute privacy. Failure to maintain a minimum 4.0/5.0 star rating may result in temporary profile deactivation.</p>
+        <p>{t.ui.courierOnboarding.s_febf86}</p>
 
         <h4 className="font-bold text-gray-950 mt-4 text-sm">5. Termination Clause</h4>
-        <p>This agreement begins immediately on approval and is valid for a period of 12 months. Either party may terminate with 7 days' written notice, or NEXG may block platform access instantly in cases of safety breach, driving license revocation, or fraudulent behavior.</p>
+        <p>{t.ui.courierOnboarding.s_1805c7}</p>
 
         <div className="grid grid-cols-2 gap-8 border-t border-gray-200 pt-8 mt-8">
           <div>
-            <p className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-6">For NEXG App</p>
+            <p className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-6">{t.ui.courierOnboarding.s_86d4ca}</p>
             <div className="h-10 flex items-end mb-1">
-              <span className="font-mono text-xs text-gray-400 font-semibold italic">NEXG Fleet Operations</span>
+              <span className="font-mono text-xs text-gray-400 font-semibold italic">{t.ui.courierOnboarding.s_f954ab}</span>
             </div>
             <div className="h-0.5 bg-gray-200 w-full mb-1"></div>
-            <p className="text-[11px] text-gray-500">Authorized Dispatch Committee</p>
+            <p className="text-[11px] text-gray-500">{t.ui.courierOnboarding.s_377b90}</p>
           </div>
 
           <div>
-            <p className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-6">Accepted & Agreed by Rider</p>
+            <p className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-6">{t.ui.courierOnboarding.s_2cb0d8}</p>
             <div className="h-10 flex items-end mb-1">
               {sigMode === 'type' ? (
                 <span className="font-serif text-2xl text-[#7a5821] italic tracking-wide">{formData.signatoryName || '—'}</span>
@@ -572,7 +572,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
             <button
               onClick={() => onNavigate('couriers')}
               className="flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 hover:bg-gray-100 text-gray-700 transition-colors cursor-pointer"
-              title="Back to Couriers"
+              title={t.ui.courierOnboarding.s_310c80}
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
@@ -622,12 +622,8 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
           {/* Banner Title */}
           <div className="bg-[#1a1c1c] px-8 py-8 md:px-12 md:py-10 text-white relative overflow-hidden border-b border-gray-800">
             <div className="absolute -right-12 -top-12 w-48 h-48 bg-gradient-to-br from-[#c49a5c] to-[#E5B65F] opacity-15 rounded-full blur-2xl"></div>
-            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white mb-2">
-              Join the Elite NEXG Rider Fleet
-            </h1>
-            <p className="text-gray-300 text-sm md:text-base max-w-xl leading-relaxed">
-              Unlock premier delivery earnings, tailored branding, and unmatched support in Kenya’s luxury hospitality ecosystem.
-            </p>
+            <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-white mb-2">{t.ui.courierOnboarding.s_aed4fc}</h1>
+            <p className="text-gray-300 text-sm md:text-base max-w-xl leading-relaxed">{t.ui.courierOnboarding.s_7d5f6e}</p>
           </div>
 
           <form onSubmit={handleFinish} className="px-8 py-10 md:px-12 space-y-0">
@@ -638,10 +634,8 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
             {currentStep === 1 && (
               <div className="space-y-8">
                 <div className="text-center max-w-xl mx-auto mb-10">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Choose Your Partnership model</h2>
-                  <p className="text-gray-500 text-sm">
-                    Select the model that aligns with your assets. We have personalized contracts and onboarding checklist steps for each path.
-                  </p>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">{t.ui.courierOnboarding.s_ef8482}</h2>
+                  <p className="text-gray-500 text-sm">{t.ui.courierOnboarding.s_f9f8d5}</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -668,23 +662,17 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     }`}>
                       <Truck size={24} />
                     </div>
-                    <h3 className="font-bold text-gray-900 text-base mb-2">Independent Rider</h3>
-                    <p className="text-gray-500 text-xs leading-relaxed mb-6">
-                      Drive your own motorcycle or scooter, set your flexible calendar hours, and take commissions per successfully completed errand.
-                    </p>
+                    <h3 className="font-bold text-gray-900 text-base mb-2">{t.ui.courierOnboarding.s_2358e6}</h3>
+                    <p className="text-gray-500 text-xs leading-relaxed mb-6">{t.ui.courierOnboarding.s_5f5518}</p>
                     <div className="space-y-2 text-left border-t border-gray-100 pt-4">
                       <div className="text-[11px] text-gray-500 flex items-center gap-2">
                         <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />
                         100% Own Calendar Flex
                       </div>
                       <div className="text-[11px] text-gray-500 flex items-center gap-2">
-                        <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />
-                        Own Vehicle required
-                      </div>
+                        <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />{t.ui.courierOnboarding.s_d5184b}</div>
                       <div className="text-[11px] text-gray-500 flex items-center gap-2">
-                        <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />
-                        Premium Commission Payout
-                      </div>
+                        <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />{t.ui.courierOnboarding.s_a40d60}</div>
                     </div>
                   </label>
 
@@ -710,23 +698,15 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     }`}>
                       <FileText size={24} />
                     </div>
-                    <h3 className="font-bold text-gray-900 text-base mb-2">NEXG Dedicated Rider</h3>
-                    <p className="text-gray-500 text-xs leading-relaxed mb-6">
-                      Ride custom NEXG-branded premium logistics vehicles, operate consistent shifts, and enjoy a stable guaranteed base salary.
-                    </p>
+                    <h3 className="font-bold text-gray-900 text-base mb-2">{t.ui.courierOnboarding.s_b5c479}</h3>
+                    <p className="text-gray-500 text-xs leading-relaxed mb-6">{t.ui.courierOnboarding.s_14bf35}</p>
                     <div className="space-y-2 text-left border-t border-gray-100 pt-4">
                       <div className="text-[11px] text-gray-500 flex items-center gap-2">
-                        <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />
-                        NEXG Provides Vehicle
-                      </div>
+                        <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />{t.ui.courierOnboarding.s_3cc4fd}</div>
                       <div className="text-[11px] text-gray-500 flex items-center gap-2">
-                        <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />
-                        Guaranteed Base Salary
-                      </div>
+                        <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />{t.ui.courierOnboarding.s_03c52e}</div>
                       <div className="text-[11px] text-gray-500 flex items-center gap-2">
-                        <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />
-                        Structured Shift schedules
-                      </div>
+                        <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />{t.ui.courierOnboarding.s_4d1c2f}</div>
                     </div>
                   </label>
 
@@ -752,23 +732,17 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     }`}>
                       <Building size={24} />
                     </div>
-                    <h3 className="font-bold text-gray-900 text-base mb-2">Fleet Partner</h3>
-                    <p className="text-gray-500 text-xs leading-relaxed mb-6">
-                      Onboard your registered Kenyan logistics agency and entire courier squad. Bulk upload riders and manage team-level settlements.
-                    </p>
+                    <h3 className="font-bold text-gray-900 text-base mb-2">{t.ui.courierOnboarding.s_0b39f6}</h3>
+                    <p className="text-gray-500 text-xs leading-relaxed mb-6">{t.ui.courierOnboarding.s_d101b7}</p>
                     <div className="space-y-2 text-left border-t border-gray-100 pt-4">
                       <div className="text-[11px] text-gray-500 flex items-center gap-2">
                         <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />
                         Company-Level Portal
                       </div>
                       <div className="text-[11px] text-gray-500 flex items-center gap-2">
-                        <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />
-                        Bulk CSV Squad Import
-                      </div>
+                        <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />{t.ui.courierOnboarding.s_e1c6ae}</div>
                       <div className="text-[11px] text-gray-500 flex items-center gap-2">
-                        <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />
-                        Consolidated Business payout
-                      </div>
+                        <Check size={12} className="text-green-500 flex-shrink-0" strokeWidth={3} />{t.ui.courierOnboarding.s_3c3541}</div>
                     </div>
                   </label>
 
@@ -783,18 +757,15 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
               <div className="space-y-8">
                 <div>
                   <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2 mb-2">
-                    <User className="text-[#7a5821]" size={20} />
-                    Personal Profile Details
-                  </h2>
-                  <p className="text-gray-500 text-xs">Ensure your details correspond exactly with your National Identification Document.</p>
+                    <User className="text-[#7a5821]" size={20} />{t.ui.courierOnboarding.s_f6da6f}</h2>
+                  <p className="text-gray-500 text-xs">{t.ui.courierOnboarding.s_fca1ec}</p>
                 </div>
 
                 {selectedType === 'dedicated' && (
                   <div className="bg-[#FDF9F1] border border-[#F3E5C8] rounded-2xl p-4 flex gap-3 text-xs text-[#967C3B] leading-relaxed">
                     <Info size={16} className="flex-shrink-0 mt-0.5" />
                     <div>
-                      <strong>Dedicated Rider Note:</strong> You are applying for a scheduled, salaried position. NEXG provides custom branded bikes, gear, and fuel budgets. Below, you will also designate your operational preferences.
-                    </div>
+                      <strong>Dedicated Rider Note:</strong>{t.ui.courierOnboarding.s_5920ae}</div>
                   </div>
                 )}
 
@@ -804,7 +775,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     <input 
                       type="text" 
                       required
-                      placeholder="E.g. John Kamau Maina"
+                      placeholder={t.ui.courierOnboarding.s_e3ca9b}
                       value={formData.fullName}
                       onChange={(e) => handleChange('fullName', e.target.value)}
                       className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -812,10 +783,10 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   </div>
 
                   <DateStringField
-                    label="Date of Birth *"
+                    label={t.ui.courierOnboarding.s_e0934e}
                     value={formData.dob}
                     onChange={(v) => handleChange('dob', v)}
-                    placeholder="Choose your date of birth"
+                    placeholder={t.ui.courierOnboarding.s_f4afb4}
                     // A date of birth cannot be in the future. Enforced in the calendar
                     // rather than by a validation message after submission, so the
                     // impossible choice is never offered.
@@ -830,7 +801,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       onChange={(e) => handleChange('gender', e.target.value)}
                       className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821] appearance-none"
                     >
-                      <option value="">Select Gender</option>
+                      <option value="">{t.ui.courierOnboarding.s_e90701}</option>
                       <option value="Male">Male</option>
                       <option value="Female">Female</option>
                       <option value="Other">Other</option>
@@ -849,13 +820,13 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">WhatsApp Mobile Number <span className="text-red-500">*</span></label>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_27980f}<span className="text-red-500">*</span></label>
                     <div className="relative">
                       <Phone className="absolute left-3.5 top-3 text-gray-400" size={16} />
                       <input 
                         type="tel" 
                         required
-                        placeholder="E.g. +254 712 345 678"
+                        placeholder={t.ui.courierOnboarding.s_f65568}
                         value={formData.phone}
                         onChange={(e) => handleChange('phone', e.target.value)}
                         className="bg-gray-50 border border-gray-200 rounded-xl pl-10 pr-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -864,10 +835,10 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Alternative Contact Phone</label>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_7cf2e1}</label>
                     <input 
                       type="tel" 
-                      placeholder="E.g. +254 700 111 222"
+                      placeholder={t.ui.courierOnboarding.s_a1c4fe}
                       value={formData.altPhone}
                       onChange={(e) => handleChange('altPhone', e.target.value)}
                       className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -876,14 +847,14 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                 </div>
 
                 <div className="border-t border-gray-100 pt-6 space-y-4">
-                  <h3 className="font-bold text-gray-900 text-sm">Residential Address</h3>
+                  <h3 className="font-bold text-gray-900 text-sm">{t.ui.courierOnboarding.s_5a833b}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                     <div>
                       <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">County <span className="text-red-500">*</span></label>
                       <input 
                         type="text" 
                         required
-                        placeholder="E.g. Nairobi"
+                        placeholder={t.ui.courierOnboarding.s_3ba957}
                         value={formData.county}
                         onChange={(e) => handleChange('county', e.target.value)}
                         className="bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -894,7 +865,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">Sub-County / Estate</label>
                       <input 
                         type="text" 
-                        placeholder="E.g. Westlands"
+                        placeholder={t.ui.courierOnboarding.s_74955f}
                         value={formData.subCounty}
                         onChange={(e) => handleChange('subCounty', e.target.value)}
                         className="bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -902,11 +873,11 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     </div>
 
                     <div>
-                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">Estate Area / Street <span className="text-red-500">*</span></label>
+                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">{t.ui.courierOnboarding.s_ec9a3f}<span className="text-red-500">*</span></label>
                       <input 
                         type="text" 
                         required
-                        placeholder="E.g. Kileleshwa, Block D"
+                        placeholder={t.ui.courierOnboarding.s_24813d}
                         value={formData.address}
                         onChange={(e) => handleChange('address', e.target.value)}
                         className="bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -924,25 +895,22 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
               <div className="space-y-8">
                 <div>
                   <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2 mb-2">
-                    <FileCheck className="text-[#7a5821]" size={20} />
-                    Identification & Vehicle Setup
-                  </h2>
-                  <p className="text-gray-500 text-xs">Submit official identification and transit licensing details.</p>
+                    <FileCheck className="text-[#7a5821]" size={20} />{t.ui.courierOnboarding.s_c8ed49}</h2>
+                  <p className="text-gray-500 text-xs">{t.ui.courierOnboarding.s_0e3256}</p>
                 </div>
 
                 {selectedType === 'dedicated' && (
                   <div className="bg-[#7a5821]/5 border border-[#7a5821]/15 rounded-2xl p-4 text-xs text-[#7a5821] leading-relaxed">
-                    <strong>Note:</strong> Your premium motorbike is provided by NEXG. You do not need to register a personal motorbike logbook or license plate here.
-                  </div>
+                    <strong>Note:</strong>{t.ui.courierOnboarding.s_a85feb}</div>
                 )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">National ID / Passport Number <span className="text-red-500">*</span></label>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_aef6a9}<span className="text-red-500">*</span></label>
                     <input 
                       type="text" 
                       required
-                      placeholder="E.g. 12345678"
+                      placeholder={t.ui.courierOnboarding.s_8bb6da}
                       value={formData.idNum}
                       onChange={(e) => handleChange('idNum', e.target.value)}
                       className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -950,11 +918,11 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">KRA PIN Number <span className="text-red-500">*</span></label>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_3bfd88}<span className="text-red-500">*</span></label>
                     <input 
                       type="text" 
                       required
-                      placeholder="E.g. A001234567Z"
+                      placeholder={t.ui.courierOnboarding.s_2b31a3}
                       value={formData.kraPin}
                       onChange={(e) => handleChange('kraPin', e.target.value)}
                       className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -962,11 +930,11 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">NTSA Driver's License Number <span className="text-red-500">*</span></label>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_37dfba}<span className="text-red-500">*</span></label>
                     <input 
                       type="text" 
                       required
-                      placeholder="E.g. DL-XXXXXX"
+                      placeholder={t.ui.courierOnboarding.s_3873df}
                       value={formData.dlNum}
                       onChange={(e) => handleChange('dlNum', e.target.value)}
                       className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -974,10 +942,10 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   </div>
 
                   <DateStringField
-                    label="Driver's License Expiry Date *"
+                    label={t.ui.courierOnboarding.s_b2e0a8}
                     value={formData.dlExpiry}
                     onChange={(v) => handleChange('dlExpiry', v)}
-                    placeholder="Choose the expiry date"
+                    placeholder={t.ui.courierOnboarding.s_41d914}
                     // A licence that has already expired cannot be used to onboard, so the
                     // calendar does not offer it. The alternative is accepting the date and
                     // rejecting the courier at review, which wastes their time.
@@ -988,18 +956,18 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                 {/* Vehicle Setup section (Hidden/Dimmed for Dedicated, required for Independent) */}
                 {selectedType === 'independent' ? (
                   <div className="border-t border-gray-100 pt-6 space-y-6">
-                    <h3 className="font-bold text-gray-900 text-sm">Vehicle Registration details</h3>
+                    <h3 className="font-bold text-gray-900 text-sm">{t.ui.courierOnboarding.s_55537f}</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Vehicle Type <span className="text-red-500">*</span></label>
+                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_2d6ca0}<span className="text-red-500">*</span></label>
                         <select
                           required
                           value={formData.vehicleType}
                           onChange={(e) => handleChange('vehicleType', e.target.value)}
                           className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821] appearance-none"
                         >
-                          <option value="Motorcycle">Motorcycle / Scooter</option>
-                          <option value="Executive Car">Executive Sedan / Van</option>
+                          <option value="Motorcycle">{t.ui.courierOnboarding.s_ad7df6}</option>
+                          <option value="Executive Car">{t.ui.courierOnboarding.s_0cb44f}</option>
                           <option value="Bicycle">Bicycle</option>
                         </select>
                       </div>
@@ -1009,7 +977,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                         <input 
                           type="text" 
                           required
-                          placeholder="E.g. KMCA 123A"
+                          placeholder={t.ui.courierOnboarding.s_c59900}
                           value={formData.plateNum}
                           onChange={(e) => handleChange('plateNum', e.target.value)}
                           className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1017,10 +985,10 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       </div>
 
                       <div className="md:col-span-2">
-                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Vehicle Model & Color</label>
+                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_e21ec5}</label>
                         <input 
                           type="text" 
-                          placeholder="E.g. Red Honda CB125F (Year 2023)"
+                          placeholder={t.ui.courierOnboarding.s_71ebbb}
                           value={formData.vehicleModel}
                           onChange={(e) => handleChange('vehicleModel', e.target.value)}
                           className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1031,10 +999,10 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                 ) : (
                   // Dedicated shifts/zones
                   <div className="border-t border-gray-100 pt-6 space-y-6">
-                    <h3 className="font-bold text-gray-900 text-sm">Shift & Operating Zones</h3>
+                    <h3 className="font-bold text-gray-900 text-sm">{t.ui.courierOnboarding.s_10f420}</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Preferred Working Shift <span className="text-red-500">*</span></label>
+                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_79865b}<span className="text-red-500">*</span></label>
                         <select
                           value={formData.shift}
                           onChange={(e) => handleChange('shift', e.target.value)}
@@ -1043,16 +1011,16 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                           <option value="Morning (6am–2pm)">Morning Shift (6am – 2pm)</option>
                           <option value="Afternoon (2pm–10pm)">Afternoon Shift (2pm – 10pm)</option>
                           <option value="Night (10pm–6am)">Night Shift (10pm – 6am)</option>
-                          <option value="Full Day">Flexible Shifts</option>
+                          <option value="Full Day">{t.ui.courierOnboarding.s_d66864}</option>
                         </select>
                       </div>
 
                       <div>
-                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Preferred Operating Area Zone <span className="text-red-500">*</span></label>
+                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_5104d5}<span className="text-red-500">*</span></label>
                         <input 
                           type="text" 
                           required
-                          placeholder="E.g. Westlands, Kilimani, Lavington"
+                          placeholder={t.ui.courierOnboarding.s_dca3fc}
                           value={formData.zone}
                           onChange={(e) => handleChange('zone', e.target.value)}
                           className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1060,7 +1028,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       </div>
 
                       <div className="md:col-span-2">
-                        <label className="block text-xs font-bold uppercase text-gray-500 mb-2">Preferred Transit Vehicle Assigned</label>
+                        <label className="block text-xs font-bold uppercase text-gray-500 mb-2">{t.ui.courierOnboarding.s_e12ee9}</label>
                         <div className="grid grid-cols-3 gap-3">
                           {['Motorcycle', 'TukTuk', 'Executive Car'].map((v) => (
                             <button
@@ -1091,10 +1059,8 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
               <div className="space-y-8">
                 <div>
                   <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2 mb-2">
-                    <Upload className="text-[#7a5821]" size={20} />
-                    Document Verification Uploads
-                  </h2>
-                  <p className="text-gray-500 text-xs">Upload crisp clear photo snapshots or PDF files under 5MB size limit.</p>
+                    <Upload className="text-[#7a5821]" size={20} />{t.ui.courierOnboarding.s_e16a80}</h2>
+                  <p className="text-gray-500 text-xs">{t.ui.courierOnboarding.s_50d865}</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1103,7 +1069,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   <div className="border border-gray-200 bg-gray-50 p-6 rounded-[24px] flex flex-col justify-between shadow-sm">
                     <div>
                       <p className="font-bold text-gray-900 text-sm mb-1">National ID (Both sides) <span className="text-red-500">*</span></p>
-                      <p className="text-gray-500 text-xs leading-relaxed">Clear scanned copy of front and back face of your card.</p>
+                      <p className="text-gray-500 text-xs leading-relaxed">{t.ui.courierOnboarding.s_340115}</p>
                     </div>
                     <div className="mt-6">
                       <input 
@@ -1129,8 +1095,8 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   {/* Document 2 */}
                   <div className="border border-gray-200 bg-gray-50 p-6 rounded-[24px] flex flex-col justify-between shadow-sm">
                     <div>
-                      <p className="font-bold text-gray-900 text-sm mb-1">NTSA Driving License <span className="text-red-500">*</span></p>
-                      <p className="text-gray-500 text-xs leading-relaxed">Both sides of your active, unexpired logistics driver license.</p>
+                      <p className="font-bold text-gray-900 text-sm mb-1">{t.ui.courierOnboarding.s_5cfa43}<span className="text-red-500">*</span></p>
+                      <p className="text-gray-500 text-xs leading-relaxed">{t.ui.courierOnboarding.s_cdec1f}</p>
                     </div>
                     <div className="mt-6">
                       <input 
@@ -1156,8 +1122,8 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   {/* Document 3 */}
                   <div className="border border-gray-200 bg-gray-50 p-6 rounded-[24px] flex flex-col justify-between shadow-sm">
                     <div>
-                      <p className="font-bold text-gray-900 text-sm mb-1">KRA PIN Confirmation Certificate <span className="text-red-500">*</span></p>
-                      <p className="text-gray-500 text-xs leading-relaxed">Official KRA Pin certification document page from iTax portal.</p>
+                      <p className="font-bold text-gray-900 text-sm mb-1">{t.ui.courierOnboarding.s_831dc7}<span className="text-red-500">*</span></p>
+                      <p className="text-gray-500 text-xs leading-relaxed">{t.ui.courierOnboarding.s_587649}</p>
                     </div>
                     <div className="mt-6">
                       <input 
@@ -1187,10 +1153,9 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     }`}
                   >
                     <div>
-                      <p className="font-bold text-gray-900 text-sm mb-1">
-                        Vehicle Logbook & Third-Party Insurance <span className="text-red-500">*</span>
+                      <p className="font-bold text-gray-900 text-sm mb-1">{t.ui.courierOnboarding.s_ecd675}<span className="text-red-500">*</span>
                       </p>
-                      <p className="text-gray-500 text-xs leading-relaxed">Proof of ownership and active public transit insurance coverage.</p>
+                      <p className="text-gray-500 text-xs leading-relaxed">{t.ui.courierOnboarding.s_c85d99}</p>
                     </div>
                     <div className="mt-6">
                       <input 
@@ -1256,10 +1221,8 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
               <div className="space-y-8">
                 <div>
                   <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2 mb-2">
-                    <CreditCard className="text-[#7a5821]" size={20} />
-                    Services & Settlement Payout
-                  </h2>
-                  <p className="text-gray-500 text-xs">Configure how you receive settlements and who to contact in emergencies.</p>
+                    <CreditCard className="text-[#7a5821]" size={20} />{t.ui.courierOnboarding.s_338cf2}</h2>
+                  <p className="text-gray-500 text-xs">{t.ui.courierOnboarding.s_fbbe43}</p>
                 </div>
 
                 {/* Service Offerings Checklist */}
@@ -1276,7 +1239,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       />
                       <User className="text-[#7a5821] mb-1" size={24} />
                       <span className="text-sm font-bold text-gray-900">Ride-Hailing</span>
-                      <span className="text-[11px] text-gray-400">Carry VIP guests to properties</span>
+                      <span className="text-[11px] text-gray-400">{t.ui.courierOnboarding.s_3c774b}</span>
                     </label>
 
                     <label className="border-2 rounded-2xl p-4 flex flex-col items-center gap-2 bg-white cursor-pointer select-none transition-colors text-center">
@@ -1287,8 +1250,8 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                         className="accent-[#7a5821] w-4.5 h-4.5 cursor-pointer mb-2"
                       />
                       <Truck className="text-[#7a5821] mb-1" size={24} />
-                      <span className="text-sm font-bold text-gray-900">Package Delivery</span>
-                      <span className="text-[11px] text-gray-400">Deliver premium retail items</span>
+                      <span className="text-sm font-bold text-gray-900">{t.ui.courierOnboarding.s_c1ecb3}</span>
+                      <span className="text-[11px] text-gray-400">{t.ui.courierOnboarding.s_6b3d6a}</span>
                     </label>
 
                     <label className="border-2 rounded-2xl p-4 flex flex-col items-center gap-2 bg-white cursor-pointer select-none transition-colors text-center">
@@ -1299,8 +1262,8 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                         className="accent-[#7a5821] w-4.5 h-4.5 cursor-pointer mb-2"
                       />
                       <Award className="text-[#7a5821] mb-1" size={24} />
-                      <span className="text-sm font-bold text-gray-900">Vip App</span>
-                      <span className="text-[11px] text-gray-400">Handle high-end guest requests</span>
+                      <span className="text-sm font-bold text-gray-900">{t.ui.courierOnboarding.s_828ade}</span>
+                      <span className="text-[11px] text-gray-400">{t.ui.courierOnboarding.s_8e203d}</span>
                     </label>
 
                   </div>
@@ -1308,17 +1271,17 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
 
                 {/* Payout configurations */}
                 <div className="border-t border-gray-100 pt-6 space-y-5">
-                  <h3 className="font-bold text-gray-900 text-sm">Payout Settlement Configurations</h3>
+                  <h3 className="font-bold text-gray-900 text-sm">{t.ui.courierOnboarding.s_e04a0d}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Payout Method <span className="text-red-500">*</span></label>
+                      <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_a0094a}<span className="text-red-500">*</span></label>
                       <select
                         value={formData.payoutMode}
                         onChange={(e) => handleChange('payoutMode', e.target.value)}
                         className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821] appearance-none"
                       >
                         <option value="M-Pesa">M-Pesa Mobile Money</option>
-                        <option value="Bank">Bank Settlement Transfer</option>
+                        <option value="Bank">{t.ui.courierOnboarding.s_70abeb}</option>
                       </select>
                     </div>
 
@@ -1328,7 +1291,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                         <input 
                           type="tel" 
                           required
-                          placeholder="E.g. +254 712 345 678"
+                          placeholder={t.ui.courierOnboarding.s_f65568}
                           value={formData.mpesaNum}
                           onChange={(e) => handleChange('mpesaNum', e.target.value)}
                           className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1337,33 +1300,33 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     ) : (
                       <div className="md:col-span-2 bg-gray-50 border border-gray-200 p-5 rounded-2xl grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                          <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">Bank Name <span className="text-red-500">*</span></label>
+                          <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">{t.ui.courierOnboarding.s_312631}<span className="text-red-500">*</span></label>
                           <input 
                             type="text" 
                             required={formData.payoutMode === 'Bank'}
-                            placeholder="E.g. Equity Bank"
+                            placeholder={t.ui.courierOnboarding.s_ddb4d1}
                             value={formData.bankName}
                             onChange={(e) => handleChange('bankName', e.target.value)}
                             className="bg-white border border-gray-200 rounded-lg px-3 py-2 w-full text-xs text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
                           />
                         </div>
                         <div>
-                          <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">Account Name <span className="text-red-500">*</span></label>
+                          <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">{t.ui.courierOnboarding.s_db3b79}<span className="text-red-500">*</span></label>
                           <input 
                             type="text" 
                             required={formData.payoutMode === 'Bank'}
-                            placeholder="E.g. John Kamau"
+                            placeholder={t.ui.courierOnboarding.s_f71ebc}
                             value={formData.accHolder}
                             onChange={(e) => handleChange('accHolder', e.target.value)}
                             className="bg-white border border-gray-200 rounded-lg px-3 py-2 w-full text-xs text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
                           />
                         </div>
                         <div>
-                          <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">Account Number <span className="text-red-500">*</span></label>
+                          <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">{t.ui.courierOnboarding.s_0bd62e}<span className="text-red-500">*</span></label>
                           <input 
                             type="text" 
                             required={formData.payoutMode === 'Bank'}
-                            placeholder="E.g. 12001234567"
+                            placeholder={t.ui.courierOnboarding.s_a1524d}
                             value={formData.accNum}
                             onChange={(e) => handleChange('accNum', e.target.value)}
                             className="bg-white border border-gray-200 rounded-lg px-3 py-2 w-full text-xs text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1376,14 +1339,14 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
 
                 {/* Emergency contact */}
                 <div className="border-t border-gray-100 pt-6 space-y-4">
-                  <h3 className="font-bold text-gray-900 text-sm">Emergency Contact Person</h3>
+                  <h3 className="font-bold text-gray-900 text-sm">{t.ui.courierOnboarding.s_3ce5aa}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                     <div>
-                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">Full Legal Name <span className="text-red-500">*</span></label>
+                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">{t.ui.courierOnboarding.s_197646}<span className="text-red-500">*</span></label>
                       <input 
                         type="text" 
                         required
-                        placeholder="E.g. Mary Jane"
+                        placeholder={t.ui.courierOnboarding.s_de744b}
                         value={formData.emergName}
                         onChange={(e) => handleChange('emergName', e.target.value)}
                         className="bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1395,7 +1358,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       <input 
                         type="text" 
                         required
-                        placeholder="E.g. Spouse / Parent"
+                        placeholder={t.ui.courierOnboarding.s_efbb4c}
                         value={formData.emergRel}
                         onChange={(e) => handleChange('emergRel', e.target.value)}
                         className="bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1403,11 +1366,11 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     </div>
 
                     <div>
-                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">Emergency Mobile Phone <span className="text-red-500">*</span></label>
+                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">{t.ui.courierOnboarding.s_44fe57}<span className="text-red-500">*</span></label>
                       <input 
                         type="tel" 
                         required
-                        placeholder="E.g. +254 711 000 000"
+                        placeholder={t.ui.courierOnboarding.s_e4c574}
                         value={formData.emergPhone}
                         onChange={(e) => handleChange('emergPhone', e.target.value)}
                         className="bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1426,19 +1389,17 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
               <div className="space-y-8">
                 <div>
                   <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2 mb-2">
-                    <Building className="text-[#7a5821]" size={20} />
-                    Fleet Partner Business Profile
-                  </h2>
-                  <p className="text-gray-500 text-xs">Configure your legal registered business details for logistics partnerships.</p>
+                    <Building className="text-[#7a5821]" size={20} />{t.ui.courierOnboarding.s_5b5250}</h2>
+                  <p className="text-gray-500 text-xs">{t.ui.courierOnboarding.s_714406}</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Company Legal Name <span className="text-red-500">*</span></label>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_c8708a}<span className="text-red-500">*</span></label>
                     <input 
                       type="text" 
                       required
-                      placeholder="E.g. Swift Express Logistics Ltd"
+                      placeholder={t.ui.courierOnboarding.s_34e784}
                       value={formData.flName}
                       onChange={(e) => handleChange('flName', e.target.value)}
                       className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1446,10 +1407,10 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Trading Name / Brand Name</label>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_e15c6c}</label>
                     <input 
                       type="text" 
-                      placeholder="E.g. Swift Deliveries"
+                      placeholder={t.ui.courierOnboarding.s_0d98d0}
                       value={formData.flTradingName}
                       onChange={(e) => handleChange('flTradingName', e.target.value)}
                       className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1457,11 +1418,11 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Business KRA PIN <span className="text-red-500">*</span></label>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_e387b2}<span className="text-red-500">*</span></label>
                     <input 
                       type="text" 
                       required
-                      placeholder="E.g. P051234567Z"
+                      placeholder={t.ui.courierOnboarding.s_692fe8}
                       value={formData.flKraPIN}
                       onChange={(e) => handleChange('flKraPIN', e.target.value)}
                       className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1469,11 +1430,11 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Certificate of Incorporation / Reg No. <span className="text-red-500">*</span></label>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_34f9ae}<span className="text-red-500">*</span></label>
                     <input 
                       type="text" 
                       required
-                      placeholder="E.g. CPR/2018/12345"
+                      placeholder={t.ui.courierOnboarding.s_8f912f}
                       value={formData.flRegNum}
                       onChange={(e) => handleChange('flRegNum', e.target.value)}
                       className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1481,11 +1442,11 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Company Office Headquarters <span className="text-red-500">*</span></label>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_27c646}<span className="text-red-500">*</span></label>
                     <input 
                       type="text" 
                       required
-                      placeholder="E.g. Corner House, 4th Floor, Kimathi St."
+                      placeholder={t.ui.courierOnboarding.s_2dc8f1}
                       value={formData.flAddress}
                       onChange={(e) => handleChange('flAddress', e.target.value)}
                       className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1493,7 +1454,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">City HQ Location <span className="text-red-500">*</span></label>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_b026ba}<span className="text-red-500">*</span></label>
                     <input 
                       type="text" 
                       required
@@ -1506,14 +1467,14 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
 
                 {/* Primary Contact Person */}
                 <div className="border-t border-gray-100 pt-6">
-                  <h3 className="font-bold text-gray-900 text-sm mb-4">Authorized Primary Contact Person</h3>
+                  <h3 className="font-bold text-gray-900 text-sm mb-4">{t.ui.courierOnboarding.s_26712f}</h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                     <div>
-                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">Full Legal Name <span className="text-red-500">*</span></label>
+                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">{t.ui.courierOnboarding.s_197646}<span className="text-red-500">*</span></label>
                       <input 
                         type="text" 
                         required
-                        placeholder="E.g. Albert Mwangi"
+                        placeholder={t.ui.courierOnboarding.s_e1fe05}
                         value={formData.flContactName}
                         onChange={(e) => handleChange('flContactName', e.target.value)}
                         className="bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1521,11 +1482,11 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     </div>
 
                     <div>
-                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">Corporate Job Title <span className="text-red-500">*</span></label>
+                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">{t.ui.courierOnboarding.s_4c7486}<span className="text-red-500">*</span></label>
                       <input 
                         type="text" 
                         required
-                        placeholder="E.g. Fleet Manager"
+                        placeholder={t.ui.courierOnboarding.s_d9863a}
                         value={formData.flContactTitle}
                         onChange={(e) => handleChange('flContactTitle', e.target.value)}
                         className="bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1533,11 +1494,11 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     </div>
 
                     <div>
-                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">Direct Mobile Number <span className="text-red-500">*</span></label>
+                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">{t.ui.courierOnboarding.s_9d159c}<span className="text-red-500">*</span></label>
                       <input 
                         type="tel" 
                         required
-                        placeholder="E.g. +254 700 987 654"
+                        placeholder={t.ui.courierOnboarding.s_f3a211}
                         value={formData.flContactPhone}
                         onChange={(e) => handleChange('flContactPhone', e.target.value)}
                         className="bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1545,11 +1506,11 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     </div>
 
                     <div className="md:col-span-2">
-                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">Contact Email Address <span className="text-red-500">*</span></label>
+                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">{t.ui.courierOnboarding.s_3174a5}<span className="text-red-500">*</span></label>
                       <input 
                         type="email" 
                         required
-                        placeholder="E.g. operations@swiftlogistics.co.ke"
+                        placeholder={t.ui.courierOnboarding.s_204be3}
                         value={formData.flContactEmail}
                         onChange={(e) => handleChange('flContactEmail', e.target.value)}
                         className="bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1557,10 +1518,10 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     </div>
 
                     <div>
-                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">WhatsApp Number</label>
+                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">{t.ui.courierOnboarding.s_51dacf}</label>
                       <input 
                         type="tel" 
-                        placeholder="E.g. +254 700 987 654"
+                        placeholder={t.ui.courierOnboarding.s_f3a211}
                         value={formData.flContactWa}
                         onChange={(e) => handleChange('flContactWa', e.target.value)}
                         className="bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1578,20 +1539,18 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
               <div className="space-y-8">
                 <div>
                   <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2 mb-2">
-                    <Truck className="text-[#7a5821]" size={20} />
-                    Fleet Operational Scale & Coverage
-                  </h2>
-                  <p className="text-gray-500 text-xs">Outline your company’s transit capacities and target operating logistics zones.</p>
+                    <Truck className="text-[#7a5821]" size={20} />{t.ui.courierOnboarding.s_93457d}</h2>
+                  <p className="text-gray-500 text-xs">{t.ui.courierOnboarding.s_27538f}</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Total Active Riders <span className="text-red-500">*</span></label>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_fa0cdb}<span className="text-red-500">*</span></label>
                     <input 
                       type="number" 
                       required
                       min="1"
-                      placeholder="E.g. 15"
+                      placeholder={t.ui.courierOnboarding.s_76af1d}
                       value={formData.flTotalRiders}
                       onChange={(e) => handleChange('flTotalRiders', e.target.value)}
                       className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1599,12 +1558,12 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Total Registered Vehicles <span className="text-red-500">*</span></label>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_63a113}<span className="text-red-500">*</span></label>
                     <input 
                       type="number" 
                       required
                       min="1"
-                      placeholder="E.g. 15"
+                      placeholder={t.ui.courierOnboarding.s_76af1d}
                       value={formData.flTotalVehicles}
                       onChange={(e) => handleChange('flTotalVehicles', e.target.value)}
                       className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1612,12 +1571,12 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">Years in Logistics Sector <span className="text-red-500">*</span></label>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_81db77}<span className="text-red-500">*</span></label>
                     <input 
                       type="number" 
                       required
                       min="0"
-                      placeholder="E.g. 4"
+                      placeholder={t.ui.courierOnboarding.s_4ff862}
                       value={formData.flExperience}
                       onChange={(e) => handleChange('flExperience', e.target.value)}
                       className="bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1626,11 +1585,11 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase text-gray-500 mb-2">Operating Counties & Estates Coverage <span className="text-red-500">*</span></label>
+                  <label className="block text-xs font-bold uppercase text-gray-500 mb-2">{t.ui.courierOnboarding.s_984805}<span className="text-red-500">*</span></label>
                   <textarea 
                     required
                     rows={3}
-                    placeholder="List all cities and estates where your fleet currently has active coverage. E.g. Nairobi CBD, Westlands, Kilimani, Mombasa, Diani, etc."
+                    placeholder={t.ui.courierOnboarding.s_b5015c}
                     value={formData.flZones}
                     onChange={(e) => handleChange('flZones', e.target.value)}
                     className="bg-gray-50 border border-gray-200 rounded-xl p-4 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -1638,7 +1597,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase text-gray-500 mb-3">Active Vehicle types represented in Fleet</label>
+                  <label className="block text-xs font-bold uppercase text-gray-500 mb-3">{t.ui.courierOnboarding.s_aafa84}</label>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {['Motorcycles', 'TukTuks', 'Cars/Vans', 'Bicycles'].map((vt) => (
                       <label 
@@ -1661,7 +1620,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
 
                 {/* Compliance Declarations */}
                 <div className="bg-gray-50 border border-gray-200 p-6 rounded-[28px] space-y-3 shadow-inner">
-                  <h3 className="font-bold text-gray-900 text-xs uppercase tracking-wider mb-2">Fleet Integrity Declarations</h3>
+                  <h3 className="font-bold text-gray-900 text-xs uppercase tracking-wider mb-2">{t.ui.courierOnboarding.s_eb6915}</h3>
                   
                   <label className="flex items-start gap-3 cursor-pointer">
                     <input 
@@ -1670,9 +1629,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       onChange={(e) => handleChange('flCheckIns', e.target.checked)}
                       className="accent-[#7a5821] w-4.5 h-4.5 cursor-pointer mt-0.5"
                     />
-                    <span className="text-xs text-gray-600 leading-relaxed select-none">
-                      We declare that our organization maintains comprehensive third-party logistics insurance and active public liability coverage across all active fleet operators.
-                    </span>
+                    <span className="text-xs text-gray-600 leading-relaxed select-none">{t.ui.courierOnboarding.s_c7a051}</span>
                   </label>
 
                   <label className="flex items-start gap-3 cursor-pointer">
@@ -1682,9 +1639,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       onChange={(e) => handleChange('flCheckRiderDl', e.target.checked)}
                       className="accent-[#7a5821] w-4.5 h-4.5 cursor-pointer mt-0.5"
                     />
-                    <span className="text-xs text-gray-600 leading-relaxed select-none">
-                      We certify that all couriers listed in our squad profiles hold valid, unexpired NTSA driving licenses and clean background clearance certifications.
-                    </span>
+                    <span className="text-xs text-gray-600 leading-relaxed select-none">{t.ui.courierOnboarding.s_4979be}</span>
                   </label>
 
                   <label className="flex items-start gap-3 cursor-pointer">
@@ -1694,9 +1649,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       onChange={(e) => handleChange('flCheckLegal', e.target.checked)}
                       className="accent-[#7a5821] w-4.5 h-4.5 cursor-pointer mt-0.5"
                     />
-                    <span className="text-xs text-gray-600 leading-relaxed select-none">
-                      We declare absolute compliance with Kenyan corporate regulations, active tax filings, and legal road safety acts.
-                    </span>
+                    <span className="text-xs text-gray-600 leading-relaxed select-none">{t.ui.courierOnboarding.s_464dfd}</span>
                   </label>
                 </div>
               </div>
@@ -1710,10 +1663,8 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div>
                     <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2 mb-1">
-                      <Users className="text-[#7a5821]" size={20} />
-                      Register Active Couriers Squad
-                    </h2>
-                    <p className="text-gray-500 text-xs">Add individual active riders to your partnership ledger.</p>
+                      <Users className="text-[#7a5821]" size={20} />{t.ui.courierOnboarding.s_71f6e3}</h2>
+                    <p className="text-gray-500 text-xs">{t.ui.courierOnboarding.s_a8caa4}</p>
                   </div>
                   
                   <div className="flex gap-2.5">
@@ -1730,9 +1681,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                       onClick={() => document.getElementById('csvUploadInput')?.click()}
                       className="bg-gray-900 hover:bg-black text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 transition shadow-sm active:scale-95"
                     >
-                      <Download size={12} className="text-[#E5B65F]" />
-                      Import CSV Spreadsheet
-                    </button>
+                      <Download size={12} className="text-[#E5B65F]" />{t.ui.courierOnboarding.s_b984fa}</button>
                     <input 
                       type="file" 
                       id="csvUploadInput" 
@@ -1747,16 +1696,14 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   <Info size={16} className="flex-shrink-0 mt-0.5" />
                   <div>
                     <strong>Two simple ways to add riders in bulk:</strong><br />
-                    • Click <strong>Add Rider Card</strong> to manually key in individual rider records.<br />
-                    • Or click <strong>Import CSV</strong> and upload a standard spreadsheet with columns matching exactly: 
-                    <code className="bg-amber-100 px-1.5 py-0.5 rounded ml-1 font-mono font-bold text-[#7a5821]">Full Name, Phone, ID Number, License Number, Vehicle Type, Plate Number</code>
+                    • Click <strong>{t.ui.courierOnboarding.s_bc5303}</strong> to manually key in individual rider records.<br />
+                    • Or click <strong>{t.ui.courierOnboarding.s_eeec98}</strong> and upload a standard spreadsheet with columns matching exactly: 
+                    <code className="bg-amber-100 px-1.5 py-0.5 rounded ml-1 font-mono font-bold text-[#7a5821]">{t.ui.courierOnboarding.s_1081b3}</code>
                     <button 
                       type="button"
                       onClick={downloadCSVTemplate}
                       className="text-amber-800 underline font-bold ml-2 hover:text-[#7a5821] block sm:inline mt-1 sm:mt-0"
-                    >
-                      Download Standard CSV Template
-                    </button>
+                    >{t.ui.courierOnboarding.s_ca5690}</button>
                   </div>
                 </div>
 
@@ -1772,16 +1719,13 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                           <span className="font-bold text-gray-800 text-sm flex items-center gap-2">
                             <span className="w-5 h-5 rounded-full bg-gray-100 text-gray-500 text-xs font-bold flex items-center justify-center">
                               {index + 1}
-                            </span>
-                            Rider Record Card
-                          </span>
+                            </span>{t.ui.courierOnboarding.s_0f32ec}</span>
                           <button 
                             type="button"
                             onClick={() => removeFleetRider(rider.id)}
                             className="text-red-500 hover:text-red-700 text-xs flex items-center gap-1 hover:bg-red-50 px-2.5 py-1 rounded-lg transition-colors"
                           >
-                            <Trash2 size={12} /> Remove Card
-                          </button>
+                            <Trash2 size={12} />{t.ui.courierOnboarding.s_430404}</button>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -1790,7 +1734,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                             <input 
                               type="text" 
                               required
-                              placeholder="E.g. John Kamau"
+                              placeholder={t.ui.courierOnboarding.s_f71ebc}
                               value={rider.name}
                               onChange={(e) => updateFleetRider(rider.id, 'name', e.target.value)}
                               className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 w-full text-xs text-gray-800 focus:outline-none focus:ring-1 focus:ring-[#7a5821]"
@@ -1801,7 +1745,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                             <input 
                               type="tel" 
                               required
-                              placeholder="E.g. +254 711..."
+                              placeholder={t.ui.courierOnboarding.s_6f9c91}
                               value={rider.phone}
                               onChange={(e) => updateFleetRider(rider.id, 'phone', e.target.value)}
                               className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 w-full text-xs text-gray-800 focus:outline-none focus:ring-1 focus:ring-[#7a5821]"
@@ -1812,7 +1756,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                             <input 
                               type="text" 
                               required
-                              placeholder="ID Number"
+                              placeholder={t.ui.courierOnboarding.s_b21f30}
                               value={rider.idNumber}
                               onChange={(e) => updateFleetRider(rider.id, 'idNumber', e.target.value)}
                               className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 w-full text-xs text-gray-800 focus:outline-none focus:ring-1 focus:ring-[#7a5821]"
@@ -1843,10 +1787,10 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                             </select>
                           </div>
                           <div>
-                            <label className="block text-[11px] font-semibold text-gray-500 mb-1">Plate Number</label>
+                            <label className="block text-[11px] font-semibold text-gray-500 mb-1">{t.ui.courierOnboarding.s_7d8667}</label>
                             <input 
                               type="text" 
-                              placeholder="E.g. KMCA 123A"
+                              placeholder={t.ui.courierOnboarding.s_c59900}
                               value={rider.plateNumber}
                               onChange={(e) => updateFleetRider(rider.id, 'plateNumber', e.target.value)}
                               className="bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 w-full text-xs text-gray-800 focus:outline-none focus:ring-1 focus:ring-[#7a5821]"
@@ -1870,10 +1814,10 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                         <thead>
                           <tr className="bg-gray-50 border-b border-gray-100 text-gray-500 font-bold">
                             <th className="px-4 py-3">#</th>
-                            <th className="px-4 py-3">Full Name</th>
+                            <th className="px-4 py-3">{t.ui.courierOnboarding.s_64346b}</th>
                             <th className="px-4 py-3">Phone</th>
-                            <th className="px-4 py-3">ID Number</th>
-                            <th className="px-4 py-3">DL Number</th>
+                            <th className="px-4 py-3">{t.ui.courierOnboarding.s_b21f30}</th>
+                            <th className="px-4 py-3">{t.ui.courierOnboarding.s_c33c9b}</th>
                             <th className="px-4 py-3">Vehicle</th>
                             <th className="px-4 py-3">Plate</th>
                           </tr>
@@ -1899,8 +1843,8 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                 {fleetRiders.length === 0 && !csvFileUploaded && (
                   <div className="text-center py-16 border-2 border-dashed border-gray-200 rounded-2xl bg-gray-50 text-gray-400">
                     <Users size={32} className="mx-auto mb-3 text-gray-300" />
-                    <p className="text-sm font-semibold text-gray-700 mb-1">No active couriers added yet</p>
-                    <p className="text-xs text-gray-500 mb-4 max-w-xs mx-auto">Click Add Rider Card above or upload your riders spreadsheet via CSV bulk import.</p>
+                    <p className="text-sm font-semibold text-gray-700 mb-1">{t.ui.courierOnboarding.s_3af714}</p>
+                    <p className="text-xs text-gray-500 mb-4 max-w-xs mx-auto">{t.ui.courierOnboarding.s_913798}</p>
                   </div>
                 )}
 
@@ -1914,10 +1858,8 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
               <div className="space-y-8">
                 <div>
                   <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2 mb-2">
-                    <ShieldCheck className="text-[#7a5821]" size={20} />
-                    Company Business Verification Documents
-                  </h2>
-                  <p className="text-gray-500 text-xs">Verify your registered logistics enterprise. Only PDF files and scanned images up to 5MB size are accepted.</p>
+                    <ShieldCheck className="text-[#7a5821]" size={20} />{t.ui.courierOnboarding.s_8d5d4c}</h2>
+                  <p className="text-gray-500 text-xs">{t.ui.courierOnboarding.s_06c8b6}</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1925,8 +1867,8 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   {/* Company Doc 1 */}
                   <div className="border border-gray-200 bg-gray-50 p-6 rounded-[24px] flex flex-col justify-between shadow-sm">
                     <div>
-                      <p className="font-bold text-gray-900 text-sm mb-1">Certificate of Incorporation <span className="text-red-500">*</span></p>
-                      <p className="text-gray-500 text-xs leading-relaxed">Official business registration certificate page issued by the Registrar of Companies.</p>
+                      <p className="font-bold text-gray-900 text-sm mb-1">{t.ui.courierOnboarding.s_156177}<span className="text-red-500">*</span></p>
+                      <p className="text-gray-500 text-xs leading-relaxed">{t.ui.courierOnboarding.s_a620a5}</p>
                     </div>
                     <div className="mt-6">
                       <input 
@@ -1952,7 +1894,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   {/* Company Doc 2 */}
                   <div className="border border-gray-200 bg-gray-50 p-6 rounded-[24px] flex flex-col justify-between shadow-sm">
                     <div>
-                      <p className="font-bold text-gray-900 text-sm mb-1">Company KRA PIN Certificate <span className="text-red-500">*</span></p>
+                      <p className="font-bold text-gray-900 text-sm mb-1">{t.ui.courierOnboarding.s_30b928}<span className="text-red-500">*</span></p>
                       <p className="text-gray-500 text-xs leading-relaxed">Company-level Tax PIN registration document copy.</p>
                     </div>
                     <div className="mt-6">
@@ -1979,8 +1921,8 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   {/* Company Doc 3 */}
                   <div className="border border-gray-200 bg-gray-50 p-6 rounded-[24px] flex flex-col justify-between shadow-sm">
                     <div>
-                      <p className="font-bold text-gray-900 text-sm mb-1">Commercial Fleet Insurance Policy <span className="text-red-500">*</span></p>
-                      <p className="text-gray-500 text-xs leading-relaxed">Active public third-party or comprehensive fleet cover policy certificate.</p>
+                      <p className="font-bold text-gray-900 text-sm mb-1">{t.ui.courierOnboarding.s_d5e54c}<span className="text-red-500">*</span></p>
+                      <p className="text-gray-500 text-xs leading-relaxed">{t.ui.courierOnboarding.s_0d36d5}</p>
                     </div>
                     <div className="mt-6">
                       <input 
@@ -2006,8 +1948,8 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   {/* Company Doc 4 */}
                   <div className="border border-gray-200 bg-gray-50 p-6 rounded-[24px] flex flex-col justify-between shadow-sm">
                     <div>
-                      <p className="font-bold text-gray-900 text-sm mb-1">Signatory Director's National ID <span className="text-red-500">*</span></p>
-                      <p className="text-gray-500 text-xs leading-relaxed">ID of the legal officer executing the Fleet Partnership Agreement.</p>
+                      <p className="font-bold text-gray-900 text-sm mb-1">{t.ui.courierOnboarding.s_af7bb7}<span className="text-red-500">*</span></p>
+                      <p className="text-gray-500 text-xs leading-relaxed">{t.ui.courierOnboarding.s_feb1b4}</p>
                     </div>
                     <div className="mt-6">
                       <input 
@@ -2034,37 +1976,37 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
 
                 {/* Bank Settlements */}
                 <div className="border-t border-gray-100 pt-6 space-y-4">
-                  <h3 className="font-bold text-gray-900 text-sm">Corporate Bank Settlement Account</h3>
-                  <p className="text-xs text-gray-500 leading-relaxed">NEXG remits compiled client transport payout settlements directly to your corporate account weekly on Mondays.</p>
+                  <h3 className="font-bold text-gray-900 text-sm">{t.ui.courierOnboarding.s_c8bc71}</h3>
+                  <p className="text-xs text-gray-500 leading-relaxed">{t.ui.courierOnboarding.s_d64903}</p>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-5 bg-gray-50 border border-gray-200 p-6 rounded-2xl shadow-inner">
                     <div>
-                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">Corporate Bank Name <span className="text-red-500">*</span></label>
+                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">{t.ui.courierOnboarding.s_6790f2}<span className="text-red-500">*</span></label>
                       <input 
                         type="text" 
                         required
-                        placeholder="E.g. Equity Bank"
+                        placeholder={t.ui.courierOnboarding.s_ddb4d1}
                         value={formData.bankName}
                         onChange={(e) => handleChange('bankName', e.target.value)}
                         className="bg-white border border-gray-200 rounded-xl px-3 py-2.5 w-full text-xs text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">Account Holder Legal Name <span className="text-red-500">*</span></label>
+                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">{t.ui.courierOnboarding.s_827c49}<span className="text-red-500">*</span></label>
                       <input 
                         type="text" 
                         required
-                        placeholder="Company Account Title"
+                        placeholder={t.ui.courierOnboarding.s_717eb1}
                         value={formData.accHolder}
                         onChange={(e) => handleChange('accHolder', e.target.value)}
                         className="bg-white border border-gray-200 rounded-xl px-3 py-2.5 w-full text-xs text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">Account Number <span className="text-red-500">*</span></label>
+                      <label className="block text-[11px] font-bold text-gray-400 uppercase mb-1">{t.ui.courierOnboarding.s_0bd62e}<span className="text-red-500">*</span></label>
                       <input 
                         type="text" 
                         required
-                        placeholder="Account Number"
+                        placeholder={t.ui.courierOnboarding.s_0bd62e}
                         value={formData.accNum}
                         onChange={(e) => handleChange('accNum', e.target.value)}
                         className="bg-white border border-gray-200 rounded-xl px-3 py-2.5 w-full text-xs text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -2083,10 +2025,8 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
               <div className="space-y-8">
                 <div>
                   <h2 className="text-xl font-bold text-gray-900 flex items-center gap-2 mb-1">
-                    <FileText className="text-[#7a5821]" size={20} />
-                    Execute Partnership Agreement Contract
-                  </h2>
-                  <p className="text-gray-500 text-xs">Review pre-filled contract agreement clauses and apply your electronic signature.</p>
+                    <FileText className="text-[#7a5821]" size={20} />{t.ui.courierOnboarding.s_903d8d}</h2>
+                  <p className="text-gray-500 text-xs">{t.ui.courierOnboarding.s_e07446}</p>
                 </div>
 
                 {/* Pre-filled Contract viewport */}
@@ -2095,45 +2035,43 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     <div className="space-y-4 text-xs md:text-sm text-gray-700 leading-relaxed font-sans">
                       <div className="text-center border-b pb-6 mb-6">
                         <LogoIcon className="w-12 h-12 text-[#7a5821] mx-auto mb-2" />
-                        <h3 className="font-bold text-lg text-gray-900 uppercase">NEXG APP LIMITED</h3>
-                        <p className="text-[#7a5821] text-xs font-bold tracking-widest uppercase">
-                          Corporate Fleet Partner logistics Framework
-                        </p>
+                        <h3 className="font-bold text-lg text-gray-900 uppercase">{t.ui.courierOnboarding.s_71c904}</h3>
+                        <p className="text-[#7a5821] text-xs font-bold tracking-widest uppercase">{t.ui.courierOnboarding.s_93e220}</p>
                         <p className="text-gray-400 text-[11px] mt-1">Date: <strong className="text-gray-600">{todayDateStr}</strong></p>
                       </div>
 
                       <p>This logistics partnership framework is executed by and between:</p>
                       <p className="pl-4 border-l-2 border-amber-300">
-                        <strong>NEXG APP LIMITED</strong>, a leading transport and logistics concierge company in Kenya; and
+                        <strong>{t.ui.courierOnboarding.s_71c904}</strong>, a leading transport and logistics concierge company in Kenya; and
                       </p>
                       <p className="pl-4 border-l-2 border-amber-300">
                         <strong>{formData.flName || '[Company Legal Name]'}</strong>, a registered agency incorporated under registration number <strong>{formData.flRegNum || '[Reg No]'}</strong> situated at <strong>{formData.flAddress || '[Business Address]'}</strong> (hereinafter referred to as "Fleet Provider").
                       </p>
 
                       <h4 className="font-bold text-gray-950 mt-6 text-sm">1. Fleet Declarations & Capacity</h4>
-                      <p>The Fleet Provider certifies that they actively manage and pay a squad of <strong>{formData.flTotalRiders || '[Rider Count]'} active couriers</strong> operating <strong>{formData.flTotalVehicles || '[Vehicle Count]'} vehicles</strong> under direct commercial contract. The primary coverage area of operations agreed upon includes: <strong>{formData.flZones || '[Coverage Zones]'}</strong>.</p>
+                      <p>{t.ui.courierOnboarding.s_af8a4e}<strong>{formData.flTotalRiders || '[Rider Count]'} active couriers</strong> operating <strong>{formData.flTotalVehicles || '[Vehicle Count]'} vehicles</strong> under direct commercial contract. The primary coverage area of operations agreed upon includes: <strong>{formData.flZones || '[Coverage Zones]'}</strong>.</p>
                       
                       <h4 className="font-bold text-gray-950 mt-4 text-sm">2. Platform Commission & Remittances</h4>
-                      <p>NEXG agrees to compile and settle client order payments to the Fleet Provider’s registered bank account weekly on Mondays, less a platform operations commission fee of <strong>12%</strong> per completed logistics job.</p>
+                      <p>{t.ui.courierOnboarding.s_a7c94e}<strong>12%</strong> per completed logistics job.</p>
 
                       <h4 className="font-bold text-gray-950 mt-4 text-sm">3. Compliance, Insurance & Licensing</h4>
-                      <p>The Fleet Provider represents and warrants that all couriers and motorbikes comply with roadworthy rules, hold comprehensive insurance certifications, and observe Kenya's Data Protection Act 2019 standards.</p>
+                      <p>{t.ui.courierOnboarding.s_53d718}</p>
 
                       <h4 className="font-bold text-gray-950 mt-4 text-sm">4. Term & Termination</h4>
-                      <p>This contract is binding for a term of 12 months. Either partner may exit the frame by providing 14 days' written notice to the other party.</p>
+                      <p>{t.ui.courierOnboarding.s_b9d00c}</p>
 
                       <div className="grid grid-cols-2 gap-8 border-t border-gray-200 pt-8 mt-8">
                         <div>
-                          <p className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-6">For NEXG App</p>
+                          <p className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-6">{t.ui.courierOnboarding.s_86d4ca}</p>
                           <div className="h-10 flex items-end mb-1">
-                            <span className="font-mono text-xs text-gray-400 font-semibold italic">NEXG Operations Admin</span>
+                            <span className="font-mono text-xs text-gray-400 font-semibold italic">{t.ui.courierOnboarding.s_cabacd}</span>
                           </div>
                           <div className="h-0.5 bg-gray-200 w-full mb-1"></div>
-                          <p className="text-[11px] text-gray-500">Board Operations Committee</p>
+                          <p className="text-[11px] text-gray-500">{t.ui.courierOnboarding.s_72a587}</p>
                         </div>
 
                         <div>
-                          <p className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-6">Accepted For Fleet Provider</p>
+                          <p className="font-bold text-xs uppercase tracking-wider text-gray-400 mb-6">{t.ui.courierOnboarding.s_17b238}</p>
                           <div className="h-10 flex items-end mb-1">
                             {sigMode === 'type' ? (
                               <span className="font-serif text-2xl text-[#7a5821] italic tracking-wide">{formData.signatoryName || '—'}</span>
@@ -2159,9 +2097,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   
                   <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-4 border-b border-gray-100 pb-4">
                     <span className="font-bold text-gray-900 text-sm flex items-center gap-2">
-                      <FileCheck className="text-[#7a5821]" size={18} />
-                      Authorized Signature Panel
-                    </span>
+                      <FileCheck className="text-[#7a5821]" size={18} />{t.ui.courierOnboarding.s_e7cfff}</span>
                     
                     {/* Toggle draw / type */}
                     <div className="flex bg-gray-200 p-1 rounded-xl text-xs max-w-max self-start">
@@ -2169,28 +2105,23 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                         type="button" 
                         onClick={() => setSigMode('draw')} 
                         className={`px-4 py-1.5 rounded-lg font-bold transition ${sigMode === 'draw' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-900'}`}
-                      >
-                        Draw Signature
-                      </button>
+                      >{t.ui.courierOnboarding.s_b09e88}</button>
                       <button 
                         type="button" 
                         onClick={() => setSigMode('type')} 
                         className={`px-4 py-1.5 rounded-lg font-bold transition ${sigMode === 'type' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-900'}`}
-                      >
-                        Type Signature
-                      </button>
+                      >{t.ui.courierOnboarding.s_2952ca}</button>
                     </div>
                   </div>
 
                   {/* Signatory Name */}
                   <div>
-                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">
-                      Authorized Officer Full Name <span className="text-red-500">*</span>
+                    <label className="block text-xs font-bold uppercase text-gray-500 mb-1.5">{t.ui.courierOnboarding.s_4c987a}<span className="text-red-500">*</span>
                     </label>
                     <input 
                       type="text" 
                       required
-                      placeholder="Name exactly as printed on legal ID card"
+                      placeholder={t.ui.courierOnboarding.s_bf24cb}
                       value={formData.signatoryName}
                       onChange={(e) => handleChange('signatoryName', e.target.value)}
                       className="bg-white border border-gray-200 rounded-xl px-4 py-3 w-full text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-[#7a5821]"
@@ -2200,8 +2131,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   {/* Draw Signature Canvas Panel */}
                   {sigMode === 'draw' && (
                     <div className="space-y-2">
-                      <label className="block text-xs font-bold uppercase text-gray-500">
-                        Draw digital signature with finger or pointer <span className="text-red-500">*</span>
+                      <label className="block text-xs font-bold uppercase text-gray-500">{t.ui.courierOnboarding.s_41fe24}<span className="text-red-500">*</span>
                       </label>
                       <div className="border border-gray-300 bg-white rounded-2xl overflow-hidden relative shadow-inner">
                         <canvas 
@@ -2221,9 +2151,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                           type="button" 
                           onClick={clearCanvas}
                           className="absolute right-3.5 bottom-3.5 px-3 py-1.5 bg-gray-900 text-white hover:bg-black rounded-lg text-[10px] font-bold transition tracking-wider uppercase active:scale-95"
-                        >
-                          Clear canvas
-                        </button>
+                        >{t.ui.courierOnboarding.s_31843b}</button>
                       </div>
                     </div>
                   )}
@@ -2231,7 +2159,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   {/* Type Signature preview */}
                   {sigMode === 'type' && (
                     <div className="space-y-2">
-                      <label className="block text-xs font-bold uppercase text-gray-500">Typed Electronic Signature preview</label>
+                      <label className="block text-xs font-bold uppercase text-gray-500">{t.ui.courierOnboarding.s_e7710e}</label>
                       <div className="border border-gray-200 bg-white p-6 rounded-2xl text-center shadow-inner select-none">
                         <p className="font-serif text-3xl text-[#7a5821] italic tracking-wider">
                           {formData.signatoryName || '- Enter Legal Name above -'}
@@ -2274,22 +2202,22 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                 </div>
 
                 <div className="bg-gray-50 rounded-3xl p-6 text-left border border-gray-100 space-y-3 shadow-md text-sm">
-                  <h4 className="font-bold text-gray-900 border-b border-gray-200 pb-2 text-center">ONBOARDING PROFILE SUMMARY</h4>
+                  <h4 className="font-bold text-gray-900 border-b border-gray-200 pb-2 text-center">{t.ui.courierOnboarding.s_9691d0}</h4>
                   <p><strong className="text-gray-500">Selected Pathway:</strong> <span className="font-bold capitalize text-[#7a5821]">{selectedType} Rider Partner</span></p>
                   <p><strong className="text-gray-500">Registered Name:</strong> <span className="font-bold text-gray-900">{selectedType === 'fleet' ? formData.flName : formData.fullName}</span></p>
                   <p><strong className="text-gray-500">Contact Number:</strong> <span className="font-semibold text-gray-900">{selectedType === 'fleet' ? formData.flContactPhone : formData.phone}</span></p>
-                  <p><strong className="text-gray-500">Onboarding Status:</strong> <span className="text-amber-800 font-bold bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full text-xs">Pending Compliance Review</span></p>
+                  <p><strong className="text-gray-500">Onboarding Status:</strong> <span className="text-amber-800 font-bold bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full text-xs">{t.ui.courierOnboarding.s_99dc14}</span></p>
                 </div>
 
                 <div className="bg-[#f0f0f0] rounded-2xl p-6 text-left text-xs text-gray-500 space-y-3.5 leading-relaxed">
-                  <p className="font-bold text-gray-700 text-center uppercase tracking-wider border-b border-gray-200 pb-2">NEXT STEPS IN OUR VERIFICATION TIMELINE</p>
+                  <p className="font-bold text-gray-700 text-center uppercase tracking-wider border-b border-gray-200 pb-2">{t.ui.courierOnboarding.s_77522e}</p>
                   <div className="flex gap-3">
                     <span className="font-bold text-[#7a5821] text-sm leading-none">1.</span>
-                    <span><strong>Compliance Auditing (Within 24 Hours):</strong> Our compliance officers verify your submitted National ID, license, PIN, and fleet logbooks directly against NTSA registers.</span>
+                    <span><strong>Compliance Auditing (Within 24 Hours):</strong>{t.ui.courierOnboarding.s_037e0b}</span>
                   </div>
                   <div className="flex gap-3">
                     <span className="font-bold text-[#7a5821] text-sm leading-none">2.</span>
-                    <span><strong>Ambassador Training Dispatch:</strong> Upon document clearance, you'll receive a WhatsApp invitation to join our premium standard customer service and hospitality training.</span>
+                    <span><strong>Ambassador Training Dispatch:</strong>{t.ui.courierOnboarding.s_a221a1}</span>
                   </div>
                   <div className="flex gap-3">
                     <span className="font-bold text-[#7a5821] text-sm leading-none">3.</span>
@@ -2303,15 +2231,12 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     onClick={() => window.print()}
                     className="flex items-center justify-center gap-2 bg-[#1a1c1c] hover:bg-black text-white px-6 py-3 rounded-xl font-bold text-sm transition shadow-md active:scale-95"
                   >
-                    <FileText size={16} /> Print Agreement Document
-                  </button>
+                    <FileText size={16} />{t.ui.courierOnboarding.s_b724e7}</button>
                   <button 
                     type="button" 
                     onClick={() => onNavigate('couriers')}
                     className="flex items-center justify-center gap-2 border border-gray-300 bg-white hover:bg-gray-50 text-gray-700 px-6 py-3 rounded-xl font-bold text-sm transition-colors"
-                  >
-                    Return to Elite Fleet page
-                  </button>
+                  >{t.ui.courierOnboarding.s_2ed783}</button>
                 </div>
               </div>
             )}
@@ -2336,18 +2261,14 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   <button 
                     type="submit"
                     className="bg-[#7a5821] hover:bg-[#c49a5c] text-white px-8 py-3 rounded-xl font-bold text-sm transition flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer active:scale-95"
-                  >
-                    Submit Portfolio Agreement
-                    <CheckCircle size={16} />
+                  >{t.ui.courierOnboarding.s_ac26fd}<CheckCircle size={16} />
                   </button>
                 ) : (
                   <button 
                     type="button" 
                     onClick={handleNext}
                     className="bg-[#7a5821] hover:bg-[#c49a5c] text-white px-8 py-3 rounded-xl font-bold text-sm transition flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer active:scale-95"
-                  >
-                    Next Step
-                    <ArrowRight size={16} />
+                  >{t.ui.courierOnboarding.s_574f02}<ArrowRight size={16} />
                   </button>
                 )}
               </div>

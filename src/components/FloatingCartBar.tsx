@@ -1,10 +1,12 @@
 import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { ShoppingBag, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useCart } from '../context/CartContext';
 import { useTheme } from '../context/ThemeContext';
 
 export default function FloatingCartBar() {
+  const { t } = useLanguage();
   const {
     cart,
     itemsCount,
@@ -51,9 +53,7 @@ export default function FloatingCartBar() {
             </div>
             <div className="text-left">
               <div className="flex items-center gap-2">
-                <span className={`font-bold text-sm tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
-                  View Order
-                </span>
+                <span className={`font-bold text-sm tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.floatingCartBar.s_f40d71}</span>
                 <span className={`text-[11px] px-2 py-0.5 rounded-full font-medium ${
                   isLight ? 'bg-slate-100 text-slate-600' : 'bg-white/10 text-gray-300'
                 }`}>

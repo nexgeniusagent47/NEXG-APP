@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   X,
@@ -35,6 +36,7 @@ export type ItemSheetState =
   | 'UNAVAILABLE';
 
 export const NexGItemSheet: React.FC = () => {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
   const { addToCart, setIsCartOpen } = useCart();
   const { state: navState, closeItemSheet, navigateToMerchant } = useNexGNavigation();
@@ -205,7 +207,7 @@ export const NexGItemSheet: React.FC = () => {
               type="button"
               onClick={closeItemSheet}
               className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/60 hover:bg-black text-white flex items-center justify-center transition-colors cursor-pointer border border-white/20 z-10"
-              aria-label="Close sheet"
+              aria-label={t.ui.nexGItemSheet.s_65d22e}
             >
               <X size={18} />
             </button>
@@ -218,7 +220,7 @@ export const NexGItemSheet: React.FC = () => {
                 'absolute top-4 right-15 w-9 h-9 rounded-full bg-black/60 hover:bg-black flex items-center justify-center transition-colors cursor-pointer border border-white/20 z-10',
                 isSavedFavorite ? 'text-rose-500' : 'text-white'
               )}
-              aria-label="Save to favorites"
+              aria-label={t.ui.nexGItemSheet.s_3beea0}
             >
               <Heart size={18} className={isSavedFavorite ? 'fill-current' : ''} />
             </button>
@@ -276,7 +278,7 @@ export const NexGItemSheet: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-1 font-medium text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg">
                   <ShieldCheck size={13} />
-                  <span>NEXG App Guarantee</span>
+                  <span>{t.ui.nexGItemSheet.s_eeea54}</span>
                 </div>
               </div>
             </div>
@@ -289,15 +291,13 @@ export const NexGItemSheet: React.FC = () => {
               )}>
                 <h4 className="text-xs font-bold uppercase tracking-wider text-[#7d5a11] dark:text-[#E5B65F] flex items-center gap-1.5">
                   <Calendar size={14} />
-                  <span>Appointment & Scheduling</span>
+                  <span>{t.ui.nexGItemSheet.s_22b77f}</span>
                 </h4>
 
                 {/* Date & Time Row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-500 dark:text-gray-400 mb-1">
-                      Preferred Date
-                    </label>
+                    <label className="block text-[11px] font-bold text-slate-500 dark:text-gray-400 mb-1">{t.ui.nexGItemSheet.s_68f2d8}</label>
                     {/* Was `input[type=date]`. The last native date input in the app: the
                         browser picker cannot be styled, is ordered month-first for a
                         market that reads day-first, and hides which days are actually
@@ -310,9 +310,7 @@ export const NexGItemSheet: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-500 dark:text-gray-400 mb-1">
-                      Time Slot
-                    </label>
+                    <label className="block text-[11px] font-bold text-slate-500 dark:text-gray-400 mb-1">{t.ui.nexGItemSheet.s_693039}</label>
                     <select
                       value={selectedTime}
                       onChange={(e) => setSelectedTime(e.target.value)}
@@ -333,9 +331,7 @@ export const NexGItemSheet: React.FC = () => {
                 {/* Duration Pills for Spa / Service */}
                 {(activeItem.subcategory.includes('spa') || activeItem.subcategory.includes('massage')) && (
                   <div>
-                    <label className="block text-[11px] font-bold text-slate-500 dark:text-gray-400 mb-1.5">
-                      Session Duration
-                    </label>
+                    <label className="block text-[11px] font-bold text-slate-500 dark:text-gray-400 mb-1.5">{t.ui.nexGItemSheet.s_24a16c}</label>
                     <div className="grid grid-cols-3 gap-2">
                       {['60 min', '90 min', '120 min'].map((dur) => (
                         <button
@@ -364,7 +360,7 @@ export const NexGItemSheet: React.FC = () => {
                 <div className="flex items-center justify-between pt-1">
                   <div className="flex items-center gap-1.5">
                     <Users size={14} className="text-[#7d5a11] dark:text-[#E5B65F]" />
-                    <span className="text-xs font-bold">Number of Guests / Attendees</span>
+                    <span className="text-xs font-bold">{t.ui.nexGItemSheet.s_a99ee2}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <button
@@ -396,9 +392,7 @@ export const NexGItemSheet: React.FC = () => {
             {/* CURATED ADD-ONS & OPTIONS */}
             {mockAddons.length > 0 && (
               <div className="space-y-3">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400">
-                  Curated Enhancements & Add-ons
-                </h4>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400">{t.ui.nexGItemSheet.s_d0e359}</h4>
                 <div className="space-y-2">
                   {mockAddons.map((addon) => {
                     const isChecked = selectedAddons.includes(addon.id);
@@ -442,9 +436,7 @@ export const NexGItemSheet: React.FC = () => {
 
             {/* SPECIAL APP INSTRUCTIONS */}
             <div>
-              <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 mb-1.5">
-                Special App Notes or Dietary Preferences
-              </label>
+              <label className="block text-xs font-bold text-slate-500 dark:text-gray-400 mb-1.5">{t.ui.nexGItemSheet.s_0932f6}</label>
               <textarea
                 rows={2}
                 value={specialInstructions}
@@ -509,7 +501,7 @@ export const NexGItemSheet: React.FC = () => {
               ) : sheetState === 'SUCCESS' ? (
                 <>
                   <Check size={18} strokeWidth={3} />
-                  <span>Added to Experience Order</span>
+                  <span>{t.ui.nexGItemSheet.s_c6cf76}</span>
                 </>
               ) : (
                 <>

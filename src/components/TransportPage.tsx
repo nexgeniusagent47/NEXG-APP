@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import {
   ArrowLeft,
   Car,
@@ -30,6 +31,7 @@ interface TransportPageProps {
 }
 
 export default function TransportPage({ onNavigate }: TransportPageProps) {
+  const { t } = useLanguage();
   const { addToCart, setIsCartOpen } = useCart();
   const { isLight } = useTheme();
 
@@ -171,12 +173,10 @@ export default function TransportPage({ onNavigate }: TransportPageProps) {
                 }`}
               >
                 <ArrowLeft size={16} />
-                <span>Explore Home</span>
+                <span>{t.ui.transportPage.s_a1e9f9}</span>
               </button>
               <span className={isLight ? 'text-slate-300' : 'text-gray-600'}>/</span>
-              <span className={`text-xs sm:text-sm font-extrabold ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>
-                VIP Chauffeur & Mobility Providers
-              </span>
+              <span className={`text-xs sm:text-sm font-extrabold ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>{t.ui.transportPage.s_52b224}</span>
             </div>
 
             <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${
@@ -204,18 +204,14 @@ export default function TransportPage({ onNavigate }: TransportPageProps) {
             <div className="relative z-10 p-6 sm:p-12 max-w-2xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-3 bg-[#E5B65F]/20 text-[#7d5a11] dark:text-[#E5B65F]">
                 <Sparkles size={13} />
-                <span>VIP White-Glove Mobility</span>
+                <span>{t.ui.transportPage.s_898adc}</span>
               </div>
               <h1 className={`text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 ${
                 isLight ? 'text-slate-900' : 'text-white'
-              }`}>
-                Executive Chauffeurs & Private Aviation
-              </h1>
+              }`}>{t.ui.transportPage.s_875bd6}</h1>
               <p className={`text-sm sm:text-base leading-relaxed mb-6 font-medium ${
                 isLight ? 'text-slate-600' : 'text-gray-300'
-              }`}>
-                Choose a luxury mobility merchant to view available Maybach S680s, Rolls-Royce Ghost motorcars, Cadillac Escalade ESVs, or twin-engine helicopter transfers.
-              </p>
+              }`}>{t.ui.transportPage.s_1836d5}</p>
 
               {/* Search Bar */}
               <div className={`flex items-center rounded-2xl p-1.5 border shadow-lg ${
@@ -224,7 +220,7 @@ export default function TransportPage({ onNavigate }: TransportPageProps) {
                 <Search className={`ml-3 w-5 h-5 ${isLight ? 'text-slate-400' : 'text-[#E5B65F]'}`} />
                 <input
                   type="text"
-                  placeholder="Search mobility providers, Maybach, Rolls-Royce, helicopter..."
+                  placeholder={t.ui.transportPage.s_784e6e}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className={`w-full bg-transparent border-none px-3 text-sm outline-none font-medium ${
@@ -327,7 +323,7 @@ export default function TransportPage({ onNavigate }: TransportPageProps) {
                         }`}
                       >
                         <CalendarIcon size={12} className="text-[#7d5a11] dark:text-[#E5B65F]" />
-                        <span>Book Transfer</span>
+                        <span>{t.ui.transportPage.s_3727e7}</span>
                       </button>
 
                       {provider.socials && (
@@ -388,7 +384,7 @@ export default function TransportPage({ onNavigate }: TransportPageProps) {
               }`}
             >
               <ArrowLeft size={16} />
-              <span>Back to all Mobility Partners</span>
+              <span>{t.ui.transportPage.s_1afb28}</span>
             </button>
 
             <div className="flex items-center gap-2">
@@ -407,7 +403,7 @@ export default function TransportPage({ onNavigate }: TransportPageProps) {
                 className="flex items-center gap-1.5 px-4 py-1.5 rounded-xl text-xs font-bold bg-[#E5B65F] hover:bg-[#d6a54d] text-black shadow-md cursor-pointer transition-colors"
               >
                 <CalendarIcon size={14} />
-                <span>Reserve Chauffeur</span>
+                <span>{t.ui.transportPage.s_3390d4}</span>
               </button>
             </div>
           </div>
@@ -533,7 +529,7 @@ export default function TransportPage({ onNavigate }: TransportPageProps) {
                     <span className={`text-xs font-bold flex items-center gap-1 ${
                       isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'
                     }`}>
-                      <span>Book Vehicle</span>
+                      <span>{t.ui.transportPage.s_eac49e}</span>
                       <ChevronRight size={13} />
                     </span>
                   </div>
@@ -566,9 +562,7 @@ export default function TransportPage({ onNavigate }: TransportPageProps) {
           >
             <div className="p-6 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
               <div>
-                <span className="text-[10px] uppercase font-bold tracking-widest text-[#7d5a11] dark:text-[#E5B65F]">
-                  Chauffeur Reservation
-                </span>
+                <span className="text-[10px] uppercase font-bold tracking-widest text-[#7d5a11] dark:text-[#E5B65F]">{t.ui.transportPage.s_2ea911}</span>
                 <h3 className="text-xl font-bold">{bookingModalConfig.vehicleName}</h3>
               </div>
               <button
@@ -598,7 +592,7 @@ export default function TransportPage({ onNavigate }: TransportPageProps) {
 
                   <div className="mt-6 pt-4 border-t border-slate-200 dark:border-white/10 flex items-center justify-between">
                     <div>
-                      <div className="text-xs text-gray-400">Pickup Date & Time</div>
+                      <div className="text-xs text-gray-400">{t.ui.transportPage.s_93f4b8}</div>
                       <div className="text-sm font-bold">
                         {bookingModalConfig.selectedDate} at {bookingModalConfig.selectedTime} • {bookingModalConfig.passengers} Passengers
                       </div>
@@ -606,9 +600,7 @@ export default function TransportPage({ onNavigate }: TransportPageProps) {
                     <button
                       onClick={() => setBookingModalConfig((prev) => ({ ...prev, isConfirmed: true }))}
                       className="px-6 py-3 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-bold text-xs uppercase tracking-wider shadow-lg transition-transform active:scale-95 cursor-pointer"
-                    >
-                      Confirm Booking
-                    </button>
+                    >{t.ui.transportPage.s_eb9e1e}</button>
                   </div>
                 </>
               ) : (
@@ -619,8 +611,7 @@ export default function TransportPage({ onNavigate }: TransportPageProps) {
                   <h4 className="text-2xl font-bold mb-2">Chauffeur Transfer Locked!</h4>
                   <p className={`text-xs max-w-md mx-auto mb-6 leading-relaxed ${
                     isLight ? 'text-slate-600' : 'text-gray-300'
-                  }`}>
-                    Your reservation for <span className="font-bold">{bookingModalConfig.vehicleName}</span> has been confirmed for {bookingModalConfig.selectedDate} at {bookingModalConfig.selectedTime}. Your attired driver will contact you with vehicle tracking details.
+                  }`}>{t.ui.transportPage.s_543b1b}<span className="font-bold">{bookingModalConfig.vehicleName}</span> has been confirmed for {bookingModalConfig.selectedDate} at {bookingModalConfig.selectedTime}. Your attired driver will contact you with vehicle tracking details.
                   </p>
                   <button
                     onClick={() => setBookingModalConfig((prev) => ({ ...prev, isOpen: false }))}

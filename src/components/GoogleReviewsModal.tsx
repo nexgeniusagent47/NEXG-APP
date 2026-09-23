@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { 
   X, 
   Star, 
@@ -47,6 +48,7 @@ export default function GoogleReviewsModal({
   reviews,
   socials,
 }: GoogleReviewsModalProps) {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
   const [filterRating, setFilterRating] = useState<number | null>(null);
   const [searchFilter, setSearchFilter] = useState('');
@@ -106,8 +108,7 @@ export default function GoogleReviewsModal({
               <div className="flex items-center gap-2">
                 <h3 className="font-extrabold text-lg sm:text-xl leading-snug">{entityName}</h3>
                 <span className="px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-500 text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
-                  <CheckCircle2 className="w-3 h-3" /> Verified Google Reviews
-                </span>
+                  <CheckCircle2 className="w-3 h-3" />{t.ui.googleReviewsModal.s_d6f49f}</span>
               </div>
               <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                 {categoryName || 'Partner'} • Direct Google Places Integration & Socials
@@ -155,14 +156,12 @@ export default function GoogleReviewsModal({
 
             {/* Middle: Aspect Breakdown */}
             <div className="md:col-span-5 space-y-2">
-              <div className="text-xs font-bold uppercase tracking-wider text-[#E5B65F]">
-                Verified Aspect Scores
-              </div>
+              <div className="text-xs font-bold uppercase tracking-wider text-[#E5B65F]">{t.ui.googleReviewsModal.s_6bce42}</div>
               {googleAspects ? (
                 <>
                   <div className="space-y-1">
                     <div className="flex justify-between text-xs">
-                      <span>Quality & Execution</span>
+                      <span>{t.ui.googleReviewsModal.s_ba9553}</span>
                       <span className="font-bold">{googleAspects.food || 4.9} / 5.0</span>
                     </div>
                     <div className="h-1.5 w-full rounded-full bg-black/20 overflow-hidden">
@@ -175,7 +174,7 @@ export default function GoogleReviewsModal({
 
                   <div className="space-y-1">
                     <div className="flex justify-between text-xs">
-                      <span>App Service</span>
+                      <span>{t.ui.googleReviewsModal.s_cbac3e}</span>
                       <span className="font-bold">{googleAspects.service || 4.8} / 5.0</span>
                     </div>
                     <div className="h-1.5 w-full rounded-full bg-black/20 overflow-hidden">
@@ -188,7 +187,7 @@ export default function GoogleReviewsModal({
 
                   <div className="space-y-1">
                     <div className="flex justify-between text-xs">
-                      <span>Atmosphere & Reliability</span>
+                      <span>{t.ui.googleReviewsModal.s_aaf427}</span>
                       <span className="font-bold">{googleAspects.atmosphere || 4.9} / 5.0</span>
                     </div>
                     <div className="h-1.5 w-full rounded-full bg-black/20 overflow-hidden">
@@ -200,15 +199,13 @@ export default function GoogleReviewsModal({
                   </div>
                 </>
               ) : (
-                <p className="text-xs text-gray-400">Aspect data collected via Google Places API</p>
+                <p className="text-xs text-gray-400">{t.ui.googleReviewsModal.s_c34ae8}</p>
               )}
             </div>
 
             {/* Right: Quick Star Filters */}
             <div className="md:col-span-3 flex flex-col gap-1.5">
-              <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400">
-                Filter by Stars
-              </span>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400">{t.ui.googleReviewsModal.s_6a6eaf}</span>
               <div className="flex flex-wrap gap-1.5">
                 {[5, 4, 3].map((num) => (
                   <button
@@ -246,9 +243,7 @@ export default function GoogleReviewsModal({
           >
             <div className="flex items-center gap-2 text-xs font-semibold">
               <span className="text-[#E5B65F] font-bold">Official Profiles:</span>
-              <span className={isLight ? 'text-slate-600' : 'text-gray-300'}>
-                Verified direct contacts & socials
-              </span>
+              <span className={isLight ? 'text-slate-600' : 'text-gray-300'}>{t.ui.googleReviewsModal.s_3ea133}</span>
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
@@ -280,7 +275,7 @@ export default function GoogleReviewsModal({
                   }`}
                 >
                   <MapPin className="w-3.5 h-3.5" />
-                  <span>Google Maps Pin</span>
+                  <span>{t.ui.googleReviewsModal.s_0d75a8}</span>
                   <ExternalLink className="w-3 h-3" />
                 </a>
               )}
@@ -297,7 +292,7 @@ export default function GoogleReviewsModal({
                   }`}
                 >
                   <Globe className="w-3.5 h-3.5 text-[#E5B65F]" />
-                  <span>Official Portal</span>
+                  <span>{t.ui.googleReviewsModal.s_d45c4f}</span>
                 </a>
               )}
 
@@ -329,7 +324,7 @@ export default function GoogleReviewsModal({
               <Search className="w-4 h-4 text-gray-400 shrink-0" />
               <input
                 type="text"
-                placeholder="Search reviews for dishes, ambiance, speed..."
+                placeholder={t.ui.googleReviewsModal.s_6913b8}
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
                 className="w-full bg-transparent border-none outline-none text-xs"
@@ -352,9 +347,7 @@ export default function GoogleReviewsModal({
           {/* Reviews List */}
           <div className="space-y-4">
             {filteredReviews.length === 0 ? (
-              <div className="text-center py-12 text-sm text-gray-400">
-                No Google reviews match your selected filter.
-              </div>
+              <div className="text-center py-12 text-sm text-gray-400">{t.ui.googleReviewsModal.s_273f6f}</div>
             ) : (
               filteredReviews.map((rev) => (
                 <div
@@ -461,7 +454,7 @@ export default function GoogleReviewsModal({
         >
           <div className="text-xs text-gray-400 flex items-center gap-1.5">
             <CheckCircle2 className="w-4 h-4 text-[#E5B65F]" />
-            <span>Reviews synced in real-time with Google Places API</span>
+            <span>{t.ui.googleReviewsModal.s_bd9554}</span>
           </div>
 
           <div className="flex items-center gap-3">

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { Database, Copy, Check, Download, X, Server, Layers } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
@@ -8,6 +9,7 @@ interface DatabaseSqlModalProps {
 }
 
 export default function DatabaseSqlModal({ isOpen, onClose }: DatabaseSqlModalProps) {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
   const [activeTab, setActiveTab] = useState<'schema' | 'seed'>('schema');
   const [copied, setCopied] = useState(false);
@@ -96,7 +98,7 @@ CREATE INDEX idx_items_name_trgm ON items USING gin (name gin_trgm_ops);`;
               <Database size={20} />
             </div>
             <div>
-              <h2 className="text-lg font-bold tracking-tight">PostgreSQL Database Scripts</h2>
+              <h2 className="text-lg font-bold tracking-tight">{t.ui.databaseSqlModal.s_baaf3a}</h2>
               <p className="text-xs text-slate-500 dark:text-slate-400">
                 Optimized for speed &amp; efficiency with pg_trgm and full image links
               </p>

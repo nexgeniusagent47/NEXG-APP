@@ -1,5 +1,6 @@
 // components/ui/offer-carousel.tsx
 import * as React from "react";
+import { useLanguage } from '../../context/LanguageContext';
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronLeft, ChevronRight, Sparkles, Clock, ArrowRight, Info, ShieldCheck, Tag } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -37,6 +38,7 @@ interface OfferCardProps {
  * carousel below, and duplicating the card markup would let the two drift apart.
  */
 export const OfferCard: React.FC<OfferCardProps> = ({ offer, twoPerScreen = true }) => {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
 
   const heroImage = offer.imageUrl || offer.imageSrc || 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=900&q=80';
@@ -176,9 +178,7 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer, twoPerScreen = true
             </div>
 
             <div className="flex items-center gap-1.5">
-              <span className="text-[11px] font-bold uppercase text-[#7d5a11] dark:text-[#E5B65F] group-hover:underline">
-                View Offer
-              </span>
+              <span className="text-[11px] font-bold uppercase text-[#7d5a11] dark:text-[#E5B65F] group-hover:underline">{t.ui.offercarousel.s_2aa5dc}</span>
               <div
                 className={cn(
                   "w-7 h-7 rounded-full flex items-center justify-center transform transition duration-300 group-hover:rotate-[-45deg] group-hover:bg-[#B88728] group-hover:text-slate-950 flex-shrink-0",
@@ -216,6 +216,7 @@ export const OfferCarousel = React.forwardRef<HTMLDivElement, OfferCarouselProps
     },
     ref
   ) => {
+    const { t } = useLanguage();
     const { isLight } = useTheme();
     const [currentIndex, setCurrentIndex] = React.useState(0);
     const [isHovered, setIsHovered] = React.useState(false);
@@ -248,6 +249,7 @@ export const OfferCarousel = React.forwardRef<HTMLDivElement, OfferCarouselProps
     };
 
     const handleNext = () => {
+      const { t } = useLanguage();
       setCurrentIndex((prev) => (prev + 1) % numSlides);
     };
 
@@ -299,7 +301,7 @@ export const OfferCarousel = React.forwardRef<HTMLDivElement, OfferCarouselProps
                   ? "bg-white/90 text-slate-800 border-slate-200 hover:bg-white hover:border-[#B88728]"
                   : "bg-black/75 text-white border-white/20 hover:bg-black hover:border-[#E5B65F]"
               )}
-              aria-label="Previous Slide"
+              aria-label={t.ui.offercarousel.s_10bb09}
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -348,7 +350,7 @@ export const OfferCarousel = React.forwardRef<HTMLDivElement, OfferCarouselProps
                   ? "bg-white/90 text-slate-800 border-slate-200 hover:bg-white hover:border-[#B88728]"
                   : "bg-black/75 text-white border-white/20 hover:bg-black hover:border-[#E5B65F]"
               )}
-              aria-label="Next Slide"
+              aria-label={t.ui.offercarousel.s_7141bc}
             >
               <ChevronRight className="w-5 h-5" />
             </button>

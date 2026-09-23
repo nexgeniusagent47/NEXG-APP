@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import { motion } from 'motion/react';
 import { Star, Clock, MapPin, Sparkles, ShieldCheck, ChevronRight, Tag, ArrowRight } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
@@ -42,6 +43,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
   variant = 'vertical',
   className,
 }) => {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
 
   // HORIZONTAL / ROW LAYOUT
@@ -334,9 +336,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
                 {entity.pricePrefix} KSh {entity.price.toLocaleString()} {entity.priceSuffix}
               </span>
             ) : (
-              <span className="text-xs font-semibold text-slate-500 dark:text-gray-400">
-                View catalog & pricing
-              </span>
+              <span className="text-xs font-semibold text-slate-500 dark:text-gray-400">{t.ui.nexGEntityCard.s_085ed0}</span>
             )}
 
             {entity.originalPrice && (

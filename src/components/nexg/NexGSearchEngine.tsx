@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import { Search, Sparkles, Building2, MapPin, Tag, Utensils, Compass, ArrowRight, Star } from 'lucide-react';
 import { CATEGORIES_21, CatalogCategory, CatalogMerchant, DynamicItem, getCategoryMerchants } from '../../data/categoryCatalog21';
 import { useTheme } from '../../context/ThemeContext';
@@ -13,6 +14,7 @@ interface NexGSearchEngineProps {
 }
 
 export const NexGSearchEngine: React.FC<NexGSearchEngineProps> = ({ query }) => {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
   const { navigateToCategory, navigateToMerchant, openItemSheet } = useNexGNavigation();
 
@@ -77,8 +79,7 @@ export const NexGSearchEngine: React.FC<NexGSearchEngineProps> = ({ query }) => 
       {/* Search Header Stats */}
       <div className="flex items-center justify-between border-b pb-4 border-slate-200 dark:border-white/10">
         <div>
-          <h2 className={cn('text-xl sm:text-2xl font-bold tracking-tight', isLight ? 'text-slate-900' : 'text-white')}>
-            Search Results for <span className="text-[#7d5a11] dark:text-[#E5B65F]">"{query}"</span>
+          <h2 className={cn('text-xl sm:text-2xl font-bold tracking-tight', isLight ? 'text-slate-900' : 'text-white')}>{t.ui.nexGSearchEngine.s_cd81f4}<span className="text-[#7d5a11] dark:text-[#E5B65F]">"{query}"</span>
           </h2>
           <p className={cn('text-xs mt-1', isLight ? 'text-slate-600' : 'text-gray-400')}>
             Found {totalResults} matching categories, merchants, and curated offerings
@@ -91,7 +92,7 @@ export const NexGSearchEngine: React.FC<NexGSearchEngineProps> = ({ query }) => 
           <div className="w-12 h-12 rounded-full bg-amber-500/10 text-[#7d5a11] dark:text-[#E5B65F] mx-auto flex items-center justify-center">
             <Search size={22} />
           </div>
-          <h3 className="font-bold text-base">No direct matches found</h3>
+          <h3 className="font-bold text-base">{t.ui.nexGSearchEngine.s_c5b914}</h3>
           <p className="text-xs text-slate-500 dark:text-gray-400">
             Try searching for "Spa", "Japanese", "Safari", "Cellar", "Wagyu", or "Chauffeur".
           </p>

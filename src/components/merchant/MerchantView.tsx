@@ -16,6 +16,7 @@
 // if it is not to mean "identical and wrong".
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import {
   ArrowLeft,
@@ -60,6 +61,7 @@ export default function MerchantView({
   onAddedToCart,
   focusOfferings = false,
 }: MerchantViewProps) {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
   const reduceMotion = useReducedMotion();
   const [filter, setFilter] = useState('');
@@ -321,9 +323,7 @@ export default function MerchantView({
               )}
             >
               <Store size={22} className={cn('mx-auto mb-2', isLight ? 'text-slate-300' : 'text-gray-600')} />
-              <h3 className={cn('text-sm font-bold', isLight ? 'text-slate-900' : 'text-white')}>
-                No offerings listed yet
-              </h3>
+              <h3 className={cn('text-sm font-bold', isLight ? 'text-slate-900' : 'text-white')}>{t.ui.merchantView.s_085b31}</h3>
               <p className={cn('text-xs mt-1', isLight ? 'text-slate-600' : 'text-gray-400')}>
                 This merchant has not published its catalogue. You can still request{' '}
                 {intent.arc.cardAction.toLowerCase()} directly.
@@ -343,9 +343,7 @@ export default function MerchantView({
                 type="button"
                 onClick={() => setFilter('')}
                 className="mt-3 text-xs font-bold text-[#7d5a11] dark:text-[#E5B65F] underline underline-offset-2"
-              >
-                Clear search
-              </button>
+              >{t.ui.merchantView.s_67300d}</button>
             </div>
           ) : (
             <>
@@ -368,7 +366,7 @@ export default function MerchantView({
                 >
                   <div
                     role="tablist"
-                    aria-label="Menu sections"
+                    aria-label={t.ui.merchantView.s_3fcbae}
                     className="flex gap-2 overflow-x-auto scrollbar-hide py-2.5"
                   >
                     {sections.map((section) => {

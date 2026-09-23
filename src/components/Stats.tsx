@@ -1,7 +1,10 @@
+import React from 'react';
 import { Building2, Store, MapPin, Clock } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Stats() {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
 
   return (
@@ -15,21 +18,16 @@ export default function Stats() {
           <div className="lg:col-span-1">
             <h2 className={`text-2xl sm:text-[32px] font-bold mb-4 sm:mb-5 leading-[1.2] tracking-tight ${
               isLight ? 'text-slate-900' : 'text-white'
-            }`}>
-              Trusted by guests<br/>across East Africa
+            }`}>{t.ui.stats.s_f2a377}<br/>across East Africa
             </h2>
             <p className={`mb-8 sm:mb-10 text-sm sm:text-[15px] max-w-sm ${
               isLight ? 'text-slate-600' : 'text-gray-400'
-            }`}>
-              From hotels to homes, we make everyday exceptional.
-            </p>
+            }`}>{t.ui.stats.s_034abd}</p>
             <button className={`border px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-colors cursor-pointer ${
               isLight
                 ? 'border-slate-300 text-slate-700 hover:border-[#B88728] hover:text-[#B88728]'
                 : 'border-gray-700 text-gray-200 hover:border-[#E5B65F] hover:text-[#E5B65F]'
-            }`}>
-              Our Partners
-            </button>
+            }`}>{t.ui.stats.s_bd3fa2}</button>
           </div>
           
           <div className="lg:col-span-2">
@@ -42,7 +40,7 @@ export default function Stats() {
                    <div className="text-xl sm:text-[26px] font-bold mb-0.5 leading-none">50+</div>
                    <div className={`text-xs sm:text-[13px] font-medium mt-1 ${
                      isLight ? 'text-slate-600' : 'text-gray-400'
-                   }`}>Hotel Partners</div>
+                   }`}>{t.ui.stats.s_826dd3}</div>
                  </div>
               </div>
               <div className="flex items-start gap-3 sm:gap-4">
@@ -69,7 +67,7 @@ export default function Stats() {
                    <div className="text-xl sm:text-[26px] font-bold mb-0.5 leading-none">24/7</div>
                    <div className={`text-xs sm:text-[13px] font-medium mt-1 leading-tight ${
                      isLight ? 'text-slate-600' : 'text-gray-400'
-                   }`}>Concierge Support</div>
+                   }`}>{t.ui.stats.s_e819e6}</div>
                  </div>
               </div>
             </div>
@@ -103,7 +101,7 @@ export default function Stats() {
                  <div className={`h-12 w-12 sm:h-16 sm:w-16 transition-colors ${
                    isLight ? 'text-[#B88728]/70 group-hover:text-[#B88728]' : 'text-[#E5B65F]/60 group-hover:text-[#E5B65F]'
                  }`}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M4 22V10M8 22V6M12 22V2M16 22V8M20 22V12 M2 22h20"/></svg></div>
-                 <div className={`text-xs sm:text-[13px] font-semibold ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>Dar es Salaam</div>
+                 <div className={`text-xs sm:text-[13px] font-semibold ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>{t.ui.stats.s_dc04b9}</div>
                </div>
                <div className="flex flex-col items-center gap-2 sm:gap-3 group cursor-default">
                  <div className={`h-12 w-12 sm:h-16 sm:w-16 transition-colors ${

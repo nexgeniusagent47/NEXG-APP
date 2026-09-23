@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import {
   X,
   Car,
@@ -29,6 +30,7 @@ export default function TransportBookingModal({
   onClose,
   onBookingConfirmed,
 }: TransportBookingModalProps) {
+  const { t } = useLanguage();
   if (!vehicle) return null;
 
   const [step, setStep] = useState<1 | 2 | 3>(1);
@@ -129,7 +131,7 @@ export default function TransportBookingModal({
             <div className="absolute bottom-4 left-6 right-6 z-10">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-tint text-gold border border-gold-line text-xs font-semibold mb-1 backdrop-blur-md">
                 <Sparkles size={12} />
-                <span>VIP Concierge Mobility</span>
+                <span>{t.ui.transportBookingModal.s_f2f922}</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">{vehicle.name}</h2>
               <div className="flex items-center gap-4 text-xs text-slate-600 mt-0.5">
@@ -158,9 +160,7 @@ export default function TransportBookingModal({
             {step === 1 && (
               <div className="space-y-5">
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">
-                    Service Type
-                  </h3>
+                  <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">{t.ui.transportBookingModal.s_8941e9}</h3>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
                     {[
                       { key: 'airport_transfer', label: 'Airport VIP Transfer', badge: `$${vehicle.priceAirportTransfer}` },
@@ -186,9 +186,7 @@ export default function TransportBookingModal({
 
                 {serviceType === 'hourly_chauffeur' && (
                   <div>
-                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
-                      Dedicated Chauffeur Hours
-                    </label>
+                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">{t.ui.transportBookingModal.s_251e18}</label>
                     <div className="flex gap-2">
                       {[3, 4, 6, 8, 12, 24].map((h) => (
                         <button
@@ -212,7 +210,7 @@ export default function TransportBookingModal({
                   <div>
                     <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5 flex items-center gap-1">
                       <MapPin size={13} className="text-gold" />
-                      <span>Pickup Location</span>
+                      <span>{t.ui.transportBookingModal.s_8dea76}</span>
                     </label>
                     <input
                       type="text"
@@ -240,7 +238,7 @@ export default function TransportBookingModal({
                   <div>
                     <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5 flex items-center gap-1">
                       <Plane size={13} className="text-gold" />
-                      <span>Flight Number / Departure Code</span>
+                      <span>{t.ui.transportBookingModal.s_d0cd2d}</span>
                     </label>
                     <input
                       type="text"
@@ -254,9 +252,7 @@ export default function TransportBookingModal({
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
-                      Schedule Date
-                    </label>
+                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">{t.ui.transportBookingModal.s_7a4175}</label>
                     <select
                       value={bookingDate}
                       onChange={(e) => setBookingDate(e.target.value)}
@@ -264,14 +260,12 @@ export default function TransportBookingModal({
                     >
                       <option value="Today">Today</option>
                       <option value="Tomorrow">Tomorrow</option>
-                      <option value="Day After">Day After</option>
+                      <option value="Day After">{t.ui.transportBookingModal.s_9ca1bd}</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
-                      Pickup Time
-                    </label>
+                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">{t.ui.transportBookingModal.s_358b66}</label>
                     <input
                       type="text"
                       value={bookingTime}
@@ -286,9 +280,7 @@ export default function TransportBookingModal({
             {step === 2 && (
               <div className="space-y-5">
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">
-                    Complimentary On-Board Amenities
-                  </h3>
+                  <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">{t.ui.transportBookingModal.s_cd11b4}</h3>
                   <div className="space-y-2">
                     {[
                       'Laurent-Perrier Chilled Champagne on Ice',
@@ -324,9 +316,7 @@ export default function TransportBookingModal({
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
-                      Guest Name
-                    </label>
+                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">{t.ui.transportBookingModal.s_be057d}</label>
                     <input
                       type="text"
                       value={guestName}
@@ -336,9 +326,7 @@ export default function TransportBookingModal({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
-                      Villa / Suite Room
-                    </label>
+                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">{t.ui.transportBookingModal.s_b68827}</label>
                     <input
                       type="text"
                       value={roomOrVilla}
@@ -355,11 +343,11 @@ export default function TransportBookingModal({
                     <span>${calculatedPrice}</span>
                   </div>
                   <div className="flex justify-between text-slate-600">
-                    <span>VIP Meet & Greet + Airport Flight Sync</span>
+                    <span>{t.ui.transportBookingModal.s_a1cbc4}</span>
                     <span className="text-emerald-400">Included</span>
                   </div>
                   <div className="border-t border-slate-200 pt-2 flex justify-between font-bold text-sm text-white">
-                    <span>Total Concierge Fee</span>
+                    <span>{t.ui.transportBookingModal.s_314bee}</span>
                     <span className="text-gold">${calculatedPrice}</span>
                   </div>
                 </div>
@@ -370,15 +358,13 @@ export default function TransportBookingModal({
               <div className="space-y-6">
                 <div className="p-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-between">
                   <div>
-                    <div className="text-xs font-bold uppercase tracking-wider text-emerald-400">
-                      Chauffeur Confirmed
-                    </div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-emerald-400">{t.ui.transportBookingModal.s_160ad9}</div>
                     <div className="text-lg font-bold text-white mt-0.5">
                       Dispatch #{confirmedBooking.id}
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-xs text-slate-600">Scheduled Departure</div>
+                    <div className="text-xs text-slate-600">{t.ui.transportBookingModal.s_77ae94}</div>
                     <div className="text-sm font-bold text-gold">
                       {confirmedBooking.date} at {confirmedBooking.time}
                     </div>
@@ -396,7 +382,7 @@ export default function TransportBookingModal({
                         referrerPolicy="no-referrer"
                       />
                       <div>
-                        <div className="text-xs text-slate-600">Assigned Chauffeur</div>
+                        <div className="text-xs text-slate-600">{t.ui.transportBookingModal.s_6f672b}</div>
                         <div className="font-bold text-sm text-white">{confirmedBooking.driver.name}</div>
                         <div className="text-[11px] text-gold flex items-center gap-2 mt-0.5">
                           <span>Plate: {confirmedBooking.driver.vehiclePlate}</span>
@@ -408,7 +394,7 @@ export default function TransportBookingModal({
                     <a
                       href={`tel:${confirmedBooking.driver.phone}`}
                       className="p-2.5 rounded-full bg-slate-100 hover:bg-slate-200 text-white border border-slate-300 transition-colors cursor-pointer"
-                      title="Call Chauffeur"
+                      title={t.ui.transportBookingModal.s_39b21c}
                     >
                       <Phone size={16} />
                     </a>
@@ -418,9 +404,7 @@ export default function TransportBookingModal({
                 {/* Live Simulation Stepper */}
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-xs font-bold text-slate-600 uppercase tracking-wider">
-                      Live Dispatch Status
-                    </h4>
+                    <h4 className="text-xs font-bold text-slate-600 uppercase tracking-wider">{t.ui.transportBookingModal.s_1505c5}</h4>
                     <button
                       type="button"
                       onClick={() => setSimulationIndex((prev) => Math.min(prev + 1, simulationSteps.length - 1))}
@@ -458,9 +442,7 @@ export default function TransportBookingModal({
                     type="button"
                     onClick={onClose}
                     className="w-full py-3 rounded-xl bg-gold hover:bg-gold-strong text-slate-950 font-bold text-sm transition cursor-pointer shadow-lg"
-                  >
-                    Done & Return to App
-                  </button>
+                  >{t.ui.transportBookingModal.s_36a60c}</button>
                 </div>
               </div>
             )}
@@ -470,7 +452,7 @@ export default function TransportBookingModal({
           {step < 3 && (
             <div className="p-4 sm:p-5 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
               <div>
-                <div className="text-[11px] text-slate-600">Total Rate</div>
+                <div className="text-[11px] text-slate-600">{t.ui.transportBookingModal.s_457b66}</div>
                 <div className="text-lg sm:text-xl font-bold text-gold">${calculatedPrice}</div>
               </div>
 
@@ -490,17 +472,13 @@ export default function TransportBookingModal({
                     type="button"
                     onClick={() => setStep(2)}
                     className="px-6 py-2.5 rounded-xl bg-gold hover:bg-gold-strong text-slate-950 text-xs sm:text-sm font-bold transition cursor-pointer shadow-md"
-                  >
-                    Continue to Amenities
-                  </button>
+                  >{t.ui.transportBookingModal.s_efb6c4}</button>
                 ) : (
                   <button
                     type="button"
                     onClick={handleConfirm}
                     className="px-6 py-2.5 rounded-xl bg-gold hover:bg-gold-strong text-slate-950 text-xs sm:text-sm font-bold transition cursor-pointer shadow-lg"
-                  >
-                    Confirm VIP Chauffeur
-                  </button>
+                  >{t.ui.transportBookingModal.s_99d1c7}</button>
                 )}
               </div>
             </div>

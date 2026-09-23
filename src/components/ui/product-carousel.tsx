@@ -1,5 +1,6 @@
 // components/ui/product-carousel.tsx
 import * as React from "react";
+import { useLanguage } from '../../context/LanguageContext';
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronLeft, ChevronRight, Clock, Info, Check, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -38,6 +39,7 @@ interface ProductCarouselProps {
 // Reusable Product Card Component with theme consistency
 const ProductCard: React.FC<ProductCardProps> = ({ product, twoPerScreen = true }) => {
   const { isLight } = useTheme();
+  const { t } = useLanguage();
   const [isAdded, setIsAdded] = React.useState(false);
 
   const handleAdd = (e: React.MouseEvent) => {
@@ -214,6 +216,7 @@ export const ProductCarousel = React.forwardRef<HTMLDivElement, ProductCarouselP
     ref
   ) => {
     const { isLight } = useTheme();
+    const { t } = useLanguage();
     const [currentIndex, setCurrentIndex] = React.useState(0);
     const [isHovered, setIsHovered] = React.useState(false);
 
@@ -245,6 +248,7 @@ export const ProductCarousel = React.forwardRef<HTMLDivElement, ProductCarouselP
     };
 
     const handleNext = () => {
+      const { t } = useLanguage();
       setCurrentIndex((prev) => (prev + 1) % numSlides);
     };
 
@@ -299,7 +303,7 @@ export const ProductCarousel = React.forwardRef<HTMLDivElement, ProductCarouselP
                   ? "bg-white/90 text-slate-800 border-slate-200 hover:bg-white hover:border-[#B88728]"
                   : "bg-black/75 text-white border-white/20 hover:bg-black hover:border-[#E5B65F]"
               )}
-              aria-label="Previous Slide"
+              aria-label={t.ui.productcarousel.s_10bb09}
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -348,7 +352,7 @@ export const ProductCarousel = React.forwardRef<HTMLDivElement, ProductCarouselP
                   ? "bg-white/90 text-slate-800 border-slate-200 hover:bg-white hover:border-[#B88728]"
                   : "bg-black/75 text-white border-white/20 hover:bg-black hover:border-[#E5B65F]"
               )}
-              aria-label="Next Slide"
+              aria-label={t.ui.productcarousel.s_7141bc}
             >
               <ChevronRight className="w-5 h-5" />
             </button>

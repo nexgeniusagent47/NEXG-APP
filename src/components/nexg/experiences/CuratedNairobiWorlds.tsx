@@ -3,6 +3,7 @@
 // with progressive disclosure: Occasion Selector -> Multi-Step Journey -> Wolt Cards -> Full Itinerary Drawer
 
 import React, { useState, useMemo } from 'react';
+import { useLanguage } from '../../../context/LanguageContext';
 import {
   Sparkles,
   ChevronRight,
@@ -40,6 +41,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
   onSelectItem,
   onSelectCategory,
 }) => {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
 
   // Active occasion state (defaults to Date Night or time-based pick)
@@ -100,19 +102,11 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-[#E5B65F]/20 text-[#7d5a11] dark:text-[#E5B65F] border border-[#E5B65F]/30">
-              <Sparkles size={11} className="fill-current" />
-              Contextual Experience Hub
-            </span>
-            <span className="text-xs font-semibold text-slate-400 dark:text-gray-500">
-              Nairobi Curated
-            </span>
+              <Sparkles size={11} className="fill-current" />{t.ui.curatedNairobiWorlds.s_c2018d}</span>
+            <span className="text-xs font-semibold text-slate-400 dark:text-gray-500">{t.ui.curatedNairobiWorlds.s_fe8da0}</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
-            Curated Nairobi Worlds
-          </h2>
-          <p className={cn('text-xs sm:text-sm font-medium', isLight ? 'text-slate-600' : 'text-gray-400')}>
-            Dynamic cross-category plans tailored to your moment, occasion & time of day
-          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">{t.ui.curatedNairobiWorlds.s_41dd82}</h2>
+          <p className={cn('text-xs sm:text-sm font-medium', isLight ? 'text-slate-600' : 'text-gray-400')}>{t.ui.curatedNairobiWorlds.s_15a714}</p>
         </div>
 
         {/* Quick Drawer Opener */}
@@ -127,7 +121,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
           )}
         >
           <SlidersHorizontal size={13} className="text-[#7d5a11] dark:text-[#E5B65F]" />
-          <span>Full Experience Builder</span>
+          <span>{t.ui.curatedNairobiWorlds.s_18a51d}</span>
           <ChevronRight size={13} />
         </button>
       </div>
@@ -241,9 +235,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
             <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-gray-400">
               Orchestrated Journey ({activeExperience.steps.length} Phases)
             </span>
-            <span className="text-[11px] font-semibold text-[#7d5a11] dark:text-[#E5B65F]">
-              Click step to explore offerings
-            </span>
+            <span className="text-[11px] font-semibold text-[#7d5a11] dark:text-[#E5B65F]">{t.ui.curatedNairobiWorlds.s_ecc198}</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
@@ -344,9 +336,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
             {/* Header */}
             <div className="p-6 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
               <div>
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#7d5a11] dark:text-[#E5B65F]">
-                  NEXG Experience Orchestrator
-                </span>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#7d5a11] dark:text-[#E5B65F]">{t.ui.curatedNairobiWorlds.s_52c035}</span>
                 <h3 className="text-xl font-bold">{activeExperience.name} Full Itinerary</h3>
               </div>
               <button
@@ -400,9 +390,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
                 type="button"
                 onClick={() => setIsFullDrawerOpen(false)}
                 className="px-5 py-2.5 rounded-full text-xs font-bold bg-[#E5B65F] text-slate-950 hover:bg-[#d6a854] transition-colors cursor-pointer"
-              >
-                Explore Offerings in Main Feed
-              </button>
+              >{t.ui.curatedNairobiWorlds.s_8abe87}</button>
             </div>
           </div>
         </div>

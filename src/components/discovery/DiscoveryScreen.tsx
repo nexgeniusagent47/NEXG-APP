@@ -12,6 +12,7 @@
 // database (v1 handoff section 5.3).
 
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import {
   Search,
   X,
@@ -41,6 +42,7 @@ export default function DiscoveryScreen({
   onBack,
   onOpenMerchant,
 }: DiscoveryScreenProps) {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
   const [query, setQuery] = useState(initialQuery);
   const [categoryId, setCategoryId] = useState<string>('all');
@@ -206,8 +208,8 @@ export default function DiscoveryScreen({
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search restaurants, spa, safaris, champagne, chauffeur, pharmacy..."
-              aria-label="Search merchants"
+              placeholder={t.ui.discoveryScreen.s_f4d948}
+              aria-label={t.ui.discoveryScreen.s_8344a6}
               className="w-full bg-transparent text-sm font-medium focus:outline-none placeholder:text-slate-600 dark:placeholder:text-gray-400"
             />
             {query && (
@@ -217,7 +219,7 @@ export default function DiscoveryScreen({
                   setQuery('');
                   searchRef.current?.focus();
                 }}
-                aria-label="Clear search"
+                aria-label={t.ui.discoveryScreen.s_67300d}
                 className={cn(
                   'flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center',
                   isLight ? 'text-slate-600 hover:bg-slate-200' : 'text-gray-400 hover:bg-white/10'
@@ -325,9 +327,7 @@ export default function DiscoveryScreen({
                 'px-3 pb-1.5 text-[10px] font-bold uppercase tracking-[0.16em]',
                 isLight ? 'text-slate-600' : 'text-gray-400'
               )}
-            >
-              All verticals
-            </h2>
+            >{t.ui.discoveryScreen.s_0b7ee2}</h2>
             <RailButton isLight={isLight} active={categoryId === 'all'} onClick={() => handleSelectCategory('all')}>
               <Store size={15} />
               <span className="flex-1 truncate">Everything</span>
@@ -377,7 +377,7 @@ export default function DiscoveryScreen({
             )}
             style={{ top: headerHeight }}
             role="tablist"
-            aria-label="Merchant categories"
+            aria-label={t.ui.discoveryScreen.s_030851}
           >
             <Chip
               isLight={isLight}
@@ -425,8 +425,7 @@ export default function DiscoveryScreen({
               )}
             >
               <p className="text-sm font-bold text-rose-500">{error}</p>
-              <p className={cn('text-xs mt-1', isLight ? 'text-slate-600' : 'text-gray-400')}>
-                The API may not be running. Start it with <code className="font-mono">npm run server</code>.
+              <p className={cn('text-xs mt-1', isLight ? 'text-slate-600' : 'text-gray-400')}>{t.ui.discoveryScreen.s_176135}<code className="font-mono">npm run server</code>.
               </p>
               <button
                 type="button"
@@ -461,7 +460,7 @@ export default function DiscoveryScreen({
               >
                 <Search size={20} />
               </div>
-              <h3 className="text-sm font-bold">No merchants found</h3>
+              <h3 className="text-sm font-bold">{t.ui.discoveryScreen.s_a3c57f}</h3>
               <p className={cn('text-xs mt-1 max-w-sm mx-auto', isLight ? 'text-slate-600' : 'text-gray-400')}>
                 {query
                   ? `Nothing matches "${query}" in this vertical. Try a different term or browse everything.`
@@ -475,9 +474,7 @@ export default function DiscoveryScreen({
                     handleSelectCategory('all');
                   }}
                   className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold bg-[#E5B65F] text-slate-950 hover:bg-[#d6a54d] active:scale-[0.98] transition-transform"
-                >
-                  Clear filters
-                </button>
+                >{t.ui.discoveryScreen.s_412226}</button>
               )}
             </div>
           )}
@@ -510,9 +507,7 @@ export default function DiscoveryScreen({
                         ? 'bg-white border-slate-300 text-slate-800 hover:bg-slate-50'
                         : 'bg-white/5 border-white/15 text-gray-100 hover:bg-white/10'
                     )}
-                  >
-                    Load more
-                  </button>
+                  >{t.ui.discoveryScreen.s_dfe60c}</button>
                 </div>
               )}
             </>

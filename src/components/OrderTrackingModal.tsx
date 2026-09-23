@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import {
   X,
   CheckCircle2,
@@ -21,6 +22,7 @@ import { useCart } from '../context/CartContext';
 import { useTheme } from '../context/ThemeContext';
 
 export default function OrderTrackingModal() {
+  const { t } = useLanguage();
   const {
     activeOrder,
     isTrackingOpen,
@@ -144,7 +146,7 @@ export default function OrderTrackingModal() {
                     ? 'bg-slate-100 hover:bg-slate-200 text-slate-700 border-slate-200'
                     : 'bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white border-white/5'
                 }`}
-                aria-label="Minimize tracking"
+                aria-label={t.ui.orderTrackingModal.s_d6e963}
               >
                 <X size={18} />
               </button>
@@ -169,7 +171,7 @@ export default function OrderTrackingModal() {
                     ? 'bg-[#B88728] hover:bg-[#967C3B] text-slate-950'
                     : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-black'
                 }`}
-                title="Fast forward simulation to next lifecycle stage"
+                title={t.ui.orderTrackingModal.s_375813}
               >
                 <FastForward size={12} />
                 <span>Fast-Forward Stage</span>
@@ -188,9 +190,7 @@ export default function OrderTrackingModal() {
                   ? isLight ? 'border-[#B88728] text-[#B88728]' : 'border-[#E5B65F] text-[#E5B65F]'
                   : isLight ? 'border-transparent text-slate-600 hover:text-slate-900' : 'border-transparent text-gray-400 hover:text-white'
               }`}
-            >
-              Live Journey & ETA
-            </button>
+            >{t.ui.orderTrackingModal.s_ea2152}</button>
             <button
               onClick={() => setActiveTab('receipt')}
               className={`py-3 px-4 text-xs sm:text-sm font-semibold border-b-2 transition-colors cursor-pointer ${
@@ -198,9 +198,7 @@ export default function OrderTrackingModal() {
                   ? isLight ? 'border-[#B88728] text-[#B88728]' : 'border-[#E5B65F] text-[#E5B65F]'
                   : isLight ? 'border-transparent text-slate-600 hover:text-slate-900' : 'border-transparent text-gray-400 hover:text-white'
               }`}
-            >
-              Itemized Receipt & PIN
-            </button>
+            >{t.ui.orderTrackingModal.s_74e226}</button>
           </div>
 
           {/* Body Content */}
@@ -217,9 +215,7 @@ export default function OrderTrackingModal() {
                     <div>
                       <span className={`text-xs font-medium uppercase tracking-wider block mb-1 ${
                         isLight ? 'text-slate-600' : 'text-gray-400'
-                      }`}>
-                        Estimated Delivery
-                      </span>
+                      }`}>{t.ui.orderTrackingModal.s_116632}</span>
                       <div className={`text-3xl sm:text-4xl font-extrabold tracking-tight flex items-baseline gap-2 ${
                         isLight ? 'text-slate-900' : 'text-white'
                       }`}>
@@ -230,9 +226,7 @@ export default function OrderTrackingModal() {
                             <span>~{activeOrder.estimatedMinutesLeft} mins</span>
                             <span className={`text-xs font-normal px-2 py-0.5 rounded-full ${
                               isLight ? 'text-emerald-700 bg-emerald-100' : 'text-emerald-400 bg-emerald-400/10'
-                            }`}>
-                              On schedule
-                            </span>
+                            }`}>{t.ui.orderTrackingModal.s_f56564}</span>
                           </>
                         )}
                       </div>
@@ -253,9 +247,7 @@ export default function OrderTrackingModal() {
                       <div>
                         <span className={`text-[10px] uppercase font-bold tracking-widest block ${
                           isLight ? 'text-slate-600' : 'text-gray-400'
-                        }`}>
-                          Delivery PIN
-                        </span>
+                        }`}>{t.ui.orderTrackingModal.s_9fb5a8}</span>
                         <span className={`text-xl font-mono font-bold tracking-widest ${
                           isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'
                         }`}>
@@ -269,7 +261,7 @@ export default function OrderTrackingModal() {
                             ? 'bg-white hover:bg-slate-100 text-slate-700 border border-slate-200'
                             : 'bg-white/5 hover:bg-white/10 text-gray-300'
                         }`}
-                        title="Copy delivery security PIN"
+                        title={t.ui.orderTrackingModal.s_6e6109}
                       >
                         {copiedPin ? <Check size={14} className={isLight ? 'text-emerald-700' : 'text-emerald-400'} /> : 'Copy'}
                       </button>
@@ -329,9 +321,7 @@ export default function OrderTrackingModal() {
                       </div>
                       <span className={`text-[10px] font-bold mt-1 px-1.5 py-0.5 rounded backdrop-blur-sm ${
                         isLight ? 'text-slate-800 bg-white/80 border border-slate-200' : 'text-gray-300 bg-black/60'
-                      }`}>
-                        Your Location
-                      </span>
+                      }`}>{t.ui.orderTrackingModal.s_cd1876}</span>
                     </div>
 
                     {/* Moving Rider Beacon */}
@@ -406,7 +396,7 @@ export default function OrderTrackingModal() {
                           ? 'bg-slate-200 hover:bg-slate-300 text-slate-700'
                           : 'bg-white/10 hover:bg-white/20 text-white'
                       }`}
-                      title="Call Courier"
+                      title={t.ui.orderTrackingModal.s_43301e}
                     >
                       <Phone size={16} />
                     </a>
@@ -417,7 +407,7 @@ export default function OrderTrackingModal() {
                           ? 'bg-[#B88728] hover:bg-[#967C3B] text-slate-950'
                           : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-black'
                       }`}
-                      title="Message Courier"
+                      title={t.ui.orderTrackingModal.s_b868ce}
                     >
                       <MessageSquare size={16} />
                     </button>
@@ -428,9 +418,7 @@ export default function OrderTrackingModal() {
                 <div className={`space-y-4 pt-2 border-t ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
                   <h4 className={`text-xs font-bold uppercase tracking-wider ${
                     isLight ? 'text-slate-600' : 'text-gray-400'
-                  }`}>
-                    Live Progress Stages
-                  </h4>
+                  }`}>{t.ui.orderTrackingModal.s_a392ce}</h4>
 
                   <div className={`relative pl-6 space-y-6 before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 ${
                     isLight ? 'before:bg-slate-200' : 'before:bg-white/10'
@@ -492,13 +480,13 @@ export default function OrderTrackingModal() {
                     isLight ? 'border-slate-200' : 'border-white/10'
                   }`}>
                     <div>
-                      <span className={`block ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Transaction Reference</span>
+                      <span className={`block ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.orderTrackingModal.s_976a74}</span>
                       <span className={`font-mono font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>
                         {activeOrder.paymentDetails.transactionRef}
                       </span>
                     </div>
                     <div className="text-right">
-                      <span className={`block ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Simulated Payment Method</span>
+                      <span className={`block ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.orderTrackingModal.s_61243a}</span>
                       <span className={`font-semibold ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>
                         {activeOrder.paymentDetails.label}
                       </span>
@@ -540,11 +528,11 @@ export default function OrderTrackingModal() {
                       <span>${activeOrder.subtotal.toFixed(2)}</span>
                     </div>
                     <div className={`flex justify-between ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                      <span>Delivery Fee</span>
+                      <span>{t.ui.orderTrackingModal.s_9c12c6}</span>
                       <span>${activeOrder.deliveryFee.toFixed(2)}</span>
                     </div>
                     <div className={`flex justify-between ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                      <span>App Service</span>
+                      <span>{t.ui.orderTrackingModal.s_cbac3e}</span>
                       <span>${activeOrder.serviceFee.toFixed(2)}</span>
                     </div>
                     {activeOrder.discount > 0 && (
@@ -557,7 +545,7 @@ export default function OrderTrackingModal() {
                     )}
                     {activeOrder.tip > 0 && (
                       <div className={`flex justify-between ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                        <span>Courier Tip</span>
+                        <span>{t.ui.orderTrackingModal.s_536456}</span>
                         <span>${activeOrder.tip.toFixed(2)}</span>
                       </div>
                     )}
@@ -579,9 +567,7 @@ export default function OrderTrackingModal() {
                     : 'bg-black/40 border border-white/10 text-gray-400'
                 }`}>
                   <span className={`font-semibold block ${isLight ? 'text-slate-800' : 'text-gray-200'}`}>Demonstration Notice:</span>
-                  <p>
-                    This is an automated simulation of the client ordering lifecycle in NEXG App. No actual payment provider has been billed. Once connected to the live API gateway, genuine payments will be processed via M-Pesa or Stripe.
-                  </p>
+                  <p>{t.ui.orderTrackingModal.s_9ca905}</p>
                 </div>
               </div>
             )}
@@ -606,9 +592,7 @@ export default function OrderTrackingModal() {
                   ? 'bg-slate-900 hover:bg-black text-white'
                   : 'bg-white/10 hover:bg-white/20 text-white'
               }`}
-            >
-              Dismiss / Back to App
-            </button>
+            >{t.ui.orderTrackingModal.s_84e3ee}</button>
           </div>
         </motion.div>
       </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import {
   ArrowLeft,
   Sparkles,
@@ -24,6 +25,7 @@ interface GroceriesPageProps {
 }
 
 export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
+  const { t } = useLanguage();
   const { addToCart, setIsCartOpen } = useCart();
   const { isLight } = useTheme();
 
@@ -127,12 +129,10 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
                 }`}
               >
                 <ArrowLeft size={16} />
-                <span>Explore Home</span>
+                <span>{t.ui.groceriesPage.s_a1e9f9}</span>
               </button>
               <span className={isLight ? 'text-slate-300' : 'text-gray-600'}>/</span>
-              <span className={`text-xs sm:text-sm font-extrabold ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>
-                Gourmet Cellar & Purveyors
-              </span>
+              <span className={`text-xs sm:text-sm font-extrabold ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>{t.ui.groceriesPage.s_340a24}</span>
             </div>
 
             <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${
@@ -160,13 +160,11 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
             <div className="relative z-10 p-6 sm:p-12 max-w-2xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-3 bg-[#E5B65F]/20 text-[#7d5a11] dark:text-[#E5B65F]">
                 <Sparkles size={13} />
-                <span>Fine Cellar & Epicurean Purveyors</span>
+                <span>{t.ui.groceriesPage.s_504097}</span>
               </div>
               <h1 className={`text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 ${
                 isLight ? 'text-slate-900' : 'text-white'
-              }`}>
-                Artisanal Cellar, Caviar & Fromagerie
-              </h1>
+              }`}>{t.ui.groceriesPage.s_48028b}</h1>
               <p className={`text-sm sm:text-base leading-relaxed mb-6 font-medium ${
                 isLight ? 'text-slate-600' : 'text-gray-300'
               }`}>
@@ -180,7 +178,7 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
                 <Search className={`ml-3 w-5 h-5 ${isLight ? 'text-slate-400' : 'text-[#E5B65F]'}`} />
                 <input
                   type="text"
-                  placeholder="Search purveyors, caviar, Dom Pérignon, Bellota, truffles..."
+                  placeholder={t.ui.groceriesPage.s_7447ef}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className={`w-full bg-transparent border-none px-3 text-sm outline-none font-medium ${
@@ -274,7 +272,7 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
                         isLight ? 'text-slate-600' : 'text-gray-400'
                       }`}>
                         <PackageCheck size={13} className="text-emerald-700" />
-                        <span>Insulated Cold Packaging</span>
+                        <span>{t.ui.groceriesPage.s_828ad2}</span>
                       </span>
 
                       {purveyor.socials && (
@@ -335,7 +333,7 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
               }`}
             >
               <ArrowLeft size={16} />
-              <span>Back to all Purveyors</span>
+              <span>{t.ui.groceriesPage.s_160a42}</span>
             </button>
 
             <button
@@ -458,7 +456,7 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
                     <span className={`text-xs font-bold flex items-center gap-1 ${
                       isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'
                     }`}>
-                      <span>Select Item</span>
+                      <span>{t.ui.groceriesPage.s_dcc1fb}</span>
                       <ChevronRight size={13} />
                     </span>
                   </div>

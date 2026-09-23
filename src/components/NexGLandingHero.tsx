@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { MapPin, Crosshair, ArrowRight, ChevronDown, Sparkles, Search, Compass } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import LogoIcon from './LogoIcon';
@@ -17,6 +18,7 @@ export default function NexGLandingHero({
   onOpenCategories,
   onNavigate,
 }: NexGLandingHeroProps) {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
   const [wordIndex, setWordIndex] = useState(0);
   const [addressInput, setAddressInput] = useState('');
@@ -88,12 +90,12 @@ export default function NexGLandingHero({
           <button
             onClick={handleLocateMe}
             className="hidden sm:flex items-center gap-2 bg-white/15 hover:bg-white/25 px-3.5 py-1.5 rounded-full text-xs font-semibold text-white transition-colors cursor-pointer backdrop-blur-md"
-            title="Change Delivery Location"
+            title={t.ui.nexGLandingHero.s_71a30d}
           >
             <div className="w-5 h-5 rounded-full bg-white text-[#009DE0] flex items-center justify-center">
               <MapPin size={12} className="fill-current" />
             </div>
-            <span>Nairobi Villas</span>
+            <span>{t.ui.nexGLandingHero.s_381d79}</span>
             <ChevronDown size={14} className="opacity-70" />
           </button>
         </div>
@@ -103,9 +105,7 @@ export default function NexGLandingHero({
           <button
             onClick={() => onNavigate?.('merchants')}
             className="hidden md:inline-block text-xs font-bold text-white/90 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/10 transition-colors"
-          >
-            For Partners
-          </button>
+          >{t.ui.nexGLandingHero.s_52a6f3}</button>
           <button
             onClick={() => onNavigate?.('couriers')}
             className="hidden md:inline-block text-xs font-bold text-white/90 hover:text-white px-3 py-1.5 rounded-full hover:bg-white/10 transition-colors"
@@ -115,15 +115,11 @@ export default function NexGLandingHero({
           <button
             onClick={() => onEnterDiscovery()}
             className="text-xs font-bold text-white/90 hover:text-white px-3.5 py-2 rounded-full hover:bg-white/15 transition-colors cursor-pointer"
-          >
-            Log in
-          </button>
+          >{t.ui.nexGLandingHero.s_f7c400}</button>
           <button
             onClick={() => onEnterDiscovery()}
             className="text-xs font-bold bg-white text-[#009DE0] px-4 py-2 rounded-full hover:bg-white/90 shadow-md transition-transform active:scale-95 cursor-pointer"
-          >
-            Sign up
-          </button>
+          >{t.ui.nexGLandingHero.s_0b8149}</button>
         </div>
       </nav>
 
@@ -173,7 +169,7 @@ export default function NexGLandingHero({
             value={addressInput}
             onChange={(e) => setAddressInput(e.target.value)}
             onClick={() => onEnterDiscovery()}
-            placeholder="Enter delivery address, villa or hotel suite..."
+            placeholder={t.ui.nexGLandingHero.s_2bd100}
             className="flex-grow bg-transparent text-slate-800 placeholder-slate-400 text-sm sm:text-base font-semibold focus:outline-none cursor-pointer"
           />
 
@@ -182,7 +178,7 @@ export default function NexGLandingHero({
             onClick={handleLocateMe}
             disabled={isLocating}
             className="p-2 rounded-full hover:bg-slate-100 text-slate-600 hover:text-[#009DE0] transition-colors cursor-pointer flex-shrink-0"
-            title="Locate my position"
+            title={t.ui.nexGLandingHero.s_fa918a}
           >
             <Crosshair
               size={20}
@@ -230,7 +226,7 @@ export default function NexGLandingHero({
         </div>
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-status" />
-          <span>Active App Fleet in Nairobi</span>
+          <span>{t.ui.nexGLandingHero.s_e17357}</span>
         </div>
       </footer>
     </div>

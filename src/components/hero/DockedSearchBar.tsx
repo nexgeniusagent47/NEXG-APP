@@ -138,7 +138,7 @@ export default function DockedSearchBar({
               type="button"
               onClick={() => onChange('')}
               tabIndex={docked ? 0 : -1}
-              title="Clear search"
+              title={t.ui.dockedSearchBar.s_67300d}
               className={cn(
                 'absolute right-20 top-1/2 -translate-y-1/2 p-1 rounded-full transition-colors cursor-pointer',
                 isLight

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import {
   ArrowLeft,
   Sparkles,
@@ -27,6 +28,7 @@ interface ExperiencesProps {
 }
 
 export default function Experiences({ onNavigate }: ExperiencesProps) {
+  const { t } = useLanguage();
   const { addToCart, setIsCartOpen } = useCart();
   const { isLight } = useTheme();
 
@@ -165,12 +167,10 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
                 }`}
               >
                 <ArrowLeft size={16} />
-                <span>Explore Home</span>
+                <span>{t.ui.experiences.s_a1e9f9}</span>
               </button>
               <span className={isLight ? 'text-slate-300' : 'text-gray-600'}>/</span>
-              <span className={`text-xs sm:text-sm font-extrabold ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>
-                Curated Experience Hosts & Outfitters
-              </span>
+              <span className={`text-xs sm:text-sm font-extrabold ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>{t.ui.experiences.s_057742}</span>
             </div>
 
             <span className={`text-xs font-semibold px-3 py-1 rounded-full border ${
@@ -198,18 +198,14 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
             <div className="relative z-10 p-6 sm:p-12 max-w-2xl">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-3 bg-[#E5B65F]/20 text-[#7d5a11] dark:text-[#E5B65F]">
                 <Sparkles size={13} />
-                <span>Bespoke Concierge Expeditions</span>
+                <span>{t.ui.experiences.s_d29299}</span>
               </div>
               <h1 className={`text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-3 ${
                 isLight ? 'text-slate-900' : 'text-white'
-              }`}>
-                Private Safaris, Aerial Tours & Cultural Ateliers
-              </h1>
+              }`}>{t.ui.experiences.s_ad3a34}</h1>
               <p className={`text-sm sm:text-base leading-relaxed mb-6 font-medium ${
                 isLight ? 'text-slate-600' : 'text-gray-300'
-              }`}>
-                Choose an expert outfitter to browse hot-air balloon flights over the Mara, private giraffe conservation sanctuaries, and master artisan ateliers.
-              </p>
+              }`}>{t.ui.experiences.s_cebc44}</p>
 
               {/* Search Bar */}
               <div className={`flex items-center rounded-2xl p-1.5 border shadow-lg ${
@@ -218,7 +214,7 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
                 <Search className={`ml-3 w-5 h-5 ${isLight ? 'text-slate-400' : 'text-[#E5B65F]'}`} />
                 <input
                   type="text"
-                  placeholder="Search hosts, Maasai Mara, Giraffe Centre, cinema, safari..."
+                  placeholder={t.ui.experiences.s_96ebfb}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className={`w-full bg-transparent border-none px-3 text-sm outline-none font-medium ${
@@ -317,7 +313,7 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
                         }`}
                       >
                         <CalendarIcon size={12} className="text-[#7d5a11] dark:text-[#E5B65F]" />
-                        <span>Book Date</span>
+                        <span>{t.ui.experiences.s_14c995}</span>
                       </button>
 
                       {host.socials && (
@@ -378,7 +374,7 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
               }`}
             >
               <ArrowLeft size={16} />
-              <span>Back to all Outfitters</span>
+              <span>{t.ui.experiences.s_9fda6b}</span>
             </button>
 
             <button
@@ -499,7 +495,7 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
                     <span className={`text-xs font-bold flex items-center gap-1 ${
                       isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'
                     }`}>
-                      <span>Book Activity</span>
+                      <span>{t.ui.experiences.s_574a76}</span>
                       <ChevronRight size={13} />
                     </span>
                   </div>
@@ -532,9 +528,7 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
           >
             <div className="p-6 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
               <div>
-                <span className="text-[10px] uppercase font-bold tracking-widest text-[#7d5a11] dark:text-[#E5B65F]">
-                  Experience Reservation
-                </span>
+                <span className="text-[10px] uppercase font-bold tracking-widest text-[#7d5a11] dark:text-[#E5B65F]">{t.ui.experiences.s_f6e8ce}</span>
                 <h3 className="text-xl font-bold">{bookingModalConfig.activityTitle}</h3>
               </div>
               <button
@@ -564,7 +558,7 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
 
                   <div className="mt-6 pt-4 border-t border-slate-200 dark:border-white/10 flex items-center justify-between">
                     <div>
-                      <div className="text-xs text-gray-400">Date & Time</div>
+                      <div className="text-xs text-gray-400">{t.ui.experiences.s_63ae7c}</div>
                       <div className="text-sm font-bold">
                         {bookingModalConfig.selectedDate} at {bookingModalConfig.selectedTime} • {bookingModalConfig.guests} Guest(s)
                       </div>
@@ -572,9 +566,7 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
                     <button
                       onClick={() => setBookingModalConfig((prev) => ({ ...prev, isConfirmed: true }))}
                       className="px-6 py-3 rounded-xl bg-[#E5B65F] hover:bg-[#d6a54d] text-black font-bold text-xs uppercase tracking-wider shadow-lg transition-transform active:scale-95 cursor-pointer"
-                    >
-                      Confirm Booking
-                    </button>
+                    >{t.ui.experiences.s_eb9e1e}</button>
                   </div>
                 </>
               ) : (
@@ -585,8 +577,7 @@ export default function Experiences({ onNavigate }: ExperiencesProps) {
                   <h4 className="text-2xl font-bold mb-2">Experience Booked!</h4>
                   <p className={`text-xs max-w-md mx-auto mb-6 leading-relaxed ${
                     isLight ? 'text-slate-600' : 'text-gray-300'
-                  }`}>
-                    Your booking with <span className="font-bold">{bookingModalConfig.hostName}</span> has been confirmed for {bookingModalConfig.selectedDate} at {bookingModalConfig.selectedTime}. Your concierge will provide itinerary and private pickup details.
+                  }`}>{t.ui.experiences.s_6568e5}<span className="font-bold">{bookingModalConfig.hostName}</span> has been confirmed for {bookingModalConfig.selectedDate} at {bookingModalConfig.selectedTime}. Your concierge will provide itinerary and private pickup details.
                   </p>
                   <button
                     onClick={() => setBookingModalConfig((prev) => ({ ...prev, isOpen: false }))}

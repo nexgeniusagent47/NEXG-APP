@@ -126,7 +126,7 @@ export default function LanguageSwitcher({
               : 'bg-white/10 hover:bg-white/15 border-white/15 text-gray-200 onboarding-text-muted shadow-xs'
           }`}
           aria-expanded={isOpen}
-          aria-label="Select Regional Language"
+          aria-label={t.ui.languageSwitcher.s_99547d}
         >
           <span className="text-[#7d5a11] dark:text-[#E5B65F] flex items-center justify-center">
             <CurrentIcon className="w-4 h-4" />
@@ -227,8 +227,8 @@ export default function LanguageSwitcher({
             : 'bg-white/10 hover:bg-white/20 border-white/15 text-gray-200 onboarding-text-muted shadow-2xs'
         }`}
         aria-expanded={isOpen}
-        aria-label="Language Selector"
-        title="Change Language (English, 中文, Kiswahili, العربية)"
+        aria-label={t.ui.languageSwitcher.s_b8cc8e}
+        title={t.ui.languageSwitcher.s_03e64a}
       >
         {/* Single-color authentic cultural / language emblem */}
         <span className="text-[#7d5a11] dark:text-[#E5B65F] flex items-center justify-center">

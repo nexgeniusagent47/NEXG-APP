@@ -1,4 +1,5 @@
 import React, { useRef, useState, useMemo } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import {
   Search,
   MapPin,
@@ -49,6 +50,7 @@ export default function NexGDiscoveryView({
   onOpenDatabaseViewer,
   onSelectMerchant,
 }: NexGDiscoveryViewProps) {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
   const { cartCount, setIsCartOpen, addToCart } = useCart();
   const {
@@ -242,7 +244,7 @@ export default function NexGDiscoveryView({
               />
               <input
                 type="text"
-                placeholder="Search food, spa, safaris, champagne, chauffeur..."
+                placeholder={t.ui.nexGDiscoveryView.s_741311}
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 className="w-full bg-transparent text-xs sm:text-sm font-medium focus:outline-none placeholder:text-gray-400"
@@ -323,9 +325,7 @@ export default function NexGDiscoveryView({
             <section className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-xl sm:text-2xl font-bold tracking-tight">
-                    Explore Verticals & Categories
-                  </h2>
+                  <h2 className="text-xl sm:text-2xl font-bold tracking-tight">{t.ui.nexGDiscoveryView.s_a9176a}</h2>
                   <p className={cn('text-xs mt-0.5', isLight ? 'text-slate-600' : 'text-gray-400')}>
                     21 distinct verticals with 134 specialized subcategories
                   </p>
@@ -339,7 +339,7 @@ export default function NexGDiscoveryView({
                         ? 'bg-white border-slate-200 hover:bg-slate-50'
                         : 'bg-[#181a1b] border-white/10 hover:bg-white/10'
                     )}
-                    aria-label="Previous categories"
+                    aria-label={t.ui.nexGDiscoveryView.s_76cb8c}
                   >
                     <ChevronLeft size={16} />
                   </button>
@@ -351,7 +351,7 @@ export default function NexGDiscoveryView({
                         ? 'bg-white border-slate-200 hover:bg-slate-50'
                         : 'bg-[#181a1b] border-white/10 hover:bg-white/10'
                     )}
-                    aria-label="Next categories"
+                    aria-label={t.ui.nexGDiscoveryView.s_844b94}
                   >
                     <ChevronRight size={16} />
                   </button>
@@ -398,8 +398,8 @@ export default function NexGDiscoveryView({
             {/* 2. INSTANT SUITE EXPRESS CONVEYOR CAROUSEL */}
             <section>
               <ProductCarousel
-                title="Instant Suite Express"
-                subtitle="High-priority concierge delivery direct to your suite or villa in under 30 minutes"
+                title={t.ui.nexGDiscoveryView.s_df4cf6}
+                subtitle={t.ui.nexGDiscoveryView.s_8f8796}
                 products={featuredFastProducts}
               />
             </section>
@@ -450,12 +450,8 @@ export default function NexGDiscoveryView({
             <section className="space-y-6 pt-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h2 className="text-xl sm:text-2xl font-bold tracking-tight">
-                    All Verified Partners & Merchants
-                  </h2>
-                  <p className={cn('text-xs mt-0.5', isLight ? 'text-slate-600' : 'text-gray-400')}>
-                    Browse verified Nairobi merchants across 20 neighborhoods with Wolt-grade previews
-                  </p>
+                  <h2 className="text-xl sm:text-2xl font-bold tracking-tight">{t.ui.nexGDiscoveryView.s_b0a3fc}</h2>
+                  <p className={cn('text-xs mt-0.5', isLight ? 'text-slate-600' : 'text-gray-400')}>{t.ui.nexGDiscoveryView.s_6d9483}</p>
                 </div>
               </div>
 

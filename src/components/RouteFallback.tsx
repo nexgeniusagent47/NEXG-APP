@@ -25,6 +25,7 @@
 // the old approach that was doing real work.
 
 import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { cn } from '../lib/utils';
 
@@ -34,6 +35,7 @@ interface RouteFallbackProps {
 }
 
 export default function RouteFallback({ isLight: isLightProp }: RouteFallbackProps) {
+  const { t } = useLanguage();
   // Subscribing unconditionally keeps the hook order stable whether or not the caller
   // supplied the value; the subscription is simply unused in that case.
   const theme = useTheme();
@@ -45,7 +47,7 @@ export default function RouteFallback({ isLight: isLightProp }: RouteFallbackPro
       role="status"
       aria-live="polite"
     >
-      <span className="sr-only">Loading page</span>
+      <span className="sr-only">{t.ui.routeFallback.s_1c5772}</span>
 
       {/* Three dots that breathe in sequence. Opacity only, and small enough to read as
           "working" rather than as content that failed to load. The animation is the

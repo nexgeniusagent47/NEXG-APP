@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { 
   ChevronLeft, 
   ChevronRight, 
@@ -57,6 +58,7 @@ export default function BookingCalendar({
   providerName,
   showGuestsPicker = true,
 }: BookingCalendarProps) {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
 
   // Parse or initialize date
@@ -137,7 +139,7 @@ export default function BookingCalendar({
               <CalendarIcon className="w-5 h-5" />
             </span>
             <div>
-              <h3 className="font-bold text-base sm:text-lg">Dedicated Reservation Calendar</h3>
+              <h3 className="font-bold text-base sm:text-lg">{t.ui.bookingCalendar.s_aeb91b}</h3>
               <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                 {serviceTitle ? `${serviceTitle} • ${providerName || 'NEXG App'}` : 'Select your preferred appointment date and time'}
               </p>
@@ -156,7 +158,7 @@ export default function BookingCalendar({
           }`}
         >
           <Share2 className="w-3.5 h-3.5 text-[#E5B65F]" />
-          <span>Sync Calendar</span>
+          <span>{t.ui.bookingCalendar.s_183a37}</span>
         </button>
       </div>
 
@@ -204,9 +206,7 @@ export default function BookingCalendar({
               ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
               : 'bg-white/5 hover:bg-white/10 border-white/10 text-gray-300'
           }`}
-        >
-          In 2 Days
-        </button>
+        >{t.ui.bookingCalendar.s_8efff8}</button>
         <button
           type="button"
           onClick={() => selectQuickDate(7)}
@@ -215,9 +215,7 @@ export default function BookingCalendar({
               ? 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-700'
               : 'bg-white/5 hover:bg-white/10 border-white/10 text-gray-300'
           }`}
-        >
-          Next Week
-        </button>
+        >{t.ui.bookingCalendar.s_fdc2b8}</button>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -237,7 +235,7 @@ export default function BookingCalendar({
                     ? 'hover:bg-slate-100 border-slate-200 text-slate-700'
                     : 'hover:bg-white/10 border-white/10 text-gray-300'
                 }`}
-                title="Previous Month"
+                title={t.ui.bookingCalendar.s_71b856}
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
@@ -249,7 +247,7 @@ export default function BookingCalendar({
                     ? 'hover:bg-slate-100 border-slate-200 text-slate-700'
                     : 'hover:bg-white/10 border-white/10 text-gray-300'
                 }`}
-                title="Next Month"
+                title={t.ui.bookingCalendar.s_534c34}
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
@@ -325,11 +323,9 @@ export default function BookingCalendar({
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-1.5">
                 <Clock className="w-4 h-4 text-[#E5B65F]" />
-                <span className="font-bold text-xs sm:text-sm">Available Time Slots</span>
+                <span className="font-bold text-xs sm:text-sm">{t.ui.bookingCalendar.s_79caea}</span>
               </div>
-              <span className={`text-[11px] ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                Local Villa Time
-              </span>
+              <span className={`text-[11px] ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.bookingCalendar.s_10422c}</span>
             </div>
 
             {/* Time Slot Grid */}
@@ -372,7 +368,7 @@ export default function BookingCalendar({
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5">
                     <Users className="w-4 h-4 text-[#E5B65F]" />
-                    <span className="font-semibold text-xs">Party / Guests</span>
+                    <span className="font-semibold text-xs">{t.ui.bookingCalendar.s_07499a}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <button
@@ -411,9 +407,7 @@ export default function BookingCalendar({
             }`}
           >
             <div>
-              <div className="text-[10px] uppercase font-bold tracking-wider text-[#E5B65F]">
-                Selected Schedule
-              </div>
+              <div className="text-[10px] uppercase font-bold tracking-wider text-[#E5B65F]">{t.ui.bookingCalendar.s_e5366b}</div>
               <div className="font-semibold text-xs mt-0.5">
                 {formatDisplayDate(selectedDate)} at {selectedTime || 'Select Time'}
               </div>

@@ -3,6 +3,7 @@
 // and horizontal popular item preview strip with instant item sheet triggers.
 
 import React, { useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import { Star, Clock, Bike, Heart, Plus, MapPin, Sparkles } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { cn } from '../../lib/utils';
@@ -23,6 +24,7 @@ export const MerchantCard: React.FC<MerchantCardProps> = ({
   onSelectMerchant,
   onSelectItem,
 }) => {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
   const [isFavorited, setIsFavorited] = useState(false);
 
@@ -85,7 +87,7 @@ export const MerchantCard: React.FC<MerchantCardProps> = ({
         <button
           type="button"
           onClick={handleFavoriteClick}
-          aria-label="Save to favorites"
+          aria-label={t.ui.merchantCard.s_3beea0}
           className={cn(
             'absolute top-3 right-3 z-10 w-8 h-8 rounded-full flex items-center justify-center backdrop-blur-md transition-transform duration-200 hover:scale-110 active:scale-95 shadow-md',
             isFavorited
@@ -164,9 +166,7 @@ export const MerchantCard: React.FC<MerchantCardProps> = ({
         {/* 3. Wolt-Style Horizontal Popular Item Preview Strip */}
         {previewItems.length > 0 && variant !== 'compact' && (
           <div className="pt-2 mt-1 space-y-1.5 border-t border-slate-100 dark:border-white/5">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-gray-500 block">
-              Popular offerings
-            </span>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-gray-500 block">{t.ui.merchantCard.s_960d55}</span>
             <div className="grid grid-cols-3 gap-2">
               {previewItems.map((item) => (
                 <div

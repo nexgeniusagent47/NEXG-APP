@@ -3,6 +3,7 @@
 // Capability-Driven Filters, Wolt Merchant Grid, and Popular Items Rail.
 
 import React, { useState, useMemo } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import {
   ArrowLeft,
   Search,
@@ -53,6 +54,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
   onSelectMerchant,
   onSelectItem,
 }) => {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
 
   // Active subcategory state (empty = all in category)
@@ -258,7 +260,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
               )}
             >
               <Bike size={13} />
-              <span>Free Delivery</span>
+              <span>{t.ui.categoryPage.s_062888}</span>
             </button>
 
             {/* Price Level Toggles */}
@@ -291,9 +293,9 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
                 isLight ? 'bg-white border-slate-200 text-slate-700' : 'bg-[#181A1F] border-white/10 text-white'
               )}
             >
-              <option value="rating">Top Rated</option>
-              <option value="delivery">Fastest Delivery</option>
-              <option value="price">Price Level</option>
+              <option value="rating">{t.ui.categoryPage.s_004d7e}</option>
+              <option value="delivery">{t.ui.categoryPage.s_41eb8f}</option>
+              <option value="price">{t.ui.categoryPage.s_c4baea}</option>
             </select>
           </div>
         </div>
@@ -350,9 +352,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
 
           {sortedMerchants.length === 0 ? (
             <div className="text-center py-16 space-y-2">
-              <p className="text-sm font-semibold text-slate-400">
-                No merchants found matching your filters.
-              </p>
+              <p className="text-sm font-semibold text-slate-400">{t.ui.categoryPage.s_fce284}</p>
               <button
                 type="button"
                 onClick={() => {
@@ -362,9 +362,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
                   setFilterPriceLevel(null);
                 }}
                 className="text-xs font-bold text-[#7d5a11] dark:text-[#E5B65F] hover:underline"
-              >
-                Reset all filters
-              </button>
+              >{t.ui.categoryPage.s_2cef94}</button>
             </div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

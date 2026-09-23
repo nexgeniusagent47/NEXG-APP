@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import { ChevronLeft, ChevronRight, Sparkles, ArrowRight } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { useNexGNavigation } from './NexGNavigationContext';
@@ -22,6 +23,7 @@ export const NexGCollectionRail: React.FC<NexGCollectionRailProps> = ({
   collection,
   onViewAll,
 }) => {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -45,7 +47,7 @@ export const NexGCollectionRail: React.FC<NexGCollectionRailProps> = ({
             )}
             <span className="text-xs font-bold text-[#7d5a11] dark:text-[#E5B65F] flex items-center gap-1">
               <Sparkles size={13} />
-              <span>Curated Collection</span>
+              <span>{t.ui.nexGCollectionRail.s_0b3917}</span>
             </span>
           </div>
           <h3 className={cn(
@@ -72,7 +74,7 @@ export const NexGCollectionRail: React.FC<NexGCollectionRailProps> = ({
                   : 'border-white/10 text-gray-300 hover:text-[#E5B65F] hover:border-[#E5B65F]'
               )}
             >
-              <span>Explore All</span>
+              <span>{t.ui.nexGCollectionRail.s_986032}</span>
               <ArrowRight size={13} />
             </button>
           )}
@@ -85,7 +87,7 @@ export const NexGCollectionRail: React.FC<NexGCollectionRailProps> = ({
                 ? 'bg-white hover:bg-slate-100 border-slate-200 text-slate-700'
                 : 'bg-white/5 hover:bg-white/10 border-white/10 text-white'
             )}
-            aria-label="Scroll left"
+            aria-label={t.ui.nexGCollectionRail.s_2c9e5a}
           >
             <ChevronLeft size={16} />
           </button>
@@ -98,7 +100,7 @@ export const NexGCollectionRail: React.FC<NexGCollectionRailProps> = ({
                 ? 'bg-white hover:bg-slate-100 border-slate-200 text-slate-700'
                 : 'bg-white/5 hover:bg-white/10 border-white/10 text-white'
             )}
-            aria-label="Scroll right"
+            aria-label={t.ui.nexGCollectionRail.s_2994b4}
           >
             <ChevronRight size={16} />
           </button>

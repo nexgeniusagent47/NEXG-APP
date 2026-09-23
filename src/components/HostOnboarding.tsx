@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import type { PointerEvent as ReactPointerEvent, ReactNode } from 'react';
 import {
   ArrowLeft,
@@ -815,6 +816,7 @@ interface HostOnboardingProps {
 }
 
 export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
+  const { t } = useLanguage();
   const [initialDraft] = useState<PersistedDraft | null>(() => loadDraft());
 
   const [form, setForm] = useState<HostFormState>(() => initialDraft?.form ?? INITIAL_FORM);
@@ -1223,14 +1225,9 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
         <Check className="h-9 w-9 text-emerald-700" strokeWidth={3} />
       </div>
       <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/15 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-800">
-        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-        Application received
-      </div>
-      <h1 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
-        You're ready for verification.
-      </h1>
-      <p className="mx-auto mt-3 max-w-xl text-sm text-slate-600 sm:text-base">
-        Your host application for <strong className="text-slate-800">{form.propertyName || 'your property'}</strong>{' '}
+        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />{t.ui.hostOnboarding.s_e4cee9}</div>
+      <h1 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">{t.ui.hostOnboarding.s_33becf}</h1>
+      <p className="mx-auto mt-3 max-w-xl text-sm text-slate-600 sm:text-base">{t.ui.hostOnboarding.s_193de6}<strong className="text-slate-800">{form.propertyName || 'your property'}</strong>{' '}
         has been captured. NEXG can now verify the property and configure the host workspace.
       </p>
       <div className="mx-auto mt-7 max-w-md space-y-3 rounded-3xl border border-slate-100 bg-slate-50 p-5 text-left text-sm">
@@ -1250,7 +1247,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
         </div>
         <div className="flex justify-between gap-4">
           <span className="text-slate-600">Status</span>
-          <strong className="text-amber-800">Pending verification</strong>
+          <strong className="text-amber-800">{t.ui.hostOnboarding.s_f0ac0a}</strong>
         </div>
       </div>
       <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
@@ -1259,23 +1256,17 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
           onClick={() => window.print()}
           className="inline-flex items-center justify-center gap-2 rounded-2xl bg-slate-950 px-6 py-3 text-sm font-bold text-white"
         >
-          <Printer className="h-4 w-4" />
-          Save / Print
-        </button>
+          <Printer className="h-4 w-4" />{t.ui.hostOnboarding.s_c36127}</button>
         <button
           type="button"
           onClick={startAnother}
           className="rounded-2xl border border-slate-200 bg-slate-100 px-6 py-3 text-sm font-bold text-slate-700"
-        >
-          Start another
-        </button>
+        >{t.ui.hostOnboarding.s_67745b}</button>
         <button
           type="button"
           onClick={() => onNavigate('properties')}
           className="rounded-2xl border border-slate-200 px-6 py-3 text-sm font-bold text-slate-600 transition hover:text-slate-900"
-        >
-          Back to host portal
-        </button>
+        >{t.ui.hostOnboarding.s_99d32f}</button>
       </div>
     </div>
   );
@@ -1311,7 +1302,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
           </div>
         </div>
         <div className={CARD}>
-          <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Property features</div>
+          <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t.ui.hostOnboarding.s_272c68}</div>
           <div className="mt-2 text-xs text-slate-600">
             {review.amenities.slice(0, 8).join(' · ') || 'None selected'}
           </div>
@@ -1335,7 +1326,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
         </div>
         <p>
           This Host Partnership &amp; Property Setup Agreement is between{' '}
-          <strong>NEXG App Limited</strong> and the host / property represented in this submission.
+          <strong>{t.ui.hostOnboarding.s_faea7e}</strong> and the host / property represented in this submission.
         </p>
         <h4 className="mb-1 mt-5 font-bold text-slate-950">1. Property representation</h4>
         <p>
@@ -1367,13 +1358,13 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
 
         <div className="mt-10 grid grid-cols-1 gap-8 border-t border-slate-200 pt-6 sm:grid-cols-2">
           <div>
-            <div className="text-[11px] font-bold uppercase text-slate-600">For NEXG App Limited</div>
-            <div className="mt-7 font-warm text-2xl text-slate-400">NEXG Operations</div>
+            <div className="text-[11px] font-bold uppercase text-slate-600">{t.ui.hostOnboarding.s_2bbda0}</div>
+            <div className="mt-7 font-warm text-2xl text-slate-400">{t.ui.hostOnboarding.s_ff1835}</div>
             <div className="mt-1 h-px bg-slate-300" />
-            <div className="mt-1 text-[10px] text-slate-600">Authorized representative</div>
+            <div className="mt-1 text-[10px] text-slate-600">{t.ui.hostOnboarding.s_486ffa}</div>
           </div>
           <div>
-            <div className="text-[11px] font-bold uppercase text-slate-600">For Host</div>
+            <div className="text-[11px] font-bold uppercase text-slate-600">{t.ui.hostOnboarding.s_ca1948}</div>
             <div className="mt-7 min-h-[32px] font-warm text-2xl text-amber-800">{signatureLine}</div>
             <div className="mt-1 h-px bg-slate-300" />
             <div className="mt-1 text-[10px] text-slate-600">
@@ -1386,13 +1377,13 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
       <div className={`${CARD} space-y-5`}>
         <Field
           htmlFor="signatoryName"
-          label="Authorized signatory name"
+          label={t.ui.hostOnboarding.s_893bd7}
           required
           error={messageFor('signatoryName')}
         >
           <input
             className={fieldClass('signatoryName')}
-            placeholder="Full legal name"
+            placeholder={t.ui.hostOnboarding.s_d1d7c9}
             value={form.signatoryName}
             onChange={(event) => updateField('signatoryName', event.target.value)}
             {...fieldProps('signatoryName')}
@@ -1401,8 +1392,8 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div>
-            <span className="mb-2 block text-sm font-semibold text-slate-800">Signature method</span>
-            <div role="group" aria-label="Signature method" className="flex rounded-xl bg-slate-200 p-1">
+            <span className="mb-2 block text-sm font-semibold text-slate-800">{t.ui.hostOnboarding.s_849305}</span>
+            <div role="group" aria-label={t.ui.hostOnboarding.s_849305} className="flex rounded-xl bg-slate-200 p-1">
               {(['draw', 'type'] as const).map((mode) => (
                 <button
                   key={mode}
@@ -1427,9 +1418,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               type="button"
               onClick={clearSignature}
               className="text-xs font-bold text-slate-600 transition hover:text-slate-900"
-            >
-              Clear signature
-            </button>
+            >{t.ui.hostOnboarding.s_897c71}</button>
           </div>
         </div>
 
@@ -1437,7 +1426,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
           <div className="relative overflow-hidden rounded-2xl border border-slate-300 bg-white">
             <canvas
               ref={canvas}
-              aria-label="Signature pad"
+              aria-label={t.ui.hostOnboarding.s_3cc2c7}
               className="block h-36 w-full cursor-crosshair touch-none"
               onPointerDown={startStroke}
               onPointerMove={extendStroke}
@@ -1480,7 +1469,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
       <div className="mb-7">
         <div className="mb-3 flex items-center justify-between gap-4">
           <div className="flex min-w-0 items-center gap-2">
-            <span className="font-display text-xs font-bold text-amber-800 sm:text-sm">HOST SETUP</span>
+            <span className="font-display text-xs font-bold text-amber-800 sm:text-sm">{t.ui.hostOnboarding.s_782667}</span>
             <span className="text-slate-300">/</span>
             <span className="truncate text-xs font-semibold text-slate-700 sm:text-sm">{activeStep.title}</span>
           </div>
@@ -1509,12 +1498,8 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
           <div className="absolute -right-12 -top-20 h-56 w-56 rounded-full bg-gradient-to-tr from-[#E5B65F] to-[#B88728] opacity-20 blur-3xl" />
           <div className="relative">
             <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-300">
-              <House className="h-3.5 w-3.5" />
-              Property partner
-            </div>
-            <h1 className="font-display text-2xl font-extrabold tracking-tight sm:text-3xl">
-              Bring your property into NEXG.
-            </h1>
+              <House className="h-3.5 w-3.5" />{t.ui.hostOnboarding.s_369c34}</div>
+            <h1 className="font-display text-2xl font-extrabold tracking-tight sm:text-3xl">{t.ui.hostOnboarding.s_1596ef}</h1>
             <p className="mt-2 max-w-2xl text-sm text-slate-300 sm:text-base">
               Tell us what exists, what guests can access, and how your team operates. We'll use this to build
               your property profile and guest experience.
@@ -1613,7 +1598,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               <div className="border-t border-slate-200 pt-5">
                 <RadioGroup
                   id="portfolio"
-                  label="Are you onboarding more than one property?"
+                  label={t.ui.hostOnboarding.s_e9c696}
                   options={PORTFOLIO_OPTIONS}
                   value={form.portfolio}
                   onChange={(value) => updateField('portfolio', value)}
@@ -1627,7 +1612,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
           {currentStep === PROPERTY_STEP && (
             <div className="space-y-6">
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-                <Field htmlFor="propertyName" label="Property name" required error={messageFor('propertyName')}>
+                <Field htmlFor="propertyName" label={t.ui.hostOnboarding.s_10599c} required error={messageFor('propertyName')}>
                   <input
                     className={fieldClass('propertyName')}
                     placeholder="e.g. The River House"
@@ -1639,13 +1624,13 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
 
                 <Field
                   htmlFor="legalEntity"
-                  label="Legal / operating entity"
+                  label={t.ui.hostOnboarding.s_616ace}
                   required
                   error={messageFor('legalEntity')}
                 >
                   <input
                     className={fieldClass('legalEntity')}
-                    placeholder="Registered company or operating name"
+                    placeholder={t.ui.hostOnboarding.s_fbd2e5}
                     value={form.legalEntity}
                     onChange={(event) => updateField('legalEntity', event.target.value)}
                     {...fieldProps('legalEntity')}
@@ -1656,7 +1641,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               <div>
                 <RadioGroup
                   id="propertyType"
-                  label="What kind of property is it?"
+                  label={t.ui.hostOnboarding.s_93cfd5}
                   required
                   options={PROPERTY_TYPE_OPTIONS}
                   value={form.propertyType}
@@ -1669,10 +1654,10 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                 />
                 {form.propertyType === 'Other' && (
                   <div className="mt-4">
-                    <Field htmlFor="otherProperty" label="Property type" error={messageFor('otherProperty')}>
+                    <Field htmlFor="otherProperty" label={t.ui.hostOnboarding.s_8ad7ea} error={messageFor('otherProperty')}>
                       <input
                         className={fieldClass('otherProperty')}
-                        placeholder="Describe your property type"
+                        placeholder={t.ui.hostOnboarding.s_924da1}
                         value={form.otherProperty}
                         onChange={(event) => updateField('otherProperty', event.target.value)}
                         {...fieldProps('otherProperty')}
@@ -1685,7 +1670,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
                 <Field
                   htmlFor="unitCount"
-                  label="Rooms / units"
+                  label={t.ui.hostOnboarding.s_773613}
                   labelClassName={COMPACT_LABEL}
                 >
                   <input
@@ -1715,7 +1700,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                 </Field>
                 <Field
                   htmlFor="guestCapacity"
-                  label="Guest capacity"
+                  label={t.ui.hostOnboarding.s_415e74}
                   labelClassName={COMPACT_LABEL}
                 >
                   <input
@@ -1730,7 +1715,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                 </Field>
                 <Field
                   htmlFor="yearOpened"
-                  label="Year opened"
+                  label={t.ui.hostOnboarding.s_86adcf}
                   labelClassName={COMPACT_LABEL}
                 >
                   <input
@@ -1748,18 +1733,18 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
 
               <ChipGroup
                 id="amenityChips"
-                label="What does the property include?"
+                label={t.ui.hostOnboarding.s_a8dc5c}
                 options={AMENITY_OPTIONS}
                 selected={chips.amenities}
                 onToggle={(option) => toggleChip('amenities', option)}
               />
 
-              <Field htmlFor="propertyDescription" label="Tell guests about the property">
+              <Field htmlFor="propertyDescription" label={t.ui.hostOnboarding.s_25e7e1}>
                 <textarea
                   rows={3}
                   maxLength={500}
                   className={fieldClass('propertyDescription')}
-                  placeholder="Short description of the property, atmosphere and what makes it distinctive..."
+                  placeholder={t.ui.hostOnboarding.s_421a0f}
                   value={form.propertyDescription}
                   onChange={(event) => updateField('propertyDescription', event.target.value)}
                   {...fieldProps('propertyDescription')}
@@ -1774,7 +1759,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                 <Field htmlFor="address" label="Address / street" required error={messageFor('address')}>
                   <input
                     className={fieldClass('address')}
-                    placeholder="Building, street or road"
+                    placeholder={t.ui.hostOnboarding.s_692b50}
                     value={form.address}
                     onChange={(event) => updateField('address', event.target.value)}
                     {...fieldProps('address')}
@@ -1815,10 +1800,8 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               <div className={CARD}>
                 <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
                   <div>
-                    <h3 className="font-display font-extrabold text-slate-900">Pin the property</h3>
-                    <p className="mt-1 text-xs text-slate-600">
-                      Tap or click the map to set the exact property point.
-                    </p>
+                    <h3 className="font-display font-extrabold text-slate-900">{t.ui.hostOnboarding.s_c0b7d7}</h3>
+                    <p className="mt-1 text-xs text-slate-600">{t.ui.hostOnboarding.s_7af122}</p>
                   </div>
                   <div className="flex items-center gap-3">
                     <button
@@ -1826,9 +1809,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                       onClick={locateMe}
                       className="flex items-center gap-1 whitespace-nowrap text-xs font-bold text-slate-600 transition hover:text-slate-900"
                     >
-                      <LocateFixed className="h-3.5 w-3.5" />
-                      Use my location
-                    </button>
+                      <LocateFixed className="h-3.5 w-3.5" />{t.ui.hostOnboarding.s_013237}</button>
                     <button
                       type="button"
                       onClick={() => focusPin.current?.(NAIROBI.lat, NAIROBI.lng, 15)}
@@ -1862,21 +1843,21 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               </div>
 
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-                <Field htmlFor="directions" label="How should guests find you?">
+                <Field htmlFor="directions" label={t.ui.hostOnboarding.s_ca9b4a}>
                   <textarea
                     rows={3}
                     className={fieldClass('directions')}
-                    placeholder="Landmarks, gate instructions, building name, entrance, etc."
+                    placeholder={t.ui.hostOnboarding.s_205866}
                     value={form.directions}
                     onChange={(event) => updateField('directions', event.target.value)}
                     {...fieldProps('directions')}
                   />
                 </Field>
-                <Field htmlFor="arrivalInstructions" label="Check-in / arrival instructions">
+                <Field htmlFor="arrivalInstructions" label={t.ui.hostOnboarding.s_a68df4}>
                   <textarea
                     rows={3}
                     className={fieldClass('arrivalInstructions')}
-                    placeholder="Reception desk, access code process, security desk, host contact, etc."
+                    placeholder={t.ui.hostOnboarding.s_0302c0}
                     value={form.arrivalInstructions}
                     onChange={(event) => updateField('arrivalInstructions', event.target.value)}
                     {...fieldProps('arrivalInstructions')}
@@ -1918,7 +1899,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                       <input
                         aria-label={`Space ${index + 1} name`}
                         className={controlClass(false)}
-                        placeholder="Name / label"
+                        placeholder={t.ui.hostOnboarding.s_12e078}
                         value={space.name}
                         onChange={(event) => updateSpace(space.id, 'name', event.target.value)}
                       />
@@ -1944,7 +1925,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                     <input
                       aria-label={`Space ${index + 1} notes`}
                       className={`${controlClass(false)} mt-3`}
-                      placeholder="Optional notes, amenities or access details"
+                      placeholder={t.ui.hostOnboarding.s_cde9a5}
                       value={space.notes}
                       onChange={(event) => updateSpace(space.id, 'notes', event.target.value)}
                     />
@@ -1957,14 +1938,12 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                 onClick={() => setSpaces((previous) => [...previous, createSpace()])}
                 className="flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-slate-200 py-4 text-sm font-bold text-slate-600 transition-colors hover:border-amber-400 hover:bg-amber-400/10 hover:text-slate-900"
               >
-                <Plus className="h-4 w-4" />
-                Add a space / unit type
-              </button>
+                <Plus className="h-4 w-4" />{t.ui.hostOnboarding.s_10a49a}</button>
 
               <div className={CARD}>
                 <RadioGroup
                   id="guestId"
-                  label="How are guests identified within the property?"
+                  label={t.ui.hostOnboarding.s_120c32}
                   options={GUEST_ID_OPTIONS}
                   value={form.guestId}
                   onChange={(value) => updateField('guestId', value)}
@@ -1979,7 +1958,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
             <div className={CARD}>
               <ChipGroup
                 id="accessChips"
-                label="Property access"
+                label={t.ui.hostOnboarding.s_c250a9}
                 hint="Which areas can guests access during a normal stay?"
                 options={ACCESS_OPTIONS}
                 selected={chips.access}
@@ -1992,7 +1971,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
             <div className="space-y-6">
               <ChipGroup
                 id="serviceChips"
-                label="What can guests access or request?"
+                label={t.ui.hostOnboarding.s_9d617c}
                 required
                 options={SERVICE_OPTIONS}
                 selected={chips.services}
@@ -2003,10 +1982,8 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               <div className={CARD}>
                 <div className="mb-4 flex items-center justify-between gap-3">
                   <div>
-                    <h3 className="font-display font-extrabold text-slate-900">Examples of guest requests</h3>
-                    <p className="mt-1 text-xs text-slate-600">
-                      Add the requests your team actually handles today.
-                    </p>
+                    <h3 className="font-display font-extrabold text-slate-900">{t.ui.hostOnboarding.s_292d45}</h3>
+                    <p className="mt-1 text-xs text-slate-600">{t.ui.hostOnboarding.s_7b12e1}</p>
                   </div>
                   <button
                     type="button"
@@ -2026,21 +2003,21 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                       <input
                         aria-label={`Request ${index + 1} name`}
                         className={controlClass(false)}
-                        placeholder="Request / service"
+                        placeholder={t.ui.hostOnboarding.s_b501d3}
                         value={request.name}
                         onChange={(event) => updateRequest(request.id, 'name', event.target.value)}
                       />
                       <input
                         aria-label={`Request ${index + 1} owner`}
                         className={controlClass(false)}
-                        placeholder="Who fulfills it?"
+                        placeholder={t.ui.hostOnboarding.s_00679c}
                         value={request.owner}
                         onChange={(event) => updateRequest(request.id, 'owner', event.target.value)}
                       />
                       <input
                         aria-label={`Request ${index + 1} price`}
                         className={controlClass(false)}
-                        placeholder="Price (optional)"
+                        placeholder={t.ui.hostOnboarding.s_25916d}
                         value={request.price}
                         onChange={(event) => updateRequest(request.id, 'price', event.target.value)}
                       />
@@ -2075,12 +2052,12 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
 
               <Field
                 htmlFor="nexgOpportunity"
-                label="What would you like NEXG to help you expose to guests?"
+                label={t.ui.hostOnboarding.s_8dc8f7}
               >
                 <textarea
                   rows={3}
                   className={fieldClass('nexgOpportunity')}
-                  placeholder="Anything you currently struggle to make visible, bookable, purchasable or easy for guests to request..."
+                  placeholder={t.ui.hostOnboarding.s_b45dc8}
                   value={form.nexgOpportunity}
                   onChange={(event) => updateField('nexgOpportunity', event.target.value)}
                   {...fieldProps('nexgOpportunity')}
@@ -2094,11 +2071,11 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               <div className={CARD}>
                 <div className="mb-5 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
                   <div>
-                    <h3 className="font-display font-extrabold text-slate-900">Operating model</h3>
+                    <h3 className="font-display font-extrabold text-slate-900">{t.ui.hostOnboarding.s_d90fdd}</h3>
                     <p className="mt-1 text-xs text-slate-600">How is the property staffed?</p>
                   </div>
                   <select
-                    aria-label="Operating model"
+                    aria-label={t.ui.hostOnboarding.s_d90fdd}
                     className={`${controlClass(false)} sm:w-64`}
                     value={form.operatingModel}
                     onChange={(event) => updateField('operatingModel', event.target.value)}
@@ -2116,7 +2093,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                       (both have non-empty defaults), so no error state is invented for
                       them here — the previous inputs read `fieldProps` too, and it
                       produced `aria-invalid: undefined` for both. */}
-                  <Field htmlFor="checkIn" label="Check-in time">
+                  <Field htmlFor="checkIn" label={t.ui.hostOnboarding.s_f71497}>
                     <TimeStringField
                       id="checkIn"
                       value={form.checkIn}
@@ -2124,7 +2101,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                       timeFormat="12"
                     />
                   </Field>
-                  <Field htmlFor="checkOut" label="Check-out time">
+                  <Field htmlFor="checkOut" label={t.ui.hostOnboarding.s_ae7f40}>
                     <TimeStringField
                       id="checkOut"
                       value={form.checkOut}
@@ -2137,7 +2114,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
 
               <ChipGroup
                 id="departmentChips"
-                label="Departments / teams available"
+                label={t.ui.hostOnboarding.s_9550a5}
                 options={DEPARTMENT_OPTIONS}
                 selected={chips.departments}
                 onToggle={(option) => toggleChip('departments', option)}
@@ -2146,7 +2123,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               <div className={CARD}>
                 <RadioGroup
                   id="requestChannel"
-                  label="How do guest requests reach your team today?"
+                  label={t.ui.hostOnboarding.s_e400b7}
                   options={REQUEST_CHANNEL_OPTIONS}
                   value={form.requestChannel}
                   onChange={(value) => updateField('requestChannel', value)}
@@ -2156,7 +2133,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               </div>
 
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-                <Field htmlFor="requestOwner" label="Who should receive NEXG requests?">
+                <Field htmlFor="requestOwner" label={t.ui.hostOnboarding.s_e45952}>
                   <input
                     className={fieldClass('requestOwner')}
                     placeholder="e.g. Front office, duty manager"
@@ -2165,7 +2142,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                     {...fieldProps('requestOwner')}
                   />
                 </Field>
-                <Field htmlFor="fulfillmentTime" label="Typical request fulfillment time">
+                <Field htmlFor="fulfillmentTime" label={t.ui.hostOnboarding.s_58eafa}>
                   <select
                     className={fieldClass('fulfillmentTime')}
                     value={form.fulfillmentTime}
@@ -2188,7 +2165,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               <div className={CARD}>
                 <ChipGroup
                   id="transactionChips"
-                  label="What do you want guests to transact for?"
+                  label={t.ui.hostOnboarding.s_aa1d9b}
                   options={TRANSACTION_OPTIONS}
                   selected={chips.transactions}
                   onToggle={(option) => toggleChip('transactions', option)}
@@ -2210,7 +2187,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                     ))}
                   </select>
                 </Field>
-                <Field htmlFor="taxSetup" label="Tax / pricing setup">
+                <Field htmlFor="taxSetup" label={t.ui.hostOnboarding.s_49e09b}>
                   <select
                     className={fieldClass('taxSetup')}
                     value={form.taxSetup}
@@ -2227,7 +2204,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               </div>
 
               <div className={CARD}>
-                <h3 className="mb-4 font-display font-extrabold text-slate-900">Settlement account</h3>
+                <h3 className="mb-4 font-display font-extrabold text-slate-900">{t.ui.hostOnboarding.s_20687f}</h3>
                 <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                   <Field htmlFor="bankName" label="Bank name">
                     <input
@@ -2241,7 +2218,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                   <Field htmlFor="accountName" label="Account name">
                     <input
                       className={fieldClass('accountName')}
-                      placeholder="Account holder name"
+                      placeholder={t.ui.hostOnboarding.s_be3ecd}
                       value={form.accountName}
                       onChange={(event) => updateField('accountName', event.target.value)}
                       {...fieldProps('accountName')}
@@ -2256,7 +2233,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                       {...fieldProps('accountNumber')}
                     />
                   </Field>
-                  <Field htmlFor="mpesa" label="M-PESA Till / Paybill">
+                  <Field htmlFor="mpesa" label={t.ui.hostOnboarding.s_e61a08}>
                     <input
                       className={fieldClass('mpesa')}
                       placeholder="Optional"
@@ -2285,8 +2262,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <div className="text-sm font-bold text-slate-800">
-                        Business / registration document <span className="text-red-500">*</span>
+                      <div className="text-sm font-bold text-slate-800">{t.ui.hostOnboarding.s_f548ec}<span className="text-red-500">*</span>
                       </div>
                       <p className="mt-1 text-xs text-slate-600">PDF, JPG or PNG</p>
                     </div>
@@ -2304,9 +2280,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                       {uploads.registration.name}
                     </div>
                   )}
-                  <div className="mt-4 rounded-xl border border-slate-200 bg-white py-2.5 text-center text-xs font-bold text-slate-600 peer-focus-visible:ring-2 peer-focus-visible:ring-amber-400/40">
-                    Choose file
-                  </div>
+                  <div className="mt-4 rounded-xl border border-slate-200 bg-white py-2.5 text-center text-xs font-bold text-slate-600 peer-focus-visible:ring-2 peer-focus-visible:ring-amber-400/40">{t.ui.hostOnboarding.s_eb7eb7}</div>
                   {invalid('registration') && (
                     <p className="mt-2 text-xs font-semibold text-red-600">{messageFor('registration')}</p>
                   )}
@@ -2315,8 +2289,8 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                 <label className={`${CARD} block cursor-pointer transition hover:border-amber-300`}>
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <div className="text-sm font-bold text-slate-800">Property / operating permit</div>
-                      <p className="mt-1 text-xs text-slate-600">If applicable</p>
+                      <div className="text-sm font-bold text-slate-800">{t.ui.hostOnboarding.s_4a9200}</div>
+                      <p className="mt-1 text-xs text-slate-600">{t.ui.hostOnboarding.s_62a764}</p>
                     </div>
                     <Stamp className="h-5 w-5 text-amber-500" />
                   </div>
@@ -2332,9 +2306,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                       {uploads.permit.name}
                     </div>
                   )}
-                  <div className="mt-4 rounded-xl border border-slate-200 bg-white py-2.5 text-center text-xs font-bold text-slate-600 peer-focus-visible:ring-2 peer-focus-visible:ring-amber-400/40">
-                    Choose file
-                  </div>
+                  <div className="mt-4 rounded-xl border border-slate-200 bg-white py-2.5 text-center text-xs font-bold text-slate-600 peer-focus-visible:ring-2 peer-focus-visible:ring-amber-400/40">{t.ui.hostOnboarding.s_eb7eb7}</div>
                 </label>
               </div>
 
@@ -2345,7 +2317,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                 </h3>
                 <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                   <label className="cursor-pointer">
-                    <span className="mb-2 block text-sm font-semibold text-slate-800">Property logo</span>
+                    <span className="mb-2 block text-sm font-semibold text-slate-800">{t.ui.hostOnboarding.s_edbfdd}</span>
                     <input
                       type="file"
                       accept="image/*"
@@ -2362,13 +2334,13 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                       )}
                       <div className="text-center text-slate-400">
                         <ImageIcon className="mx-auto h-8 w-8" />
-                        <div className="mt-2 text-xs font-bold">Upload square logo</div>
+                        <div className="mt-2 text-xs font-bold">{t.ui.hostOnboarding.s_b50578}</div>
                       </div>
                     </div>
                   </label>
 
                   <label className="cursor-pointer">
-                    <span className="mb-2 block text-sm font-semibold text-slate-800">Property cover image</span>
+                    <span className="mb-2 block text-sm font-semibold text-slate-800">{t.ui.hostOnboarding.s_7bba35}</span>
                     <input
                       type="file"
                       accept="image/*"
@@ -2391,7 +2363,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                   </label>
                 </div>
                 <div className="mt-5">
-                  <Field htmlFor="website" label="Website / booking page">
+                  <Field htmlFor="website" label={t.ui.hostOnboarding.s_8e3c7a}>
                     <input
                       type="url"
                       className={fieldClass('website')}
@@ -2417,9 +2389,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
             >
               <CircleAlert className="mt-px h-4 w-4 shrink-0 text-red-500" />
               <div className="text-xs">
-                <p className="font-semibold text-slate-800">
-                  Please complete the highlighted fields before continuing.
-                </p>
+                <p className="font-semibold text-slate-800">{t.ui.hostOnboarding.s_ecc61a}</p>
                 <ul className="mt-1 list-inside list-disc space-y-0.5 font-medium text-slate-700">
                   {issues.map((issue) => (
                     <li key={issue.key}>{issue.message}</li>
@@ -2441,9 +2411,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
             ) : (
               <span />
             )}
-            <div className="hidden text-[11px] font-medium text-slate-400 sm:block">
-              Your progress is saved locally on this device.
-            </div>
+            <div className="hidden text-[11px] font-medium text-slate-400 sm:block">{t.ui.hostOnboarding.s_75d65e}</div>
             <button type="button" onClick={goNext} className={`ml-auto ${PRIMARY_BUTTON}`}>
               {isLastStep ? 'Submit Host Application' : 'Continue'}
               {isLastStep ? <Check className="h-4 w-4" /> : <ArrowRight className="h-4 w-4" />}
@@ -2462,7 +2430,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
             <button
               type="button"
               onClick={() => onNavigate('properties')}
-              aria-label="Back to the host portal"
+              aria-label={t.ui.hostOnboarding.s_82c7e7}
               className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
             >
               <ArrowLeft className="h-4 w-4" />
@@ -2472,15 +2440,13 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
             </div>
             <div className="leading-tight">
               <div className="font-display font-extrabold tracking-tight text-slate-950">NEXG</div>
-              <div className="text-[10px] font-bold uppercase tracking-[.18em] text-slate-400">
-                Host onboarding
-              </div>
+              <div className="text-[10px] font-bold uppercase tracking-[.18em] text-slate-400">{t.ui.hostOnboarding.s_6372ac}</div>
             </div>
           </div>
           <div className="hidden items-center gap-3 text-xs font-semibold text-slate-600 sm:flex">
-            <span>Host Portal</span>
+            <span>{t.ui.hostOnboarding.s_0d3b1e}</span>
             <span className="text-slate-300">/</span>
-            <span className="text-slate-900">Property setup</span>
+            <span className="text-slate-900">{t.ui.hostOnboarding.s_b5508b}</span>
           </div>
           <div className="flex items-center gap-2 text-xs font-semibold text-slate-600">
             <span className="inline-block h-2 w-2 rounded-full bg-amber-500" />

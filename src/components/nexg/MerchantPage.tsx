@@ -2,6 +2,7 @@
 // Dedicated Merchant / Provider Screen with Hero, Identity, Meta, Sticky CategoryNav, and Item Sections
 
 import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import {
   ArrowLeft,
   Star,
@@ -31,6 +32,7 @@ export const MerchantPage: React.FC<MerchantPageProps> = ({
   onBack,
   onSelectItem,
 }) => {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
   const [isFavorited, setIsFavorited] = useState(false);
   const [activeSectionId, setActiveSectionId] = useState<string>('all');
@@ -170,7 +172,7 @@ export const MerchantPage: React.FC<MerchantPageProps> = ({
             {/* Status */}
             <div className="flex items-center gap-1 text-emerald-700 dark:text-emerald-400 font-bold">
               <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              <span>Open Now</span>
+              <span>{t.ui.merchantPage.s_c902a1}</span>
             </div>
           </div>
 

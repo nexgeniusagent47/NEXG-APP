@@ -38,6 +38,7 @@
 //   - min/max violations state the rule AND the recovery, per this project's voice rules
 
 import React, { useCallback, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import { AlertCircle, Calendar as CalendarIcon, ChevronDown, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { cn } from '../../lib/utils';
@@ -119,6 +120,7 @@ export type DateTimeFieldProps = RangeProps | SingleProps;
 const WEEKDAY_HEADERS = DAY_NAMES.map((full, i) => ({ full, initial: DAY_INITIALS[i] }));
 
 export function DateTimeField(props: DateTimeFieldProps) {
+  const { t } = useLanguage();
   const {
     label,
     error,
@@ -505,7 +507,7 @@ export function DateTimeField(props: DateTimeFieldProps) {
                 <button
                   type="button"
                   onClick={() => setVisibleMonth((m) => addMonths(m, -1))}
-                  aria-label="Previous month"
+                  aria-label={t.ui.dateTimeField.s_46a299}
                   className={cn(
                     'w-9 h-9 rounded-full flex items-center justify-center cursor-pointer',
                     'transition-colors duration-150 ease-out',
@@ -532,7 +534,7 @@ export function DateTimeField(props: DateTimeFieldProps) {
                 <button
                   type="button"
                   onClick={() => setVisibleMonth((m) => addMonths(m, 1))}
-                  aria-label="Next month"
+                  aria-label={t.ui.dateTimeField.s_8abf7c}
                   className={cn(
                     'w-9 h-9 rounded-full flex items-center justify-center cursor-pointer',
                     'transition-colors duration-150 ease-out',
@@ -547,7 +549,7 @@ export function DateTimeField(props: DateTimeFieldProps) {
                 <div
                   className="grid grid-cols-4 gap-1 max-h-[248px] overflow-y-auto py-1"
                   role="listbox"
-                  aria-label="Choose a year"
+                  aria-label={t.ui.dateTimeField.s_7ecc8b}
                 >
                   {years.map((y) => (
                     <button

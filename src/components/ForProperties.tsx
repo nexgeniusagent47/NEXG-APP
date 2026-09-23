@@ -100,8 +100,8 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                   ? 'bg-white/80 hover:bg-white text-slate-800 shadow-xs'
                   : 'bg-white/10 hover:bg-white/20 text-white'
               }`}
-              title="Return to Guest App"
-              aria-label="Back to Home"
+              title={t.ui.forProperties.s_75dde0}
+              aria-label={t.ui.forProperties.s_ce7472}
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
@@ -155,7 +155,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                   ? 'bg-white/80 hover:bg-white border-slate-200 text-amber-800 shadow-2xs'
                   : 'bg-white/10 hover:bg-white/20 border-white/15 text-[#E5B65F]'
               }`}
-              aria-label="Toggle Theme"
+              aria-label={t.ui.forProperties.s_b74c4e}
               title={isLight ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
             >
               {isLight ? <Moon size={16} /> : <Sun size={16} />}
@@ -173,7 +173,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                   ? 'bg-white border-slate-200 text-amber-800'
                   : 'bg-white/10 border-white/15 text-[#E5B65F]'
               }`}
-              title="Toggle Theme"
+              title={t.ui.forProperties.s_b74c4e}
             >
               {isLight ? <Moon size={15} /> : <Sun size={15} />}
             </button>
@@ -202,18 +202,16 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               }`}
             >
               <div className="flex flex-col gap-3 font-semibold text-sm">
-                <button onClick={() => handleMobileNav('home')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">Explore Home</button>
-                <button onClick={() => handleMobileNav('properties')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors text-[#E5B65F]">For Properties</button>
-                <button onClick={() => handleMobileNav('merchants')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">For Partners</button>
-                <button onClick={() => handleMobileNav('couriers')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">Elite Fleet</button>
+                <button onClick={() => handleMobileNav('home')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">{t.ui.forProperties.s_a1e9f9}</button>
+                <button onClick={() => handleMobileNav('properties')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors text-[#E5B65F]">{t.ui.forProperties.s_38769a}</button>
+                <button onClick={() => handleMobileNav('merchants')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">{t.ui.forProperties.s_52a6f3}</button>
+                <button onClick={() => handleMobileNav('couriers')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">{t.ui.forProperties.s_18414d}</button>
                 <button onClick={() => handleMobileNav('experiences')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">Experiences</button>
               </div>
               <button 
                 onClick={() => handleMobileNav('merchant_onboarding')}
                 className="w-full text-center text-sm font-bold bg-[#E5B65F] text-[#291800] rounded-xl py-3 hover:bg-[#ffddb1] transition-colors"
-              >
-                Partner Onboarding
-              </button>
+              >{t.ui.forProperties.s_7bf908}</button>
             </motion.div>
           )}
         </AnimatePresence>
@@ -229,7 +227,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               <div className="absolute inset-0 bg-gradient-to-r from-[#F8F9FA]/95 via-[#F8F9FA]/70 to-transparent z-10"></div>
               <img 
                 src={responsiveProps('properties_hero_light_1789911827135.jpg', '100vw')?.src} 
-                alt="Properties Daylight Hero Background" 
+                alt={t.ui.forProperties.s_8d365a} 
                 className="w-full h-full object-cover opacity-85 brightness-105 transition-transform duration-[10000ms] hover:scale-105" 
                 referrerPolicy="no-referrer"
               />
@@ -240,7 +238,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-transparent z-10"></div>
               <img 
                 src={responsiveProps('properties_hero_1783930332445.jpg', '100vw')?.src} 
-                alt="Properties Hero Background" 
+                alt={t.ui.forProperties.s_0293af} 
                 className="w-full h-full object-cover opacity-65 transition-transform duration-[10000ms] hover:scale-105" 
                 referrerPolicy="no-referrer"
               />
@@ -256,30 +254,20 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
         {/* Content Container */}
         <div className="container mx-auto max-w-[1400px] relative z-20 px-4 sm:px-8 xl:px-16 w-full">
           <div className="max-w-3xl">
-            <h1 className={`text-3xl sm:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 leading-[1.15] tracking-tight drop-shadow-md ${isLight ? 'text-slate-900' : 'text-white'}`}>
-              Elevate Guest Experiences.
-            </h1>
-            <p className="text-[#E5B65F] text-lg sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6 tracking-tight">
-              Unlock Property Potential.
-            </p>
-            <p className={`text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-10 max-w-2xl leading-relaxed ${isLight ? 'text-slate-700 font-medium' : 'text-gray-200'}`}>
-              Integrate seamless, world-class concierge services into your luxury rentals and hotels. Empower guests to order gourmet food, book organic spa treatments, and request private transport with a single, contactless scan.
-            </p>
+            <h1 className={`text-3xl sm:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 leading-[1.15] tracking-tight drop-shadow-md ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forProperties.s_31c559}</h1>
+            <p className="text-[#E5B65F] text-lg sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6 tracking-tight">{t.ui.forProperties.s_5fbc63}</p>
+            <p className={`text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-10 max-w-2xl leading-relaxed ${isLight ? 'text-slate-700 font-medium' : 'text-gray-200'}`}>{t.ui.forProperties.s_06fb24}</p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <button 
                 onClick={() => onNavigate('host_onboarding')}
                 className="flex items-center justify-center gap-2 bg-[#E5B65F] hover:bg-[#ffddb1] text-[#291800] px-8 py-4 rounded-full font-bold text-base transition shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
-              >
-                Partner with NEXG
-                <ArrowRight size={18} />
+              >{t.ui.forProperties.s_cd4fe8}<ArrowRight size={18} />
               </button>
               <button className={`flex items-center justify-center border px-8 py-4 rounded-full font-semibold text-base transition-colors shadow-md cursor-pointer ${
                 isLight
                   ? 'border-slate-300 text-slate-800 hover:bg-slate-100 bg-white/70 shadow-sm'
                   : 'border-white/30 backdrop-blur-md text-white hover:bg-white/10'
-              }`}>
-                View Demo Video
-              </button>
+              }`}>{t.ui.forProperties.s_7ee992}</button>
             </div>
           </div>
         </div>
@@ -294,20 +282,14 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             <div className="max-w-xl">
               <span className={`font-bold tracking-widest text-xs uppercase px-3 py-1.5 rounded-full ${
                 isLight ? 'bg-amber-100 text-amber-800' : 'bg-[#E5B65F]/10 text-[#E5B65F]'
-              }`}>
-                THE ECOSYSTEM
-              </span>
+              }`}>{t.ui.forProperties.s_fe3f95}</span>
               <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mt-2 sm:mt-4 tracking-tight ${
                 isLight ? 'text-slate-900' : 'text-white'
-              }`}>
-                One Elite App. Infinite Services.
-              </h2>
+              }`}>{t.ui.forProperties.s_f907f8}</h2>
             </div>
             <div className={`max-w-sm text-xs sm:text-sm leading-relaxed font-medium ${
               isLight ? 'text-slate-600' : 'text-[#a0a1a1]'
-            }`}>
-              We seamlessly integrate previously fragmented premium local merchants into an elegant singular user experience reflecting your property’s status.
-            </div>
+            }`}>{t.ui.forProperties.s_ee7b88}</div>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -324,10 +306,10 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                 }`} />
                 <p className={`font-bold text-xs sm:text-sm text-center mb-1 ${
                   isLight ? 'text-slate-900' : 'text-white'
-                }`}>Fine Dining</p>
+                }`}>{t.ui.forProperties.s_a3fb7a}</p>
                 <p className={`text-[10px] text-center hidden sm:block ${
                   isLight ? 'text-slate-600' : 'text-gray-400'
-                }`}>Curated local menus</p>
+                }`}>{t.ui.forProperties.s_061f53}</p>
               </div>
             </div>
 
@@ -341,7 +323,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                 <Sparkles className="text-[#06B6D4] mb-4 group-hover:scale-110 transition-transform w-8 h-8 sm:w-10 sm:h-10" />
                 <p className={`font-bold text-xs sm:text-sm text-center mb-1 ${
                   isLight ? 'text-slate-900' : 'text-white'
-                }`}>Wellness & Spa</p>
+                }`}>{t.ui.forProperties.s_d8481d}</p>
                 <p className={`text-[10px] text-center hidden sm:block ${
                   isLight ? 'text-slate-600' : 'text-gray-400'
                 }`}>In-suite organic therapies</p>
@@ -358,10 +340,10 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                 <Car className="text-[#3B82F6] mb-4 group-hover:scale-110 transition-transform w-8 h-8 sm:w-10 sm:h-10" />
                 <p className={`font-bold text-xs sm:text-sm text-center mb-1 ${
                   isLight ? 'text-slate-900' : 'text-white'
-                }`}>Luxury Transport</p>
+                }`}>{t.ui.forProperties.s_c9bc84}</p>
                 <p className={`text-[10px] text-center hidden sm:block ${
                   isLight ? 'text-slate-600' : 'text-gray-400'
-                }`}>Chauffeurs & rentals</p>
+                }`}>{t.ui.forProperties.s_73ba7f}</p>
               </div>
             </div>
 
@@ -375,10 +357,10 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                 <Compass className="text-[#F43F5E] mb-4 group-hover:scale-110 transition-transform w-8 h-8 sm:w-10 sm:h-10" />
                 <p className={`font-bold text-xs sm:text-sm text-center mb-1 ${
                   isLight ? 'text-slate-900' : 'text-white'
-                }`}>Local Adventures</p>
+                }`}>{t.ui.forProperties.s_4d2dec}</p>
                 <p className={`text-[10px] text-center hidden sm:block ${
                   isLight ? 'text-slate-600' : 'text-gray-400'
-                }`}>Safaris & excursions</p>
+                }`}>{t.ui.forProperties.s_a969aa}</p>
               </div>
             </div>
 
@@ -409,10 +391,10 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                 <div>
                   <h3 className={`text-xl sm:text-2xl font-bold tracking-tight ${
                     isLight ? 'text-slate-900' : 'text-white'
-                  }`}>The QR Advantage</h3>
+                  }`}>{t.ui.forProperties.s_5bfbb7}</h3>
                   <p className={`text-xs sm:text-sm font-medium ${
                     isLight ? 'text-slate-600' : 'text-gray-400'
-                  }`}>Instant access, absolutely zero apps required</p>
+                  }`}>{t.ui.forProperties.s_0a3693}</p>
                 </div>
               </div>
 
@@ -431,9 +413,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                     }`}>Room-Specific Precision</h4>
                     <p className={`leading-relaxed text-xs sm:text-sm ${
                       isLight ? 'text-slate-600' : 'text-[#a0a1a1]'
-                    }`}>
-                      Every QR code is uniquely tied to the guest suite, meaning food deliveries, room cleanings, or requested towels find guests exactly where they are.
-                    </p>
+                    }`}>{t.ui.forProperties.s_1be9e5}</p>
                   </div>
                 </div>
 
@@ -448,12 +428,10 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                   <div>
                     <h4 className={`font-bold text-base sm:text-lg mb-1 ${
                       isLight ? 'text-slate-900' : 'text-white'
-                    }`}>Zero Friction Interface</h4>
+                    }`}>{t.ui.forProperties.s_d08ccb}</h4>
                     <p className={`leading-relaxed text-xs sm:text-sm ${
                       isLight ? 'text-slate-600' : 'text-[#a0a1a1]'
-                    }`}>
-                      Guests simply point their camera and browse. No logins, no tedious app downloads, just premier high-end service in a couple of seconds.
-                    </p>
+                    }`}>{t.ui.forProperties.s_a2cb3c}</p>
                   </div>
                 </div>
 
@@ -468,7 +446,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                   <div>
                     <h4 className={`font-bold text-base sm:text-lg mb-1 ${
                       isLight ? 'text-slate-900' : 'text-white'
-                    }`}>Unified Service Hub</h4>
+                    }`}>{t.ui.forProperties.s_0e5ae2}</h4>
                     <p className={`leading-relaxed text-xs sm:text-sm ${
                       isLight ? 'text-slate-600' : 'text-[#a0a1a1]'
                     }`}>
@@ -488,7 +466,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500 z-10"></div>
               <img 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                alt="Luxury suite with guest scanning QR code" 
+                alt={t.ui.forProperties.s_f77be3} 
                 src={responsiveProps('qr_advantage_1783930346328.jpg', '100vw')?.src} 
               />
               <div className={`absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6 backdrop-blur-xl p-4 sm:p-6 rounded-2xl z-20 shadow-lg border ${
@@ -501,9 +479,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                 }`}>94% User Adoption</p>
                 <p className={`text-xs sm:text-sm leading-relaxed ${
                   isLight ? 'text-slate-600' : 'text-gray-300'
-                }`}>
-                  Properties utilizing NEXG Contactless QR systems experience a massive increase in service engagement compared to conventional physical folders.
-                </p>
+                }`}>{t.ui.forProperties.s_271358}</p>
               </div>
             </div>
           </div>
@@ -516,14 +492,10 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className={`font-bold tracking-widest text-xs uppercase px-3.5 py-1.5 rounded-full ${
             isLight ? 'bg-amber-100 text-amber-800' : 'bg-[#E5B65F]/10 text-[#E5B65F]'
-          }`}>
-            WHY PARTNER WITH US
-          </span>
+          }`}>{t.ui.forProperties.s_e56df8}</span>
           <h2 className={`text-2xl sm:text-3xl md:text-5xl font-extrabold mt-4 mb-6 tracking-tight ${
             isLight ? 'text-slate-900' : 'text-white'
-          }`}>
-            Why Hosts Choose NEXG
-          </h2>
+          }`}>{t.ui.forProperties.s_8c8458}</h2>
           
           {/* Slogan Pill */}
           <div className={`inline-flex flex-wrap items-center justify-center gap-2 sm:gap-6 px-6 py-3 rounded-full shadow-lg relative overflow-hidden border ${
@@ -535,23 +507,17 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             <span className={`text-xs sm:text-sm md:text-base font-bold tracking-tight flex items-center gap-1.5 ${
               isLight ? 'text-slate-800' : 'text-gray-200'
             }`}>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>
-              Happy Guests
-            </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>{t.ui.forProperties.s_21f4bb}</span>
             <span className={`hidden sm:inline font-light ${isLight ? 'text-slate-300' : 'text-gray-600'}`}>|</span>
             <span className={`text-xs sm:text-sm md:text-base font-bold tracking-tight flex items-center gap-1.5 ${
               isLight ? 'text-amber-800' : 'text-[#E5B65F]'
             }`}>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>
-              Better Reviews
-            </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>{t.ui.forProperties.s_d300d6}</span>
             <span className={`hidden sm:inline font-light ${isLight ? 'text-slate-300' : 'text-gray-600'}`}>|</span>
             <span className={`text-xs sm:text-sm md:text-base font-bold tracking-tight flex items-center gap-1.5 ${
               isLight ? 'text-slate-800' : 'text-gray-200'
             }`}>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>
-              More Bookings
-            </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>{t.ui.forProperties.s_e7f7ee}</span>
           </div>
         </div>
 
@@ -566,10 +532,8 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             <div className="w-12 h-12 rounded-xl bg-[#E5B65F]/10 border border-[#E5B65F]/20 text-[#E5B65F] flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 shadow-sm">
               <Sparkles size={24} />
             </div>
-            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Enhanced Experience</h3>
-            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-              Deliver unmatched, instant room service, organic spa appointments, and curated local safaris at the simple scan of a finger.
-            </p>
+            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forProperties.s_a2f3a7}</h3>
+            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forProperties.s_f90548}</p>
           </div>
 
           {/* Pillar 2: 5-Star Reviews */}
@@ -582,9 +546,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               <Star size={24} />
             </div>
             <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>5-Star Reviews</h3>
-            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-              Delighted guests leave glowing feedback. Maximize your rating scores and booking ranks across Airbnb, Booking, and Expedia.
-            </p>
+            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forProperties.s_d15371}</p>
           </div>
 
           {/* Pillar 3: Earn More Income */}
@@ -596,10 +558,8 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             <div className="w-12 h-12 rounded-xl bg-[#E5B65F]/10 border border-[#E5B65F]/20 text-[#E5B65F] flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 shadow-sm">
               <DollarSign size={24} />
             </div>
-            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Earn More Income</h3>
-            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-              Unlock a hands-off, zero-effort passive revenue stream by receiving high commission splits from every guest meal, ride, or tour booked.
-            </p>
+            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forProperties.s_338ed9}</h3>
+            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forProperties.s_a97bcc}</p>
           </div>
 
           {/* Pillar 4: Stand Out */}
@@ -611,10 +571,8 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             <div className="w-12 h-12 rounded-xl bg-[#E5B65F]/10 border border-[#E5B65F]/20 text-[#E5B65F] flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 shadow-sm">
               <Award size={24} />
             </div>
-            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Stand Out</h3>
-            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-              Position your properties as elite, technologically forward luxury destinations. Set a standard of hospitality others can't match.
-            </p>
+            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forProperties.s_70a8da}</h3>
+            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forProperties.s_7a1f3a}</p>
           </div>
 
           {/* Pillar 5: We Handle Everything */}
@@ -626,10 +584,8 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             <div className="w-12 h-12 rounded-xl bg-[#E5B65F]/10 border border-[#E5B65F]/20 text-[#E5B65F] flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 shadow-sm">
               <Briefcase size={24} />
             </div>
-            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>We Handle Everything</h3>
-            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-              Absolutely zero operational burden for you. From partner restaurant execution to vetted courier logistics, NEXG does all the heavy lifting.
-            </p>
+            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forProperties.s_49f179}</h3>
+            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forProperties.s_f04a9d}</p>
           </div>
 
           {/* Pillar 6: Trusted & Safe */}
@@ -641,10 +597,8 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             <div className="w-12 h-12 rounded-xl bg-[#E5B65F]/10 border border-[#E5B65F]/20 text-[#E5B65F] flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 shadow-sm">
               <ShieldCheck size={24} />
             </div>
-            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Trusted & Safe</h3>
-            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-              Secure automated checkouts, verified premier concierge merchants, and licensed professional couriers guarantee safety and guest peace of mind.
-            </p>
+            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forProperties.s_4216f1}</h3>
+            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forProperties.s_182ad0}</p>
           </div>
 
         </div>
@@ -658,19 +612,13 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
             <span className={`font-bold tracking-widest text-xs uppercase px-3.5 py-1.5 rounded-full ${
               isLight ? 'bg-amber-100 text-amber-800' : 'bg-[#E5B65F]/10 text-[#E5B65F]'
-            }`}>
-              DATA INTELLIGENCE
-            </span>
+            }`}>{t.ui.forProperties.s_53cdfb}</span>
             <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mt-4 mb-4 sm:mb-6 tracking-tight ${
               isLight ? 'text-slate-900' : 'text-white'
-            }`}>
-              Powerful Analytics for Modern Managers
-            </h2>
+            }`}>{t.ui.forProperties.s_785c45}</h2>
             <p className={`text-xs sm:text-sm md:text-base lg:text-lg ${
               isLight ? 'text-slate-600' : 'text-[#a0a1a1]'
-            }`}>
-              Transform guest behavior into highly actionable insights. Track ordering trends, optimize your staffing, and refine property offerings with real-time analytics.
-            </p>
+            }`}>{t.ui.forProperties.s_7c6eec}</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
@@ -689,18 +637,16 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                     <TrendingUp size={24} />
                   </div>
                   <div className="text-right">
-                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Average Order Growth</p>
+                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.forProperties.s_c5bb5d}</p>
                     <p className={`text-xl sm:text-2xl font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>+28%</p>
                   </div>
                 </div>
-                <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Guest Habit Tracking</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-                  Understand exactly what your guests prefer. Track peak booking periods, top fine dining cravings, and late-night requests.
-                </p>
+                <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forProperties.s_d178f4}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forProperties.s_d887cc}</p>
               </div>
               <div className={`mt-8 pt-6 border-t ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
                 <div className="flex items-center justify-between text-xs font-semibold">
-                  <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>Order Conversion Rate</span>
+                  <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>{t.ui.forProperties.s_4fdd58}</span>
                   <span className={isLight ? 'text-slate-900' : 'text-white'}>12.4%</span>
                 </div>
                 <div className={`w-full h-1.5 rounded-full mt-2 overflow-hidden ${isLight ? 'bg-slate-200' : 'bg-white/10'}`}>
@@ -723,18 +669,16 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                     <Users size={24} />
                   </div>
                   <div className="text-right">
-                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Guest Satisfaction</p>
+                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.forProperties.s_052b34}</p>
                     <p className={`text-xl sm:text-2xl font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>4.9 / 5</p>
                   </div>
                 </div>
-                <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Preference Profiles</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-                  NEXG builds privacy-compliant guest preference profiles to help your staff pre-empt needs before they are even spoken out loud.
-                </p>
+                <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forProperties.s_176079}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forProperties.s_341a50}</p>
               </div>
               <div className={`mt-8 pt-6 border-t ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
                 <div className="flex items-center justify-between text-xs font-semibold">
-                  <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>Loyalty Return Intent</span>
+                  <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>{t.ui.forProperties.s_e87389}</span>
                   <span className={isLight ? 'text-slate-900' : 'text-white'}>88.0%</span>
                 </div>
                 <div className={`w-full h-1.5 rounded-full mt-2 overflow-hidden ${isLight ? 'bg-slate-200' : 'bg-white/10'}`}>
@@ -757,18 +701,16 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                     <LineChart size={24} />
                   </div>
                   <div className="text-right">
-                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Inventory Speed</p>
+                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.forProperties.s_8332c9}</p>
                     <p className={`text-xl sm:text-2xl font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>Realtime</p>
                   </div>
                 </div>
-                <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Operational Optimization</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-                  Predict high-demand hours to allocate room cleaning, butler services, or external partner delivery drivers with supreme efficiency.
-                </p>
+                <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forProperties.s_e09921}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forProperties.s_0d3b7b}</p>
               </div>
               <div className={`mt-8 pt-6 border-t ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
                 <div className="flex items-center justify-between text-xs font-semibold">
-                  <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>Service Response Index</span>
+                  <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>{t.ui.forProperties.s_3b6c18}</span>
                   <span className={isLight ? 'text-slate-900' : 'text-white'}>94.2%</span>
                 </div>
                 <div className={`w-full h-1.5 rounded-full mt-2 overflow-hidden ${isLight ? 'bg-slate-200' : 'bg-white/10'}`}>
@@ -786,9 +728,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
         <div className="text-center max-w-2xl mx-auto mb-16">
           <span className={`font-bold tracking-widest text-xs uppercase px-3.5 py-1.5 rounded-full ${
             isLight ? 'bg-amber-100 text-amber-800' : 'bg-[#E5B65F]/10 text-[#E5B65F]'
-          }`}>
-            SETUP TIMELINE
-          </span>
+          }`}>{t.ui.forProperties.s_4c36e1}</span>
           <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mt-4 mb-4 sm:mb-6 tracking-tight ${
             isLight ? 'text-slate-900' : 'text-white'
           }`}>
@@ -796,9 +736,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           </h2>
           <p className={`text-xs sm:text-sm leading-relaxed ${
             isLight ? 'text-slate-600' : 'text-[#a0a1a1]'
-          }`}>
-            Zero integration overhead. Complete hotel setup, display delivery, and automatic digital catalog activation in under 48 hours.
-          </p>
+          }`}>{t.ui.forProperties.s_a5d6a1}</p>
         </div>
 
         {/* Timeline track wrapper */}
@@ -824,9 +762,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                     isLight
                       ? 'bg-amber-100 text-amber-800 border-amber-300'
                       : 'bg-[#E5B65F]/10 text-[#E5B65F] border-[#E5B65F]/20'
-                  }`}>
-                    STEP 01
-                  </span>
+                  }`}>{t.ui.forProperties.s_2bf27f}</span>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shadow-inner ${
                     isLight
                       ? 'bg-amber-100 border border-amber-300 text-amber-800'
@@ -835,10 +771,8 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                     1
                   </div>
                 </div>
-                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>Apply & Partner</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-                  Submit your property and suite list online. Our concierge activation specialists verify your layout to launch your space.
-                </p>
+                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forProperties.s_8fe3e8}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forProperties.s_8c288d}</p>
               </div>
             </div>
 
@@ -854,9 +788,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                     isLight
                       ? 'bg-amber-100 text-amber-800 border-amber-300'
                       : 'bg-[#E5B65F]/10 text-[#E5B65F] border-[#E5B65F]/20'
-                  }`}>
-                    STEP 02
-                  </span>
+                  }`}>{t.ui.forProperties.s_c24cae}</span>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shadow-inner ${
                     isLight
                       ? 'bg-amber-100 border border-amber-300 text-amber-800'
@@ -865,10 +797,8 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                     2
                   </div>
                 </div>
-                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>Configure & Customise</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-                  We integrate premier local partner cuisines, spa offerings, and chauffeur fleets into a single, seamless brand-matching portal.
-                </p>
+                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forProperties.s_589ee1}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forProperties.s_d5d3ea}</p>
               </div>
             </div>
 
@@ -884,9 +814,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                     isLight
                       ? 'bg-amber-100 text-amber-800 border-amber-300'
                       : 'bg-[#E5B65F]/10 text-[#E5B65F] border-[#E5B65F]/20'
-                  }`}>
-                    STEP 03
-                  </span>
+                  }`}>{t.ui.forProperties.s_4d81b2}</span>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shadow-inner ${
                     isLight
                       ? 'bg-amber-100 border border-amber-300 text-amber-800'
@@ -895,10 +823,8 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                     3
                   </div>
                 </div>
-                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>Deploy QR Displays</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-                  We supply custom-crafted physical suite-specific QR cards. Place them in your room directories or high-visibility bedside tables.
-                </p>
+                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forProperties.s_872061}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forProperties.s_534294}</p>
               </div>
             </div>
 
@@ -910,17 +836,13 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             }`}>
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-bold tracking-widest uppercase bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">
-                    STEP 04
-                  </span>
+                  <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-bold tracking-widest uppercase bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">{t.ui.forProperties.s_e3b925}</span>
                   <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-700 dark:text-emerald-400 font-bold text-xs shadow-inner">
                     ✓
                   </div>
                 </div>
-                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>Passive Commissions</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-                  Guests scan, order, and pay instantly. NEXG handles all fulfillment, depositing automatic commission shares to your dashboard.
-                </p>
+                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forProperties.s_aaa399}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forProperties.s_46f477}</p>
               </div>
             </div>
 
@@ -946,19 +868,13 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                 isLight
                   ? 'bg-amber-100 text-amber-800 border-amber-300'
                   : 'bg-[#E5B65F]/10 text-[#E5B65F] border-[#E5B65F]/20'
-              }`}>
-                REVENUE GENERATION
-              </span>
+              }`}>{t.ui.forProperties.s_a62509}</span>
               <h2 className={`text-2xl sm:text-3xl md:text-5xl font-bold mb-4 sm:mb-6 leading-tight tracking-tight ${
                 isLight ? 'text-slate-900' : 'text-white'
-              }`}>
-                Monetize Every Single Stay.
-              </h2>
+              }`}>{t.ui.forProperties.s_f59c46}</h2>
               <p className={`text-sm sm:text-base md:text-lg mb-6 sm:mb-10 leading-relaxed ${
                 isLight ? 'text-slate-600 font-medium' : 'text-gray-300'
-              }`}>
-                Stop leaving incremental hospitality revenue on the table. Our mutual commission-sharing model turns every guest service interaction into a direct revenue flow for your property, even when fulfilled entirely by trusted third-party merchants.
-              </p>
+              }`}>{t.ui.forProperties.s_9fd2f3}</p>
 
               <div className="grid grid-cols-2 gap-4 sm:gap-8 mb-6 sm:mb-10">
                 <div>
@@ -967,14 +883,14 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                 </div>
                 <div>
                   <p className={`text-3xl sm:text-4xl font-extrabold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>$0</p>
-                  <p className={`text-[10px] sm:text-xs mt-1 font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Upfront Integration Cost</p>
+                  <p className={`text-[10px] sm:text-xs mt-1 font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.forProperties.s_25096d}</p>
                 </div>
               </div>
 
               <div className="space-y-3 sm:space-y-4">
                 <div className="flex items-center gap-3">
                   <CheckCircle className={`flex-shrink-0 ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`} size={20} />
-                  <span className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-700' : 'text-gray-200'}`}>Fully automated payouts and digital reporting</span>
+                  <span className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-700' : 'text-gray-200'}`}>{t.ui.forProperties.s_c50b8f}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle className={`flex-shrink-0 ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`} size={20} />
@@ -982,7 +898,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                 </div>
                 <div className="flex items-center gap-3">
                   <CheckCircle className={`flex-shrink-0 ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`} size={20} />
-                  <span className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-700' : 'text-gray-200'}`}>Clear real-time transparency audit trail</span>
+                  <span className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-700' : 'text-gray-200'}`}>{t.ui.forProperties.s_818f94}</span>
                 </div>
               </div>
             </div>
@@ -996,15 +912,13 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               <h3 className={`text-lg sm:text-xl font-bold mb-6 flex items-center gap-2 ${
                 isLight ? 'text-slate-900' : 'text-white'
               }`}>
-                <DollarSign size={20} className={isLight ? 'text-amber-800' : 'text-[#E5B65F]'} />
-                Earnings Estimator
-              </h3>
+                <DollarSign size={20} className={isLight ? 'text-amber-800' : 'text-[#E5B65F]'} />{t.ui.forProperties.s_17d67c}</h3>
 
               <div className="space-y-6 mb-6 sm:mb-8">
                 {/* Sliders */}
                 <div>
                   <div className="flex justify-between items-center text-xs sm:text-sm font-medium mb-2">
-                    <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>Total Rooms / Suites</span>
+                    <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>{t.ui.forProperties.s_c86934}</span>
                     <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>{rooms} Rooms</span>
                   </div>
                   <input 
@@ -1021,7 +935,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
 
                 <div>
                   <div className="flex justify-between items-center text-xs sm:text-sm font-medium mb-2">
-                    <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>Average Occupancy Rate</span>
+                    <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>{t.ui.forProperties.s_40c759}</span>
                     <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>{occupancy}%</span>
                   </div>
                   <input 
@@ -1038,7 +952,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
 
                 <div>
                   <div className="flex justify-between items-center text-xs sm:text-sm font-medium mb-2">
-                    <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>Average App Spend per Stay</span>
+                    <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>{t.ui.forProperties.s_fa3fc3}</span>
                     <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>${guestSpend} USD</span>
                   </div>
                   <input 
@@ -1061,7 +975,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                     ? 'bg-amber-50/80 border-amber-200 text-slate-900'
                     : 'bg-white/5 border-white/5 text-white'
                 }`}>
-                  <span className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>Estimated Monthly Share</span>
+                  <span className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>{t.ui.forProperties.s_4f7049}</span>
                   <span className={`text-xl sm:text-2xl font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>
                     ${totalCommissionRevenue.toLocaleString()} USD
                   </span>
@@ -1069,11 +983,11 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
 
                 <div className="space-y-2.5 px-1">
                   <div className={`flex justify-between text-[11px] sm:text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                    <span>Food & Dining referrals</span>
+                    <span>{t.ui.forProperties.s_8249e7}</span>
                     <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>${foodRev.toLocaleString()}</span>
                   </div>
                   <div className={`flex justify-between text-[11px] sm:text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                    <span>Private Cab & Car Hire shares</span>
+                    <span>{t.ui.forProperties.s_7b1758}</span>
                     <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>${transportRev.toLocaleString()}</span>
                   </div>
                   <div className={`flex justify-between text-[11px] sm:text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
@@ -1081,7 +995,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                     <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>${spaRev.toLocaleString()}</span>
                   </div>
                   <div className={`flex justify-between text-[11px] sm:text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                    <span>Bespoke Tours & Safaris</span>
+                    <span>{t.ui.forProperties.s_8e8592}</span>
                     <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>${excursionRev.toLocaleString()}</span>
                   </div>
                 </div>
@@ -1089,9 +1003,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                 <button 
                   onClick={() => onNavigate('merchant_onboarding')}
                   className="w-full py-4 mt-4 bg-[#E5B65F] hover:bg-[#ffddb1] text-[#291800] rounded-xl font-bold transition text-sm tracking-wide shadow-md cursor-pointer"
-                >
-                  Apply for Partnership
-                </button>
+                >{t.ui.forProperties.s_ea763f}</button>
               </div>
             </div>
 
@@ -1108,7 +1020,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             <div className="absolute inset-0 bg-black/60 z-10"></div>
             <img 
               src={responsiveProps('properties_cta_1783930356640.jpg', '100vw')?.src} 
-              alt="Properties CTA Sunset Background" 
+              alt={t.ui.forProperties.s_29b967} 
               className="w-full h-full object-cover transition-transform duration-[8000ms] hover:scale-105" 
             />
           </div>
@@ -1117,15 +1029,11 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             <h2 className="text-xl sm:text-3xl md:text-5xl font-bold mb-4 sm:mb-6 tracking-tight leading-tight">
               Ready to Transform Your Property?
             </h2>
-            <p className="text-gray-200 text-xs sm:text-sm md:text-base lg:text-lg mb-6 sm:mb-10 leading-relaxed max-w-2xl mx-auto">
-              Join hundreds of high-end resorts, boutique hotels, and luxury Airbnb hosts across East Africa that are boosting guest satisfaction and building zero-cost revenue.
-            </p>
+            <p className="text-gray-200 text-xs sm:text-sm md:text-base lg:text-lg mb-6 sm:mb-10 leading-relaxed max-w-2xl mx-auto">{t.ui.forProperties.s_110820}</p>
             <button 
               onClick={() => onNavigate('merchant_onboarding')}
               className="bg-[#E5B65F] hover:bg-[#ffddb1] text-[#291800] px-8 sm:px-10 py-3.5 sm:py-5 rounded-full font-bold text-sm sm:text-lg transition-transform hover:scale-105 active:scale-95 shadow-xl cursor-pointer"
-            >
-              Partner with NEXG
-            </button>
+            >{t.ui.forProperties.s_cd4fe8}</button>
             <p className="mt-8 text-gray-300 text-[10px] sm:text-xs tracking-wider uppercase font-semibold">
               Ultra-Fast Onboarding • Dedicated Account Success Managers • Guaranteed Lift
             </p>
@@ -1142,9 +1050,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               {/* The wordmark already spells NEXG, so no text sits beside it. */}
               <LogoIcon variant="wordmark" className="h-9 w-auto" />
             </div>
-            <p className="text-[#a0a1a1] text-sm leading-relaxed mb-6">
-              Elevating premium hospitality across East Africa with integrated, contactless concierge ecosystems.
-            </p>
+            <p className="text-[#a0a1a1] text-sm leading-relaxed mb-6">{t.ui.forProperties.s_89bdbf}</p>
             <div className="flex space-x-4">
               <button className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-gray-400 hover:text-[#E5B65F] hover:border-[#E5B65F] transition-colors bg-white/5">
                 <Star size={16} />
@@ -1161,7 +1067,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           <div className="col-span-1">
             <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-5">Company</h4>
             <div className="flex flex-col space-y-3">
-              <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">About Us</button>
+              <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">{t.ui.forProperties.s_c887b9}</button>
               <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">Careers</button>
               <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">Blog</button>
               <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">Press</button>
@@ -1171,25 +1077,25 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           <div className="col-span-1">
             <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-5">Resources</h4>
             <div className="flex flex-col space-y-3">
-              <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">Help Center</button>
-              <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">Contact Us</button>
+              <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">{t.ui.forProperties.s_110158}</button>
+              <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">{t.ui.forProperties.s_9ad0cc}</button>
               <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">FAQs</button>
-              <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">Safety Guidelines</button>
+              <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">{t.ui.forProperties.s_1d2be9}</button>
             </div>
           </div>
 
           <div className="col-span-1">
             <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-5">Legal</h4>
             <div className="flex flex-col space-y-3">
-              <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">Terms of Service</button>
-              <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">Privacy Policy</button>
-              <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">Cookie Policy</button>
+              <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">{t.ui.forProperties.s_0c8a9a}</button>
+              <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">{t.ui.forProperties.s_9db108}</button>
+              <button onClick={() => onNavigate('home')} className="text-sm font-semibold text-gray-400 hover:text-[#E5B65F] text-left bg-transparent border-none cursor-pointer">{t.ui.forProperties.s_e6e178}</button>
             </div>
           </div>
 
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
             <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-5">Newsletter</h4>
-            <p className="text-sm text-gray-400 mb-4">Stay updated with premier hospitality tips and trends.</p>
+            <p className="text-sm text-gray-400 mb-4">{t.ui.forProperties.s_ec3c35}</p>
             <div className="flex">
               <input 
                 type="email" 
@@ -1208,7 +1114,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
           <p>© 2026 NEXG App. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5"><Globe size={14} /> Global</span>
-            <span className="flex items-center gap-1.5">Secure Site</span>
+            <span className="flex items-center gap-1.5">{t.ui.forProperties.s_a9577d}</span>
           </div>
         </div>
       </footer>

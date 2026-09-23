@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useRef } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import {
   Search,
   MapPin,
@@ -41,6 +42,7 @@ export default function NexGCategoryDrilldown({
   category,
   onBackToDiscovery,
 }: NexGCategoryDrilldownProps) {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
   const { addToCart, setIsCartOpen } = useCart();
   const [selectedSubcategory, setSelectedSubcategory] = useState<string>('all');
@@ -212,7 +214,7 @@ export default function NexGCategoryDrilldown({
                   ? 'bg-white border-slate-200 text-slate-700 hover:border-[#B88728]'
                   : 'bg-[#181a1b] border-white/10 text-white hover:border-[#E5B65F]'
               }`}
-              title="Back to Discovery"
+              title={t.ui.nexGCategoryDrilldown.s_7db318}
             >
               <ArrowLeft size={18} className={isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'} />
             </button>
@@ -232,7 +234,7 @@ export default function NexGCategoryDrilldown({
               }`}
             >
               <MapPin size={12} className={isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'} />
-              <span>Nairobi Luxury District</span>
+              <span>{t.ui.nexGCategoryDrilldown.s_8bf67b}</span>
             </div>
           </div>
 
@@ -276,7 +278,7 @@ export default function NexGCategoryDrilldown({
           <div className="relative z-10 max-w-2xl space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-[#E5B65F]/20 text-[#E5B65F] border border-[#E5B65F]/30 backdrop-blur-md">
               <Sparkles size={12} />
-              <span>Strict Category & Subcategory Catalog</span>
+              <span>{t.ui.nexGCategoryDrilldown.s_c25b51}</span>
             </div>
             <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
               {category.name}
@@ -297,9 +299,7 @@ export default function NexGCategoryDrilldown({
                   {category.subcategories.length} Curated
                 </span>
               </h2>
-              <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                Explore dedicated subcategories with specialized imagery and custom parameters
-              </p>
+              <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.nexGCategoryDrilldown.s_e16a1d}</p>
             </div>
 
             <div className="flex items-center gap-1.5">
@@ -310,7 +310,7 @@ export default function NexGCategoryDrilldown({
                     ? 'bg-white border-slate-200 hover:border-[#B88728] text-slate-700'
                     : 'bg-[#181a1b] border-white/10 hover:border-[#E5B65F] text-white'
                 }`}
-                title="Scroll left"
+                title={t.ui.nexGCategoryDrilldown.s_2c9e5a}
               >
                 <ChevronLeft size={16} />
               </button>
@@ -321,7 +321,7 @@ export default function NexGCategoryDrilldown({
                     ? 'bg-white border-slate-200 hover:border-[#B88728] text-slate-700'
                     : 'bg-[#181a1b] border-white/10 hover:border-[#E5B65F] text-white'
                 }`}
-                title="Scroll right"
+                title={t.ui.nexGCategoryDrilldown.s_2994b4}
               >
                 <ChevronRight size={16} />
               </button>
@@ -355,12 +355,8 @@ export default function NexGCategoryDrilldown({
                 />
               </div>
               <div className="w-full">
-                <span className="block font-bold text-xs text-foreground truncate">
-                  All Items
-                </span>
-                <span className={`text-[10px] block mt-0.5 ${isLight ? 'text-slate-400' : 'text-gray-400'}`}>
-                  Complete view
-                </span>
+                <span className="block font-bold text-xs text-foreground truncate">{t.ui.nexGCategoryDrilldown.s_2f1873}</span>
+                <span className={`text-[10px] block mt-0.5 ${isLight ? 'text-slate-400' : 'text-gray-400'}`}>{t.ui.nexGCategoryDrilldown.s_27c636}</span>
               </div>
             </button>
 
@@ -434,7 +430,7 @@ export default function NexGCategoryDrilldown({
               }`}
             >
               <Star size={12} className="fill-amber-400 text-amber-400" />
-              <span>Rating 4.8+</span>
+              <span>{t.ui.nexGCategoryDrilldown.s_34318e}</span>
             </button>
 
             {/* Quick Filter: Fast Delivery */}
@@ -451,7 +447,7 @@ export default function NexGCategoryDrilldown({
               }`}
             >
               <Clock size={12} />
-              <span>Under 25 min</span>
+              <span>{t.ui.nexGCategoryDrilldown.s_ab2d11}</span>
             </button>
 
             {/* Quick Filter: Special Offers */}
@@ -468,7 +464,7 @@ export default function NexGCategoryDrilldown({
               }`}
             >
               <Tag size={12} />
-              <span>Special Offers</span>
+              <span>{t.ui.nexGCategoryDrilldown.s_1f647f}</span>
             </button>
 
             {(filterRating45 || filterFastDelivery || filterDiscountOnly || selectedSubcategory !== 'all') && (
@@ -480,9 +476,7 @@ export default function NexGCategoryDrilldown({
                   setSelectedSubcategory('all');
                 }}
                 className="text-xs text-rose-500 hover:underline font-bold px-2 py-1"
-              >
-                Reset Filters
-              </button>
+              >{t.ui.nexGCategoryDrilldown.s_5be698}</button>
             )}
           </div>
 
@@ -499,7 +493,7 @@ export default function NexGCategoryDrilldown({
               }`}
             >
               <option value="recommended">Recommended</option>
-              <option value="rating">Highest Rated</option>
+              <option value="rating">{t.ui.nexGCategoryDrilldown.s_d394a9}</option>
               <option value="price_low">Price: Low to High</option>
               <option value="price_high">Price: High to Low</option>
             </select>
@@ -510,9 +504,7 @@ export default function NexGCategoryDrilldown({
         <section id="merchants-selection-section" className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-              <h2 className="text-xl font-bold tracking-tight text-foreground">
-                Merchant Providers & Partners
-              </h2>
+              <h2 className="text-xl font-bold tracking-tight text-foreground">{t.ui.nexGCategoryDrilldown.s_03f70c}</h2>
               <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                 {selectedSubcategory === 'all'
                   ? `Showing ${displayedMerchants.length} premier partners (5 merchants per subcategory). Click any provider to reveal their live items.`
@@ -527,9 +519,7 @@ export default function NexGCategoryDrilldown({
                 <button
                   onClick={() => setActiveMerchantId(null)}
                   className="px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-gray-300 hover:bg-slate-200 dark:hover:bg-white/20 transition-colors cursor-pointer"
-                >
-                  Clear Selection
-                </button>
+                >{t.ui.nexGCategoryDrilldown.s_fae58c}</button>
               )}
             </div>
           </div>
@@ -631,12 +621,8 @@ export default function NexGCategoryDrilldown({
               <div className="w-14 h-14 rounded-2xl mx-auto mb-3 bg-[#B88728]/10 dark:bg-[#E5B65F]/15 flex items-center justify-center text-[#7d5a11] dark:text-[#E5B65F]">
                 <Sparkles size={28} />
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-foreground">
-                Select a Merchant Provider Above
-              </h3>
-              <p className={`text-xs sm:text-sm max-w-lg mx-auto mt-2 leading-relaxed ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                To view item cards, please click any of the verified merchant providers above. Their full 30-item catalog, specifications, and instant ordering will appear here.
-              </p>
+              <h3 className="text-xl sm:text-2xl font-bold text-foreground">{t.ui.nexGCategoryDrilldown.s_4ce3f0}</h3>
+              <p className={`text-xs sm:text-sm max-w-lg mx-auto mt-2 leading-relaxed ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.nexGCategoryDrilldown.s_eb13c4}</p>
               <div className="flex flex-wrap items-center justify-center gap-2.5 mt-6">
                 {displayedMerchants.slice(0, 5).map((m) => (
                   <button
@@ -704,9 +690,7 @@ export default function NexGCategoryDrilldown({
                 <button
                   onClick={() => setActiveMerchantId(null)}
                   className="px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
-                >
-                  Switch Provider
-                </button>
+                >{t.ui.nexGCategoryDrilldown.s_0df6f0}</button>
               </div>
             </section>
 
@@ -714,7 +698,7 @@ export default function NexGCategoryDrilldown({
             <section>
               <ProductCarousel
                 title={`${currentMerchant.name} · Highlight Selections`}
-                subtitle="Fast selections & customer favorites"
+                subtitle={t.ui.nexGCategoryDrilldown.s_fcdcf7}
                 products={carouselProducts}
               />
             </section>
@@ -726,9 +710,7 @@ export default function NexGCategoryDrilldown({
               <h2 className="text-2xl font-bold tracking-tight text-foreground">
                 {currentMerchant.name} Catalog ({filteredItems.length} Offerings)
               </h2>
-              <p className={`text-xs mt-0.5 ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                Browse catalog offerings with real-time pricing and availability
-              </p>
+              <p className={`text-xs mt-0.5 ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.nexGCategoryDrilldown.s_c14e04}</p>
             </div>
           </div>
 
@@ -738,7 +720,7 @@ export default function NexGCategoryDrilldown({
                 isLight ? 'bg-white border-slate-200' : 'bg-[#181a1b] border-white/10'
               }`}
             >
-              <p className="text-slate-400 text-sm">No items found matching your filters.</p>
+              <p className="text-slate-400 text-sm">{t.ui.nexGCategoryDrilldown.s_9dca31}</p>
               <button
                 onClick={() => {
                   setSelectedSubcategory('all');
@@ -748,9 +730,7 @@ export default function NexGCategoryDrilldown({
                   setFilterDiscountOnly(false);
                 }}
                 className="mt-3 px-4 py-2 rounded-xl text-xs font-bold bg-[#B88728] text-slate-950 cursor-pointer"
-              >
-                Reset All Filters
-              </button>
+              >{t.ui.nexGCategoryDrilldown.s_1b8543}</button>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -808,9 +788,7 @@ export default function NexGCategoryDrilldown({
                             : 'bg-[#111315]/80 border-white/10 text-gray-300'
                         }`}
                       >
-                        <div className="text-[10px] font-bold uppercase tracking-wider text-[#7d5a11] dark:text-[#E5B65F] mb-1">
-                          Decision Specifications
-                        </div>
+                        <div className="text-[10px] font-bold uppercase tracking-wider text-[#7d5a11] dark:text-[#E5B65F] mb-1">{t.ui.nexGCategoryDrilldown.s_8978ea}</div>
                         {Object.entries(item.dynamicAttributes).map(([key, val]) => (
                           <div key={key} className="flex items-center justify-between gap-2">
                             <span className="text-slate-400 text-[11px] truncate">{key}:</span>
@@ -846,12 +824,12 @@ export default function NexGCategoryDrilldown({
                         {item.workflowType === 'order' ? (
                           <>
                             <Plus size={14} />
-                            <span>Add to Order</span>
+                            <span>{t.ui.nexGCategoryDrilldown.s_492026}</span>
                           </>
                         ) : (
                           <>
                             <Calendar size={14} />
-                            <span>Reserve / Book</span>
+                            <span>{t.ui.nexGCategoryDrilldown.s_77bf79}</span>
                           </>
                         )}
                       </button>
@@ -887,8 +865,7 @@ export default function NexGCategoryDrilldown({
                   <Check size={32} />
                 </div>
                 <h3 className="text-2xl font-bold">Dispatch Confirmed!</h3>
-                <p className={`text-sm ${isLight ? 'text-slate-600' : 'text-gray-300'}`}>
-                  Your reservation for <span className="font-bold text-foreground">{selectedItemForWorkflow.item.name}</span> has been scheduled with {selectedItemForWorkflow.merchant.name}.
+                <p className={`text-sm ${isLight ? 'text-slate-600' : 'text-gray-300'}`}>{t.ui.nexGCategoryDrilldown.s_543b1b}<span className="font-bold text-foreground">{selectedItemForWorkflow.item.name}</span> has been scheduled with {selectedItemForWorkflow.merchant.name}.
                 </p>
                 <p className="text-xs text-slate-400">
                   A personal concierge has been assigned to your suite.
@@ -925,7 +902,7 @@ export default function NexGCategoryDrilldown({
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold mb-1 text-slate-600">Scheduled Date</label>
+                    <label className="block text-xs font-bold mb-1 text-slate-600">{t.ui.nexGCategoryDrilldown.s_19ad69}</label>
                     {/* Was `input[type=date]`: the native picker cannot be styled, is
                         ordered month-first for a market that reads day-first, and shows
                         a different control in every browser. */}
@@ -937,11 +914,11 @@ export default function NexGCategoryDrilldown({
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold mb-1 text-slate-600">Preferred Time</label>
+                    <label className="block text-xs font-bold mb-1 text-slate-600">{t.ui.nexGCategoryDrilldown.s_126f44}</label>
                     <TimeStringField
                       value={bookingTime}
                       onChange={setBookingTime}
-                      placeholder="Choose a time"
+                      placeholder={t.ui.nexGCategoryDrilldown.s_09efe8}
                       timeFormat="12"
                       minuteStep={15}
                     />
@@ -949,9 +926,7 @@ export default function NexGCategoryDrilldown({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold mb-1 text-slate-600">
-                    Suite Number or Location Notes
-                  </label>
+                  <label className="block text-xs font-bold mb-1 text-slate-600">{t.ui.nexGCategoryDrilldown.s_c07c6d}</label>
                   <input
                     type="text"
                     value={specialNotes}
@@ -971,12 +946,8 @@ export default function NexGCategoryDrilldown({
                         ? 'bg-[#B88728] hover:bg-[#9e721d] text-slate-950'
                         : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-black'
                     }`}
-                  >
-                    Confirm & Reserve Instant Dispatch
-                  </button>
-                  <p className="text-[10px] text-center text-slate-400 mt-2">
-                    No upfront charge. Escrow reservation handled by concierge desk.
-                  </p>
+                  >{t.ui.nexGCategoryDrilldown.s_0ecb20}</button>
+                  <p className="text-[10px] text-center text-slate-400 mt-2">{t.ui.nexGCategoryDrilldown.s_50238f}</p>
                 </div>
               </form>
             )}

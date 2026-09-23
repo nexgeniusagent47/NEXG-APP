@@ -10,6 +10,7 @@
 // reachable directly, so a failed fetch has to explain itself and offer a way out.
 
 import React, { useEffect, useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import { RefreshCw } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { cn } from '../../lib/utils';
@@ -33,6 +34,7 @@ export default function MerchantRoute({
   onAddedToCart,
   focusOfferings = false,
 }: MerchantRouteProps) {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
   const [merchant, setMerchant] = useState<ApiMerchant | null>(fallback);
   const [loading, setLoading] = useState(true);
@@ -68,8 +70,7 @@ export default function MerchantRoute({
           )}
         >
           <p className="text-sm font-bold text-rose-500">{error}</p>
-          <p className={cn('text-xs mt-1.5', isLight ? 'text-slate-600' : 'text-gray-400')}>
-            The API may not be running. Start it with <code className="font-mono">npm run server</code>.
+          <p className={cn('text-xs mt-1.5', isLight ? 'text-slate-600' : 'text-gray-400')}>{t.ui.merchantRoute.s_176135}<code className="font-mono">npm run server</code>.
           </p>
           <div className="mt-5 flex items-center justify-center gap-2">
             <button
@@ -89,9 +90,7 @@ export default function MerchantRoute({
                   ? 'bg-white border-slate-300 text-slate-800 hover:bg-slate-50'
                   : 'bg-white/5 border-white/15 text-gray-100 hover:bg-white/10'
               )}
-            >
-              Go back
-            </button>
+            >{t.ui.merchantRoute.s_e84712}</button>
           </div>
         </div>
       </div>
@@ -109,9 +108,7 @@ export default function MerchantRoute({
             isLight ? 'text-slate-600' : 'text-gray-400'
           )}
         >
-          <RefreshCw size={14} className="animate-spin" />
-          Loading merchant
-        </div>
+          <RefreshCw size={14} className="animate-spin" />{t.ui.merchantRoute.s_a1ca54}</div>
       </div>
     );
   }

@@ -165,9 +165,7 @@ export default function CategoryExplorerModal({
                   <Icons.Layers className="w-5 h-5" />
                 </div>
                 <div>
-                  <h2 className="text-lg sm:text-xl font-bold tracking-tight">
-                    Merchant Categories & Subcategories
-                  </h2>
+                  <h2 className="text-lg sm:text-xl font-bold tracking-tight">{t.ui.categoryExplorerModal.s_f4cf7c}</h2>
                   <p
                     className={`text-xs font-medium ${
                       isLight ? 'text-slate-600' : 'text-gray-400'
@@ -181,7 +179,7 @@ export default function CategoryExplorerModal({
               <button
                 id="close-category-explorer-btn"
                 onClick={onClose}
-                aria-label="Close categories"
+                aria-label={t.ui.categoryExplorerModal.s_940323}
                 className={`p-2.5 rounded-xl border transition-colors cursor-pointer ${
                   isLight
                     ? 'hover:bg-slate-200 border-slate-200 text-slate-700'
@@ -205,7 +203,7 @@ export default function CategoryExplorerModal({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search across all 21 categories & 134 subcategories (e.g. Fine Dining, Vapes, Chauffeur, Safari)..."
+                placeholder={t.ui.categoryExplorerModal.s_c9f43c}
                 autoFocus
                 className={`w-full pl-11 pr-10 py-3 rounded-xl text-sm font-medium border transition-colors focus:outline-none focus:ring-2 ${
                   isLight
@@ -273,14 +271,12 @@ export default function CategoryExplorerModal({
                     isLight ? 'text-slate-300' : 'text-gray-600'
                   }`}
                 />
-                <h3 className="text-base font-bold mb-1">No matching verticals found</h3>
+                <h3 className="text-base font-bold mb-1">{t.ui.categoryExplorerModal.s_e37ac9}</h3>
                 <p
                   className={`text-xs ${
                     isLight ? 'text-slate-600' : 'text-gray-400'
                   }`}
-                >
-                  Try searching for another keyword or clear the search query.
-                </p>
+                >{t.ui.categoryExplorerModal.s_c7fa37}</p>
                 <button
                   onClick={() => {
                     setSearchQuery('');
@@ -291,9 +287,7 @@ export default function CategoryExplorerModal({
                       ? 'bg-amber-50 border-amber-300 text-[#B88728]'
                       : 'bg-white/5 border-white/15 text-[#E5B65F]'
                   }`}
-                >
-                  Reset Catalog Filters
-                </button>
+                >{t.ui.categoryExplorerModal.s_7fd08b}</button>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
@@ -391,18 +385,14 @@ export default function CategoryExplorerModal({
                     <div className="mt-4 pt-3 flex items-center justify-between text-[11px] font-medium opacity-80 border-t border-black/5 dark:border-white/5">
                       <span className="flex items-center gap-1">
                         <Icons.CheckCircle2 size={12} className={isLight ? 'text-emerald-700' : 'text-emerald-400'} />
-                        <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>
-                          Verified Merchant Partners
-                        </span>
+                        <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>{t.ui.categoryExplorerModal.s_af1c10}</span>
                       </span>
                       <span
                         onClick={() => handleSelectCategory(cat)}
                         className={`font-semibold cursor-pointer underline-offset-2 hover:underline ${
                           isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'
                         }`}
-                      >
-                        View listings
-                      </span>
+                      >{t.ui.categoryExplorerModal.s_7c267a}</span>
                     </div>
                   </div>
                 ))}
@@ -418,7 +408,7 @@ export default function CategoryExplorerModal({
                 : 'bg-[#1a1d21] border-white/10 text-gray-400'
             }`}
           >
-            <span>Click any category or subcategory to instantly browse partners</span>
+            <span>{t.ui.categoryExplorerModal.s_233e38}</span>
             <div className="flex items-center gap-3">
               <button
                 onClick={() => {

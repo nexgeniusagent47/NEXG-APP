@@ -29,6 +29,7 @@
 //     150-200ms state transition.
 
 import React, { useRef } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import { X, Star, Clock, Bike, MapPin, ArrowRight, Store } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
@@ -52,6 +53,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
   onViewFull,
   onPrimaryAction,
 }) => {
+  const { t } = useLanguage();
   const { isLight } = useTheme();
   const reduceMotion = useReducedMotion();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -114,7 +116,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                 ref={closeButtonRef}
                 type="button"
                 onClick={onClose}
-                aria-label="Close preview"
+                aria-label={t.ui.merchantPreviewSheet.s_baa550}
                 className={cn(
                   'absolute top-4 right-4 z-20 w-9 h-9 rounded-full flex items-center justify-center',
                   'transition-transform duration-150 ease-out hover:scale-105 active:scale-95',
@@ -215,9 +217,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                     </ol>
 
                     {intent.inferred && (
-                      <p className={cn('text-[11px] italic', isLight ? 'text-slate-600' : 'text-gray-400')}>
-                        This merchant does not declare its own workflow, so the default for its category is shown.
-                      </p>
+                      <p className={cn('text-[11px] italic', isLight ? 'text-slate-600' : 'text-gray-400')}>{t.ui.merchantPreviewSheet.s_0f4c5c}</p>
                     )}
                   </div>
 
@@ -303,9 +303,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                       ? 'bg-white border-slate-300 text-slate-800 hover:bg-slate-50 focus-visible:ring-offset-white'
                       : 'bg-white/5 border-white/15 text-gray-100 hover:bg-white/10 focus-visible:ring-offset-[#141618]'
                   )}
-                >
-                  See all offerings
-                </button>
+                >{t.ui.merchantPreviewSheet.s_28da6e}</button>
               </div>
             </motion.div>
           </div>

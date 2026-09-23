@@ -47,7 +47,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
                   : 'bg-white/10 hover:bg-white/20 text-white'
               }`}
               title={t.partnersPortal.backHome}
-              aria-label="Back to Home"
+              aria-label={t.ui.forMerchants.s_ce7472}
             >
               <Icons.ArrowLeft className="w-5 h-5" />
             </button>
@@ -101,7 +101,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
                   ? 'bg-white/80 hover:bg-white border-slate-200 text-amber-800 shadow-2xs'
                   : 'bg-white/10 hover:bg-white/20 border-white/15 text-[#E5B65F]'
               }`}
-              aria-label="Toggle Theme"
+              aria-label={t.ui.forMerchants.s_b74c4e}
               title={isLight ? 'Switch to Dark Mode' : 'Switch to Light Mode'}
             >
               {isLight ? <Icons.Moon size={16} /> : <Icons.Sun size={16} />}
@@ -119,7 +119,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
                   ? 'bg-white border-slate-200 text-amber-800'
                   : 'bg-white/10 border-white/15 text-[#E5B65F]'
               }`}
-              title="Toggle Theme"
+              title={t.ui.forMerchants.s_b74c4e}
             >
               {isLight ? <Icons.Moon size={15} /> : <Icons.Sun size={15} />}
             </button>
@@ -148,18 +148,16 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
               }`}
             >
               <div className="flex flex-col gap-3 font-semibold text-sm">
-                <button onClick={() => handleMobileNav('home')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">Explore Home</button>
-                <button onClick={() => handleMobileNav('properties')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">For Properties</button>
-                <button onClick={() => handleMobileNav('merchants')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors text-[#E5B65F]">For Partners</button>
-                <button onClick={() => handleMobileNav('couriers')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">Elite Fleet</button>
+                <button onClick={() => handleMobileNav('home')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">{t.ui.forMerchants.s_a1e9f9}</button>
+                <button onClick={() => handleMobileNav('properties')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">{t.ui.forMerchants.s_38769a}</button>
+                <button onClick={() => handleMobileNav('merchants')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors text-[#E5B65F]">{t.ui.forMerchants.s_52a6f3}</button>
+                <button onClick={() => handleMobileNav('couriers')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">{t.ui.forMerchants.s_18414d}</button>
                 <button onClick={() => handleMobileNav('experiences')} className="text-left py-2 hover:text-[#E5B65F] w-full transition-colors">Experiences</button>
               </div>
               <button 
                 onClick={() => handleMobileNav('merchant_onboarding')}
                 className="w-full text-center text-sm font-bold bg-[#E5B65F] text-[#291800] rounded-xl py-3 hover:bg-[#ffddb1] transition-colors shadow-md"
-              >
-                Start Onboarding
-              </button>
+              >{t.ui.forMerchants.s_aa32fa}</button>
             </motion.div>
           )}
         </AnimatePresence>
@@ -175,7 +173,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
               <div className="absolute inset-0 bg-gradient-to-r from-[#F8F9FA]/95 via-[#F8F9FA]/70 to-transparent z-10"></div>
               <img 
                 src={responsiveProps('merchants_hero_light_1789911802167.jpg', '100vw')?.src} 
-                alt="Merchants Hero Daylight Background" 
+                alt={t.ui.forMerchants.s_118503} 
                 className="w-full h-full object-cover opacity-85 brightness-105 transition-transform duration-[10000ms] hover:scale-105" 
                 referrerPolicy="no-referrer"
               />
@@ -186,7 +184,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
               <div className="absolute inset-0 bg-gradient-to-r from-[#1a1c1c]/95 via-[#1a1c1c]/70 to-transparent z-10"></div>
               <img 
                 src={responsiveProps('merchant_hero_section.29.39.jpeg', '100vw')?.src} 
-                alt="Merchants Hero Background" 
+                alt={t.ui.forMerchants.s_c75030} 
                 className="w-full h-full object-cover opacity-60 sm:opacity-80 brightness-60 sm:brightness-75 transition-transform duration-[10000ms] hover:scale-105" 
                 referrerPolicy="no-referrer"
               />
@@ -202,22 +200,14 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
         {/* Content Container */}
         <div className="container mx-auto max-w-[1400px] relative z-20 px-4 sm:px-8 xl:px-16 w-full">
           <div className="max-w-3xl">
-            <h1 className={`font-bold text-3xl sm:text-5xl lg:text-6xl mb-3 sm:mb-4 leading-[1.15] tracking-tight ${isLight ? 'text-slate-900 drop-shadow-sm' : 'text-white'}`}>
-              Reach Customers.
-            </h1>
-            <p className={`text-lg sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6 tracking-tight ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>
-              Right Where They Are.
-            </p>
-            <p className={`text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-10 max-w-2xl leading-relaxed ${isLight ? 'text-slate-700 font-medium' : 'text-gray-200'}`}>
-              Partner with NEXG App to serve guests directly inside premier luxury properties. We provide white-glove logistics, automated payouts, and seamless integration with your existing team.
-            </p>
+            <h1 className={`font-bold text-3xl sm:text-5xl lg:text-6xl mb-3 sm:mb-4 leading-[1.15] tracking-tight ${isLight ? 'text-slate-900 drop-shadow-sm' : 'text-white'}`}>{t.ui.forMerchants.s_c0228a}</h1>
+            <p className={`text-lg sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6 tracking-tight ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>{t.ui.forMerchants.s_0eaa2f}</p>
+            <p className={`text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-10 max-w-2xl leading-relaxed ${isLight ? 'text-slate-700 font-medium' : 'text-gray-200'}`}>{t.ui.forMerchants.s_c89f38}</p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <button 
                 onClick={() => onNavigate?.('merchant_onboarding')}
                 className="w-full sm:w-auto bg-[#E5B65F] text-[#291800] px-8 py-4 rounded-full font-bold text-base hover:bg-[#ffddb1] transition shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 text-center cursor-pointer min-h-[48px]"
-              >
-                Start Onboarding
-              </button>
+              >{t.ui.forMerchants.s_aa32fa}</button>
             </div>
           </div>
         </div>
@@ -228,7 +218,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 py-10 sm:py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           <div className="text-center sm:text-left">
             <div className={`font-bold text-3xl sm:text-4xl mb-1 ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>3x</div>
-            <div className={`text-[10px] sm:text-xs uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>Higher Avg. Order Value</div>
+            <div className={`text-[10px] sm:text-xs uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forMerchants.s_591721}</div>
           </div>
           <div className="text-center sm:text-left">
             <div className={`font-bold text-3xl sm:text-4xl mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>100%</div>
@@ -236,11 +226,11 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
           </div>
           <div className="text-center sm:text-left">
             <div className={`font-bold text-3xl sm:text-4xl mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>0%</div>
-            <div className={`text-[10px] sm:text-xs uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>Commission on Pickups</div>
+            <div className={`text-[10px] sm:text-xs uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forMerchants.s_ba7223}</div>
           </div>
           <div className="text-center sm:text-left">
             <div className={`font-bold text-3xl sm:text-4xl mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>24/7</div>
-            <div className={`text-[10px] sm:text-xs uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>Merchant Support</div>
+            <div className={`text-[10px] sm:text-xs uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forMerchants.s_2f5b37}</div>
           </div>
         </div>
       </section>
@@ -248,12 +238,8 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
       {/* Why Partners Choose NEXG (6 Pillars) */}
       <section className="py-16 sm:py-24 px-4 sm:px-8 xl:px-16 max-w-[1400px] mx-auto" id="why-merchants-choose">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className={`font-bold tracking-widest text-xs uppercase px-3.5 py-1.5 rounded-full ${isLight ? 'bg-amber-100 text-amber-800' : 'bg-[#E5B65F]/10 text-[#E5B65F]'}`}>
-            WHY PARTNER WITH US
-          </span>
-          <h2 className={`text-2xl sm:text-3xl md:text-5xl font-extrabold mt-4 mb-6 tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
-            Why Merchants Choose NEXG
-          </h2>
+          <span className={`font-bold tracking-widest text-xs uppercase px-3.5 py-1.5 rounded-full ${isLight ? 'bg-amber-100 text-amber-800' : 'bg-[#E5B65F]/10 text-[#E5B65F]'}`}>{t.ui.forMerchants.s_e56df8}</span>
+          <h2 className={`text-2xl sm:text-3xl md:text-5xl font-extrabold mt-4 mb-6 tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forMerchants.s_771412}</h2>
           
           {/* Slogan banner */}
           <div className={`inline-flex flex-wrap items-center justify-center gap-2 sm:gap-6 px-6 py-3 rounded-full shadow-lg relative overflow-hidden border ${
@@ -262,19 +248,13 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
               : 'bg-[#131515] border-white/10'
           }`}>
             <span className={`text-xs sm:text-sm md:text-base font-bold tracking-tight flex items-center gap-1.5 ${isLight ? 'text-slate-800' : 'text-gray-200'}`}>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>
-              Verified Properties
-            </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>{t.ui.forMerchants.s_e9cbdf}</span>
             <span className={`hidden sm:inline font-light ${isLight ? 'text-slate-300' : 'text-gray-600'}`}>|</span>
             <span className={`text-xs sm:text-sm md:text-base font-bold tracking-tight flex items-center gap-1.5 ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>
-              Consistent Orders
-            </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>{t.ui.forMerchants.s_81df05}</span>
             <span className={`hidden sm:inline font-light ${isLight ? 'text-slate-300' : 'text-gray-600'}`}>|</span>
             <span className={`text-xs sm:text-sm md:text-base font-bold tracking-tight flex items-center gap-1.5 ${isLight ? 'text-slate-800' : 'text-gray-200'}`}>
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>
-              Seamless Payouts
-            </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>{t.ui.forMerchants.s_da08fb}</span>
           </div>
         </div>
 
@@ -289,10 +269,8 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
             <div className="text-[#E5B65F] mb-5 transition-transform duration-300 group-hover:scale-110">
               <Icons.Sparkles size={28} />
             </div>
-            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Premium Exposure</h3>
-            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-              Gain exclusive positioning in elite hotel room directories, high-visibility bedside QR cards, and digital concierge web-apps.
-            </p>
+            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forMerchants.s_85feef}</h3>
+            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forMerchants.s_f6e1bd}</p>
           </div>
 
           {/* Pillar 2: Multiply Orders */}
@@ -304,10 +282,8 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
             <div className="text-[#E5B65F] mb-5 transition-transform duration-300 group-hover:scale-110">
               <Icons.TrendingUp size={28} />
             </div>
-            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Multiply Volume</h3>
-            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-              Tap into high-net-worth guests, tourists, and business travelers ordering gourmet meals, personal amenities, or spa treatments.
-            </p>
+            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forMerchants.s_7cb113}</h3>
+            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forMerchants.s_f6538e}</p>
           </div>
 
           {/* Pillar 3: White-Glove Logistics */}
@@ -320,9 +296,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
               <Icons.Truck size={28} />
             </div>
             <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>White-Glove Logistics</h3>
-            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-              Never worry about transport. Our highly vetted professional courier fleet collects your packages and delivers them with elite standards.
-            </p>
+            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forMerchants.s_ce9fe6}</p>
           </div>
 
           {/* Pillar 4: Zero Friction Setup */}
@@ -334,10 +308,8 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
             <div className="text-[#E5B65F] mb-5 transition-transform duration-300 group-hover:scale-110">
               <Icons.Zap size={28} />
             </div>
-            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Zero Friction Setup</h3>
-            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-              We handle everything from digital menu formatting to custom checkout links. Absolutely no technical setup required on your end.
-            </p>
+            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forMerchants.s_d6626f}</h3>
+            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forMerchants.s_891482}</p>
           </div>
 
           {/* Pillar 5: Direct Split Payouts */}
@@ -349,10 +321,8 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
             <div className="text-rose-500 mb-5 transition-transform duration-300 group-hover:scale-110">
               <Icons.CreditCard size={28} />
             </div>
-            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Instant Split Payouts</h3>
-            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-              Get paid on time, every time. Once a guest completes checkout, automated, secure merchant payouts route instantly to your bank.
-            </p>
+            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forMerchants.s_80b451}</h3>
+            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forMerchants.s_673bf7}</p>
           </div>
 
           {/* Pillar 6: Dedicated Live Support */}
@@ -364,10 +334,8 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
             <div className="text-[#E5B65F] mb-5 transition-transform duration-300 group-hover:scale-110">
               <Icons.ShieldCheck size={28} />
             </div>
-            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Dedicated Support</h3>
-            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-              Keep orders running flawlessly. Our active support concierge monitors deliveries live and assists with special suite requests.
-            </p>
+            <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forMerchants.s_def7cc}</h3>
+            <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forMerchants.s_ae23a7}</p>
           </div>
 
         </div>
@@ -376,15 +344,11 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
       {/* 4-Step Onboarding Timeline Flow */}
       <section className="py-16 sm:py-24 px-4 sm:px-8 xl:px-16 max-w-[1400px] mx-auto" id="how-it-works-merchant-timeline">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className={`font-bold tracking-widest text-xs uppercase px-3.5 py-1.5 rounded-full ${isLight ? 'bg-amber-100 text-amber-800' : 'bg-[#E5B65F]/10 text-[#E5B65F]'}`}>
-            ONBOARDING TIMELINE
-          </span>
+          <span className={`font-bold tracking-widest text-xs uppercase px-3.5 py-1.5 rounded-full ${isLight ? 'bg-amber-100 text-amber-800' : 'bg-[#E5B65F]/10 text-[#E5B65F]'}`}>{t.ui.forMerchants.s_a92592}</span>
           <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mt-4 mb-4 sm:mb-6 tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
             4 Simple Steps to Launch Your Brand
           </h2>
-          <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-            Zero integration headache. Submit your menu or catalogue, let us digitise your portal, and receive curated local sales in 48 hours.
-          </p>
+          <p className={`text-xs sm:text-sm leading-relaxed ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forMerchants.s_3f3d89}</p>
         </div>
 
         {/* Timeline track wrapper */}
@@ -408,19 +372,15 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
                 <div className="flex items-center justify-between mb-4">
                   <span className={`text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-md border ${
                     isLight ? 'text-amber-800 bg-amber-50 border-amber-200' : 'text-[#E5B65F] bg-[#E5B65F]/10 border-[#E5B65F]/20'
-                  }`}>
-                    STEP 01
-                  </span>
+                  }`}>{t.ui.forMerchants.s_2bf27f}</span>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shadow-inner border ${
                     isLight ? 'bg-amber-100 border-amber-300 text-amber-800' : 'bg-[#E5B65F]/10 border-[#E5B65F]/30 text-[#E5B65F]'
                   }`}>
                     1
                   </div>
                 </div>
-                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>Apply Online</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-                  Submit your fine dining menus, luxury spa offerings, or rental catalogs through our seamless, intuitive 2-minute onboarding form.
-                </p>
+                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forMerchants.s_0c343a}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forMerchants.s_89a9da}</p>
               </div>
             </div>
 
@@ -434,19 +394,15 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
                 <div className="flex items-center justify-between mb-4">
                   <span className={`text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-md border ${
                     isLight ? 'text-amber-800 bg-amber-50 border-amber-200' : 'text-[#E5B65F] bg-[#E5B65F]/10 border-[#E5B65F]/20'
-                  }`}>
-                    STEP 02
-                  </span>
+                  }`}>{t.ui.forMerchants.s_c24cae}</span>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shadow-inner border ${
                     isLight ? 'bg-amber-100 border-amber-300 text-amber-800' : 'bg-[#E5B65F]/10 border-[#E5B65F]/30 text-[#E5B65F]'
                   }`}>
                     2
                   </div>
                 </div>
-                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>Digital Integration</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-                  Our professional curation experts ingest your items, style gorgeous visuals, and optimize layouts for direct contactless guest displays.
-                </p>
+                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forMerchants.s_916b2f}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forMerchants.s_032a19}</p>
               </div>
             </div>
 
@@ -460,19 +416,15 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
                 <div className="flex items-center justify-between mb-4">
                   <span className={`text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-md border ${
                     isLight ? 'text-amber-800 bg-amber-50 border-amber-200' : 'text-[#E5B65F] bg-[#E5B65F]/10 border-[#E5B65F]/20'
-                  }`}>
-                    STEP 03
-                  </span>
+                  }`}>{t.ui.forMerchants.s_4d81b2}</span>
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs shadow-inner border ${
                     isLight ? 'bg-amber-100 border-amber-300 text-amber-800' : 'bg-[#E5B65F]/10 border-[#E5B65F]/30 text-[#E5B65F]'
                   }`}>
                     3
                   </div>
                 </div>
-                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>Receive Suite Orders</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-                  As guests scan room QR codes, orders stream directly to your merchant dashboard with real-time audio and visual system notifications.
-                </p>
+                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forMerchants.s_a2e8c7}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forMerchants.s_faae3e}</p>
               </div>
             </div>
 
@@ -484,17 +436,13 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
             }`}>
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-bold tracking-widest uppercase bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">
-                    STEP 04
-                  </span>
+                  <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-bold tracking-widest uppercase bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">{t.ui.forMerchants.s_e3b925}</span>
                   <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-700 dark:text-emerald-400 font-bold text-xs shadow-inner">
                     ✓
                   </div>
                 </div>
-                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>Automated Revenue</h3>
-                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>
-                  Prepare packages meticulously. Professional NEXG couriers gather the items, fulfill deliveries, and secure payouts automatically.
-                </p>
+                <h3 className={`text-base sm:text-lg font-bold mb-2 ${isLight ? 'text-slate-900' : 'text-white'}`}>{t.ui.forMerchants.s_540349}</h3>
+                <p className={`text-xs sm:text-sm leading-relaxed font-medium ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>{t.ui.forMerchants.s_abafb4}</p>
               </div>
             </div>
 
@@ -511,15 +459,11 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
             : 'bg-white/5 border-white/10'
         }`}>
           <h2 className={`font-bold text-2xl sm:text-3xl md:text-4xl mb-4 sm:mb-6 ${isLight ? 'text-slate-900' : 'text-white'}`}>Ready to redefine your reach?</h2>
-          <p className={`mb-8 md:mb-10 text-sm sm:text-base leading-relaxed ${isLight ? 'text-slate-700 font-medium' : 'text-[#a0a1a1]'}`}>
-            Applications are reviewed by our curation team within 24 hours to ensure our high standards of quality and service are maintained across the platform.
-          </p>
+          <p className={`mb-8 md:mb-10 text-sm sm:text-base leading-relaxed ${isLight ? 'text-slate-700 font-medium' : 'text-[#a0a1a1]'}`}>{t.ui.forMerchants.s_750959}</p>
           <button 
             onClick={() => onNavigate?.('merchant_onboarding')}
             className="w-full sm:w-auto bg-[#E5B65F] text-[#291800] px-8 sm:px-10 py-4 sm:py-5 rounded-full font-bold text-base sm:text-lg hover:bg-[#ffddb1] transition shadow-[0_0_40px_rgba(229,182,95,0.3)] hover:shadow-[0_0_60px_rgba(229,182,95,0.5)] active:scale-95 cursor-pointer text-center min-h-[48px]"
-          >
-            Apply to Join NEXG
-          </button>
+          >{t.ui.forMerchants.s_1600e2}</button>
         </div>
       </section>
 
@@ -529,9 +473,9 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
           <div className={`font-bold text-xl sm:text-2xl tracking-widest ${isLight ? 'text-slate-900' : 'text-white'}`}>NEXG</div>
           <div className="text-xs sm:text-sm text-center md:text-left">© 2026 NEXG App. All rights reserved.</div>
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm">
-            <a href="#" className={`transition-colors py-2 px-1 min-h-[44px] flex items-center ${isLight ? 'hover:text-slate-900' : 'hover:text-white'}`}>Merchant Terms</a>
+            <a href="#" className={`transition-colors py-2 px-1 min-h-[44px] flex items-center ${isLight ? 'hover:text-slate-900' : 'hover:text-white'}`}>{t.ui.forMerchants.s_e6a013}</a>
             <a href="#" className={`transition-colors py-2 px-1 min-h-[44px] flex items-center ${isLight ? 'hover:text-slate-900' : 'hover:text-white'}`}>Privacy</a>
-            <a href="#" className={`transition-colors py-2 px-1 min-h-[44px] flex items-center ${isLight ? 'hover:text-slate-900' : 'hover:text-white'}`}>Contact Support</a>
+            <a href="#" className={`transition-colors py-2 px-1 min-h-[44px] flex items-center ${isLight ? 'hover:text-slate-900' : 'hover:text-white'}`}>{t.ui.forMerchants.s_fe1a29}</a>
           </div>
         </div>
       </footer>

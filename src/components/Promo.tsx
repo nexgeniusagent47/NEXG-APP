@@ -65,7 +65,7 @@ export default function Promo({ onNavigate }: PromoProps) {
           <div className="absolute right-0 bottom-0 top-0 w-[52%] sm:w-[54%] md:w-[56%] lg:w-[50%] xl:w-[54%] flex items-end justify-end overflow-hidden z-0 pointer-events-none">
             <img 
               src={responsiveProps('NEXG  PHONE MPCKUP.png', '100vw')?.src} 
-              alt="NEXG App App Interface" 
+              alt={t.ui.promo.s_d2c984} 
               className="w-full h-full object-contain object-right-bottom drop-shadow-2xl translate-y-[2%] translate-x-[2%] hover:scale-[1.02] transition-transform duration-500" 
               referrerPolicy="no-referrer"
             />
@@ -87,7 +87,7 @@ export default function Promo({ onNavigate }: PromoProps) {
             <div className="w-[110px] sm:w-[130px] flex-shrink-0 relative overflow-hidden">
               <img 
                 src={responsiveProps('couriers_hero_banner_1783931131203.jpg', '100vw')?.src} 
-                alt="For Merchants" 
+                alt={t.ui.promo.s_4a421c} 
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                 referrerPolicy="no-referrer"
               />
@@ -125,7 +125,7 @@ export default function Promo({ onNavigate }: PromoProps) {
             <div className="w-[110px] sm:w-[130px] flex-shrink-0 relative overflow-hidden">
               <img 
                 src={responsiveProps('courier_delivery_door_1783931148146.jpg', '100vw')?.src} 
-                alt="For Couriers" 
+                alt={t.ui.promo.s_c63982} 
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                 referrerPolicy="no-referrer"
               />
@@ -163,7 +163,7 @@ export default function Promo({ onNavigate }: PromoProps) {
             <div className="w-[110px] sm:w-[130px] flex-shrink-0 relative overflow-hidden">
               <img 
                 src={responsiveProps('properties_hero_1783930332445.jpg', '100vw')?.src} 
-                alt="For Properties" 
+                alt={t.ui.promo.s_38769a} 
                 className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                 referrerPolicy="no-referrer"
               />

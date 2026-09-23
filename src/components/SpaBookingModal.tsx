@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import {
   X,
   Clock,
@@ -30,6 +31,7 @@ export default function SpaBookingModal({
   onClose,
   onBookingConfirmed,
 }: SpaBookingModalProps) {
+  const { t } = useLanguage();
   if (!treatment) return null;
 
   // Workflow steps: 1: Config (Duration, Location, Date, Time), 2: Personalization (Therapist, Pressure, Oil, Addons), 3: Guest details, 4: Active Tracker
@@ -147,7 +149,7 @@ export default function SpaBookingModal({
             <div className="absolute bottom-4 left-6 right-6 z-10">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gold-tint text-gold border border-gold-line text-xs font-semibold mb-1 backdrop-blur-md">
                 <Sparkles size={12} />
-                <span>District Wellness Experience</span>
+                <span>{t.ui.spaBookingModal.s_15ddf4}</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">{treatment.title}</h2>
               <p className="text-xs sm:text-sm text-slate-600 line-clamp-1">{spaName}</p>
@@ -177,9 +179,7 @@ export default function SpaBookingModal({
             {step === 1 && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">
-                    Select Ritual Duration
-                  </h3>
+                  <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">{t.ui.spaBookingModal.s_a027ba}</h3>
                   <div className="grid grid-cols-3 gap-2.5">
                     {treatment.durations.map((d) => (
                       <button
@@ -201,9 +201,7 @@ export default function SpaBookingModal({
 
                 {/* Location Selection */}
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">
-                    Experience Setting
-                  </h3>
+                  <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">{t.ui.spaBookingModal.s_039d05}</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <button
                       type="button"
@@ -216,10 +214,8 @@ export default function SpaBookingModal({
                     >
                       <MapPin size={20} className="text-gold shrink-0 mt-0.5" />
                       <div>
-                        <div className="font-bold text-sm">Private In-Villa Sanctuary</div>
-                        <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
-                          Therapist dispatches directly to your villa with heated table, organic linens & aromatherapy.
-                        </p>
+                        <div className="font-bold text-sm">{t.ui.spaBookingModal.s_4b8ec9}</div>
+                        <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">{t.ui.spaBookingModal.s_9e603c}</p>
                       </div>
                     </button>
 
@@ -234,10 +230,8 @@ export default function SpaBookingModal({
                     >
                       <Compass size={20} className="text-gold shrink-0 mt-0.5" />
                       <div>
-                        <div className="font-bold text-sm">Resort Spa Pavilion</div>
-                        <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
-                          Private oceanfront cabana with thermal plunge pool & tranquil zen garden access.
-                        </p>
+                        <div className="font-bold text-sm">{t.ui.spaBookingModal.s_f79d9c}</div>
+                        <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">{t.ui.spaBookingModal.s_7d1e9d}</p>
                       </div>
                     </button>
                   </div>
@@ -246,9 +240,7 @@ export default function SpaBookingModal({
                 {/* Date & Time Slot Picker (District style) */}
                 <div>
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider">
-                      Appointment Slot
-                    </h3>
+                    <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider">{t.ui.spaBookingModal.s_09121f}</h3>
                     <div className="flex gap-1">
                       {(['today', 'tomorrow'] as const).map((d) => (
                         <button
@@ -301,9 +293,7 @@ export default function SpaBookingModal({
             {step === 2 && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">
-                    Therapist Preference
-                  </h3>
+                  <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">{t.ui.spaBookingModal.s_be9475}</h3>
                   <div className="grid grid-cols-3 gap-2">
                     {[
                       { key: 'female', label: 'Female Therapist' },
@@ -327,9 +317,7 @@ export default function SpaBookingModal({
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">
-                    Massage Pressure Preference
-                  </h3>
+                  <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">{t.ui.spaBookingModal.s_950d86}</h3>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                     {[
                       { key: 'gentle', label: 'Gentle / Relaxing' },
@@ -354,9 +342,7 @@ export default function SpaBookingModal({
                 </div>
 
                 <div>
-                  <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">
-                    Signature Aromatherapy Oil
-                  </h3>
+                  <h3 className="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">{t.ui.spaBookingModal.s_2fd731}</h3>
                   <div className="space-y-2">
                     {treatment.availableOils.map((oil) => (
                       <label
@@ -429,16 +415,12 @@ export default function SpaBookingModal({
                 <div className="p-4 rounded-2xl bg-gold-tint border border-gold-line text-xs text-gray-200">
                   <div className="font-bold text-gold mb-1 flex items-center gap-1.5 text-sm">
                     <UserCheck size={16} />
-                    <span>Concierge In-Villa Service Protocol</span>
-                  </div>
-                  Our certified therapist will arrive 10 minutes prior with sanitized organic towels, ultrasonic mist diffuser, and a heated memory-foam bed.
-                </div>
+                    <span>{t.ui.spaBookingModal.s_b3a5a1}</span>
+                  </div>{t.ui.spaBookingModal.s_4548b7}</div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
-                      Primary Guest Name
-                    </label>
+                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">{t.ui.spaBookingModal.s_c8c5fe}</label>
                     <input
                       type="text"
                       value={guestName}
@@ -448,9 +430,7 @@ export default function SpaBookingModal({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
-                      Villa / Suite Number
-                    </label>
+                    <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">{t.ui.spaBookingModal.s_485336}</label>
                     <input
                       type="text"
                       value={roomOrVilla}
@@ -462,9 +442,7 @@ export default function SpaBookingModal({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">
-                    Focus Areas & Medical Notes
-                  </label>
+                  <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1.5">{t.ui.spaBookingModal.s_5621b9}</label>
                   <textarea
                     rows={3}
                     value={specialNotes}
@@ -487,7 +465,7 @@ export default function SpaBookingModal({
                     </div>
                   ))}
                   <div className="border-t border-slate-200 pt-2 flex justify-between font-bold text-sm text-white">
-                    <span>Total Concierge Charge</span>
+                    <span>{t.ui.spaBookingModal.s_9505aa}</span>
                     <span className="text-gold">${totalPrice}</span>
                   </div>
                 </div>
@@ -499,15 +477,13 @@ export default function SpaBookingModal({
               <div className="space-y-6">
                 <div className="p-4 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-between">
                   <div>
-                    <div className="text-xs font-bold uppercase tracking-wider text-emerald-400">
-                      Appointment Confirmed
-                    </div>
+                    <div className="text-xs font-bold uppercase tracking-wider text-emerald-400">{t.ui.spaBookingModal.s_c0a672}</div>
                     <div className="text-lg font-bold text-white mt-0.5">
                       Booking #{confirmedBooking.id}
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-xs text-slate-600">Slot Scheduled</div>
+                    <div className="text-xs text-slate-600">{t.ui.spaBookingModal.s_17548b}</div>
                     <div className="text-sm font-bold text-gold">
                       {confirmedBooking.date} at {confirmedBooking.timeSlot}
                     </div>
@@ -525,7 +501,7 @@ export default function SpaBookingModal({
                         referrerPolicy="no-referrer"
                       />
                       <div>
-                        <div className="text-xs text-slate-600">Assigned Master Therapist</div>
+                        <div className="text-xs text-slate-600">{t.ui.spaBookingModal.s_f00e02}</div>
                         <div className="font-bold text-sm text-white">{confirmedBooking.therapist.name}</div>
                         <div className="text-[11px] text-gold flex items-center gap-1">
                           <span>★ {confirmedBooking.therapist.rating}</span>
@@ -537,7 +513,7 @@ export default function SpaBookingModal({
                     <a
                       href={`tel:${confirmedBooking.therapist.phone}`}
                       className="p-2.5 rounded-full bg-slate-100 hover:bg-slate-200 text-white border border-slate-300 transition-colors cursor-pointer"
-                      title="Contact Spa Concierge"
+                      title={t.ui.spaBookingModal.s_712231}
                     >
                       <Phone size={16} />
                     </a>
@@ -547,9 +523,7 @@ export default function SpaBookingModal({
                 {/* Live Simulation Stepper */}
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-xs font-bold text-slate-600 uppercase tracking-wider">
-                      Live Dispatch Progress
-                    </h4>
+                    <h4 className="text-xs font-bold text-slate-600 uppercase tracking-wider">{t.ui.spaBookingModal.s_301d19}</h4>
                     <button
                       type="button"
                       onClick={() => setSimulationStatusIndex((prev) => Math.min(prev + 1, simulationSteps.length - 1))}
@@ -592,7 +566,7 @@ export default function SpaBookingModal({
                     className="flex items-center justify-center gap-2 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-300 text-white text-xs font-bold transition-colors cursor-pointer"
                   >
                     <CalendarPlus size={16} />
-                    <span>Add to Calendar</span>
+                    <span>{t.ui.spaBookingModal.s_9092d9}</span>
                   </button>
 
                   <button
@@ -611,7 +585,7 @@ export default function SpaBookingModal({
           {step < 4 && (
             <div className="p-4 sm:p-5 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
               <div>
-                <div className="text-[11px] text-slate-600">Total Experience Fee</div>
+                <div className="text-[11px] text-slate-600">{t.ui.spaBookingModal.s_8cff8d}</div>
                 <div className="text-lg sm:text-xl font-bold text-gold">${totalPrice}</div>
               </div>
 
@@ -642,7 +616,7 @@ export default function SpaBookingModal({
                     className="flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-gold hover:bg-gold-strong text-slate-950 text-xs sm:text-sm font-bold transition cursor-pointer shadow-lg"
                   >
                     <Sparkles size={15} />
-                    <span>Confirm Spa Booking</span>
+                    <span>{t.ui.spaBookingModal.s_9a36a0}</span>
                   </button>
                 )}
               </div>

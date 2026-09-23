@@ -584,16 +584,36 @@ function AppContent() {
   );
 }
 
-export default function App() {
+/**
+ * The providers, exported so `main.tsx` can wrap MORE than the application with them.
+ *
+ * `ConsentBanner` is mounted as a SIBLING of `<App />` in main.tsx, deliberately, because it has
+ * to outlive every route change and its click capture must be installed before the first lazily
+ * loaded page is fetched. Both are properties of the document rather than of a page.
+ *
+ * That sibling relationship is what broke when the banner gained a `useLanguage()` call: it sat
+ * outside `LanguageProvider`, the hook threw, and the entire application failed to render — a
+ * blank page, with the error naming the hook rather than the component. The fix is not to remove
+ * the call but to put the provider above both, which is where it belonged.
+ */
+export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider>
       <LanguageProvider>
         <CartProvider>
-          <NexGNavigationProvider>
-            <AppContent />
-          </NexGNavigationProvider>
+          <NexGNavigationProvider>{children}</NexGNavigationProvider>
         </CartProvider>
       </LanguageProvider>
     </ThemeProvider>
+  );
+}
+
+export { AppContent };
+
+export default function App() {
+  return (
+    <AppProviders>
+      <AppContent />
+    </AppProviders>
   );
 }
