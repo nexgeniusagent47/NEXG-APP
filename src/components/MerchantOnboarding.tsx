@@ -773,7 +773,10 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
       <div className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm no-print">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3 cursor-pointer select-none" onClick={() => onNavigate?.('home')}>
-            <span className="font-extrabold text-2xl tracking-widest text-[#E5B65F] font-sans hover:text-amber-500 transition-colors">NEXG</span>
+            {/* #8A6413 on light, #E5B65F on dark. The dark gold measures 1.79:1 on the light
+                page - unreadable - and the light gold measures 3.47:1 on the dark one. Each
+                theme needs its own, which is what DESIGN.md documents. */}
+            <span className="font-extrabold text-2xl tracking-widest font-sans hover:text-amber-500 transition-colors text-[#8A6413] dark:text-[#E5B65F]">NEXG</span>
             <span className="text-slate-300 font-light">|</span>
             <span className="text-sm font-semibold tracking-wide uppercase text-slate-600 hover:text-slate-900 transition-colors">Merchant Portal</span>
           </div>
@@ -799,7 +802,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
         <div className="mb-8 no-print">
           <div className="flex justify-between items-center mb-3 text-xs md:text-sm text-slate-500">
             <div className="flex items-center gap-2 font-semibold text-slate-800">
-              <span className="cursor-pointer text-[#E5B65F] hover:underline" onClick={() => onNavigate?.('home')}>Home</span>
+              <span className="cursor-pointer hover:underline text-[#8A6413] dark:text-[#E5B65F]" onClick={() => onNavigate?.('home')}>Home</span>
               {selectedCategory && (
                 <>
                   <span className="text-slate-400">/</span>
@@ -861,8 +864,25 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       <div 
                         key={cat.id}
                         onClick={() => selectCategory(cat)}
-                        style={{ borderColor: isSelected ? cat.color : '#e2e8f0', backgroundColor: isSelected ? cat.bg : 'white' }}
-                        className={`rounded-2xl p-5 border cursor-pointer hover:shadow-md hover:scale-[1.01] transition flex flex-col justify-between`}
+                        /* THE NEUTRALS MUST BE CLASSES, NOT INLINE STYLE.
+                           This card used to carry
+                             style={{ borderColor: isSelected ? cat.color : '#e2e8f0',
+                                      backgroundColor: isSelected ? cat.bg : 'white' }}
+                           An inline declaration beats every rule in every stylesheet, so it
+                           also beat `.onboarding-theme`'s redefinition of `--color-white`.
+                           Measured in dark mode: the outer card resolved to rgb(22,25,29) while
+                           this nested one stayed pure white, with near-white text on it - 42
+                           elements at 1.11:1 on this page alone. The token system was working
+                           exactly as designed and this one attribute was outside it.
+
+                           The unselected half now uses the ordinary utilities, which read the
+                           tokens and therefore flip with the theme. The selected half keeps
+                           `cat.color`/`cat.bg` because those are per-category brand values from
+                           the catalogue, deliberately the same in both themes. */
+                        style={isSelected ? { borderColor: cat.color, backgroundColor: cat.bg } : undefined}
+                        className={`rounded-2xl p-5 border cursor-pointer hover:shadow-md hover:scale-[1.01] transition flex flex-col justify-between ${
+                          isSelected ? '' : 'border-slate-200 bg-white'
+                        }`}
                       >
                         <div className="flex items-center justify-between">
                           <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: isSelected ? 'rgba(255,255,255,0.8)' : cat.bg, color: cat.color }}>

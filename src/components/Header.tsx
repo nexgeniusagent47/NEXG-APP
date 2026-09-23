@@ -151,7 +151,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
             className={`transition-colors cursor-pointer text-left bg-transparent border-none p-0 ${
               currentPage === 'home'
                 ? isLight
-                  ? 'text-[#B88728] font-bold'
+                  ? 'text-[#8A6413] font-bold'
                   : 'text-[#E5B65F] font-bold'
                 : isLight
                 ? 'text-slate-600 hover:text-slate-900'
@@ -169,7 +169,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
                 currentPage === 'properties' ||
                 currentPage === 'couriers'
                   ? isLight
-                    ? 'text-[#B88728] font-bold'
+                    ? 'text-[#8A6413] font-bold'
                     : 'text-[#E5B65F] font-bold'
                   : isLight
                   ? 'text-slate-600 hover:text-slate-900'
