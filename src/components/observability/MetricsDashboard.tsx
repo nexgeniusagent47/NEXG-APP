@@ -346,7 +346,17 @@ function Card({
 }) {
   return (
     <section
-      className={`rounded-2xl border border-slate-200 bg-white p-4 shadow-sm ${className}`}
+      /* `min-w-0` is load-bearing, and it is why this page used to be wider than every phone.
+         A grid item's `min-width` defaults to `auto`, which resolves to its MIN-CONTENT size.
+         This card contains a five-column table whose min-content is 422px, so the grid item
+         refused to go below that, the grid's `scrollWidth` came out at 456px inside a 358px
+         column, and the whole document was pushed to 473px in a 390px viewport - measured.
+         The table already sits in an `overflow-x-auto` wrapper, so it was the grid item's
+         intrinsic minimum, not the table's, that escaped.
+
+         Setting it here rather than on each of the six grid containers fixes every grid in the
+         file at once, and it is the correct place: a card is a grid item wherever it is used. */
+      className={`min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm ${className}`}
       aria-label={title}
     >
       <h2 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
