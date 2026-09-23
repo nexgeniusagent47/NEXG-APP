@@ -155,13 +155,13 @@ export const MerchantPage: React.FC<MerchantPageProps> = ({
 
             {/* Delivery Time */}
             <div className="flex items-center gap-1.5 text-slate-600 dark:text-gray-300">
-              <Clock size={14} className="text-[#8A6413] dark:text-[#E5B65F]" />
+              <Clock size={14} className="text-[#7d5a11] dark:text-[#E5B65F]" />
               <span>{merchant.deliveryTime}</span>
             </div>
 
             {/* Delivery Fee */}
             <div className="flex items-center gap-1.5 text-slate-600 dark:text-gray-300">
-              <Bike size={14} className="text-[#8A6413] dark:text-[#E5B65F]" />
+              <Bike size={14} className="text-[#7d5a11] dark:text-[#E5B65F]" />
               <span>
                 {merchant.deliveryFee === 0 ? 'Free delivery' : `KSh ${merchant.deliveryFee} delivery`}
               </span>
@@ -272,7 +272,7 @@ export const MerchantPage: React.FC<MerchantPageProps> = ({
                       {item.description}
                     </p>
                     <div className="pt-1 flex items-center gap-2">
-                      <span className="text-sm font-extrabold text-[#8A6413] dark:text-[#E5B65F]">
+                      <span className="text-sm font-extrabold text-[#7d5a11] dark:text-[#E5B65F]">
                         KSh {item.price.toLocaleString()}
                       </span>
                       {item.originalPrice && (

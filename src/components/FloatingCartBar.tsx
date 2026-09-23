@@ -61,7 +61,7 @@ export default function FloatingCartBar() {
                 </span>
               </div>
               <p className={`text-[11px] font-medium truncate max-w-[180px] sm:max-w-[260px] ${
-                isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'
+                isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'
               }`}>
                 {cartRestaurantName || 'Concierge Order'}
               </p>

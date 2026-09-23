@@ -54,16 +54,38 @@ const CASES = [
     'FAIL',
     'background:#000',
   ],
-  // MODERN COLOUR SYNTAX. Tailwind v4 emits oklab/oklch, and a parser that only understood
-  // rgb/rgba returned null for them - which made the walk skip the layer entirely and
-  // report a 75%-black badge as white-on-white. This case uses the syntax the browser
-  // actually returns, so a regression in the parser fails here rather than on a real page.
+  // MODERN COLOUR SYNTAX, RESOLVED.
   //
-  // Note this is the OPACITY-BLACK case, where reading alpha alone is sufficient: black
-  // composites as black in either colour space. A translucent WHITE layer is not tested in
-  // oklab, because the probe deliberately reads only the alpha from oklab/oklch and does
-  // NOT convert channels between colour spaces. The next case covers the white-overlay
-  // arithmetic in rgb, where the numbers are exact.
+  // These were previously UNRESOLVED. Tailwind v4 emits oklch/oklab for most utilities, so
+  // 2550 elements across the app could not be measured at all. The browser resolves them
+  // exactly - but only when the canvas is used with a SENTINEL, because an unparsable value
+  // leaves `fillStyle` unchanged and would otherwise inherit whatever was set before it.
+  // That sentinel is implementation, so these cases pin the RESULT:
+  //
+  // Tailwind gray-400 (#9ca3af) on #181A1F is the ratio DESIGN.md documents as the dark-mode
+  // floor at 6.86:1, and gray-500 (#6b7280) on the same surface is documented as failing at
+  // 3.60:1. Both are asserted in oklch syntax here, so a pixel-resolution regression fails
+  // on the palette's own numbers rather than on a number this file invented.
+  [
+    'gray-400 in oklch on #181A1F (modern syntax -> the documented 6.86:1, PASS)',
+    'color:oklch(0.707 0.022 261.325);background:#181A1F;font-size:16px',
+    'PASS',
+  ],
+  [
+    'gray-500 in oklch on #181A1F (modern syntax -> the documented 3.60:1, FAIL)',
+    'color:oklch(0.551 0.027 264.364);background:#181A1F;font-size:16px',
+    'FAIL',
+  ],
+  [
+    'black on oklch(1 0 0) over white (modern syntax resolves to white -> PASS at 21:1)',
+    'color:#000;background:oklch(1 0 0);font-size:16px',
+    'PASS',
+  ],
+  [
+    'white on oklch(0.928 0.006 264.531) (resolves to gray-200 #e5e7eb -> FAIL)',
+    'color:#fff;background:oklch(0.928 0.006 264.531);font-size:16px',
+    'FAIL',
+  ],
   [
     'white on an oklab 75% black badge over a white card (modern syntax -> PASS)',
     'color:#fff;background:oklab(0 0 0 / 0.75);font-size:16px',

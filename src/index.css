@@ -666,10 +666,10 @@ body::-webkit-scrollbar {
 
 /* The accent. One point of contrast on the line, on the motivation word rather
    than the merchandise. Two tokens because the palette needs two: #E5B65F is
-   9.92:1 on the dark hero, #8A6413 is 5.05:1 on the light one. See DESIGN.md. */
+   9.92:1 on the dark hero, #7d5a11 is 5.05:1 on the light one. See DESIGN.md. */
 /* The accent. One point of contrast on the line, on the motivation word rather
    than the merchandise. Two tokens because the palette needs two: #E5B65F is
-   9.92:1 on the dark hero, #8A6413 is 5.05:1 on the light one. See DESIGN.md.
+   9.92:1 on the dark hero, #7d5a11 is 5.05:1 on the light one. See DESIGN.md.
 
    The face lives here rather than in a variant's scoped block. It was previously
    declared only inside `@scope ([data-impeccable-variant="3"])`, so with variant 1
@@ -694,9 +694,9 @@ body::-webkit-scrollbar {
 
 /* Keyed off the class the theme provider writes, not `prefers-color-scheme`: the
    app decides its own theme, so an OS preference of light with the app set to
-   dark would have painted #8a6413 on the dark hero at 2.4:1. */
+   dark would have painted #7d5a11 on the dark hero at 2.4:1. */
 html.light .hero-wipe__lead {
-  color: #8a6413;
+  color: #7d5a11;
 }
 
 .hero-pod__sep {

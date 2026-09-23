@@ -97,7 +97,7 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer, twoPerScreen = true
                 isLight ? "text-slate-500" : "text-gray-400"
               )}
             >
-              <span className="uppercase tracking-wider text-[10px] font-bold text-[#8A6413] dark:text-[#E5B65F]">
+              <span className="uppercase tracking-wider text-[10px] font-bold text-[#7d5a11] dark:text-[#E5B65F]">
                 {displayCategory}
               </span>
               <div className="flex items-center gap-1">
@@ -176,7 +176,7 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer, twoPerScreen = true
             </div>
 
             <div className="flex items-center gap-1.5">
-              <span className="text-[11px] font-bold uppercase text-[#8A6413] dark:text-[#E5B65F] group-hover:underline">
+              <span className="text-[11px] font-bold uppercase text-[#7d5a11] dark:text-[#E5B65F] group-hover:underline">
                 View Offer
               </span>
               <div

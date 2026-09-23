@@ -43,7 +43,7 @@ export const NexGCollectionRail: React.FC<NexGCollectionRailProps> = ({
                 {collection.badge}
               </span>
             )}
-            <span className="text-xs font-bold text-[#8A6413] dark:text-[#E5B65F] flex items-center gap-1">
+            <span className="text-xs font-bold text-[#7d5a11] dark:text-[#E5B65F] flex items-center gap-1">
               <Sparkles size={13} />
               <span>Curated Collection</span>
             </span>

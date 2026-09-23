@@ -747,7 +747,7 @@ export function DateTimeField(props: DateTimeFieldProps) {
         aria-describedby={describedBy}
         className={triggerClasses}
       >
-        <Icon size={15} className={cn('flex-shrink-0', isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]')} />
+        <Icon size={15} className={cn('flex-shrink-0', isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]')} />
         <span className="flex-1 truncate">{displayText || placeholder || defaultPlaceholder(mode)}</span>
       </button>
 

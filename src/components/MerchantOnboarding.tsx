@@ -784,10 +784,10 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
       <div className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm no-print">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0 cursor-pointer select-none" onClick={() => onNavigate?.('home')}>
-            {/* #8A6413 on light, #E5B65F on dark. The dark gold measures 1.79:1 on the light
+            {/* #7d5a11 on light, #E5B65F on dark. The dark gold measures 1.79:1 on the light
                 page - unreadable - and the light gold measures 3.47:1 on the dark one. Each
                 theme needs its own, which is what DESIGN.md documents. */}
-            <span className="font-extrabold text-2xl tracking-widest font-sans hover:text-amber-500 transition-colors text-[#8A6413] dark:text-[#E5B65F] shrink-0">NEXG</span>
+            <span className="font-extrabold text-2xl tracking-widest font-sans hover:text-amber-500 transition-colors text-[#7d5a11] dark:text-[#E5B65F] shrink-0">NEXG</span>
             <span className="text-slate-300 font-light shrink-0">|</span>
             <span className="text-sm font-semibold tracking-wide uppercase text-slate-600 hover:text-slate-900 transition-colors truncate">Merchant Portal</span>
           </div>
@@ -813,7 +813,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
         <div className="mb-8 no-print">
           <div className="flex justify-between items-center mb-3 text-xs md:text-sm text-slate-500">
             <div className="flex items-center gap-2 font-semibold text-slate-800">
-              <span className="cursor-pointer hover:underline text-[#8A6413] dark:text-[#E5B65F]" onClick={() => onNavigate?.('home')}>Home</span>
+              <span className="cursor-pointer hover:underline text-[#7d5a11] dark:text-[#E5B65F]" onClick={() => onNavigate?.('home')}>Home</span>
               {selectedCategory && (
                 <>
                   <span className="text-slate-400">/</span>

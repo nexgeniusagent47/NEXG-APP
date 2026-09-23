@@ -234,15 +234,15 @@ export default function MerchantView({
             </span>
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <Clock size={14} className="text-[#8A6413] dark:text-[#E5B65F]" />
+            <Clock size={14} className="text-[#7d5a11] dark:text-[#E5B65F]" />
             {merchant.deliveryTime}
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <Bike size={14} className="text-[#8A6413] dark:text-[#E5B65F]" />
+            <Bike size={14} className="text-[#7d5a11] dark:text-[#E5B65F]" />
             {merchant.deliveryFee === 0 ? 'Free delivery' : `KSh ${merchant.deliveryFee} delivery`}
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <MapPin size={14} className="text-[#8A6413] dark:text-[#E5B65F]" />
+            <MapPin size={14} className="text-[#7d5a11] dark:text-[#E5B65F]" />
             {merchant.address}
           </span>
           {!merchant.isOpen && (
@@ -256,7 +256,7 @@ export default function MerchantView({
             merchant instead of assuming they all sell the same way. */}
         <section className="mt-6">
           <div className="flex items-center gap-2 mb-2">
-            <ShieldCheck size={15} className="text-[#8A6413] dark:text-[#E5B65F]" />
+            <ShieldCheck size={15} className="text-[#7d5a11] dark:text-[#E5B65F]" />
             <h2 className={cn('text-sm font-bold', isLight ? 'text-slate-900' : 'text-white')}>
               {intent.arc.label}
             </h2>
@@ -300,7 +300,7 @@ export default function MerchantView({
                     : 'bg-white/5 border-white/10 focus-within:border-[#E5B65F]'
                 )}
               >
-                <Search size={14} className="flex-shrink-0 text-[#8A6413] dark:text-[#E5B65F]" />
+                <Search size={14} className="flex-shrink-0 text-[#7d5a11] dark:text-[#E5B65F]" />
                 <input
                   type="search"
                   value={filter}
@@ -342,7 +342,7 @@ export default function MerchantView({
               <button
                 type="button"
                 onClick={() => setFilter('')}
-                className="mt-3 text-xs font-bold text-[#8A6413] dark:text-[#E5B65F] underline underline-offset-2"
+                className="mt-3 text-xs font-bold text-[#7d5a11] dark:text-[#E5B65F] underline underline-offset-2"
               >
                 Clear search
               </button>
@@ -463,7 +463,7 @@ export default function MerchantView({
                               {item.description}
                             </p>
                             <div className="mt-auto pt-2 flex items-center justify-between gap-2">
-                              <span className="text-sm font-bold text-[#8A6413] dark:text-[#E5B65F] tabular-nums">
+                              <span className="text-sm font-bold text-[#7d5a11] dark:text-[#E5B65F] tabular-nums">
                                 KSh {item.price.toLocaleString()}
                               </span>
                               <span

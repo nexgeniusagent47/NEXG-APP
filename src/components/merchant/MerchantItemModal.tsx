@@ -161,7 +161,7 @@ export const MerchantItemModal: React.FC<MerchantItemModalProps> = ({
               >
                 {item.name}
               </h2>
-              <span className="text-base font-bold text-[#8A6413] dark:text-[#E5B65F] tabular-nums flex-shrink-0">
+              <span className="text-base font-bold text-[#7d5a11] dark:text-[#E5B65F] tabular-nums flex-shrink-0">
                 KSh {item.price.toLocaleString()}
               </span>
             </div>

@@ -271,7 +271,7 @@ export const NexGItemSheet: React.FC = () => {
                   <span className="text-slate-400 font-normal">({activeItem.reviewCount} reviews)</span>
                 </div>
                 <div className="flex items-center gap-1 font-medium text-slate-500 dark:text-gray-400 bg-slate-100 dark:bg-white/5 px-2.5 py-1 rounded-lg">
-                  <Clock size={13} className="text-[#8A6413] dark:text-[#E5B65F]" />
+                  <Clock size={13} className="text-[#7d5a11] dark:text-[#E5B65F]" />
                   <span>{activeItem.deliveryTime}</span>
                 </div>
                 <div className="flex items-center gap-1 font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg">
@@ -287,7 +287,7 @@ export const NexGItemSheet: React.FC = () => {
                 'p-4 rounded-2xl border space-y-4',
                 isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#181A1F] border-white/10'
               )}>
-                <h4 className="text-xs font-bold uppercase tracking-wider text-[#8A6413] dark:text-[#E5B65F] flex items-center gap-1.5">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#7d5a11] dark:text-[#E5B65F] flex items-center gap-1.5">
                   <Calendar size={14} />
                   <span>Appointment & Scheduling</span>
                 </h4>
@@ -363,7 +363,7 @@ export const NexGItemSheet: React.FC = () => {
                 {/* Guest / Party Counter */}
                 <div className="flex items-center justify-between pt-1">
                   <div className="flex items-center gap-1.5">
-                    <Users size={14} className="text-[#8A6413] dark:text-[#E5B65F]" />
+                    <Users size={14} className="text-[#7d5a11] dark:text-[#E5B65F]" />
                     <span className="text-xs font-bold">Number of Guests / Attendees</span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -430,7 +430,7 @@ export const NexGItemSheet: React.FC = () => {
                           </div>
                           <span className="text-xs font-bold">{addon.name}</span>
                         </div>
-                        <span className="text-xs font-bold text-[#8A6413] dark:text-[#E5B65F]">
+                        <span className="text-xs font-bold text-[#7d5a11] dark:text-[#E5B65F]">
                           +KSh {addon.price.toLocaleString()}
                         </span>
                       </div>

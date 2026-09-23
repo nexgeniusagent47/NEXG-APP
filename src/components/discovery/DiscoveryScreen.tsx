@@ -199,7 +199,7 @@ export default function DiscoveryScreen({
                 : 'bg-white/5 border-white/10 focus-within:border-[#E5B65F]'
             )}
           >
-            <Search size={16} className="flex-shrink-0 text-[#8A6413] dark:text-[#E5B65F]" />
+            <Search size={16} className="flex-shrink-0 text-[#7d5a11] dark:text-[#E5B65F]" />
             <input
               ref={searchRef}
               id="discovery-search-input"
@@ -298,7 +298,7 @@ export default function DiscoveryScreen({
                         className={cn(
                           'w-full text-left px-4 py-2 text-xs font-semibold transition-colors',
                           sort === option.key
-                            ? 'text-[#8A6413] dark:text-[#E5B65F]'
+                            ? 'text-[#7d5a11] dark:text-[#E5B65F]'
                             : isLight
                             ? 'text-slate-700 hover:bg-slate-50'
                             : 'text-gray-300 hover:bg-white/5'
@@ -585,7 +585,7 @@ const RailButton: React.FC<{
       'w-full flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-left transition-colors',
       active
         ? isLight
-          ? 'bg-[#B88728]/10 text-[#8A6413]'
+          ? 'bg-[#B88728]/10 text-[#7d5a11]'
           : 'bg-[#E5B65F]/15 text-[#E5B65F]'
         : isLight
         ? 'text-slate-600 hover:bg-slate-100'

@@ -152,7 +152,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
               {selectedSubcatId !== 'all' && (
                 <>
                   <ChevronRight size={12} />
-                  <span className="text-[#8A6413] dark:text-[#E5B65F] font-bold">
+                  <span className="text-[#7d5a11] dark:text-[#E5B65F] font-bold">
                     {category.subcategories.find((s) => s.id === selectedSubcatId)?.name ||
                       selectedSubcatId}
                   </span>
@@ -331,7 +331,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
                     {item.name}
                   </h4>
                   <p className="text-[11px] text-slate-400 truncate">{item.merchantName}</p>
-                  <span className="text-xs font-extrabold text-[#8A6413] dark:text-[#E5B65F] mt-1 block">
+                  <span className="text-xs font-extrabold text-[#7d5a11] dark:text-[#E5B65F] mt-1 block">
                     KSh {item.price.toLocaleString()}
                   </span>
                 </div>
@@ -361,7 +361,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
                   setFilterFreeDelivery(false);
                   setFilterPriceLevel(null);
                 }}
-                className="text-xs font-bold text-[#8A6413] dark:text-[#E5B65F] hover:underline"
+                className="text-xs font-bold text-[#7d5a11] dark:text-[#E5B65F] hover:underline"
               >
                 Reset all filters
               </button>

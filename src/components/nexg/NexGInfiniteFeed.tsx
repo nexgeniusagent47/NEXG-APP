@@ -137,12 +137,12 @@ export function NexGInfiniteFeed<T>({
             >
               {isLoadingMore ? (
                 <>
-                  <Loader2 className="w-3.5 h-3.5 animate-spin text-[#8A6413] dark:text-[#E5B65F]" />
+                  <Loader2 className="w-3.5 h-3.5 animate-spin text-[#7d5a11] dark:text-[#E5B65F]" />
                   <span>Loading more curated {itemTypeLabel}...</span>
                 </>
               ) : (
                 <>
-                  <ChevronDown className="w-3.5 h-3.5 text-[#8A6413] dark:text-[#E5B65F]" />
+                  <ChevronDown className="w-3.5 h-3.5 text-[#7d5a11] dark:text-[#E5B65F]" />
                   <span>
                     Load more ({displayedCount} of {items.length} {itemTypeLabel})
                   </span>
@@ -164,7 +164,7 @@ export function NexGInfiniteFeed<T>({
                 isLight ? 'text-slate-400' : 'text-gray-500'
               )}
             >
-              <Sparkles className="w-3 h-3 text-[#8A6413] dark:text-[#E5B65F]" />
+              <Sparkles className="w-3 h-3 text-[#7d5a11] dark:text-[#E5B65F]" />
               <span>You have reached the end of all {items.length} {itemTypeLabel}</span>
             </p>
           </div>

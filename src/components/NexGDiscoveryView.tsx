@@ -215,12 +215,12 @@ export default function NexGDiscoveryView({
               <span
                 className={cn(
                   'font-bold text-base sm:text-lg tracking-tight',
-                  isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'
+                  isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'
                 )}
               >
                 NEXG
               </span>
-              <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-[#E5B65F]/20 text-[#8A6413] dark:text-[#E5B65F] border border-[#E5B65F]/30">
+              <span className="text-[11px] font-bold px-2 py-0.5 rounded-full bg-[#E5B65F]/20 text-[#7d5a11] dark:text-[#E5B65F] border border-[#E5B65F]/30">
                 Concierge
               </span>
             </div>
@@ -238,7 +238,7 @@ export default function NexGDiscoveryView({
             >
               <Search
                 size={16}
-                className={cn('mr-2.5 flex-shrink-0', isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]')}
+                className={cn('mr-2.5 flex-shrink-0', isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]')}
               />
               <input
                 type="text"
@@ -269,7 +269,7 @@ export default function NexGDiscoveryView({
                   : 'bg-white/5 border-white/10 text-gray-300'
               )}
             >
-              <MapPin size={13} className="text-[#8A6413] dark:text-[#E5B65F]" />
+              <MapPin size={13} className="text-[#7d5a11] dark:text-[#E5B65F]" />
               <span className="truncate max-w-[130px]">Nairobi • Westlands</span>
             </div>
           </div>

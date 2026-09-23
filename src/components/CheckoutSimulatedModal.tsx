@@ -90,7 +90,7 @@ export default function CheckoutSimulatedModal() {
             isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#121314] border-white/10'
           }`}>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#E5B65F]/20 text-[#8A6413] dark:text-[#E5B65F] border border-[#E5B65F]/40 flex items-center justify-center font-bold">
+              <div className="w-10 h-10 rounded-full bg-[#E5B65F]/20 text-[#7d5a11] dark:text-[#E5B65F] border border-[#E5B65F]/40 flex items-center justify-center font-bold">
                 <CreditCard size={20} />
               </div>
               <div>
@@ -100,7 +100,7 @@ export default function CheckoutSimulatedModal() {
                   Finalize & Place Order
                 </h3>
                 <span className={`text-[10px] uppercase font-bold tracking-widest block mt-0.5 ${
-                  isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'
+                  isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'
                 }`}>
                   Simulated Demo Checkout
                 </span>
@@ -147,7 +147,7 @@ export default function CheckoutSimulatedModal() {
               <div className={`flex items-center gap-2 text-sm font-extrabold tracking-wide ${
                 isLight ? 'text-slate-900' : 'text-white'
               }`}>
-                <MapPin size={16} className="text-[#8A6413] dark:text-[#E5B65F]" />
+                <MapPin size={16} className="text-[#7d5a11] dark:text-[#E5B65F]" />
                 <span>Delivery Address & Location</span>
               </div>
 
@@ -208,10 +208,10 @@ export default function CheckoutSimulatedModal() {
                 <div className={`flex items-center gap-2 text-sm font-extrabold tracking-wide ${
                   isLight ? 'text-slate-900' : 'text-white'
                 }`}>
-                  <CreditCard size={16} className="text-[#8A6413] dark:text-[#E5B65F]" />
+                  <CreditCard size={16} className="text-[#7d5a11] dark:text-[#E5B65F]" />
                   <span>Choose Simulated Payment Method</span>
                 </div>
-                <span className="text-[11px] font-bold px-2 py-0.5 rounded border bg-amber-500/10 border-amber-500/30 text-[#8A6413] dark:text-[#E5B65F]">
+                <span className="text-[11px] font-bold px-2 py-0.5 rounded border bg-amber-500/10 border-amber-500/30 text-[#7d5a11] dark:text-[#E5B65F]">
                   Sandbox Router Active
                 </span>
               </div>
@@ -387,7 +387,7 @@ export default function CheckoutSimulatedModal() {
                     <span className={`font-bold ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>
                       Preloaded Demo Card
                     </span>
-                    <span className="font-bold text-[#8A6413] dark:text-[#E5B65F]">Visa Infinite • 8492</span>
+                    <span className="font-bold text-[#7d5a11] dark:text-[#E5B65F]">Visa Infinite • 8492</span>
                   </div>
                   <input
                     type="text"
@@ -428,7 +428,7 @@ export default function CheckoutSimulatedModal() {
                 isLight ? 'text-slate-900 border-slate-200' : 'text-white border-white/10'
               }`}>
                 <span>Total Demo Amount</span>
-                <span className="text-[#8A6413] dark:text-[#E5B65F] text-base font-bold">
+                <span className="text-[#7d5a11] dark:text-[#E5B65F] text-base font-bold">
                   ${finalTotal.toFixed(2)}
                 </span>
               </div>
@@ -443,7 +443,7 @@ export default function CheckoutSimulatedModal() {
               <div className={`w-full py-4 rounded-2xl border flex flex-col items-center justify-center gap-2 text-center ${
                 isLight ? 'bg-white border-amber-300' : 'bg-[#202224] border-[#E5B65F]/40'
               }`}>
-                <div className="flex items-center gap-2 text-sm font-bold text-[#8A6413] dark:text-[#E5B65F]">
+                <div className="flex items-center gap-2 text-sm font-bold text-[#7d5a11] dark:text-[#E5B65F]">
                   <Loader2 size={18} className="animate-spin" />
                   <span>Processing Demo Payment...</span>
                 </div>

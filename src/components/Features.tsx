@@ -35,7 +35,7 @@ export default function Features() {
       icon: CreditCard,
       title: t.features.f3Title,
       desc: t.features.f3Desc,
-      color: isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]',
+      color: isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]',
       bg: isLight
         ? 'bg-amber-50 border-amber-200 hover:border-amber-300 hover:bg-amber-100/60'
         : 'bg-[#E5B65F]/10 border-[#E5B65F]/20 hover:border-[#E5B65F]/40 hover:bg-[#E5B65F]/20',

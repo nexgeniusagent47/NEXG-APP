@@ -173,15 +173,15 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                       </span>
                     </span>
                     <span className="inline-flex items-center gap-1.5">
-                      <Clock size={13} className="text-[#8A6413] dark:text-[#E5B65F]" />
+                      <Clock size={13} className="text-[#7d5a11] dark:text-[#E5B65F]" />
                       {merchant.deliveryTime}
                     </span>
                     <span className="inline-flex items-center gap-1.5">
-                      <Bike size={13} className="text-[#8A6413] dark:text-[#E5B65F]" />
+                      <Bike size={13} className="text-[#7d5a11] dark:text-[#E5B65F]" />
                       {merchant.deliveryFee === 0 ? 'Free delivery' : `KSh ${merchant.deliveryFee}`}
                     </span>
                     <span className="inline-flex items-center gap-1.5">
-                      <MapPin size={13} className="text-[#8A6413] dark:text-[#E5B65F]" />
+                      <MapPin size={13} className="text-[#7d5a11] dark:text-[#E5B65F]" />
                       {merchant.nairobiArea}
                     </span>
                   </div>
@@ -252,7 +252,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                             >
                               {item.name}
                             </p>
-                            <span className="text-xs font-bold text-[#8A6413] dark:text-[#E5B65F] flex-shrink-0">
+                            <span className="text-xs font-bold text-[#7d5a11] dark:text-[#E5B65F] flex-shrink-0">
                               KSh {item.price.toLocaleString()}
                             </span>
                           </li>
@@ -262,7 +262,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                   )}
 
                   <p className={cn('flex items-start gap-2 text-xs', isLight ? 'text-slate-500' : 'text-gray-400')}>
-                    <Store size={13} className="mt-0.5 flex-shrink-0 text-[#8A6413] dark:text-[#E5B65F]" />
+                    <Store size={13} className="mt-0.5 flex-shrink-0 text-[#7d5a11] dark:text-[#E5B65F]" />
                     {merchant.address}
                   </p>
                 </div>

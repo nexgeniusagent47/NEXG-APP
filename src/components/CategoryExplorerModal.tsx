@@ -40,7 +40,7 @@ export default function CategoryExplorerModal({
     return (
       <IconComponent
         className={`${className} ${
-          isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'
+          isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'
         }`}
       />
     );
@@ -197,7 +197,7 @@ export default function CategoryExplorerModal({
               <Icons.Search
                 size={18}
                 className={`absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none ${
-                  isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'
+                  isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'
                 }`}
               />
               <input
@@ -345,10 +345,10 @@ export default function CategoryExplorerModal({
                           onClick={() => handleSelectCategory(cat)}
                           className={`flex items-center gap-1 text-[11px] font-bold px-2.5 py-1 rounded-lg border transition-colors cursor-pointer flex-shrink-0 ${
                             isLight
-                              ? // #8A6413, not #B88728: the fill gold is 3.21:1 as text on
+                              ? // #7d5a11, not #B88728: the fill gold is 3.21:1 as text on
                                 // the slate-50 chip and 3.02:1 against the page behind it.
-                                // DESIGN.md records #8A6413 as the 5.37:1 gold for text.
-                                'bg-slate-50 hover:bg-amber-50 text-[#8A6413] border-slate-200 hover:border-amber-300'
+                                // DESIGN.md records #7d5a11 as the 5.37:1 gold for text.
+                                'bg-slate-50 hover:bg-amber-50 text-[#7d5a11] border-slate-200 hover:border-amber-300'
                               : 'bg-white/5 hover:bg-white/10 text-[#E5B65F] border-white/10 hover:border-[#E5B65F]/40'
                           }`}
                         >
@@ -398,7 +398,7 @@ export default function CategoryExplorerModal({
                       <span
                         onClick={() => handleSelectCategory(cat)}
                         className={`font-semibold cursor-pointer underline-offset-2 hover:underline ${
-                          isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'
+                          isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'
                         }`}
                       >
                         View listings

@@ -111,7 +111,7 @@ export const MerchantCard: React.FC<MerchantCardProps> = ({
         {/* Bottom-Right Wolt Delivery Pill */}
         <div className="absolute bottom-3 right-3 z-10">
           <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-white/95 dark:bg-[#181A1F]/95 text-slate-900 dark:text-white backdrop-blur-md shadow-md border border-black/5 dark:border-white/10">
-            <Clock size={12} className="text-[#8A6413] dark:text-[#E5B65F]" />
+            <Clock size={12} className="text-[#7d5a11] dark:text-[#E5B65F]" />
             <span>{merchant.deliveryTime}</span>
           </div>
         </div>
@@ -148,7 +148,7 @@ export const MerchantCard: React.FC<MerchantCardProps> = ({
         {/* Delivery & Logistics Row */}
         <div className="flex items-center justify-between pt-2 text-xs border-t border-slate-100 dark:border-white/5">
           <div className="flex items-center gap-1.5 font-medium text-slate-600 dark:text-gray-300">
-            <Bike size={13} className="text-[#8A6413] dark:text-[#E5B65F]" />
+            <Bike size={13} className="text-[#7d5a11] dark:text-[#E5B65F]" />
             <span>
               {merchant.deliveryFee === 0
                 ? 'Free delivery'
@@ -198,7 +198,7 @@ export const MerchantCard: React.FC<MerchantCardProps> = ({
                   >
                     {item.name}
                   </h5>
-                  <span className="text-[10px] font-bold text-[#8A6413] dark:text-[#E5B65F] mt-0.5">
+                  <span className="text-[10px] font-bold text-[#7d5a11] dark:text-[#E5B65F] mt-0.5">
                     KSh {item.price.toLocaleString()}
                   </span>
                 </div>

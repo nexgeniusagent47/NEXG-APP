@@ -185,7 +185,7 @@ export default function Restaurants({ onNavigate }: RestaurantsProps) {
                 <span>Explore Home</span>
               </button>
               <span className={isLight ? 'text-slate-300' : 'text-gray-600'}>/</span>
-              <span className={`text-xs sm:text-sm font-extrabold ${isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'}`}>
+              <span className={`text-xs sm:text-sm font-extrabold ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>
                 Fine Dining Partners
               </span>
             </div>
@@ -215,7 +215,7 @@ export default function Restaurants({ onNavigate }: RestaurantsProps) {
             }`} />
 
             <div className="relative z-10 p-6 sm:p-12 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-3 bg-[#E5B65F]/20 text-[#8A6413] dark:text-[#E5B65F]">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-3 bg-[#E5B65F]/20 text-[#7d5a11] dark:text-[#E5B65F]">
                 <Sparkles size={13} />
                 <span>Curated Culinary Directory</span>
               </div>
@@ -290,7 +290,7 @@ export default function Restaurants({ onNavigate }: RestaurantsProps) {
                   : 'bg-white/5 text-gray-300 border-white/10 hover:bg-white/10'
               }`}
             >
-              <Star size={13} className={onlyTopRated ? 'fill-current' : 'text-[#8A6413] dark:text-[#E5B65F]'} />
+              <Star size={13} className={onlyTopRated ? 'fill-current' : 'text-[#7d5a11] dark:text-[#E5B65F]'} />
               <span>Top Rated Only (4.8+)</span>
             </button>
           </div>
@@ -392,7 +392,7 @@ export default function Restaurants({ onNavigate }: RestaurantsProps) {
                           <span className="font-bold">{gRating}</span>
                           <span className="text-[11px] opacity-75">({gCount.toLocaleString()} Google reviews)</span>
                         </div>
-                        <span className="text-[10px] font-bold text-[#8A6413] dark:text-[#E5B65F]">
+                        <span className="text-[10px] font-bold text-[#7d5a11] dark:text-[#E5B65F]">
                           View Reviews →
                         </span>
                       </button>
@@ -408,7 +408,7 @@ export default function Restaurants({ onNavigate }: RestaurantsProps) {
                             : 'bg-white/10 hover:bg-white/20 text-white border-white/15'
                         }`}
                       >
-                        <CalendarIcon size={12} className="text-[#8A6413] dark:text-[#E5B65F]" />
+                        <CalendarIcon size={12} className="text-[#7d5a11] dark:text-[#E5B65F]" />
                         <span>Reserve Table</span>
                       </button>
 
@@ -697,7 +697,7 @@ export default function Restaurants({ onNavigate }: RestaurantsProps) {
                       </div>
 
                       <span className={`text-xs font-bold flex items-center gap-1 ${
-                        isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'
+                        isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'
                       }`}>
                         <span>Customize & Order</span>
                         <ChevronRight size={13} />
@@ -733,7 +733,7 @@ export default function Restaurants({ onNavigate }: RestaurantsProps) {
           >
             <div className="p-6 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
               <div>
-                <span className="text-[10px] uppercase font-bold tracking-widest text-[#8A6413] dark:text-[#E5B65F]">
+                <span className="text-[10px] uppercase font-bold tracking-widest text-[#7d5a11] dark:text-[#E5B65F]">
                   Table Reservation
                 </span>
                 <h3 className="text-xl font-bold">{bookingModalConfig.restaurantName}</h3>

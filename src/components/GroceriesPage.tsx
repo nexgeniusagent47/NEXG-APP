@@ -130,7 +130,7 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
                 <span>Explore Home</span>
               </button>
               <span className={isLight ? 'text-slate-300' : 'text-gray-600'}>/</span>
-              <span className={`text-xs sm:text-sm font-extrabold ${isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'}`}>
+              <span className={`text-xs sm:text-sm font-extrabold ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>
                 Gourmet Cellar & Purveyors
               </span>
             </div>
@@ -158,7 +158,7 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
             }`} />
 
             <div className="relative z-10 p-6 sm:p-12 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-3 bg-[#E5B65F]/20 text-[#8A6413] dark:text-[#E5B65F]">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest mb-3 bg-[#E5B65F]/20 text-[#7d5a11] dark:text-[#E5B65F]">
                 <Sparkles size={13} />
                 <span>Fine Cellar & Epicurean Purveyors</span>
               </div>
@@ -262,7 +262,7 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
                           <span className="font-bold">{purveyor.googleRating}</span>
                           <span className="text-[11px] opacity-75">({purveyor.googleReviewsCount.toLocaleString()} Google reviews)</span>
                         </div>
-                        <span className="text-[10px] font-bold text-[#8A6413] dark:text-[#E5B65F]">
+                        <span className="text-[10px] font-bold text-[#7d5a11] dark:text-[#E5B65F]">
                           View Reviews →
                         </span>
                       </button>
@@ -456,7 +456,7 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
                     </div>
 
                     <span className={`text-xs font-bold flex items-center gap-1 ${
-                      isLight ? 'text-[#8A6413]' : 'text-[#E5B65F]'
+                      isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'
                     }`}>
                       <span>Select Item</span>
                       <ChevronRight size={13} />

@@ -60,7 +60,7 @@ export default function LanguageSwitcher({
           <span className={`text-xs font-semibold flex items-center gap-1.5 ${
             isLight ? 'text-slate-600' : 'text-gray-300'
           }`}>
-            <Globe size={14} className="text-[#8A6413] dark:text-[#E5B65F]" />
+            <Globe size={14} className="text-[#7d5a11] dark:text-[#E5B65F]" />
             {t.nav.selectLanguage}
           </span>
           <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${
@@ -128,7 +128,7 @@ export default function LanguageSwitcher({
           aria-expanded={isOpen}
           aria-label="Select Regional Language"
         >
-          <span className="text-[#8A6413] dark:text-[#E5B65F] flex items-center justify-center">
+          <span className="text-[#7d5a11] dark:text-[#E5B65F] flex items-center justify-center">
             <CurrentIcon className="w-4 h-4" />
           </span>
           <span>{currentOption.nativeName}</span>
@@ -202,7 +202,7 @@ export default function LanguageSwitcher({
                         </div>
                       </div>
                       {isSelected && (
-                        <Check size={14} className="text-[#8A6413] dark:text-[#E5B65F]" />
+                        <Check size={14} className="text-[#7d5a11] dark:text-[#E5B65F]" />
                       )}
                     </button>
                   );
@@ -231,7 +231,7 @@ export default function LanguageSwitcher({
         title="Change Language (English, 中文, Kiswahili, العربية)"
       >
         {/* Single-color authentic cultural / language emblem */}
-        <span className="text-[#8A6413] dark:text-[#E5B65F] flex items-center justify-center">
+        <span className="text-[#7d5a11] dark:text-[#E5B65F] flex items-center justify-center">
           <CurrentIcon className="w-4 h-4" />
         </span>
         <span className="hidden sm:inline font-bold tracking-tight">{currentOption.nativeName}</span>
@@ -259,7 +259,7 @@ export default function LanguageSwitcher({
           >
             {/* Header info */}
             <div className="flex items-center gap-1.5 px-3 py-2 border-b border-black/5 dark:border-white/5 mb-1">
-              <Globe size={13} className="text-[#8A6413] dark:text-[#E5B65F]" />
+              <Globe size={13} className="text-[#7d5a11] dark:text-[#E5B65F]" />
               <span className={`text-[11px] font-bold uppercase tracking-wider ${
                 isLight ? 'text-slate-600' : 'text-gray-300'
               }`}>
@@ -315,7 +315,7 @@ export default function LanguageSwitcher({
                       </div>
                     </div>
                     {isSelected && (
-                      <Check size={16} className="text-[#8A6413] dark:text-[#E5B65F] shrink-0 ml-2" />
+                      <Check size={16} className="text-[#7d5a11] dark:text-[#E5B65F] shrink-0 ml-2" />
                     )}
                   </button>
                 );

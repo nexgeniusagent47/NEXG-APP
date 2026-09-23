@@ -91,7 +91,7 @@ export const DiscoveryMerchantCard: React.FC<DiscoveryMerchantCardProps> = ({
 
         <div className="absolute bottom-3 right-3 z-10">
           <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-[11px] font-bold bg-white/95 dark:bg-[#181A1F]/95 text-slate-900 dark:text-white">
-            <Clock size={12} className="text-[#8A6413] dark:text-[#E5B65F]" />
+            <Clock size={12} className="text-[#7d5a11] dark:text-[#E5B65F]" />
             {merchant.deliveryTime}
           </span>
         </div>
@@ -103,7 +103,7 @@ export const DiscoveryMerchantCard: React.FC<DiscoveryMerchantCardProps> = ({
           <h3
             className={cn(
               'text-[15px] font-bold leading-tight line-clamp-1 tracking-tight transition-colors',
-              'group-hover:text-[#8A6413] dark:group-hover:text-[#E5B65F]',
+              'group-hover:text-[#7d5a11] dark:group-hover:text-[#E5B65F]',
               isLight ? 'text-slate-900' : 'text-white'
             )}
           >
@@ -132,11 +132,11 @@ export const DiscoveryMerchantCard: React.FC<DiscoveryMerchantCardProps> = ({
           )}
         >
           <span className="inline-flex items-center gap-1">
-            <MapPin size={12} className="text-[#8A6413] dark:text-[#E5B65F]" />
+            <MapPin size={12} className="text-[#7d5a11] dark:text-[#E5B65F]" />
             {merchant.nairobiArea}
           </span>
           <span className="inline-flex items-center gap-1">
-            <Bike size={12} className="text-[#8A6413] dark:text-[#E5B65F]" />
+            <Bike size={12} className="text-[#7d5a11] dark:text-[#E5B65F]" />
             {merchant.deliveryFee === 0 ? 'Free' : `KSh ${merchant.deliveryFee}`}
           </span>
           <span className="ml-auto font-bold tracking-tight">

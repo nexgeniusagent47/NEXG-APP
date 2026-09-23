@@ -18,25 +18,54 @@
 export const CONTRAST_PROBE = String.raw`(() => {
   // Colour parsing.
   //
-  // TWO DISTINCT PROBLEMS, and the honest answer differs for each.
+  // rgb()/rgba() carry sRGB channels and are read directly.
   //
-  // 1. rgb()/rgba() - parsed exactly, channels and alpha.
+  // oklab()/oklch() do NOT: oklch(0.928 0.006 264.531) is lightness 0.928, chroma 0.006 and
+  // hue 264.5 degrees. Reading those three numbers as r/g/b produced ratios like 2.31:1 for
+  // near-white text on near-black, and turned 0 failures into 99 the moment the parser
+  // started accepting them. Tailwind v4 emits this syntax for most utilities, so leaving it
+  // unresolved meant 2550 elements across the app could not be measured at all.
   //
-  // 2. oklab()/oklch() - Tailwind v4 emits these for most utilities. Their channel values
-  //    are NOT sRGB: oklch(0.928 0.006 264.531) is lightness 0.928, chroma 0.006 and hue
-  //    264.5 degrees. Reading those three numbers as r/g/b produced ratios like 2.31:1 for
-  //    near-white text on near-black, which is nonsense, and it turned 0 failures into 99
-  //    the moment the parser started accepting them.
+  // They are now resolved by asking the BROWSER, which is the only parser here that is right.
+  // The colour is painted to a 1x1 canvas and the pixel is read back.
   //
-  //    There is no colour-space conversion here, and inventing one would be the mistake
-  //    this project keeps repeating: a confidently wrong number is worse than no number.
-  //    So oklab/oklch colours are reported UNRESOLVED and counted separately, never
-  //    silently passed and never guessed at.
+  // THE SENTINEL IS LOAD-BEARING. An unparsable value leaves fillStyle UNCHANGED rather
+  // than throwing or blanking it, so a failed parse would silently inherit the previous
+  // colour. A fixed sentinel is painted first; if the pixel still reads as the sentinel, the
+  // value did not parse and the colour stays unresolved. Without that check this would
+  // report confident nonsense for every value the browser rejects.
   //
-  //    The one exception is ALPHA, which is meaningful in every space: a 75%-black badge
-  //    composites as 75% black whatever syntax expressed it, and opaque-versus-translucent
-  //    is the only question the background walk needs answered. So alpha is read from all
-  //    syntaxes, and the channels are read only from rgb/rgba.
+  // This DOES use a canvas, which the project notes warn about - "canvas returns opaque black
+  // for oklch()". That warning is about a different call pattern: getComputedStyle(...).color
+  // and ctx.fillStyle both return the oklch STRING unchanged, so a probe reading those sees
+  // no conversion and concludes black. Reading an actual PIXEL does convert, and it was
+  // measured against the Tailwind palette before being trusted: gray-200 exact, gray-500
+  // within 2/255 on one channel, black and white exact. verify-contrast-probe.mjs pins
+  // gray-400 and gray-500 to the ratios DESIGN.md already documents, so a regression here
+  // fails on the palette's own numbers.
+  //
+  // Alpha is not converted and is not canvas-readable; it is read from the source string,
+  // which is exact in every syntax. Only the channel values come from the pixel.
+  const SENTINEL = [0x12, 0x34, 0x56]; // #123456: matches nothing in this app's palette
+  const canvas =
+    typeof document !== 'undefined' ? document.createElement('canvas') : null;
+  if (canvas) {
+    canvas.width = 1;
+    canvas.height = 1;
+  }
+  const ctx = canvas ? canvas.getContext('2d', { willReadFrequently: true }) : null;
+
+  /** Channels for any CSS colour, or null when the browser will not parse it. */
+  const resolveChannels = (css) => {
+    if (!ctx) return null;
+    ctx.fillStyle = '#123456';
+    ctx.fillStyle = css;
+    ctx.fillRect(0, 0, 1, 1);
+    const d = ctx.getImageData(0, 0, 1, 1).data;
+    if (d[0] === SENTINEL[0] && d[1] === SENTINEL[1] && d[2] === SENTINEL[2]) return null;
+    return { r: d[0], g: d[1], b: d[2] };
+  };
+
   const parseColor = (value) => {
     if (!value || value === 'transparent') return null;
     const m = value.match(/(rgba?|oklab|oklch|lab|lch|color)\(([^)]+)\)/);
@@ -57,7 +86,11 @@ export const CONTRAST_PROBE = String.raw`(() => {
     if (fn === 'rgb' || fn === 'rgba') {
       return { r: parts[0], g: parts[1], b: parts[2], a: a, modern: false };
     }
-    return { a: a, modern: true, syntax: fn };
+
+    // Modern syntax: ask the browser for the channels, read alpha from the string.
+    const resolved = resolveChannels(value);
+    if (!resolved) return { a: a, modern: true, syntax: fn, unresolvable: true };
+    return { r: resolved.r, g: resolved.g, b: resolved.b, a: a, modern: false };
   };
 
   const relLum = ({ r, g, b }) => {
@@ -103,28 +136,13 @@ export const CONTRAST_PROBE = String.raw`(() => {
       // reports white-on-white at 1.00:1 for text that actually sits at about 8:1 - a
       // false positive that was produced for real on the spa page, and which would have
       // sent someone to "fix" a badge that was already correct.
-      if (bg && bg.a > 0) {
-        if (bg.modern && bg.a < 1) {
-          // A translucent modern-syntax layer: alpha is meaningful in every colour space,
-          // but the channels are not sRGB, so this layer can be counted as coverage only
-          // when it is black (which composites as black in any space). Anything else stops
-          // the walk rather than being approximated.
-          if (bg.syntax === 'oklab' || bg.syntax === 'oklch') {
-            // oklab/oklch lightness 0 is black; a fully black layer needs no conversion.
-            const bgCss = cs.backgroundColor;
-            const isBlack =
-              /^ok(lab|ch)\(\s*0(\.0+)?\s/.test(bgCss.trim()) || /^ok(lab|ch)\(\s*0\s/.test(bgCss.trim());
-            if (!isBlack) return { unresolved: 'modern-colour' };
-            stack.unshift({ r: 0, g: 0, b: 0, a: bg.a });
-          } else {
-            return { unresolved: 'modern-colour' };
-          }
-        } else if (bg.modern) {
-          // Opaque modern-syntax background: the ratio cannot be derived from CSS here.
-          return { unresolved: 'modern-colour' };
-        } else {
-          stack.unshift(bg);
-        }
+      //
+      // Every layer that reaches here now carries real sRGB channels: rgb() directly, and
+      // oklab/oklch through the browser. A value the browser refuses to parse comes back
+      // flagged and stops the walk rather than being approximated.
+      if (bg) {
+        if (bg.unresolvable) return { unresolved: 'unparsable-colour' };
+        stack.unshift(bg);
       }
       node = node.parentElement;
     }
@@ -186,9 +204,9 @@ export const CONTRAST_PROBE = String.raw`(() => {
 
     const bgInfo = effectiveBackground(el);
 
-    // A foreground in modern syntax cannot be resolved either. Report it rather than
-    // reading oklch channels as r/g/b, which is what produced 99 bogus failures.
-    if (fg.modern) {
+    // A foreground the browser could not parse. Every parsed colour now carries sRGB
+    // channels, so this only fires on a genuinely unreadable value.
+    if (fg.unresolvable) {
       out.push({
         tag: el.tagName.toLowerCase(),
         cls: String(el.className || '').slice(0, 60),
