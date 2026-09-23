@@ -769,18 +769,29 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
         }
       `}</style>
 
-      {/* Header Banner */}
+      {/* Header Banner
+          The row must be able to SHRINK. A flex row with `justify-between` gives its items
+          their content width, and `min-width: auto` on a flex item refuses to go below that —
+          so with the logo lockup plus the language switcher plus a "Back to Site" button, the
+          row kept its natural width and pushed the whole page sideways. Measured before this
+          fix: overflowX 71px at 320, 16px at 375, and still 16px at 440 — the page was wider
+          than every phone, at every width, which is why "Back to Site" sat at right=391 on a
+          360px screen.
+
+          `min-w-0` lets the left group shrink and `truncate` is what it shrinks into, so the
+          portal label gives way before the controls do. The right group is `shrink-0` because
+          a language switcher and a navigation button are the parts that must stay tappable. */}
       <div className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm no-print">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3 cursor-pointer select-none" onClick={() => onNavigate?.('home')}>
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3 min-w-0 cursor-pointer select-none" onClick={() => onNavigate?.('home')}>
             {/* #8A6413 on light, #E5B65F on dark. The dark gold measures 1.79:1 on the light
                 page - unreadable - and the light gold measures 3.47:1 on the dark one. Each
                 theme needs its own, which is what DESIGN.md documents. */}
-            <span className="font-extrabold text-2xl tracking-widest font-sans hover:text-amber-500 transition-colors text-[#8A6413] dark:text-[#E5B65F]">NEXG</span>
-            <span className="text-slate-300 font-light">|</span>
-            <span className="text-sm font-semibold tracking-wide uppercase text-slate-600 hover:text-slate-900 transition-colors">Merchant Portal</span>
+            <span className="font-extrabold text-2xl tracking-widest font-sans hover:text-amber-500 transition-colors text-[#8A6413] dark:text-[#E5B65F] shrink-0">NEXG</span>
+            <span className="text-slate-300 font-light shrink-0">|</span>
+            <span className="text-sm font-semibold tracking-wide uppercase text-slate-600 hover:text-slate-900 transition-colors truncate">Merchant Portal</span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 shrink-0">
             <LanguageSwitcher />
             <button
               onClick={() => onNavigate?.('home')}

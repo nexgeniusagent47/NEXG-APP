@@ -65,7 +65,28 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
 
     const previous = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
+
+    /**
+     * Escape closes the drawer.
+     *
+     * The drawer had no keyboard dismissal at all. Every other overlay in this app goes
+     * through `useModalBehavior`, which exists precisely to own "Escape to dismiss" -
+     * but the drawer is rendered by the Header and never adopted it, so a keyboard user
+     * could open the menu with Enter and then only leave it by tabbing to the toggle.
+     *
+     * Bound on `document` in the capture phase for one reason that has already cost this
+     * project time: a handler on a container stops receiving the event if anything inside
+     * calls `stopPropagation`, and the comment in `MerchantPreviewSheet` records exactly
+     * that failure. Capture cannot be swallowed by a descendant.
+     */
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      setIsMobileMenuOpen(false);
+    };
+    document.addEventListener('keydown', onKeyDown, true);
+
     return () => {
+      document.removeEventListener('keydown', onKeyDown, true);
       document.body.style.overflow = previous;
     };
   }, [isMobileMenuOpen]);
@@ -120,14 +141,23 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
           }}
         />
       </div>
-      <div className="max-w-[1520px] mx-auto px-4 sm:px-8 flex items-center justify-between">
+      {/* The row must be able to SHRINK.
+          A flex row gives its items their content width, and `min-width: auto` on a flex item
+          refuses to go below that — so on `?page=metrics`, whose nav has more labels than any
+          other surface, the row kept its natural width and pushed the page sideways by 32 to
+          145px at every phone width. The other routes had fewer labels and happened to fit,
+          which is why this looked like a metrics bug rather than a header one.
+
+          `min-w-0` lets the children shrink; `truncate` is what they shrink into; the control
+          cluster is `shrink-0` because navigation must stay tappable. */}
+      <div className="max-w-[1520px] mx-auto px-4 sm:px-8 flex items-center justify-between gap-3 min-w-0">
         {/* Brand — the supplied wordmark, with no text beside it.
             The artwork already spells NEXG, so a text block next to it said the name twice.
             Sized by height rather than a square box because the artwork is 361x137, about
             2.6:1: it needs roughly 40px of height to stay legible, which makes it about
             105px wide. `w-auto` is therefore load-bearing — a fixed width would squash it. */}
         <div
-          className="flex items-center cursor-pointer select-none group"
+          className="flex items-center shrink-0 cursor-pointer select-none group"
           onClick={() => onNavigate('home')}
         >
           <LogoIcon
@@ -145,7 +175,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
             This also fixes v1 defect D-15: the full nav needed ~1331px inside a
             1280px `xl` breakpoint, so items crowded at exactly the width where
             they first appeared. */}
-        <nav className="hidden sm:flex items-center gap-7 text-xs sm:text-[13px] font-semibold tracking-wide">
+        <nav className="hidden sm:flex items-center gap-7 min-w-0 text-xs sm:text-[13px] font-semibold tracking-wide">
           <button
             onClick={() => (onExplore ? onExplore() : onNavigate('home'))}
             className={`transition-colors cursor-pointer text-left bg-transparent border-none p-0 ${
@@ -217,7 +247,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
         </nav>
 
         {/* Right Controls */}
-        <div className="flex items-center gap-2 sm:gap-2.5">
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
           {/* Active Order Tracker Shortcut */}
           {activeOrder && activeOrder.estimatedMinutesLeft > 0 && activeOrder.status !== 'delivered' && (
             <button
@@ -283,7 +313,17 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
             className={`p-1.5 sm:hidden cursor-pointer ${
               isLight ? 'text-slate-800 hover:text-[#B88728]' : 'text-white hover:text-[#E5B65F]'
             }`}
-            aria-label="Open Mobile Menu"
+            /* The name follows the state. It used to be the fixed string "Open Mobile Menu"
+               while the icon flipped to an X, so once the drawer was open a screen reader
+               still announced "Open Mobile Menu" for a control that closes it - the name and
+               the action disagreed. `aria-expanded` states the same fact in the form assistive
+               technology expects, and the label is the action the button will perform next.
+
+               This also misled an audit: searching for a close button found none, because the
+               only button there keeps its "Open" name forever. */
+            aria-label={isMobileMenuOpen ? 'Close Mobile Menu' : 'Open Mobile Menu'}
+            aria-expanded={isMobileMenuOpen}
+            aria-controls="mobile-menu-drawer"
           >
             {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
@@ -294,6 +334,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
+            id="mobile-menu-drawer"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}

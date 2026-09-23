@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X, Trash2, Plus, Minus, Tag, ShieldCheck, ArrowRight, Utensils, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { useCart } from '../context/CartContext';
@@ -29,7 +29,43 @@ export default function CartDrawer() {
   const [promoInput, setPromoInput] = useState('');
   const [promoMessage, setPromoMessage] = useState<{ text: string; success: boolean } | null>(null);
 
-  if (!isCartOpen) return null;
+  /**
+   * Lock the page behind the drawer, and let Escape dismiss it.
+   *
+   * Declared HERE, above every return, because the component used to bail out with
+   * `if (!isCartOpen) return null` further down. Any hook placed after that return is
+   * mounted only while the drawer is open, so the render where it opens mounts MORE hooks
+   * than the previous one did - React's "Rendered more hooks than during the previous
+   * render", which throws and blanks the page. That was introduced and caught here; the
+   * effect now sits before the guard so the hook count is constant.
+   *
+   * This drawer was also the only overlay in the app that never locked the body. Every
+   * other modal goes through `useModalBehavior`, which owns exactly this. On a phone an
+   * unlocked page scrolls under an open drawer, so the user scrolls content they cannot
+   * see and loses their place - the same defect the Header's drawer was fixed for.
+   *
+   * `previous` is restored rather than cleared, so a second lock elsewhere is not broken,
+   * and the listener is bound in the capture phase so a descendant calling
+   * stopPropagation cannot swallow the dismissal (a failure recorded in MerchantPreviewSheet).
+   */
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    if (!isCartOpen) return;
+
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      setIsCartOpen(false);
+    };
+    document.addEventListener('keydown', onKeyDown, true);
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown, true);
+      document.body.style.overflow = previous;
+    };
+  }, [isCartOpen, setIsCartOpen]);
 
   const handleApplyPromo = (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,7 +88,13 @@ export default function CartDrawer() {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 overflow-hidden">
+      {isCartOpen && (
+      <div
+        className="fixed inset-0 z-50 overflow-hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Your order"
+      >
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -481,6 +523,7 @@ export default function CartDrawer() {
           </motion.div>
         </div>
       </div>
+      )}
     </AnimatePresence>
   );
 }
