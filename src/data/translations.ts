@@ -1,6 +1,1173 @@
 export type Language = 'en' | 'zh' | 'sw' | 'ar';
 
 export interface TranslationSchema {
+  /*
+    SCREEN COPY, extracted from the components.
+
+    Every user-facing string that was written directly into JSX now has a key here, so the four
+    languages cover the whole application rather than the navigation shell.
+
+    STATUS: the English values are the source. The Chinese, Swahili and Arabic entries currently
+    hold the English text and are listed in PENDING_TRANSLATIONS, so the UI can show which screens
+    are still awaiting a translator. Seeding rather than inventing keeps every key present in all
+    four languages — which is what makes tsc able to enforce completeness — without putting
+    machine-guessed Arabic in front of a customer.
+  */
+  ui: {
+    bookingCalendar: {
+      's_07499a': string;
+      's_10422c': string;
+      's_183a37': string;
+      's_534c34': string;
+      's_71b856': string;
+      's_79caea': string;
+      's_8efff8': string;
+      's_aeb91b': string;
+      's_e5366b': string;
+      's_fdc2b8': string;
+    };
+    cartDrawer: {
+      's_11a9f0': string;
+      's_1fc724': string;
+      's_2303a3': string;
+      's_237e47': string;
+      's_2c7952': string;
+      's_42cb61': string;
+      's_44951e': string;
+      's_643b96': string;
+      's_733b61': string;
+      's_76ecba': string;
+      's_ab8546': string;
+      's_c7085d': string;
+      's_d2467b': string;
+      's_d2f4d4': string;
+      's_d6ea26': string;
+    };
+    categories: {
+      's_1a9863': string;
+    };
+    categoryExplorerModal: {
+      's_233e38': string;
+      's_7c267a': string;
+      's_7fd08b': string;
+      's_940323': string;
+      's_af1c10': string;
+      's_c7fa37': string;
+      's_c9f43c': string;
+      's_e37ac9': string;
+      's_f4cf7c': string;
+    };
+    categoryPage: {
+      's_004d7e': string;
+      's_062888': string;
+      's_2cef94': string;
+      's_41eb8f': string;
+      's_c4baea': string;
+      's_fce284': string;
+    };
+    checkoutSimulatedModal: {
+      's_119c2f': string;
+      's_19e2a2': string;
+      's_3a7a99': string;
+      's_55e54d': string;
+      's_635949': string;
+      's_63da07': string;
+      's_6aa79c': string;
+      's_7db213': string;
+      's_846466': string;
+      's_882f46': string;
+      's_9ad55a': string;
+      's_ac51d0': string;
+      's_b79126': string;
+      's_bac774': string;
+      's_bb36a9': string;
+      's_cecb67': string;
+      's_dd0a60': string;
+      's_e5297b': string;
+      's_e569ab': string;
+      's_ea3289': string;
+      's_ea4478': string;
+      's_eb034a': string;
+      's_ee343f': string;
+      's_fee23b': string;
+    };
+    consentBanner: {
+      's_35c291': string;
+      's_66cd82': string;
+      's_788df5': string;
+      's_821d1f': string;
+      's_956fa7': string;
+      's_9e0cba': string;
+      's_da6a92': string;
+      's_e7d306': string;
+      's_f477c8': string;
+    };
+    courierOnboarding: {
+      's_037e0b': string;
+      's_03c52e': string;
+      's_06c8b6': string;
+      's_0b39f6': string;
+      's_0bd62e': string;
+      's_0cb44f': string;
+      's_0d36d5': string;
+      's_0d98d0': string;
+      's_0e3256': string;
+      's_0f32ec': string;
+      's_1081b3': string;
+      's_10f420': string;
+      's_14bf35': string;
+      's_156177': string;
+      's_17b238': string;
+      's_1805c7': string;
+      's_197646': string;
+      's_204be3': string;
+      's_2358e6': string;
+      's_24813d': string;
+      's_26712f': string;
+      's_27538f': string;
+      's_27980f': string;
+      's_27c646': string;
+      's_2952ca': string;
+      's_2b31a3': string;
+      's_2cb0d8': string;
+      's_2d6ca0': string;
+      's_2dc8f1': string;
+      's_2ed783': string;
+      's_30b928': string;
+      's_310c80': string;
+      's_312631': string;
+      's_3174a5': string;
+      's_31843b': string;
+      's_338cf2': string;
+      's_340115': string;
+      's_34e784': string;
+      's_34f9ae': string;
+      's_377b90': string;
+      's_37dfba': string;
+      's_3873df': string;
+      's_3af714': string;
+      's_3ba957': string;
+      's_3bfd88': string;
+      's_3c3541': string;
+      's_3c774b': string;
+      's_3cc4fd': string;
+      's_3ce5aa': string;
+      's_41d914': string;
+      's_41fe24': string;
+      's_430404': string;
+      's_44fe57': string;
+      's_464dfd': string;
+      's_4979be': string;
+      's_4c7486': string;
+      's_4c987a': string;
+      's_4d1c2f': string;
+      's_4ff862': string;
+      's_50d865': string;
+      's_5104d5': string;
+      's_51dacf': string;
+      's_53d718': string;
+      's_55537f': string;
+      's_574f02': string;
+      's_587649': string;
+      's_5920ae': string;
+      's_5a833b': string;
+      's_5b5250': string;
+      's_5cfa43': string;
+      's_5f5518': string;
+      's_63a113': string;
+      's_64346b': string;
+      's_6790f2': string;
+      's_692fe8': string;
+      's_6b3d6a': string;
+      's_6f9c91': string;
+      's_70abeb': string;
+      's_714406': string;
+      's_717eb1': string;
+      's_71c904': string;
+      's_71ebbb': string;
+      's_71f6e3': string;
+      's_72a587': string;
+      's_74955f': string;
+      's_76af1d': string;
+      's_77522e': string;
+      's_79865b': string;
+      's_7cf2e1': string;
+      's_7d5f6e': string;
+      's_7d8667': string;
+      's_81db77': string;
+      's_827c49': string;
+      's_828ade': string;
+      's_831dc7': string;
+      's_86d4ca': string;
+      's_8bb6da': string;
+      's_8d5d4c': string;
+      's_8e203d': string;
+      's_8f912f': string;
+      's_903d8d': string;
+      's_913798': string;
+      's_93457d': string;
+      's_93e220': string;
+      's_9691d0': string;
+      's_984805': string;
+      's_99dc14': string;
+      's_9d159c': string;
+      's_a0094a': string;
+      's_a1524d': string;
+      's_a1c4fe': string;
+      's_a221a1': string;
+      's_a40d60': string;
+      's_a620a5': string;
+      's_a7c94e': string;
+      's_a85feb': string;
+      's_a8caa4': string;
+      's_aafa84': string;
+      's_ac26fd': string;
+      's_ad7df6': string;
+      's_aed4fc': string;
+      's_aef6a9': string;
+      's_af7bb7': string;
+      's_af8a4e': string;
+      's_b026ba': string;
+      's_b09e88': string;
+      's_b21f30': string;
+      's_b2e0a8': string;
+      's_b5015c': string;
+      's_b5c479': string;
+      's_b724e7': string;
+      's_b984fa': string;
+      's_b9d00c': string;
+      's_bc5303': string;
+      's_bf24cb': string;
+      's_c1ecb3': string;
+      's_c33c9b': string;
+      's_c59900': string;
+      's_c7a051': string;
+      's_c85d99': string;
+      's_c8708a': string;
+      's_c8bc71': string;
+      's_c8ed49': string;
+      's_ca5690': string;
+      's_cabacd': string;
+      's_cdec1f': string;
+      's_d101b7': string;
+      's_d5184b': string;
+      's_d5e54c': string;
+      's_d64903': string;
+      's_d66864': string;
+      's_d9863a': string;
+      's_db3b79': string;
+      's_dca3fc': string;
+      's_ddb4d1': string;
+      's_de744b': string;
+      's_e04a0d': string;
+      's_e07446': string;
+      's_e0934e': string;
+      's_e12ee9': string;
+      's_e15c6c': string;
+      's_e16a80': string;
+      's_e1c6ae': string;
+      's_e1fe05': string;
+      's_e21ec5': string;
+      's_e387b2': string;
+      's_e3ca9b': string;
+      's_e4c574': string;
+      's_e7710e': string;
+      's_e7cfff': string;
+      's_e90701': string;
+      's_eb6915': string;
+      's_ec9a3f': string;
+      's_ecd675': string;
+      's_eeec98': string;
+      's_ef8482': string;
+      's_efbb4c': string;
+      's_f3a211': string;
+      's_f4afb4': string;
+      's_f65568': string;
+      's_f6da6f': string;
+      's_f71ebc': string;
+      's_f954ab': string;
+      's_f9f8d5': string;
+      's_fa0cdb': string;
+      's_fbbe43': string;
+      's_fca1ec': string;
+      's_feb1b4': string;
+      's_febf86': string;
+    };
+    curatedNairobiWorlds: {
+      's_15a714': string;
+      's_18a51d': string;
+      's_41dd82': string;
+      's_52c035': string;
+      's_8abe87': string;
+      's_c2018d': string;
+      's_ecc198': string;
+      's_fe8da0': string;
+    };
+    databaseSqlModal: {
+      's_baaf3a': string;
+    };
+    dateTimeField: {
+      's_46a299': string;
+      's_7ecc8b': string;
+      's_8abf7c': string;
+    };
+    discoveryScreen: {
+      's_030851': string;
+      's_0b7ee2': string;
+      's_176135': string;
+      's_412226': string;
+      's_67300d': string;
+      's_8344a6': string;
+      's_a3c57f': string;
+      's_dfe60c': string;
+      's_f4d948': string;
+    };
+    dishCustomizerModal: {
+      's_052b34': string;
+      's_062e79': string;
+      's_1c711d': string;
+      's_2db328': string;
+      's_492026': string;
+      's_594a3d': string;
+      's_6c02ab': string;
+      's_70d3a5': string;
+      's_84ab4b': string;
+      's_9c0406': string;
+      's_a196bb': string;
+      's_bfae0e': string;
+      's_d0fac0': string;
+      's_ece1f0': string;
+    };
+    dockedSearchBar: {
+      's_67300d': string;
+    };
+    experiences: {
+      's_057742': string;
+      's_14c995': string;
+      's_574a76': string;
+      's_63ae7c': string;
+      's_6568e5': string;
+      's_96ebfb': string;
+      's_9fda6b': string;
+      's_a1e9f9': string;
+      's_ad3a34': string;
+      's_cebc44': string;
+      's_d29299': string;
+      's_eb9e1e': string;
+      's_f6e8ce': string;
+    };
+    floatingCartBar: {
+      's_f40d71': string;
+    };
+    forCouriers: {
+      's_06816c': string;
+      's_08c1c3': string;
+      's_0c343a': string;
+      's_0c8a9a': string;
+      's_0e840b': string;
+      's_110158': string;
+      's_153ab5': string;
+      's_18414d': string;
+      's_1bedd8': string;
+      's_1d2be9': string;
+      's_209f63': string;
+      's_22d1d3': string;
+      's_2a7274': string;
+      's_2bf27f': string;
+      's_2d816d': string;
+      's_2e6151': string;
+      's_2ed1ed': string;
+      's_33b4c6': string;
+      's_3500ab': string;
+      's_355ac2': string;
+      's_38769a': string;
+      's_38df83': string;
+      's_39bc68': string;
+      's_41493f': string;
+      's_42475b': string;
+      's_440245': string;
+      's_45b640': string;
+      's_4748c1': string;
+      's_4c36e1': string;
+      's_4d5b64': string;
+      's_4d81b2': string;
+      's_4f555f': string;
+      's_5150fd': string;
+      's_52a6f3': string;
+      's_530246': string;
+      's_53cdfb': string;
+      's_54c4b5': string;
+      's_5b8964': string;
+      's_5ce9fd': string;
+      's_5e7925': string;
+      's_653ccb': string;
+      's_677710': string;
+      's_6bde0a': string;
+      's_6d1c48': string;
+      's_75dde0': string;
+      's_765f2b': string;
+      's_777b12': string;
+      's_78df83': string;
+      's_7e32e7': string;
+      's_7f255f': string;
+      's_8049d9': string;
+      's_85cf78': string;
+      's_89bdbf': string;
+      's_8b1193': string;
+      's_928714': string;
+      's_933192': string;
+      's_93a5bc': string;
+      's_93fef0': string;
+      's_95e986': string;
+      's_97b846': string;
+      's_981b01': string;
+      's_9ad0cc': string;
+      's_9b1690': string;
+      's_9d3f52': string;
+      's_9db108': string;
+      's_a08321': string;
+      's_a1e9f9': string;
+      's_a7acb1': string;
+      's_a9577d': string;
+      's_ad6c0d': string;
+      's_aed5c5': string;
+      's_b53080': string;
+      's_b74c4e': string;
+      's_bc89aa': string;
+      's_befa37': string;
+      's_c10fec': string;
+      's_c18810': string;
+      's_c24cae': string;
+      's_c38c49': string;
+      's_c71f96': string;
+      's_c88176': string;
+      's_c887b9': string;
+      's_ce60db': string;
+      's_ce7472': string;
+      's_d44881': string;
+      's_d781b4': string;
+      's_df9144': string;
+      's_e10068': string;
+      's_e18d8e': string;
+      's_e3a7a2': string;
+      's_e3b925': string;
+      's_e6e178': string;
+      's_e72e94': string;
+      's_eb35f1': string;
+      's_ec3c35': string;
+      's_eeb176': string;
+      's_f370c7': string;
+      's_f582d4': string;
+      's_f6e64a': string;
+      's_fbe3b3': string;
+      's_fcf600': string;
+      's_ff2382': string;
+    };
+    forMerchants: {
+      's_032a19': string;
+      's_0c343a': string;
+      's_0eaa2f': string;
+      's_118503': string;
+      's_1600e2': string;
+      's_18414d': string;
+      's_2bf27f': string;
+      's_2f5b37': string;
+      's_38769a': string;
+      's_3f3d89': string;
+      's_4d81b2': string;
+      's_52a6f3': string;
+      's_540349': string;
+      's_591721': string;
+      's_673bf7': string;
+      's_750959': string;
+      's_771412': string;
+      's_7cb113': string;
+      's_80b451': string;
+      's_81df05': string;
+      's_85feef': string;
+      's_891482': string;
+      's_89a9da': string;
+      's_916b2f': string;
+      's_a1e9f9': string;
+      's_a2e8c7': string;
+      's_a92592': string;
+      's_aa32fa': string;
+      's_abafb4': string;
+      's_ae23a7': string;
+      's_b74c4e': string;
+      's_ba7223': string;
+      's_c0228a': string;
+      's_c24cae': string;
+      's_c75030': string;
+      's_c89f38': string;
+      's_ce7472': string;
+      's_ce9fe6': string;
+      's_d6626f': string;
+      's_da08fb': string;
+      's_def7cc': string;
+      's_e3b925': string;
+      's_e56df8': string;
+      's_e6a013': string;
+      's_e9cbdf': string;
+      's_f6538e': string;
+      's_f6e1bd': string;
+      's_faae3e': string;
+      's_fe1a29': string;
+    };
+    forProperties: {
+      's_0293af': string;
+      's_052b34': string;
+      's_061f53': string;
+      's_06fb24': string;
+      's_0a3693': string;
+      's_0c8a9a': string;
+      's_0d3b7b': string;
+      's_0e5ae2': string;
+      's_110158': string;
+      's_110820': string;
+      's_176079': string;
+      's_17d67c': string;
+      's_182ad0': string;
+      's_18414d': string;
+      's_1be9e5': string;
+      's_1d2be9': string;
+      's_21f4bb': string;
+      's_25096d': string;
+      's_271358': string;
+      's_29b967': string;
+      's_2bf27f': string;
+      's_31c559': string;
+      's_338ed9': string;
+      's_341a50': string;
+      's_38769a': string;
+      's_3b6c18': string;
+      's_40c759': string;
+      's_4216f1': string;
+      's_46f477': string;
+      's_49f179': string;
+      's_4c36e1': string;
+      's_4d2dec': string;
+      's_4d81b2': string;
+      's_4f7049': string;
+      's_4fdd58': string;
+      's_52a6f3': string;
+      's_534294': string;
+      's_53cdfb': string;
+      's_589ee1': string;
+      's_5bfbb7': string;
+      's_5fbc63': string;
+      's_70a8da': string;
+      's_73ba7f': string;
+      's_75dde0': string;
+      's_785c45': string;
+      's_7a1f3a': string;
+      's_7b1758': string;
+      's_7bf908': string;
+      's_7c6eec': string;
+      's_7ee992': string;
+      's_818f94': string;
+      's_8249e7': string;
+      's_8332c9': string;
+      's_872061': string;
+      's_89bdbf': string;
+      's_8c288d': string;
+      's_8c8458': string;
+      's_8d365a': string;
+      's_8e8592': string;
+      's_8fe3e8': string;
+      's_9ad0cc': string;
+      's_9db108': string;
+      's_9fd2f3': string;
+      's_a1e9f9': string;
+      's_a2cb3c': string;
+      's_a2f3a7': string;
+      's_a3fb7a': string;
+      's_a5d6a1': string;
+      's_a62509': string;
+      's_a9577d': string;
+      's_a969aa': string;
+      's_a97bcc': string;
+      's_aaa399': string;
+      's_b74c4e': string;
+      's_c24cae': string;
+      's_c50b8f': string;
+      's_c5bb5d': string;
+      's_c86934': string;
+      's_c887b9': string;
+      's_c9bc84': string;
+      's_cd4fe8': string;
+      's_ce7472': string;
+      's_d08ccb': string;
+      's_d15371': string;
+      's_d178f4': string;
+      's_d300d6': string;
+      's_d5d3ea': string;
+      's_d8481d': string;
+      's_d887cc': string;
+      's_e09921': string;
+      's_e3b925': string;
+      's_e56df8': string;
+      's_e6e178': string;
+      's_e7f7ee': string;
+      's_e87389': string;
+      's_ea763f': string;
+      's_ec3c35': string;
+      's_ee7b88': string;
+      's_f04a9d': string;
+      's_f59c46': string;
+      's_f77be3': string;
+      's_f90548': string;
+      's_f907f8': string;
+      's_fa3fc3': string;
+      's_fe3f95': string;
+    };
+    googleReviewsModal: {
+      's_0d75a8': string;
+      's_273f6f': string;
+      's_3ea133': string;
+      's_6913b8': string;
+      's_6a6eaf': string;
+      's_6bce42': string;
+      's_aaf427': string;
+      's_ba9553': string;
+      's_bd9554': string;
+      's_c34ae8': string;
+      's_cbac3e': string;
+      's_d45c4f': string;
+      's_d6f49f': string;
+    };
+    groceriesPage: {
+      's_160a42': string;
+      's_340a24': string;
+      's_48028b': string;
+      's_504097': string;
+      's_7447ef': string;
+      's_828ad2': string;
+      's_a1e9f9': string;
+      's_dcc1fb': string;
+    };
+    header: {
+      's_64f892': string;
+      's_7abd6c': string;
+    };
+    hero: {
+      's_67300d': string;
+      's_7ecda2': string;
+      's_c75a68': string;
+      's_ece6e2': string;
+    };
+    hostOnboarding: {
+      's_00679c': string;
+      's_013237': string;
+      's_0302c0': string;
+      's_0d3b1e': string;
+      's_10599c': string;
+      's_10a49a': string;
+      's_120c32': string;
+      's_12e078': string;
+      's_1596ef': string;
+      's_193de6': string;
+      's_205866': string;
+      's_20687f': string;
+      's_25916d': string;
+      's_25e7e1': string;
+      's_272c68': string;
+      's_292d45': string;
+      's_2bbda0': string;
+      's_33becf': string;
+      's_369c34': string;
+      's_3cc2c7': string;
+      's_415e74': string;
+      's_421a0f': string;
+      's_486ffa': string;
+      's_49e09b': string;
+      's_4a9200': string;
+      's_4e17c4': string;
+      's_58eafa': string;
+      's_616ace': string;
+      's_62a764': string;
+      's_6372ac': string;
+      's_67745b': string;
+      's_692b50': string;
+      's_7013c7': string;
+      's_75d65e': string;
+      's_773613': string;
+      's_782667': string;
+      's_7af122': string;
+      's_7b12e1': string;
+      's_7bba35': string;
+      's_810878': string;
+      's_82c7e7': string;
+      's_849305': string;
+      's_86adcf': string;
+      's_893bd7': string;
+      's_897c71': string;
+      's_8ad7ea': string;
+      's_8dc8f7': string;
+      's_8e3c7a': string;
+      's_924da1': string;
+      's_93cfd5': string;
+      's_9550a5': string;
+      's_99d32f': string;
+      's_9d617c': string;
+      's_a2a1b1': string;
+      's_a68df4': string;
+      's_a6d2ea': string;
+      's_a8dc5c': string;
+      's_aa1d9b': string;
+      's_ae7f40': string;
+      's_b45dc8': string;
+      's_b501d3': string;
+      's_b50578': string;
+      's_b5508b': string;
+      's_be3ecd': string;
+      's_bf72f7': string;
+      's_c0b7d7': string;
+      's_c250a9': string;
+      's_c36127': string;
+      's_ca1948': string;
+      's_ca9b4a': string;
+      's_cde9a5': string;
+      's_ce9840': string;
+      's_d1d7c9': string;
+      's_d90fdd': string;
+      's_e400b7': string;
+      's_e45952': string;
+      's_e4cee9': string;
+      's_e61a08': string;
+      's_e9c696': string;
+      's_eb7eb7': string;
+      's_ecc61a': string;
+      's_edbfdd': string;
+      's_f0ac0a': string;
+      's_f548ec': string;
+      's_f71497': string;
+      's_faea7e': string;
+      's_fbd2e5': string;
+      's_ff1835': string;
+    };
+    languageSwitcher: {
+      's_03e64a': string;
+      's_99547d': string;
+      's_b8cc8e': string;
+    };
+    merchantAdCarousel: {
+      's_297522': string;
+      's_2d4e52': string;
+      's_3340de': string;
+      's_430fac': string;
+    };
+    merchantCard: {
+      's_3beea0': string;
+      's_960d55': string;
+    };
+    merchantItemModal: {
+      's_062e79': string;
+      's_6c02ab': string;
+    };
+    merchantOnboarding: {
+      's_00b623': string;
+      's_012a51': string;
+      's_01edab': string;
+      's_02aa9a': string;
+      's_0bd62e': string;
+      's_0cb1d6': string;
+      's_108c09': string;
+      's_197803': string;
+      's_1c7169': string;
+      's_1cf31b': string;
+      's_20f7df': string;
+      's_21f543': string;
+      's_22691e': string;
+      's_26a2ff': string;
+      's_2eabdb': string;
+      's_312631': string;
+      's_39e42f': string;
+      's_3e95c1': string;
+      's_3fa081': string;
+      's_411097': string;
+      's_4331e0': string;
+      's_4baf91': string;
+      's_4f2047': string;
+      's_540d0d': string;
+      's_550c6f': string;
+      's_5664e0': string;
+      's_59c22e': string;
+      's_5fa789': string;
+      's_676418': string;
+      's_67de19': string;
+      's_7122f5': string;
+      's_71c904': string;
+      's_721462': string;
+      's_7308b8': string;
+      's_8242a9': string;
+      's_85273b': string;
+      's_869b48': string;
+      's_87a51d': string;
+      's_89ac4c': string;
+      's_8c1404': string;
+      's_91091f': string;
+      's_91dd0b': string;
+      's_928d67': string;
+      's_9441e0': string;
+      's_959d0c': string;
+      's_963f97': string;
+      's_9d4f8b': string;
+      's_a03653': string;
+      's_a0b2cf': string;
+      's_a133eb': string;
+      's_a4d472': string;
+      's_a5d0ab': string;
+      's_abf9f4': string;
+      's_b03404': string;
+      's_b32233': string;
+      's_b62775': string;
+      's_b639de': string;
+      's_b8579d': string;
+      's_b9084a': string;
+      's_b9f2b1': string;
+      's_b9ffbd': string;
+      's_bb20e3': string;
+      's_c05283': string;
+      's_c5955e': string;
+      's_c6846b': string;
+      's_d1bf6b': string;
+      's_d1d21f': string;
+      's_d33bf6': string;
+      's_d7a397': string;
+      's_d890b7': string;
+      's_db3b79': string;
+      's_e0a26d': string;
+      's_e58331': string;
+      's_e79369': string;
+      's_eab077': string;
+      's_eab952': string;
+      's_ebaf4a': string;
+      's_ed6a3f': string;
+      's_f1dd4c': string;
+      's_f7c245': string;
+      's_faea7e': string;
+    };
+    merchantPage: {
+      's_c902a1': string;
+    };
+    merchantPreviewSheet: {
+      's_0f4c5c': string;
+      's_28da6e': string;
+      's_baa550': string;
+    };
+    merchantRoute: {
+      's_176135': string;
+      's_a1ca54': string;
+      's_e84712': string;
+    };
+    merchantView: {
+      's_085b31': string;
+      's_3fcbae': string;
+      's_67300d': string;
+    };
+    metricsDashboard: {
+      's_048f2f': string;
+      's_0dd383': string;
+      's_1c8836': string;
+      's_235f7b': string;
+      's_236a59': string;
+      's_266384': string;
+      's_406acb': string;
+      's_41e8de': string;
+      's_461aff': string;
+      's_58b6dc': string;
+      's_5dd968': string;
+      's_65916f': string;
+      's_74d595': string;
+      's_74efa0': string;
+      's_75e157': string;
+      's_8474ec': string;
+      's_886fb2': string;
+      's_9d5b00': string;
+      's_a41501': string;
+      's_b0ad50': string;
+      's_c347b1': string;
+      's_cc1e6a': string;
+      's_cec477': string;
+      's_e4076f': string;
+      's_ee9d59': string;
+      's_f8fd6e': string;
+      's_ffb77d': string;
+    };
+    nexGCategoryDrilldown: {
+      's_03f70c': string;
+      's_09efe8': string;
+      's_0df6f0': string;
+      's_0ecb20': string;
+      's_126f44': string;
+      's_19ad69': string;
+      's_1b8543': string;
+      's_1f647f': string;
+      's_27c636': string;
+      's_2994b4': string;
+      's_2c9e5a': string;
+      's_2f1873': string;
+      's_34318e': string;
+      's_492026': string;
+      's_4ce3f0': string;
+      's_50238f': string;
+      's_543b1b': string;
+      's_5be698': string;
+      's_77bf79': string;
+      's_7db318': string;
+      's_8978ea': string;
+      's_8bf67b': string;
+      's_9dca31': string;
+      's_ab2d11': string;
+      's_c07c6d': string;
+      's_c14e04': string;
+      's_c25b51': string;
+      's_d394a9': string;
+      's_e16a1d': string;
+      's_eb13c4': string;
+      's_fae58c': string;
+      's_fcdcf7': string;
+    };
+    nexGCollectionRail: {
+      's_0b3917': string;
+      's_2994b4': string;
+      's_2c9e5a': string;
+      's_986032': string;
+    };
+    nexGDiscoveryView: {
+      's_6d9483': string;
+      's_741311': string;
+      's_76cb8c': string;
+      's_844b94': string;
+      's_8f8796': string;
+      's_a9176a': string;
+      's_b0a3fc': string;
+      's_df4cf6': string;
+    };
+    nexGEntityCard: {
+      's_085ed0': string;
+    };
+    nexGItemSheet: {
+      's_0932f6': string;
+      's_22b77f': string;
+      's_24a16c': string;
+      's_3beea0': string;
+      's_65d22e': string;
+      's_68f2d8': string;
+      's_693039': string;
+      's_a99ee2': string;
+      's_c6cf76': string;
+      's_d0e359': string;
+      's_eeea54': string;
+    };
+    nexGLandingHero: {
+      's_0b8149': string;
+      's_2bd100': string;
+      's_381d79': string;
+      's_52a6f3': string;
+      's_71a30d': string;
+      's_e17357': string;
+      's_f7c400': string;
+      's_fa918a': string;
+    };
+    nexGSearchEngine: {
+      's_c5b914': string;
+      's_cd81f4': string;
+    };
+    offercarousel: {
+      's_10bb09': string;
+      's_2aa5dc': string;
+      's_7141bc': string;
+    };
+    orderTrackingModal: {
+      's_116632': string;
+      's_375813': string;
+      's_43301e': string;
+      's_536456': string;
+      's_61243a': string;
+      's_6e6109': string;
+      's_74e226': string;
+      's_84e3ee': string;
+      's_976a74': string;
+      's_9c12c6': string;
+      's_9ca905': string;
+      's_9fb5a8': string;
+      's_a392ce': string;
+      's_b868ce': string;
+      's_cbac3e': string;
+      's_cd1876': string;
+      's_d6e963': string;
+      's_ea2152': string;
+      's_f56564': string;
+    };
+    productcarousel: {
+      's_10bb09': string;
+      's_7141bc': string;
+    };
+    promo: {
+      's_38769a': string;
+      's_4a421c': string;
+      's_c63982': string;
+      's_d2c984': string;
+    };
+    restaurantDetailModal: {
+      's_034ad6': string;
+      's_116c19': string;
+      's_3beea0': string;
+      's_4f2130': string;
+      's_52aed7': string;
+      's_56ba29': string;
+      's_649ff9': string;
+      's_652bc8': string;
+      's_79db72': string;
+      's_79fe15': string;
+      's_9c203d': string;
+      's_9f068b': string;
+      's_a023e6': string;
+      's_b05630': string;
+      's_b38795': string;
+      's_c152be': string;
+      's_e1c6bf': string;
+      's_f4657b': string;
+    };
+    restaurants: {
+      's_0721cf': string;
+      's_072c89': string;
+      's_0c8f01': string;
+      's_25b120': string;
+      's_2c3b25': string;
+      's_34df71': string;
+      's_4f9fa0': string;
+      's_5be698': string;
+      's_5f716b': string;
+      's_6b2c05': string;
+      's_7288fd': string;
+      's_868fb0': string;
+      's_99256e': string;
+      's_9da221': string;
+      's_a1e9f9': string;
+      's_ae0cb2': string;
+      's_bf0c7d': string;
+      's_cfdf8b': string;
+      's_d97dd5': string;
+      's_dde236': string;
+      's_e25e77': string;
+      's_eac205': string;
+    };
+    routeFallback: {
+      's_1c5772': string;
+    };
+    scrollToTop: {
+      's_f07710': string;
+    };
+    spaBookingModal: {
+      's_039d05': string;
+      's_09121f': string;
+      's_15ddf4': string;
+      's_17548b': string;
+      's_2fd731': string;
+      's_301d19': string;
+      's_4548b7': string;
+      's_485336': string;
+      's_4b8ec9': string;
+      's_5621b9': string;
+      's_712231': string;
+      's_7d1e9d': string;
+      's_8cff8d': string;
+      's_9092d9': string;
+      's_9505aa': string;
+      's_950d86': string;
+      's_9a36a0': string;
+      's_9e603c': string;
+      's_a027ba': string;
+      's_b3a5a1': string;
+      's_be9475': string;
+      's_c0a672': string;
+      's_c8c5fe': string;
+      's_f00e02': string;
+      's_f79d9c': string;
+    };
+    spaWellness: {
+      's_120405': string;
+      's_3669be': string;
+      's_5276ac': string;
+      's_5dfb4e': string;
+      's_659a92': string;
+      's_689bea': string;
+      's_69d23c': string;
+      's_9aabe9': string;
+      's_a1e9f9': string;
+      's_c1c2fb': string;
+      's_d02cb4': string;
+      's_eb9e1e': string;
+      's_f212ea': string;
+      's_f2937f': string;
+      's_fda6e0': string;
+      's_fe0476': string;
+    };
+    stats: {
+      's_034abd': string;
+      's_826dd3': string;
+      's_bd3fa2': string;
+      's_dc04b9': string;
+      's_e819e6': string;
+      's_f2a377': string;
+    };
+    transportBookingModal: {
+      's_1505c5': string;
+      's_160ad9': string;
+      's_251e18': string;
+      's_314bee': string;
+      's_358b66': string;
+      's_36a60c': string;
+      's_39b21c': string;
+      's_457b66': string;
+      's_6f672b': string;
+      's_77ae94': string;
+      's_7a4175': string;
+      's_8941e9': string;
+      's_8dea76': string;
+      's_99d1c7': string;
+      's_9ca1bd': string;
+      's_a1cbc4': string;
+      's_b68827': string;
+      's_be057d': string;
+      's_cd11b4': string;
+      's_d0cd2d': string;
+      's_efb6c4': string;
+      's_f2f922': string;
+    };
+    transportPage: {
+      's_1836d5': string;
+      's_1afb28': string;
+      's_2ea911': string;
+      's_3390d4': string;
+      's_3727e7': string;
+      's_52b224': string;
+      's_543b1b': string;
+      's_784e6e': string;
+      's_875bd6': string;
+      's_898adc': string;
+      's_93f4b8': string;
+      's_a1e9f9': string;
+      's_eac49e': string;
+      's_eb9e1e': string;
+    };
+    unifiedItemModal: {
+      's_0125ec': string;
+      's_1cc3d0': string;
+      's_3c0047': string;
+      's_4c13f0': string;
+      's_5d14d6': string;
+      's_94c578': string;
+      's_a027ba': string;
+      's_bf3b18': string;
+      's_ee3e2e': string;
+      's_ee749a': string;
+    };
+  };
+
 
   /*
     SHARED FORM VOCABULARY.
@@ -355,8 +1522,1175 @@ export interface TranslationSchema {
   };
 }
 
+/**
+ * Keys whose non-English values are still the English source, by language.
+ *
+ * Counted rather than listed so this cannot drift from reality: the number is written by the
+ * generator and re-checked by scripts/check-i18n-pending.mjs. When a language reaches zero the
+ * application is fully translated.
+ */
+export const PENDING_TRANSLATIONS = {
+  zh: 1042,  // keys still holding English text
+  sw: 1042,  // keys still holding English text
+  ar: 1042,  // keys still holding English text
+};
+
 export const translations: Record<Language, TranslationSchema> = {
   en: {
+  ui: {
+    bookingCalendar: {
+      's_07499a': 'Party / Guests',
+      's_10422c': 'Local Villa Time',
+      's_183a37': 'Sync Calendar',
+      's_534c34': 'Next Month',
+      's_71b856': 'Previous Month',
+      's_79caea': 'Available Time Slots',
+      's_8efff8': 'In 2 Days',
+      's_aeb91b': 'Dedicated Reservation Calendar',
+      's_e5366b': 'Selected Schedule',
+      's_fdc2b8': 'Next Week',
+    },
+    cartDrawer: {
+      's_11a9f0': 'Explore Menus',
+      's_1fc724': 'Promo code (try NEXG20)',
+      's_2303a3': 'Your cart is empty',
+      's_237e47': 'Clear entire cart',
+      's_2c7952': 'Simulated checkout & instant confirmation',
+      's_42cb61': 'Close cart',
+      's_44951e': 'Courier tip',
+      's_643b96': 'Your Order Cart',
+      's_733b61': 'Delivery fee',
+      's_76ecba': 'Remove item',
+      's_ab8546': 'Explore our curated restaurants and add artisanal dishes or concierge dining to get started.',
+      's_c7085d': 'Courier Concierge Tip',
+      's_d2467b': 'Your order',
+      's_d2f4d4': 'Proceed to Checkout',
+      's_d6ea26': 'Concierge service fee',
+    },
+    categories: {
+      's_1a9863': 'Browse Partners',
+    },
+    categoryExplorerModal: {
+      's_233e38': 'Click any category or subcategory to instantly browse partners',
+      's_7c267a': 'View listings',
+      's_7fd08b': 'Reset Catalog Filters',
+      's_940323': 'Close categories',
+      's_af1c10': 'Verified Merchant Partners',
+      's_c7fa37': 'Try searching for another keyword or clear the search query.',
+      's_c9f43c': 'Search across all 21 categories & 134 subcategories (e.g. Fine Dining, Vapes, Chauffeur, Safari)...',
+      's_e37ac9': 'No matching verticals found',
+      's_f4cf7c': 'Merchant Categories & Subcategories',
+    },
+    categoryPage: {
+      's_004d7e': 'Top Rated',
+      's_062888': 'Free Delivery',
+      's_2cef94': 'Reset all filters',
+      's_41eb8f': 'Fastest Delivery',
+      's_c4baea': 'Price Level',
+      's_fce284': 'No merchants found matching your filters.',
+    },
+    checkoutSimulatedModal: {
+      's_119c2f': 'This payment is',
+      's_19e2a2': 'Finalize & Place Order',
+      's_3a7a99': 'Apple Pay',
+      's_55e54d': 'App Delivery Instructions',
+      's_635949': 'Choose Simulated Payment Method',
+      's_63da07': 'Simulate Payment & Place Order',
+      's_6aa79c': 'Selected Items',
+      's_7db213': 'Hotel / Villa / Street Address',
+      's_846466': 'Close checkout',
+      's_882f46': 'Simulates instant STK push prompt directly on mobile handset.',
+      's_9ad55a': 'Total Demo Amount',
+      's_ac51d0': 'Cardholder Name',
+      's_b79126': 'No real funds or accounts will be debited.',
+      's_bac774': 'Simulated Demo Checkout',
+      's_bb36a9': 'DEMO ROUTER',
+      's_cecb67': 'Preloaded Demo Card',
+      's_dd0a60': 'Router Demo Validated',
+      's_e5297b': 'Delivery Address & Location',
+      's_e569ab': 'Processing Demo Payment...',
+      's_ea3289': 'Room Folio / Cash',
+      's_ea4478': 'Simulates one-touch FaceID / TouchID authorization.',
+      's_eb034a': 'Billed directly to your hotel master room folio upon delivery.',
+      's_ee343f': 'Sandbox Router Active',
+      's_fee23b': 'Merchant Partner',
+    },
+    consentBanner: {
+      's_35c291': 'Reject all',
+      's_66cd82': 'Strictly necessary cookies keep the site working. Analytics and marketing cookies stay off until you turn them on, and you can change this at any time.',
+      's_788df5': 'Your cookie choices',
+      's_821d1f': 'Accept all',
+      's_956fa7': 'Save choices',
+      's_9e0cba': 'Cookie settings',
+      's_da6a92': 'Necessary cookies are always active. Everything else is optional.',
+      's_e7d306': 'Cookie preferences',
+      's_f477c8': 'Always on. It cannot be switched off because the site cannot run without it.',
+    },
+    courierOnboarding: {
+      's_037e0b': 'Our compliance officers verify your submitted National ID, license, PIN, and fleet logbooks directly against NTSA registers.',
+      's_03c52e': 'Guaranteed Base Salary',
+      's_06c8b6': 'Verify your registered logistics enterprise. Only PDF files and scanned images up to 5MB size are accepted.',
+      's_0b39f6': 'Fleet Partner',
+      's_0bd62e': 'Account Number',
+      's_0cb44f': 'Executive Sedan / Van',
+      's_0d36d5': 'Active public third-party or comprehensive fleet cover policy certificate.',
+      's_0d98d0': 'E.g. Swift Deliveries',
+      's_0e3256': 'Submit official identification and transit licensing details.',
+      's_0f32ec': 'Rider Record Card',
+      's_1081b3': 'Full Name, Phone, ID Number, License Number, Vehicle Type, Plate Number',
+      's_10f420': 'Shift & Operating Zones',
+      's_14bf35': 'Ride custom NEXG-branded premium logistics vehicles, operate consistent shifts, and enjoy a stable guaranteed base salary.',
+      's_156177': 'Certificate of Incorporation',
+      's_17b238': 'Accepted For Fleet Provider',
+      's_1805c7': 'This agreement begins immediately on approval and is valid for a period of 12 months. Either party may terminate with 7 days\' written notice, or NEXG may block platform access instantly in cases of safety breach, driving license revocation, or fraudulent behavior.',
+      's_197646': 'Full Legal Name',
+      's_204be3': 'E.g. operations@swiftlogistics.co.ke',
+      's_2358e6': 'Independent Rider',
+      's_24813d': 'E.g. Kileleshwa, Block D',
+      's_26712f': 'Authorized Primary Contact Person',
+      's_27538f': 'Outline your company’s transit capacities and target operating logistics zones.',
+      's_27980f': 'WhatsApp Mobile Number',
+      's_27c646': 'Company Office Headquarters',
+      's_2952ca': 'Type Signature',
+      's_2b31a3': 'E.g. A001234567Z',
+      's_2cb0d8': 'Accepted & Agreed by Rider',
+      's_2d6ca0': 'Vehicle Type',
+      's_2dc8f1': 'E.g. Corner House, 4th Floor, Kimathi St.',
+      's_2ed783': 'Return to Elite Fleet page',
+      's_30b928': 'Company KRA PIN Certificate',
+      's_310c80': 'Back to Couriers',
+      's_312631': 'Bank Name',
+      's_3174a5': 'Contact Email Address',
+      's_31843b': 'Clear canvas',
+      's_338cf2': 'Services & Settlement Payout',
+      's_340115': 'Clear scanned copy of front and back face of your card.',
+      's_34e784': 'E.g. Swift Express Logistics Ltd',
+      's_34f9ae': 'Certificate of Incorporation / Reg No.',
+      's_377b90': 'Authorized Dispatch Committee',
+      's_37dfba': 'NTSA Driver\'s License Number',
+      's_3873df': 'E.g. DL-XXXXXX',
+      's_3af714': 'No active couriers added yet',
+      's_3ba957': 'E.g. Nairobi',
+      's_3bfd88': 'KRA PIN Number',
+      's_3c3541': 'Consolidated Business payout',
+      's_3c774b': 'Carry VIP guests to properties',
+      's_3cc4fd': 'NEXG Provides Vehicle',
+      's_3ce5aa': 'Emergency Contact Person',
+      's_41d914': 'Choose the expiry date',
+      's_41fe24': 'Draw digital signature with finger or pointer',
+      's_430404': 'Remove Card',
+      's_44fe57': 'Emergency Mobile Phone',
+      's_464dfd': 'We declare absolute compliance with Kenyan corporate regulations, active tax filings, and legal road safety acts.',
+      's_4979be': 'We certify that all couriers listed in our squad profiles hold valid, unexpired NTSA driving licenses and clean background clearance certifications.',
+      's_4c7486': 'Corporate Job Title',
+      's_4c987a': 'Authorized Officer Full Name',
+      's_4d1c2f': 'Structured Shift schedules',
+      's_4ff862': 'E.g. 4',
+      's_50d865': 'Upload crisp clear photo snapshots or PDF files under 5MB size limit.',
+      's_5104d5': 'Preferred Operating Area Zone',
+      's_51dacf': 'WhatsApp Number',
+      's_53d718': 'The Fleet Provider represents and warrants that all couriers and motorbikes comply with roadworthy rules, hold comprehensive insurance certifications, and observe Kenya\'s Data Protection Act 2019 standards.',
+      's_55537f': 'Vehicle Registration details',
+      's_574f02': 'Next Step',
+      's_587649': 'Official KRA Pin certification document page from iTax portal.',
+      's_5920ae': 'You are applying for a scheduled, salaried position. NEXG provides custom branded bikes, gear, and fuel budgets. Below, you will also designate your operational preferences.',
+      's_5a833b': 'Residential Address',
+      's_5b5250': 'Fleet Partner Business Profile',
+      's_5cfa43': 'NTSA Driving License',
+      's_5f5518': 'Drive your own motorcycle or scooter, set your flexible calendar hours, and take commissions per successfully completed errand.',
+      's_63a113': 'Total Registered Vehicles',
+      's_64346b': 'Full Name',
+      's_6790f2': 'Corporate Bank Name',
+      's_692fe8': 'E.g. P051234567Z',
+      's_6b3d6a': 'Deliver premium retail items',
+      's_6f9c91': 'E.g. +254 711...',
+      's_70abeb': 'Bank Settlement Transfer',
+      's_714406': 'Configure your legal registered business details for logistics partnerships.',
+      's_717eb1': 'Company Account Title',
+      's_71c904': 'NEXG APP LIMITED',
+      's_71ebbb': 'E.g. Red Honda CB125F (Year 2023)',
+      's_71f6e3': 'Register Active Couriers Squad',
+      's_72a587': 'Board Operations Committee',
+      's_74955f': 'E.g. Westlands',
+      's_76af1d': 'E.g. 15',
+      's_77522e': 'NEXT STEPS IN OUR VERIFICATION TIMELINE',
+      's_79865b': 'Preferred Working Shift',
+      's_7cf2e1': 'Alternative Contact Phone',
+      's_7d5f6e': 'Unlock premier delivery earnings, tailored branding, and unmatched support in Kenya’s luxury hospitality ecosystem.',
+      's_7d8667': 'Plate Number',
+      's_81db77': 'Years in Logistics Sector',
+      's_827c49': 'Account Holder Legal Name',
+      's_828ade': 'Vip App',
+      's_831dc7': 'KRA PIN Confirmation Certificate',
+      's_86d4ca': 'For NEXG App',
+      's_8bb6da': 'E.g. 12345678',
+      's_8d5d4c': 'Company Business Verification Documents',
+      's_8e203d': 'Handle high-end guest requests',
+      's_8f912f': 'E.g. CPR/2018/12345',
+      's_903d8d': 'Execute Partnership Agreement Contract',
+      's_913798': 'Click Add Rider Card above or upload your riders spreadsheet via CSV bulk import.',
+      's_93457d': 'Fleet Operational Scale & Coverage',
+      's_93e220': 'Corporate Fleet Partner logistics Framework',
+      's_9691d0': 'ONBOARDING PROFILE SUMMARY',
+      's_984805': 'Operating Counties & Estates Coverage',
+      's_99dc14': 'Pending Compliance Review',
+      's_9d159c': 'Direct Mobile Number',
+      's_a0094a': 'Payout Method',
+      's_a1524d': 'E.g. 12001234567',
+      's_a1c4fe': 'E.g. +254 700 111 222',
+      's_a221a1': 'Upon document clearance, you\'ll receive a WhatsApp invitation to join our premium standard customer service and hospitality training.',
+      's_a40d60': 'Premium Commission Payout',
+      's_a620a5': 'Official business registration certificate page issued by the Registrar of Companies.',
+      's_a7c94e': 'NEXG agrees to compile and settle client order payments to the Fleet Provider’s registered bank account weekly on Mondays, less a platform operations commission fee of',
+      's_a85feb': 'Your premium motorbike is provided by NEXG. You do not need to register a personal motorbike logbook or license plate here.',
+      's_a8caa4': 'Add individual active riders to your partnership ledger.',
+      's_aafa84': 'Active Vehicle types represented in Fleet',
+      's_ac26fd': 'Submit Portfolio Agreement',
+      's_ad7df6': 'Motorcycle / Scooter',
+      's_aed4fc': 'Join the Elite NEXG Rider Fleet',
+      's_aef6a9': 'National ID / Passport Number',
+      's_af7bb7': 'Signatory Director\'s National ID',
+      's_af8a4e': 'The Fleet Provider certifies that they actively manage and pay a squad of',
+      's_b026ba': 'City HQ Location',
+      's_b09e88': 'Draw Signature',
+      's_b21f30': 'ID Number',
+      's_b2e0a8': 'Driver\'s License Expiry Date *',
+      's_b5015c': 'List all cities and estates where your fleet currently has active coverage. E.g. Nairobi CBD, Westlands, Kilimani, Mombasa, Diani, etc.',
+      's_b5c479': 'NEXG Dedicated Rider',
+      's_b724e7': 'Print Agreement Document',
+      's_b984fa': 'Import CSV Spreadsheet',
+      's_b9d00c': 'This contract is binding for a term of 12 months. Either partner may exit the frame by providing 14 days\' written notice to the other party.',
+      's_bc5303': 'Add Rider Card',
+      's_bf24cb': 'Name exactly as printed on legal ID card',
+      's_c1ecb3': 'Package Delivery',
+      's_c33c9b': 'DL Number',
+      's_c59900': 'E.g. KMCA 123A',
+      's_c7a051': 'We declare that our organization maintains comprehensive third-party logistics insurance and active public liability coverage across all active fleet operators.',
+      's_c85d99': 'Proof of ownership and active public transit insurance coverage.',
+      's_c8708a': 'Company Legal Name',
+      's_c8bc71': 'Corporate Bank Settlement Account',
+      's_c8ed49': 'Identification & Vehicle Setup',
+      's_ca5690': 'Download Standard CSV Template',
+      's_cabacd': 'NEXG Operations Admin',
+      's_cdec1f': 'Both sides of your active, unexpired logistics driver license.',
+      's_d101b7': 'Onboard your registered Kenyan logistics agency and entire courier squad. Bulk upload riders and manage team-level settlements.',
+      's_d5184b': 'Own Vehicle required',
+      's_d5e54c': 'Commercial Fleet Insurance Policy',
+      's_d64903': 'NEXG remits compiled client transport payout settlements directly to your corporate account weekly on Mondays.',
+      's_d66864': 'Flexible Shifts',
+      's_d9863a': 'E.g. Fleet Manager',
+      's_db3b79': 'Account Name',
+      's_dca3fc': 'E.g. Westlands, Kilimani, Lavington',
+      's_ddb4d1': 'E.g. Equity Bank',
+      's_de744b': 'E.g. Mary Jane',
+      's_e04a0d': 'Payout Settlement Configurations',
+      's_e07446': 'Review pre-filled contract agreement clauses and apply your electronic signature.',
+      's_e0934e': 'Date of Birth *',
+      's_e12ee9': 'Preferred Transit Vehicle Assigned',
+      's_e15c6c': 'Trading Name / Brand Name',
+      's_e16a80': 'Document Verification Uploads',
+      's_e1c6ae': 'Bulk CSV Squad Import',
+      's_e1fe05': 'E.g. Albert Mwangi',
+      's_e21ec5': 'Vehicle Model & Color',
+      's_e387b2': 'Business KRA PIN',
+      's_e3ca9b': 'E.g. John Kamau Maina',
+      's_e4c574': 'E.g. +254 711 000 000',
+      's_e7710e': 'Typed Electronic Signature preview',
+      's_e7cfff': 'Authorized Signature Panel',
+      's_e90701': 'Select Gender',
+      's_eb6915': 'Fleet Integrity Declarations',
+      's_ec9a3f': 'Estate Area / Street',
+      's_ecd675': 'Vehicle Logbook & Third-Party Insurance',
+      's_eeec98': 'Import CSV',
+      's_ef8482': 'Choose Your Partnership model',
+      's_efbb4c': 'E.g. Spouse / Parent',
+      's_f3a211': 'E.g. +254 700 987 654',
+      's_f4afb4': 'Choose your date of birth',
+      's_f65568': 'E.g. +254 712 345 678',
+      's_f6da6f': 'Personal Profile Details',
+      's_f71ebc': 'E.g. John Kamau',
+      's_f954ab': 'NEXG Fleet Operations',
+      's_f9f8d5': 'Select the model that aligns with your assets. We have personalized contracts and onboarding checklist steps for each path.',
+      's_fa0cdb': 'Total Active Riders',
+      's_fbbe43': 'Configure how you receive settlements and who to contact in emergencies.',
+      's_fca1ec': 'Ensure your details correspond exactly with your National Identification Document.',
+      's_feb1b4': 'ID of the legal officer executing the Fleet Partnership Agreement.',
+      's_febf86': 'Rider agrees to strictly wear the customized NEXG apparel on duty, maintain exemplary clean vehicle hygiene, arrive within specified time slots, and respect international hospitality guests\' absolute privacy. Failure to maintain a minimum 4.0/5.0 star rating may result in temporary profile deactivation.',
+    },
+    curatedNairobiWorlds: {
+      's_15a714': 'Dynamic cross-category plans tailored to your moment, occasion & time of day',
+      's_18a51d': 'Full Experience Builder',
+      's_41dd82': 'Curated Nairobi Worlds',
+      's_52c035': 'NEXG Experience Orchestrator',
+      's_8abe87': 'Explore Offerings in Main Feed',
+      's_c2018d': 'Contextual Experience Hub',
+      's_ecc198': 'Click step to explore offerings',
+      's_fe8da0': 'Nairobi Curated',
+    },
+    databaseSqlModal: {
+      's_baaf3a': 'PostgreSQL Database Scripts',
+    },
+    dateTimeField: {
+      's_46a299': 'Previous month',
+      's_7ecc8b': 'Choose a year',
+      's_8abf7c': 'Next month',
+    },
+    discoveryScreen: {
+      's_030851': 'Merchant categories',
+      's_0b7ee2': 'All verticals',
+      's_176135': 'The API may not be running. Start it with',
+      's_412226': 'Clear filters',
+      's_67300d': 'Clear search',
+      's_8344a6': 'Search merchants',
+      's_a3c57f': 'No merchants found',
+      's_dfe60c': 'Load more',
+      's_f4d948': 'Search restaurants, spa, safaris, champagne, chauffeur, pharmacy...',
+    },
+    dishCustomizerModal: {
+      's_052b34': 'Guest Satisfaction',
+      's_062e79': 'Increase quantity',
+      's_1c711d': 'Verified Diners Only',
+      's_2db328': 'Any preferences? e.g. Extra dressing on side, cutlery needed...',
+      's_492026': 'Add to Order',
+      's_594a3d': 'Share what made this dish memorable...',
+      's_6c02ab': 'Decrease quantity',
+      's_70d3a5': 'Close modal',
+      's_84ab4b': 'Submit Verified Review',
+      's_9c0406': 'Suite / Villa (e.g. Penthouse 402)',
+      's_a196bb': 'Customize & Options',
+      's_bfae0e': 'Your Name (e.g. Eleanor V.)',
+      's_d0fac0': 'Leave Your Dining Review',
+      's_ece1f0': 'Special Kitchen Instructions',
+    },
+    dockedSearchBar: {
+      's_67300d': 'Clear search',
+    },
+    experiences: {
+      's_057742': 'Curated Experience Hosts & Outfitters',
+      's_14c995': 'Book Date',
+      's_574a76': 'Book Activity',
+      's_63ae7c': 'Date & Time',
+      's_6568e5': 'Your booking with',
+      's_96ebfb': 'Search hosts, Maasai Mara, Giraffe Centre, cinema, safari...',
+      's_9fda6b': 'Back to all Outfitters',
+      's_a1e9f9': 'Explore Home',
+      's_ad3a34': 'Private Safaris, Aerial Tours & Cultural Ateliers',
+      's_cebc44': 'Choose an expert outfitter to browse hot-air balloon flights over the Mara, private giraffe conservation sanctuaries, and master artisan ateliers.',
+      's_d29299': 'Bespoke Concierge Expeditions',
+      's_eb9e1e': 'Confirm Booking',
+      's_f6e8ce': 'Experience Reservation',
+    },
+    floatingCartBar: {
+      's_f40d71': 'View Order',
+    },
+    forCouriers: {
+      's_06816c': 'Apply to Drive',
+      's_08c1c3': 'We provide access to high-quality vehicle maintenance programs, comprehensive courier insurance plans, and dedicated dispatch teams assisting you 24/7.',
+      's_0c343a': 'Apply Online',
+      's_0c8a9a': 'Terms of Service',
+      's_0e840b': 'Pocket High Tips',
+      's_110158': 'Help Center',
+      's_153ab5': 'Idle Reduction',
+      's_18414d': 'Elite Fleet',
+      's_1bedd8': 'Ambassadors utilizing our suite-specific integrated routing enjoy significantly higher success ratings and earn double the average industry tips.',
+      's_1d2be9': 'Safety Guidelines',
+      's_209f63': 'Average Earnings Growth',
+      's_22d1d3': 'Once you submit your application online, our onboarding team reviews documents within 48 hours. If qualified, you\'ll be invited for a brief physical assessment and standard white-glove training before your account goes active.',
+      's_2a7274': 'Submit your vehicle registration and documents online in under 5 minutes through our secure, mobile-friendly onboarding portal.',
+      's_2bf27f': 'STEP 01',
+      's_2d816d': 'Career Advancement',
+      's_2e6151': 'FLEET REQUIREMENTS',
+      's_2ed1ed': 'Premium Payouts for Professional Ambassadors.',
+      's_33b4c6': 'Join the Elite Fleet',
+      's_3500ab': 'Join a community built on premium status and mutual respect. We support your career path and help you develop unmatched service skills.',
+      's_355ac2': 'Deliveries per Day',
+      's_38769a': 'For Properties',
+      's_38df83': 'Estimate Earnings',
+      's_39bc68': 'Your Vehicle Type',
+      's_41493f': 'Join the Elite',
+      's_42475b': 'Maintain exceptional ratings and receive daily performance multipliers and exclusive priority dispatcher pairing.',
+      's_440245': 'The NEXG Driver App',
+      's_45b640': 'Go online in the driver app, navigate to hot premium spots, complete high-end orders, and watch your mobile wallet balance swell.',
+      's_4748c1': 'Receive clear, automated settlements straight to your bank or mobile wallet without delay, backed by detailed electronic statements.',
+      's_4c36e1': 'SETUP TIMELINE',
+      's_4d5b64': 'Ambassador Rating',
+      's_4d81b2': 'STEP 03',
+      's_4f555f': 'Track your daily performance, optimize your delivery times, and master Swahili & English hospitality tips with our smart companion analytics dashboard.',
+      's_5150fd': 'Priority Routing Tech',
+      's_52a6f3': 'For Partners',
+      's_530246': 'Guaranteed Weekly Payouts',
+      's_53cdfb': 'DATA INTELLIGENCE',
+      's_54c4b5': 'Exceptional Presentation',
+      's_5b8964': 'Guest Rating Profiles',
+      's_5ce9fd': 'Fast Verification',
+      's_5e7925': 'Our professional partner compliance team validates your records and issues a secure orientation invitation within 48 hours.',
+      's_653ccb': 'We currently support major high-end neighborhoods and coastal luxury zones across Nairobi, Mombasa, and Diani, expanding quickly to other East African metropolitan areas.',
+      's_677710': 'Route Efficiency Score',
+      's_6bde0a': 'Apply Online Now',
+      's_6d1c48': 'Earn stars and secure exclusive bonuses. Build private, anonymous reviews that reinforce your stellar reputation with premium hotels.',
+      's_75dde0': 'Return to Guest App',
+      's_765f2b': 'TRANSPARENT EARNINGS',
+      's_777b12': 'Ambassador delivering gourmet meals',
+      's_78df83': 'Powerful Analytics for Elite Drivers',
+      's_7e32e7': 'Quick online onboarding. Submit details, attend orientation, retrieve your custom elite starter kit, and take your first order in under 48 hours.',
+      's_7f255f': 'Deliver high-end products and culinary creations with meticulous care. Be dressed in custom-designed NEXG apparel to reflect elite standards.',
+      's_8049d9': 'Weekly Payout Settlements',
+      's_85cf78': 'No waiting for week-ends. Complete premium tasks and trigger instant payouts directly into your mobile wallet.',
+      's_89bdbf': 'Elevating premium hospitality across East Africa with integrated, contactless concierge ecosystems.',
+      's_8b1193': 'Understand your daily yields. Monitor peak areas, identify high-tipping zones, and learn the best hours to go online.',
+      's_928714': 'Collect Starter Kit',
+      's_933192': 'What it Takes to Be a NEXG Ambassador.',
+      's_93a5bc': 'Exec Car',
+      's_93fef0': 'Empowered Scheduling',
+      's_95e986': 'Take complete control over your working hours. Plan your deliveries around peak fine-dining periods to lock in dynamic high fares.',
+      's_97b846': 'Gain exclusive professional training in hospitality service, client management, and path leadership with certificates of excellence.',
+      's_981b01': 'Premium Fleet Support',
+      's_9ad0cc': 'Contact Us',
+      's_9b1690': 'Apply to Fleet',
+      's_9d3f52': 'Our advanced routing algorithms guide you efficiently to high-value destinations, minimizing idle mileage and maximizing deliveries per hour.',
+      's_9db108': 'Privacy Policy',
+      's_a08321': 'Redefining Delivery.',
+      's_a1e9f9': 'Explore Home',
+      's_a7acb1': 'Work according to your personal schedule. Take shifts during peak fine-dining hours for maximized yield.',
+      's_a9577d': 'Secure Site',
+      's_ad6c0d': 'KNOWLEDGE BASE',
+      's_aed5c5': 'Must possess a clean driving record, valid local driver\'s license for your specified vehicle, and active comprehensive third-party insurance coverage.',
+      's_b53080': 'Courier Partner FAQs',
+      's_b74c4e': 'Toggle Theme',
+      's_bc89aa': 'Empowered Flexibility',
+      's_befa37': 'Ambassador scanning the driver app',
+      's_c10fec': 'Flawless Modern Vehicle',
+      's_c18810': 'Valid Documents & Licenses',
+      's_c24cae': 'STEP 02',
+      's_c38c49': 'Elite Rank Status',
+      's_c71f96': 'Weekly Target Reached',
+      's_c88176': 'Access culinary deliveries, spa wellness packages, and executive courier jobs cleanly integrated under a single, highly intuitive screen.',
+      's_c887b9': 'About Us',
+      's_ce60db': 'Own Your Earnings.',
+      's_ce7472': 'Back to Home',
+      's_d44881': 'Couriers Hero Background',
+      's_d781b4': 'Operational Mapping',
+      's_df9144': 'ELITE STANDARDS',
+      's_e10068': 'Based on an average base fee of',
+      's_e18d8e': 'Courier Earnings Estimator',
+      's_e3a7a2': 'Direct payments made straight to your account every single week, with zero hidden fees.',
+      's_e3b925': 'STEP 04',
+      's_e6e178': 'Cookie Policy',
+      's_e72e94': 'Earnings Analytics',
+      's_eb35f1': 'Start your application today. Complete the secure onboarding questions and step into a new tier of professional independence and respect.',
+      's_ec3c35': 'Stay updated with premier hospitality tips and trends.',
+      's_eeb176': 'To guarantee top status, NEXG provides all approved couriers with premium tailored jackets, clean polo shirts, and custom-insulated delivery bags. Black trousers and clean black shoes are required on duty.',
+      's_f370c7': 'Our app guides you right up to the designated suite or property zone, avoiding lobby confusion and ensuring frictionless drop-offs.',
+      's_f582d4': 'Our dispatch systems minimize your empty miles. Pre-book orders or follow integrated corridors to stack high-paying jobs in a row.',
+      's_f6e64a': 'Average Tip per Delivery',
+      's_fbe3b3': 'Premium Integrated Hub',
+      's_fcf600': 'Retrieve your tailored NEXG jackets, insulated food packs, smartphone bracket, and secure driver login credentials.',
+      's_ff2382': 'Couriers Hero Daylight Background',
+    },
+    forMerchants: {
+      's_032a19': 'Our professional curation experts ingest your items, style gorgeous visuals, and optimize layouts for direct contactless guest displays.',
+      's_0c343a': 'Apply Online',
+      's_0eaa2f': 'Right Where They Are.',
+      's_118503': 'Merchants Hero Daylight Background',
+      's_1600e2': 'Apply to Join NEXG',
+      's_18414d': 'Elite Fleet',
+      's_2bf27f': 'STEP 01',
+      's_2f5b37': 'Merchant Support',
+      's_38769a': 'For Properties',
+      's_3f3d89': 'Zero integration headache. Submit your menu or catalogue, let us digitise your portal, and receive curated local sales in 48 hours.',
+      's_4d81b2': 'STEP 03',
+      's_52a6f3': 'For Partners',
+      's_540349': 'Automated Revenue',
+      's_591721': 'Higher Avg. Order Value',
+      's_673bf7': 'Get paid on time, every time. Once a guest completes checkout, automated, secure merchant payouts route instantly to your bank.',
+      's_750959': 'Applications are reviewed by our curation team within 24 hours to ensure our high standards of quality and service are maintained across the platform.',
+      's_771412': 'Why Merchants Choose NEXG',
+      's_7cb113': 'Multiply Volume',
+      's_80b451': 'Instant Split Payouts',
+      's_81df05': 'Consistent Orders',
+      's_85feef': 'Premium Exposure',
+      's_891482': 'We handle everything from digital menu formatting to custom checkout links. Absolutely no technical setup required on your end.',
+      's_89a9da': 'Submit your fine dining menus, luxury spa offerings, or rental catalogs through our seamless, intuitive 2-minute onboarding form.',
+      's_916b2f': 'Digital Integration',
+      's_a1e9f9': 'Explore Home',
+      's_a2e8c7': 'Receive Suite Orders',
+      's_a92592': 'ONBOARDING TIMELINE',
+      's_aa32fa': 'Start Onboarding',
+      's_abafb4': 'Prepare packages meticulously. Professional NEXG couriers gather the items, fulfill deliveries, and secure payouts automatically.',
+      's_ae23a7': 'Keep orders running flawlessly. Our active support concierge monitors deliveries live and assists with special suite requests.',
+      's_b74c4e': 'Toggle Theme',
+      's_ba7223': 'Commission on Pickups',
+      's_c0228a': 'Reach Customers.',
+      's_c24cae': 'STEP 02',
+      's_c75030': 'Merchants Hero Background',
+      's_c89f38': 'Partner with NEXG App to serve guests directly inside premier luxury properties. We provide white-glove logistics, automated payouts, and seamless integration with your existing team.',
+      's_ce7472': 'Back to Home',
+      's_ce9fe6': 'Never worry about transport. Our highly vetted professional courier fleet collects your packages and delivers them with elite standards.',
+      's_d6626f': 'Zero Friction Setup',
+      's_da08fb': 'Seamless Payouts',
+      's_def7cc': 'Dedicated Support',
+      's_e3b925': 'STEP 04',
+      's_e56df8': 'WHY PARTNER WITH US',
+      's_e6a013': 'Merchant Terms',
+      's_e9cbdf': 'Verified Properties',
+      's_f6538e': 'Tap into high-net-worth guests, tourists, and business travelers ordering gourmet meals, personal amenities, or spa treatments.',
+      's_f6e1bd': 'Gain exclusive positioning in elite hotel room directories, high-visibility bedside QR cards, and digital concierge web-apps.',
+      's_faae3e': 'As guests scan room QR codes, orders stream directly to your merchant dashboard with real-time audio and visual system notifications.',
+      's_fe1a29': 'Contact Support',
+    },
+    forProperties: {
+      's_0293af': 'Properties Hero Background',
+      's_052b34': 'Guest Satisfaction',
+      's_061f53': 'Curated local menus',
+      's_06fb24': 'Integrate seamless, world-class concierge services into your luxury rentals and hotels. Empower guests to order gourmet food, book organic spa treatments, and request private transport with a single, contactless scan.',
+      's_0a3693': 'Instant access, absolutely zero apps required',
+      's_0c8a9a': 'Terms of Service',
+      's_0d3b7b': 'Predict high-demand hours to allocate room cleaning, butler services, or external partner delivery drivers with supreme efficiency.',
+      's_0e5ae2': 'Unified Service Hub',
+      's_110158': 'Help Center',
+      's_110820': 'Join hundreds of high-end resorts, boutique hotels, and luxury Airbnb hosts across East Africa that are boosting guest satisfaction and building zero-cost revenue.',
+      's_176079': 'Preference Profiles',
+      's_17d67c': 'Earnings Estimator',
+      's_182ad0': 'Secure automated checkouts, verified premier concierge merchants, and licensed professional couriers guarantee safety and guest peace of mind.',
+      's_18414d': 'Elite Fleet',
+      's_1be9e5': 'Every QR code is uniquely tied to the guest suite, meaning food deliveries, room cleanings, or requested towels find guests exactly where they are.',
+      's_1d2be9': 'Safety Guidelines',
+      's_21f4bb': 'Happy Guests',
+      's_25096d': 'Upfront Integration Cost',
+      's_271358': 'Properties utilizing NEXG Contactless QR systems experience a massive increase in service engagement compared to conventional physical folders.',
+      's_29b967': 'Properties CTA Sunset Background',
+      's_2bf27f': 'STEP 01',
+      's_31c559': 'Elevate Guest Experiences.',
+      's_338ed9': 'Earn More Income',
+      's_341a50': 'NEXG builds privacy-compliant guest preference profiles to help your staff pre-empt needs before they are even spoken out loud.',
+      's_38769a': 'For Properties',
+      's_3b6c18': 'Service Response Index',
+      's_40c759': 'Average Occupancy Rate',
+      's_4216f1': 'Trusted & Safe',
+      's_46f477': 'Guests scan, order, and pay instantly. NEXG handles all fulfillment, depositing automatic commission shares to your dashboard.',
+      's_49f179': 'We Handle Everything',
+      's_4c36e1': 'SETUP TIMELINE',
+      's_4d2dec': 'Local Adventures',
+      's_4d81b2': 'STEP 03',
+      's_4f7049': 'Estimated Monthly Share',
+      's_4fdd58': 'Order Conversion Rate',
+      's_52a6f3': 'For Partners',
+      's_534294': 'We supply custom-crafted physical suite-specific QR cards. Place them in your room directories or high-visibility bedside tables.',
+      's_53cdfb': 'DATA INTELLIGENCE',
+      's_589ee1': 'Configure & Customise',
+      's_5bfbb7': 'The QR Advantage',
+      's_5fbc63': 'Unlock Property Potential.',
+      's_70a8da': 'Stand Out',
+      's_73ba7f': 'Chauffeurs & rentals',
+      's_75dde0': 'Return to Guest App',
+      's_785c45': 'Powerful Analytics for Modern Managers',
+      's_7a1f3a': 'Position your properties as elite, technologically forward luxury destinations. Set a standard of hospitality others can\'t match.',
+      's_7b1758': 'Private Cab & Car Hire shares',
+      's_7bf908': 'Partner Onboarding',
+      's_7c6eec': 'Transform guest behavior into highly actionable insights. Track ordering trends, optimize your staffing, and refine property offerings with real-time analytics.',
+      's_7ee992': 'View Demo Video',
+      's_818f94': 'Clear real-time transparency audit trail',
+      's_8249e7': 'Food & Dining referrals',
+      's_8332c9': 'Inventory Speed',
+      's_872061': 'Deploy QR Displays',
+      's_89bdbf': 'Elevating premium hospitality across East Africa with integrated, contactless concierge ecosystems.',
+      's_8c288d': 'Submit your property and suite list online. Our concierge activation specialists verify your layout to launch your space.',
+      's_8c8458': 'Why Hosts Choose NEXG',
+      's_8d365a': 'Properties Daylight Hero Background',
+      's_8e8592': 'Bespoke Tours & Safaris',
+      's_8fe3e8': 'Apply & Partner',
+      's_9ad0cc': 'Contact Us',
+      's_9db108': 'Privacy Policy',
+      's_9fd2f3': 'Stop leaving incremental hospitality revenue on the table. Our mutual commission-sharing model turns every guest service interaction into a direct revenue flow for your property, even when fulfilled entirely by trusted third-party merchants.',
+      's_a1e9f9': 'Explore Home',
+      's_a2cb3c': 'Guests simply point their camera and browse. No logins, no tedious app downloads, just premier high-end service in a couple of seconds.',
+      's_a2f3a7': 'Enhanced Experience',
+      's_a3fb7a': 'Fine Dining',
+      's_a5d6a1': 'Zero integration overhead. Complete hotel setup, display delivery, and automatic digital catalog activation in under 48 hours.',
+      's_a62509': 'REVENUE GENERATION',
+      's_a9577d': 'Secure Site',
+      's_a969aa': 'Safaris & excursions',
+      's_a97bcc': 'Unlock a hands-off, zero-effort passive revenue stream by receiving high commission splits from every guest meal, ride, or tour booked.',
+      's_aaa399': 'Passive Commissions',
+      's_b74c4e': 'Toggle Theme',
+      's_c24cae': 'STEP 02',
+      's_c50b8f': 'Fully automated payouts and digital reporting',
+      's_c5bb5d': 'Average Order Growth',
+      's_c86934': 'Total Rooms / Suites',
+      's_c887b9': 'About Us',
+      's_c9bc84': 'Luxury Transport',
+      's_cd4fe8': 'Partner with NEXG',
+      's_ce7472': 'Back to Home',
+      's_d08ccb': 'Zero Friction Interface',
+      's_d15371': 'Delighted guests leave glowing feedback. Maximize your rating scores and booking ranks across Airbnb, Booking, and Expedia.',
+      's_d178f4': 'Guest Habit Tracking',
+      's_d300d6': 'Better Reviews',
+      's_d5d3ea': 'We integrate premier local partner cuisines, spa offerings, and chauffeur fleets into a single, seamless brand-matching portal.',
+      's_d8481d': 'Wellness & Spa',
+      's_d887cc': 'Understand exactly what your guests prefer. Track peak booking periods, top fine dining cravings, and late-night requests.',
+      's_e09921': 'Operational Optimization',
+      's_e3b925': 'STEP 04',
+      's_e56df8': 'WHY PARTNER WITH US',
+      's_e6e178': 'Cookie Policy',
+      's_e7f7ee': 'More Bookings',
+      's_e87389': 'Loyalty Return Intent',
+      's_ea763f': 'Apply for Partnership',
+      's_ec3c35': 'Stay updated with premier hospitality tips and trends.',
+      's_ee7b88': 'We seamlessly integrate previously fragmented premium local merchants into an elegant singular user experience reflecting your property’s status.',
+      's_f04a9d': 'Absolutely zero operational burden for you. From partner restaurant execution to vetted courier logistics, NEXG does all the heavy lifting.',
+      's_f59c46': 'Monetize Every Single Stay.',
+      's_f77be3': 'Luxury suite with guest scanning QR code',
+      's_f90548': 'Deliver unmatched, instant room service, organic spa appointments, and curated local safaris at the simple scan of a finger.',
+      's_f907f8': 'One Elite App. Infinite Services.',
+      's_fa3fc3': 'Average App Spend per Stay',
+      's_fe3f95': 'THE ECOSYSTEM',
+    },
+    googleReviewsModal: {
+      's_0d75a8': 'Google Maps Pin',
+      's_273f6f': 'No Google reviews match your selected filter.',
+      's_3ea133': 'Verified direct contacts & socials',
+      's_6913b8': 'Search reviews for dishes, ambiance, speed...',
+      's_6a6eaf': 'Filter by Stars',
+      's_6bce42': 'Verified Aspect Scores',
+      's_aaf427': 'Atmosphere & Reliability',
+      's_ba9553': 'Quality & Execution',
+      's_bd9554': 'Reviews synced in real-time with Google Places API',
+      's_c34ae8': 'Aspect data collected via Google Places API',
+      's_cbac3e': 'App Service',
+      's_d45c4f': 'Official Portal',
+      's_d6f49f': 'Verified Google Reviews',
+    },
+    groceriesPage: {
+      's_160a42': 'Back to all Purveyors',
+      's_340a24': 'Gourmet Cellar & Purveyors',
+      's_48028b': 'Artisanal Cellar, Caviar & Fromagerie',
+      's_504097': 'Fine Cellar & Epicurean Purveyors',
+      's_7447ef': 'Search purveyors, caviar, Dom Pérignon, Bellota, truffles...',
+      's_828ad2': 'Insulated Cold Packaging',
+      's_a1e9f9': 'Explore Home',
+      's_dcc1fb': 'Select Item',
+    },
+    header: {
+      's_64f892': 'Toggle Light/Dark Theme',
+      's_7abd6c': 'View Cart',
+    },
+    hero: {
+      's_67300d': 'Clear search',
+      's_7ecda2': 'Nocturnal Luxury Penthouse Dining & Skyline',
+      's_c75a68': 'Sunlit Luxury Penthouse Infinity Pool and Skyline',
+      's_ece6e2': 'Nocturnal Luxury Suite Mobile',
+    },
+    hostOnboarding: {
+      's_00679c': 'Who fulfills it?',
+      's_013237': 'Use my location',
+      's_0302c0': 'Reception desk, access code process, security desk, host contact, etc.',
+      's_0d3b1e': 'Host Portal',
+      's_10599c': 'Property name',
+      's_10a49a': 'Add a space / unit type',
+      's_120c32': 'How are guests identified within the property?',
+      's_12e078': 'Name / label',
+      's_1596ef': 'Bring your property into NEXG.',
+      's_193de6': 'Your host application for',
+      's_205866': 'Landmarks, gate instructions, building name, entrance, etc.',
+      's_20687f': 'Settlement account',
+      's_25916d': 'Price (optional)',
+      's_25e7e1': 'Tell guests about the property',
+      's_272c68': 'Property features',
+      's_292d45': 'Examples of guest requests',
+      's_2bbda0': 'For NEXG App Limited',
+      's_33becf': 'You\'re ready for verification.',
+      's_369c34': 'Property partner',
+      's_3cc2c7': 'Signature pad',
+      's_415e74': 'Guest capacity',
+      's_421a0f': 'Short description of the property, atmosphere and what makes it distinctive...',
+      's_486ffa': 'Authorized representative',
+      's_49e09b': 'Tax / pricing setup',
+      's_4a9200': 'Property / operating permit',
+      's_4e17c4': 'By signing below, the authorized representative confirms that the submission is accurate and accepts the applicable NEXG host partnership terms presented during onboarding.',
+      's_58eafa': 'Typical request fulfillment time',
+      's_616ace': 'Legal / operating entity',
+      's_62a764': 'If applicable',
+      's_6372ac': 'Host onboarding',
+      's_67745b': 'Start another',
+      's_692b50': 'Building, street or road',
+      's_7013c7': 'The Host remains responsible for the operation, safety, licensing, staffing, availability, pricing and fulfillment of property services. NEXG may coordinate guest requests, transactions and related workflows according to the agreed configuration.',
+      's_75d65e': 'Your progress is saved locally on this device.',
+      's_773613': 'Rooms / units',
+      's_782667': 'HOST SETUP',
+      's_7af122': 'Tap or click the map to set the exact property point.',
+      's_7b12e1': 'Add the requests your team actually handles today.',
+      's_7bba35': 'Property cover image',
+      's_810878': 'Tell us what exists, what guests can access, and how your team operates. We\'ll use this to build your property profile and guest experience.',
+      's_82c7e7': 'Back to the host portal',
+      's_849305': 'Signature method',
+      's_86adcf': 'Year opened',
+      's_893bd7': 'Authorized signatory name',
+      's_897c71': 'Clear signature',
+      's_8ad7ea': 'Property type',
+      's_8dc8f7': 'What would you like NEXG to help you expose to guests?',
+      's_8e3c7a': 'Website / booking page',
+      's_924da1': 'Describe your property type',
+      's_93cfd5': 'What kind of property is it?',
+      's_9550a5': 'Departments / teams available',
+      's_99d32f': 'Back to host portal',
+      's_9d617c': 'What can guests access or request?',
+      's_a2a1b1': 'The Host agrees to maintain accurate property information and reasonable service availability, and to notify NEXG of material changes that could affect guest fulfillment.',
+      's_a68df4': 'Check-in / arrival instructions',
+      's_a6d2ea': 'The Host confirms that the information supplied about the property, its operating model, guest-accessible spaces and services is accurate to the best of their knowledge and that they are authorized to provide it.',
+      's_a8dc5c': 'What does the property include?',
+      's_aa1d9b': 'What do you want guests to transact for?',
+      's_ae7f40': 'Check-out time',
+      's_b45dc8': 'Anything you currently struggle to make visible, bookable, purchasable or easy for guests to request...',
+      's_b501d3': 'Request / service',
+      's_b50578': 'Upload square logo',
+      's_b5508b': 'Property setup',
+      's_be3ecd': 'Account holder name',
+      's_bf72f7': 'Settlement details should be verified before activation. Do not use this form for card or wallet credentials.',
+      's_c0b7d7': 'Pin the property',
+      's_c250a9': 'Property access',
+      's_c36127': 'Save / Print',
+      's_ca1948': 'For Host',
+      's_ca9b4a': 'How should guests find you?',
+      's_cde9a5': 'Optional notes, amenities or access details',
+      's_ce9840': 'Submitted information may be reviewed for onboarding, verification, operations, support, settlement and guest-experience purposes. Additional verification may be requested before activation.',
+      's_d1d7c9': 'Full legal name',
+      's_d90fdd': 'Operating model',
+      's_e400b7': 'How do guest requests reach your team today?',
+      's_e45952': 'Who should receive NEXG requests?',
+      's_e4cee9': 'Application received',
+      's_e61a08': 'M-PESA Till / Paybill',
+      's_e9c696': 'Are you onboarding more than one property?',
+      's_eb7eb7': 'Choose file',
+      's_ecc61a': 'Please complete the highlighted fields before continuing.',
+      's_edbfdd': 'Property logo',
+      's_f0ac0a': 'Pending verification',
+      's_f548ec': 'Business / registration document',
+      's_f71497': 'Check-in time',
+      's_faea7e': 'NEXG App Limited',
+      's_fbd2e5': 'Registered company or operating name',
+      's_ff1835': 'NEXG Operations',
+    },
+    languageSwitcher: {
+      's_03e64a': 'Change Language (English, 中文, Kiswahili, العربية)',
+      's_99547d': 'Select Regional Language',
+      's_b8cc8e': 'Language Selector',
+    },
+    merchantAdCarousel: {
+      's_297522': 'Sponsored partner offers',
+      's_2d4e52': 'PARTNER SPOTLIGHT',
+      's_3340de': 'Exclusive host and verified partner privileges',
+      's_430fac': 'Enable location to see trending offerings near you',
+    },
+    merchantCard: {
+      's_3beea0': 'Save to favorites',
+      's_960d55': 'Popular offerings',
+    },
+    merchantItemModal: {
+      's_062e79': 'Increase quantity',
+      's_6c02ab': 'Decrease quantity',
+    },
+    merchantOnboarding: {
+      's_00b623': 'Upload business certificates and company logos. These will be used to dynamically set up your store theme inside the NEXG customer application.',
+      's_012a51': 'Please register the legal trading entities. Correct tax identifiers help guarantee smooth fast payouts.',
+      's_01edab': 'Search Location Finder',
+      's_02aa9a': 'Input branch parameters. You can search using Nominatim autocomplete finder or drop coordinates via the map.',
+      's_0bd62e': 'Account Number',
+      's_0cb1d6': 'Authorized Officer Signature',
+      's_108c09': 'NEXG Riders Fleet',
+      's_197803': 'Above 60 minutes',
+      's_1c7169': 'Logo preview',
+      's_1cf31b': 'Generated via map picker',
+      's_20f7df': 'Closing Time *',
+      's_21f543': 'Facebook page',
+      's_22691e': 'Provide a brief summary of specialties, offerings, or history (max 150 characters)',
+      's_26a2ff': 'Based on your category, select common sections to organize your items or add custom ones.',
+      's_2eabdb': 'Partnership Agreement Contract',
+      's_312631': 'Bank Name',
+      's_39e42f': 'Interactive catalog listing on the premium NEXG Client App.',
+      's_3e95c1': 'Nominate your payouts destinations. Weekly settlements are transferred directly every Monday morning.',
+      's_3fa081': 'You selected',
+      's_411097': 'None selected yet. Choose suggestions or add a custom one below.',
+      's_4331e0': 'Holiday Closing Time',
+      's_4baf91': 'Short Business Description',
+      's_4f2047': 'Maintain exact availability schedules, correct pricing, and stock sync lists.',
+      's_540d0d': 'Suggested Sections',
+      's_550c6f': 'Register primary coordinates. Authorized officers receive system orders, accounts payouts auditing details, and alerts.',
+      's_5664e0': 'The Merchant is solely responsible for clearing customs duties, port levies, and ensuring all shipping cargo meets international and local compliance standards.',
+      's_59c22e': 'Upload Banner Image',
+      's_5fa789': 'You can select multiple specific types if your outlet handles different luxury segments.',
+      's_676418': 'Business Paybill No.',
+      's_67de19': 'Provide premium white-glove deliveries & concierge orders to luxury customers in Kenya.',
+      's_7122f5': 'Business Profile',
+      's_71c904': 'NEXG APP LIMITED',
+      's_721462': 'Director ID / Passport Scan',
+      's_7308b8': 'Review the pre-drafted legal contract. Ensure all merchant parameters, locations, and banking details are correct.',
+      's_8242a9': 'Upload business registration scan PDF or image.',
+      's_85273b': 'Confirm Coordinates',
+      's_869b48': 'NEXG Legal Representative',
+      's_87a51d': 'Own Store Riders',
+      's_89ac4c': 'Hours Configuration Template',
+      's_8c1404': 'Instagram profile',
+      's_91091f': 'Type landmark e.g. Yaya Centre, Westlands, Sarit...',
+      's_91dd0b': 'TikTok profile',
+      's_928d67': 'Coordinates Map Link',
+      's_9441e0': 'Branch Manager / Contact Person',
+      's_959d0c': 'For NEXG APP LIMITED',
+      's_963f97': 'Average Preparation Time',
+      's_9d4f8b': 'Type your full legal name',
+      's_a03653': 'Expand Your Business with NEXG',
+      's_a0b2cf': 'Search categories e.g. Food, Safe, Spa, Flight...',
+      's_a133eb': 'Click to add',
+      's_a4d472': 'NEXG operates logistics carriage from your store using our background-checked professional couriers.',
+      's_a5d0ab': 'Certificate of Registration',
+      's_abf9f4': 'Banner preview',
+      's_b03404': 'Your premium merchant onboarding is complete. Our partnership audit committee will complete verify checks and activate your store front within 24 hours.',
+      's_b32233': 'Website URL',
+      's_b62775': 'Upload ID or passport of major primary director.',
+      's_b639de': 'Add Section',
+      's_b8579d': 'Payment Details',
+      's_b9084a': 'Choose Category',
+      's_b9f2b1': 'Operating Days',
+      's_b9ffbd': 'Merchant Partnership Agreement',
+      's_bb20e3': 'For THE MERCHANT',
+      's_c05283': 'Choose the category that best aligns with your merchant store operations. Use search or filter down instantly.',
+      's_c5955e': 'Opening Time *',
+      's_c6846b': 'Signature drawing',
+      's_d1bf6b': 'Kenyan Public Holidays Availability',
+      's_d1d21f': 'Collection and processing of accounts charges from guests, tourists, and corporate networks.',
+      's_d33bf6': 'Merchant Portal',
+      's_d7a397': 'Branch Contact Phone',
+      's_d890b7': 'Branch Location',
+      's_db3b79': 'Account Name',
+      's_e0a26d': 'Logistics carriage orchestration based on requested parameters.',
+      's_e58331': 'Handwriting Style Preview',
+      's_e79369': 'Store Branches & Location Map',
+      's_eab077': 'Delivery Carriage Modes',
+      's_eab952': 'WhatsApp Dispatch No.',
+      's_ebaf4a': 'Paybill Account Name',
+      's_ed6a3f': 'Holiday Opening Time',
+      's_f1dd4c': 'Buy Goods Till No.',
+      's_f7c245': 'Onboard Another Store',
+      's_faea7e': 'NEXG App Limited',
+    },
+    merchantPage: {
+      's_c902a1': 'Open Now',
+    },
+    merchantPreviewSheet: {
+      's_0f4c5c': 'This merchant does not declare its own workflow, so the default for its category is shown.',
+      's_28da6e': 'See all offerings',
+      's_baa550': 'Close preview',
+    },
+    merchantRoute: {
+      's_176135': 'The API may not be running. Start it with',
+      's_a1ca54': 'Loading merchant',
+      's_e84712': 'Go back',
+    },
+    merchantView: {
+      's_085b31': 'No offerings listed yet',
+      's_3fcbae': 'Menu sections',
+      's_67300d': 'Clear search',
+    },
+    metricsDashboard: {
+      's_048f2f': 'Status breakdown',
+      's_0dd383': 'API version',
+      's_1c8836': 'Built at',
+      's_235f7b': 'Events accepted',
+      's_236a59': 'Bars are per-bucket counts derived from the API\'s cumulative Prometheus buckets.',
+      's_266384': '5xx error rate',
+      's_406acb': 'Requests / minute',
+      's_41e8de': 'Recent traces (/api/traces)',
+      's_461aff': 'No spans buffered yet.',
+      's_58b6dc': 'In flight',
+      's_5dd968': 'Events dropped',
+      's_65916f': 'Browser events arrive only from visitors who granted analytics consent.',
+      's_74d595': 'No metrics available',
+      's_74efa0': 'Metrics API unreachable.',
+      's_75e157': 'The dashboard polls',
+      's_8474ec': 'No samples yet.',
+      's_886fb2': 'Client telemetry',
+      's_9d5b00': 'Slowest routes (by p95)',
+      's_a41501': 'Runtime, build and data source',
+      's_b0ad50': 'No routes recorded yet.',
+      's_c347b1': 'Service metrics',
+      's_cc1e6a': 'Duration histogram',
+      's_cec477': 'Last 60s',
+      's_e4076f': 'Collecting samples. The line appears after the second poll.',
+      's_ee9d59': 'Json fallback reads',
+      's_f8fd6e': 'No responses recorded yet.',
+      's_ffb77d': 'Data source',
+    },
+    nexGCategoryDrilldown: {
+      's_03f70c': 'Merchant Providers & Partners',
+      's_09efe8': 'Choose a time',
+      's_0df6f0': 'Switch Provider',
+      's_0ecb20': 'Confirm & Reserve Instant Dispatch',
+      's_126f44': 'Preferred Time',
+      's_19ad69': 'Scheduled Date',
+      's_1b8543': 'Reset All Filters',
+      's_1f647f': 'Special Offers',
+      's_27c636': 'Complete view',
+      's_2994b4': 'Scroll right',
+      's_2c9e5a': 'Scroll left',
+      's_2f1873': 'All Items',
+      's_34318e': 'Rating 4.8+',
+      's_492026': 'Add to Order',
+      's_4ce3f0': 'Select a Merchant Provider Above',
+      's_50238f': 'No upfront charge. Escrow reservation handled by concierge desk.',
+      's_543b1b': 'Your reservation for',
+      's_5be698': 'Reset Filters',
+      's_77bf79': 'Reserve / Book',
+      's_7db318': 'Back to Discovery',
+      's_8978ea': 'Decision Specifications',
+      's_8bf67b': 'Nairobi Luxury District',
+      's_9dca31': 'No items found matching your filters.',
+      's_ab2d11': 'Under 25 min',
+      's_c07c6d': 'Suite Number or Location Notes',
+      's_c14e04': 'Browse catalog offerings with real-time pricing and availability',
+      's_c25b51': 'Strict Category & Subcategory Catalog',
+      's_d394a9': 'Highest Rated',
+      's_e16a1d': 'Explore dedicated subcategories with specialized imagery and custom parameters',
+      's_eb13c4': 'To view item cards, please click any of the verified merchant providers above. Their full 30-item catalog, specifications, and instant ordering will appear here.',
+      's_fae58c': 'Clear Selection',
+      's_fcdcf7': 'Fast selections & customer favorites',
+    },
+    nexGCollectionRail: {
+      's_0b3917': 'Curated Collection',
+      's_2994b4': 'Scroll right',
+      's_2c9e5a': 'Scroll left',
+      's_986032': 'Explore All',
+    },
+    nexGDiscoveryView: {
+      's_6d9483': 'Browse verified Nairobi merchants across 20 neighborhoods with Wolt-grade previews',
+      's_741311': 'Search food, spa, safaris, champagne, chauffeur...',
+      's_76cb8c': 'Previous categories',
+      's_844b94': 'Next categories',
+      's_8f8796': 'High-priority concierge delivery direct to your suite or villa in under 30 minutes',
+      's_a9176a': 'Explore Verticals & Categories',
+      's_b0a3fc': 'All Verified Partners & Merchants',
+      's_df4cf6': 'Instant Suite Express',
+    },
+    nexGEntityCard: {
+      's_085ed0': 'View catalog & pricing',
+    },
+    nexGItemSheet: {
+      's_0932f6': 'Special App Notes or Dietary Preferences',
+      's_22b77f': 'Appointment & Scheduling',
+      's_24a16c': 'Session Duration',
+      's_3beea0': 'Save to favorites',
+      's_65d22e': 'Close sheet',
+      's_68f2d8': 'Preferred Date',
+      's_693039': 'Time Slot',
+      's_a99ee2': 'Number of Guests / Attendees',
+      's_c6cf76': 'Added to Experience Order',
+      's_d0e359': 'Curated Enhancements & Add-ons',
+      's_eeea54': 'NEXG App Guarantee',
+    },
+    nexGLandingHero: {
+      's_0b8149': 'Sign up',
+      's_2bd100': 'Enter delivery address, villa or hotel suite...',
+      's_381d79': 'Nairobi Villas',
+      's_52a6f3': 'For Partners',
+      's_71a30d': 'Change Delivery Location',
+      's_e17357': 'Active App Fleet in Nairobi',
+      's_f7c400': 'Log in',
+      's_fa918a': 'Locate my position',
+    },
+    nexGSearchEngine: {
+      's_c5b914': 'No direct matches found',
+      's_cd81f4': 'Search Results for',
+    },
+    offercarousel: {
+      's_10bb09': 'Previous Slide',
+      's_2aa5dc': 'View Offer',
+      's_7141bc': 'Next Slide',
+    },
+    orderTrackingModal: {
+      's_116632': 'Estimated Delivery',
+      's_375813': 'Fast forward simulation to next lifecycle stage',
+      's_43301e': 'Call Courier',
+      's_536456': 'Courier Tip',
+      's_61243a': 'Simulated Payment Method',
+      's_6e6109': 'Copy delivery security PIN',
+      's_74e226': 'Itemized Receipt & PIN',
+      's_84e3ee': 'Dismiss / Back to App',
+      's_976a74': 'Transaction Reference',
+      's_9c12c6': 'Delivery Fee',
+      's_9ca905': 'This is an automated simulation of the client ordering lifecycle in NEXG App. No actual payment provider has been billed. Once connected to the live API gateway, genuine payments will be processed via M-Pesa or Stripe.',
+      's_9fb5a8': 'Delivery PIN',
+      's_a392ce': 'Live Progress Stages',
+      's_b868ce': 'Message Courier',
+      's_cbac3e': 'App Service',
+      's_cd1876': 'Your Location',
+      's_d6e963': 'Minimize tracking',
+      's_ea2152': 'Live Journey & ETA',
+      's_f56564': 'On schedule',
+    },
+    productcarousel: {
+      's_10bb09': 'Previous Slide',
+      's_7141bc': 'Next Slide',
+    },
+    promo: {
+      's_38769a': 'For Properties',
+      's_4a421c': 'For Merchants',
+      's_c63982': 'For Couriers',
+      's_d2c984': 'NEXG App App Interface',
+    },
+    restaurantDetailModal: {
+      's_034ad6': 'Recent Google Reviews',
+      's_116c19': 'Hospitality & Service',
+      's_3beea0': 'Save to favorites',
+      's_4f2130': 'Google Restaurant Reviews',
+      's_52aed7': 'Food Quality',
+      's_56ba29': 'No dishes match your search criteria.',
+      's_649ff9': 'Add to order',
+      's_652bc8': 'Posted on Google',
+      's_79db72': 'View & Write Reviews',
+      's_79fe15': 'View Google Reviews',
+      's_9c203d': 'Artisanal Menu',
+      's_9f068b': 'Verified Place',
+      's_a023e6': 'Chef Pick',
+      's_b05630': 'Synced Live',
+      's_b38795': 'Search dishes...',
+      's_c152be': 'No Google reviews loaded for this venue.',
+      's_e1c6bf': 'Atmosphere & Transport',
+      's_f4657b': 'Google Maps Rating',
+    },
+    restaurants: {
+      's_0721cf': 'Your reservation at',
+      's_072c89': 'Reserve Table',
+      's_0c8f01': 'Table Reservation',
+      's_25b120': 'Selected Reservation',
+      's_2c3b25': 'Confirm Table',
+      's_34df71': 'Search dining partners, sushi, dry-aged steaks, pasta...',
+      's_4f9fa0': 'Google Maps Location',
+      's_5be698': 'Reset Filters',
+      's_5f716b': 'Try adjusting your search keywords or resetting cuisine filters.',
+      's_6b2c05': 'Fine Dining Partners',
+      's_7288fd': 'Fine Dining Partners & Master Chefs',
+      's_868fb0': 'Click any dish to configure ingredients, accompaniments, or place a simulated order',
+      's_99256e': 'Curated Culinary Directory',
+      's_9da221': 'Featured Partner',
+      's_a1e9f9': 'Explore Home',
+      's_ae0cb2': 'Signature Dishes & Menu Offerings',
+      's_bf0c7d': 'Back to all Dining Partners & Merchants',
+      's_cfdf8b': 'Search menu dishes...',
+      's_d97dd5': 'View Google Reviews & Diner Insights',
+      's_dde236': 'Customize & Order',
+      's_e25e77': 'Select a merchant to explore their Michelin-grade menu, signature dishes, verified Google diner reviews, and table reservations.',
+      's_eac205': 'No dining partners match your filters',
+    },
+    routeFallback: {
+      's_1c5772': 'Loading page',
+    },
+    scrollToTop: {
+      's_f07710': 'Scroll to top',
+    },
+    spaBookingModal: {
+      's_039d05': 'Experience Setting',
+      's_09121f': 'Appointment Slot',
+      's_15ddf4': 'District Wellness Experience',
+      's_17548b': 'Slot Scheduled',
+      's_2fd731': 'Signature Aromatherapy Oil',
+      's_301d19': 'Live Dispatch Progress',
+      's_4548b7': 'Our certified therapist will arrive 10 minutes prior with sanitized organic towels, ultrasonic mist diffuser, and a heated memory-foam bed.',
+      's_485336': 'Villa / Suite Number',
+      's_4b8ec9': 'Private In-Villa Sanctuary',
+      's_5621b9': 'Focus Areas & Medical Notes',
+      's_712231': 'Contact Spa Concierge',
+      's_7d1e9d': 'Private oceanfront cabana with thermal plunge pool & tranquil zen garden access.',
+      's_8cff8d': 'Total Experience Fee',
+      's_9092d9': 'Add to Calendar',
+      's_9505aa': 'Total Concierge Charge',
+      's_950d86': 'Massage Pressure Preference',
+      's_9a36a0': 'Confirm Spa Booking',
+      's_9e603c': 'Therapist dispatches directly to your villa with heated table, organic linens & aromatherapy.',
+      's_a027ba': 'Select Ritual Duration',
+      's_b3a5a1': 'Concierge In-Villa Service Protocol',
+      's_be9475': 'Therapist Preference',
+      's_c0a672': 'Appointment Confirmed',
+      's_c8c5fe': 'Primary Guest Name',
+      's_f00e02': 'Assigned Master Therapist',
+      's_f79d9c': 'Resort Spa Pavilion',
+    },
+    spaWellness: {
+      's_120405': 'Select Ritual',
+      's_3669be': 'Book Calendar',
+      's_5276ac': 'Your appointment at',
+      's_5dfb4e': 'Spa & Wellness Sanctuaries',
+      's_659a92': 'Search spa sanctuaries, Balinese, deep tissue, sauna...',
+      's_689bea': 'Back to all Sanctuary Partners',
+      's_69d23c': 'District Holistic Wellness & Spa',
+      's_9aabe9': 'Book Session',
+      's_a1e9f9': 'Explore Home',
+      's_c1c2fb': 'Sanctuary Spas & In-Villa Wellness',
+      's_d02cb4': 'Search rituals & massages...',
+      's_eb9e1e': 'Confirm Booking',
+      's_f212ea': 'Spa Sanctuary Reservation',
+      's_f2937f': 'Select duration, botanical essential oils, and schedule an immediate in-villa or pavilion appointment',
+      's_fda6e0': 'Select a wellness sanctuary to browse certified therapists, in-villa Balinese massages, Ayurvedic Shirodhara, and hydrothermal rituals.',
+      's_fe0476': 'Sanctuary Treatments & In-Villa Rituals',
+    },
+    stats: {
+      's_034abd': 'From hotels to homes, we make everyday exceptional.',
+      's_826dd3': 'Hotel Partners',
+      's_bd3fa2': 'Our Partners',
+      's_dc04b9': 'Dar es Salaam',
+      's_e819e6': 'Concierge Support',
+      's_f2a377': 'Trusted by guests',
+    },
+    transportBookingModal: {
+      's_1505c5': 'Live Dispatch Status',
+      's_160ad9': 'Chauffeur Confirmed',
+      's_251e18': 'Dedicated Chauffeur Hours',
+      's_314bee': 'Total Concierge Fee',
+      's_358b66': 'Pickup Time',
+      's_36a60c': 'Done & Return to App',
+      's_39b21c': 'Call Chauffeur',
+      's_457b66': 'Total Rate',
+      's_6f672b': 'Assigned Chauffeur',
+      's_77ae94': 'Scheduled Departure',
+      's_7a4175': 'Schedule Date',
+      's_8941e9': 'Service Type',
+      's_8dea76': 'Pickup Location',
+      's_99d1c7': 'Confirm VIP Chauffeur',
+      's_9ca1bd': 'Day After',
+      's_a1cbc4': 'VIP Meet & Greet + Airport Flight Sync',
+      's_b68827': 'Villa / Suite Room',
+      's_be057d': 'Guest Name',
+      's_cd11b4': 'Complimentary On-Board Amenities',
+      's_d0cd2d': 'Flight Number / Departure Code',
+      's_efb6c4': 'Continue to Amenities',
+      's_f2f922': 'VIP Concierge Mobility',
+    },
+    transportPage: {
+      's_1836d5': 'Choose a luxury mobility merchant to view available Maybach S680s, Rolls-Royce Ghost motorcars, Cadillac Escalade ESVs, or twin-engine helicopter transfers.',
+      's_1afb28': 'Back to all Mobility Partners',
+      's_2ea911': 'Chauffeur Reservation',
+      's_3390d4': 'Reserve Chauffeur',
+      's_3727e7': 'Book Transfer',
+      's_52b224': 'VIP Chauffeur & Mobility Providers',
+      's_543b1b': 'Your reservation for',
+      's_784e6e': 'Search mobility providers, Maybach, Rolls-Royce, helicopter...',
+      's_875bd6': 'Executive Chauffeurs & Private Aviation',
+      's_898adc': 'VIP White-Glove Mobility',
+      's_93f4b8': 'Pickup Date & Time',
+      's_a1e9f9': 'Explore Home',
+      's_eac49e': 'Book Vehicle',
+      's_eb9e1e': 'Confirm Booking',
+    },
+    unifiedItemModal: {
+      's_0125ec': 'View All Reviews',
+      's_1cc3d0': 'Aromatherapy Essential Oil',
+      's_3c0047': 'Dedicated Appointment Calendar',
+      's_4c13f0': 'App Notes & Villa Details',
+      's_5d14d6': 'E.g. Villa Suite 402, gate access code, dietary allergies, or arrival notes...',
+      's_94c578': 'Confirm Calendar Reservation',
+      's_a027ba': 'Select Ritual Duration',
+      's_bf3b18': 'Add to App Cart',
+      's_ee3e2e': 'About this offering',
+      's_ee749a': 'Total Estimate',
+    },
+  },
 
   /*
     SHARED FORM VOCABULARY.
@@ -710,6 +3044,1160 @@ export const translations: Record<Language, TranslationSchema> = {
     },
   },
   zh: {
+  ui: {
+    bookingCalendar: {
+      's_07499a': 'Party / Guests',
+      's_10422c': 'Local Villa Time',
+      's_183a37': 'Sync Calendar',
+      's_534c34': 'Next Month',
+      's_71b856': 'Previous Month',
+      's_79caea': 'Available Time Slots',
+      's_8efff8': 'In 2 Days',
+      's_aeb91b': 'Dedicated Reservation Calendar',
+      's_e5366b': 'Selected Schedule',
+      's_fdc2b8': 'Next Week',
+    },
+    cartDrawer: {
+      's_11a9f0': 'Explore Menus',
+      's_1fc724': 'Promo code (try NEXG20)',
+      's_2303a3': 'Your cart is empty',
+      's_237e47': 'Clear entire cart',
+      's_2c7952': 'Simulated checkout & instant confirmation',
+      's_42cb61': 'Close cart',
+      's_44951e': 'Courier tip',
+      's_643b96': 'Your Order Cart',
+      's_733b61': 'Delivery fee',
+      's_76ecba': 'Remove item',
+      's_ab8546': 'Explore our curated restaurants and add artisanal dishes or concierge dining to get started.',
+      's_c7085d': 'Courier Concierge Tip',
+      's_d2467b': 'Your order',
+      's_d2f4d4': 'Proceed to Checkout',
+      's_d6ea26': 'Concierge service fee',
+    },
+    categories: {
+      's_1a9863': 'Browse Partners',
+    },
+    categoryExplorerModal: {
+      's_233e38': 'Click any category or subcategory to instantly browse partners',
+      's_7c267a': 'View listings',
+      's_7fd08b': 'Reset Catalog Filters',
+      's_940323': 'Close categories',
+      's_af1c10': 'Verified Merchant Partners',
+      's_c7fa37': 'Try searching for another keyword or clear the search query.',
+      's_c9f43c': 'Search across all 21 categories & 134 subcategories (e.g. Fine Dining, Vapes, Chauffeur, Safari)...',
+      's_e37ac9': 'No matching verticals found',
+      's_f4cf7c': 'Merchant Categories & Subcategories',
+    },
+    categoryPage: {
+      's_004d7e': 'Top Rated',
+      's_062888': 'Free Delivery',
+      's_2cef94': 'Reset all filters',
+      's_41eb8f': 'Fastest Delivery',
+      's_c4baea': 'Price Level',
+      's_fce284': 'No merchants found matching your filters.',
+    },
+    checkoutSimulatedModal: {
+      's_119c2f': 'This payment is',
+      's_19e2a2': 'Finalize & Place Order',
+      's_3a7a99': 'Apple Pay',
+      's_55e54d': 'App Delivery Instructions',
+      's_635949': 'Choose Simulated Payment Method',
+      's_63da07': 'Simulate Payment & Place Order',
+      's_6aa79c': 'Selected Items',
+      's_7db213': 'Hotel / Villa / Street Address',
+      's_846466': 'Close checkout',
+      's_882f46': 'Simulates instant STK push prompt directly on mobile handset.',
+      's_9ad55a': 'Total Demo Amount',
+      's_ac51d0': 'Cardholder Name',
+      's_b79126': 'No real funds or accounts will be debited.',
+      's_bac774': 'Simulated Demo Checkout',
+      's_bb36a9': 'DEMO ROUTER',
+      's_cecb67': 'Preloaded Demo Card',
+      's_dd0a60': 'Router Demo Validated',
+      's_e5297b': 'Delivery Address & Location',
+      's_e569ab': 'Processing Demo Payment...',
+      's_ea3289': 'Room Folio / Cash',
+      's_ea4478': 'Simulates one-touch FaceID / TouchID authorization.',
+      's_eb034a': 'Billed directly to your hotel master room folio upon delivery.',
+      's_ee343f': 'Sandbox Router Active',
+      's_fee23b': 'Merchant Partner',
+    },
+    consentBanner: {
+      's_35c291': 'Reject all',
+      's_66cd82': 'Strictly necessary cookies keep the site working. Analytics and marketing cookies stay off until you turn them on, and you can change this at any time.',
+      's_788df5': 'Your cookie choices',
+      's_821d1f': 'Accept all',
+      's_956fa7': 'Save choices',
+      's_9e0cba': 'Cookie settings',
+      's_da6a92': 'Necessary cookies are always active. Everything else is optional.',
+      's_e7d306': 'Cookie preferences',
+      's_f477c8': 'Always on. It cannot be switched off because the site cannot run without it.',
+    },
+    courierOnboarding: {
+      's_037e0b': 'Our compliance officers verify your submitted National ID, license, PIN, and fleet logbooks directly against NTSA registers.',
+      's_03c52e': 'Guaranteed Base Salary',
+      's_06c8b6': 'Verify your registered logistics enterprise. Only PDF files and scanned images up to 5MB size are accepted.',
+      's_0b39f6': 'Fleet Partner',
+      's_0bd62e': 'Account Number',
+      's_0cb44f': 'Executive Sedan / Van',
+      's_0d36d5': 'Active public third-party or comprehensive fleet cover policy certificate.',
+      's_0d98d0': 'E.g. Swift Deliveries',
+      's_0e3256': 'Submit official identification and transit licensing details.',
+      's_0f32ec': 'Rider Record Card',
+      's_1081b3': 'Full Name, Phone, ID Number, License Number, Vehicle Type, Plate Number',
+      's_10f420': 'Shift & Operating Zones',
+      's_14bf35': 'Ride custom NEXG-branded premium logistics vehicles, operate consistent shifts, and enjoy a stable guaranteed base salary.',
+      's_156177': 'Certificate of Incorporation',
+      's_17b238': 'Accepted For Fleet Provider',
+      's_1805c7': 'This agreement begins immediately on approval and is valid for a period of 12 months. Either party may terminate with 7 days\' written notice, or NEXG may block platform access instantly in cases of safety breach, driving license revocation, or fraudulent behavior.',
+      's_197646': 'Full Legal Name',
+      's_204be3': 'E.g. operations@swiftlogistics.co.ke',
+      's_2358e6': 'Independent Rider',
+      's_24813d': 'E.g. Kileleshwa, Block D',
+      's_26712f': 'Authorized Primary Contact Person',
+      's_27538f': 'Outline your company’s transit capacities and target operating logistics zones.',
+      's_27980f': 'WhatsApp Mobile Number',
+      's_27c646': 'Company Office Headquarters',
+      's_2952ca': 'Type Signature',
+      's_2b31a3': 'E.g. A001234567Z',
+      's_2cb0d8': 'Accepted & Agreed by Rider',
+      's_2d6ca0': 'Vehicle Type',
+      's_2dc8f1': 'E.g. Corner House, 4th Floor, Kimathi St.',
+      's_2ed783': 'Return to Elite Fleet page',
+      's_30b928': 'Company KRA PIN Certificate',
+      's_310c80': 'Back to Couriers',
+      's_312631': 'Bank Name',
+      's_3174a5': 'Contact Email Address',
+      's_31843b': 'Clear canvas',
+      's_338cf2': 'Services & Settlement Payout',
+      's_340115': 'Clear scanned copy of front and back face of your card.',
+      's_34e784': 'E.g. Swift Express Logistics Ltd',
+      's_34f9ae': 'Certificate of Incorporation / Reg No.',
+      's_377b90': 'Authorized Dispatch Committee',
+      's_37dfba': 'NTSA Driver\'s License Number',
+      's_3873df': 'E.g. DL-XXXXXX',
+      's_3af714': 'No active couriers added yet',
+      's_3ba957': 'E.g. Nairobi',
+      's_3bfd88': 'KRA PIN Number',
+      's_3c3541': 'Consolidated Business payout',
+      's_3c774b': 'Carry VIP guests to properties',
+      's_3cc4fd': 'NEXG Provides Vehicle',
+      's_3ce5aa': 'Emergency Contact Person',
+      's_41d914': 'Choose the expiry date',
+      's_41fe24': 'Draw digital signature with finger or pointer',
+      's_430404': 'Remove Card',
+      's_44fe57': 'Emergency Mobile Phone',
+      's_464dfd': 'We declare absolute compliance with Kenyan corporate regulations, active tax filings, and legal road safety acts.',
+      's_4979be': 'We certify that all couriers listed in our squad profiles hold valid, unexpired NTSA driving licenses and clean background clearance certifications.',
+      's_4c7486': 'Corporate Job Title',
+      's_4c987a': 'Authorized Officer Full Name',
+      's_4d1c2f': 'Structured Shift schedules',
+      's_4ff862': 'E.g. 4',
+      's_50d865': 'Upload crisp clear photo snapshots or PDF files under 5MB size limit.',
+      's_5104d5': 'Preferred Operating Area Zone',
+      's_51dacf': 'WhatsApp Number',
+      's_53d718': 'The Fleet Provider represents and warrants that all couriers and motorbikes comply with roadworthy rules, hold comprehensive insurance certifications, and observe Kenya\'s Data Protection Act 2019 standards.',
+      's_55537f': 'Vehicle Registration details',
+      's_574f02': 'Next Step',
+      's_587649': 'Official KRA Pin certification document page from iTax portal.',
+      's_5920ae': 'You are applying for a scheduled, salaried position. NEXG provides custom branded bikes, gear, and fuel budgets. Below, you will also designate your operational preferences.',
+      's_5a833b': 'Residential Address',
+      's_5b5250': 'Fleet Partner Business Profile',
+      's_5cfa43': 'NTSA Driving License',
+      's_5f5518': 'Drive your own motorcycle or scooter, set your flexible calendar hours, and take commissions per successfully completed errand.',
+      's_63a113': 'Total Registered Vehicles',
+      's_64346b': 'Full Name',
+      's_6790f2': 'Corporate Bank Name',
+      's_692fe8': 'E.g. P051234567Z',
+      's_6b3d6a': 'Deliver premium retail items',
+      's_6f9c91': 'E.g. +254 711...',
+      's_70abeb': 'Bank Settlement Transfer',
+      's_714406': 'Configure your legal registered business details for logistics partnerships.',
+      's_717eb1': 'Company Account Title',
+      's_71c904': 'NEXG APP LIMITED',
+      's_71ebbb': 'E.g. Red Honda CB125F (Year 2023)',
+      's_71f6e3': 'Register Active Couriers Squad',
+      's_72a587': 'Board Operations Committee',
+      's_74955f': 'E.g. Westlands',
+      's_76af1d': 'E.g. 15',
+      's_77522e': 'NEXT STEPS IN OUR VERIFICATION TIMELINE',
+      's_79865b': 'Preferred Working Shift',
+      's_7cf2e1': 'Alternative Contact Phone',
+      's_7d5f6e': 'Unlock premier delivery earnings, tailored branding, and unmatched support in Kenya’s luxury hospitality ecosystem.',
+      's_7d8667': 'Plate Number',
+      's_81db77': 'Years in Logistics Sector',
+      's_827c49': 'Account Holder Legal Name',
+      's_828ade': 'Vip App',
+      's_831dc7': 'KRA PIN Confirmation Certificate',
+      's_86d4ca': 'For NEXG App',
+      's_8bb6da': 'E.g. 12345678',
+      's_8d5d4c': 'Company Business Verification Documents',
+      's_8e203d': 'Handle high-end guest requests',
+      's_8f912f': 'E.g. CPR/2018/12345',
+      's_903d8d': 'Execute Partnership Agreement Contract',
+      's_913798': 'Click Add Rider Card above or upload your riders spreadsheet via CSV bulk import.',
+      's_93457d': 'Fleet Operational Scale & Coverage',
+      's_93e220': 'Corporate Fleet Partner logistics Framework',
+      's_9691d0': 'ONBOARDING PROFILE SUMMARY',
+      's_984805': 'Operating Counties & Estates Coverage',
+      's_99dc14': 'Pending Compliance Review',
+      's_9d159c': 'Direct Mobile Number',
+      's_a0094a': 'Payout Method',
+      's_a1524d': 'E.g. 12001234567',
+      's_a1c4fe': 'E.g. +254 700 111 222',
+      's_a221a1': 'Upon document clearance, you\'ll receive a WhatsApp invitation to join our premium standard customer service and hospitality training.',
+      's_a40d60': 'Premium Commission Payout',
+      's_a620a5': 'Official business registration certificate page issued by the Registrar of Companies.',
+      's_a7c94e': 'NEXG agrees to compile and settle client order payments to the Fleet Provider’s registered bank account weekly on Mondays, less a platform operations commission fee of',
+      's_a85feb': 'Your premium motorbike is provided by NEXG. You do not need to register a personal motorbike logbook or license plate here.',
+      's_a8caa4': 'Add individual active riders to your partnership ledger.',
+      's_aafa84': 'Active Vehicle types represented in Fleet',
+      's_ac26fd': 'Submit Portfolio Agreement',
+      's_ad7df6': 'Motorcycle / Scooter',
+      's_aed4fc': 'Join the Elite NEXG Rider Fleet',
+      's_aef6a9': 'National ID / Passport Number',
+      's_af7bb7': 'Signatory Director\'s National ID',
+      's_af8a4e': 'The Fleet Provider certifies that they actively manage and pay a squad of',
+      's_b026ba': 'City HQ Location',
+      's_b09e88': 'Draw Signature',
+      's_b21f30': 'ID Number',
+      's_b2e0a8': 'Driver\'s License Expiry Date *',
+      's_b5015c': 'List all cities and estates where your fleet currently has active coverage. E.g. Nairobi CBD, Westlands, Kilimani, Mombasa, Diani, etc.',
+      's_b5c479': 'NEXG Dedicated Rider',
+      's_b724e7': 'Print Agreement Document',
+      's_b984fa': 'Import CSV Spreadsheet',
+      's_b9d00c': 'This contract is binding for a term of 12 months. Either partner may exit the frame by providing 14 days\' written notice to the other party.',
+      's_bc5303': 'Add Rider Card',
+      's_bf24cb': 'Name exactly as printed on legal ID card',
+      's_c1ecb3': 'Package Delivery',
+      's_c33c9b': 'DL Number',
+      's_c59900': 'E.g. KMCA 123A',
+      's_c7a051': 'We declare that our organization maintains comprehensive third-party logistics insurance and active public liability coverage across all active fleet operators.',
+      's_c85d99': 'Proof of ownership and active public transit insurance coverage.',
+      's_c8708a': 'Company Legal Name',
+      's_c8bc71': 'Corporate Bank Settlement Account',
+      's_c8ed49': 'Identification & Vehicle Setup',
+      's_ca5690': 'Download Standard CSV Template',
+      's_cabacd': 'NEXG Operations Admin',
+      's_cdec1f': 'Both sides of your active, unexpired logistics driver license.',
+      's_d101b7': 'Onboard your registered Kenyan logistics agency and entire courier squad. Bulk upload riders and manage team-level settlements.',
+      's_d5184b': 'Own Vehicle required',
+      's_d5e54c': 'Commercial Fleet Insurance Policy',
+      's_d64903': 'NEXG remits compiled client transport payout settlements directly to your corporate account weekly on Mondays.',
+      's_d66864': 'Flexible Shifts',
+      's_d9863a': 'E.g. Fleet Manager',
+      's_db3b79': 'Account Name',
+      's_dca3fc': 'E.g. Westlands, Kilimani, Lavington',
+      's_ddb4d1': 'E.g. Equity Bank',
+      's_de744b': 'E.g. Mary Jane',
+      's_e04a0d': 'Payout Settlement Configurations',
+      's_e07446': 'Review pre-filled contract agreement clauses and apply your electronic signature.',
+      's_e0934e': 'Date of Birth *',
+      's_e12ee9': 'Preferred Transit Vehicle Assigned',
+      's_e15c6c': 'Trading Name / Brand Name',
+      's_e16a80': 'Document Verification Uploads',
+      's_e1c6ae': 'Bulk CSV Squad Import',
+      's_e1fe05': 'E.g. Albert Mwangi',
+      's_e21ec5': 'Vehicle Model & Color',
+      's_e387b2': 'Business KRA PIN',
+      's_e3ca9b': 'E.g. John Kamau Maina',
+      's_e4c574': 'E.g. +254 711 000 000',
+      's_e7710e': 'Typed Electronic Signature preview',
+      's_e7cfff': 'Authorized Signature Panel',
+      's_e90701': 'Select Gender',
+      's_eb6915': 'Fleet Integrity Declarations',
+      's_ec9a3f': 'Estate Area / Street',
+      's_ecd675': 'Vehicle Logbook & Third-Party Insurance',
+      's_eeec98': 'Import CSV',
+      's_ef8482': 'Choose Your Partnership model',
+      's_efbb4c': 'E.g. Spouse / Parent',
+      's_f3a211': 'E.g. +254 700 987 654',
+      's_f4afb4': 'Choose your date of birth',
+      's_f65568': 'E.g. +254 712 345 678',
+      's_f6da6f': 'Personal Profile Details',
+      's_f71ebc': 'E.g. John Kamau',
+      's_f954ab': 'NEXG Fleet Operations',
+      's_f9f8d5': 'Select the model that aligns with your assets. We have personalized contracts and onboarding checklist steps for each path.',
+      's_fa0cdb': 'Total Active Riders',
+      's_fbbe43': 'Configure how you receive settlements and who to contact in emergencies.',
+      's_fca1ec': 'Ensure your details correspond exactly with your National Identification Document.',
+      's_feb1b4': 'ID of the legal officer executing the Fleet Partnership Agreement.',
+      's_febf86': 'Rider agrees to strictly wear the customized NEXG apparel on duty, maintain exemplary clean vehicle hygiene, arrive within specified time slots, and respect international hospitality guests\' absolute privacy. Failure to maintain a minimum 4.0/5.0 star rating may result in temporary profile deactivation.',
+    },
+    curatedNairobiWorlds: {
+      's_15a714': 'Dynamic cross-category plans tailored to your moment, occasion & time of day',
+      's_18a51d': 'Full Experience Builder',
+      's_41dd82': 'Curated Nairobi Worlds',
+      's_52c035': 'NEXG Experience Orchestrator',
+      's_8abe87': 'Explore Offerings in Main Feed',
+      's_c2018d': 'Contextual Experience Hub',
+      's_ecc198': 'Click step to explore offerings',
+      's_fe8da0': 'Nairobi Curated',
+    },
+    databaseSqlModal: {
+      's_baaf3a': 'PostgreSQL Database Scripts',
+    },
+    dateTimeField: {
+      's_46a299': 'Previous month',
+      's_7ecc8b': 'Choose a year',
+      's_8abf7c': 'Next month',
+    },
+    discoveryScreen: {
+      's_030851': 'Merchant categories',
+      's_0b7ee2': 'All verticals',
+      's_176135': 'The API may not be running. Start it with',
+      's_412226': 'Clear filters',
+      's_67300d': 'Clear search',
+      's_8344a6': 'Search merchants',
+      's_a3c57f': 'No merchants found',
+      's_dfe60c': 'Load more',
+      's_f4d948': 'Search restaurants, spa, safaris, champagne, chauffeur, pharmacy...',
+    },
+    dishCustomizerModal: {
+      's_052b34': 'Guest Satisfaction',
+      's_062e79': 'Increase quantity',
+      's_1c711d': 'Verified Diners Only',
+      's_2db328': 'Any preferences? e.g. Extra dressing on side, cutlery needed...',
+      's_492026': 'Add to Order',
+      's_594a3d': 'Share what made this dish memorable...',
+      's_6c02ab': 'Decrease quantity',
+      's_70d3a5': 'Close modal',
+      's_84ab4b': 'Submit Verified Review',
+      's_9c0406': 'Suite / Villa (e.g. Penthouse 402)',
+      's_a196bb': 'Customize & Options',
+      's_bfae0e': 'Your Name (e.g. Eleanor V.)',
+      's_d0fac0': 'Leave Your Dining Review',
+      's_ece1f0': 'Special Kitchen Instructions',
+    },
+    dockedSearchBar: {
+      's_67300d': 'Clear search',
+    },
+    experiences: {
+      's_057742': 'Curated Experience Hosts & Outfitters',
+      's_14c995': 'Book Date',
+      's_574a76': 'Book Activity',
+      's_63ae7c': 'Date & Time',
+      's_6568e5': 'Your booking with',
+      's_96ebfb': 'Search hosts, Maasai Mara, Giraffe Centre, cinema, safari...',
+      's_9fda6b': 'Back to all Outfitters',
+      's_a1e9f9': 'Explore Home',
+      's_ad3a34': 'Private Safaris, Aerial Tours & Cultural Ateliers',
+      's_cebc44': 'Choose an expert outfitter to browse hot-air balloon flights over the Mara, private giraffe conservation sanctuaries, and master artisan ateliers.',
+      's_d29299': 'Bespoke Concierge Expeditions',
+      's_eb9e1e': 'Confirm Booking',
+      's_f6e8ce': 'Experience Reservation',
+    },
+    floatingCartBar: {
+      's_f40d71': 'View Order',
+    },
+    forCouriers: {
+      's_06816c': 'Apply to Drive',
+      's_08c1c3': 'We provide access to high-quality vehicle maintenance programs, comprehensive courier insurance plans, and dedicated dispatch teams assisting you 24/7.',
+      's_0c343a': 'Apply Online',
+      's_0c8a9a': 'Terms of Service',
+      's_0e840b': 'Pocket High Tips',
+      's_110158': 'Help Center',
+      's_153ab5': 'Idle Reduction',
+      's_18414d': 'Elite Fleet',
+      's_1bedd8': 'Ambassadors utilizing our suite-specific integrated routing enjoy significantly higher success ratings and earn double the average industry tips.',
+      's_1d2be9': 'Safety Guidelines',
+      's_209f63': 'Average Earnings Growth',
+      's_22d1d3': 'Once you submit your application online, our onboarding team reviews documents within 48 hours. If qualified, you\'ll be invited for a brief physical assessment and standard white-glove training before your account goes active.',
+      's_2a7274': 'Submit your vehicle registration and documents online in under 5 minutes through our secure, mobile-friendly onboarding portal.',
+      's_2bf27f': 'STEP 01',
+      's_2d816d': 'Career Advancement',
+      's_2e6151': 'FLEET REQUIREMENTS',
+      's_2ed1ed': 'Premium Payouts for Professional Ambassadors.',
+      's_33b4c6': 'Join the Elite Fleet',
+      's_3500ab': 'Join a community built on premium status and mutual respect. We support your career path and help you develop unmatched service skills.',
+      's_355ac2': 'Deliveries per Day',
+      's_38769a': 'For Properties',
+      's_38df83': 'Estimate Earnings',
+      's_39bc68': 'Your Vehicle Type',
+      's_41493f': 'Join the Elite',
+      's_42475b': 'Maintain exceptional ratings and receive daily performance multipliers and exclusive priority dispatcher pairing.',
+      's_440245': 'The NEXG Driver App',
+      's_45b640': 'Go online in the driver app, navigate to hot premium spots, complete high-end orders, and watch your mobile wallet balance swell.',
+      's_4748c1': 'Receive clear, automated settlements straight to your bank or mobile wallet without delay, backed by detailed electronic statements.',
+      's_4c36e1': 'SETUP TIMELINE',
+      's_4d5b64': 'Ambassador Rating',
+      's_4d81b2': 'STEP 03',
+      's_4f555f': 'Track your daily performance, optimize your delivery times, and master Swahili & English hospitality tips with our smart companion analytics dashboard.',
+      's_5150fd': 'Priority Routing Tech',
+      's_52a6f3': 'For Partners',
+      's_530246': 'Guaranteed Weekly Payouts',
+      's_53cdfb': 'DATA INTELLIGENCE',
+      's_54c4b5': 'Exceptional Presentation',
+      's_5b8964': 'Guest Rating Profiles',
+      's_5ce9fd': 'Fast Verification',
+      's_5e7925': 'Our professional partner compliance team validates your records and issues a secure orientation invitation within 48 hours.',
+      's_653ccb': 'We currently support major high-end neighborhoods and coastal luxury zones across Nairobi, Mombasa, and Diani, expanding quickly to other East African metropolitan areas.',
+      's_677710': 'Route Efficiency Score',
+      's_6bde0a': 'Apply Online Now',
+      's_6d1c48': 'Earn stars and secure exclusive bonuses. Build private, anonymous reviews that reinforce your stellar reputation with premium hotels.',
+      's_75dde0': 'Return to Guest App',
+      's_765f2b': 'TRANSPARENT EARNINGS',
+      's_777b12': 'Ambassador delivering gourmet meals',
+      's_78df83': 'Powerful Analytics for Elite Drivers',
+      's_7e32e7': 'Quick online onboarding. Submit details, attend orientation, retrieve your custom elite starter kit, and take your first order in under 48 hours.',
+      's_7f255f': 'Deliver high-end products and culinary creations with meticulous care. Be dressed in custom-designed NEXG apparel to reflect elite standards.',
+      's_8049d9': 'Weekly Payout Settlements',
+      's_85cf78': 'No waiting for week-ends. Complete premium tasks and trigger instant payouts directly into your mobile wallet.',
+      's_89bdbf': 'Elevating premium hospitality across East Africa with integrated, contactless concierge ecosystems.',
+      's_8b1193': 'Understand your daily yields. Monitor peak areas, identify high-tipping zones, and learn the best hours to go online.',
+      's_928714': 'Collect Starter Kit',
+      's_933192': 'What it Takes to Be a NEXG Ambassador.',
+      's_93a5bc': 'Exec Car',
+      's_93fef0': 'Empowered Scheduling',
+      's_95e986': 'Take complete control over your working hours. Plan your deliveries around peak fine-dining periods to lock in dynamic high fares.',
+      's_97b846': 'Gain exclusive professional training in hospitality service, client management, and path leadership with certificates of excellence.',
+      's_981b01': 'Premium Fleet Support',
+      's_9ad0cc': 'Contact Us',
+      's_9b1690': 'Apply to Fleet',
+      's_9d3f52': 'Our advanced routing algorithms guide you efficiently to high-value destinations, minimizing idle mileage and maximizing deliveries per hour.',
+      's_9db108': 'Privacy Policy',
+      's_a08321': 'Redefining Delivery.',
+      's_a1e9f9': 'Explore Home',
+      's_a7acb1': 'Work according to your personal schedule. Take shifts during peak fine-dining hours for maximized yield.',
+      's_a9577d': 'Secure Site',
+      's_ad6c0d': 'KNOWLEDGE BASE',
+      's_aed5c5': 'Must possess a clean driving record, valid local driver\'s license for your specified vehicle, and active comprehensive third-party insurance coverage.',
+      's_b53080': 'Courier Partner FAQs',
+      's_b74c4e': 'Toggle Theme',
+      's_bc89aa': 'Empowered Flexibility',
+      's_befa37': 'Ambassador scanning the driver app',
+      's_c10fec': 'Flawless Modern Vehicle',
+      's_c18810': 'Valid Documents & Licenses',
+      's_c24cae': 'STEP 02',
+      's_c38c49': 'Elite Rank Status',
+      's_c71f96': 'Weekly Target Reached',
+      's_c88176': 'Access culinary deliveries, spa wellness packages, and executive courier jobs cleanly integrated under a single, highly intuitive screen.',
+      's_c887b9': 'About Us',
+      's_ce60db': 'Own Your Earnings.',
+      's_ce7472': 'Back to Home',
+      's_d44881': 'Couriers Hero Background',
+      's_d781b4': 'Operational Mapping',
+      's_df9144': 'ELITE STANDARDS',
+      's_e10068': 'Based on an average base fee of',
+      's_e18d8e': 'Courier Earnings Estimator',
+      's_e3a7a2': 'Direct payments made straight to your account every single week, with zero hidden fees.',
+      's_e3b925': 'STEP 04',
+      's_e6e178': 'Cookie Policy',
+      's_e72e94': 'Earnings Analytics',
+      's_eb35f1': 'Start your application today. Complete the secure onboarding questions and step into a new tier of professional independence and respect.',
+      's_ec3c35': 'Stay updated with premier hospitality tips and trends.',
+      's_eeb176': 'To guarantee top status, NEXG provides all approved couriers with premium tailored jackets, clean polo shirts, and custom-insulated delivery bags. Black trousers and clean black shoes are required on duty.',
+      's_f370c7': 'Our app guides you right up to the designated suite or property zone, avoiding lobby confusion and ensuring frictionless drop-offs.',
+      's_f582d4': 'Our dispatch systems minimize your empty miles. Pre-book orders or follow integrated corridors to stack high-paying jobs in a row.',
+      's_f6e64a': 'Average Tip per Delivery',
+      's_fbe3b3': 'Premium Integrated Hub',
+      's_fcf600': 'Retrieve your tailored NEXG jackets, insulated food packs, smartphone bracket, and secure driver login credentials.',
+      's_ff2382': 'Couriers Hero Daylight Background',
+    },
+    forMerchants: {
+      's_032a19': 'Our professional curation experts ingest your items, style gorgeous visuals, and optimize layouts for direct contactless guest displays.',
+      's_0c343a': 'Apply Online',
+      's_0eaa2f': 'Right Where They Are.',
+      's_118503': 'Merchants Hero Daylight Background',
+      's_1600e2': 'Apply to Join NEXG',
+      's_18414d': 'Elite Fleet',
+      's_2bf27f': 'STEP 01',
+      's_2f5b37': 'Merchant Support',
+      's_38769a': 'For Properties',
+      's_3f3d89': 'Zero integration headache. Submit your menu or catalogue, let us digitise your portal, and receive curated local sales in 48 hours.',
+      's_4d81b2': 'STEP 03',
+      's_52a6f3': 'For Partners',
+      's_540349': 'Automated Revenue',
+      's_591721': 'Higher Avg. Order Value',
+      's_673bf7': 'Get paid on time, every time. Once a guest completes checkout, automated, secure merchant payouts route instantly to your bank.',
+      's_750959': 'Applications are reviewed by our curation team within 24 hours to ensure our high standards of quality and service are maintained across the platform.',
+      's_771412': 'Why Merchants Choose NEXG',
+      's_7cb113': 'Multiply Volume',
+      's_80b451': 'Instant Split Payouts',
+      's_81df05': 'Consistent Orders',
+      's_85feef': 'Premium Exposure',
+      's_891482': 'We handle everything from digital menu formatting to custom checkout links. Absolutely no technical setup required on your end.',
+      's_89a9da': 'Submit your fine dining menus, luxury spa offerings, or rental catalogs through our seamless, intuitive 2-minute onboarding form.',
+      's_916b2f': 'Digital Integration',
+      's_a1e9f9': 'Explore Home',
+      's_a2e8c7': 'Receive Suite Orders',
+      's_a92592': 'ONBOARDING TIMELINE',
+      's_aa32fa': 'Start Onboarding',
+      's_abafb4': 'Prepare packages meticulously. Professional NEXG couriers gather the items, fulfill deliveries, and secure payouts automatically.',
+      's_ae23a7': 'Keep orders running flawlessly. Our active support concierge monitors deliveries live and assists with special suite requests.',
+      's_b74c4e': 'Toggle Theme',
+      's_ba7223': 'Commission on Pickups',
+      's_c0228a': 'Reach Customers.',
+      's_c24cae': 'STEP 02',
+      's_c75030': 'Merchants Hero Background',
+      's_c89f38': 'Partner with NEXG App to serve guests directly inside premier luxury properties. We provide white-glove logistics, automated payouts, and seamless integration with your existing team.',
+      's_ce7472': 'Back to Home',
+      's_ce9fe6': 'Never worry about transport. Our highly vetted professional courier fleet collects your packages and delivers them with elite standards.',
+      's_d6626f': 'Zero Friction Setup',
+      's_da08fb': 'Seamless Payouts',
+      's_def7cc': 'Dedicated Support',
+      's_e3b925': 'STEP 04',
+      's_e56df8': 'WHY PARTNER WITH US',
+      's_e6a013': 'Merchant Terms',
+      's_e9cbdf': 'Verified Properties',
+      's_f6538e': 'Tap into high-net-worth guests, tourists, and business travelers ordering gourmet meals, personal amenities, or spa treatments.',
+      's_f6e1bd': 'Gain exclusive positioning in elite hotel room directories, high-visibility bedside QR cards, and digital concierge web-apps.',
+      's_faae3e': 'As guests scan room QR codes, orders stream directly to your merchant dashboard with real-time audio and visual system notifications.',
+      's_fe1a29': 'Contact Support',
+    },
+    forProperties: {
+      's_0293af': 'Properties Hero Background',
+      's_052b34': 'Guest Satisfaction',
+      's_061f53': 'Curated local menus',
+      's_06fb24': 'Integrate seamless, world-class concierge services into your luxury rentals and hotels. Empower guests to order gourmet food, book organic spa treatments, and request private transport with a single, contactless scan.',
+      's_0a3693': 'Instant access, absolutely zero apps required',
+      's_0c8a9a': 'Terms of Service',
+      's_0d3b7b': 'Predict high-demand hours to allocate room cleaning, butler services, or external partner delivery drivers with supreme efficiency.',
+      's_0e5ae2': 'Unified Service Hub',
+      's_110158': 'Help Center',
+      's_110820': 'Join hundreds of high-end resorts, boutique hotels, and luxury Airbnb hosts across East Africa that are boosting guest satisfaction and building zero-cost revenue.',
+      's_176079': 'Preference Profiles',
+      's_17d67c': 'Earnings Estimator',
+      's_182ad0': 'Secure automated checkouts, verified premier concierge merchants, and licensed professional couriers guarantee safety and guest peace of mind.',
+      's_18414d': 'Elite Fleet',
+      's_1be9e5': 'Every QR code is uniquely tied to the guest suite, meaning food deliveries, room cleanings, or requested towels find guests exactly where they are.',
+      's_1d2be9': 'Safety Guidelines',
+      's_21f4bb': 'Happy Guests',
+      's_25096d': 'Upfront Integration Cost',
+      's_271358': 'Properties utilizing NEXG Contactless QR systems experience a massive increase in service engagement compared to conventional physical folders.',
+      's_29b967': 'Properties CTA Sunset Background',
+      's_2bf27f': 'STEP 01',
+      's_31c559': 'Elevate Guest Experiences.',
+      's_338ed9': 'Earn More Income',
+      's_341a50': 'NEXG builds privacy-compliant guest preference profiles to help your staff pre-empt needs before they are even spoken out loud.',
+      's_38769a': 'For Properties',
+      's_3b6c18': 'Service Response Index',
+      's_40c759': 'Average Occupancy Rate',
+      's_4216f1': 'Trusted & Safe',
+      's_46f477': 'Guests scan, order, and pay instantly. NEXG handles all fulfillment, depositing automatic commission shares to your dashboard.',
+      's_49f179': 'We Handle Everything',
+      's_4c36e1': 'SETUP TIMELINE',
+      's_4d2dec': 'Local Adventures',
+      's_4d81b2': 'STEP 03',
+      's_4f7049': 'Estimated Monthly Share',
+      's_4fdd58': 'Order Conversion Rate',
+      's_52a6f3': 'For Partners',
+      's_534294': 'We supply custom-crafted physical suite-specific QR cards. Place them in your room directories or high-visibility bedside tables.',
+      's_53cdfb': 'DATA INTELLIGENCE',
+      's_589ee1': 'Configure & Customise',
+      's_5bfbb7': 'The QR Advantage',
+      's_5fbc63': 'Unlock Property Potential.',
+      's_70a8da': 'Stand Out',
+      's_73ba7f': 'Chauffeurs & rentals',
+      's_75dde0': 'Return to Guest App',
+      's_785c45': 'Powerful Analytics for Modern Managers',
+      's_7a1f3a': 'Position your properties as elite, technologically forward luxury destinations. Set a standard of hospitality others can\'t match.',
+      's_7b1758': 'Private Cab & Car Hire shares',
+      's_7bf908': 'Partner Onboarding',
+      's_7c6eec': 'Transform guest behavior into highly actionable insights. Track ordering trends, optimize your staffing, and refine property offerings with real-time analytics.',
+      's_7ee992': 'View Demo Video',
+      's_818f94': 'Clear real-time transparency audit trail',
+      's_8249e7': 'Food & Dining referrals',
+      's_8332c9': 'Inventory Speed',
+      's_872061': 'Deploy QR Displays',
+      's_89bdbf': 'Elevating premium hospitality across East Africa with integrated, contactless concierge ecosystems.',
+      's_8c288d': 'Submit your property and suite list online. Our concierge activation specialists verify your layout to launch your space.',
+      's_8c8458': 'Why Hosts Choose NEXG',
+      's_8d365a': 'Properties Daylight Hero Background',
+      's_8e8592': 'Bespoke Tours & Safaris',
+      's_8fe3e8': 'Apply & Partner',
+      's_9ad0cc': 'Contact Us',
+      's_9db108': 'Privacy Policy',
+      's_9fd2f3': 'Stop leaving incremental hospitality revenue on the table. Our mutual commission-sharing model turns every guest service interaction into a direct revenue flow for your property, even when fulfilled entirely by trusted third-party merchants.',
+      's_a1e9f9': 'Explore Home',
+      's_a2cb3c': 'Guests simply point their camera and browse. No logins, no tedious app downloads, just premier high-end service in a couple of seconds.',
+      's_a2f3a7': 'Enhanced Experience',
+      's_a3fb7a': 'Fine Dining',
+      's_a5d6a1': 'Zero integration overhead. Complete hotel setup, display delivery, and automatic digital catalog activation in under 48 hours.',
+      's_a62509': 'REVENUE GENERATION',
+      's_a9577d': 'Secure Site',
+      's_a969aa': 'Safaris & excursions',
+      's_a97bcc': 'Unlock a hands-off, zero-effort passive revenue stream by receiving high commission splits from every guest meal, ride, or tour booked.',
+      's_aaa399': 'Passive Commissions',
+      's_b74c4e': 'Toggle Theme',
+      's_c24cae': 'STEP 02',
+      's_c50b8f': 'Fully automated payouts and digital reporting',
+      's_c5bb5d': 'Average Order Growth',
+      's_c86934': 'Total Rooms / Suites',
+      's_c887b9': 'About Us',
+      's_c9bc84': 'Luxury Transport',
+      's_cd4fe8': 'Partner with NEXG',
+      's_ce7472': 'Back to Home',
+      's_d08ccb': 'Zero Friction Interface',
+      's_d15371': 'Delighted guests leave glowing feedback. Maximize your rating scores and booking ranks across Airbnb, Booking, and Expedia.',
+      's_d178f4': 'Guest Habit Tracking',
+      's_d300d6': 'Better Reviews',
+      's_d5d3ea': 'We integrate premier local partner cuisines, spa offerings, and chauffeur fleets into a single, seamless brand-matching portal.',
+      's_d8481d': 'Wellness & Spa',
+      's_d887cc': 'Understand exactly what your guests prefer. Track peak booking periods, top fine dining cravings, and late-night requests.',
+      's_e09921': 'Operational Optimization',
+      's_e3b925': 'STEP 04',
+      's_e56df8': 'WHY PARTNER WITH US',
+      's_e6e178': 'Cookie Policy',
+      's_e7f7ee': 'More Bookings',
+      's_e87389': 'Loyalty Return Intent',
+      's_ea763f': 'Apply for Partnership',
+      's_ec3c35': 'Stay updated with premier hospitality tips and trends.',
+      's_ee7b88': 'We seamlessly integrate previously fragmented premium local merchants into an elegant singular user experience reflecting your property’s status.',
+      's_f04a9d': 'Absolutely zero operational burden for you. From partner restaurant execution to vetted courier logistics, NEXG does all the heavy lifting.',
+      's_f59c46': 'Monetize Every Single Stay.',
+      's_f77be3': 'Luxury suite with guest scanning QR code',
+      's_f90548': 'Deliver unmatched, instant room service, organic spa appointments, and curated local safaris at the simple scan of a finger.',
+      's_f907f8': 'One Elite App. Infinite Services.',
+      's_fa3fc3': 'Average App Spend per Stay',
+      's_fe3f95': 'THE ECOSYSTEM',
+    },
+    googleReviewsModal: {
+      's_0d75a8': 'Google Maps Pin',
+      's_273f6f': 'No Google reviews match your selected filter.',
+      's_3ea133': 'Verified direct contacts & socials',
+      's_6913b8': 'Search reviews for dishes, ambiance, speed...',
+      's_6a6eaf': 'Filter by Stars',
+      's_6bce42': 'Verified Aspect Scores',
+      's_aaf427': 'Atmosphere & Reliability',
+      's_ba9553': 'Quality & Execution',
+      's_bd9554': 'Reviews synced in real-time with Google Places API',
+      's_c34ae8': 'Aspect data collected via Google Places API',
+      's_cbac3e': 'App Service',
+      's_d45c4f': 'Official Portal',
+      's_d6f49f': 'Verified Google Reviews',
+    },
+    groceriesPage: {
+      's_160a42': 'Back to all Purveyors',
+      's_340a24': 'Gourmet Cellar & Purveyors',
+      's_48028b': 'Artisanal Cellar, Caviar & Fromagerie',
+      's_504097': 'Fine Cellar & Epicurean Purveyors',
+      's_7447ef': 'Search purveyors, caviar, Dom Pérignon, Bellota, truffles...',
+      's_828ad2': 'Insulated Cold Packaging',
+      's_a1e9f9': 'Explore Home',
+      's_dcc1fb': 'Select Item',
+    },
+    header: {
+      's_64f892': 'Toggle Light/Dark Theme',
+      's_7abd6c': 'View Cart',
+    },
+    hero: {
+      's_67300d': 'Clear search',
+      's_7ecda2': 'Nocturnal Luxury Penthouse Dining & Skyline',
+      's_c75a68': 'Sunlit Luxury Penthouse Infinity Pool and Skyline',
+      's_ece6e2': 'Nocturnal Luxury Suite Mobile',
+    },
+    hostOnboarding: {
+      's_00679c': 'Who fulfills it?',
+      's_013237': 'Use my location',
+      's_0302c0': 'Reception desk, access code process, security desk, host contact, etc.',
+      's_0d3b1e': 'Host Portal',
+      's_10599c': 'Property name',
+      's_10a49a': 'Add a space / unit type',
+      's_120c32': 'How are guests identified within the property?',
+      's_12e078': 'Name / label',
+      's_1596ef': 'Bring your property into NEXG.',
+      's_193de6': 'Your host application for',
+      's_205866': 'Landmarks, gate instructions, building name, entrance, etc.',
+      's_20687f': 'Settlement account',
+      's_25916d': 'Price (optional)',
+      's_25e7e1': 'Tell guests about the property',
+      's_272c68': 'Property features',
+      's_292d45': 'Examples of guest requests',
+      's_2bbda0': 'For NEXG App Limited',
+      's_33becf': 'You\'re ready for verification.',
+      's_369c34': 'Property partner',
+      's_3cc2c7': 'Signature pad',
+      's_415e74': 'Guest capacity',
+      's_421a0f': 'Short description of the property, atmosphere and what makes it distinctive...',
+      's_486ffa': 'Authorized representative',
+      's_49e09b': 'Tax / pricing setup',
+      's_4a9200': 'Property / operating permit',
+      's_4e17c4': 'By signing below, the authorized representative confirms that the submission is accurate and accepts the applicable NEXG host partnership terms presented during onboarding.',
+      's_58eafa': 'Typical request fulfillment time',
+      's_616ace': 'Legal / operating entity',
+      's_62a764': 'If applicable',
+      's_6372ac': 'Host onboarding',
+      's_67745b': 'Start another',
+      's_692b50': 'Building, street or road',
+      's_7013c7': 'The Host remains responsible for the operation, safety, licensing, staffing, availability, pricing and fulfillment of property services. NEXG may coordinate guest requests, transactions and related workflows according to the agreed configuration.',
+      's_75d65e': 'Your progress is saved locally on this device.',
+      's_773613': 'Rooms / units',
+      's_782667': 'HOST SETUP',
+      's_7af122': 'Tap or click the map to set the exact property point.',
+      's_7b12e1': 'Add the requests your team actually handles today.',
+      's_7bba35': 'Property cover image',
+      's_810878': 'Tell us what exists, what guests can access, and how your team operates. We\'ll use this to build your property profile and guest experience.',
+      's_82c7e7': 'Back to the host portal',
+      's_849305': 'Signature method',
+      's_86adcf': 'Year opened',
+      's_893bd7': 'Authorized signatory name',
+      's_897c71': 'Clear signature',
+      's_8ad7ea': 'Property type',
+      's_8dc8f7': 'What would you like NEXG to help you expose to guests?',
+      's_8e3c7a': 'Website / booking page',
+      's_924da1': 'Describe your property type',
+      's_93cfd5': 'What kind of property is it?',
+      's_9550a5': 'Departments / teams available',
+      's_99d32f': 'Back to host portal',
+      's_9d617c': 'What can guests access or request?',
+      's_a2a1b1': 'The Host agrees to maintain accurate property information and reasonable service availability, and to notify NEXG of material changes that could affect guest fulfillment.',
+      's_a68df4': 'Check-in / arrival instructions',
+      's_a6d2ea': 'The Host confirms that the information supplied about the property, its operating model, guest-accessible spaces and services is accurate to the best of their knowledge and that they are authorized to provide it.',
+      's_a8dc5c': 'What does the property include?',
+      's_aa1d9b': 'What do you want guests to transact for?',
+      's_ae7f40': 'Check-out time',
+      's_b45dc8': 'Anything you currently struggle to make visible, bookable, purchasable or easy for guests to request...',
+      's_b501d3': 'Request / service',
+      's_b50578': 'Upload square logo',
+      's_b5508b': 'Property setup',
+      's_be3ecd': 'Account holder name',
+      's_bf72f7': 'Settlement details should be verified before activation. Do not use this form for card or wallet credentials.',
+      's_c0b7d7': 'Pin the property',
+      's_c250a9': 'Property access',
+      's_c36127': 'Save / Print',
+      's_ca1948': 'For Host',
+      's_ca9b4a': 'How should guests find you?',
+      's_cde9a5': 'Optional notes, amenities or access details',
+      's_ce9840': 'Submitted information may be reviewed for onboarding, verification, operations, support, settlement and guest-experience purposes. Additional verification may be requested before activation.',
+      's_d1d7c9': 'Full legal name',
+      's_d90fdd': 'Operating model',
+      's_e400b7': 'How do guest requests reach your team today?',
+      's_e45952': 'Who should receive NEXG requests?',
+      's_e4cee9': 'Application received',
+      's_e61a08': 'M-PESA Till / Paybill',
+      's_e9c696': 'Are you onboarding more than one property?',
+      's_eb7eb7': 'Choose file',
+      's_ecc61a': 'Please complete the highlighted fields before continuing.',
+      's_edbfdd': 'Property logo',
+      's_f0ac0a': 'Pending verification',
+      's_f548ec': 'Business / registration document',
+      's_f71497': 'Check-in time',
+      's_faea7e': 'NEXG App Limited',
+      's_fbd2e5': 'Registered company or operating name',
+      's_ff1835': 'NEXG Operations',
+    },
+    languageSwitcher: {
+      's_03e64a': 'Change Language (English, 中文, Kiswahili, العربية)',
+      's_99547d': 'Select Regional Language',
+      's_b8cc8e': 'Language Selector',
+    },
+    merchantAdCarousel: {
+      's_297522': 'Sponsored partner offers',
+      's_2d4e52': 'PARTNER SPOTLIGHT',
+      's_3340de': 'Exclusive host and verified partner privileges',
+      's_430fac': 'Enable location to see trending offerings near you',
+    },
+    merchantCard: {
+      's_3beea0': 'Save to favorites',
+      's_960d55': 'Popular offerings',
+    },
+    merchantItemModal: {
+      's_062e79': 'Increase quantity',
+      's_6c02ab': 'Decrease quantity',
+    },
+    merchantOnboarding: {
+      's_00b623': 'Upload business certificates and company logos. These will be used to dynamically set up your store theme inside the NEXG customer application.',
+      's_012a51': 'Please register the legal trading entities. Correct tax identifiers help guarantee smooth fast payouts.',
+      's_01edab': 'Search Location Finder',
+      's_02aa9a': 'Input branch parameters. You can search using Nominatim autocomplete finder or drop coordinates via the map.',
+      's_0bd62e': 'Account Number',
+      's_0cb1d6': 'Authorized Officer Signature',
+      's_108c09': 'NEXG Riders Fleet',
+      's_197803': 'Above 60 minutes',
+      's_1c7169': 'Logo preview',
+      's_1cf31b': 'Generated via map picker',
+      's_20f7df': 'Closing Time *',
+      's_21f543': 'Facebook page',
+      's_22691e': 'Provide a brief summary of specialties, offerings, or history (max 150 characters)',
+      's_26a2ff': 'Based on your category, select common sections to organize your items or add custom ones.',
+      's_2eabdb': 'Partnership Agreement Contract',
+      's_312631': 'Bank Name',
+      's_39e42f': 'Interactive catalog listing on the premium NEXG Client App.',
+      's_3e95c1': 'Nominate your payouts destinations. Weekly settlements are transferred directly every Monday morning.',
+      's_3fa081': 'You selected',
+      's_411097': 'None selected yet. Choose suggestions or add a custom one below.',
+      's_4331e0': 'Holiday Closing Time',
+      's_4baf91': 'Short Business Description',
+      's_4f2047': 'Maintain exact availability schedules, correct pricing, and stock sync lists.',
+      's_540d0d': 'Suggested Sections',
+      's_550c6f': 'Register primary coordinates. Authorized officers receive system orders, accounts payouts auditing details, and alerts.',
+      's_5664e0': 'The Merchant is solely responsible for clearing customs duties, port levies, and ensuring all shipping cargo meets international and local compliance standards.',
+      's_59c22e': 'Upload Banner Image',
+      's_5fa789': 'You can select multiple specific types if your outlet handles different luxury segments.',
+      's_676418': 'Business Paybill No.',
+      's_67de19': 'Provide premium white-glove deliveries & concierge orders to luxury customers in Kenya.',
+      's_7122f5': 'Business Profile',
+      's_71c904': 'NEXG APP LIMITED',
+      's_721462': 'Director ID / Passport Scan',
+      's_7308b8': 'Review the pre-drafted legal contract. Ensure all merchant parameters, locations, and banking details are correct.',
+      's_8242a9': 'Upload business registration scan PDF or image.',
+      's_85273b': 'Confirm Coordinates',
+      's_869b48': 'NEXG Legal Representative',
+      's_87a51d': 'Own Store Riders',
+      's_89ac4c': 'Hours Configuration Template',
+      's_8c1404': 'Instagram profile',
+      's_91091f': 'Type landmark e.g. Yaya Centre, Westlands, Sarit...',
+      's_91dd0b': 'TikTok profile',
+      's_928d67': 'Coordinates Map Link',
+      's_9441e0': 'Branch Manager / Contact Person',
+      's_959d0c': 'For NEXG APP LIMITED',
+      's_963f97': 'Average Preparation Time',
+      's_9d4f8b': 'Type your full legal name',
+      's_a03653': 'Expand Your Business with NEXG',
+      's_a0b2cf': 'Search categories e.g. Food, Safe, Spa, Flight...',
+      's_a133eb': 'Click to add',
+      's_a4d472': 'NEXG operates logistics carriage from your store using our background-checked professional couriers.',
+      's_a5d0ab': 'Certificate of Registration',
+      's_abf9f4': 'Banner preview',
+      's_b03404': 'Your premium merchant onboarding is complete. Our partnership audit committee will complete verify checks and activate your store front within 24 hours.',
+      's_b32233': 'Website URL',
+      's_b62775': 'Upload ID or passport of major primary director.',
+      's_b639de': 'Add Section',
+      's_b8579d': 'Payment Details',
+      's_b9084a': 'Choose Category',
+      's_b9f2b1': 'Operating Days',
+      's_b9ffbd': 'Merchant Partnership Agreement',
+      's_bb20e3': 'For THE MERCHANT',
+      's_c05283': 'Choose the category that best aligns with your merchant store operations. Use search or filter down instantly.',
+      's_c5955e': 'Opening Time *',
+      's_c6846b': 'Signature drawing',
+      's_d1bf6b': 'Kenyan Public Holidays Availability',
+      's_d1d21f': 'Collection and processing of accounts charges from guests, tourists, and corporate networks.',
+      's_d33bf6': 'Merchant Portal',
+      's_d7a397': 'Branch Contact Phone',
+      's_d890b7': 'Branch Location',
+      's_db3b79': 'Account Name',
+      's_e0a26d': 'Logistics carriage orchestration based on requested parameters.',
+      's_e58331': 'Handwriting Style Preview',
+      's_e79369': 'Store Branches & Location Map',
+      's_eab077': 'Delivery Carriage Modes',
+      's_eab952': 'WhatsApp Dispatch No.',
+      's_ebaf4a': 'Paybill Account Name',
+      's_ed6a3f': 'Holiday Opening Time',
+      's_f1dd4c': 'Buy Goods Till No.',
+      's_f7c245': 'Onboard Another Store',
+      's_faea7e': 'NEXG App Limited',
+    },
+    merchantPage: {
+      's_c902a1': 'Open Now',
+    },
+    merchantPreviewSheet: {
+      's_0f4c5c': 'This merchant does not declare its own workflow, so the default for its category is shown.',
+      's_28da6e': 'See all offerings',
+      's_baa550': 'Close preview',
+    },
+    merchantRoute: {
+      's_176135': 'The API may not be running. Start it with',
+      's_a1ca54': 'Loading merchant',
+      's_e84712': 'Go back',
+    },
+    merchantView: {
+      's_085b31': 'No offerings listed yet',
+      's_3fcbae': 'Menu sections',
+      's_67300d': 'Clear search',
+    },
+    metricsDashboard: {
+      's_048f2f': 'Status breakdown',
+      's_0dd383': 'API version',
+      's_1c8836': 'Built at',
+      's_235f7b': 'Events accepted',
+      's_236a59': 'Bars are per-bucket counts derived from the API\'s cumulative Prometheus buckets.',
+      's_266384': '5xx error rate',
+      's_406acb': 'Requests / minute',
+      's_41e8de': 'Recent traces (/api/traces)',
+      's_461aff': 'No spans buffered yet.',
+      's_58b6dc': 'In flight',
+      's_5dd968': 'Events dropped',
+      's_65916f': 'Browser events arrive only from visitors who granted analytics consent.',
+      's_74d595': 'No metrics available',
+      's_74efa0': 'Metrics API unreachable.',
+      's_75e157': 'The dashboard polls',
+      's_8474ec': 'No samples yet.',
+      's_886fb2': 'Client telemetry',
+      's_9d5b00': 'Slowest routes (by p95)',
+      's_a41501': 'Runtime, build and data source',
+      's_b0ad50': 'No routes recorded yet.',
+      's_c347b1': 'Service metrics',
+      's_cc1e6a': 'Duration histogram',
+      's_cec477': 'Last 60s',
+      's_e4076f': 'Collecting samples. The line appears after the second poll.',
+      's_ee9d59': 'Json fallback reads',
+      's_f8fd6e': 'No responses recorded yet.',
+      's_ffb77d': 'Data source',
+    },
+    nexGCategoryDrilldown: {
+      's_03f70c': 'Merchant Providers & Partners',
+      's_09efe8': 'Choose a time',
+      's_0df6f0': 'Switch Provider',
+      's_0ecb20': 'Confirm & Reserve Instant Dispatch',
+      's_126f44': 'Preferred Time',
+      's_19ad69': 'Scheduled Date',
+      's_1b8543': 'Reset All Filters',
+      's_1f647f': 'Special Offers',
+      's_27c636': 'Complete view',
+      's_2994b4': 'Scroll right',
+      's_2c9e5a': 'Scroll left',
+      's_2f1873': 'All Items',
+      's_34318e': 'Rating 4.8+',
+      's_492026': 'Add to Order',
+      's_4ce3f0': 'Select a Merchant Provider Above',
+      's_50238f': 'No upfront charge. Escrow reservation handled by concierge desk.',
+      's_543b1b': 'Your reservation for',
+      's_5be698': 'Reset Filters',
+      's_77bf79': 'Reserve / Book',
+      's_7db318': 'Back to Discovery',
+      's_8978ea': 'Decision Specifications',
+      's_8bf67b': 'Nairobi Luxury District',
+      's_9dca31': 'No items found matching your filters.',
+      's_ab2d11': 'Under 25 min',
+      's_c07c6d': 'Suite Number or Location Notes',
+      's_c14e04': 'Browse catalog offerings with real-time pricing and availability',
+      's_c25b51': 'Strict Category & Subcategory Catalog',
+      's_d394a9': 'Highest Rated',
+      's_e16a1d': 'Explore dedicated subcategories with specialized imagery and custom parameters',
+      's_eb13c4': 'To view item cards, please click any of the verified merchant providers above. Their full 30-item catalog, specifications, and instant ordering will appear here.',
+      's_fae58c': 'Clear Selection',
+      's_fcdcf7': 'Fast selections & customer favorites',
+    },
+    nexGCollectionRail: {
+      's_0b3917': 'Curated Collection',
+      's_2994b4': 'Scroll right',
+      's_2c9e5a': 'Scroll left',
+      's_986032': 'Explore All',
+    },
+    nexGDiscoveryView: {
+      's_6d9483': 'Browse verified Nairobi merchants across 20 neighborhoods with Wolt-grade previews',
+      's_741311': 'Search food, spa, safaris, champagne, chauffeur...',
+      's_76cb8c': 'Previous categories',
+      's_844b94': 'Next categories',
+      's_8f8796': 'High-priority concierge delivery direct to your suite or villa in under 30 minutes',
+      's_a9176a': 'Explore Verticals & Categories',
+      's_b0a3fc': 'All Verified Partners & Merchants',
+      's_df4cf6': 'Instant Suite Express',
+    },
+    nexGEntityCard: {
+      's_085ed0': 'View catalog & pricing',
+    },
+    nexGItemSheet: {
+      's_0932f6': 'Special App Notes or Dietary Preferences',
+      's_22b77f': 'Appointment & Scheduling',
+      's_24a16c': 'Session Duration',
+      's_3beea0': 'Save to favorites',
+      's_65d22e': 'Close sheet',
+      's_68f2d8': 'Preferred Date',
+      's_693039': 'Time Slot',
+      's_a99ee2': 'Number of Guests / Attendees',
+      's_c6cf76': 'Added to Experience Order',
+      's_d0e359': 'Curated Enhancements & Add-ons',
+      's_eeea54': 'NEXG App Guarantee',
+    },
+    nexGLandingHero: {
+      's_0b8149': 'Sign up',
+      's_2bd100': 'Enter delivery address, villa or hotel suite...',
+      's_381d79': 'Nairobi Villas',
+      's_52a6f3': 'For Partners',
+      's_71a30d': 'Change Delivery Location',
+      's_e17357': 'Active App Fleet in Nairobi',
+      's_f7c400': 'Log in',
+      's_fa918a': 'Locate my position',
+    },
+    nexGSearchEngine: {
+      's_c5b914': 'No direct matches found',
+      's_cd81f4': 'Search Results for',
+    },
+    offercarousel: {
+      's_10bb09': 'Previous Slide',
+      's_2aa5dc': 'View Offer',
+      's_7141bc': 'Next Slide',
+    },
+    orderTrackingModal: {
+      's_116632': 'Estimated Delivery',
+      's_375813': 'Fast forward simulation to next lifecycle stage',
+      's_43301e': 'Call Courier',
+      's_536456': 'Courier Tip',
+      's_61243a': 'Simulated Payment Method',
+      's_6e6109': 'Copy delivery security PIN',
+      's_74e226': 'Itemized Receipt & PIN',
+      's_84e3ee': 'Dismiss / Back to App',
+      's_976a74': 'Transaction Reference',
+      's_9c12c6': 'Delivery Fee',
+      's_9ca905': 'This is an automated simulation of the client ordering lifecycle in NEXG App. No actual payment provider has been billed. Once connected to the live API gateway, genuine payments will be processed via M-Pesa or Stripe.',
+      's_9fb5a8': 'Delivery PIN',
+      's_a392ce': 'Live Progress Stages',
+      's_b868ce': 'Message Courier',
+      's_cbac3e': 'App Service',
+      's_cd1876': 'Your Location',
+      's_d6e963': 'Minimize tracking',
+      's_ea2152': 'Live Journey & ETA',
+      's_f56564': 'On schedule',
+    },
+    productcarousel: {
+      's_10bb09': 'Previous Slide',
+      's_7141bc': 'Next Slide',
+    },
+    promo: {
+      's_38769a': 'For Properties',
+      's_4a421c': 'For Merchants',
+      's_c63982': 'For Couriers',
+      's_d2c984': 'NEXG App App Interface',
+    },
+    restaurantDetailModal: {
+      's_034ad6': 'Recent Google Reviews',
+      's_116c19': 'Hospitality & Service',
+      's_3beea0': 'Save to favorites',
+      's_4f2130': 'Google Restaurant Reviews',
+      's_52aed7': 'Food Quality',
+      's_56ba29': 'No dishes match your search criteria.',
+      's_649ff9': 'Add to order',
+      's_652bc8': 'Posted on Google',
+      's_79db72': 'View & Write Reviews',
+      's_79fe15': 'View Google Reviews',
+      's_9c203d': 'Artisanal Menu',
+      's_9f068b': 'Verified Place',
+      's_a023e6': 'Chef Pick',
+      's_b05630': 'Synced Live',
+      's_b38795': 'Search dishes...',
+      's_c152be': 'No Google reviews loaded for this venue.',
+      's_e1c6bf': 'Atmosphere & Transport',
+      's_f4657b': 'Google Maps Rating',
+    },
+    restaurants: {
+      's_0721cf': 'Your reservation at',
+      's_072c89': 'Reserve Table',
+      's_0c8f01': 'Table Reservation',
+      's_25b120': 'Selected Reservation',
+      's_2c3b25': 'Confirm Table',
+      's_34df71': 'Search dining partners, sushi, dry-aged steaks, pasta...',
+      's_4f9fa0': 'Google Maps Location',
+      's_5be698': 'Reset Filters',
+      's_5f716b': 'Try adjusting your search keywords or resetting cuisine filters.',
+      's_6b2c05': 'Fine Dining Partners',
+      's_7288fd': 'Fine Dining Partners & Master Chefs',
+      's_868fb0': 'Click any dish to configure ingredients, accompaniments, or place a simulated order',
+      's_99256e': 'Curated Culinary Directory',
+      's_9da221': 'Featured Partner',
+      's_a1e9f9': 'Explore Home',
+      's_ae0cb2': 'Signature Dishes & Menu Offerings',
+      's_bf0c7d': 'Back to all Dining Partners & Merchants',
+      's_cfdf8b': 'Search menu dishes...',
+      's_d97dd5': 'View Google Reviews & Diner Insights',
+      's_dde236': 'Customize & Order',
+      's_e25e77': 'Select a merchant to explore their Michelin-grade menu, signature dishes, verified Google diner reviews, and table reservations.',
+      's_eac205': 'No dining partners match your filters',
+    },
+    routeFallback: {
+      's_1c5772': 'Loading page',
+    },
+    scrollToTop: {
+      's_f07710': 'Scroll to top',
+    },
+    spaBookingModal: {
+      's_039d05': 'Experience Setting',
+      's_09121f': 'Appointment Slot',
+      's_15ddf4': 'District Wellness Experience',
+      's_17548b': 'Slot Scheduled',
+      's_2fd731': 'Signature Aromatherapy Oil',
+      's_301d19': 'Live Dispatch Progress',
+      's_4548b7': 'Our certified therapist will arrive 10 minutes prior with sanitized organic towels, ultrasonic mist diffuser, and a heated memory-foam bed.',
+      's_485336': 'Villa / Suite Number',
+      's_4b8ec9': 'Private In-Villa Sanctuary',
+      's_5621b9': 'Focus Areas & Medical Notes',
+      's_712231': 'Contact Spa Concierge',
+      's_7d1e9d': 'Private oceanfront cabana with thermal plunge pool & tranquil zen garden access.',
+      's_8cff8d': 'Total Experience Fee',
+      's_9092d9': 'Add to Calendar',
+      's_9505aa': 'Total Concierge Charge',
+      's_950d86': 'Massage Pressure Preference',
+      's_9a36a0': 'Confirm Spa Booking',
+      's_9e603c': 'Therapist dispatches directly to your villa with heated table, organic linens & aromatherapy.',
+      's_a027ba': 'Select Ritual Duration',
+      's_b3a5a1': 'Concierge In-Villa Service Protocol',
+      's_be9475': 'Therapist Preference',
+      's_c0a672': 'Appointment Confirmed',
+      's_c8c5fe': 'Primary Guest Name',
+      's_f00e02': 'Assigned Master Therapist',
+      's_f79d9c': 'Resort Spa Pavilion',
+    },
+    spaWellness: {
+      's_120405': 'Select Ritual',
+      's_3669be': 'Book Calendar',
+      's_5276ac': 'Your appointment at',
+      's_5dfb4e': 'Spa & Wellness Sanctuaries',
+      's_659a92': 'Search spa sanctuaries, Balinese, deep tissue, sauna...',
+      's_689bea': 'Back to all Sanctuary Partners',
+      's_69d23c': 'District Holistic Wellness & Spa',
+      's_9aabe9': 'Book Session',
+      's_a1e9f9': 'Explore Home',
+      's_c1c2fb': 'Sanctuary Spas & In-Villa Wellness',
+      's_d02cb4': 'Search rituals & massages...',
+      's_eb9e1e': 'Confirm Booking',
+      's_f212ea': 'Spa Sanctuary Reservation',
+      's_f2937f': 'Select duration, botanical essential oils, and schedule an immediate in-villa or pavilion appointment',
+      's_fda6e0': 'Select a wellness sanctuary to browse certified therapists, in-villa Balinese massages, Ayurvedic Shirodhara, and hydrothermal rituals.',
+      's_fe0476': 'Sanctuary Treatments & In-Villa Rituals',
+    },
+    stats: {
+      's_034abd': 'From hotels to homes, we make everyday exceptional.',
+      's_826dd3': 'Hotel Partners',
+      's_bd3fa2': 'Our Partners',
+      's_dc04b9': 'Dar es Salaam',
+      's_e819e6': 'Concierge Support',
+      's_f2a377': 'Trusted by guests',
+    },
+    transportBookingModal: {
+      's_1505c5': 'Live Dispatch Status',
+      's_160ad9': 'Chauffeur Confirmed',
+      's_251e18': 'Dedicated Chauffeur Hours',
+      's_314bee': 'Total Concierge Fee',
+      's_358b66': 'Pickup Time',
+      's_36a60c': 'Done & Return to App',
+      's_39b21c': 'Call Chauffeur',
+      's_457b66': 'Total Rate',
+      's_6f672b': 'Assigned Chauffeur',
+      's_77ae94': 'Scheduled Departure',
+      's_7a4175': 'Schedule Date',
+      's_8941e9': 'Service Type',
+      's_8dea76': 'Pickup Location',
+      's_99d1c7': 'Confirm VIP Chauffeur',
+      's_9ca1bd': 'Day After',
+      's_a1cbc4': 'VIP Meet & Greet + Airport Flight Sync',
+      's_b68827': 'Villa / Suite Room',
+      's_be057d': 'Guest Name',
+      's_cd11b4': 'Complimentary On-Board Amenities',
+      's_d0cd2d': 'Flight Number / Departure Code',
+      's_efb6c4': 'Continue to Amenities',
+      's_f2f922': 'VIP Concierge Mobility',
+    },
+    transportPage: {
+      's_1836d5': 'Choose a luxury mobility merchant to view available Maybach S680s, Rolls-Royce Ghost motorcars, Cadillac Escalade ESVs, or twin-engine helicopter transfers.',
+      's_1afb28': 'Back to all Mobility Partners',
+      's_2ea911': 'Chauffeur Reservation',
+      's_3390d4': 'Reserve Chauffeur',
+      's_3727e7': 'Book Transfer',
+      's_52b224': 'VIP Chauffeur & Mobility Providers',
+      's_543b1b': 'Your reservation for',
+      's_784e6e': 'Search mobility providers, Maybach, Rolls-Royce, helicopter...',
+      's_875bd6': 'Executive Chauffeurs & Private Aviation',
+      's_898adc': 'VIP White-Glove Mobility',
+      's_93f4b8': 'Pickup Date & Time',
+      's_a1e9f9': 'Explore Home',
+      's_eac49e': 'Book Vehicle',
+      's_eb9e1e': 'Confirm Booking',
+    },
+    unifiedItemModal: {
+      's_0125ec': 'View All Reviews',
+      's_1cc3d0': 'Aromatherapy Essential Oil',
+      's_3c0047': 'Dedicated Appointment Calendar',
+      's_4c13f0': 'App Notes & Villa Details',
+      's_5d14d6': 'E.g. Villa Suite 402, gate access code, dietary allergies, or arrival notes...',
+      's_94c578': 'Confirm Calendar Reservation',
+      's_a027ba': 'Select Ritual Duration',
+      's_bf3b18': 'Add to App Cart',
+      's_ee3e2e': 'About this offering',
+      's_ee749a': 'Total Estimate',
+    },
+  },
 
   /*
     SHARED FORM VOCABULARY.
@@ -1063,6 +4551,1160 @@ export const translations: Record<Language, TranslationSchema> = {
     },
   },
   sw: {
+  ui: {
+    bookingCalendar: {
+      's_07499a': 'Party / Guests',
+      's_10422c': 'Local Villa Time',
+      's_183a37': 'Sync Calendar',
+      's_534c34': 'Next Month',
+      's_71b856': 'Previous Month',
+      's_79caea': 'Available Time Slots',
+      's_8efff8': 'In 2 Days',
+      's_aeb91b': 'Dedicated Reservation Calendar',
+      's_e5366b': 'Selected Schedule',
+      's_fdc2b8': 'Next Week',
+    },
+    cartDrawer: {
+      's_11a9f0': 'Explore Menus',
+      's_1fc724': 'Promo code (try NEXG20)',
+      's_2303a3': 'Your cart is empty',
+      's_237e47': 'Clear entire cart',
+      's_2c7952': 'Simulated checkout & instant confirmation',
+      's_42cb61': 'Close cart',
+      's_44951e': 'Courier tip',
+      's_643b96': 'Your Order Cart',
+      's_733b61': 'Delivery fee',
+      's_76ecba': 'Remove item',
+      's_ab8546': 'Explore our curated restaurants and add artisanal dishes or concierge dining to get started.',
+      's_c7085d': 'Courier Concierge Tip',
+      's_d2467b': 'Your order',
+      's_d2f4d4': 'Proceed to Checkout',
+      's_d6ea26': 'Concierge service fee',
+    },
+    categories: {
+      's_1a9863': 'Browse Partners',
+    },
+    categoryExplorerModal: {
+      's_233e38': 'Click any category or subcategory to instantly browse partners',
+      's_7c267a': 'View listings',
+      's_7fd08b': 'Reset Catalog Filters',
+      's_940323': 'Close categories',
+      's_af1c10': 'Verified Merchant Partners',
+      's_c7fa37': 'Try searching for another keyword or clear the search query.',
+      's_c9f43c': 'Search across all 21 categories & 134 subcategories (e.g. Fine Dining, Vapes, Chauffeur, Safari)...',
+      's_e37ac9': 'No matching verticals found',
+      's_f4cf7c': 'Merchant Categories & Subcategories',
+    },
+    categoryPage: {
+      's_004d7e': 'Top Rated',
+      's_062888': 'Free Delivery',
+      's_2cef94': 'Reset all filters',
+      's_41eb8f': 'Fastest Delivery',
+      's_c4baea': 'Price Level',
+      's_fce284': 'No merchants found matching your filters.',
+    },
+    checkoutSimulatedModal: {
+      's_119c2f': 'This payment is',
+      's_19e2a2': 'Finalize & Place Order',
+      's_3a7a99': 'Apple Pay',
+      's_55e54d': 'App Delivery Instructions',
+      's_635949': 'Choose Simulated Payment Method',
+      's_63da07': 'Simulate Payment & Place Order',
+      's_6aa79c': 'Selected Items',
+      's_7db213': 'Hotel / Villa / Street Address',
+      's_846466': 'Close checkout',
+      's_882f46': 'Simulates instant STK push prompt directly on mobile handset.',
+      's_9ad55a': 'Total Demo Amount',
+      's_ac51d0': 'Cardholder Name',
+      's_b79126': 'No real funds or accounts will be debited.',
+      's_bac774': 'Simulated Demo Checkout',
+      's_bb36a9': 'DEMO ROUTER',
+      's_cecb67': 'Preloaded Demo Card',
+      's_dd0a60': 'Router Demo Validated',
+      's_e5297b': 'Delivery Address & Location',
+      's_e569ab': 'Processing Demo Payment...',
+      's_ea3289': 'Room Folio / Cash',
+      's_ea4478': 'Simulates one-touch FaceID / TouchID authorization.',
+      's_eb034a': 'Billed directly to your hotel master room folio upon delivery.',
+      's_ee343f': 'Sandbox Router Active',
+      's_fee23b': 'Merchant Partner',
+    },
+    consentBanner: {
+      's_35c291': 'Reject all',
+      's_66cd82': 'Strictly necessary cookies keep the site working. Analytics and marketing cookies stay off until you turn them on, and you can change this at any time.',
+      's_788df5': 'Your cookie choices',
+      's_821d1f': 'Accept all',
+      's_956fa7': 'Save choices',
+      's_9e0cba': 'Cookie settings',
+      's_da6a92': 'Necessary cookies are always active. Everything else is optional.',
+      's_e7d306': 'Cookie preferences',
+      's_f477c8': 'Always on. It cannot be switched off because the site cannot run without it.',
+    },
+    courierOnboarding: {
+      's_037e0b': 'Our compliance officers verify your submitted National ID, license, PIN, and fleet logbooks directly against NTSA registers.',
+      's_03c52e': 'Guaranteed Base Salary',
+      's_06c8b6': 'Verify your registered logistics enterprise. Only PDF files and scanned images up to 5MB size are accepted.',
+      's_0b39f6': 'Fleet Partner',
+      's_0bd62e': 'Account Number',
+      's_0cb44f': 'Executive Sedan / Van',
+      's_0d36d5': 'Active public third-party or comprehensive fleet cover policy certificate.',
+      's_0d98d0': 'E.g. Swift Deliveries',
+      's_0e3256': 'Submit official identification and transit licensing details.',
+      's_0f32ec': 'Rider Record Card',
+      's_1081b3': 'Full Name, Phone, ID Number, License Number, Vehicle Type, Plate Number',
+      's_10f420': 'Shift & Operating Zones',
+      's_14bf35': 'Ride custom NEXG-branded premium logistics vehicles, operate consistent shifts, and enjoy a stable guaranteed base salary.',
+      's_156177': 'Certificate of Incorporation',
+      's_17b238': 'Accepted For Fleet Provider',
+      's_1805c7': 'This agreement begins immediately on approval and is valid for a period of 12 months. Either party may terminate with 7 days\' written notice, or NEXG may block platform access instantly in cases of safety breach, driving license revocation, or fraudulent behavior.',
+      's_197646': 'Full Legal Name',
+      's_204be3': 'E.g. operations@swiftlogistics.co.ke',
+      's_2358e6': 'Independent Rider',
+      's_24813d': 'E.g. Kileleshwa, Block D',
+      's_26712f': 'Authorized Primary Contact Person',
+      's_27538f': 'Outline your company’s transit capacities and target operating logistics zones.',
+      's_27980f': 'WhatsApp Mobile Number',
+      's_27c646': 'Company Office Headquarters',
+      's_2952ca': 'Type Signature',
+      's_2b31a3': 'E.g. A001234567Z',
+      's_2cb0d8': 'Accepted & Agreed by Rider',
+      's_2d6ca0': 'Vehicle Type',
+      's_2dc8f1': 'E.g. Corner House, 4th Floor, Kimathi St.',
+      's_2ed783': 'Return to Elite Fleet page',
+      's_30b928': 'Company KRA PIN Certificate',
+      's_310c80': 'Back to Couriers',
+      's_312631': 'Bank Name',
+      's_3174a5': 'Contact Email Address',
+      's_31843b': 'Clear canvas',
+      's_338cf2': 'Services & Settlement Payout',
+      's_340115': 'Clear scanned copy of front and back face of your card.',
+      's_34e784': 'E.g. Swift Express Logistics Ltd',
+      's_34f9ae': 'Certificate of Incorporation / Reg No.',
+      's_377b90': 'Authorized Dispatch Committee',
+      's_37dfba': 'NTSA Driver\'s License Number',
+      's_3873df': 'E.g. DL-XXXXXX',
+      's_3af714': 'No active couriers added yet',
+      's_3ba957': 'E.g. Nairobi',
+      's_3bfd88': 'KRA PIN Number',
+      's_3c3541': 'Consolidated Business payout',
+      's_3c774b': 'Carry VIP guests to properties',
+      's_3cc4fd': 'NEXG Provides Vehicle',
+      's_3ce5aa': 'Emergency Contact Person',
+      's_41d914': 'Choose the expiry date',
+      's_41fe24': 'Draw digital signature with finger or pointer',
+      's_430404': 'Remove Card',
+      's_44fe57': 'Emergency Mobile Phone',
+      's_464dfd': 'We declare absolute compliance with Kenyan corporate regulations, active tax filings, and legal road safety acts.',
+      's_4979be': 'We certify that all couriers listed in our squad profiles hold valid, unexpired NTSA driving licenses and clean background clearance certifications.',
+      's_4c7486': 'Corporate Job Title',
+      's_4c987a': 'Authorized Officer Full Name',
+      's_4d1c2f': 'Structured Shift schedules',
+      's_4ff862': 'E.g. 4',
+      's_50d865': 'Upload crisp clear photo snapshots or PDF files under 5MB size limit.',
+      's_5104d5': 'Preferred Operating Area Zone',
+      's_51dacf': 'WhatsApp Number',
+      's_53d718': 'The Fleet Provider represents and warrants that all couriers and motorbikes comply with roadworthy rules, hold comprehensive insurance certifications, and observe Kenya\'s Data Protection Act 2019 standards.',
+      's_55537f': 'Vehicle Registration details',
+      's_574f02': 'Next Step',
+      's_587649': 'Official KRA Pin certification document page from iTax portal.',
+      's_5920ae': 'You are applying for a scheduled, salaried position. NEXG provides custom branded bikes, gear, and fuel budgets. Below, you will also designate your operational preferences.',
+      's_5a833b': 'Residential Address',
+      's_5b5250': 'Fleet Partner Business Profile',
+      's_5cfa43': 'NTSA Driving License',
+      's_5f5518': 'Drive your own motorcycle or scooter, set your flexible calendar hours, and take commissions per successfully completed errand.',
+      's_63a113': 'Total Registered Vehicles',
+      's_64346b': 'Full Name',
+      's_6790f2': 'Corporate Bank Name',
+      's_692fe8': 'E.g. P051234567Z',
+      's_6b3d6a': 'Deliver premium retail items',
+      's_6f9c91': 'E.g. +254 711...',
+      's_70abeb': 'Bank Settlement Transfer',
+      's_714406': 'Configure your legal registered business details for logistics partnerships.',
+      's_717eb1': 'Company Account Title',
+      's_71c904': 'NEXG APP LIMITED',
+      's_71ebbb': 'E.g. Red Honda CB125F (Year 2023)',
+      's_71f6e3': 'Register Active Couriers Squad',
+      's_72a587': 'Board Operations Committee',
+      's_74955f': 'E.g. Westlands',
+      's_76af1d': 'E.g. 15',
+      's_77522e': 'NEXT STEPS IN OUR VERIFICATION TIMELINE',
+      's_79865b': 'Preferred Working Shift',
+      's_7cf2e1': 'Alternative Contact Phone',
+      's_7d5f6e': 'Unlock premier delivery earnings, tailored branding, and unmatched support in Kenya’s luxury hospitality ecosystem.',
+      's_7d8667': 'Plate Number',
+      's_81db77': 'Years in Logistics Sector',
+      's_827c49': 'Account Holder Legal Name',
+      's_828ade': 'Vip App',
+      's_831dc7': 'KRA PIN Confirmation Certificate',
+      's_86d4ca': 'For NEXG App',
+      's_8bb6da': 'E.g. 12345678',
+      's_8d5d4c': 'Company Business Verification Documents',
+      's_8e203d': 'Handle high-end guest requests',
+      's_8f912f': 'E.g. CPR/2018/12345',
+      's_903d8d': 'Execute Partnership Agreement Contract',
+      's_913798': 'Click Add Rider Card above or upload your riders spreadsheet via CSV bulk import.',
+      's_93457d': 'Fleet Operational Scale & Coverage',
+      's_93e220': 'Corporate Fleet Partner logistics Framework',
+      's_9691d0': 'ONBOARDING PROFILE SUMMARY',
+      's_984805': 'Operating Counties & Estates Coverage',
+      's_99dc14': 'Pending Compliance Review',
+      's_9d159c': 'Direct Mobile Number',
+      's_a0094a': 'Payout Method',
+      's_a1524d': 'E.g. 12001234567',
+      's_a1c4fe': 'E.g. +254 700 111 222',
+      's_a221a1': 'Upon document clearance, you\'ll receive a WhatsApp invitation to join our premium standard customer service and hospitality training.',
+      's_a40d60': 'Premium Commission Payout',
+      's_a620a5': 'Official business registration certificate page issued by the Registrar of Companies.',
+      's_a7c94e': 'NEXG agrees to compile and settle client order payments to the Fleet Provider’s registered bank account weekly on Mondays, less a platform operations commission fee of',
+      's_a85feb': 'Your premium motorbike is provided by NEXG. You do not need to register a personal motorbike logbook or license plate here.',
+      's_a8caa4': 'Add individual active riders to your partnership ledger.',
+      's_aafa84': 'Active Vehicle types represented in Fleet',
+      's_ac26fd': 'Submit Portfolio Agreement',
+      's_ad7df6': 'Motorcycle / Scooter',
+      's_aed4fc': 'Join the Elite NEXG Rider Fleet',
+      's_aef6a9': 'National ID / Passport Number',
+      's_af7bb7': 'Signatory Director\'s National ID',
+      's_af8a4e': 'The Fleet Provider certifies that they actively manage and pay a squad of',
+      's_b026ba': 'City HQ Location',
+      's_b09e88': 'Draw Signature',
+      's_b21f30': 'ID Number',
+      's_b2e0a8': 'Driver\'s License Expiry Date *',
+      's_b5015c': 'List all cities and estates where your fleet currently has active coverage. E.g. Nairobi CBD, Westlands, Kilimani, Mombasa, Diani, etc.',
+      's_b5c479': 'NEXG Dedicated Rider',
+      's_b724e7': 'Print Agreement Document',
+      's_b984fa': 'Import CSV Spreadsheet',
+      's_b9d00c': 'This contract is binding for a term of 12 months. Either partner may exit the frame by providing 14 days\' written notice to the other party.',
+      's_bc5303': 'Add Rider Card',
+      's_bf24cb': 'Name exactly as printed on legal ID card',
+      's_c1ecb3': 'Package Delivery',
+      's_c33c9b': 'DL Number',
+      's_c59900': 'E.g. KMCA 123A',
+      's_c7a051': 'We declare that our organization maintains comprehensive third-party logistics insurance and active public liability coverage across all active fleet operators.',
+      's_c85d99': 'Proof of ownership and active public transit insurance coverage.',
+      's_c8708a': 'Company Legal Name',
+      's_c8bc71': 'Corporate Bank Settlement Account',
+      's_c8ed49': 'Identification & Vehicle Setup',
+      's_ca5690': 'Download Standard CSV Template',
+      's_cabacd': 'NEXG Operations Admin',
+      's_cdec1f': 'Both sides of your active, unexpired logistics driver license.',
+      's_d101b7': 'Onboard your registered Kenyan logistics agency and entire courier squad. Bulk upload riders and manage team-level settlements.',
+      's_d5184b': 'Own Vehicle required',
+      's_d5e54c': 'Commercial Fleet Insurance Policy',
+      's_d64903': 'NEXG remits compiled client transport payout settlements directly to your corporate account weekly on Mondays.',
+      's_d66864': 'Flexible Shifts',
+      's_d9863a': 'E.g. Fleet Manager',
+      's_db3b79': 'Account Name',
+      's_dca3fc': 'E.g. Westlands, Kilimani, Lavington',
+      's_ddb4d1': 'E.g. Equity Bank',
+      's_de744b': 'E.g. Mary Jane',
+      's_e04a0d': 'Payout Settlement Configurations',
+      's_e07446': 'Review pre-filled contract agreement clauses and apply your electronic signature.',
+      's_e0934e': 'Date of Birth *',
+      's_e12ee9': 'Preferred Transit Vehicle Assigned',
+      's_e15c6c': 'Trading Name / Brand Name',
+      's_e16a80': 'Document Verification Uploads',
+      's_e1c6ae': 'Bulk CSV Squad Import',
+      's_e1fe05': 'E.g. Albert Mwangi',
+      's_e21ec5': 'Vehicle Model & Color',
+      's_e387b2': 'Business KRA PIN',
+      's_e3ca9b': 'E.g. John Kamau Maina',
+      's_e4c574': 'E.g. +254 711 000 000',
+      's_e7710e': 'Typed Electronic Signature preview',
+      's_e7cfff': 'Authorized Signature Panel',
+      's_e90701': 'Select Gender',
+      's_eb6915': 'Fleet Integrity Declarations',
+      's_ec9a3f': 'Estate Area / Street',
+      's_ecd675': 'Vehicle Logbook & Third-Party Insurance',
+      's_eeec98': 'Import CSV',
+      's_ef8482': 'Choose Your Partnership model',
+      's_efbb4c': 'E.g. Spouse / Parent',
+      's_f3a211': 'E.g. +254 700 987 654',
+      's_f4afb4': 'Choose your date of birth',
+      's_f65568': 'E.g. +254 712 345 678',
+      's_f6da6f': 'Personal Profile Details',
+      's_f71ebc': 'E.g. John Kamau',
+      's_f954ab': 'NEXG Fleet Operations',
+      's_f9f8d5': 'Select the model that aligns with your assets. We have personalized contracts and onboarding checklist steps for each path.',
+      's_fa0cdb': 'Total Active Riders',
+      's_fbbe43': 'Configure how you receive settlements and who to contact in emergencies.',
+      's_fca1ec': 'Ensure your details correspond exactly with your National Identification Document.',
+      's_feb1b4': 'ID of the legal officer executing the Fleet Partnership Agreement.',
+      's_febf86': 'Rider agrees to strictly wear the customized NEXG apparel on duty, maintain exemplary clean vehicle hygiene, arrive within specified time slots, and respect international hospitality guests\' absolute privacy. Failure to maintain a minimum 4.0/5.0 star rating may result in temporary profile deactivation.',
+    },
+    curatedNairobiWorlds: {
+      's_15a714': 'Dynamic cross-category plans tailored to your moment, occasion & time of day',
+      's_18a51d': 'Full Experience Builder',
+      's_41dd82': 'Curated Nairobi Worlds',
+      's_52c035': 'NEXG Experience Orchestrator',
+      's_8abe87': 'Explore Offerings in Main Feed',
+      's_c2018d': 'Contextual Experience Hub',
+      's_ecc198': 'Click step to explore offerings',
+      's_fe8da0': 'Nairobi Curated',
+    },
+    databaseSqlModal: {
+      's_baaf3a': 'PostgreSQL Database Scripts',
+    },
+    dateTimeField: {
+      's_46a299': 'Previous month',
+      's_7ecc8b': 'Choose a year',
+      's_8abf7c': 'Next month',
+    },
+    discoveryScreen: {
+      's_030851': 'Merchant categories',
+      's_0b7ee2': 'All verticals',
+      's_176135': 'The API may not be running. Start it with',
+      's_412226': 'Clear filters',
+      's_67300d': 'Clear search',
+      's_8344a6': 'Search merchants',
+      's_a3c57f': 'No merchants found',
+      's_dfe60c': 'Load more',
+      's_f4d948': 'Search restaurants, spa, safaris, champagne, chauffeur, pharmacy...',
+    },
+    dishCustomizerModal: {
+      's_052b34': 'Guest Satisfaction',
+      's_062e79': 'Increase quantity',
+      's_1c711d': 'Verified Diners Only',
+      's_2db328': 'Any preferences? e.g. Extra dressing on side, cutlery needed...',
+      's_492026': 'Add to Order',
+      's_594a3d': 'Share what made this dish memorable...',
+      's_6c02ab': 'Decrease quantity',
+      's_70d3a5': 'Close modal',
+      's_84ab4b': 'Submit Verified Review',
+      's_9c0406': 'Suite / Villa (e.g. Penthouse 402)',
+      's_a196bb': 'Customize & Options',
+      's_bfae0e': 'Your Name (e.g. Eleanor V.)',
+      's_d0fac0': 'Leave Your Dining Review',
+      's_ece1f0': 'Special Kitchen Instructions',
+    },
+    dockedSearchBar: {
+      's_67300d': 'Clear search',
+    },
+    experiences: {
+      's_057742': 'Curated Experience Hosts & Outfitters',
+      's_14c995': 'Book Date',
+      's_574a76': 'Book Activity',
+      's_63ae7c': 'Date & Time',
+      's_6568e5': 'Your booking with',
+      's_96ebfb': 'Search hosts, Maasai Mara, Giraffe Centre, cinema, safari...',
+      's_9fda6b': 'Back to all Outfitters',
+      's_a1e9f9': 'Explore Home',
+      's_ad3a34': 'Private Safaris, Aerial Tours & Cultural Ateliers',
+      's_cebc44': 'Choose an expert outfitter to browse hot-air balloon flights over the Mara, private giraffe conservation sanctuaries, and master artisan ateliers.',
+      's_d29299': 'Bespoke Concierge Expeditions',
+      's_eb9e1e': 'Confirm Booking',
+      's_f6e8ce': 'Experience Reservation',
+    },
+    floatingCartBar: {
+      's_f40d71': 'View Order',
+    },
+    forCouriers: {
+      's_06816c': 'Apply to Drive',
+      's_08c1c3': 'We provide access to high-quality vehicle maintenance programs, comprehensive courier insurance plans, and dedicated dispatch teams assisting you 24/7.',
+      's_0c343a': 'Apply Online',
+      's_0c8a9a': 'Terms of Service',
+      's_0e840b': 'Pocket High Tips',
+      's_110158': 'Help Center',
+      's_153ab5': 'Idle Reduction',
+      's_18414d': 'Elite Fleet',
+      's_1bedd8': 'Ambassadors utilizing our suite-specific integrated routing enjoy significantly higher success ratings and earn double the average industry tips.',
+      's_1d2be9': 'Safety Guidelines',
+      's_209f63': 'Average Earnings Growth',
+      's_22d1d3': 'Once you submit your application online, our onboarding team reviews documents within 48 hours. If qualified, you\'ll be invited for a brief physical assessment and standard white-glove training before your account goes active.',
+      's_2a7274': 'Submit your vehicle registration and documents online in under 5 minutes through our secure, mobile-friendly onboarding portal.',
+      's_2bf27f': 'STEP 01',
+      's_2d816d': 'Career Advancement',
+      's_2e6151': 'FLEET REQUIREMENTS',
+      's_2ed1ed': 'Premium Payouts for Professional Ambassadors.',
+      's_33b4c6': 'Join the Elite Fleet',
+      's_3500ab': 'Join a community built on premium status and mutual respect. We support your career path and help you develop unmatched service skills.',
+      's_355ac2': 'Deliveries per Day',
+      's_38769a': 'For Properties',
+      's_38df83': 'Estimate Earnings',
+      's_39bc68': 'Your Vehicle Type',
+      's_41493f': 'Join the Elite',
+      's_42475b': 'Maintain exceptional ratings and receive daily performance multipliers and exclusive priority dispatcher pairing.',
+      's_440245': 'The NEXG Driver App',
+      's_45b640': 'Go online in the driver app, navigate to hot premium spots, complete high-end orders, and watch your mobile wallet balance swell.',
+      's_4748c1': 'Receive clear, automated settlements straight to your bank or mobile wallet without delay, backed by detailed electronic statements.',
+      's_4c36e1': 'SETUP TIMELINE',
+      's_4d5b64': 'Ambassador Rating',
+      's_4d81b2': 'STEP 03',
+      's_4f555f': 'Track your daily performance, optimize your delivery times, and master Swahili & English hospitality tips with our smart companion analytics dashboard.',
+      's_5150fd': 'Priority Routing Tech',
+      's_52a6f3': 'For Partners',
+      's_530246': 'Guaranteed Weekly Payouts',
+      's_53cdfb': 'DATA INTELLIGENCE',
+      's_54c4b5': 'Exceptional Presentation',
+      's_5b8964': 'Guest Rating Profiles',
+      's_5ce9fd': 'Fast Verification',
+      's_5e7925': 'Our professional partner compliance team validates your records and issues a secure orientation invitation within 48 hours.',
+      's_653ccb': 'We currently support major high-end neighborhoods and coastal luxury zones across Nairobi, Mombasa, and Diani, expanding quickly to other East African metropolitan areas.',
+      's_677710': 'Route Efficiency Score',
+      's_6bde0a': 'Apply Online Now',
+      's_6d1c48': 'Earn stars and secure exclusive bonuses. Build private, anonymous reviews that reinforce your stellar reputation with premium hotels.',
+      's_75dde0': 'Return to Guest App',
+      's_765f2b': 'TRANSPARENT EARNINGS',
+      's_777b12': 'Ambassador delivering gourmet meals',
+      's_78df83': 'Powerful Analytics for Elite Drivers',
+      's_7e32e7': 'Quick online onboarding. Submit details, attend orientation, retrieve your custom elite starter kit, and take your first order in under 48 hours.',
+      's_7f255f': 'Deliver high-end products and culinary creations with meticulous care. Be dressed in custom-designed NEXG apparel to reflect elite standards.',
+      's_8049d9': 'Weekly Payout Settlements',
+      's_85cf78': 'No waiting for week-ends. Complete premium tasks and trigger instant payouts directly into your mobile wallet.',
+      's_89bdbf': 'Elevating premium hospitality across East Africa with integrated, contactless concierge ecosystems.',
+      's_8b1193': 'Understand your daily yields. Monitor peak areas, identify high-tipping zones, and learn the best hours to go online.',
+      's_928714': 'Collect Starter Kit',
+      's_933192': 'What it Takes to Be a NEXG Ambassador.',
+      's_93a5bc': 'Exec Car',
+      's_93fef0': 'Empowered Scheduling',
+      's_95e986': 'Take complete control over your working hours. Plan your deliveries around peak fine-dining periods to lock in dynamic high fares.',
+      's_97b846': 'Gain exclusive professional training in hospitality service, client management, and path leadership with certificates of excellence.',
+      's_981b01': 'Premium Fleet Support',
+      's_9ad0cc': 'Contact Us',
+      's_9b1690': 'Apply to Fleet',
+      's_9d3f52': 'Our advanced routing algorithms guide you efficiently to high-value destinations, minimizing idle mileage and maximizing deliveries per hour.',
+      's_9db108': 'Privacy Policy',
+      's_a08321': 'Redefining Delivery.',
+      's_a1e9f9': 'Explore Home',
+      's_a7acb1': 'Work according to your personal schedule. Take shifts during peak fine-dining hours for maximized yield.',
+      's_a9577d': 'Secure Site',
+      's_ad6c0d': 'KNOWLEDGE BASE',
+      's_aed5c5': 'Must possess a clean driving record, valid local driver\'s license for your specified vehicle, and active comprehensive third-party insurance coverage.',
+      's_b53080': 'Courier Partner FAQs',
+      's_b74c4e': 'Toggle Theme',
+      's_bc89aa': 'Empowered Flexibility',
+      's_befa37': 'Ambassador scanning the driver app',
+      's_c10fec': 'Flawless Modern Vehicle',
+      's_c18810': 'Valid Documents & Licenses',
+      's_c24cae': 'STEP 02',
+      's_c38c49': 'Elite Rank Status',
+      's_c71f96': 'Weekly Target Reached',
+      's_c88176': 'Access culinary deliveries, spa wellness packages, and executive courier jobs cleanly integrated under a single, highly intuitive screen.',
+      's_c887b9': 'About Us',
+      's_ce60db': 'Own Your Earnings.',
+      's_ce7472': 'Back to Home',
+      's_d44881': 'Couriers Hero Background',
+      's_d781b4': 'Operational Mapping',
+      's_df9144': 'ELITE STANDARDS',
+      's_e10068': 'Based on an average base fee of',
+      's_e18d8e': 'Courier Earnings Estimator',
+      's_e3a7a2': 'Direct payments made straight to your account every single week, with zero hidden fees.',
+      's_e3b925': 'STEP 04',
+      's_e6e178': 'Cookie Policy',
+      's_e72e94': 'Earnings Analytics',
+      's_eb35f1': 'Start your application today. Complete the secure onboarding questions and step into a new tier of professional independence and respect.',
+      's_ec3c35': 'Stay updated with premier hospitality tips and trends.',
+      's_eeb176': 'To guarantee top status, NEXG provides all approved couriers with premium tailored jackets, clean polo shirts, and custom-insulated delivery bags. Black trousers and clean black shoes are required on duty.',
+      's_f370c7': 'Our app guides you right up to the designated suite or property zone, avoiding lobby confusion and ensuring frictionless drop-offs.',
+      's_f582d4': 'Our dispatch systems minimize your empty miles. Pre-book orders or follow integrated corridors to stack high-paying jobs in a row.',
+      's_f6e64a': 'Average Tip per Delivery',
+      's_fbe3b3': 'Premium Integrated Hub',
+      's_fcf600': 'Retrieve your tailored NEXG jackets, insulated food packs, smartphone bracket, and secure driver login credentials.',
+      's_ff2382': 'Couriers Hero Daylight Background',
+    },
+    forMerchants: {
+      's_032a19': 'Our professional curation experts ingest your items, style gorgeous visuals, and optimize layouts for direct contactless guest displays.',
+      's_0c343a': 'Apply Online',
+      's_0eaa2f': 'Right Where They Are.',
+      's_118503': 'Merchants Hero Daylight Background',
+      's_1600e2': 'Apply to Join NEXG',
+      's_18414d': 'Elite Fleet',
+      's_2bf27f': 'STEP 01',
+      's_2f5b37': 'Merchant Support',
+      's_38769a': 'For Properties',
+      's_3f3d89': 'Zero integration headache. Submit your menu or catalogue, let us digitise your portal, and receive curated local sales in 48 hours.',
+      's_4d81b2': 'STEP 03',
+      's_52a6f3': 'For Partners',
+      's_540349': 'Automated Revenue',
+      's_591721': 'Higher Avg. Order Value',
+      's_673bf7': 'Get paid on time, every time. Once a guest completes checkout, automated, secure merchant payouts route instantly to your bank.',
+      's_750959': 'Applications are reviewed by our curation team within 24 hours to ensure our high standards of quality and service are maintained across the platform.',
+      's_771412': 'Why Merchants Choose NEXG',
+      's_7cb113': 'Multiply Volume',
+      's_80b451': 'Instant Split Payouts',
+      's_81df05': 'Consistent Orders',
+      's_85feef': 'Premium Exposure',
+      's_891482': 'We handle everything from digital menu formatting to custom checkout links. Absolutely no technical setup required on your end.',
+      's_89a9da': 'Submit your fine dining menus, luxury spa offerings, or rental catalogs through our seamless, intuitive 2-minute onboarding form.',
+      's_916b2f': 'Digital Integration',
+      's_a1e9f9': 'Explore Home',
+      's_a2e8c7': 'Receive Suite Orders',
+      's_a92592': 'ONBOARDING TIMELINE',
+      's_aa32fa': 'Start Onboarding',
+      's_abafb4': 'Prepare packages meticulously. Professional NEXG couriers gather the items, fulfill deliveries, and secure payouts automatically.',
+      's_ae23a7': 'Keep orders running flawlessly. Our active support concierge monitors deliveries live and assists with special suite requests.',
+      's_b74c4e': 'Toggle Theme',
+      's_ba7223': 'Commission on Pickups',
+      's_c0228a': 'Reach Customers.',
+      's_c24cae': 'STEP 02',
+      's_c75030': 'Merchants Hero Background',
+      's_c89f38': 'Partner with NEXG App to serve guests directly inside premier luxury properties. We provide white-glove logistics, automated payouts, and seamless integration with your existing team.',
+      's_ce7472': 'Back to Home',
+      's_ce9fe6': 'Never worry about transport. Our highly vetted professional courier fleet collects your packages and delivers them with elite standards.',
+      's_d6626f': 'Zero Friction Setup',
+      's_da08fb': 'Seamless Payouts',
+      's_def7cc': 'Dedicated Support',
+      's_e3b925': 'STEP 04',
+      's_e56df8': 'WHY PARTNER WITH US',
+      's_e6a013': 'Merchant Terms',
+      's_e9cbdf': 'Verified Properties',
+      's_f6538e': 'Tap into high-net-worth guests, tourists, and business travelers ordering gourmet meals, personal amenities, or spa treatments.',
+      's_f6e1bd': 'Gain exclusive positioning in elite hotel room directories, high-visibility bedside QR cards, and digital concierge web-apps.',
+      's_faae3e': 'As guests scan room QR codes, orders stream directly to your merchant dashboard with real-time audio and visual system notifications.',
+      's_fe1a29': 'Contact Support',
+    },
+    forProperties: {
+      's_0293af': 'Properties Hero Background',
+      's_052b34': 'Guest Satisfaction',
+      's_061f53': 'Curated local menus',
+      's_06fb24': 'Integrate seamless, world-class concierge services into your luxury rentals and hotels. Empower guests to order gourmet food, book organic spa treatments, and request private transport with a single, contactless scan.',
+      's_0a3693': 'Instant access, absolutely zero apps required',
+      's_0c8a9a': 'Terms of Service',
+      's_0d3b7b': 'Predict high-demand hours to allocate room cleaning, butler services, or external partner delivery drivers with supreme efficiency.',
+      's_0e5ae2': 'Unified Service Hub',
+      's_110158': 'Help Center',
+      's_110820': 'Join hundreds of high-end resorts, boutique hotels, and luxury Airbnb hosts across East Africa that are boosting guest satisfaction and building zero-cost revenue.',
+      's_176079': 'Preference Profiles',
+      's_17d67c': 'Earnings Estimator',
+      's_182ad0': 'Secure automated checkouts, verified premier concierge merchants, and licensed professional couriers guarantee safety and guest peace of mind.',
+      's_18414d': 'Elite Fleet',
+      's_1be9e5': 'Every QR code is uniquely tied to the guest suite, meaning food deliveries, room cleanings, or requested towels find guests exactly where they are.',
+      's_1d2be9': 'Safety Guidelines',
+      's_21f4bb': 'Happy Guests',
+      's_25096d': 'Upfront Integration Cost',
+      's_271358': 'Properties utilizing NEXG Contactless QR systems experience a massive increase in service engagement compared to conventional physical folders.',
+      's_29b967': 'Properties CTA Sunset Background',
+      's_2bf27f': 'STEP 01',
+      's_31c559': 'Elevate Guest Experiences.',
+      's_338ed9': 'Earn More Income',
+      's_341a50': 'NEXG builds privacy-compliant guest preference profiles to help your staff pre-empt needs before they are even spoken out loud.',
+      's_38769a': 'For Properties',
+      's_3b6c18': 'Service Response Index',
+      's_40c759': 'Average Occupancy Rate',
+      's_4216f1': 'Trusted & Safe',
+      's_46f477': 'Guests scan, order, and pay instantly. NEXG handles all fulfillment, depositing automatic commission shares to your dashboard.',
+      's_49f179': 'We Handle Everything',
+      's_4c36e1': 'SETUP TIMELINE',
+      's_4d2dec': 'Local Adventures',
+      's_4d81b2': 'STEP 03',
+      's_4f7049': 'Estimated Monthly Share',
+      's_4fdd58': 'Order Conversion Rate',
+      's_52a6f3': 'For Partners',
+      's_534294': 'We supply custom-crafted physical suite-specific QR cards. Place them in your room directories or high-visibility bedside tables.',
+      's_53cdfb': 'DATA INTELLIGENCE',
+      's_589ee1': 'Configure & Customise',
+      's_5bfbb7': 'The QR Advantage',
+      's_5fbc63': 'Unlock Property Potential.',
+      's_70a8da': 'Stand Out',
+      's_73ba7f': 'Chauffeurs & rentals',
+      's_75dde0': 'Return to Guest App',
+      's_785c45': 'Powerful Analytics for Modern Managers',
+      's_7a1f3a': 'Position your properties as elite, technologically forward luxury destinations. Set a standard of hospitality others can\'t match.',
+      's_7b1758': 'Private Cab & Car Hire shares',
+      's_7bf908': 'Partner Onboarding',
+      's_7c6eec': 'Transform guest behavior into highly actionable insights. Track ordering trends, optimize your staffing, and refine property offerings with real-time analytics.',
+      's_7ee992': 'View Demo Video',
+      's_818f94': 'Clear real-time transparency audit trail',
+      's_8249e7': 'Food & Dining referrals',
+      's_8332c9': 'Inventory Speed',
+      's_872061': 'Deploy QR Displays',
+      's_89bdbf': 'Elevating premium hospitality across East Africa with integrated, contactless concierge ecosystems.',
+      's_8c288d': 'Submit your property and suite list online. Our concierge activation specialists verify your layout to launch your space.',
+      's_8c8458': 'Why Hosts Choose NEXG',
+      's_8d365a': 'Properties Daylight Hero Background',
+      's_8e8592': 'Bespoke Tours & Safaris',
+      's_8fe3e8': 'Apply & Partner',
+      's_9ad0cc': 'Contact Us',
+      's_9db108': 'Privacy Policy',
+      's_9fd2f3': 'Stop leaving incremental hospitality revenue on the table. Our mutual commission-sharing model turns every guest service interaction into a direct revenue flow for your property, even when fulfilled entirely by trusted third-party merchants.',
+      's_a1e9f9': 'Explore Home',
+      's_a2cb3c': 'Guests simply point their camera and browse. No logins, no tedious app downloads, just premier high-end service in a couple of seconds.',
+      's_a2f3a7': 'Enhanced Experience',
+      's_a3fb7a': 'Fine Dining',
+      's_a5d6a1': 'Zero integration overhead. Complete hotel setup, display delivery, and automatic digital catalog activation in under 48 hours.',
+      's_a62509': 'REVENUE GENERATION',
+      's_a9577d': 'Secure Site',
+      's_a969aa': 'Safaris & excursions',
+      's_a97bcc': 'Unlock a hands-off, zero-effort passive revenue stream by receiving high commission splits from every guest meal, ride, or tour booked.',
+      's_aaa399': 'Passive Commissions',
+      's_b74c4e': 'Toggle Theme',
+      's_c24cae': 'STEP 02',
+      's_c50b8f': 'Fully automated payouts and digital reporting',
+      's_c5bb5d': 'Average Order Growth',
+      's_c86934': 'Total Rooms / Suites',
+      's_c887b9': 'About Us',
+      's_c9bc84': 'Luxury Transport',
+      's_cd4fe8': 'Partner with NEXG',
+      's_ce7472': 'Back to Home',
+      's_d08ccb': 'Zero Friction Interface',
+      's_d15371': 'Delighted guests leave glowing feedback. Maximize your rating scores and booking ranks across Airbnb, Booking, and Expedia.',
+      's_d178f4': 'Guest Habit Tracking',
+      's_d300d6': 'Better Reviews',
+      's_d5d3ea': 'We integrate premier local partner cuisines, spa offerings, and chauffeur fleets into a single, seamless brand-matching portal.',
+      's_d8481d': 'Wellness & Spa',
+      's_d887cc': 'Understand exactly what your guests prefer. Track peak booking periods, top fine dining cravings, and late-night requests.',
+      's_e09921': 'Operational Optimization',
+      's_e3b925': 'STEP 04',
+      's_e56df8': 'WHY PARTNER WITH US',
+      's_e6e178': 'Cookie Policy',
+      's_e7f7ee': 'More Bookings',
+      's_e87389': 'Loyalty Return Intent',
+      's_ea763f': 'Apply for Partnership',
+      's_ec3c35': 'Stay updated with premier hospitality tips and trends.',
+      's_ee7b88': 'We seamlessly integrate previously fragmented premium local merchants into an elegant singular user experience reflecting your property’s status.',
+      's_f04a9d': 'Absolutely zero operational burden for you. From partner restaurant execution to vetted courier logistics, NEXG does all the heavy lifting.',
+      's_f59c46': 'Monetize Every Single Stay.',
+      's_f77be3': 'Luxury suite with guest scanning QR code',
+      's_f90548': 'Deliver unmatched, instant room service, organic spa appointments, and curated local safaris at the simple scan of a finger.',
+      's_f907f8': 'One Elite App. Infinite Services.',
+      's_fa3fc3': 'Average App Spend per Stay',
+      's_fe3f95': 'THE ECOSYSTEM',
+    },
+    googleReviewsModal: {
+      's_0d75a8': 'Google Maps Pin',
+      's_273f6f': 'No Google reviews match your selected filter.',
+      's_3ea133': 'Verified direct contacts & socials',
+      's_6913b8': 'Search reviews for dishes, ambiance, speed...',
+      's_6a6eaf': 'Filter by Stars',
+      's_6bce42': 'Verified Aspect Scores',
+      's_aaf427': 'Atmosphere & Reliability',
+      's_ba9553': 'Quality & Execution',
+      's_bd9554': 'Reviews synced in real-time with Google Places API',
+      's_c34ae8': 'Aspect data collected via Google Places API',
+      's_cbac3e': 'App Service',
+      's_d45c4f': 'Official Portal',
+      's_d6f49f': 'Verified Google Reviews',
+    },
+    groceriesPage: {
+      's_160a42': 'Back to all Purveyors',
+      's_340a24': 'Gourmet Cellar & Purveyors',
+      's_48028b': 'Artisanal Cellar, Caviar & Fromagerie',
+      's_504097': 'Fine Cellar & Epicurean Purveyors',
+      's_7447ef': 'Search purveyors, caviar, Dom Pérignon, Bellota, truffles...',
+      's_828ad2': 'Insulated Cold Packaging',
+      's_a1e9f9': 'Explore Home',
+      's_dcc1fb': 'Select Item',
+    },
+    header: {
+      's_64f892': 'Toggle Light/Dark Theme',
+      's_7abd6c': 'View Cart',
+    },
+    hero: {
+      's_67300d': 'Clear search',
+      's_7ecda2': 'Nocturnal Luxury Penthouse Dining & Skyline',
+      's_c75a68': 'Sunlit Luxury Penthouse Infinity Pool and Skyline',
+      's_ece6e2': 'Nocturnal Luxury Suite Mobile',
+    },
+    hostOnboarding: {
+      's_00679c': 'Who fulfills it?',
+      's_013237': 'Use my location',
+      's_0302c0': 'Reception desk, access code process, security desk, host contact, etc.',
+      's_0d3b1e': 'Host Portal',
+      's_10599c': 'Property name',
+      's_10a49a': 'Add a space / unit type',
+      's_120c32': 'How are guests identified within the property?',
+      's_12e078': 'Name / label',
+      's_1596ef': 'Bring your property into NEXG.',
+      's_193de6': 'Your host application for',
+      's_205866': 'Landmarks, gate instructions, building name, entrance, etc.',
+      's_20687f': 'Settlement account',
+      's_25916d': 'Price (optional)',
+      's_25e7e1': 'Tell guests about the property',
+      's_272c68': 'Property features',
+      's_292d45': 'Examples of guest requests',
+      's_2bbda0': 'For NEXG App Limited',
+      's_33becf': 'You\'re ready for verification.',
+      's_369c34': 'Property partner',
+      's_3cc2c7': 'Signature pad',
+      's_415e74': 'Guest capacity',
+      's_421a0f': 'Short description of the property, atmosphere and what makes it distinctive...',
+      's_486ffa': 'Authorized representative',
+      's_49e09b': 'Tax / pricing setup',
+      's_4a9200': 'Property / operating permit',
+      's_4e17c4': 'By signing below, the authorized representative confirms that the submission is accurate and accepts the applicable NEXG host partnership terms presented during onboarding.',
+      's_58eafa': 'Typical request fulfillment time',
+      's_616ace': 'Legal / operating entity',
+      's_62a764': 'If applicable',
+      's_6372ac': 'Host onboarding',
+      's_67745b': 'Start another',
+      's_692b50': 'Building, street or road',
+      's_7013c7': 'The Host remains responsible for the operation, safety, licensing, staffing, availability, pricing and fulfillment of property services. NEXG may coordinate guest requests, transactions and related workflows according to the agreed configuration.',
+      's_75d65e': 'Your progress is saved locally on this device.',
+      's_773613': 'Rooms / units',
+      's_782667': 'HOST SETUP',
+      's_7af122': 'Tap or click the map to set the exact property point.',
+      's_7b12e1': 'Add the requests your team actually handles today.',
+      's_7bba35': 'Property cover image',
+      's_810878': 'Tell us what exists, what guests can access, and how your team operates. We\'ll use this to build your property profile and guest experience.',
+      's_82c7e7': 'Back to the host portal',
+      's_849305': 'Signature method',
+      's_86adcf': 'Year opened',
+      's_893bd7': 'Authorized signatory name',
+      's_897c71': 'Clear signature',
+      's_8ad7ea': 'Property type',
+      's_8dc8f7': 'What would you like NEXG to help you expose to guests?',
+      's_8e3c7a': 'Website / booking page',
+      's_924da1': 'Describe your property type',
+      's_93cfd5': 'What kind of property is it?',
+      's_9550a5': 'Departments / teams available',
+      's_99d32f': 'Back to host portal',
+      's_9d617c': 'What can guests access or request?',
+      's_a2a1b1': 'The Host agrees to maintain accurate property information and reasonable service availability, and to notify NEXG of material changes that could affect guest fulfillment.',
+      's_a68df4': 'Check-in / arrival instructions',
+      's_a6d2ea': 'The Host confirms that the information supplied about the property, its operating model, guest-accessible spaces and services is accurate to the best of their knowledge and that they are authorized to provide it.',
+      's_a8dc5c': 'What does the property include?',
+      's_aa1d9b': 'What do you want guests to transact for?',
+      's_ae7f40': 'Check-out time',
+      's_b45dc8': 'Anything you currently struggle to make visible, bookable, purchasable or easy for guests to request...',
+      's_b501d3': 'Request / service',
+      's_b50578': 'Upload square logo',
+      's_b5508b': 'Property setup',
+      's_be3ecd': 'Account holder name',
+      's_bf72f7': 'Settlement details should be verified before activation. Do not use this form for card or wallet credentials.',
+      's_c0b7d7': 'Pin the property',
+      's_c250a9': 'Property access',
+      's_c36127': 'Save / Print',
+      's_ca1948': 'For Host',
+      's_ca9b4a': 'How should guests find you?',
+      's_cde9a5': 'Optional notes, amenities or access details',
+      's_ce9840': 'Submitted information may be reviewed for onboarding, verification, operations, support, settlement and guest-experience purposes. Additional verification may be requested before activation.',
+      's_d1d7c9': 'Full legal name',
+      's_d90fdd': 'Operating model',
+      's_e400b7': 'How do guest requests reach your team today?',
+      's_e45952': 'Who should receive NEXG requests?',
+      's_e4cee9': 'Application received',
+      's_e61a08': 'M-PESA Till / Paybill',
+      's_e9c696': 'Are you onboarding more than one property?',
+      's_eb7eb7': 'Choose file',
+      's_ecc61a': 'Please complete the highlighted fields before continuing.',
+      's_edbfdd': 'Property logo',
+      's_f0ac0a': 'Pending verification',
+      's_f548ec': 'Business / registration document',
+      's_f71497': 'Check-in time',
+      's_faea7e': 'NEXG App Limited',
+      's_fbd2e5': 'Registered company or operating name',
+      's_ff1835': 'NEXG Operations',
+    },
+    languageSwitcher: {
+      's_03e64a': 'Change Language (English, 中文, Kiswahili, العربية)',
+      's_99547d': 'Select Regional Language',
+      's_b8cc8e': 'Language Selector',
+    },
+    merchantAdCarousel: {
+      's_297522': 'Sponsored partner offers',
+      's_2d4e52': 'PARTNER SPOTLIGHT',
+      's_3340de': 'Exclusive host and verified partner privileges',
+      's_430fac': 'Enable location to see trending offerings near you',
+    },
+    merchantCard: {
+      's_3beea0': 'Save to favorites',
+      's_960d55': 'Popular offerings',
+    },
+    merchantItemModal: {
+      's_062e79': 'Increase quantity',
+      's_6c02ab': 'Decrease quantity',
+    },
+    merchantOnboarding: {
+      's_00b623': 'Upload business certificates and company logos. These will be used to dynamically set up your store theme inside the NEXG customer application.',
+      's_012a51': 'Please register the legal trading entities. Correct tax identifiers help guarantee smooth fast payouts.',
+      's_01edab': 'Search Location Finder',
+      's_02aa9a': 'Input branch parameters. You can search using Nominatim autocomplete finder or drop coordinates via the map.',
+      's_0bd62e': 'Account Number',
+      's_0cb1d6': 'Authorized Officer Signature',
+      's_108c09': 'NEXG Riders Fleet',
+      's_197803': 'Above 60 minutes',
+      's_1c7169': 'Logo preview',
+      's_1cf31b': 'Generated via map picker',
+      's_20f7df': 'Closing Time *',
+      's_21f543': 'Facebook page',
+      's_22691e': 'Provide a brief summary of specialties, offerings, or history (max 150 characters)',
+      's_26a2ff': 'Based on your category, select common sections to organize your items or add custom ones.',
+      's_2eabdb': 'Partnership Agreement Contract',
+      's_312631': 'Bank Name',
+      's_39e42f': 'Interactive catalog listing on the premium NEXG Client App.',
+      's_3e95c1': 'Nominate your payouts destinations. Weekly settlements are transferred directly every Monday morning.',
+      's_3fa081': 'You selected',
+      's_411097': 'None selected yet. Choose suggestions or add a custom one below.',
+      's_4331e0': 'Holiday Closing Time',
+      's_4baf91': 'Short Business Description',
+      's_4f2047': 'Maintain exact availability schedules, correct pricing, and stock sync lists.',
+      's_540d0d': 'Suggested Sections',
+      's_550c6f': 'Register primary coordinates. Authorized officers receive system orders, accounts payouts auditing details, and alerts.',
+      's_5664e0': 'The Merchant is solely responsible for clearing customs duties, port levies, and ensuring all shipping cargo meets international and local compliance standards.',
+      's_59c22e': 'Upload Banner Image',
+      's_5fa789': 'You can select multiple specific types if your outlet handles different luxury segments.',
+      's_676418': 'Business Paybill No.',
+      's_67de19': 'Provide premium white-glove deliveries & concierge orders to luxury customers in Kenya.',
+      's_7122f5': 'Business Profile',
+      's_71c904': 'NEXG APP LIMITED',
+      's_721462': 'Director ID / Passport Scan',
+      's_7308b8': 'Review the pre-drafted legal contract. Ensure all merchant parameters, locations, and banking details are correct.',
+      's_8242a9': 'Upload business registration scan PDF or image.',
+      's_85273b': 'Confirm Coordinates',
+      's_869b48': 'NEXG Legal Representative',
+      's_87a51d': 'Own Store Riders',
+      's_89ac4c': 'Hours Configuration Template',
+      's_8c1404': 'Instagram profile',
+      's_91091f': 'Type landmark e.g. Yaya Centre, Westlands, Sarit...',
+      's_91dd0b': 'TikTok profile',
+      's_928d67': 'Coordinates Map Link',
+      's_9441e0': 'Branch Manager / Contact Person',
+      's_959d0c': 'For NEXG APP LIMITED',
+      's_963f97': 'Average Preparation Time',
+      's_9d4f8b': 'Type your full legal name',
+      's_a03653': 'Expand Your Business with NEXG',
+      's_a0b2cf': 'Search categories e.g. Food, Safe, Spa, Flight...',
+      's_a133eb': 'Click to add',
+      's_a4d472': 'NEXG operates logistics carriage from your store using our background-checked professional couriers.',
+      's_a5d0ab': 'Certificate of Registration',
+      's_abf9f4': 'Banner preview',
+      's_b03404': 'Your premium merchant onboarding is complete. Our partnership audit committee will complete verify checks and activate your store front within 24 hours.',
+      's_b32233': 'Website URL',
+      's_b62775': 'Upload ID or passport of major primary director.',
+      's_b639de': 'Add Section',
+      's_b8579d': 'Payment Details',
+      's_b9084a': 'Choose Category',
+      's_b9f2b1': 'Operating Days',
+      's_b9ffbd': 'Merchant Partnership Agreement',
+      's_bb20e3': 'For THE MERCHANT',
+      's_c05283': 'Choose the category that best aligns with your merchant store operations. Use search or filter down instantly.',
+      's_c5955e': 'Opening Time *',
+      's_c6846b': 'Signature drawing',
+      's_d1bf6b': 'Kenyan Public Holidays Availability',
+      's_d1d21f': 'Collection and processing of accounts charges from guests, tourists, and corporate networks.',
+      's_d33bf6': 'Merchant Portal',
+      's_d7a397': 'Branch Contact Phone',
+      's_d890b7': 'Branch Location',
+      's_db3b79': 'Account Name',
+      's_e0a26d': 'Logistics carriage orchestration based on requested parameters.',
+      's_e58331': 'Handwriting Style Preview',
+      's_e79369': 'Store Branches & Location Map',
+      's_eab077': 'Delivery Carriage Modes',
+      's_eab952': 'WhatsApp Dispatch No.',
+      's_ebaf4a': 'Paybill Account Name',
+      's_ed6a3f': 'Holiday Opening Time',
+      's_f1dd4c': 'Buy Goods Till No.',
+      's_f7c245': 'Onboard Another Store',
+      's_faea7e': 'NEXG App Limited',
+    },
+    merchantPage: {
+      's_c902a1': 'Open Now',
+    },
+    merchantPreviewSheet: {
+      's_0f4c5c': 'This merchant does not declare its own workflow, so the default for its category is shown.',
+      's_28da6e': 'See all offerings',
+      's_baa550': 'Close preview',
+    },
+    merchantRoute: {
+      's_176135': 'The API may not be running. Start it with',
+      's_a1ca54': 'Loading merchant',
+      's_e84712': 'Go back',
+    },
+    merchantView: {
+      's_085b31': 'No offerings listed yet',
+      's_3fcbae': 'Menu sections',
+      's_67300d': 'Clear search',
+    },
+    metricsDashboard: {
+      's_048f2f': 'Status breakdown',
+      's_0dd383': 'API version',
+      's_1c8836': 'Built at',
+      's_235f7b': 'Events accepted',
+      's_236a59': 'Bars are per-bucket counts derived from the API\'s cumulative Prometheus buckets.',
+      's_266384': '5xx error rate',
+      's_406acb': 'Requests / minute',
+      's_41e8de': 'Recent traces (/api/traces)',
+      's_461aff': 'No spans buffered yet.',
+      's_58b6dc': 'In flight',
+      's_5dd968': 'Events dropped',
+      's_65916f': 'Browser events arrive only from visitors who granted analytics consent.',
+      's_74d595': 'No metrics available',
+      's_74efa0': 'Metrics API unreachable.',
+      's_75e157': 'The dashboard polls',
+      's_8474ec': 'No samples yet.',
+      's_886fb2': 'Client telemetry',
+      's_9d5b00': 'Slowest routes (by p95)',
+      's_a41501': 'Runtime, build and data source',
+      's_b0ad50': 'No routes recorded yet.',
+      's_c347b1': 'Service metrics',
+      's_cc1e6a': 'Duration histogram',
+      's_cec477': 'Last 60s',
+      's_e4076f': 'Collecting samples. The line appears after the second poll.',
+      's_ee9d59': 'Json fallback reads',
+      's_f8fd6e': 'No responses recorded yet.',
+      's_ffb77d': 'Data source',
+    },
+    nexGCategoryDrilldown: {
+      's_03f70c': 'Merchant Providers & Partners',
+      's_09efe8': 'Choose a time',
+      's_0df6f0': 'Switch Provider',
+      's_0ecb20': 'Confirm & Reserve Instant Dispatch',
+      's_126f44': 'Preferred Time',
+      's_19ad69': 'Scheduled Date',
+      's_1b8543': 'Reset All Filters',
+      's_1f647f': 'Special Offers',
+      's_27c636': 'Complete view',
+      's_2994b4': 'Scroll right',
+      's_2c9e5a': 'Scroll left',
+      's_2f1873': 'All Items',
+      's_34318e': 'Rating 4.8+',
+      's_492026': 'Add to Order',
+      's_4ce3f0': 'Select a Merchant Provider Above',
+      's_50238f': 'No upfront charge. Escrow reservation handled by concierge desk.',
+      's_543b1b': 'Your reservation for',
+      's_5be698': 'Reset Filters',
+      's_77bf79': 'Reserve / Book',
+      's_7db318': 'Back to Discovery',
+      's_8978ea': 'Decision Specifications',
+      's_8bf67b': 'Nairobi Luxury District',
+      's_9dca31': 'No items found matching your filters.',
+      's_ab2d11': 'Under 25 min',
+      's_c07c6d': 'Suite Number or Location Notes',
+      's_c14e04': 'Browse catalog offerings with real-time pricing and availability',
+      's_c25b51': 'Strict Category & Subcategory Catalog',
+      's_d394a9': 'Highest Rated',
+      's_e16a1d': 'Explore dedicated subcategories with specialized imagery and custom parameters',
+      's_eb13c4': 'To view item cards, please click any of the verified merchant providers above. Their full 30-item catalog, specifications, and instant ordering will appear here.',
+      's_fae58c': 'Clear Selection',
+      's_fcdcf7': 'Fast selections & customer favorites',
+    },
+    nexGCollectionRail: {
+      's_0b3917': 'Curated Collection',
+      's_2994b4': 'Scroll right',
+      's_2c9e5a': 'Scroll left',
+      's_986032': 'Explore All',
+    },
+    nexGDiscoveryView: {
+      's_6d9483': 'Browse verified Nairobi merchants across 20 neighborhoods with Wolt-grade previews',
+      's_741311': 'Search food, spa, safaris, champagne, chauffeur...',
+      's_76cb8c': 'Previous categories',
+      's_844b94': 'Next categories',
+      's_8f8796': 'High-priority concierge delivery direct to your suite or villa in under 30 minutes',
+      's_a9176a': 'Explore Verticals & Categories',
+      's_b0a3fc': 'All Verified Partners & Merchants',
+      's_df4cf6': 'Instant Suite Express',
+    },
+    nexGEntityCard: {
+      's_085ed0': 'View catalog & pricing',
+    },
+    nexGItemSheet: {
+      's_0932f6': 'Special App Notes or Dietary Preferences',
+      's_22b77f': 'Appointment & Scheduling',
+      's_24a16c': 'Session Duration',
+      's_3beea0': 'Save to favorites',
+      's_65d22e': 'Close sheet',
+      's_68f2d8': 'Preferred Date',
+      's_693039': 'Time Slot',
+      's_a99ee2': 'Number of Guests / Attendees',
+      's_c6cf76': 'Added to Experience Order',
+      's_d0e359': 'Curated Enhancements & Add-ons',
+      's_eeea54': 'NEXG App Guarantee',
+    },
+    nexGLandingHero: {
+      's_0b8149': 'Sign up',
+      's_2bd100': 'Enter delivery address, villa or hotel suite...',
+      's_381d79': 'Nairobi Villas',
+      's_52a6f3': 'For Partners',
+      's_71a30d': 'Change Delivery Location',
+      's_e17357': 'Active App Fleet in Nairobi',
+      's_f7c400': 'Log in',
+      's_fa918a': 'Locate my position',
+    },
+    nexGSearchEngine: {
+      's_c5b914': 'No direct matches found',
+      's_cd81f4': 'Search Results for',
+    },
+    offercarousel: {
+      's_10bb09': 'Previous Slide',
+      's_2aa5dc': 'View Offer',
+      's_7141bc': 'Next Slide',
+    },
+    orderTrackingModal: {
+      's_116632': 'Estimated Delivery',
+      's_375813': 'Fast forward simulation to next lifecycle stage',
+      's_43301e': 'Call Courier',
+      's_536456': 'Courier Tip',
+      's_61243a': 'Simulated Payment Method',
+      's_6e6109': 'Copy delivery security PIN',
+      's_74e226': 'Itemized Receipt & PIN',
+      's_84e3ee': 'Dismiss / Back to App',
+      's_976a74': 'Transaction Reference',
+      's_9c12c6': 'Delivery Fee',
+      's_9ca905': 'This is an automated simulation of the client ordering lifecycle in NEXG App. No actual payment provider has been billed. Once connected to the live API gateway, genuine payments will be processed via M-Pesa or Stripe.',
+      's_9fb5a8': 'Delivery PIN',
+      's_a392ce': 'Live Progress Stages',
+      's_b868ce': 'Message Courier',
+      's_cbac3e': 'App Service',
+      's_cd1876': 'Your Location',
+      's_d6e963': 'Minimize tracking',
+      's_ea2152': 'Live Journey & ETA',
+      's_f56564': 'On schedule',
+    },
+    productcarousel: {
+      's_10bb09': 'Previous Slide',
+      's_7141bc': 'Next Slide',
+    },
+    promo: {
+      's_38769a': 'For Properties',
+      's_4a421c': 'For Merchants',
+      's_c63982': 'For Couriers',
+      's_d2c984': 'NEXG App App Interface',
+    },
+    restaurantDetailModal: {
+      's_034ad6': 'Recent Google Reviews',
+      's_116c19': 'Hospitality & Service',
+      's_3beea0': 'Save to favorites',
+      's_4f2130': 'Google Restaurant Reviews',
+      's_52aed7': 'Food Quality',
+      's_56ba29': 'No dishes match your search criteria.',
+      's_649ff9': 'Add to order',
+      's_652bc8': 'Posted on Google',
+      's_79db72': 'View & Write Reviews',
+      's_79fe15': 'View Google Reviews',
+      's_9c203d': 'Artisanal Menu',
+      's_9f068b': 'Verified Place',
+      's_a023e6': 'Chef Pick',
+      's_b05630': 'Synced Live',
+      's_b38795': 'Search dishes...',
+      's_c152be': 'No Google reviews loaded for this venue.',
+      's_e1c6bf': 'Atmosphere & Transport',
+      's_f4657b': 'Google Maps Rating',
+    },
+    restaurants: {
+      's_0721cf': 'Your reservation at',
+      's_072c89': 'Reserve Table',
+      's_0c8f01': 'Table Reservation',
+      's_25b120': 'Selected Reservation',
+      's_2c3b25': 'Confirm Table',
+      's_34df71': 'Search dining partners, sushi, dry-aged steaks, pasta...',
+      's_4f9fa0': 'Google Maps Location',
+      's_5be698': 'Reset Filters',
+      's_5f716b': 'Try adjusting your search keywords or resetting cuisine filters.',
+      's_6b2c05': 'Fine Dining Partners',
+      's_7288fd': 'Fine Dining Partners & Master Chefs',
+      's_868fb0': 'Click any dish to configure ingredients, accompaniments, or place a simulated order',
+      's_99256e': 'Curated Culinary Directory',
+      's_9da221': 'Featured Partner',
+      's_a1e9f9': 'Explore Home',
+      's_ae0cb2': 'Signature Dishes & Menu Offerings',
+      's_bf0c7d': 'Back to all Dining Partners & Merchants',
+      's_cfdf8b': 'Search menu dishes...',
+      's_d97dd5': 'View Google Reviews & Diner Insights',
+      's_dde236': 'Customize & Order',
+      's_e25e77': 'Select a merchant to explore their Michelin-grade menu, signature dishes, verified Google diner reviews, and table reservations.',
+      's_eac205': 'No dining partners match your filters',
+    },
+    routeFallback: {
+      's_1c5772': 'Loading page',
+    },
+    scrollToTop: {
+      's_f07710': 'Scroll to top',
+    },
+    spaBookingModal: {
+      's_039d05': 'Experience Setting',
+      's_09121f': 'Appointment Slot',
+      's_15ddf4': 'District Wellness Experience',
+      's_17548b': 'Slot Scheduled',
+      's_2fd731': 'Signature Aromatherapy Oil',
+      's_301d19': 'Live Dispatch Progress',
+      's_4548b7': 'Our certified therapist will arrive 10 minutes prior with sanitized organic towels, ultrasonic mist diffuser, and a heated memory-foam bed.',
+      's_485336': 'Villa / Suite Number',
+      's_4b8ec9': 'Private In-Villa Sanctuary',
+      's_5621b9': 'Focus Areas & Medical Notes',
+      's_712231': 'Contact Spa Concierge',
+      's_7d1e9d': 'Private oceanfront cabana with thermal plunge pool & tranquil zen garden access.',
+      's_8cff8d': 'Total Experience Fee',
+      's_9092d9': 'Add to Calendar',
+      's_9505aa': 'Total Concierge Charge',
+      's_950d86': 'Massage Pressure Preference',
+      's_9a36a0': 'Confirm Spa Booking',
+      's_9e603c': 'Therapist dispatches directly to your villa with heated table, organic linens & aromatherapy.',
+      's_a027ba': 'Select Ritual Duration',
+      's_b3a5a1': 'Concierge In-Villa Service Protocol',
+      's_be9475': 'Therapist Preference',
+      's_c0a672': 'Appointment Confirmed',
+      's_c8c5fe': 'Primary Guest Name',
+      's_f00e02': 'Assigned Master Therapist',
+      's_f79d9c': 'Resort Spa Pavilion',
+    },
+    spaWellness: {
+      's_120405': 'Select Ritual',
+      's_3669be': 'Book Calendar',
+      's_5276ac': 'Your appointment at',
+      's_5dfb4e': 'Spa & Wellness Sanctuaries',
+      's_659a92': 'Search spa sanctuaries, Balinese, deep tissue, sauna...',
+      's_689bea': 'Back to all Sanctuary Partners',
+      's_69d23c': 'District Holistic Wellness & Spa',
+      's_9aabe9': 'Book Session',
+      's_a1e9f9': 'Explore Home',
+      's_c1c2fb': 'Sanctuary Spas & In-Villa Wellness',
+      's_d02cb4': 'Search rituals & massages...',
+      's_eb9e1e': 'Confirm Booking',
+      's_f212ea': 'Spa Sanctuary Reservation',
+      's_f2937f': 'Select duration, botanical essential oils, and schedule an immediate in-villa or pavilion appointment',
+      's_fda6e0': 'Select a wellness sanctuary to browse certified therapists, in-villa Balinese massages, Ayurvedic Shirodhara, and hydrothermal rituals.',
+      's_fe0476': 'Sanctuary Treatments & In-Villa Rituals',
+    },
+    stats: {
+      's_034abd': 'From hotels to homes, we make everyday exceptional.',
+      's_826dd3': 'Hotel Partners',
+      's_bd3fa2': 'Our Partners',
+      's_dc04b9': 'Dar es Salaam',
+      's_e819e6': 'Concierge Support',
+      's_f2a377': 'Trusted by guests',
+    },
+    transportBookingModal: {
+      's_1505c5': 'Live Dispatch Status',
+      's_160ad9': 'Chauffeur Confirmed',
+      's_251e18': 'Dedicated Chauffeur Hours',
+      's_314bee': 'Total Concierge Fee',
+      's_358b66': 'Pickup Time',
+      's_36a60c': 'Done & Return to App',
+      's_39b21c': 'Call Chauffeur',
+      's_457b66': 'Total Rate',
+      's_6f672b': 'Assigned Chauffeur',
+      's_77ae94': 'Scheduled Departure',
+      's_7a4175': 'Schedule Date',
+      's_8941e9': 'Service Type',
+      's_8dea76': 'Pickup Location',
+      's_99d1c7': 'Confirm VIP Chauffeur',
+      's_9ca1bd': 'Day After',
+      's_a1cbc4': 'VIP Meet & Greet + Airport Flight Sync',
+      's_b68827': 'Villa / Suite Room',
+      's_be057d': 'Guest Name',
+      's_cd11b4': 'Complimentary On-Board Amenities',
+      's_d0cd2d': 'Flight Number / Departure Code',
+      's_efb6c4': 'Continue to Amenities',
+      's_f2f922': 'VIP Concierge Mobility',
+    },
+    transportPage: {
+      's_1836d5': 'Choose a luxury mobility merchant to view available Maybach S680s, Rolls-Royce Ghost motorcars, Cadillac Escalade ESVs, or twin-engine helicopter transfers.',
+      's_1afb28': 'Back to all Mobility Partners',
+      's_2ea911': 'Chauffeur Reservation',
+      's_3390d4': 'Reserve Chauffeur',
+      's_3727e7': 'Book Transfer',
+      's_52b224': 'VIP Chauffeur & Mobility Providers',
+      's_543b1b': 'Your reservation for',
+      's_784e6e': 'Search mobility providers, Maybach, Rolls-Royce, helicopter...',
+      's_875bd6': 'Executive Chauffeurs & Private Aviation',
+      's_898adc': 'VIP White-Glove Mobility',
+      's_93f4b8': 'Pickup Date & Time',
+      's_a1e9f9': 'Explore Home',
+      's_eac49e': 'Book Vehicle',
+      's_eb9e1e': 'Confirm Booking',
+    },
+    unifiedItemModal: {
+      's_0125ec': 'View All Reviews',
+      's_1cc3d0': 'Aromatherapy Essential Oil',
+      's_3c0047': 'Dedicated Appointment Calendar',
+      's_4c13f0': 'App Notes & Villa Details',
+      's_5d14d6': 'E.g. Villa Suite 402, gate access code, dietary allergies, or arrival notes...',
+      's_94c578': 'Confirm Calendar Reservation',
+      's_a027ba': 'Select Ritual Duration',
+      's_bf3b18': 'Add to App Cart',
+      's_ee3e2e': 'About this offering',
+      's_ee749a': 'Total Estimate',
+    },
+  },
 
   /*
     SHARED FORM VOCABULARY.
@@ -1416,6 +6058,1160 @@ export const translations: Record<Language, TranslationSchema> = {
     },
   },
   ar: {
+  ui: {
+    bookingCalendar: {
+      's_07499a': 'Party / Guests',
+      's_10422c': 'Local Villa Time',
+      's_183a37': 'Sync Calendar',
+      's_534c34': 'Next Month',
+      's_71b856': 'Previous Month',
+      's_79caea': 'Available Time Slots',
+      's_8efff8': 'In 2 Days',
+      's_aeb91b': 'Dedicated Reservation Calendar',
+      's_e5366b': 'Selected Schedule',
+      's_fdc2b8': 'Next Week',
+    },
+    cartDrawer: {
+      's_11a9f0': 'Explore Menus',
+      's_1fc724': 'Promo code (try NEXG20)',
+      's_2303a3': 'Your cart is empty',
+      's_237e47': 'Clear entire cart',
+      's_2c7952': 'Simulated checkout & instant confirmation',
+      's_42cb61': 'Close cart',
+      's_44951e': 'Courier tip',
+      's_643b96': 'Your Order Cart',
+      's_733b61': 'Delivery fee',
+      's_76ecba': 'Remove item',
+      's_ab8546': 'Explore our curated restaurants and add artisanal dishes or concierge dining to get started.',
+      's_c7085d': 'Courier Concierge Tip',
+      's_d2467b': 'Your order',
+      's_d2f4d4': 'Proceed to Checkout',
+      's_d6ea26': 'Concierge service fee',
+    },
+    categories: {
+      's_1a9863': 'Browse Partners',
+    },
+    categoryExplorerModal: {
+      's_233e38': 'Click any category or subcategory to instantly browse partners',
+      's_7c267a': 'View listings',
+      's_7fd08b': 'Reset Catalog Filters',
+      's_940323': 'Close categories',
+      's_af1c10': 'Verified Merchant Partners',
+      's_c7fa37': 'Try searching for another keyword or clear the search query.',
+      's_c9f43c': 'Search across all 21 categories & 134 subcategories (e.g. Fine Dining, Vapes, Chauffeur, Safari)...',
+      's_e37ac9': 'No matching verticals found',
+      's_f4cf7c': 'Merchant Categories & Subcategories',
+    },
+    categoryPage: {
+      's_004d7e': 'Top Rated',
+      's_062888': 'Free Delivery',
+      's_2cef94': 'Reset all filters',
+      's_41eb8f': 'Fastest Delivery',
+      's_c4baea': 'Price Level',
+      's_fce284': 'No merchants found matching your filters.',
+    },
+    checkoutSimulatedModal: {
+      's_119c2f': 'This payment is',
+      's_19e2a2': 'Finalize & Place Order',
+      's_3a7a99': 'Apple Pay',
+      's_55e54d': 'App Delivery Instructions',
+      's_635949': 'Choose Simulated Payment Method',
+      's_63da07': 'Simulate Payment & Place Order',
+      's_6aa79c': 'Selected Items',
+      's_7db213': 'Hotel / Villa / Street Address',
+      's_846466': 'Close checkout',
+      's_882f46': 'Simulates instant STK push prompt directly on mobile handset.',
+      's_9ad55a': 'Total Demo Amount',
+      's_ac51d0': 'Cardholder Name',
+      's_b79126': 'No real funds or accounts will be debited.',
+      's_bac774': 'Simulated Demo Checkout',
+      's_bb36a9': 'DEMO ROUTER',
+      's_cecb67': 'Preloaded Demo Card',
+      's_dd0a60': 'Router Demo Validated',
+      's_e5297b': 'Delivery Address & Location',
+      's_e569ab': 'Processing Demo Payment...',
+      's_ea3289': 'Room Folio / Cash',
+      's_ea4478': 'Simulates one-touch FaceID / TouchID authorization.',
+      's_eb034a': 'Billed directly to your hotel master room folio upon delivery.',
+      's_ee343f': 'Sandbox Router Active',
+      's_fee23b': 'Merchant Partner',
+    },
+    consentBanner: {
+      's_35c291': 'Reject all',
+      's_66cd82': 'Strictly necessary cookies keep the site working. Analytics and marketing cookies stay off until you turn them on, and you can change this at any time.',
+      's_788df5': 'Your cookie choices',
+      's_821d1f': 'Accept all',
+      's_956fa7': 'Save choices',
+      's_9e0cba': 'Cookie settings',
+      's_da6a92': 'Necessary cookies are always active. Everything else is optional.',
+      's_e7d306': 'Cookie preferences',
+      's_f477c8': 'Always on. It cannot be switched off because the site cannot run without it.',
+    },
+    courierOnboarding: {
+      's_037e0b': 'Our compliance officers verify your submitted National ID, license, PIN, and fleet logbooks directly against NTSA registers.',
+      's_03c52e': 'Guaranteed Base Salary',
+      's_06c8b6': 'Verify your registered logistics enterprise. Only PDF files and scanned images up to 5MB size are accepted.',
+      's_0b39f6': 'Fleet Partner',
+      's_0bd62e': 'Account Number',
+      's_0cb44f': 'Executive Sedan / Van',
+      's_0d36d5': 'Active public third-party or comprehensive fleet cover policy certificate.',
+      's_0d98d0': 'E.g. Swift Deliveries',
+      's_0e3256': 'Submit official identification and transit licensing details.',
+      's_0f32ec': 'Rider Record Card',
+      's_1081b3': 'Full Name, Phone, ID Number, License Number, Vehicle Type, Plate Number',
+      's_10f420': 'Shift & Operating Zones',
+      's_14bf35': 'Ride custom NEXG-branded premium logistics vehicles, operate consistent shifts, and enjoy a stable guaranteed base salary.',
+      's_156177': 'Certificate of Incorporation',
+      's_17b238': 'Accepted For Fleet Provider',
+      's_1805c7': 'This agreement begins immediately on approval and is valid for a period of 12 months. Either party may terminate with 7 days\' written notice, or NEXG may block platform access instantly in cases of safety breach, driving license revocation, or fraudulent behavior.',
+      's_197646': 'Full Legal Name',
+      's_204be3': 'E.g. operations@swiftlogistics.co.ke',
+      's_2358e6': 'Independent Rider',
+      's_24813d': 'E.g. Kileleshwa, Block D',
+      's_26712f': 'Authorized Primary Contact Person',
+      's_27538f': 'Outline your company’s transit capacities and target operating logistics zones.',
+      's_27980f': 'WhatsApp Mobile Number',
+      's_27c646': 'Company Office Headquarters',
+      's_2952ca': 'Type Signature',
+      's_2b31a3': 'E.g. A001234567Z',
+      's_2cb0d8': 'Accepted & Agreed by Rider',
+      's_2d6ca0': 'Vehicle Type',
+      's_2dc8f1': 'E.g. Corner House, 4th Floor, Kimathi St.',
+      's_2ed783': 'Return to Elite Fleet page',
+      's_30b928': 'Company KRA PIN Certificate',
+      's_310c80': 'Back to Couriers',
+      's_312631': 'Bank Name',
+      's_3174a5': 'Contact Email Address',
+      's_31843b': 'Clear canvas',
+      's_338cf2': 'Services & Settlement Payout',
+      's_340115': 'Clear scanned copy of front and back face of your card.',
+      's_34e784': 'E.g. Swift Express Logistics Ltd',
+      's_34f9ae': 'Certificate of Incorporation / Reg No.',
+      's_377b90': 'Authorized Dispatch Committee',
+      's_37dfba': 'NTSA Driver\'s License Number',
+      's_3873df': 'E.g. DL-XXXXXX',
+      's_3af714': 'No active couriers added yet',
+      's_3ba957': 'E.g. Nairobi',
+      's_3bfd88': 'KRA PIN Number',
+      's_3c3541': 'Consolidated Business payout',
+      's_3c774b': 'Carry VIP guests to properties',
+      's_3cc4fd': 'NEXG Provides Vehicle',
+      's_3ce5aa': 'Emergency Contact Person',
+      's_41d914': 'Choose the expiry date',
+      's_41fe24': 'Draw digital signature with finger or pointer',
+      's_430404': 'Remove Card',
+      's_44fe57': 'Emergency Mobile Phone',
+      's_464dfd': 'We declare absolute compliance with Kenyan corporate regulations, active tax filings, and legal road safety acts.',
+      's_4979be': 'We certify that all couriers listed in our squad profiles hold valid, unexpired NTSA driving licenses and clean background clearance certifications.',
+      's_4c7486': 'Corporate Job Title',
+      's_4c987a': 'Authorized Officer Full Name',
+      's_4d1c2f': 'Structured Shift schedules',
+      's_4ff862': 'E.g. 4',
+      's_50d865': 'Upload crisp clear photo snapshots or PDF files under 5MB size limit.',
+      's_5104d5': 'Preferred Operating Area Zone',
+      's_51dacf': 'WhatsApp Number',
+      's_53d718': 'The Fleet Provider represents and warrants that all couriers and motorbikes comply with roadworthy rules, hold comprehensive insurance certifications, and observe Kenya\'s Data Protection Act 2019 standards.',
+      's_55537f': 'Vehicle Registration details',
+      's_574f02': 'Next Step',
+      's_587649': 'Official KRA Pin certification document page from iTax portal.',
+      's_5920ae': 'You are applying for a scheduled, salaried position. NEXG provides custom branded bikes, gear, and fuel budgets. Below, you will also designate your operational preferences.',
+      's_5a833b': 'Residential Address',
+      's_5b5250': 'Fleet Partner Business Profile',
+      's_5cfa43': 'NTSA Driving License',
+      's_5f5518': 'Drive your own motorcycle or scooter, set your flexible calendar hours, and take commissions per successfully completed errand.',
+      's_63a113': 'Total Registered Vehicles',
+      's_64346b': 'Full Name',
+      's_6790f2': 'Corporate Bank Name',
+      's_692fe8': 'E.g. P051234567Z',
+      's_6b3d6a': 'Deliver premium retail items',
+      's_6f9c91': 'E.g. +254 711...',
+      's_70abeb': 'Bank Settlement Transfer',
+      's_714406': 'Configure your legal registered business details for logistics partnerships.',
+      's_717eb1': 'Company Account Title',
+      's_71c904': 'NEXG APP LIMITED',
+      's_71ebbb': 'E.g. Red Honda CB125F (Year 2023)',
+      's_71f6e3': 'Register Active Couriers Squad',
+      's_72a587': 'Board Operations Committee',
+      's_74955f': 'E.g. Westlands',
+      's_76af1d': 'E.g. 15',
+      's_77522e': 'NEXT STEPS IN OUR VERIFICATION TIMELINE',
+      's_79865b': 'Preferred Working Shift',
+      's_7cf2e1': 'Alternative Contact Phone',
+      's_7d5f6e': 'Unlock premier delivery earnings, tailored branding, and unmatched support in Kenya’s luxury hospitality ecosystem.',
+      's_7d8667': 'Plate Number',
+      's_81db77': 'Years in Logistics Sector',
+      's_827c49': 'Account Holder Legal Name',
+      's_828ade': 'Vip App',
+      's_831dc7': 'KRA PIN Confirmation Certificate',
+      's_86d4ca': 'For NEXG App',
+      's_8bb6da': 'E.g. 12345678',
+      's_8d5d4c': 'Company Business Verification Documents',
+      's_8e203d': 'Handle high-end guest requests',
+      's_8f912f': 'E.g. CPR/2018/12345',
+      's_903d8d': 'Execute Partnership Agreement Contract',
+      's_913798': 'Click Add Rider Card above or upload your riders spreadsheet via CSV bulk import.',
+      's_93457d': 'Fleet Operational Scale & Coverage',
+      's_93e220': 'Corporate Fleet Partner logistics Framework',
+      's_9691d0': 'ONBOARDING PROFILE SUMMARY',
+      's_984805': 'Operating Counties & Estates Coverage',
+      's_99dc14': 'Pending Compliance Review',
+      's_9d159c': 'Direct Mobile Number',
+      's_a0094a': 'Payout Method',
+      's_a1524d': 'E.g. 12001234567',
+      's_a1c4fe': 'E.g. +254 700 111 222',
+      's_a221a1': 'Upon document clearance, you\'ll receive a WhatsApp invitation to join our premium standard customer service and hospitality training.',
+      's_a40d60': 'Premium Commission Payout',
+      's_a620a5': 'Official business registration certificate page issued by the Registrar of Companies.',
+      's_a7c94e': 'NEXG agrees to compile and settle client order payments to the Fleet Provider’s registered bank account weekly on Mondays, less a platform operations commission fee of',
+      's_a85feb': 'Your premium motorbike is provided by NEXG. You do not need to register a personal motorbike logbook or license plate here.',
+      's_a8caa4': 'Add individual active riders to your partnership ledger.',
+      's_aafa84': 'Active Vehicle types represented in Fleet',
+      's_ac26fd': 'Submit Portfolio Agreement',
+      's_ad7df6': 'Motorcycle / Scooter',
+      's_aed4fc': 'Join the Elite NEXG Rider Fleet',
+      's_aef6a9': 'National ID / Passport Number',
+      's_af7bb7': 'Signatory Director\'s National ID',
+      's_af8a4e': 'The Fleet Provider certifies that they actively manage and pay a squad of',
+      's_b026ba': 'City HQ Location',
+      's_b09e88': 'Draw Signature',
+      's_b21f30': 'ID Number',
+      's_b2e0a8': 'Driver\'s License Expiry Date *',
+      's_b5015c': 'List all cities and estates where your fleet currently has active coverage. E.g. Nairobi CBD, Westlands, Kilimani, Mombasa, Diani, etc.',
+      's_b5c479': 'NEXG Dedicated Rider',
+      's_b724e7': 'Print Agreement Document',
+      's_b984fa': 'Import CSV Spreadsheet',
+      's_b9d00c': 'This contract is binding for a term of 12 months. Either partner may exit the frame by providing 14 days\' written notice to the other party.',
+      's_bc5303': 'Add Rider Card',
+      's_bf24cb': 'Name exactly as printed on legal ID card',
+      's_c1ecb3': 'Package Delivery',
+      's_c33c9b': 'DL Number',
+      's_c59900': 'E.g. KMCA 123A',
+      's_c7a051': 'We declare that our organization maintains comprehensive third-party logistics insurance and active public liability coverage across all active fleet operators.',
+      's_c85d99': 'Proof of ownership and active public transit insurance coverage.',
+      's_c8708a': 'Company Legal Name',
+      's_c8bc71': 'Corporate Bank Settlement Account',
+      's_c8ed49': 'Identification & Vehicle Setup',
+      's_ca5690': 'Download Standard CSV Template',
+      's_cabacd': 'NEXG Operations Admin',
+      's_cdec1f': 'Both sides of your active, unexpired logistics driver license.',
+      's_d101b7': 'Onboard your registered Kenyan logistics agency and entire courier squad. Bulk upload riders and manage team-level settlements.',
+      's_d5184b': 'Own Vehicle required',
+      's_d5e54c': 'Commercial Fleet Insurance Policy',
+      's_d64903': 'NEXG remits compiled client transport payout settlements directly to your corporate account weekly on Mondays.',
+      's_d66864': 'Flexible Shifts',
+      's_d9863a': 'E.g. Fleet Manager',
+      's_db3b79': 'Account Name',
+      's_dca3fc': 'E.g. Westlands, Kilimani, Lavington',
+      's_ddb4d1': 'E.g. Equity Bank',
+      's_de744b': 'E.g. Mary Jane',
+      's_e04a0d': 'Payout Settlement Configurations',
+      's_e07446': 'Review pre-filled contract agreement clauses and apply your electronic signature.',
+      's_e0934e': 'Date of Birth *',
+      's_e12ee9': 'Preferred Transit Vehicle Assigned',
+      's_e15c6c': 'Trading Name / Brand Name',
+      's_e16a80': 'Document Verification Uploads',
+      's_e1c6ae': 'Bulk CSV Squad Import',
+      's_e1fe05': 'E.g. Albert Mwangi',
+      's_e21ec5': 'Vehicle Model & Color',
+      's_e387b2': 'Business KRA PIN',
+      's_e3ca9b': 'E.g. John Kamau Maina',
+      's_e4c574': 'E.g. +254 711 000 000',
+      's_e7710e': 'Typed Electronic Signature preview',
+      's_e7cfff': 'Authorized Signature Panel',
+      's_e90701': 'Select Gender',
+      's_eb6915': 'Fleet Integrity Declarations',
+      's_ec9a3f': 'Estate Area / Street',
+      's_ecd675': 'Vehicle Logbook & Third-Party Insurance',
+      's_eeec98': 'Import CSV',
+      's_ef8482': 'Choose Your Partnership model',
+      's_efbb4c': 'E.g. Spouse / Parent',
+      's_f3a211': 'E.g. +254 700 987 654',
+      's_f4afb4': 'Choose your date of birth',
+      's_f65568': 'E.g. +254 712 345 678',
+      's_f6da6f': 'Personal Profile Details',
+      's_f71ebc': 'E.g. John Kamau',
+      's_f954ab': 'NEXG Fleet Operations',
+      's_f9f8d5': 'Select the model that aligns with your assets. We have personalized contracts and onboarding checklist steps for each path.',
+      's_fa0cdb': 'Total Active Riders',
+      's_fbbe43': 'Configure how you receive settlements and who to contact in emergencies.',
+      's_fca1ec': 'Ensure your details correspond exactly with your National Identification Document.',
+      's_feb1b4': 'ID of the legal officer executing the Fleet Partnership Agreement.',
+      's_febf86': 'Rider agrees to strictly wear the customized NEXG apparel on duty, maintain exemplary clean vehicle hygiene, arrive within specified time slots, and respect international hospitality guests\' absolute privacy. Failure to maintain a minimum 4.0/5.0 star rating may result in temporary profile deactivation.',
+    },
+    curatedNairobiWorlds: {
+      's_15a714': 'Dynamic cross-category plans tailored to your moment, occasion & time of day',
+      's_18a51d': 'Full Experience Builder',
+      's_41dd82': 'Curated Nairobi Worlds',
+      's_52c035': 'NEXG Experience Orchestrator',
+      's_8abe87': 'Explore Offerings in Main Feed',
+      's_c2018d': 'Contextual Experience Hub',
+      's_ecc198': 'Click step to explore offerings',
+      's_fe8da0': 'Nairobi Curated',
+    },
+    databaseSqlModal: {
+      's_baaf3a': 'PostgreSQL Database Scripts',
+    },
+    dateTimeField: {
+      's_46a299': 'Previous month',
+      's_7ecc8b': 'Choose a year',
+      's_8abf7c': 'Next month',
+    },
+    discoveryScreen: {
+      's_030851': 'Merchant categories',
+      's_0b7ee2': 'All verticals',
+      's_176135': 'The API may not be running. Start it with',
+      's_412226': 'Clear filters',
+      's_67300d': 'Clear search',
+      's_8344a6': 'Search merchants',
+      's_a3c57f': 'No merchants found',
+      's_dfe60c': 'Load more',
+      's_f4d948': 'Search restaurants, spa, safaris, champagne, chauffeur, pharmacy...',
+    },
+    dishCustomizerModal: {
+      's_052b34': 'Guest Satisfaction',
+      's_062e79': 'Increase quantity',
+      's_1c711d': 'Verified Diners Only',
+      's_2db328': 'Any preferences? e.g. Extra dressing on side, cutlery needed...',
+      's_492026': 'Add to Order',
+      's_594a3d': 'Share what made this dish memorable...',
+      's_6c02ab': 'Decrease quantity',
+      's_70d3a5': 'Close modal',
+      's_84ab4b': 'Submit Verified Review',
+      's_9c0406': 'Suite / Villa (e.g. Penthouse 402)',
+      's_a196bb': 'Customize & Options',
+      's_bfae0e': 'Your Name (e.g. Eleanor V.)',
+      's_d0fac0': 'Leave Your Dining Review',
+      's_ece1f0': 'Special Kitchen Instructions',
+    },
+    dockedSearchBar: {
+      's_67300d': 'Clear search',
+    },
+    experiences: {
+      's_057742': 'Curated Experience Hosts & Outfitters',
+      's_14c995': 'Book Date',
+      's_574a76': 'Book Activity',
+      's_63ae7c': 'Date & Time',
+      's_6568e5': 'Your booking with',
+      's_96ebfb': 'Search hosts, Maasai Mara, Giraffe Centre, cinema, safari...',
+      's_9fda6b': 'Back to all Outfitters',
+      's_a1e9f9': 'Explore Home',
+      's_ad3a34': 'Private Safaris, Aerial Tours & Cultural Ateliers',
+      's_cebc44': 'Choose an expert outfitter to browse hot-air balloon flights over the Mara, private giraffe conservation sanctuaries, and master artisan ateliers.',
+      's_d29299': 'Bespoke Concierge Expeditions',
+      's_eb9e1e': 'Confirm Booking',
+      's_f6e8ce': 'Experience Reservation',
+    },
+    floatingCartBar: {
+      's_f40d71': 'View Order',
+    },
+    forCouriers: {
+      's_06816c': 'Apply to Drive',
+      's_08c1c3': 'We provide access to high-quality vehicle maintenance programs, comprehensive courier insurance plans, and dedicated dispatch teams assisting you 24/7.',
+      's_0c343a': 'Apply Online',
+      's_0c8a9a': 'Terms of Service',
+      's_0e840b': 'Pocket High Tips',
+      's_110158': 'Help Center',
+      's_153ab5': 'Idle Reduction',
+      's_18414d': 'Elite Fleet',
+      's_1bedd8': 'Ambassadors utilizing our suite-specific integrated routing enjoy significantly higher success ratings and earn double the average industry tips.',
+      's_1d2be9': 'Safety Guidelines',
+      's_209f63': 'Average Earnings Growth',
+      's_22d1d3': 'Once you submit your application online, our onboarding team reviews documents within 48 hours. If qualified, you\'ll be invited for a brief physical assessment and standard white-glove training before your account goes active.',
+      's_2a7274': 'Submit your vehicle registration and documents online in under 5 minutes through our secure, mobile-friendly onboarding portal.',
+      's_2bf27f': 'STEP 01',
+      's_2d816d': 'Career Advancement',
+      's_2e6151': 'FLEET REQUIREMENTS',
+      's_2ed1ed': 'Premium Payouts for Professional Ambassadors.',
+      's_33b4c6': 'Join the Elite Fleet',
+      's_3500ab': 'Join a community built on premium status and mutual respect. We support your career path and help you develop unmatched service skills.',
+      's_355ac2': 'Deliveries per Day',
+      's_38769a': 'For Properties',
+      's_38df83': 'Estimate Earnings',
+      's_39bc68': 'Your Vehicle Type',
+      's_41493f': 'Join the Elite',
+      's_42475b': 'Maintain exceptional ratings and receive daily performance multipliers and exclusive priority dispatcher pairing.',
+      's_440245': 'The NEXG Driver App',
+      's_45b640': 'Go online in the driver app, navigate to hot premium spots, complete high-end orders, and watch your mobile wallet balance swell.',
+      's_4748c1': 'Receive clear, automated settlements straight to your bank or mobile wallet without delay, backed by detailed electronic statements.',
+      's_4c36e1': 'SETUP TIMELINE',
+      's_4d5b64': 'Ambassador Rating',
+      's_4d81b2': 'STEP 03',
+      's_4f555f': 'Track your daily performance, optimize your delivery times, and master Swahili & English hospitality tips with our smart companion analytics dashboard.',
+      's_5150fd': 'Priority Routing Tech',
+      's_52a6f3': 'For Partners',
+      's_530246': 'Guaranteed Weekly Payouts',
+      's_53cdfb': 'DATA INTELLIGENCE',
+      's_54c4b5': 'Exceptional Presentation',
+      's_5b8964': 'Guest Rating Profiles',
+      's_5ce9fd': 'Fast Verification',
+      's_5e7925': 'Our professional partner compliance team validates your records and issues a secure orientation invitation within 48 hours.',
+      's_653ccb': 'We currently support major high-end neighborhoods and coastal luxury zones across Nairobi, Mombasa, and Diani, expanding quickly to other East African metropolitan areas.',
+      's_677710': 'Route Efficiency Score',
+      's_6bde0a': 'Apply Online Now',
+      's_6d1c48': 'Earn stars and secure exclusive bonuses. Build private, anonymous reviews that reinforce your stellar reputation with premium hotels.',
+      's_75dde0': 'Return to Guest App',
+      's_765f2b': 'TRANSPARENT EARNINGS',
+      's_777b12': 'Ambassador delivering gourmet meals',
+      's_78df83': 'Powerful Analytics for Elite Drivers',
+      's_7e32e7': 'Quick online onboarding. Submit details, attend orientation, retrieve your custom elite starter kit, and take your first order in under 48 hours.',
+      's_7f255f': 'Deliver high-end products and culinary creations with meticulous care. Be dressed in custom-designed NEXG apparel to reflect elite standards.',
+      's_8049d9': 'Weekly Payout Settlements',
+      's_85cf78': 'No waiting for week-ends. Complete premium tasks and trigger instant payouts directly into your mobile wallet.',
+      's_89bdbf': 'Elevating premium hospitality across East Africa with integrated, contactless concierge ecosystems.',
+      's_8b1193': 'Understand your daily yields. Monitor peak areas, identify high-tipping zones, and learn the best hours to go online.',
+      's_928714': 'Collect Starter Kit',
+      's_933192': 'What it Takes to Be a NEXG Ambassador.',
+      's_93a5bc': 'Exec Car',
+      's_93fef0': 'Empowered Scheduling',
+      's_95e986': 'Take complete control over your working hours. Plan your deliveries around peak fine-dining periods to lock in dynamic high fares.',
+      's_97b846': 'Gain exclusive professional training in hospitality service, client management, and path leadership with certificates of excellence.',
+      's_981b01': 'Premium Fleet Support',
+      's_9ad0cc': 'Contact Us',
+      's_9b1690': 'Apply to Fleet',
+      's_9d3f52': 'Our advanced routing algorithms guide you efficiently to high-value destinations, minimizing idle mileage and maximizing deliveries per hour.',
+      's_9db108': 'Privacy Policy',
+      's_a08321': 'Redefining Delivery.',
+      's_a1e9f9': 'Explore Home',
+      's_a7acb1': 'Work according to your personal schedule. Take shifts during peak fine-dining hours for maximized yield.',
+      's_a9577d': 'Secure Site',
+      's_ad6c0d': 'KNOWLEDGE BASE',
+      's_aed5c5': 'Must possess a clean driving record, valid local driver\'s license for your specified vehicle, and active comprehensive third-party insurance coverage.',
+      's_b53080': 'Courier Partner FAQs',
+      's_b74c4e': 'Toggle Theme',
+      's_bc89aa': 'Empowered Flexibility',
+      's_befa37': 'Ambassador scanning the driver app',
+      's_c10fec': 'Flawless Modern Vehicle',
+      's_c18810': 'Valid Documents & Licenses',
+      's_c24cae': 'STEP 02',
+      's_c38c49': 'Elite Rank Status',
+      's_c71f96': 'Weekly Target Reached',
+      's_c88176': 'Access culinary deliveries, spa wellness packages, and executive courier jobs cleanly integrated under a single, highly intuitive screen.',
+      's_c887b9': 'About Us',
+      's_ce60db': 'Own Your Earnings.',
+      's_ce7472': 'Back to Home',
+      's_d44881': 'Couriers Hero Background',
+      's_d781b4': 'Operational Mapping',
+      's_df9144': 'ELITE STANDARDS',
+      's_e10068': 'Based on an average base fee of',
+      's_e18d8e': 'Courier Earnings Estimator',
+      's_e3a7a2': 'Direct payments made straight to your account every single week, with zero hidden fees.',
+      's_e3b925': 'STEP 04',
+      's_e6e178': 'Cookie Policy',
+      's_e72e94': 'Earnings Analytics',
+      's_eb35f1': 'Start your application today. Complete the secure onboarding questions and step into a new tier of professional independence and respect.',
+      's_ec3c35': 'Stay updated with premier hospitality tips and trends.',
+      's_eeb176': 'To guarantee top status, NEXG provides all approved couriers with premium tailored jackets, clean polo shirts, and custom-insulated delivery bags. Black trousers and clean black shoes are required on duty.',
+      's_f370c7': 'Our app guides you right up to the designated suite or property zone, avoiding lobby confusion and ensuring frictionless drop-offs.',
+      's_f582d4': 'Our dispatch systems minimize your empty miles. Pre-book orders or follow integrated corridors to stack high-paying jobs in a row.',
+      's_f6e64a': 'Average Tip per Delivery',
+      's_fbe3b3': 'Premium Integrated Hub',
+      's_fcf600': 'Retrieve your tailored NEXG jackets, insulated food packs, smartphone bracket, and secure driver login credentials.',
+      's_ff2382': 'Couriers Hero Daylight Background',
+    },
+    forMerchants: {
+      's_032a19': 'Our professional curation experts ingest your items, style gorgeous visuals, and optimize layouts for direct contactless guest displays.',
+      's_0c343a': 'Apply Online',
+      's_0eaa2f': 'Right Where They Are.',
+      's_118503': 'Merchants Hero Daylight Background',
+      's_1600e2': 'Apply to Join NEXG',
+      's_18414d': 'Elite Fleet',
+      's_2bf27f': 'STEP 01',
+      's_2f5b37': 'Merchant Support',
+      's_38769a': 'For Properties',
+      's_3f3d89': 'Zero integration headache. Submit your menu or catalogue, let us digitise your portal, and receive curated local sales in 48 hours.',
+      's_4d81b2': 'STEP 03',
+      's_52a6f3': 'For Partners',
+      's_540349': 'Automated Revenue',
+      's_591721': 'Higher Avg. Order Value',
+      's_673bf7': 'Get paid on time, every time. Once a guest completes checkout, automated, secure merchant payouts route instantly to your bank.',
+      's_750959': 'Applications are reviewed by our curation team within 24 hours to ensure our high standards of quality and service are maintained across the platform.',
+      's_771412': 'Why Merchants Choose NEXG',
+      's_7cb113': 'Multiply Volume',
+      's_80b451': 'Instant Split Payouts',
+      's_81df05': 'Consistent Orders',
+      's_85feef': 'Premium Exposure',
+      's_891482': 'We handle everything from digital menu formatting to custom checkout links. Absolutely no technical setup required on your end.',
+      's_89a9da': 'Submit your fine dining menus, luxury spa offerings, or rental catalogs through our seamless, intuitive 2-minute onboarding form.',
+      's_916b2f': 'Digital Integration',
+      's_a1e9f9': 'Explore Home',
+      's_a2e8c7': 'Receive Suite Orders',
+      's_a92592': 'ONBOARDING TIMELINE',
+      's_aa32fa': 'Start Onboarding',
+      's_abafb4': 'Prepare packages meticulously. Professional NEXG couriers gather the items, fulfill deliveries, and secure payouts automatically.',
+      's_ae23a7': 'Keep orders running flawlessly. Our active support concierge monitors deliveries live and assists with special suite requests.',
+      's_b74c4e': 'Toggle Theme',
+      's_ba7223': 'Commission on Pickups',
+      's_c0228a': 'Reach Customers.',
+      's_c24cae': 'STEP 02',
+      's_c75030': 'Merchants Hero Background',
+      's_c89f38': 'Partner with NEXG App to serve guests directly inside premier luxury properties. We provide white-glove logistics, automated payouts, and seamless integration with your existing team.',
+      's_ce7472': 'Back to Home',
+      's_ce9fe6': 'Never worry about transport. Our highly vetted professional courier fleet collects your packages and delivers them with elite standards.',
+      's_d6626f': 'Zero Friction Setup',
+      's_da08fb': 'Seamless Payouts',
+      's_def7cc': 'Dedicated Support',
+      's_e3b925': 'STEP 04',
+      's_e56df8': 'WHY PARTNER WITH US',
+      's_e6a013': 'Merchant Terms',
+      's_e9cbdf': 'Verified Properties',
+      's_f6538e': 'Tap into high-net-worth guests, tourists, and business travelers ordering gourmet meals, personal amenities, or spa treatments.',
+      's_f6e1bd': 'Gain exclusive positioning in elite hotel room directories, high-visibility bedside QR cards, and digital concierge web-apps.',
+      's_faae3e': 'As guests scan room QR codes, orders stream directly to your merchant dashboard with real-time audio and visual system notifications.',
+      's_fe1a29': 'Contact Support',
+    },
+    forProperties: {
+      's_0293af': 'Properties Hero Background',
+      's_052b34': 'Guest Satisfaction',
+      's_061f53': 'Curated local menus',
+      's_06fb24': 'Integrate seamless, world-class concierge services into your luxury rentals and hotels. Empower guests to order gourmet food, book organic spa treatments, and request private transport with a single, contactless scan.',
+      's_0a3693': 'Instant access, absolutely zero apps required',
+      's_0c8a9a': 'Terms of Service',
+      's_0d3b7b': 'Predict high-demand hours to allocate room cleaning, butler services, or external partner delivery drivers with supreme efficiency.',
+      's_0e5ae2': 'Unified Service Hub',
+      's_110158': 'Help Center',
+      's_110820': 'Join hundreds of high-end resorts, boutique hotels, and luxury Airbnb hosts across East Africa that are boosting guest satisfaction and building zero-cost revenue.',
+      's_176079': 'Preference Profiles',
+      's_17d67c': 'Earnings Estimator',
+      's_182ad0': 'Secure automated checkouts, verified premier concierge merchants, and licensed professional couriers guarantee safety and guest peace of mind.',
+      's_18414d': 'Elite Fleet',
+      's_1be9e5': 'Every QR code is uniquely tied to the guest suite, meaning food deliveries, room cleanings, or requested towels find guests exactly where they are.',
+      's_1d2be9': 'Safety Guidelines',
+      's_21f4bb': 'Happy Guests',
+      's_25096d': 'Upfront Integration Cost',
+      's_271358': 'Properties utilizing NEXG Contactless QR systems experience a massive increase in service engagement compared to conventional physical folders.',
+      's_29b967': 'Properties CTA Sunset Background',
+      's_2bf27f': 'STEP 01',
+      's_31c559': 'Elevate Guest Experiences.',
+      's_338ed9': 'Earn More Income',
+      's_341a50': 'NEXG builds privacy-compliant guest preference profiles to help your staff pre-empt needs before they are even spoken out loud.',
+      's_38769a': 'For Properties',
+      's_3b6c18': 'Service Response Index',
+      's_40c759': 'Average Occupancy Rate',
+      's_4216f1': 'Trusted & Safe',
+      's_46f477': 'Guests scan, order, and pay instantly. NEXG handles all fulfillment, depositing automatic commission shares to your dashboard.',
+      's_49f179': 'We Handle Everything',
+      's_4c36e1': 'SETUP TIMELINE',
+      's_4d2dec': 'Local Adventures',
+      's_4d81b2': 'STEP 03',
+      's_4f7049': 'Estimated Monthly Share',
+      's_4fdd58': 'Order Conversion Rate',
+      's_52a6f3': 'For Partners',
+      's_534294': 'We supply custom-crafted physical suite-specific QR cards. Place them in your room directories or high-visibility bedside tables.',
+      's_53cdfb': 'DATA INTELLIGENCE',
+      's_589ee1': 'Configure & Customise',
+      's_5bfbb7': 'The QR Advantage',
+      's_5fbc63': 'Unlock Property Potential.',
+      's_70a8da': 'Stand Out',
+      's_73ba7f': 'Chauffeurs & rentals',
+      's_75dde0': 'Return to Guest App',
+      's_785c45': 'Powerful Analytics for Modern Managers',
+      's_7a1f3a': 'Position your properties as elite, technologically forward luxury destinations. Set a standard of hospitality others can\'t match.',
+      's_7b1758': 'Private Cab & Car Hire shares',
+      's_7bf908': 'Partner Onboarding',
+      's_7c6eec': 'Transform guest behavior into highly actionable insights. Track ordering trends, optimize your staffing, and refine property offerings with real-time analytics.',
+      's_7ee992': 'View Demo Video',
+      's_818f94': 'Clear real-time transparency audit trail',
+      's_8249e7': 'Food & Dining referrals',
+      's_8332c9': 'Inventory Speed',
+      's_872061': 'Deploy QR Displays',
+      's_89bdbf': 'Elevating premium hospitality across East Africa with integrated, contactless concierge ecosystems.',
+      's_8c288d': 'Submit your property and suite list online. Our concierge activation specialists verify your layout to launch your space.',
+      's_8c8458': 'Why Hosts Choose NEXG',
+      's_8d365a': 'Properties Daylight Hero Background',
+      's_8e8592': 'Bespoke Tours & Safaris',
+      's_8fe3e8': 'Apply & Partner',
+      's_9ad0cc': 'Contact Us',
+      's_9db108': 'Privacy Policy',
+      's_9fd2f3': 'Stop leaving incremental hospitality revenue on the table. Our mutual commission-sharing model turns every guest service interaction into a direct revenue flow for your property, even when fulfilled entirely by trusted third-party merchants.',
+      's_a1e9f9': 'Explore Home',
+      's_a2cb3c': 'Guests simply point their camera and browse. No logins, no tedious app downloads, just premier high-end service in a couple of seconds.',
+      's_a2f3a7': 'Enhanced Experience',
+      's_a3fb7a': 'Fine Dining',
+      's_a5d6a1': 'Zero integration overhead. Complete hotel setup, display delivery, and automatic digital catalog activation in under 48 hours.',
+      's_a62509': 'REVENUE GENERATION',
+      's_a9577d': 'Secure Site',
+      's_a969aa': 'Safaris & excursions',
+      's_a97bcc': 'Unlock a hands-off, zero-effort passive revenue stream by receiving high commission splits from every guest meal, ride, or tour booked.',
+      's_aaa399': 'Passive Commissions',
+      's_b74c4e': 'Toggle Theme',
+      's_c24cae': 'STEP 02',
+      's_c50b8f': 'Fully automated payouts and digital reporting',
+      's_c5bb5d': 'Average Order Growth',
+      's_c86934': 'Total Rooms / Suites',
+      's_c887b9': 'About Us',
+      's_c9bc84': 'Luxury Transport',
+      's_cd4fe8': 'Partner with NEXG',
+      's_ce7472': 'Back to Home',
+      's_d08ccb': 'Zero Friction Interface',
+      's_d15371': 'Delighted guests leave glowing feedback. Maximize your rating scores and booking ranks across Airbnb, Booking, and Expedia.',
+      's_d178f4': 'Guest Habit Tracking',
+      's_d300d6': 'Better Reviews',
+      's_d5d3ea': 'We integrate premier local partner cuisines, spa offerings, and chauffeur fleets into a single, seamless brand-matching portal.',
+      's_d8481d': 'Wellness & Spa',
+      's_d887cc': 'Understand exactly what your guests prefer. Track peak booking periods, top fine dining cravings, and late-night requests.',
+      's_e09921': 'Operational Optimization',
+      's_e3b925': 'STEP 04',
+      's_e56df8': 'WHY PARTNER WITH US',
+      's_e6e178': 'Cookie Policy',
+      's_e7f7ee': 'More Bookings',
+      's_e87389': 'Loyalty Return Intent',
+      's_ea763f': 'Apply for Partnership',
+      's_ec3c35': 'Stay updated with premier hospitality tips and trends.',
+      's_ee7b88': 'We seamlessly integrate previously fragmented premium local merchants into an elegant singular user experience reflecting your property’s status.',
+      's_f04a9d': 'Absolutely zero operational burden for you. From partner restaurant execution to vetted courier logistics, NEXG does all the heavy lifting.',
+      's_f59c46': 'Monetize Every Single Stay.',
+      's_f77be3': 'Luxury suite with guest scanning QR code',
+      's_f90548': 'Deliver unmatched, instant room service, organic spa appointments, and curated local safaris at the simple scan of a finger.',
+      's_f907f8': 'One Elite App. Infinite Services.',
+      's_fa3fc3': 'Average App Spend per Stay',
+      's_fe3f95': 'THE ECOSYSTEM',
+    },
+    googleReviewsModal: {
+      's_0d75a8': 'Google Maps Pin',
+      's_273f6f': 'No Google reviews match your selected filter.',
+      's_3ea133': 'Verified direct contacts & socials',
+      's_6913b8': 'Search reviews for dishes, ambiance, speed...',
+      's_6a6eaf': 'Filter by Stars',
+      's_6bce42': 'Verified Aspect Scores',
+      's_aaf427': 'Atmosphere & Reliability',
+      's_ba9553': 'Quality & Execution',
+      's_bd9554': 'Reviews synced in real-time with Google Places API',
+      's_c34ae8': 'Aspect data collected via Google Places API',
+      's_cbac3e': 'App Service',
+      's_d45c4f': 'Official Portal',
+      's_d6f49f': 'Verified Google Reviews',
+    },
+    groceriesPage: {
+      's_160a42': 'Back to all Purveyors',
+      's_340a24': 'Gourmet Cellar & Purveyors',
+      's_48028b': 'Artisanal Cellar, Caviar & Fromagerie',
+      's_504097': 'Fine Cellar & Epicurean Purveyors',
+      's_7447ef': 'Search purveyors, caviar, Dom Pérignon, Bellota, truffles...',
+      's_828ad2': 'Insulated Cold Packaging',
+      's_a1e9f9': 'Explore Home',
+      's_dcc1fb': 'Select Item',
+    },
+    header: {
+      's_64f892': 'Toggle Light/Dark Theme',
+      's_7abd6c': 'View Cart',
+    },
+    hero: {
+      's_67300d': 'Clear search',
+      's_7ecda2': 'Nocturnal Luxury Penthouse Dining & Skyline',
+      's_c75a68': 'Sunlit Luxury Penthouse Infinity Pool and Skyline',
+      's_ece6e2': 'Nocturnal Luxury Suite Mobile',
+    },
+    hostOnboarding: {
+      's_00679c': 'Who fulfills it?',
+      's_013237': 'Use my location',
+      's_0302c0': 'Reception desk, access code process, security desk, host contact, etc.',
+      's_0d3b1e': 'Host Portal',
+      's_10599c': 'Property name',
+      's_10a49a': 'Add a space / unit type',
+      's_120c32': 'How are guests identified within the property?',
+      's_12e078': 'Name / label',
+      's_1596ef': 'Bring your property into NEXG.',
+      's_193de6': 'Your host application for',
+      's_205866': 'Landmarks, gate instructions, building name, entrance, etc.',
+      's_20687f': 'Settlement account',
+      's_25916d': 'Price (optional)',
+      's_25e7e1': 'Tell guests about the property',
+      's_272c68': 'Property features',
+      's_292d45': 'Examples of guest requests',
+      's_2bbda0': 'For NEXG App Limited',
+      's_33becf': 'You\'re ready for verification.',
+      's_369c34': 'Property partner',
+      's_3cc2c7': 'Signature pad',
+      's_415e74': 'Guest capacity',
+      's_421a0f': 'Short description of the property, atmosphere and what makes it distinctive...',
+      's_486ffa': 'Authorized representative',
+      's_49e09b': 'Tax / pricing setup',
+      's_4a9200': 'Property / operating permit',
+      's_4e17c4': 'By signing below, the authorized representative confirms that the submission is accurate and accepts the applicable NEXG host partnership terms presented during onboarding.',
+      's_58eafa': 'Typical request fulfillment time',
+      's_616ace': 'Legal / operating entity',
+      's_62a764': 'If applicable',
+      's_6372ac': 'Host onboarding',
+      's_67745b': 'Start another',
+      's_692b50': 'Building, street or road',
+      's_7013c7': 'The Host remains responsible for the operation, safety, licensing, staffing, availability, pricing and fulfillment of property services. NEXG may coordinate guest requests, transactions and related workflows according to the agreed configuration.',
+      's_75d65e': 'Your progress is saved locally on this device.',
+      's_773613': 'Rooms / units',
+      's_782667': 'HOST SETUP',
+      's_7af122': 'Tap or click the map to set the exact property point.',
+      's_7b12e1': 'Add the requests your team actually handles today.',
+      's_7bba35': 'Property cover image',
+      's_810878': 'Tell us what exists, what guests can access, and how your team operates. We\'ll use this to build your property profile and guest experience.',
+      's_82c7e7': 'Back to the host portal',
+      's_849305': 'Signature method',
+      's_86adcf': 'Year opened',
+      's_893bd7': 'Authorized signatory name',
+      's_897c71': 'Clear signature',
+      's_8ad7ea': 'Property type',
+      's_8dc8f7': 'What would you like NEXG to help you expose to guests?',
+      's_8e3c7a': 'Website / booking page',
+      's_924da1': 'Describe your property type',
+      's_93cfd5': 'What kind of property is it?',
+      's_9550a5': 'Departments / teams available',
+      's_99d32f': 'Back to host portal',
+      's_9d617c': 'What can guests access or request?',
+      's_a2a1b1': 'The Host agrees to maintain accurate property information and reasonable service availability, and to notify NEXG of material changes that could affect guest fulfillment.',
+      's_a68df4': 'Check-in / arrival instructions',
+      's_a6d2ea': 'The Host confirms that the information supplied about the property, its operating model, guest-accessible spaces and services is accurate to the best of their knowledge and that they are authorized to provide it.',
+      's_a8dc5c': 'What does the property include?',
+      's_aa1d9b': 'What do you want guests to transact for?',
+      's_ae7f40': 'Check-out time',
+      's_b45dc8': 'Anything you currently struggle to make visible, bookable, purchasable or easy for guests to request...',
+      's_b501d3': 'Request / service',
+      's_b50578': 'Upload square logo',
+      's_b5508b': 'Property setup',
+      's_be3ecd': 'Account holder name',
+      's_bf72f7': 'Settlement details should be verified before activation. Do not use this form for card or wallet credentials.',
+      's_c0b7d7': 'Pin the property',
+      's_c250a9': 'Property access',
+      's_c36127': 'Save / Print',
+      's_ca1948': 'For Host',
+      's_ca9b4a': 'How should guests find you?',
+      's_cde9a5': 'Optional notes, amenities or access details',
+      's_ce9840': 'Submitted information may be reviewed for onboarding, verification, operations, support, settlement and guest-experience purposes. Additional verification may be requested before activation.',
+      's_d1d7c9': 'Full legal name',
+      's_d90fdd': 'Operating model',
+      's_e400b7': 'How do guest requests reach your team today?',
+      's_e45952': 'Who should receive NEXG requests?',
+      's_e4cee9': 'Application received',
+      's_e61a08': 'M-PESA Till / Paybill',
+      's_e9c696': 'Are you onboarding more than one property?',
+      's_eb7eb7': 'Choose file',
+      's_ecc61a': 'Please complete the highlighted fields before continuing.',
+      's_edbfdd': 'Property logo',
+      's_f0ac0a': 'Pending verification',
+      's_f548ec': 'Business / registration document',
+      's_f71497': 'Check-in time',
+      's_faea7e': 'NEXG App Limited',
+      's_fbd2e5': 'Registered company or operating name',
+      's_ff1835': 'NEXG Operations',
+    },
+    languageSwitcher: {
+      's_03e64a': 'Change Language (English, 中文, Kiswahili, العربية)',
+      's_99547d': 'Select Regional Language',
+      's_b8cc8e': 'Language Selector',
+    },
+    merchantAdCarousel: {
+      's_297522': 'Sponsored partner offers',
+      's_2d4e52': 'PARTNER SPOTLIGHT',
+      's_3340de': 'Exclusive host and verified partner privileges',
+      's_430fac': 'Enable location to see trending offerings near you',
+    },
+    merchantCard: {
+      's_3beea0': 'Save to favorites',
+      's_960d55': 'Popular offerings',
+    },
+    merchantItemModal: {
+      's_062e79': 'Increase quantity',
+      's_6c02ab': 'Decrease quantity',
+    },
+    merchantOnboarding: {
+      's_00b623': 'Upload business certificates and company logos. These will be used to dynamically set up your store theme inside the NEXG customer application.',
+      's_012a51': 'Please register the legal trading entities. Correct tax identifiers help guarantee smooth fast payouts.',
+      's_01edab': 'Search Location Finder',
+      's_02aa9a': 'Input branch parameters. You can search using Nominatim autocomplete finder or drop coordinates via the map.',
+      's_0bd62e': 'Account Number',
+      's_0cb1d6': 'Authorized Officer Signature',
+      's_108c09': 'NEXG Riders Fleet',
+      's_197803': 'Above 60 minutes',
+      's_1c7169': 'Logo preview',
+      's_1cf31b': 'Generated via map picker',
+      's_20f7df': 'Closing Time *',
+      's_21f543': 'Facebook page',
+      's_22691e': 'Provide a brief summary of specialties, offerings, or history (max 150 characters)',
+      's_26a2ff': 'Based on your category, select common sections to organize your items or add custom ones.',
+      's_2eabdb': 'Partnership Agreement Contract',
+      's_312631': 'Bank Name',
+      's_39e42f': 'Interactive catalog listing on the premium NEXG Client App.',
+      's_3e95c1': 'Nominate your payouts destinations. Weekly settlements are transferred directly every Monday morning.',
+      's_3fa081': 'You selected',
+      's_411097': 'None selected yet. Choose suggestions or add a custom one below.',
+      's_4331e0': 'Holiday Closing Time',
+      's_4baf91': 'Short Business Description',
+      's_4f2047': 'Maintain exact availability schedules, correct pricing, and stock sync lists.',
+      's_540d0d': 'Suggested Sections',
+      's_550c6f': 'Register primary coordinates. Authorized officers receive system orders, accounts payouts auditing details, and alerts.',
+      's_5664e0': 'The Merchant is solely responsible for clearing customs duties, port levies, and ensuring all shipping cargo meets international and local compliance standards.',
+      's_59c22e': 'Upload Banner Image',
+      's_5fa789': 'You can select multiple specific types if your outlet handles different luxury segments.',
+      's_676418': 'Business Paybill No.',
+      's_67de19': 'Provide premium white-glove deliveries & concierge orders to luxury customers in Kenya.',
+      's_7122f5': 'Business Profile',
+      's_71c904': 'NEXG APP LIMITED',
+      's_721462': 'Director ID / Passport Scan',
+      's_7308b8': 'Review the pre-drafted legal contract. Ensure all merchant parameters, locations, and banking details are correct.',
+      's_8242a9': 'Upload business registration scan PDF or image.',
+      's_85273b': 'Confirm Coordinates',
+      's_869b48': 'NEXG Legal Representative',
+      's_87a51d': 'Own Store Riders',
+      's_89ac4c': 'Hours Configuration Template',
+      's_8c1404': 'Instagram profile',
+      's_91091f': 'Type landmark e.g. Yaya Centre, Westlands, Sarit...',
+      's_91dd0b': 'TikTok profile',
+      's_928d67': 'Coordinates Map Link',
+      's_9441e0': 'Branch Manager / Contact Person',
+      's_959d0c': 'For NEXG APP LIMITED',
+      's_963f97': 'Average Preparation Time',
+      's_9d4f8b': 'Type your full legal name',
+      's_a03653': 'Expand Your Business with NEXG',
+      's_a0b2cf': 'Search categories e.g. Food, Safe, Spa, Flight...',
+      's_a133eb': 'Click to add',
+      's_a4d472': 'NEXG operates logistics carriage from your store using our background-checked professional couriers.',
+      's_a5d0ab': 'Certificate of Registration',
+      's_abf9f4': 'Banner preview',
+      's_b03404': 'Your premium merchant onboarding is complete. Our partnership audit committee will complete verify checks and activate your store front within 24 hours.',
+      's_b32233': 'Website URL',
+      's_b62775': 'Upload ID or passport of major primary director.',
+      's_b639de': 'Add Section',
+      's_b8579d': 'Payment Details',
+      's_b9084a': 'Choose Category',
+      's_b9f2b1': 'Operating Days',
+      's_b9ffbd': 'Merchant Partnership Agreement',
+      's_bb20e3': 'For THE MERCHANT',
+      's_c05283': 'Choose the category that best aligns with your merchant store operations. Use search or filter down instantly.',
+      's_c5955e': 'Opening Time *',
+      's_c6846b': 'Signature drawing',
+      's_d1bf6b': 'Kenyan Public Holidays Availability',
+      's_d1d21f': 'Collection and processing of accounts charges from guests, tourists, and corporate networks.',
+      's_d33bf6': 'Merchant Portal',
+      's_d7a397': 'Branch Contact Phone',
+      's_d890b7': 'Branch Location',
+      's_db3b79': 'Account Name',
+      's_e0a26d': 'Logistics carriage orchestration based on requested parameters.',
+      's_e58331': 'Handwriting Style Preview',
+      's_e79369': 'Store Branches & Location Map',
+      's_eab077': 'Delivery Carriage Modes',
+      's_eab952': 'WhatsApp Dispatch No.',
+      's_ebaf4a': 'Paybill Account Name',
+      's_ed6a3f': 'Holiday Opening Time',
+      's_f1dd4c': 'Buy Goods Till No.',
+      's_f7c245': 'Onboard Another Store',
+      's_faea7e': 'NEXG App Limited',
+    },
+    merchantPage: {
+      's_c902a1': 'Open Now',
+    },
+    merchantPreviewSheet: {
+      's_0f4c5c': 'This merchant does not declare its own workflow, so the default for its category is shown.',
+      's_28da6e': 'See all offerings',
+      's_baa550': 'Close preview',
+    },
+    merchantRoute: {
+      's_176135': 'The API may not be running. Start it with',
+      's_a1ca54': 'Loading merchant',
+      's_e84712': 'Go back',
+    },
+    merchantView: {
+      's_085b31': 'No offerings listed yet',
+      's_3fcbae': 'Menu sections',
+      's_67300d': 'Clear search',
+    },
+    metricsDashboard: {
+      's_048f2f': 'Status breakdown',
+      's_0dd383': 'API version',
+      's_1c8836': 'Built at',
+      's_235f7b': 'Events accepted',
+      's_236a59': 'Bars are per-bucket counts derived from the API\'s cumulative Prometheus buckets.',
+      's_266384': '5xx error rate',
+      's_406acb': 'Requests / minute',
+      's_41e8de': 'Recent traces (/api/traces)',
+      's_461aff': 'No spans buffered yet.',
+      's_58b6dc': 'In flight',
+      's_5dd968': 'Events dropped',
+      's_65916f': 'Browser events arrive only from visitors who granted analytics consent.',
+      's_74d595': 'No metrics available',
+      's_74efa0': 'Metrics API unreachable.',
+      's_75e157': 'The dashboard polls',
+      's_8474ec': 'No samples yet.',
+      's_886fb2': 'Client telemetry',
+      's_9d5b00': 'Slowest routes (by p95)',
+      's_a41501': 'Runtime, build and data source',
+      's_b0ad50': 'No routes recorded yet.',
+      's_c347b1': 'Service metrics',
+      's_cc1e6a': 'Duration histogram',
+      's_cec477': 'Last 60s',
+      's_e4076f': 'Collecting samples. The line appears after the second poll.',
+      's_ee9d59': 'Json fallback reads',
+      's_f8fd6e': 'No responses recorded yet.',
+      's_ffb77d': 'Data source',
+    },
+    nexGCategoryDrilldown: {
+      's_03f70c': 'Merchant Providers & Partners',
+      's_09efe8': 'Choose a time',
+      's_0df6f0': 'Switch Provider',
+      's_0ecb20': 'Confirm & Reserve Instant Dispatch',
+      's_126f44': 'Preferred Time',
+      's_19ad69': 'Scheduled Date',
+      's_1b8543': 'Reset All Filters',
+      's_1f647f': 'Special Offers',
+      's_27c636': 'Complete view',
+      's_2994b4': 'Scroll right',
+      's_2c9e5a': 'Scroll left',
+      's_2f1873': 'All Items',
+      's_34318e': 'Rating 4.8+',
+      's_492026': 'Add to Order',
+      's_4ce3f0': 'Select a Merchant Provider Above',
+      's_50238f': 'No upfront charge. Escrow reservation handled by concierge desk.',
+      's_543b1b': 'Your reservation for',
+      's_5be698': 'Reset Filters',
+      's_77bf79': 'Reserve / Book',
+      's_7db318': 'Back to Discovery',
+      's_8978ea': 'Decision Specifications',
+      's_8bf67b': 'Nairobi Luxury District',
+      's_9dca31': 'No items found matching your filters.',
+      's_ab2d11': 'Under 25 min',
+      's_c07c6d': 'Suite Number or Location Notes',
+      's_c14e04': 'Browse catalog offerings with real-time pricing and availability',
+      's_c25b51': 'Strict Category & Subcategory Catalog',
+      's_d394a9': 'Highest Rated',
+      's_e16a1d': 'Explore dedicated subcategories with specialized imagery and custom parameters',
+      's_eb13c4': 'To view item cards, please click any of the verified merchant providers above. Their full 30-item catalog, specifications, and instant ordering will appear here.',
+      's_fae58c': 'Clear Selection',
+      's_fcdcf7': 'Fast selections & customer favorites',
+    },
+    nexGCollectionRail: {
+      's_0b3917': 'Curated Collection',
+      's_2994b4': 'Scroll right',
+      's_2c9e5a': 'Scroll left',
+      's_986032': 'Explore All',
+    },
+    nexGDiscoveryView: {
+      's_6d9483': 'Browse verified Nairobi merchants across 20 neighborhoods with Wolt-grade previews',
+      's_741311': 'Search food, spa, safaris, champagne, chauffeur...',
+      's_76cb8c': 'Previous categories',
+      's_844b94': 'Next categories',
+      's_8f8796': 'High-priority concierge delivery direct to your suite or villa in under 30 minutes',
+      's_a9176a': 'Explore Verticals & Categories',
+      's_b0a3fc': 'All Verified Partners & Merchants',
+      's_df4cf6': 'Instant Suite Express',
+    },
+    nexGEntityCard: {
+      's_085ed0': 'View catalog & pricing',
+    },
+    nexGItemSheet: {
+      's_0932f6': 'Special App Notes or Dietary Preferences',
+      's_22b77f': 'Appointment & Scheduling',
+      's_24a16c': 'Session Duration',
+      's_3beea0': 'Save to favorites',
+      's_65d22e': 'Close sheet',
+      's_68f2d8': 'Preferred Date',
+      's_693039': 'Time Slot',
+      's_a99ee2': 'Number of Guests / Attendees',
+      's_c6cf76': 'Added to Experience Order',
+      's_d0e359': 'Curated Enhancements & Add-ons',
+      's_eeea54': 'NEXG App Guarantee',
+    },
+    nexGLandingHero: {
+      's_0b8149': 'Sign up',
+      's_2bd100': 'Enter delivery address, villa or hotel suite...',
+      's_381d79': 'Nairobi Villas',
+      's_52a6f3': 'For Partners',
+      's_71a30d': 'Change Delivery Location',
+      's_e17357': 'Active App Fleet in Nairobi',
+      's_f7c400': 'Log in',
+      's_fa918a': 'Locate my position',
+    },
+    nexGSearchEngine: {
+      's_c5b914': 'No direct matches found',
+      's_cd81f4': 'Search Results for',
+    },
+    offercarousel: {
+      's_10bb09': 'Previous Slide',
+      's_2aa5dc': 'View Offer',
+      's_7141bc': 'Next Slide',
+    },
+    orderTrackingModal: {
+      's_116632': 'Estimated Delivery',
+      's_375813': 'Fast forward simulation to next lifecycle stage',
+      's_43301e': 'Call Courier',
+      's_536456': 'Courier Tip',
+      's_61243a': 'Simulated Payment Method',
+      's_6e6109': 'Copy delivery security PIN',
+      's_74e226': 'Itemized Receipt & PIN',
+      's_84e3ee': 'Dismiss / Back to App',
+      's_976a74': 'Transaction Reference',
+      's_9c12c6': 'Delivery Fee',
+      's_9ca905': 'This is an automated simulation of the client ordering lifecycle in NEXG App. No actual payment provider has been billed. Once connected to the live API gateway, genuine payments will be processed via M-Pesa or Stripe.',
+      's_9fb5a8': 'Delivery PIN',
+      's_a392ce': 'Live Progress Stages',
+      's_b868ce': 'Message Courier',
+      's_cbac3e': 'App Service',
+      's_cd1876': 'Your Location',
+      's_d6e963': 'Minimize tracking',
+      's_ea2152': 'Live Journey & ETA',
+      's_f56564': 'On schedule',
+    },
+    productcarousel: {
+      's_10bb09': 'Previous Slide',
+      's_7141bc': 'Next Slide',
+    },
+    promo: {
+      's_38769a': 'For Properties',
+      's_4a421c': 'For Merchants',
+      's_c63982': 'For Couriers',
+      's_d2c984': 'NEXG App App Interface',
+    },
+    restaurantDetailModal: {
+      's_034ad6': 'Recent Google Reviews',
+      's_116c19': 'Hospitality & Service',
+      's_3beea0': 'Save to favorites',
+      's_4f2130': 'Google Restaurant Reviews',
+      's_52aed7': 'Food Quality',
+      's_56ba29': 'No dishes match your search criteria.',
+      's_649ff9': 'Add to order',
+      's_652bc8': 'Posted on Google',
+      's_79db72': 'View & Write Reviews',
+      's_79fe15': 'View Google Reviews',
+      's_9c203d': 'Artisanal Menu',
+      's_9f068b': 'Verified Place',
+      's_a023e6': 'Chef Pick',
+      's_b05630': 'Synced Live',
+      's_b38795': 'Search dishes...',
+      's_c152be': 'No Google reviews loaded for this venue.',
+      's_e1c6bf': 'Atmosphere & Transport',
+      's_f4657b': 'Google Maps Rating',
+    },
+    restaurants: {
+      's_0721cf': 'Your reservation at',
+      's_072c89': 'Reserve Table',
+      's_0c8f01': 'Table Reservation',
+      's_25b120': 'Selected Reservation',
+      's_2c3b25': 'Confirm Table',
+      's_34df71': 'Search dining partners, sushi, dry-aged steaks, pasta...',
+      's_4f9fa0': 'Google Maps Location',
+      's_5be698': 'Reset Filters',
+      's_5f716b': 'Try adjusting your search keywords or resetting cuisine filters.',
+      's_6b2c05': 'Fine Dining Partners',
+      's_7288fd': 'Fine Dining Partners & Master Chefs',
+      's_868fb0': 'Click any dish to configure ingredients, accompaniments, or place a simulated order',
+      's_99256e': 'Curated Culinary Directory',
+      's_9da221': 'Featured Partner',
+      's_a1e9f9': 'Explore Home',
+      's_ae0cb2': 'Signature Dishes & Menu Offerings',
+      's_bf0c7d': 'Back to all Dining Partners & Merchants',
+      's_cfdf8b': 'Search menu dishes...',
+      's_d97dd5': 'View Google Reviews & Diner Insights',
+      's_dde236': 'Customize & Order',
+      's_e25e77': 'Select a merchant to explore their Michelin-grade menu, signature dishes, verified Google diner reviews, and table reservations.',
+      's_eac205': 'No dining partners match your filters',
+    },
+    routeFallback: {
+      's_1c5772': 'Loading page',
+    },
+    scrollToTop: {
+      's_f07710': 'Scroll to top',
+    },
+    spaBookingModal: {
+      's_039d05': 'Experience Setting',
+      's_09121f': 'Appointment Slot',
+      's_15ddf4': 'District Wellness Experience',
+      's_17548b': 'Slot Scheduled',
+      's_2fd731': 'Signature Aromatherapy Oil',
+      's_301d19': 'Live Dispatch Progress',
+      's_4548b7': 'Our certified therapist will arrive 10 minutes prior with sanitized organic towels, ultrasonic mist diffuser, and a heated memory-foam bed.',
+      's_485336': 'Villa / Suite Number',
+      's_4b8ec9': 'Private In-Villa Sanctuary',
+      's_5621b9': 'Focus Areas & Medical Notes',
+      's_712231': 'Contact Spa Concierge',
+      's_7d1e9d': 'Private oceanfront cabana with thermal plunge pool & tranquil zen garden access.',
+      's_8cff8d': 'Total Experience Fee',
+      's_9092d9': 'Add to Calendar',
+      's_9505aa': 'Total Concierge Charge',
+      's_950d86': 'Massage Pressure Preference',
+      's_9a36a0': 'Confirm Spa Booking',
+      's_9e603c': 'Therapist dispatches directly to your villa with heated table, organic linens & aromatherapy.',
+      's_a027ba': 'Select Ritual Duration',
+      's_b3a5a1': 'Concierge In-Villa Service Protocol',
+      's_be9475': 'Therapist Preference',
+      's_c0a672': 'Appointment Confirmed',
+      's_c8c5fe': 'Primary Guest Name',
+      's_f00e02': 'Assigned Master Therapist',
+      's_f79d9c': 'Resort Spa Pavilion',
+    },
+    spaWellness: {
+      's_120405': 'Select Ritual',
+      's_3669be': 'Book Calendar',
+      's_5276ac': 'Your appointment at',
+      's_5dfb4e': 'Spa & Wellness Sanctuaries',
+      's_659a92': 'Search spa sanctuaries, Balinese, deep tissue, sauna...',
+      's_689bea': 'Back to all Sanctuary Partners',
+      's_69d23c': 'District Holistic Wellness & Spa',
+      's_9aabe9': 'Book Session',
+      's_a1e9f9': 'Explore Home',
+      's_c1c2fb': 'Sanctuary Spas & In-Villa Wellness',
+      's_d02cb4': 'Search rituals & massages...',
+      's_eb9e1e': 'Confirm Booking',
+      's_f212ea': 'Spa Sanctuary Reservation',
+      's_f2937f': 'Select duration, botanical essential oils, and schedule an immediate in-villa or pavilion appointment',
+      's_fda6e0': 'Select a wellness sanctuary to browse certified therapists, in-villa Balinese massages, Ayurvedic Shirodhara, and hydrothermal rituals.',
+      's_fe0476': 'Sanctuary Treatments & In-Villa Rituals',
+    },
+    stats: {
+      's_034abd': 'From hotels to homes, we make everyday exceptional.',
+      's_826dd3': 'Hotel Partners',
+      's_bd3fa2': 'Our Partners',
+      's_dc04b9': 'Dar es Salaam',
+      's_e819e6': 'Concierge Support',
+      's_f2a377': 'Trusted by guests',
+    },
+    transportBookingModal: {
+      's_1505c5': 'Live Dispatch Status',
+      's_160ad9': 'Chauffeur Confirmed',
+      's_251e18': 'Dedicated Chauffeur Hours',
+      's_314bee': 'Total Concierge Fee',
+      's_358b66': 'Pickup Time',
+      's_36a60c': 'Done & Return to App',
+      's_39b21c': 'Call Chauffeur',
+      's_457b66': 'Total Rate',
+      's_6f672b': 'Assigned Chauffeur',
+      's_77ae94': 'Scheduled Departure',
+      's_7a4175': 'Schedule Date',
+      's_8941e9': 'Service Type',
+      's_8dea76': 'Pickup Location',
+      's_99d1c7': 'Confirm VIP Chauffeur',
+      's_9ca1bd': 'Day After',
+      's_a1cbc4': 'VIP Meet & Greet + Airport Flight Sync',
+      's_b68827': 'Villa / Suite Room',
+      's_be057d': 'Guest Name',
+      's_cd11b4': 'Complimentary On-Board Amenities',
+      's_d0cd2d': 'Flight Number / Departure Code',
+      's_efb6c4': 'Continue to Amenities',
+      's_f2f922': 'VIP Concierge Mobility',
+    },
+    transportPage: {
+      's_1836d5': 'Choose a luxury mobility merchant to view available Maybach S680s, Rolls-Royce Ghost motorcars, Cadillac Escalade ESVs, or twin-engine helicopter transfers.',
+      's_1afb28': 'Back to all Mobility Partners',
+      's_2ea911': 'Chauffeur Reservation',
+      's_3390d4': 'Reserve Chauffeur',
+      's_3727e7': 'Book Transfer',
+      's_52b224': 'VIP Chauffeur & Mobility Providers',
+      's_543b1b': 'Your reservation for',
+      's_784e6e': 'Search mobility providers, Maybach, Rolls-Royce, helicopter...',
+      's_875bd6': 'Executive Chauffeurs & Private Aviation',
+      's_898adc': 'VIP White-Glove Mobility',
+      's_93f4b8': 'Pickup Date & Time',
+      's_a1e9f9': 'Explore Home',
+      's_eac49e': 'Book Vehicle',
+      's_eb9e1e': 'Confirm Booking',
+    },
+    unifiedItemModal: {
+      's_0125ec': 'View All Reviews',
+      's_1cc3d0': 'Aromatherapy Essential Oil',
+      's_3c0047': 'Dedicated Appointment Calendar',
+      's_4c13f0': 'App Notes & Villa Details',
+      's_5d14d6': 'E.g. Villa Suite 402, gate access code, dietary allergies, or arrival notes...',
+      's_94c578': 'Confirm Calendar Reservation',
+      's_a027ba': 'Select Ritual Duration',
+      's_bf3b18': 'Add to App Cart',
+      's_ee3e2e': 'About this offering',
+      's_ee749a': 'Total Estimate',
+    },
+  },
 
   /*
     SHARED FORM VOCABULARY.
