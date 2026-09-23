@@ -95,7 +95,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
             </h4>
 
             {entity.subtitle && (
-              <p className={cn('text-xs line-clamp-1', isLight ? 'text-slate-500' : 'text-gray-400')}>
+              <p className={cn('text-xs line-clamp-1', isLight ? 'text-slate-600' : 'text-gray-400')}>
                 {entity.subtitle}
               </p>
             )}
@@ -320,7 +320,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
           </h3>
 
           {entity.subtitle && (
-            <p className={cn('text-xs line-clamp-1', isLight ? 'text-slate-500' : 'text-gray-400')}>
+            <p className={cn('text-xs line-clamp-1', isLight ? 'text-slate-600' : 'text-gray-400')}>
               {entity.subtitle}
             </p>
           )}
@@ -340,7 +340,7 @@ export const NexGEntityCard: React.FC<NexGEntityCardProps> = ({
             )}
 
             {entity.originalPrice && (
-              <span className="text-xs text-slate-400 line-through">
+              <span className="text-xs text-slate-600 line-through">
                 KSh {entity.originalPrice.toLocaleString()}
               </span>
             )}

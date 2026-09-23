@@ -138,7 +138,7 @@ export default function BookingCalendar({
             </span>
             <div>
               <h3 className="font-bold text-base sm:text-lg">Dedicated Reservation Calendar</h3>
-              <p className={`text-xs ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+              <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                 {serviceTitle ? `${serviceTitle} • ${providerName || 'NEXG App'}` : 'Select your preferred appointment date and time'}
               </p>
             </div>
@@ -169,7 +169,7 @@ export default function BookingCalendar({
 
       {/* Quick Date Pills */}
       <div className="flex items-center gap-2 overflow-x-auto pb-3 mb-4 scrollbar-hide">
-        <span className={`text-xs font-semibold shrink-0 ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+        <span className={`text-xs font-semibold shrink-0 ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
           Quick Pick:
         </span>
         <button
@@ -263,7 +263,7 @@ export default function BookingCalendar({
             {DAYS_OF_WEEK.map((day) => (
               <div
                 key={day}
-                className={isLight ? 'text-slate-500' : 'text-gray-400'}
+                className={isLight ? 'text-slate-600' : 'text-gray-400'}
               >
                 {day}
               </div>
@@ -327,7 +327,7 @@ export default function BookingCalendar({
                 <Clock className="w-4 h-4 text-[#E5B65F]" />
                 <span className="font-bold text-xs sm:text-sm">Available Time Slots</span>
               </div>
-              <span className={`text-[11px] ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+              <span className={`text-[11px] ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                 Local Villa Time
               </span>
             </div>
@@ -355,7 +355,7 @@ export default function BookingCalendar({
                         isSelected
                           ? 'text-black/80'
                           : isLight
-                          ? 'text-slate-500'
+                          ? 'text-slate-600'
                           : 'text-gray-400'
                       }`}
                     >

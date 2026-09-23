@@ -99,7 +99,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, twoPerScreen = true 
             <div
               className={cn(
                 "flex items-center space-x-1.5 text-[11px] font-semibold",
-                isLight ? "text-slate-500" : "text-gray-400"
+                isLight ? "text-slate-600" : "text-gray-400"
               )}
             >
               <Clock className="h-3.5 w-3.5 text-[#7d5a11] dark:text-[#E5B65F]" />
@@ -128,7 +128,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, twoPerScreen = true 
             <p
               className={cn(
                 "text-xs font-medium truncate",
-                isLight ? "text-slate-500" : "text-gray-400"
+                isLight ? "text-slate-600" : "text-gray-400"
               )}
             >
               {product.quantity}
@@ -152,7 +152,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, twoPerScreen = true 
                 KSh {product.price.toLocaleString()}
               </span>
               {product.originalPrice && (
-                <span className="text-xs text-slate-400 line-through">
+                <span className="text-xs text-slate-600 line-through">
                   KSh {product.originalPrice.toLocaleString()}
                 </span>
               )}
@@ -264,7 +264,7 @@ export const ProductCarousel = React.forwardRef<HTMLDivElement, ProductCarouselP
               <p
                 className={cn(
                   "text-xs font-semibold uppercase tracking-widest mt-0.5",
-                  isLight ? "text-slate-500" : "text-gray-400"
+                  isLight ? "text-slate-600" : "text-gray-400"
                 )}
               >
                 {subtitle}

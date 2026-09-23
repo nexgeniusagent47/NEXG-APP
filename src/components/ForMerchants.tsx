@@ -70,10 +70,10 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
               </>
             ) : (
               <>
-                <button onClick={() => onNavigate?.('properties')} className={`transition-colors cursor-pointer py-2 px-2 ${isLight ? 'text-slate-700 hover:text-amber-600' : 'text-gray-300 hover:text-white'}`}>{t.nav.forProperties}</button>
-                <button onClick={() => onNavigate?.('merchants')} className={`transition-colors cursor-pointer py-2 px-2 ${isLight ? 'text-amber-700 font-bold' : 'text-[#E5B65F] font-bold'}`}>{t.nav.forMerchants}</button>
-                <button onClick={() => onNavigate?.('couriers')} className={`transition-colors cursor-pointer py-2 px-2 ${isLight ? 'text-slate-700 hover:text-amber-600' : 'text-gray-300 hover:text-white'}`}>{t.nav.forCouriers}</button>
-                <button onClick={() => onNavigate?.('experiences')} className={`transition-colors cursor-pointer py-2 px-2 ${isLight ? 'text-slate-700 hover:text-amber-600' : 'text-gray-300 hover:text-white'}`}>{t.nav.experiences}</button>
+                <button onClick={() => onNavigate?.('properties')} className={`transition-colors cursor-pointer py-2 px-2 ${isLight ? 'text-slate-700 hover:text-amber-800' : 'text-gray-300 hover:text-white'}`}>{t.nav.forProperties}</button>
+                <button onClick={() => onNavigate?.('merchants')} className={`transition-colors cursor-pointer py-2 px-2 ${isLight ? 'text-amber-800 font-bold' : 'text-[#E5B65F] font-bold'}`}>{t.nav.forMerchants}</button>
+                <button onClick={() => onNavigate?.('couriers')} className={`transition-colors cursor-pointer py-2 px-2 ${isLight ? 'text-slate-700 hover:text-amber-800' : 'text-gray-300 hover:text-white'}`}>{t.nav.forCouriers}</button>
+                <button onClick={() => onNavigate?.('experiences')} className={`transition-colors cursor-pointer py-2 px-2 ${isLight ? 'text-slate-700 hover:text-amber-800' : 'text-gray-300 hover:text-white'}`}>{t.nav.experiences}</button>
               </>
             )}
             
@@ -126,7 +126,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`w-10 h-10 flex items-center justify-center transition-colors focus:outline-none cursor-pointer min-w-[40px] min-h-[40px] ${
-                isLight ? 'text-slate-800 hover:text-amber-600' : 'text-white hover:text-[#E5B65F]'
+                isLight ? 'text-slate-800 hover:text-amber-800' : 'text-white hover:text-[#E5B65F]'
               }`}
             >
               {isMobileMenuOpen ? <Icons.X size={22} /> : <Icons.Menu size={22} />}
@@ -228,19 +228,19 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
         <div className="max-w-[1400px] mx-auto px-4 sm:px-8 py-10 sm:py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           <div className="text-center sm:text-left">
             <div className={`font-bold text-3xl sm:text-4xl mb-1 ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>3x</div>
-            <div className={`text-[10px] sm:text-xs uppercase tracking-wider font-semibold ${isLight ? 'text-slate-500' : 'text-[#a0a1a1]'}`}>Higher Avg. Order Value</div>
+            <div className={`text-[10px] sm:text-xs uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>Higher Avg. Order Value</div>
           </div>
           <div className="text-center sm:text-left">
             <div className={`font-bold text-3xl sm:text-4xl mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>100%</div>
-            <div className={`text-[10px] sm:text-xs uppercase tracking-wider font-semibold ${isLight ? 'text-slate-500' : 'text-[#a0a1a1]'}`}>White-Glove Delivery</div>
+            <div className={`text-[10px] sm:text-xs uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>White-Glove Delivery</div>
           </div>
           <div className="text-center sm:text-left">
             <div className={`font-bold text-3xl sm:text-4xl mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>0%</div>
-            <div className={`text-[10px] sm:text-xs uppercase tracking-wider font-semibold ${isLight ? 'text-slate-500' : 'text-[#a0a1a1]'}`}>Commission on Pickups</div>
+            <div className={`text-[10px] sm:text-xs uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>Commission on Pickups</div>
           </div>
           <div className="text-center sm:text-left">
             <div className={`font-bold text-3xl sm:text-4xl mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>24/7</div>
-            <div className={`text-[10px] sm:text-xs uppercase tracking-wider font-semibold ${isLight ? 'text-slate-500' : 'text-[#a0a1a1]'}`}>Merchant Support</div>
+            <div className={`text-[10px] sm:text-xs uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-[#a0a1a1]'}`}>Merchant Support</div>
           </div>
         </div>
       </section>
@@ -484,10 +484,10 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
             }`}>
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold tracking-widest uppercase bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">
+                  <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-bold tracking-widest uppercase bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">
                     STEP 04
                   </span>
-                  <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-bold text-xs shadow-inner">
+                  <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-700 dark:text-emerald-400 font-bold text-xs shadow-inner">
                     ✓
                   </div>
                 </div>

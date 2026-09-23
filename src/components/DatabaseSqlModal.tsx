@@ -105,7 +105,7 @@ CREATE INDEX idx_items_name_trgm ON items USING gin (name gin_trgm_ops);`;
 
           <button
             onClick={onClose}
-            className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-white/10 text-slate-500 cursor-pointer"
+            className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-white/10 text-slate-600 cursor-pointer"
           >
             <X size={20} />
           </button>
@@ -119,7 +119,7 @@ CREATE INDEX idx_items_name_trgm ON items USING gin (name gin_trgm_ops);`;
               className={`px-4 py-2 text-xs font-bold border-b-2 cursor-pointer transition-colors ${
                 activeTab === 'schema'
                   ? 'border-[#009DE0] text-[#009DE0]'
-                  : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white'
+                  : 'border-transparent text-slate-600 hover:text-slate-800 dark:hover:text-white'
               }`}
             >
               schema.sql (DDL &amp; Trigram Indexes)
@@ -129,7 +129,7 @@ CREATE INDEX idx_items_name_trgm ON items USING gin (name gin_trgm_ops);`;
               className={`px-4 py-2 text-xs font-bold border-b-2 cursor-pointer transition-colors ${
                 activeTab === 'seed'
                   ? 'border-[#009DE0] text-[#009DE0]'
-                  : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-white'
+                  : 'border-transparent text-slate-600 hover:text-slate-800 dark:hover:text-white'
               }`}
             >
               seed.sql (21 Categories &amp; Image URLs)
@@ -153,7 +153,7 @@ CREATE INDEX idx_items_name_trgm ON items USING gin (name gin_trgm_ops);`;
         </div>
 
         {/* Footer info */}
-        <div className="p-4 bg-slate-100 dark:bg-[#0d1014] border-t border-slate-200 dark:border-white/10 flex items-center justify-between text-xs text-slate-500">
+        <div className="p-4 bg-slate-100 dark:bg-[#0d1014] border-t border-slate-200 dark:border-white/10 flex items-center justify-between text-xs text-slate-600">
           <span>Files saved in your project at: <code>/src/db/schema.sql</code> and <code>/src/db/seed.sql</code></span>
           <button
             onClick={onClose}

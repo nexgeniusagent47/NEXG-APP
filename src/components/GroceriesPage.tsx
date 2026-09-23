@@ -271,9 +271,9 @@ export default function GroceriesPage({ onNavigate }: GroceriesPageProps) {
                     {/* Action Row */}
                     <div className="mt-auto pt-3 border-t border-slate-200 dark:border-white/10 flex items-center justify-between gap-2">
                       <span className={`text-xs font-semibold flex items-center gap-1 ${
-                        isLight ? 'text-slate-500' : 'text-gray-400'
+                        isLight ? 'text-slate-600' : 'text-gray-400'
                       }`}>
-                        <PackageCheck size={13} className="text-emerald-500" />
+                        <PackageCheck size={13} className="text-emerald-700" />
                         <span>Insulated Cold Packaging</span>
                       </span>
 

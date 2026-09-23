@@ -278,7 +278,7 @@ export default function UnifiedItemModal({
                   </div>
                   <div>
                     <div className="font-bold">{item.merchantName}</div>
-                    <div className={`text-[11px] ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                    <div className={`text-[11px] ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                       App Verified Partner • Direct Fulfillment
                     </div>
                   </div>
@@ -531,7 +531,7 @@ export default function UnifiedItemModal({
             }`}
           >
             <div>
-              <div className={`text-[11px] ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+              <div className={`text-[11px] ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                 Total Estimate
               </div>
               <div className="text-xl sm:text-2xl font-bold text-[#E5B65F]">

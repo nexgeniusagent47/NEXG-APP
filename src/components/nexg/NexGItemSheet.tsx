@@ -274,7 +274,7 @@ export const NexGItemSheet: React.FC = () => {
                   <Clock size={13} className="text-[#7d5a11] dark:text-[#E5B65F]" />
                   <span>{activeItem.deliveryTime}</span>
                 </div>
-                <div className="flex items-center gap-1 font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg">
+                <div className="flex items-center gap-1 font-medium text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg">
                   <ShieldCheck size={13} />
                   <span>NEXG App Guarantee</span>
                 </div>

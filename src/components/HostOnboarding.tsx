@@ -55,7 +55,7 @@ import { TimeStringField } from './forms/DateTimeField';
    signature canvas, which own their own imperative surfaces.
 
    Colours come from two sources, and nothing else:
-     - neutral utilities (bg-white / text-slate-500 / border-slate-200 …) which
+     - neutral utilities (bg-white / text-slate-600 / border-slate-200 …) which
        resolve through the `.onboarding-theme` token block in src/index.css and
        therefore invert with the theme;
      - the amber / emerald / red families, which keep their meaning in both
@@ -669,7 +669,7 @@ const Field = ({
       {required && <span className="text-red-500"> *</span>}
     </label>
     {children}
-    {hint && !error && <p className="mt-1.5 text-xs text-slate-500">{hint}</p>}
+    {hint && !error && <p className="mt-1.5 text-xs text-slate-600">{hint}</p>}
     {error && (
       <p id={`${htmlFor}-error`} className="mt-1.5 text-xs font-semibold text-red-600">
         {error}
@@ -678,7 +678,7 @@ const Field = ({
   </div>
 );
 
-const COMPACT_LABEL = 'mb-2 block text-xs font-bold uppercase tracking-wider text-slate-500';
+const COMPACT_LABEL = 'mb-2 block text-xs font-bold uppercase tracking-wider text-slate-600';
 
 interface StepHeadingProps {
   icon: LucideIcon;
@@ -689,12 +689,12 @@ interface StepHeadingProps {
 const StepHeading = ({ icon: Icon, title, blurb }: StepHeadingProps) => (
   <div className="mb-7">
     <h2 className="flex items-center gap-3 font-display text-2xl font-extrabold tracking-tight text-slate-950">
-      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 text-amber-600">
+      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 text-amber-800">
         <Icon className="h-5 w-5" />
       </span>
       {title}
     </h2>
-    <p className="mt-2 text-sm text-slate-500">{blurb}</p>
+    <p className="mt-2 text-sm text-slate-600">{blurb}</p>
   </div>
 );
 
@@ -715,7 +715,7 @@ const ChipGroup = ({ id, label, options, selected, onToggle, error, hint, requir
       {label}
       {required && <span className="text-red-500"> *</span>}
     </p>
-    {hint && <p className="mt-1 mb-3 text-xs text-slate-500">{hint}</p>}
+    {hint && <p className="mt-1 mb-3 text-xs text-slate-600">{hint}</p>}
     <div
       role="group"
       aria-labelledby={id}
@@ -793,7 +793,7 @@ const RadioGroup = ({
           >
             {Icon && <Icon className="h-5 w-5 text-slate-400" />}
             <div className={Icon ? 'mt-2 text-sm font-bold' : 'text-sm font-bold'}>{option.label}</div>
-            {option.hint && <div className="mt-1 text-xs text-slate-500">{option.hint}</div>}
+            {option.hint && <div className="mt-1 text-xs text-slate-600">{option.hint}</div>}
           </button>
         );
       })}
@@ -1220,7 +1220,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
   const renderSuccess = () => (
     <div className="success-settle rounded-[2rem] border border-slate-100 bg-white p-7 text-center shadow-xl sm:p-12">
       <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-500/15">
-        <Check className="h-9 w-9 text-emerald-600" strokeWidth={3} />
+        <Check className="h-9 w-9 text-emerald-700" strokeWidth={3} />
       </div>
       <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/15 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-800">
         <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
@@ -1229,28 +1229,28 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
       <h1 className="mt-4 font-display text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">
         You're ready for verification.
       </h1>
-      <p className="mx-auto mt-3 max-w-xl text-sm text-slate-500 sm:text-base">
+      <p className="mx-auto mt-3 max-w-xl text-sm text-slate-600 sm:text-base">
         Your host application for <strong className="text-slate-800">{form.propertyName || 'your property'}</strong>{' '}
         has been captured. NEXG can now verify the property and configure the host workspace.
       </p>
       <div className="mx-auto mt-7 max-w-md space-y-3 rounded-3xl border border-slate-100 bg-slate-50 p-5 text-left text-sm">
         <div className="flex justify-between gap-4">
-          <span className="text-slate-500">Property</span>
+          <span className="text-slate-600">Property</span>
           <strong className="text-slate-900">{form.propertyName || '—'}</strong>
         </div>
         <div className="flex justify-between gap-4">
-          <span className="text-slate-500">Type</span>
+          <span className="text-slate-600">Type</span>
           <strong className="text-slate-900">{form.propertyType || '—'}</strong>
         </div>
         <div className="flex justify-between gap-4">
-          <span className="text-slate-500">Location</span>
+          <span className="text-slate-600">Location</span>
           <strong className="text-slate-900">
             {form.neighbourhood || '—'}, {form.city || '—'}
           </strong>
         </div>
         <div className="flex justify-between gap-4">
-          <span className="text-slate-500">Status</span>
-          <strong className="text-amber-600">Pending verification</strong>
+          <span className="text-slate-600">Status</span>
+          <strong className="text-amber-800">Pending verification</strong>
         </div>
       </div>
       <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
@@ -1272,7 +1272,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
         <button
           type="button"
           onClick={() => onNavigate('properties')}
-          className="rounded-2xl border border-slate-200 px-6 py-3 text-sm font-bold text-slate-500 transition hover:text-slate-900"
+          className="rounded-2xl border border-slate-200 px-6 py-3 text-sm font-bold text-slate-600 transition hover:text-slate-900"
         >
           Back to host portal
         </button>
@@ -1288,24 +1288,24 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
         <div className={CARD}>
           <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Host</div>
           <div className="mt-1 font-display font-extrabold text-slate-900">{review.hostName}</div>
-          <div className="mt-1 text-xs text-slate-500">{review.hostMeta}</div>
+          <div className="mt-1 text-xs text-slate-600">{review.hostMeta}</div>
         </div>
         <div className={CARD}>
           <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Property</div>
           <div className="mt-1 font-display font-extrabold text-slate-900">{review.propertyName}</div>
-          <div className="mt-1 text-xs text-slate-500">{review.propertyMeta}</div>
+          <div className="mt-1 text-xs text-slate-600">{review.propertyMeta}</div>
         </div>
         <div className={CARD}>
           <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Spaces</div>
           <div className="mt-1 font-display font-extrabold text-slate-900">{review.spaceCount} configured</div>
-          <div className="mt-1 text-xs text-slate-500">{review.capacity} guest capacity</div>
+          <div className="mt-1 text-xs text-slate-600">{review.capacity} guest capacity</div>
         </div>
         <div className={CARD}>
           <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Services</div>
           <div className="mt-1 font-display font-extrabold text-slate-900">
             {review.services.length} selected
           </div>
-          <div className="mt-1 text-xs text-slate-500">
+          <div className="mt-1 text-xs text-slate-600">
             {review.services.slice(0, 4).join(', ')}
             {review.services.length > 4 ? '…' : ''}
           </div>
@@ -1319,14 +1319,14 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
         <div className={CARD}>
           <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Location</div>
           <div className="mt-1 font-display font-extrabold text-slate-900">{review.location}</div>
-          <div className="mt-1 text-xs text-slate-500">{review.coordinates}</div>
+          <div className="mt-1 text-xs text-slate-600">{review.coordinates}</div>
         </div>
       </div>
 
       <div className="mb-6 max-h-[390px] overflow-y-auto rounded-3xl border border-slate-200 bg-white p-5 text-sm leading-relaxed text-slate-700 shadow-inner sm:p-7">
         <div className="mb-6 border-b border-slate-200 pb-5 text-center">
           <div className="font-display text-2xl font-extrabold text-slate-950">NEXG</div>
-          <div className="mt-1 text-[10px] font-bold uppercase tracking-[.18em] text-amber-600">
+          <div className="mt-1 text-[10px] font-bold uppercase tracking-[.18em] text-amber-800">
             Host Partnership &amp; Property Setup
           </div>
           <div className="mt-2 text-xs text-slate-400">
@@ -1367,16 +1367,16 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
 
         <div className="mt-10 grid grid-cols-1 gap-8 border-t border-slate-200 pt-6 sm:grid-cols-2">
           <div>
-            <div className="text-[11px] font-bold uppercase text-slate-500">For NEXG App Limited</div>
+            <div className="text-[11px] font-bold uppercase text-slate-600">For NEXG App Limited</div>
             <div className="mt-7 font-warm text-2xl text-slate-400">NEXG Operations</div>
             <div className="mt-1 h-px bg-slate-300" />
-            <div className="mt-1 text-[10px] text-slate-500">Authorized representative</div>
+            <div className="mt-1 text-[10px] text-slate-600">Authorized representative</div>
           </div>
           <div>
-            <div className="text-[11px] font-bold uppercase text-slate-500">For Host</div>
-            <div className="mt-7 min-h-[32px] font-warm text-2xl text-amber-600">{signatureLine}</div>
+            <div className="text-[11px] font-bold uppercase text-slate-600">For Host</div>
+            <div className="mt-7 min-h-[32px] font-warm text-2xl text-amber-800">{signatureLine}</div>
             <div className="mt-1 h-px bg-slate-300" />
-            <div className="mt-1 text-[10px] text-slate-500">
+            <div className="mt-1 text-[10px] text-slate-600">
               Authorized signatory: <span>{form.signatoryName}</span>
             </div>
           </div>
@@ -1414,7 +1414,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                     setSignatureDrawn(false);
                   }}
                   className={`flex-1 rounded-lg px-3 py-2 text-xs font-bold capitalize transition ${
-                    signatureMode === mode ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-500'
+                    signatureMode === mode ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600'
                   }`}
                 >
                   {mode}
@@ -1426,7 +1426,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
             <button
               type="button"
               onClick={clearSignature}
-              className="text-xs font-bold text-slate-500 transition hover:text-slate-900"
+              className="text-xs font-bold text-slate-600 transition hover:text-slate-900"
             >
               Clear signature
             </button>
@@ -1446,7 +1446,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
             />
           </div>
         ) : (
-          <div className="flex min-h-[90px] items-center justify-center rounded-2xl border border-slate-200 bg-white font-warm text-4xl text-amber-600">
+          <div className="flex min-h-[90px] items-center justify-center rounded-2xl border border-slate-200 bg-white font-warm text-4xl text-amber-800">
             {form.signatoryName || 'Your Signature'}
           </div>
         )}
@@ -1480,7 +1480,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
       <div className="mb-7">
         <div className="mb-3 flex items-center justify-between gap-4">
           <div className="flex min-w-0 items-center gap-2">
-            <span className="font-display text-xs font-bold text-amber-600 sm:text-sm">HOST SETUP</span>
+            <span className="font-display text-xs font-bold text-amber-800 sm:text-sm">HOST SETUP</span>
             <span className="text-slate-300">/</span>
             <span className="truncate text-xs font-semibold text-slate-700 sm:text-sm">{activeStep.title}</span>
           </div>
@@ -1816,7 +1816,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                 <div className="mb-4 flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <h3 className="font-display font-extrabold text-slate-900">Pin the property</h3>
-                    <p className="mt-1 text-xs text-slate-500">
+                    <p className="mt-1 text-xs text-slate-600">
                       Tap or click the map to set the exact property point.
                     </p>
                   </div>
@@ -1824,7 +1824,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                     <button
                       type="button"
                       onClick={locateMe}
-                      className="flex items-center gap-1 whitespace-nowrap text-xs font-bold text-slate-500 transition hover:text-slate-900"
+                      className="flex items-center gap-1 whitespace-nowrap text-xs font-bold text-slate-600 transition hover:text-slate-900"
                     >
                       <LocateFixed className="h-3.5 w-3.5" />
                       Use my location
@@ -1832,7 +1832,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                     <button
                       type="button"
                       onClick={() => focusPin.current?.(NAIROBI.lat, NAIROBI.lng, 15)}
-                      className="flex items-center gap-1 whitespace-nowrap text-xs font-bold text-amber-600 transition hover:text-amber-700"
+                      className="flex items-center gap-1 whitespace-nowrap text-xs font-bold text-amber-800 transition hover:text-amber-800"
                     >
                       <Crosshair className="h-3.5 w-3.5" />
                       Nairobi
@@ -1858,7 +1858,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                     </div>
                   </div>
                 </div>
-                {geoStatus && <p className="mt-3 text-xs font-semibold text-slate-500">{geoStatus}</p>}
+                {geoStatus && <p className="mt-3 text-xs font-semibold text-slate-600">{geoStatus}</p>}
               </div>
 
               <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
@@ -2004,7 +2004,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                 <div className="mb-4 flex items-center justify-between gap-3">
                   <div>
                     <h3 className="font-display font-extrabold text-slate-900">Examples of guest requests</h3>
-                    <p className="mt-1 text-xs text-slate-500">
+                    <p className="mt-1 text-xs text-slate-600">
                       Add the requests your team actually handles today.
                     </p>
                   </div>
@@ -2095,7 +2095,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                 <div className="mb-5 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
                   <div>
                     <h3 className="font-display font-extrabold text-slate-900">Operating model</h3>
-                    <p className="mt-1 text-xs text-slate-500">How is the property staffed?</p>
+                    <p className="mt-1 text-xs text-slate-600">How is the property staffed?</p>
                   </div>
                   <select
                     aria-label="Operating model"
@@ -2288,7 +2288,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                       <div className="text-sm font-bold text-slate-800">
                         Business / registration document <span className="text-red-500">*</span>
                       </div>
-                      <p className="mt-1 text-xs text-slate-500">PDF, JPG or PNG</p>
+                      <p className="mt-1 text-xs text-slate-600">PDF, JPG or PNG</p>
                     </div>
                     <FileText className="h-5 w-5 text-amber-500" />
                   </div>
@@ -2299,7 +2299,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                     onChange={(event) => handleFile('registration', event.target.files?.[0])}
                   />
                   {uploads.registration && (
-                    <div className="mt-4 flex items-center gap-2 text-xs font-bold text-emerald-600">
+                    <div className="mt-4 flex items-center gap-2 text-xs font-bold text-emerald-700">
                       <CircleCheck className="h-3.5 w-3.5" />
                       {uploads.registration.name}
                     </div>
@@ -2316,7 +2316,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <div className="text-sm font-bold text-slate-800">Property / operating permit</div>
-                      <p className="mt-1 text-xs text-slate-500">If applicable</p>
+                      <p className="mt-1 text-xs text-slate-600">If applicable</p>
                     </div>
                     <Stamp className="h-5 w-5 text-amber-500" />
                   </div>
@@ -2327,7 +2327,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                     onChange={(event) => handleFile('permit', event.target.files?.[0])}
                   />
                   {uploads.permit && (
-                    <div className="mt-4 flex items-center gap-2 text-xs font-bold text-emerald-600">
+                    <div className="mt-4 flex items-center gap-2 text-xs font-bold text-emerald-700">
                       <CircleCheck className="h-3.5 w-3.5" />
                       {uploads.permit.name}
                     </div>
@@ -2433,7 +2433,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               <button
                 type="button"
                 onClick={goPrevious}
-                className="flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-bold text-slate-500 transition hover:text-slate-900 sm:px-6"
+                className="flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-bold text-slate-600 transition hover:text-slate-900 sm:px-6"
               >
                 <ArrowLeft className="h-4 w-4" />
                 Previous
@@ -2463,7 +2463,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               type="button"
               onClick={() => onNavigate('properties')}
               aria-label="Back to the host portal"
-              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-500 transition hover:bg-slate-100 hover:text-slate-900"
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-200 text-slate-600 transition hover:bg-slate-100 hover:text-slate-900"
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
@@ -2477,12 +2477,12 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               </div>
             </div>
           </div>
-          <div className="hidden items-center gap-3 text-xs font-semibold text-slate-500 sm:flex">
+          <div className="hidden items-center gap-3 text-xs font-semibold text-slate-600 sm:flex">
             <span>Host Portal</span>
             <span className="text-slate-300">/</span>
             <span className="text-slate-900">Property setup</span>
           </div>
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500">
+          <div className="flex items-center gap-2 text-xs font-semibold text-slate-600">
             <span className="inline-block h-2 w-2 rounded-full bg-amber-500" />
             <span>{saveStatus}</span>
           </div>

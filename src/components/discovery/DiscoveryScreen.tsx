@@ -220,7 +220,7 @@ export default function DiscoveryScreen({
                 aria-label="Clear search"
                 className={cn(
                   'flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center',
-                  isLight ? 'text-slate-500 hover:bg-slate-200' : 'text-gray-400 hover:bg-white/10'
+                  isLight ? 'text-slate-600 hover:bg-slate-200' : 'text-gray-400 hover:bg-white/10'
                 )}
               >
                 <X size={13} />
@@ -411,7 +411,7 @@ export default function DiscoveryScreen({
                 : 'All merchants'}
             </h1>
             {!loading && (
-              <span className={cn('text-xs font-semibold', isLight ? 'text-slate-500' : 'text-gray-400')}>
+              <span className={cn('text-xs font-semibold', isLight ? 'text-slate-600' : 'text-gray-400')}>
                 {total.toLocaleString()} {total === 1 ? 'merchant' : 'merchants'}
               </span>
             )}
@@ -425,7 +425,7 @@ export default function DiscoveryScreen({
               )}
             >
               <p className="text-sm font-bold text-rose-500">{error}</p>
-              <p className={cn('text-xs mt-1', isLight ? 'text-slate-500' : 'text-gray-400')}>
+              <p className={cn('text-xs mt-1', isLight ? 'text-slate-600' : 'text-gray-400')}>
                 The API may not be running. Start it with <code className="font-mono">npm run server</code>.
               </p>
               <button
@@ -462,7 +462,7 @@ export default function DiscoveryScreen({
                 <Search size={20} />
               </div>
               <h3 className="text-sm font-bold">No merchants found</h3>
-              <p className={cn('text-xs mt-1 max-w-sm mx-auto', isLight ? 'text-slate-500' : 'text-gray-400')}>
+              <p className={cn('text-xs mt-1 max-w-sm mx-auto', isLight ? 'text-slate-600' : 'text-gray-400')}>
                 {query
                   ? `Nothing matches "${query}" in this vertical. Try a different term or browse everything.`
                   : 'This vertical has no merchants yet.'}

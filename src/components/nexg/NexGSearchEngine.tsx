@@ -80,7 +80,7 @@ export const NexGSearchEngine: React.FC<NexGSearchEngineProps> = ({ query }) => 
           <h2 className={cn('text-xl sm:text-2xl font-bold tracking-tight', isLight ? 'text-slate-900' : 'text-white')}>
             Search Results for <span className="text-[#7d5a11] dark:text-[#E5B65F]">"{query}"</span>
           </h2>
-          <p className={cn('text-xs mt-1', isLight ? 'text-slate-500' : 'text-gray-400')}>
+          <p className={cn('text-xs mt-1', isLight ? 'text-slate-600' : 'text-gray-400')}>
             Found {totalResults} matching categories, merchants, and curated offerings
           </p>
         </div>

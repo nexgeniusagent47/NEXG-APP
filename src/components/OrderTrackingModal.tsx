@@ -54,7 +54,7 @@ export default function OrderTrackingModal() {
         return {
           label: 'Chef Preparing Dishes',
           color: isLight
-            ? 'text-amber-700 bg-amber-50 border-amber-200'
+            ? 'text-amber-800 bg-amber-50 border-amber-200'
             : 'text-amber-400 bg-amber-500/10 border-amber-500/30',
         };
       case 'courier_heading':
@@ -121,7 +121,7 @@ export default function OrderTrackingModal() {
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className={`text-xs font-mono font-bold ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                  <span className={`text-xs font-mono font-bold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                     {activeOrder.id}
                   </span>
                   <span className={`text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full border ${badge.color}`}>
@@ -186,7 +186,7 @@ export default function OrderTrackingModal() {
               className={`py-3 px-4 text-xs sm:text-sm font-semibold border-b-2 transition-colors cursor-pointer ${
                 activeTab === 'tracking'
                   ? isLight ? 'border-[#B88728] text-[#B88728]' : 'border-[#E5B65F] text-[#E5B65F]'
-                  : isLight ? 'border-transparent text-slate-500 hover:text-slate-900' : 'border-transparent text-gray-400 hover:text-white'
+                  : isLight ? 'border-transparent text-slate-600 hover:text-slate-900' : 'border-transparent text-gray-400 hover:text-white'
               }`}
             >
               Live Journey & ETA
@@ -196,7 +196,7 @@ export default function OrderTrackingModal() {
               className={`py-3 px-4 text-xs sm:text-sm font-semibold border-b-2 transition-colors cursor-pointer ${
                 activeTab === 'receipt'
                   ? isLight ? 'border-[#B88728] text-[#B88728]' : 'border-[#E5B65F] text-[#E5B65F]'
-                  : isLight ? 'border-transparent text-slate-500 hover:text-slate-900' : 'border-transparent text-gray-400 hover:text-white'
+                  : isLight ? 'border-transparent text-slate-600 hover:text-slate-900' : 'border-transparent text-gray-400 hover:text-white'
               }`}
             >
               Itemized Receipt & PIN
@@ -216,7 +216,7 @@ export default function OrderTrackingModal() {
                   <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                       <span className={`text-xs font-medium uppercase tracking-wider block mb-1 ${
-                        isLight ? 'text-slate-500' : 'text-gray-400'
+                        isLight ? 'text-slate-600' : 'text-gray-400'
                       }`}>
                         Estimated Delivery
                       </span>
@@ -224,7 +224,7 @@ export default function OrderTrackingModal() {
                         isLight ? 'text-slate-900' : 'text-white'
                       }`}>
                         {activeOrder.status === 'delivered' ? (
-                          <span className={isLight ? 'text-emerald-600' : 'text-emerald-400'}>Order Arrived!</span>
+                          <span className={isLight ? 'text-emerald-700' : 'text-emerald-400'}>Order Arrived!</span>
                         ) : (
                           <>
                             <span>~{activeOrder.estimatedMinutesLeft} mins</span>
@@ -252,7 +252,7 @@ export default function OrderTrackingModal() {
                     }`}>
                       <div>
                         <span className={`text-[10px] uppercase font-bold tracking-widest block ${
-                          isLight ? 'text-slate-500' : 'text-gray-400'
+                          isLight ? 'text-slate-600' : 'text-gray-400'
                         }`}>
                           Delivery PIN
                         </span>
@@ -271,7 +271,7 @@ export default function OrderTrackingModal() {
                         }`}
                         title="Copy delivery security PIN"
                       >
-                        {copiedPin ? <Check size={14} className={isLight ? 'text-emerald-600' : 'text-emerald-400'} /> : 'Copy'}
+                        {copiedPin ? <Check size={14} className={isLight ? 'text-emerald-700' : 'text-emerald-400'} /> : 'Copy'}
                       </button>
                     </div>
                   </div>
@@ -392,7 +392,7 @@ export default function OrderTrackingModal() {
                       <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                         {activeOrder.courier.vehicle}
                       </p>
-                      <p className={`text-[11px] ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                      <p className={`text-[11px] ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                         {activeOrder.courier.deliveriesCount}+ concierge trips
                       </p>
                     </div>
@@ -427,7 +427,7 @@ export default function OrderTrackingModal() {
                 {/* Vertical Timeline Stepper */}
                 <div className={`space-y-4 pt-2 border-t ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
                   <h4 className={`text-xs font-bold uppercase tracking-wider ${
-                    isLight ? 'text-slate-500' : 'text-gray-400'
+                    isLight ? 'text-slate-600' : 'text-gray-400'
                   }`}>
                     Live Progress Stages
                   </h4>
@@ -467,14 +467,14 @@ export default function OrderTrackingModal() {
                               className={`text-sm font-semibold ${
                                 step.current || step.completed
                                   ? isLight ? 'text-slate-900' : 'text-white'
-                                  : isLight ? 'text-slate-500' : 'text-gray-400'
+                                  : isLight ? 'text-slate-600' : 'text-gray-400'
                               }`}
                             >
                               {step.title}
                             </span>
                             <span className={`text-xs ${isLight ? 'text-slate-400' : 'text-gray-400'}`}>{step.timestamp}</span>
                           </div>
-                          <p className={`text-xs mt-0.5 ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>{step.description}</p>
+                          <p className={`text-xs mt-0.5 ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{step.description}</p>
                         </div>
                       </div>
                     ))}
@@ -492,13 +492,13 @@ export default function OrderTrackingModal() {
                     isLight ? 'border-slate-200' : 'border-white/10'
                   }`}>
                     <div>
-                      <span className={`block ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>Transaction Reference</span>
+                      <span className={`block ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Transaction Reference</span>
                       <span className={`font-mono font-semibold ${isLight ? 'text-slate-900' : 'text-white'}`}>
                         {activeOrder.paymentDetails.transactionRef}
                       </span>
                     </div>
                     <div className="text-right">
-                      <span className={`block ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>Simulated Payment Method</span>
+                      <span className={`block ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Simulated Payment Method</span>
                       <span className={`font-semibold ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}>
                         {activeOrder.paymentDetails.label}
                       </span>
@@ -519,7 +519,7 @@ export default function OrderTrackingModal() {
                             </span>
                           </div>
                           {it.selectedOptions && it.selectedOptions.length > 0 && (
-                            <p className={`text-[11px] pl-5 ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                            <p className={`text-[11px] pl-5 ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                               {it.selectedOptions.map((o) => o.choiceName).join(', ')}
                             </p>
                           )}
@@ -535,15 +535,15 @@ export default function OrderTrackingModal() {
                   <div className={`pt-3 border-t space-y-2 text-xs ${
                     isLight ? 'border-slate-200' : 'border-white/10'
                   }`}>
-                    <div className={`flex justify-between ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                    <div className={`flex justify-between ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                       <span>Subtotal</span>
                       <span>${activeOrder.subtotal.toFixed(2)}</span>
                     </div>
-                    <div className={`flex justify-between ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                    <div className={`flex justify-between ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                       <span>Delivery Fee</span>
                       <span>${activeOrder.deliveryFee.toFixed(2)}</span>
                     </div>
-                    <div className={`flex justify-between ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                    <div className={`flex justify-between ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                       <span>App Service</span>
                       <span>${activeOrder.serviceFee.toFixed(2)}</span>
                     </div>
@@ -556,7 +556,7 @@ export default function OrderTrackingModal() {
                       </div>
                     )}
                     {activeOrder.tip > 0 && (
-                      <div className={`flex justify-between ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                      <div className={`flex justify-between ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                         <span>Courier Tip</span>
                         <span>${activeOrder.tip.toFixed(2)}</span>
                       </div>

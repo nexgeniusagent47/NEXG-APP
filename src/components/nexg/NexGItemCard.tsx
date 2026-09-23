@@ -93,7 +93,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
             {item.name}
           </h4>
 
-          <p className={cn('text-xs line-clamp-2', isLight ? 'text-slate-500' : 'text-gray-400')}>
+          <p className={cn('text-xs line-clamp-2', isLight ? 'text-slate-600' : 'text-gray-400')}>
             {item.description}
           </p>
 
@@ -102,7 +102,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
               KSh {item.price.toLocaleString()}
             </span>
             {item.originalPrice && (
-              <span className="text-slate-400 line-through text-[11px]">
+              <span className="text-slate-600 line-through text-[11px]">
                 KSh {item.originalPrice.toLocaleString()}
               </span>
             )}
@@ -213,7 +213,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
             {item.name}
           </h3>
 
-          <p className={cn('text-xs line-clamp-2', isLight ? 'text-slate-500' : 'text-gray-400')}>
+          <p className={cn('text-xs line-clamp-2', isLight ? 'text-slate-600' : 'text-gray-400')}>
             {item.description}
           </p>
         </div>
@@ -225,7 +225,7 @@ export const NexGItemCard: React.FC<NexGItemCardProps> = ({
               KSh {item.price.toLocaleString()}
             </span>
             {item.originalPrice && (
-              <span className="text-[11px] text-slate-400 line-through">
+              <span className="text-[11px] text-slate-600 line-through">
                 KSh {item.originalPrice.toLocaleString()}
               </span>
             )}

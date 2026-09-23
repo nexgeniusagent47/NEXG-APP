@@ -115,7 +115,7 @@ export const DiscoveryMerchantCard: React.FC<DiscoveryMerchantCardProps> = ({
           </span>
         </div>
 
-        <p className={cn('text-xs font-medium line-clamp-1', isLight ? 'text-slate-500' : 'text-gray-400')}>
+        <p className={cn('text-xs font-medium line-clamp-1', isLight ? 'text-slate-600' : 'text-gray-400')}>
           {merchant.subcategory || merchant.category}
         </p>
 
@@ -128,7 +128,7 @@ export const DiscoveryMerchantCard: React.FC<DiscoveryMerchantCardProps> = ({
         <div
           className={cn(
             'flex items-center gap-3 text-[11px] font-medium',
-            isLight ? 'text-slate-500' : 'text-gray-400'
+            isLight ? 'text-slate-600' : 'text-gray-400'
           )}
         >
           <span className="inline-flex items-center gap-1">

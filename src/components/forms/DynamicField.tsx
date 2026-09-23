@@ -93,7 +93,7 @@ export const DynamicField: React.FC<DynamicFieldProps> = ({
   const labelIdFor = isGroup ? labelId : undefined;
 
   const hint = requirement.hint && !error && (
-    <p id={`${requirement.id}-hint`} className={cn('mt-1 text-[11px]', isLight ? 'text-slate-500' : 'text-gray-400')}>
+    <p id={`${requirement.id}-hint`} className={cn('mt-1 text-[11px]', isLight ? 'text-slate-600' : 'text-gray-400')}>
       {requirement.hint}
     </p>
   );

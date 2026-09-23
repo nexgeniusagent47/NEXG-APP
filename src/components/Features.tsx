@@ -11,7 +11,7 @@ export default function Features() {
       icon: ShieldCheck,
       title: t.features.f1Title,
       desc: t.features.f1Desc,
-      color: isLight ? 'text-emerald-600' : 'text-emerald-400',
+      color: isLight ? 'text-emerald-700' : 'text-emerald-400',
       bg: isLight
         ? 'bg-emerald-50 border-emerald-200 hover:border-emerald-300 hover:bg-emerald-100/60'
         : 'bg-emerald-400/10 border-emerald-400/20 hover:border-emerald-400/40 hover:bg-emerald-400/20',

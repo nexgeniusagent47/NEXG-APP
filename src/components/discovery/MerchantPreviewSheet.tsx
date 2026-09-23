@@ -198,7 +198,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                     <ol
                       className={cn(
                         'flex flex-wrap items-center gap-x-1.5 gap-y-1 text-[11px] font-medium pt-1',
-                        isLight ? 'text-slate-500' : 'text-gray-400'
+                        isLight ? 'text-slate-600' : 'text-gray-400'
                       )}
                     >
                       {intent.arc.steps.map((step, index) => (
@@ -261,7 +261,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                     </div>
                   )}
 
-                  <p className={cn('flex items-start gap-2 text-xs', isLight ? 'text-slate-500' : 'text-gray-400')}>
+                  <p className={cn('flex items-start gap-2 text-xs', isLight ? 'text-slate-600' : 'text-gray-400')}>
                     <Store size={13} className="mt-0.5 flex-shrink-0 text-[#7d5a11] dark:text-[#E5B65F]" />
                     {merchant.address}
                   </p>

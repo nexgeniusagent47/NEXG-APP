@@ -181,7 +181,7 @@ export default function RestaurantDetailModal({
               className={`py-3.5 px-4 font-bold text-xs sm:text-sm border-b-2 transition-colors cursor-pointer flex items-center gap-2 ${
                 modalTab === 'menu'
                   ? 'border-gold text-gold'
-                  : 'border-transparent text-slate-500 hover:text-slate-900'
+                  : 'border-transparent text-slate-600 hover:text-slate-900'
               }`}
             >
               <ShoppingBag size={15} />
@@ -196,7 +196,7 @@ export default function RestaurantDetailModal({
               className={`py-3.5 px-4 font-bold text-xs sm:text-sm border-b-2 transition-colors cursor-pointer flex items-center gap-2 ${
                 modalTab === 'google-reviews'
                   ? 'border-gold text-gold'
-                  : 'border-transparent text-slate-500 hover:text-slate-900'
+                  : 'border-transparent text-slate-600 hover:text-slate-900'
               }`}
             >
               <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
@@ -226,7 +226,7 @@ export default function RestaurantDetailModal({
                       className={`px-4 py-2 rounded-full text-xs font-bold whitespace-nowrap transition cursor-pointer ${
                         activeCategory === cat.id
                           ? 'bg-gold text-slate-950 shadow-md'
-                          : 'bg-slate-100 text-slate-500 hover:text-slate-900 hover:bg-slate-100 border border-slate-100'
+                          : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-100 border border-slate-100'
                       }`}
                     >
                       {cat.label}
@@ -236,7 +236,7 @@ export default function RestaurantDetailModal({
 
                 {/* Quick Search */}
                 <div className="relative w-full sm:w-64 flex-shrink-0">
-                  <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+                  <Search size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-600" />
                   <input
                     type="text"
                     placeholder="Search dishes..."
@@ -251,7 +251,7 @@ export default function RestaurantDetailModal({
               <div className="p-4 sm:p-6 overflow-y-auto flex-grow space-y-4 custom-scrollbar">
                 {filteredMenu.length === 0 ? (
                   <div className="text-center py-16">
-                    <p className="text-slate-500 text-sm">No dishes match your search criteria.</p>
+                    <p className="text-slate-600 text-sm">No dishes match your search criteria.</p>
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -280,12 +280,12 @@ export default function RestaurantDetailModal({
                                 <Star size={12} className="fill-gold" />
                                 <span>{dish.rating || 4.9}</span>
                               </div>
-                              <span className="text-[11px] text-slate-500 hover:text-gold transition-colors underline decoration-white/20">
+                              <span className="text-[11px] text-slate-600 hover:text-gold transition-colors underline decoration-white/20">
                                 ({dish.reviewsCount || (dish.userReviews?.length || 24)} diner reviews)
                               </span>
                             </div>
 
-                            <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed font-normal">
+                            <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed font-normal">
                               {dish.description}
                             </p>
                           </div>
@@ -294,7 +294,7 @@ export default function RestaurantDetailModal({
                             <span className="font-bold text-sm sm:text-base text-gold">
                               ${dish.price.toFixed(2)}
                             </span>
-                            <span className="text-[11px] text-slate-500 hover:text-slate-900 flex items-center gap-1">
+                            <span className="text-[11px] text-slate-600 hover:text-slate-900 flex items-center gap-1">
                               <MessageSquare size={12} />
                               <span>View & Write Reviews</span>
                             </span>
@@ -351,14 +351,14 @@ export default function RestaurantDetailModal({
                           Verified Place
                         </span>
                       </div>
-                      <p className="text-xs text-slate-500 mt-0.5">
+                      <p className="text-xs text-slate-600 mt-0.5">
                         Based on {googleReviewsCount?.toLocaleString()} authentic customer reviews on Google Places & Maps
                       </p>
                     </div>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="text-xs text-slate-500 font-medium">Synced Live</span>
+                    <span className="text-xs text-slate-600 font-medium">Synced Live</span>
                     <div className="w-2 h-2 rounded-full bg-emerald-400 animate-status" />
                   </div>
                 </div>
@@ -415,7 +415,7 @@ export default function RestaurantDetailModal({
 
                 {(!restaurant.googleReviews || restaurant.googleReviews.length === 0) ? (
                   <div className="text-center py-10 bg-slate-50 rounded-2xl border border-slate-200">
-                    <p className="text-slate-500 text-sm">No Google reviews loaded for this venue.</p>
+                    <p className="text-slate-600 text-sm">No Google reviews loaded for this venue.</p>
                   </div>
                 ) : (
                   restaurant.googleReviews.map((rev) => {
@@ -449,7 +449,7 @@ export default function RestaurantDetailModal({
                                   </span>
                                 )}
                               </div>
-                              <div className="flex items-center gap-2 text-xs text-slate-500 mt-0.5">
+                              <div className="flex items-center gap-2 text-xs text-slate-600 mt-0.5">
                                 <div className="flex items-center gap-0.5 text-gold">
                                   {[...Array(rev.rating)].map((_, i) => (
                                     <Star key={i} size={11} className="fill-gold" />
@@ -461,7 +461,7 @@ export default function RestaurantDetailModal({
                             </div>
                           </div>
 
-                          <div className="flex items-center gap-1 text-[11px] text-slate-500 bg-black/40 px-2.5 py-1 rounded-full border border-slate-100">
+                          <div className="flex items-center gap-1 text-[11px] text-slate-600 bg-black/40 px-2.5 py-1 rounded-full border border-slate-100">
                             <svg className="w-3 h-3" viewBox="0 0 24 24">
                               <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
                               <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.15C3.27 21.36 7.34 24 12 24z"/>
@@ -482,14 +482,14 @@ export default function RestaurantDetailModal({
                             className={`flex items-center gap-1.5 text-xs px-3 py-1 rounded-full transition-colors cursor-pointer ${
                               hasVoted
                                 ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold'
-                                : 'bg-slate-100 text-slate-500 hover:text-slate-900 hover:bg-slate-100'
+                                : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-100'
                             }`}
                           >
                             <ThumbsUp size={12} className={hasVoted ? 'fill-emerald-400' : ''} />
                             <span>Helpful ({currentHelpful})</span>
                           </button>
 
-                          <span className="text-[11px] text-slate-500">
+                          <span className="text-[11px] text-slate-600">
                             Posted on Google
                           </span>
                         </div>
@@ -505,7 +505,7 @@ export default function RestaurantDetailModal({
           {cart.length > 0 && (
             <div className="p-4 bg-white border-t border-slate-200 flex items-center justify-between">
               <div>
-                <span className="text-xs text-slate-500">Order Total:</span>
+                <span className="text-xs text-slate-600">Order Total:</span>
                 <span className="text-sm font-bold text-gold ml-2">${finalTotal.toFixed(2)}</span>
               </div>
               <button

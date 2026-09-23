@@ -212,7 +212,7 @@ export const MerchantItemModal: React.FC<MerchantItemModalProps> = ({
           )}
         >
           <div className="flex items-center justify-between gap-3 mb-3">
-            <span className={cn('text-xs font-semibold', isLight ? 'text-slate-500' : 'text-gray-400')}>
+            <span className={cn('text-xs font-semibold', isLight ? 'text-slate-600' : 'text-gray-400')}>
               {quantity} × KSh {item.price.toLocaleString()}
             </span>
             <span className={cn('text-base font-bold tabular-nums', isLight ? 'text-slate-900' : 'text-white')}>
@@ -254,7 +254,7 @@ const RequirementSectionView: React.FC<{
       <h3
         className={cn(
           'text-xs font-bold uppercase tracking-[0.12em]',
-          isLight ? 'text-slate-500' : 'text-gray-400'
+          isLight ? 'text-slate-600' : 'text-gray-400'
         )}
       >
         {section.title}
@@ -263,7 +263,7 @@ const RequirementSectionView: React.FC<{
     </div>
 
     {section.note && (
-      <p className={cn('text-[11px] -mt-1', isLight ? 'text-slate-500' : 'text-gray-400')}>
+      <p className={cn('text-[11px] -mt-1', isLight ? 'text-slate-600' : 'text-gray-400')}>
         {section.note}
       </p>
     )}

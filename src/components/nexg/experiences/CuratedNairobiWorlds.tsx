@@ -110,7 +110,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900 dark:text-white">
             Curated Nairobi Worlds
           </h2>
-          <p className={cn('text-xs sm:text-sm font-medium', isLight ? 'text-slate-500' : 'text-gray-400')}>
+          <p className={cn('text-xs sm:text-sm font-medium', isLight ? 'text-slate-600' : 'text-gray-400')}>
             Dynamic cross-category plans tailored to your moment, occasion & time of day
           </p>
         </div>
@@ -280,7 +280,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
                   <h4 className="text-sm font-bold truncate text-slate-900 dark:text-white">
                     {step.stepName}
                   </h4>
-                  <p className={cn('text-[11px] line-clamp-1 mt-0.5', isLight ? 'text-slate-500' : 'text-gray-400')}>
+                  <p className={cn('text-[11px] line-clamp-1 mt-0.5', isLight ? 'text-slate-600' : 'text-gray-400')}>
                     {step.description}
                   </p>
                 </div>
@@ -300,7 +300,7 @@ export const CuratedNairobiWorlds: React.FC<CuratedNairobiWorldsProps> = ({
                 ({stepMerchants.length} curated partners)
               </span>
             </h3>
-            <p className={cn('text-xs', isLight ? 'text-slate-500' : 'text-gray-400')}>
+            <p className={cn('text-xs', isLight ? 'text-slate-600' : 'text-gray-400')}>
               {activeStep.description} • {activeStep.category}
             </p>
           </div>

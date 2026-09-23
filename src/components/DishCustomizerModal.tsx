@@ -315,14 +315,14 @@ export default function DishCustomizerModal({
                     <Star size={13} className="fill-gold" />
                     <span>{dish.rating || 4.9}</span>
                   </div>
-                  <span className="text-slate-500">•</span>
+                  <span className="text-slate-600">•</span>
                   <button
                     onClick={() => setActiveTab('reviews')}
-                    className="text-xs text-slate-500 hover:text-gold transition-colors underline decoration-white/20 cursor-pointer"
+                    className="text-xs text-slate-600 hover:text-gold transition-colors underline decoration-white/20 cursor-pointer"
                   >
                     {reviewsList.length} verified diner reviews
                   </button>
-                  <span className="text-slate-500">•</span>
+                  <span className="text-slate-600">•</span>
                   <span className="text-xs text-emerald-400 font-medium">98% recommendation</span>
                 </div>
               </div>
@@ -344,7 +344,7 @@ export default function DishCustomizerModal({
               className={`py-3 px-3 font-bold text-xs sm:text-sm border-b-2 transition-colors cursor-pointer flex items-center gap-1.5 ${
                 activeTab === 'customize'
                   ? 'border-gold text-gold'
-                  : 'border-transparent text-slate-500 hover:text-slate-900'
+                  : 'border-transparent text-slate-600 hover:text-slate-900'
               }`}
             >
               <span>Customize & Options</span>
@@ -355,7 +355,7 @@ export default function DishCustomizerModal({
               className={`py-3 px-3 font-bold text-xs sm:text-sm border-b-2 transition-colors cursor-pointer flex items-center gap-1.5 ${
                 activeTab === 'reviews'
                   ? 'border-gold text-gold'
-                  : 'border-transparent text-slate-500 hover:text-slate-900'
+                  : 'border-transparent text-slate-600 hover:text-slate-900'
               }`}
             >
               <MessageSquare size={14} />
@@ -383,7 +383,7 @@ export default function DishCustomizerModal({
                                 Required
                               </span>
                             ) : (
-                              <span className="text-[10px] text-slate-500">Optional</span>
+                              <span className="text-[10px] text-slate-600">Optional</span>
                             )}
                           </div>
                         </div>
@@ -498,7 +498,7 @@ export default function DishCustomizerModal({
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-white">Guest Satisfaction</h4>
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-slate-600">
                       Based on {reviewsList.length} verified ratings for this dish
                     </p>
                   </div>
@@ -575,7 +575,7 @@ export default function DishCustomizerModal({
 
                     {/* Quick Tags */}
                     <div>
-                      <label className="text-xs text-slate-500 block mb-1">Highlight:</label>
+                      <label className="text-xs text-slate-600 block mb-1">Highlight:</label>
                       <div className="flex flex-wrap gap-1.5">
                         {availableTags.map((tag) => (
                           <button
@@ -617,12 +617,12 @@ export default function DishCustomizerModal({
 
               {/* Existing Reviews List */}
               <div className="space-y-3">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-600">
                   Guest Comments ({reviewsList.length})
                 </h4>
 
                 {reviewsList.length === 0 ? (
-                  <p className="text-xs text-slate-500 text-center py-6">
+                  <p className="text-xs text-slate-600 text-center py-6">
                     No guest reviews yet. Be the first to review this dish!
                   </p>
                 ) : (
@@ -649,7 +649,7 @@ export default function DishCustomizerModal({
                                   </span>
                                 )}
                               </div>
-                              <div className="flex items-center gap-1.5 text-[11px] text-slate-500">
+                              <div className="flex items-center gap-1.5 text-[11px] text-slate-600">
                                 <span>{rev.authorRoom || 'Guest'}</span>
                                 <span>•</span>
                                 <span>{rev.date}</span>
@@ -688,7 +688,7 @@ export default function DishCustomizerModal({
                             className={`flex items-center gap-1 text-[11px] px-2.5 py-0.5 rounded-full transition-colors cursor-pointer ${
                               hasVoted
                                 ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold'
-                                : 'text-slate-500 hover:text-slate-900 bg-slate-100'
+                                : 'text-slate-600 hover:text-slate-900 bg-slate-100'
                             }`}
                           >
                             <ThumbsUp size={11} className={hasVoted ? 'fill-emerald-400' : ''} />

@@ -799,7 +799,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
             >
               {renderIcon('ArrowLeft', 'w-3.5 h-3.5')} {t.partnersPortal.backToSite}
             </button>
-            <div className="hidden sm:flex items-center gap-4 text-xs font-bold uppercase text-slate-500 tracking-wider">
+            <div className="hidden sm:flex items-center gap-4 text-xs font-bold uppercase text-slate-600 tracking-wider">
               <span>{t.partnersPortal.onboardingStatus}</span>
               <span className="bg-amber-100 text-amber-800 px-3 py-1 rounded-full font-extrabold">{t.partnersPortal.activeStatus}</span>
             </div>
@@ -811,7 +811,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
         
         {/* Progress Timeline Header */}
         <div className="mb-8 no-print">
-          <div className="flex justify-between items-center mb-3 text-xs md:text-sm text-slate-500">
+          <div className="flex justify-between items-center mb-3 text-xs md:text-sm text-slate-600">
             <div className="flex items-center gap-2 font-semibold text-slate-800">
               <span className="cursor-pointer hover:underline text-[#7d5a11] dark:text-[#E5B65F]" onClick={() => onNavigate?.('home')}>Home</span>
               {selectedCategory && (
@@ -852,7 +852,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Choose Category</h2>
                 </div>
-                <p className="text-slate-500 text-sm">Choose the category that best aligns with your merchant store operations. Use search or filter down instantly.</p>
+                <p className="text-slate-600 text-sm">Choose the category that best aligns with your merchant store operations. Use search or filter down instantly.</p>
 
                 {/* Filter Search */}
                 <div className="relative max-w-md">
@@ -905,7 +905,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                         </div>
                         <div className="mt-4">
                           <h3 className="font-extrabold text-slate-900 text-sm">{cat.name}</h3>
-                          <p className="text-slate-500 text-[11px] leading-relaxed mt-1">{cat.desc}</p>
+                          <p className="text-slate-600 text-[11px] leading-relaxed mt-1">{cat.desc}</p>
                         </div>
                       </div>
                     );
@@ -923,7 +923,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Select Business Type in {selectedCategory.name}</h2>
                 </div>
-                <p className="text-slate-500 text-sm">You can select multiple specific types if your outlet handles different luxury segments.</p>
+                <p className="text-slate-600 text-sm">You can select multiple specific types if your outlet handles different luxury segments.</p>
 
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   {selectedCategory.subcategories.map(sub => {
@@ -940,7 +940,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                         <div className="mt-4">
                           <h3 className="font-extrabold text-slate-900 text-sm">{sub.name}</h3>
                           {isSelected ? (
-                            <span className="text-[10px] text-amber-700 font-extrabold mt-1 block">✓ Added</span>
+                            <span className="text-[10px] text-amber-800 font-extrabold mt-1 block">✓ Added</span>
                           ) : (
                             <span className="text-[10px] text-slate-400 mt-1 block">Click to add</span>
                           )}
@@ -1035,7 +1035,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                               >
                                 <div className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform ${dynamicFields[fieldId] ? 'translate-x-6' : 'translate-x-0'}`} />
                               </button>
-                              <span className="text-xs font-semibold text-slate-500">{dynamicFields[fieldId] ? 'Yes' : 'No'}</span>
+                              <span className="text-xs font-semibold text-slate-600">{dynamicFields[fieldId] ? 'Yes' : 'No'}</span>
                             </div>
                           )}
                           {def.type === 'radio' && (
@@ -1085,12 +1085,12 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                     <h3 className="font-bold text-slate-900 text-base flex items-center gap-2">
                       {renderIcon('Briefcase', 'w-4 h-4 text-amber-500')} Catalog Sections Setup
                     </h3>
-                    <p className="text-xs text-slate-500 mt-1">Based on your category, select common sections to organize your items or add custom ones.</p>
+                    <p className="text-xs text-slate-600 mt-1">Based on your category, select common sections to organize your items or add custom ones.</p>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50 p-6 rounded-2xl border border-slate-100">
                     <div className="space-y-4">
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">Suggested Sections</h4>
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-slate-600">Suggested Sections</h4>
                       <div className="flex flex-wrap gap-1.5">
                         {SUGGESTED_SECTIONS[selectedCategory.id]?.map(secName => {
                           const isSelected = selectedCatalogSections.some(s => s.name === secName);
@@ -1109,7 +1109,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                     </div>
 
                     <div className="space-y-4">
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500">Active Sections ({selectedCatalogSections.length})</h4>
+                      <h4 className="text-xs font-bold uppercase tracking-wider text-slate-600">Active Sections ({selectedCatalogSections.length})</h4>
                       <div className="space-y-2 max-h-[220px] overflow-y-auto pr-2">
                         {selectedCatalogSections.length === 0 ? (
                           <p className="text-xs italic text-slate-400">None selected yet. Choose suggestions or add a custom one below.</p>
@@ -1165,11 +1165,11 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Business Profile</h2>
                 </div>
-                <p className="text-slate-500 text-sm">Please register the legal trading entities. Correct tax identifiers help guarantee smooth fast payouts.</p>
+                <p className="text-slate-600 text-sm">Please register the legal trading entities. Correct tax identifiers help guarantee smooth fast payouts.</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">Legal Business Name *</label>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Legal Business Name *</label>
                     <input 
                       type="text"
                       value={profileData.legalName}
@@ -1179,7 +1179,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">Trading Name *</label>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Trading Name *</label>
                     <input 
                       type="text"
                       value={profileData.tradingName}
@@ -1192,7 +1192,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">KRA Tax PIN *</label>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">KRA Tax PIN *</label>
                     <input 
                       type="text"
                       value={profileData.kraPin}
@@ -1202,7 +1202,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">Website URL</label>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Website URL</label>
                     <input 
                       type="url"
                       value={profileData.website}
@@ -1214,7 +1214,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">Short Business Description</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Short Business Description</label>
                   <textarea 
                     value={profileData.shortDesc}
                     onChange={(e) => setProfileData({ ...profileData, shortDesc: e.target.value })}
@@ -1240,12 +1240,12 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   <button 
                     type="button"
                     onClick={addBranch}
-                    className="px-4 py-2 text-xs font-bold text-amber-700 bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-xl transition-colors flex items-center gap-1.5"
+                    className="px-4 py-2 text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200 rounded-xl transition-colors flex items-center gap-1.5"
                   >
                     {renderIcon('Plus', 'w-3.5 h-3.5')} Add Branch
                   </button>
                 </div>
-                <p className="text-slate-500 text-sm">Input branch parameters. You can search using Nominatim autocomplete finder or drop coordinates via the map.</p>
+                <p className="text-slate-600 text-sm">Input branch parameters. You can search using Nominatim autocomplete finder or drop coordinates via the map.</p>
 
                 <div className="space-y-6">
                   {branches.map((branch, idx) => (
@@ -1268,7 +1268,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                       {/* Search / Map Picker */}
                       <div className="space-y-2">
-                        <label className="block text-xs font-bold tracking-wider text-slate-500 uppercase">Search Location Finder</label>
+                        <label className="block text-xs font-bold tracking-wider text-slate-600 uppercase">Search Location Finder</label>
                         <div className="flex gap-2 relative">
                           <div className="relative flex-1">
                             <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
@@ -1309,7 +1309,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="space-y-1">
-                          <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-500">Branch Name *</label>
+                          <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-600">Branch Name *</label>
                           <input 
                             type="text"
                             required
@@ -1320,7 +1320,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-500">County / City *</label>
+                          <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-600">County / City *</label>
                           <input 
                             type="text"
                             required
@@ -1333,7 +1333,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       </div>
 
                       <div className="space-y-1">
-                        <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-500">Physical Address Details *</label>
+                        <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-600">Physical Address Details *</label>
                         <input 
                           type="text"
                           required
@@ -1345,19 +1345,19 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       </div>
 
                       <div className="space-y-1">
-                        <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-500">Coordinates Map Link</label>
+                        <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-600">Coordinates Map Link</label>
                         <input 
                           type="text"
                           value={branch.mapLink}
                           readOnly
                           placeholder="Generated via map picker"
-                          className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-slate-50 text-slate-500 cursor-default focus:outline-none"
+                          className="w-full px-3 py-2 border border-slate-200 rounded-xl text-xs bg-slate-50 text-slate-600 cursor-default focus:outline-none"
                         />
                       </div>
 
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-100 pt-4">
                         <div className="space-y-1">
-                          <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-500">Branch Manager / Contact Person</label>
+                          <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-600">Branch Manager / Contact Person</label>
                           <input 
                             type="text"
                             value={branch.contactName}
@@ -1367,7 +1367,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-500">Branch Contact Phone</label>
+                          <label className="block text-[11px] font-bold uppercase tracking-wide text-slate-600">Branch Contact Phone</label>
                           <input 
                             type="tel"
                             value={branch.contactPhone}
@@ -1392,7 +1392,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Contact &amp; Social Media</h2>
                 </div>
-                <p className="text-slate-500 text-sm">Register primary coordinates. Authorized officers receive system orders, accounts payouts auditing details, and alerts.</p>
+                <p className="text-slate-600 text-sm">Register primary coordinates. Authorized officers receive system orders, accounts payouts auditing details, and alerts.</p>
 
                 <div className="bg-slate-50 p-6 rounded-3xl space-y-4 border border-slate-100">
                   <h3 className="font-bold text-slate-800 text-sm flex items-center gap-2">
@@ -1495,11 +1495,11 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Operations &amp; Delivery Logistics</h2>
                 </div>
-                <p className="text-slate-500 text-sm">Fine-tune operations periods, holiday settings, and shipping dispatch carriage options.</p>
+                <p className="text-slate-600 text-sm">Fine-tune operations periods, holiday settings, and shipping dispatch carriage options.</p>
 
                 {/* Operating Days */}
                 <div className="space-y-2">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">Operating Days</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Operating Days</label>
                   <div className="grid grid-cols-4 md:grid-cols-7 gap-2">
                     {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(day => {
                       const isChecked = operatingDays.includes(day);
@@ -1529,7 +1529,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           key={mode}
                           type="button"
                           onClick={() => setHoursMode(mode)}
-                          className={`px-3 py-1.5 rounded-lg font-bold capitalize transition ${hoursMode === mode ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500'}`}
+                          className={`px-3 py-1.5 rounded-lg font-bold capitalize transition ${hoursMode === mode ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-600'}`}
                         >
                           {mode === 'same' ? 'Same Everyday' : mode === 'split' ? 'Split Weekends' : 'Custom Daily'}
                         </button>
@@ -1666,7 +1666,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                 {/* Delivery Options */}
                 <div className="space-y-4">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">Delivery Carriage Modes</label>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Delivery Carriage Modes</label>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div 
                       onClick={() => setDeliveryNexg(!deliveryNexg)}
@@ -1681,7 +1681,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           className="w-4 h-4 accent-amber-500"
                         />
                       </div>
-                      <p className="text-xs text-slate-500 mt-2">NEXG operates logistics carriage from your store using our background-checked professional couriers.</p>
+                      <p className="text-xs text-slate-600 mt-2">NEXG operates logistics carriage from your store using our background-checked professional couriers.</p>
                     </div>
 
                     <div 
@@ -1697,7 +1697,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           className="w-4 h-4 accent-amber-500"
                         />
                       </div>
-                      <p className="text-xs text-slate-500 mt-2">You employ and coordinate your own dispatch riders; we provide order aggregation and dashboard details.</p>
+                      <p className="text-xs text-slate-600 mt-2">You employ and coordinate your own dispatch riders; we provide order aggregation and dashboard details.</p>
                     </div>
                   </div>
                 </div>
@@ -1738,11 +1738,11 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Payment Details</h2>
                 </div>
-                <p className="text-slate-500 text-sm">Nominate your payouts destinations. Weekly settlements are transferred directly every Monday morning.</p>
+                <p className="text-slate-600 text-sm">Nominate your payouts destinations. Weekly settlements are transferred directly every Monday morning.</p>
 
                 <div className="space-y-4">
                   <div className="space-y-1">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">Bank Name</label>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Bank Name</label>
                     <input 
                       type="text"
                       value={paymentData.bankName}
@@ -1754,7 +1754,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-1">
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">Account Name</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Account Name</label>
                       <input 
                         type="text"
                         value={paymentData.accountName}
@@ -1764,7 +1764,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">Account Number</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Account Number</label>
                       <input 
                         type="text"
                         value={paymentData.accountNumber}
@@ -1783,7 +1783,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="space-y-1">
-                      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500">Buy Goods Till No.</label>
+                      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600">Buy Goods Till No.</label>
                       <input 
                         type="text"
                         value={paymentData.mpesaTill}
@@ -1793,7 +1793,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500">Business Paybill No.</label>
+                      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600">Business Paybill No.</label>
                       <input 
                         type="text"
                         value={paymentData.mpesaPaybill}
@@ -1803,7 +1803,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                       />
                     </div>
                     <div className="space-y-1">
-                      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500">Paybill Account Name</label>
+                      <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-600">Paybill Account Name</label>
                       <input 
                         type="text"
                         value={paymentData.mpesaPaybillAcc}
@@ -1826,13 +1826,13 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Documents &amp; Brand Assets</h2>
                 </div>
-                <p className="text-slate-500 text-sm">Upload business certificates and company logos. These will be used to dynamically set up your store theme inside the NEXG customer application.</p>
+                <p className="text-slate-600 text-sm">Upload business certificates and company logos. These will be used to dynamically set up your store theme inside the NEXG customer application.</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="border border-slate-200 bg-slate-50 p-5 rounded-3xl flex flex-col justify-between">
                     <div>
                       <p className="font-bold text-slate-800 text-sm">Certificate of Registration</p>
-                      <p className="text-slate-500 text-xs mt-1">Upload business registration scan PDF or image.</p>
+                      <p className="text-slate-600 text-xs mt-1">Upload business registration scan PDF or image.</p>
                     </div>
                     <div className="mt-4">
                       <label className={`w-full py-2.5 px-4 border text-center font-semibold rounded-2xl text-xs flex items-center justify-center gap-2 cursor-pointer transition-colors ${uploadedFiles.certFile ? 'bg-emerald-50 border-emerald-300 text-emerald-700' : 'bg-white border-slate-300 text-slate-700 hover:border-amber-400 hover:bg-slate-50'}`}>
@@ -1846,7 +1846,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   <div className="border border-slate-200 bg-slate-50 p-5 rounded-3xl flex flex-col justify-between">
                     <div>
                       <p className="font-bold text-slate-800 text-sm">Director ID / Passport Scan</p>
-                      <p className="text-slate-500 text-xs mt-1">Upload ID or passport of major primary director.</p>
+                      <p className="text-slate-600 text-xs mt-1">Upload ID or passport of major primary director.</p>
                     </div>
                     <div className="mt-4">
                       <label className={`w-full py-2.5 px-4 border text-center font-semibold rounded-2xl text-xs flex items-center justify-center gap-2 cursor-pointer transition-colors ${uploadedFiles.idFile ? 'bg-emerald-50 border-emerald-300 text-emerald-700' : 'bg-white border-slate-300 text-slate-700 hover:border-amber-400 hover:bg-slate-50'}`}>
@@ -1865,7 +1865,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">Business Logo (Square 1:1)</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Business Logo (Square 1:1)</label>
                       <div className="border-2 border-dashed border-slate-200 rounded-2xl aspect-square flex flex-col items-center justify-center p-4 bg-white relative cursor-pointer group hover:border-amber-400 transition-colors">
                         <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setLogoPreview)} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" />
                         {logoPreview ? (
@@ -1873,14 +1873,14 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                         ) : (
                           <div className="text-center group-hover:scale-105 transition-transform">
                             {renderIcon('Camera', 'w-8 h-8 text-slate-300 mx-auto group-hover:text-amber-500')}
-                            <p className="text-xs font-semibold text-slate-500 mt-2">Upload Logo (JPG/PNG)</p>
+                            <p className="text-xs font-semibold text-slate-600 mt-2">Upload Logo (JPG/PNG)</p>
                           </div>
                         )}
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">Store Front Banner (16:9 Landscape)</label>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-600">Store Front Banner (16:9 Landscape)</label>
                       <div className="border-2 border-dashed border-slate-200 rounded-2xl aspect-[16/9] flex flex-col items-center justify-center p-4 bg-white relative cursor-pointer group hover:border-amber-400 transition-colors">
                         <input type="file" accept="image/*" onChange={(e) => handleImageUpload(e, setBannerPreview)} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20" />
                         {bannerPreview ? (
@@ -1888,7 +1888,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                         ) : (
                           <div className="text-center group-hover:scale-105 transition-transform">
                             {renderIcon('Camera', 'w-8 h-8 text-slate-300 mx-auto group-hover:text-amber-500')}
-                            <p className="text-xs font-semibold text-slate-500 mt-2">Upload Banner Image</p>
+                            <p className="text-xs font-semibold text-slate-600 mt-2">Upload Banner Image</p>
                           </div>
                         )}
                       </div>
@@ -1907,7 +1907,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   </div>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Partnership Agreement Contract</h2>
                 </div>
-                <p className="text-slate-500 text-sm no-print">Review the pre-drafted legal contract. Ensure all merchant parameters, locations, and banking details are correct.</p>
+                <p className="text-slate-600 text-sm no-print">Review the pre-drafted legal contract. Ensure all merchant parameters, locations, and banking details are correct.</p>
 
                 {/* Agreement Layout Contract Area */}
                 <div 
@@ -1984,8 +1984,8 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           <span className="font-cursive text-xl text-slate-400 select-none">NEXG Legal Representative</span>
                         </div>
                         <div className="h-px bg-slate-300 w-full mb-1"></div>
-                        <p className="text-[10px] text-slate-500">Authorized Officer Signature</p>
-                        <p className="text-[10px] text-slate-500">Date: {new Date().toLocaleDateString('en-GB')}</p>
+                        <p className="text-[10px] text-slate-600">Authorized Officer Signature</p>
+                        <p className="text-[10px] text-slate-600">Date: {new Date().toLocaleDateString('en-GB')}</p>
                       </div>
                       <div>
                         <p className="font-bold text-slate-800 text-[11px] uppercase">For THE MERCHANT</p>
@@ -1999,8 +1999,8 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           )}
                         </div>
                         <div className="h-px bg-slate-300 w-full mb-1"></div>
-                        <p className="text-[10px] text-slate-500">Authorized Officer: <strong>{signatoryName || '[Signatory Name]'}</strong></p>
-                        <p className="text-[10px] text-slate-500">Date: {new Date().toLocaleDateString('en-GB')}</p>
+                        <p className="text-[10px] text-slate-600">Authorized Officer: <strong>{signatoryName || '[Signatory Name]'}</strong></p>
+                        <p className="text-[10px] text-slate-600">Date: {new Date().toLocaleDateString('en-GB')}</p>
                       </div>
                     </div>
                   </div>
@@ -2018,7 +2018,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           key={mode}
                           type="button"
                           onClick={() => setSigMode(mode)}
-                          className={`px-3 py-1.5 rounded-lg transition ${sigMode === mode ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-500'}`}
+                          className={`px-3 py-1.5 rounded-lg transition ${sigMode === mode ? 'bg-white text-slate-800 shadow-sm' : 'text-slate-600'}`}
                         >
                           {mode === 'draw' ? 'Draw Sign' : 'Type Sign'}
                         </button>
@@ -2027,7 +2027,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="block text-xs font-bold tracking-wider text-slate-500 uppercase">Authorized Officer Legal Name *</label>
+                    <label className="block text-xs font-bold tracking-wider text-slate-600 uppercase">Authorized Officer Legal Name *</label>
                     <input 
                       type="text"
                       value={signatoryName}
@@ -2039,7 +2039,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                   {sigMode === 'draw' && (
                     <div className="space-y-2">
-                      <label className="block text-xs font-bold tracking-wider text-slate-500 uppercase">Draw Signature below *</label>
+                      <label className="block text-xs font-bold tracking-wider text-slate-600 uppercase">Draw Signature below *</label>
                       <div className="border border-slate-300 bg-white rounded-2xl overflow-hidden relative shadow-inner">
                         <canvas 
                           ref={canvasRef} 
@@ -2060,7 +2060,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                   {sigMode === 'type' && (
                     <div className="space-y-2">
-                      <label className="block text-xs font-bold tracking-wider text-slate-500 uppercase">Handwriting Style Preview</label>
+                      <label className="block text-xs font-bold tracking-wider text-slate-600 uppercase">Handwriting Style Preview</label>
                       <div className="border border-slate-200 bg-white p-6 rounded-2xl text-center shadow-inner">
                         <p className="font-cursive text-4xl text-[#E5B65F] select-none">
                           {signatoryName || '- Your Signature -'}
@@ -2088,13 +2088,13 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
             {/* STEP 11: SUCCESS SCREEN STATE */}
             {currentStep === 11 && (
               <div className="text-center py-12 space-y-6">
-                <div className="w-20 h-20 rounded-full bg-emerald-100 text-emerald-500 flex items-center justify-center text-4xl mx-auto shadow-md success-settle">
+                <div className="w-20 h-20 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-4xl mx-auto shadow-md success-settle">
                   {renderIcon('CheckCircle2', 'w-10 h-10')}
                 </div>
                 
                 <div className="space-y-2">
                   <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">Application Submitted Successfully!</h2>
-                  <p className="text-slate-500 text-sm max-w-lg mx-auto">Your premium merchant onboarding is complete. Our partnership audit committee will complete verify checks and activate your store front within 24 hours.</p>
+                  <p className="text-slate-600 text-sm max-w-lg mx-auto">Your premium merchant onboarding is complete. Our partnership audit committee will complete verify checks and activate your store front within 24 hours.</p>
                 </div>
 
                 <div className="bg-slate-50 p-6 rounded-3xl max-w-lg mx-auto border border-slate-100 text-left text-xs md:text-sm space-y-3 shadow-inner">

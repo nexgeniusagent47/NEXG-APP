@@ -54,7 +54,7 @@ export const NexGCollectionRail: React.FC<NexGCollectionRailProps> = ({
           )}>
             {collection.title}
           </h3>
-          <p className={cn('text-xs mt-0.5', isLight ? 'text-slate-500' : 'text-gray-400')}>
+          <p className={cn('text-xs mt-0.5', isLight ? 'text-slate-600' : 'text-gray-400')}>
             {collection.subtitle}
           </p>
         </div>

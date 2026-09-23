@@ -109,7 +109,7 @@ export default function GoogleReviewsModal({
                   <CheckCircle2 className="w-3 h-3" /> Verified Google Reviews
                 </span>
               </div>
-              <p className={`text-xs ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+              <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                 {categoryName || 'Partner'} • Direct Google Places Integration & Socials
               </p>
             </div>
@@ -344,7 +344,7 @@ export default function GoogleReviewsModal({
               )}
             </div>
 
-            <div className={`text-xs ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+            <div className={`text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
               Showing {filteredReviews.length} reviews
             </div>
           </div>

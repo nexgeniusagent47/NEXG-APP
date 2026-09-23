@@ -181,7 +181,7 @@ export default function NexGLandingHero({
             type="button"
             onClick={handleLocateMe}
             disabled={isLocating}
-            className="p-2 rounded-full hover:bg-slate-100 text-slate-500 hover:text-[#009DE0] transition-colors cursor-pointer flex-shrink-0"
+            className="p-2 rounded-full hover:bg-slate-100 text-slate-600 hover:text-[#009DE0] transition-colors cursor-pointer flex-shrink-0"
             title="Locate my position"
           >
             <Crosshair

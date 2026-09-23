@@ -120,7 +120,7 @@ export default function Footer({ onNavigate }: FooterProps) {
       </div>
       
       <div className={`max-w-[1400px] mx-auto mt-16 sm:mt-20 flex flex-col sm:flex-row justify-between items-center gap-4 border-t pt-8 text-[12px] font-medium ${
-        isLight ? 'border-slate-200 text-slate-500' : 'border-white/10 text-gray-400'
+        isLight ? 'border-slate-200 text-slate-600' : 'border-white/10 text-gray-400'
       }`}>
         <div>
           {t.footer.rights}

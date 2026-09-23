@@ -140,7 +140,7 @@ export const MerchantCard: React.FC<MerchantCardProps> = ({
             </div>
           </div>
 
-          <p className={cn('text-xs line-clamp-1 font-medium', isLight ? 'text-slate-500' : 'text-gray-400')}>
+          <p className={cn('text-xs line-clamp-1 font-medium', isLight ? 'text-slate-600' : 'text-gray-400')}>
             {merchant.subcategory || merchant.category} • {merchant.nairobiArea} • {'$'.repeat(merchant.priceLevel || 2)}
           </p>
         </div>

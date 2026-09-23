@@ -4,7 +4,7 @@
 //
 // WHY THIS EXISTS
 // The forms had drifted into several unrelated treatments for the same visual role,
-// counted across the three of them: `bg-amber-100 text-amber-600` eight times,
+// counted across the three of them: `bg-amber-100 text-amber-800` eight times,
 // `bg-rose-100`, `bg-slate-800 text-[#E5B65F]`, `bg-red-500`, `bg-slate-950` and a
 // `bg-gray-50 text-gray-800` tile that appears fifty-one times in CourierOnboarding.
 // Nothing was wrong with any one of them; the problem is that a reviewer cannot tell

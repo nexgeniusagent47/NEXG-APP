@@ -68,7 +68,7 @@ export default function MerchantRoute({
           )}
         >
           <p className="text-sm font-bold text-rose-500">{error}</p>
-          <p className={cn('text-xs mt-1.5', isLight ? 'text-slate-500' : 'text-gray-400')}>
+          <p className={cn('text-xs mt-1.5', isLight ? 'text-slate-600' : 'text-gray-400')}>
             The API may not be running. Start it with <code className="font-mono">npm run server</code>.
           </p>
           <div className="mt-5 flex items-center justify-center gap-2">

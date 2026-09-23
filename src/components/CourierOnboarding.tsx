@@ -1753,7 +1753,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                     <button 
                       type="button"
                       onClick={downloadCSVTemplate}
-                      className="text-amber-700 underline font-bold ml-2 hover:text-[#7a5821] block sm:inline mt-1 sm:mt-0"
+                      className="text-amber-800 underline font-bold ml-2 hover:text-[#7a5821] block sm:inline mt-1 sm:mt-0"
                     >
                       Download Standard CSV Template
                     </button>
@@ -2278,7 +2278,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                   <p><strong className="text-gray-500">Selected Pathway:</strong> <span className="font-bold capitalize text-[#7a5821]">{selectedType} Rider Partner</span></p>
                   <p><strong className="text-gray-500">Registered Name:</strong> <span className="font-bold text-gray-900">{selectedType === 'fleet' ? formData.flName : formData.fullName}</span></p>
                   <p><strong className="text-gray-500">Contact Number:</strong> <span className="font-semibold text-gray-900">{selectedType === 'fleet' ? formData.flContactPhone : formData.phone}</span></p>
-                  <p><strong className="text-gray-500">Onboarding Status:</strong> <span className="text-amber-600 font-bold bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full text-xs">Pending Compliance Review</span></p>
+                  <p><strong className="text-gray-500">Onboarding Status:</strong> <span className="text-amber-800 font-bold bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full text-xs">Pending Compliance Review</span></p>
                 </div>
 
                 <div className="bg-[#f0f0f0] rounded-2xl p-6 text-left text-xs text-gray-500 space-y-3.5 leading-relaxed">

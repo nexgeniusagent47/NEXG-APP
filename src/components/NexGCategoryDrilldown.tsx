@@ -297,7 +297,7 @@ export default function NexGCategoryDrilldown({
                   {category.subcategories.length} Curated
                 </span>
               </h2>
-              <p className={`text-xs ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+              <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                 Explore dedicated subcategories with specialized imagery and custom parameters
               </p>
             </div>
@@ -513,7 +513,7 @@ export default function NexGCategoryDrilldown({
               <h2 className="text-xl font-bold tracking-tight text-foreground">
                 Merchant Providers & Partners
               </h2>
-              <p className={`text-xs ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+              <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                 {selectedSubcategory === 'all'
                   ? `Showing ${displayedMerchants.length} premier partners (5 merchants per subcategory). Click any provider to reveal their live items.`
                   : `Showing 5 partners for ${selectedSubcategory}. Click any provider to reveal their live items.`}
@@ -591,7 +591,7 @@ export default function NexGCategoryDrilldown({
                       <h3 className="font-bold text-sm truncate text-foreground group-hover:text-[#B88728] dark:group-hover:text-[#E5B65F] transition-colors">
                         {merchant.name}
                       </h3>
-                      <p className={`text-[11px] mt-0.5 truncate ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                      <p className={`text-[11px] mt-0.5 truncate ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                         {merchant.deliveryFee === 0 ? 'Free Delivery' : `Delivery: KSh ${merchant.deliveryFee}`}
                       </p>
                     </div>
@@ -634,7 +634,7 @@ export default function NexGCategoryDrilldown({
               <h3 className="text-xl sm:text-2xl font-bold text-foreground">
                 Select a Merchant Provider Above
               </h3>
-              <p className={`text-xs sm:text-sm max-w-lg mx-auto mt-2 leading-relaxed ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+              <p className={`text-xs sm:text-sm max-w-lg mx-auto mt-2 leading-relaxed ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                 To view item cards, please click any of the verified merchant providers above. Their full 30-item catalog, specifications, and instant ordering will appear here.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-2.5 mt-6">
@@ -726,7 +726,7 @@ export default function NexGCategoryDrilldown({
               <h2 className="text-2xl font-bold tracking-tight text-foreground">
                 {currentMerchant.name} Catalog ({filteredItems.length} Offerings)
               </h2>
-              <p className={`text-xs mt-0.5 ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+              <p className={`text-xs mt-0.5 ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                 Browse catalog offerings with real-time pricing and availability
               </p>
             </div>
@@ -883,7 +883,7 @@ export default function NexGCategoryDrilldown({
 
             {bookingSuccess ? (
               <div className="text-center py-8 space-y-3">
-                <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center mx-auto">
+                <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-700 flex items-center justify-center mx-auto">
                   <Check size={32} />
                 </div>
                 <h3 className="text-2xl font-bold">Dispatch Confirmed!</h3>
@@ -903,7 +903,7 @@ export default function NexGCategoryDrilldown({
                   <h3 className="text-xl sm:text-2xl font-bold tracking-tight mt-1">
                     {selectedItemForWorkflow.item.name}
                   </h3>
-                  <p className={`text-xs mt-1 ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                  <p className={`text-xs mt-1 ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                     Provider: {selectedItemForWorkflow.merchant.name} • KSh {selectedItemForWorkflow.item.price.toLocaleString()}
                   </p>
                 </div>
@@ -925,7 +925,7 @@ export default function NexGCategoryDrilldown({
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-bold mb-1 text-slate-500">Scheduled Date</label>
+                    <label className="block text-xs font-bold mb-1 text-slate-600">Scheduled Date</label>
                     {/* Was `input[type=date]`: the native picker cannot be styled, is
                         ordered month-first for a market that reads day-first, and shows
                         a different control in every browser. */}
@@ -937,7 +937,7 @@ export default function NexGCategoryDrilldown({
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold mb-1 text-slate-500">Preferred Time</label>
+                    <label className="block text-xs font-bold mb-1 text-slate-600">Preferred Time</label>
                     <TimeStringField
                       value={bookingTime}
                       onChange={setBookingTime}
@@ -949,7 +949,7 @@ export default function NexGCategoryDrilldown({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold mb-1 text-slate-500">
+                  <label className="block text-xs font-bold mb-1 text-slate-600">
                     Suite Number or Location Notes
                   </label>
                   <input

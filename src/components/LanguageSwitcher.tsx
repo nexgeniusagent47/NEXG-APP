@@ -99,8 +99,8 @@ export default function LanguageSwitcher({
                   <span className="leading-tight font-bold truncate">{opt.nativeName}</span>
                   <span className={`text-[10px] truncate ${
                     isSelected
-                      ? isLight ? 'text-amber-700' : 'text-amber-300/80'
-                      : isLight ? 'text-slate-500' : 'text-gray-400'
+                      ? isLight ? 'text-amber-800' : 'text-amber-300/80'
+                      : isLight ? 'text-slate-600' : 'text-gray-400'
                   }`}>
                     {opt.label}
                   </span>
@@ -160,7 +160,7 @@ export default function LanguageSwitcher({
             >
               <div className="px-2.5 py-1.5 border-b border-black/5 dark:border-white/5 mb-1">
                 <span className={`text-[11px] font-bold uppercase tracking-wider ${
-                  isLight ? 'text-slate-500' : 'text-gray-400'
+                  isLight ? 'text-slate-600' : 'text-gray-400'
                 }`}>
                   {t.nav.selectLanguage}
                 </span>
@@ -195,7 +195,7 @@ export default function LanguageSwitcher({
                         <div className="flex flex-col text-left">
                           <span className="leading-tight">{opt.nativeName}</span>
                           <span className={`text-[10px] font-normal ${
-                            isLight ? 'text-slate-500' : 'text-gray-400'
+                            isLight ? 'text-slate-600' : 'text-gray-400'
                           }`}>
                             {opt.label} • {opt.region}
                           </span>
@@ -308,7 +308,7 @@ export default function LanguageSwitcher({
                           </span>
                         </div>
                         <span className={`text-[11px] font-normal ${
-                          isLight ? 'text-slate-500' : 'text-gray-400'
+                          isLight ? 'text-slate-600' : 'text-gray-400'
                         }`}>
                           {opt.label} • {opt.region}
                         </span>

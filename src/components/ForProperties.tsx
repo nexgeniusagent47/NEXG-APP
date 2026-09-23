@@ -124,10 +124,10 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               </>
             ) : (
               <>
-                <button onClick={() => onNavigate('properties')} className={`transition-colors cursor-pointer py-2 px-2 ${isLight ? 'text-amber-700 font-bold' : 'text-[#E5B65F] font-bold'}`}>{t.nav.forProperties}</button>
-                <button onClick={() => onNavigate('merchants')} className={`transition-colors cursor-pointer py-2 px-2 ${isLight ? 'text-slate-700 hover:text-amber-600' : 'text-gray-300 hover:text-white'}`}>{t.nav.forMerchants}</button>
-                <button onClick={() => onNavigate('couriers')} className={`transition-colors cursor-pointer py-2 px-2 ${isLight ? 'text-slate-700 hover:text-amber-600' : 'text-gray-300 hover:text-white'}`}>{t.nav.forCouriers}</button>
-                <button onClick={() => onNavigate('experiences')} className={`transition-colors cursor-pointer py-2 px-2 ${isLight ? 'text-slate-700 hover:text-amber-600' : 'text-gray-300 hover:text-white'}`}>{t.nav.experiences}</button>
+                <button onClick={() => onNavigate('properties')} className={`transition-colors cursor-pointer py-2 px-2 ${isLight ? 'text-amber-800 font-bold' : 'text-[#E5B65F] font-bold'}`}>{t.nav.forProperties}</button>
+                <button onClick={() => onNavigate('merchants')} className={`transition-colors cursor-pointer py-2 px-2 ${isLight ? 'text-slate-700 hover:text-amber-800' : 'text-gray-300 hover:text-white'}`}>{t.nav.forMerchants}</button>
+                <button onClick={() => onNavigate('couriers')} className={`transition-colors cursor-pointer py-2 px-2 ${isLight ? 'text-slate-700 hover:text-amber-800' : 'text-gray-300 hover:text-white'}`}>{t.nav.forCouriers}</button>
+                <button onClick={() => onNavigate('experiences')} className={`transition-colors cursor-pointer py-2 px-2 ${isLight ? 'text-slate-700 hover:text-amber-800' : 'text-gray-300 hover:text-white'}`}>{t.nav.experiences}</button>
               </>
             )}
 
@@ -180,7 +180,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`w-10 h-10 flex items-center justify-center transition-colors focus:outline-none cursor-pointer min-w-[40px] min-h-[40px] ${
-                isLight ? 'text-slate-800 hover:text-amber-600' : 'text-white hover:text-[#E5B65F]'
+                isLight ? 'text-slate-800 hover:text-amber-800' : 'text-white hover:text-[#E5B65F]'
               }`}
             >
               {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -320,13 +320,13 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                   : 'bg-white/5 hover:bg-[#E5B65F]/10 hover:shadow-[0_0_20px_rgba(229,182,95,0.15)]'
               }`}>
                 <Utensils className={`mb-4 group-hover:scale-110 transition-transform w-8 h-8 sm:w-10 sm:h-10 ${
-                  isLight ? 'text-amber-600' : 'text-[#E5B65F]'
+                  isLight ? 'text-amber-800' : 'text-[#E5B65F]'
                 }`} />
                 <p className={`font-bold text-xs sm:text-sm text-center mb-1 ${
                   isLight ? 'text-slate-900' : 'text-white'
                 }`}>Fine Dining</p>
                 <p className={`text-[10px] text-center hidden sm:block ${
-                  isLight ? 'text-slate-500' : 'text-gray-400'
+                  isLight ? 'text-slate-600' : 'text-gray-400'
                 }`}>Curated local menus</p>
               </div>
             </div>
@@ -343,7 +343,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                   isLight ? 'text-slate-900' : 'text-white'
                 }`}>Wellness & Spa</p>
                 <p className={`text-[10px] text-center hidden sm:block ${
-                  isLight ? 'text-slate-500' : 'text-gray-400'
+                  isLight ? 'text-slate-600' : 'text-gray-400'
                 }`}>In-suite organic therapies</p>
               </div>
             </div>
@@ -360,7 +360,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                   isLight ? 'text-slate-900' : 'text-white'
                 }`}>Luxury Transport</p>
                 <p className={`text-[10px] text-center hidden sm:block ${
-                  isLight ? 'text-slate-500' : 'text-gray-400'
+                  isLight ? 'text-slate-600' : 'text-gray-400'
                 }`}>Chauffeurs & rentals</p>
               </div>
             </div>
@@ -377,7 +377,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                   isLight ? 'text-slate-900' : 'text-white'
                 }`}>Local Adventures</p>
                 <p className={`text-[10px] text-center hidden sm:block ${
-                  isLight ? 'text-slate-500' : 'text-gray-400'
+                  isLight ? 'text-slate-600' : 'text-gray-400'
                 }`}>Safaris & excursions</p>
               </div>
             </div>
@@ -401,7 +401,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               <div className="flex items-center gap-4 mb-6 sm:mb-10">
                 <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${
                   isLight
-                    ? 'bg-amber-100/70 border border-amber-300 text-amber-700'
+                    ? 'bg-amber-100/70 border border-amber-300 text-amber-800'
                     : 'bg-white/5 border border-white/10 text-[#E5B65F]'
                 }`}>
                   <QrCode size={24} />
@@ -411,7 +411,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                     isLight ? 'text-slate-900' : 'text-white'
                   }`}>The QR Advantage</h3>
                   <p className={`text-xs sm:text-sm font-medium ${
-                    isLight ? 'text-slate-500' : 'text-gray-400'
+                    isLight ? 'text-slate-600' : 'text-gray-400'
                   }`}>Instant access, absolutely zero apps required</p>
                 </div>
               </div>
@@ -540,7 +540,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             </span>
             <span className={`hidden sm:inline font-light ${isLight ? 'text-slate-300' : 'text-gray-600'}`}>|</span>
             <span className={`text-xs sm:text-sm md:text-base font-bold tracking-tight flex items-center gap-1.5 ${
-              isLight ? 'text-amber-700' : 'text-[#E5B65F]'
+              isLight ? 'text-amber-800' : 'text-[#E5B65F]'
             }`}>
               <span className="w-1.5 h-1.5 rounded-full bg-[#E5B65F] ring-2 ring-[#E5B65F]/25"></span>
               Better Reviews
@@ -684,13 +684,13 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               <div>
                 <div className="mb-6 flex justify-between items-start">
                   <div className={`p-3 rounded-2xl border ${
-                    isLight ? 'bg-amber-50 border-amber-200 text-amber-600' : 'bg-white/5 border-white/10 text-[#E5B65F]'
+                    isLight ? 'bg-amber-50 border-amber-200 text-amber-800' : 'bg-white/5 border-white/10 text-[#E5B65F]'
                   }`}>
                     <TrendingUp size={24} />
                   </div>
                   <div className="text-right">
-                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>Average Order Growth</p>
-                    <p className={`text-xl sm:text-2xl font-bold ${isLight ? 'text-amber-600' : 'text-[#E5B65F]'}`}>+28%</p>
+                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Average Order Growth</p>
+                    <p className={`text-xl sm:text-2xl font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>+28%</p>
                   </div>
                 </div>
                 <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Guest Habit Tracking</h3>
@@ -700,7 +700,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               </div>
               <div className={`mt-8 pt-6 border-t ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
                 <div className="flex items-center justify-between text-xs font-semibold">
-                  <span className={isLight ? 'text-slate-500' : 'text-gray-400'}>Order Conversion Rate</span>
+                  <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>Order Conversion Rate</span>
                   <span className={isLight ? 'text-slate-900' : 'text-white'}>12.4%</span>
                 </div>
                 <div className={`w-full h-1.5 rounded-full mt-2 overflow-hidden ${isLight ? 'bg-slate-200' : 'bg-white/10'}`}>
@@ -718,13 +718,13 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               <div>
                 <div className="mb-6 flex justify-between items-start">
                   <div className={`p-3 rounded-2xl border ${
-                    isLight ? 'bg-amber-50 border-amber-200 text-amber-600' : 'bg-white/5 border-white/10 text-[#E5B65F]'
+                    isLight ? 'bg-amber-50 border-amber-200 text-amber-800' : 'bg-white/5 border-white/10 text-[#E5B65F]'
                   }`}>
                     <Users size={24} />
                   </div>
                   <div className="text-right">
-                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>Guest Satisfaction</p>
-                    <p className={`text-xl sm:text-2xl font-bold ${isLight ? 'text-amber-600' : 'text-[#E5B65F]'}`}>4.9 / 5</p>
+                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Guest Satisfaction</p>
+                    <p className={`text-xl sm:text-2xl font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>4.9 / 5</p>
                   </div>
                 </div>
                 <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Preference Profiles</h3>
@@ -734,7 +734,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               </div>
               <div className={`mt-8 pt-6 border-t ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
                 <div className="flex items-center justify-between text-xs font-semibold">
-                  <span className={isLight ? 'text-slate-500' : 'text-gray-400'}>Loyalty Return Intent</span>
+                  <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>Loyalty Return Intent</span>
                   <span className={isLight ? 'text-slate-900' : 'text-white'}>88.0%</span>
                 </div>
                 <div className={`w-full h-1.5 rounded-full mt-2 overflow-hidden ${isLight ? 'bg-slate-200' : 'bg-white/10'}`}>
@@ -752,13 +752,13 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               <div>
                 <div className="mb-6 flex justify-between items-start">
                   <div className={`p-3 rounded-2xl border ${
-                    isLight ? 'bg-amber-50 border-amber-200 text-amber-600' : 'bg-white/5 border-white/10 text-[#E5B65F]'
+                    isLight ? 'bg-amber-50 border-amber-200 text-amber-800' : 'bg-white/5 border-white/10 text-[#E5B65F]'
                   }`}>
                     <LineChart size={24} />
                   </div>
                   <div className="text-right">
-                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>Inventory Speed</p>
-                    <p className={`text-xl sm:text-2xl font-bold ${isLight ? 'text-amber-600' : 'text-[#E5B65F]'}`}>Realtime</p>
+                    <p className={`text-[10px] uppercase tracking-wider font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Inventory Speed</p>
+                    <p className={`text-xl sm:text-2xl font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>Realtime</p>
                   </div>
                 </div>
                 <h3 className={`text-lg sm:text-xl font-bold mb-3 ${isLight ? 'text-slate-900' : 'text-white'}`}>Operational Optimization</h3>
@@ -768,7 +768,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               </div>
               <div className={`mt-8 pt-6 border-t ${isLight ? 'border-slate-200' : 'border-white/10'}`}>
                 <div className="flex items-center justify-between text-xs font-semibold">
-                  <span className={isLight ? 'text-slate-500' : 'text-gray-400'}>Service Response Index</span>
+                  <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>Service Response Index</span>
                   <span className={isLight ? 'text-slate-900' : 'text-white'}>94.2%</span>
                 </div>
                 <div className={`w-full h-1.5 rounded-full mt-2 overflow-hidden ${isLight ? 'bg-slate-200' : 'bg-white/10'}`}>
@@ -910,10 +910,10 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             }`}>
               <div>
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-[10px] text-emerald-500 dark:text-emerald-400 font-bold tracking-widest uppercase bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">
+                  <span className="text-[10px] text-emerald-700 dark:text-emerald-400 font-bold tracking-widest uppercase bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">
                     STEP 04
                   </span>
-                  <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-bold text-xs shadow-inner">
+                  <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-700 dark:text-emerald-400 font-bold text-xs shadow-inner">
                     ✓
                   </div>
                 </div>
@@ -962,26 +962,26 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
 
               <div className="grid grid-cols-2 gap-4 sm:gap-8 mb-6 sm:mb-10">
                 <div>
-                  <p className={`text-3xl sm:text-4xl font-extrabold ${isLight ? 'text-amber-600' : 'text-[#E5B65F]'}`}>15%</p>
-                  <p className={`text-[10px] sm:text-xs mt-1 font-medium ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>Avg. Commission Share</p>
+                  <p className={`text-3xl sm:text-4xl font-extrabold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>15%</p>
+                  <p className={`text-[10px] sm:text-xs mt-1 font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Avg. Commission Share</p>
                 </div>
                 <div>
-                  <p className={`text-3xl sm:text-4xl font-extrabold ${isLight ? 'text-amber-600' : 'text-[#E5B65F]'}`}>$0</p>
-                  <p className={`text-[10px] sm:text-xs mt-1 font-medium ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>Upfront Integration Cost</p>
+                  <p className={`text-3xl sm:text-4xl font-extrabold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>$0</p>
+                  <p className={`text-[10px] sm:text-xs mt-1 font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Upfront Integration Cost</p>
                 </div>
               </div>
 
               <div className="space-y-3 sm:space-y-4">
                 <div className="flex items-center gap-3">
-                  <CheckCircle className={`flex-shrink-0 ${isLight ? 'text-amber-600' : 'text-[#E5B65F]'}`} size={20} />
+                  <CheckCircle className={`flex-shrink-0 ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`} size={20} />
                   <span className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-700' : 'text-gray-200'}`}>Fully automated payouts and digital reporting</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <CheckCircle className={`flex-shrink-0 ${isLight ? 'text-amber-600' : 'text-[#E5B65F]'}`} size={20} />
+                  <CheckCircle className={`flex-shrink-0 ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`} size={20} />
                   <span className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-700' : 'text-gray-200'}`}>Multi-currency payment gateways for global travelers</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <CheckCircle className={`flex-shrink-0 ${isLight ? 'text-amber-600' : 'text-[#E5B65F]'}`} size={20} />
+                  <CheckCircle className={`flex-shrink-0 ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`} size={20} />
                   <span className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-700' : 'text-gray-200'}`}>Clear real-time transparency audit trail</span>
                 </div>
               </div>
@@ -996,7 +996,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               <h3 className={`text-lg sm:text-xl font-bold mb-6 flex items-center gap-2 ${
                 isLight ? 'text-slate-900' : 'text-white'
               }`}>
-                <DollarSign size={20} className={isLight ? 'text-amber-600' : 'text-[#E5B65F]'} />
+                <DollarSign size={20} className={isLight ? 'text-amber-800' : 'text-[#E5B65F]'} />
                 Earnings Estimator
               </h3>
 
@@ -1005,7 +1005,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                 <div>
                   <div className="flex justify-between items-center text-xs sm:text-sm font-medium mb-2">
                     <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>Total Rooms / Suites</span>
-                    <span className={`font-bold ${isLight ? 'text-amber-700' : 'text-[#E5B65F]'}`}>{rooms} Rooms</span>
+                    <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>{rooms} Rooms</span>
                   </div>
                   <input 
                     type="range" 
@@ -1022,7 +1022,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                 <div>
                   <div className="flex justify-between items-center text-xs sm:text-sm font-medium mb-2">
                     <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>Average Occupancy Rate</span>
-                    <span className={`font-bold ${isLight ? 'text-amber-700' : 'text-[#E5B65F]'}`}>{occupancy}%</span>
+                    <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>{occupancy}%</span>
                   </div>
                   <input 
                     type="range" 
@@ -1039,7 +1039,7 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                 <div>
                   <div className="flex justify-between items-center text-xs sm:text-sm font-medium mb-2">
                     <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>Average App Spend per Stay</span>
-                    <span className={`font-bold ${isLight ? 'text-amber-700' : 'text-[#E5B65F]'}`}>${guestSpend} USD</span>
+                    <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>${guestSpend} USD</span>
                   </div>
                   <input 
                     type="range" 
@@ -1062,25 +1062,25 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                     : 'bg-white/5 border-white/5 text-white'
                 }`}>
                   <span className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>Estimated Monthly Share</span>
-                  <span className={`text-xl sm:text-2xl font-bold ${isLight ? 'text-amber-700' : 'text-[#E5B65F]'}`}>
+                  <span className={`text-xl sm:text-2xl font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>
                     ${totalCommissionRevenue.toLocaleString()} USD
                   </span>
                 </div>
 
                 <div className="space-y-2.5 px-1">
-                  <div className={`flex justify-between text-[11px] sm:text-xs ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                  <div className={`flex justify-between text-[11px] sm:text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                     <span>Food & Dining referrals</span>
                     <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>${foodRev.toLocaleString()}</span>
                   </div>
-                  <div className={`flex justify-between text-[11px] sm:text-xs ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                  <div className={`flex justify-between text-[11px] sm:text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                     <span>Private Cab & Car Hire shares</span>
                     <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>${transportRev.toLocaleString()}</span>
                   </div>
-                  <div className={`flex justify-between text-[11px] sm:text-xs ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                  <div className={`flex justify-between text-[11px] sm:text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                     <span>In-room Spa bookings commission</span>
                     <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>${spaRev.toLocaleString()}</span>
                   </div>
-                  <div className={`flex justify-between text-[11px] sm:text-xs ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                  <div className={`flex justify-between text-[11px] sm:text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                     <span>Bespoke Tours & Safaris</span>
                     <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>${excursionRev.toLocaleString()}</span>
                   </div>

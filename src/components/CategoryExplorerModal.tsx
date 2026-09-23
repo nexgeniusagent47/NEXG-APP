@@ -170,7 +170,7 @@ export default function CategoryExplorerModal({
                   </h2>
                   <p
                     className={`text-xs font-medium ${
-                      isLight ? 'text-slate-500' : 'text-gray-400'
+                      isLight ? 'text-slate-600' : 'text-gray-400'
                     }`}
                   >
                     21 Curated Verticals • {totalSubcategoriesCount} Specialized Subcategories
@@ -276,7 +276,7 @@ export default function CategoryExplorerModal({
                 <h3 className="text-base font-bold mb-1">No matching verticals found</h3>
                 <p
                   className={`text-xs ${
-                    isLight ? 'text-slate-500' : 'text-gray-400'
+                    isLight ? 'text-slate-600' : 'text-gray-400'
                   }`}
                 >
                   Try searching for another keyword or clear the search query.
@@ -333,7 +333,7 @@ export default function CategoryExplorerModal({
                             </h3>
                             <p
                               className={`text-xs line-clamp-1 ${
-                                isLight ? 'text-slate-500' : 'text-gray-400'
+                                isLight ? 'text-slate-600' : 'text-gray-400'
                               }`}
                             >
                               {cat.desc}
@@ -390,7 +390,7 @@ export default function CategoryExplorerModal({
                     {/* Bottom hint badge */}
                     <div className="mt-4 pt-3 flex items-center justify-between text-[11px] font-medium opacity-80 border-t border-black/5 dark:border-white/5">
                       <span className="flex items-center gap-1">
-                        <Icons.CheckCircle2 size={12} className={isLight ? 'text-emerald-600' : 'text-emerald-400'} />
+                        <Icons.CheckCircle2 size={12} className={isLight ? 'text-emerald-700' : 'text-emerald-400'} />
                         <span className={isLight ? 'text-slate-600' : 'text-gray-400'}>
                           Verified Merchant Partners
                         </span>

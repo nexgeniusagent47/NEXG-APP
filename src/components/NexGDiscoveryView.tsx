@@ -326,7 +326,7 @@ export default function NexGDiscoveryView({
                   <h2 className="text-xl sm:text-2xl font-bold tracking-tight">
                     Explore Verticals & Categories
                   </h2>
-                  <p className={cn('text-xs mt-0.5', isLight ? 'text-slate-500' : 'text-gray-400')}>
+                  <p className={cn('text-xs mt-0.5', isLight ? 'text-slate-600' : 'text-gray-400')}>
                     21 distinct verticals with 134 specialized subcategories
                   </p>
                 </div>
@@ -387,7 +387,7 @@ export default function NexGDiscoveryView({
                     <h3 className="font-bold text-xs sm:text-sm truncate group-hover:text-[#B88728] dark:group-hover:text-[#E5B65F] transition-colors">
                       {category.name}
                     </h3>
-                    <p className={cn('text-[11px] truncate mt-0.5', isLight ? 'text-slate-500' : 'text-gray-400')}>
+                    <p className={cn('text-[11px] truncate mt-0.5', isLight ? 'text-slate-600' : 'text-gray-400')}>
                       {category.subcategories.length} Subcategories
                     </p>
                   </button>
@@ -453,7 +453,7 @@ export default function NexGDiscoveryView({
                   <h2 className="text-xl sm:text-2xl font-bold tracking-tight">
                     All Verified Partners & Merchants
                   </h2>
-                  <p className={cn('text-xs mt-0.5', isLight ? 'text-slate-500' : 'text-gray-400')}>
+                  <p className={cn('text-xs mt-0.5', isLight ? 'text-slate-600' : 'text-gray-400')}>
                     Browse verified Nairobi merchants across 20 neighborhoods with Wolt-grade previews
                   </p>
                 </div>

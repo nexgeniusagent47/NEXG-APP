@@ -356,12 +356,12 @@ export default function Restaurants({ onNavigate }: RestaurantsProps) {
                       }`}>
                         {restaurant.name}
                       </h3>
-                      <span className={`text-xs font-extrabold shrink-0 ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                      <span className={`text-xs font-extrabold shrink-0 ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                         {restaurant.priceTier}
                       </span>
                     </div>
 
-                    <p className={`text-xs font-semibold mb-2 line-clamp-1 ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                    <p className={`text-xs font-semibold mb-2 line-clamp-1 ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                       {restaurant.cuisine}
                     </p>
 
@@ -484,7 +484,7 @@ export default function Restaurants({ onNavigate }: RestaurantsProps) {
               <h4 className={`text-lg font-bold mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>
                 No dining partners match your filters
               </h4>
-              <p className={`text-xs max-w-sm mx-auto mb-4 ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+              <p className={`text-xs max-w-sm mx-auto mb-4 ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                 Try adjusting your search keywords or resetting cuisine filters.
               </p>
               <button
@@ -607,7 +607,7 @@ export default function Restaurants({ onNavigate }: RestaurantsProps) {
               <h2 className={`text-2xl font-bold tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
                 Signature Dishes & Menu Offerings
               </h2>
-              <p className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+              <p className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                 Click any dish to configure ingredients, accompaniments, or place a simulated order
               </p>
             </div>

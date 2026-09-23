@@ -129,7 +129,7 @@ export default function ConsentBanner() {
                       <span className="block text-sm font-medium text-slate-900">{title}</span>
                       <span className="block text-xs text-slate-600">{description}</span>
                       {locked && (
-                        <span className="mt-1 block text-xs font-medium text-slate-500">
+                        <span className="mt-1 block text-xs font-medium text-slate-600">
                           Always on. It cannot be switched off because the site cannot run without
                           it.
                         </span>
@@ -172,7 +172,7 @@ export default function ConsentBanner() {
 
           {/* Focus styling is the document-wide `:focus-visible` rule in src/index.css,
               so every control here gets the same visible ring as the rest of the app. */}
-          <p className="mt-3 text-xs text-slate-500">
+          <p className="mt-3 text-xs text-slate-600">
             Necessary cookies are always active. Everything else is optional.
           </p>
         </div>

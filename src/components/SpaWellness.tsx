@@ -328,7 +328,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
                       {venue.name}
                     </h3>
 
-                    <p className={`text-xs font-semibold mb-2 line-clamp-1 ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                    <p className={`text-xs font-semibold mb-2 line-clamp-1 ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                       {venue.location}
                     </p>
 
@@ -544,7 +544,7 @@ export default function SpaWellness({ onNavigate }: SpaWellnessProps) {
               <h2 className={`text-2xl font-bold tracking-tight ${isLight ? 'text-slate-900' : 'text-white'}`}>
                 Sanctuary Treatments & In-Villa Rituals
               </h2>
-              <p className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+              <p className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                 Select duration, botanical essential oils, and schedule an immediate in-villa or pavilion appointment
               </p>
             </div>

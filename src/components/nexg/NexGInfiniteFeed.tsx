@@ -79,7 +79,7 @@ export function NexGInfiniteFeed<T>({
       <div className="py-12 text-center">
         {emptyState || (
           <div className="max-w-md mx-auto p-8 rounded-3xl border border-dashed text-center">
-            <p className={isLight ? 'text-slate-500 font-medium text-sm' : 'text-gray-400 font-medium text-sm'}>
+            <p className={isLight ? 'text-slate-600 font-medium text-sm' : 'text-gray-400 font-medium text-sm'}>
               No {itemTypeLabel} matching your current filters.
             </p>
           </div>

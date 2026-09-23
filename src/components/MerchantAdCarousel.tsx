@@ -328,7 +328,7 @@ export default function MerchantAdCarousel({
               </h2>
 
               {hasLocation ? (
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/25">
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/25">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-status" />
                   <span className="truncate max-w-[160px] sm:max-w-none">{locationName}</span>
                 </div>
@@ -345,7 +345,7 @@ export default function MerchantAdCarousel({
               )}
             </div>
 
-            <p className={`text-xs mt-1 font-medium ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+            <p className={`text-xs mt-1 font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
               {hasLocation
                 ? `Showing curated culinary and concierge highlights trending around ${locationName}`
                 : 'Real-time trending luxury favorites and instant suite arrivals'}
@@ -384,7 +384,7 @@ export default function MerchantAdCarousel({
             >
               Sponsored
             </h2>
-            <p className={`text-xs mt-0.5 font-medium ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+            <p className={`text-xs mt-0.5 font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
               Exclusive host and verified partner privileges
             </p>
           </div>

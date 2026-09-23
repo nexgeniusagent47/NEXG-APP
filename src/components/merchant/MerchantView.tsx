@@ -270,7 +270,7 @@ export default function MerchantView({
           <ol
             className={cn(
               'mt-3 flex flex-wrap items-center gap-x-1.5 gap-y-1.5 text-[11px] font-semibold',
-              isLight ? 'text-slate-500' : 'text-gray-400'
+              isLight ? 'text-slate-600' : 'text-gray-400'
             )}
           >
             {intent.arc.steps.map((step, index) => (
@@ -324,7 +324,7 @@ export default function MerchantView({
               <h3 className={cn('text-sm font-bold', isLight ? 'text-slate-900' : 'text-white')}>
                 No offerings listed yet
               </h3>
-              <p className={cn('text-xs mt-1', isLight ? 'text-slate-500' : 'text-gray-400')}>
+              <p className={cn('text-xs mt-1', isLight ? 'text-slate-600' : 'text-gray-400')}>
                 This merchant has not published its catalogue. You can still request{' '}
                 {intent.arc.cardAction.toLowerCase()} directly.
               </p>
@@ -421,7 +421,7 @@ export default function MerchantView({
                     >
                       {section.name}
                     </h3>
-                    <span className={cn('text-[11px] font-semibold', isLight ? 'text-slate-500' : 'text-gray-400')}>
+                    <span className={cn('text-[11px] font-semibold', isLight ? 'text-slate-600' : 'text-gray-400')}>
                       {section.items.length}
                     </span>
                   </div>
@@ -459,7 +459,7 @@ export default function MerchantView({
                             >
                               {item.name}
                             </p>
-                            <p className={cn('text-[11px] mt-0.5 line-clamp-2', isLight ? 'text-slate-500' : 'text-gray-400')}>
+                            <p className={cn('text-[11px] mt-0.5 line-clamp-2', isLight ? 'text-slate-600' : 'text-gray-400')}>
                               {item.description}
                             </p>
                             <div className="mt-auto pt-2 flex items-center justify-between gap-2">

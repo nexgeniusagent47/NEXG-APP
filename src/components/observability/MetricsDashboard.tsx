@@ -186,7 +186,7 @@ function formatClock(iso: string | null | undefined): string {
 function Sparkline({ values }: { values: number[] }) {
   if (values.length < 2) {
     return (
-      <p className="text-xs text-slate-500">
+      <p className="text-xs text-slate-600">
         Collecting samples. The line appears after the second poll.
       </p>
     );
@@ -229,7 +229,7 @@ function LatencyHistogram({ buckets }: { buckets: LatencyBucket[] }) {
   const finite = deltas.filter((bucket) => typeof bucket.le === 'number');
   const max = Math.max(1, ...deltas.map((bucket) => bucket.count));
 
-  if (!deltas.length) return <p className="text-xs text-slate-500">No samples yet.</p>;
+  if (!deltas.length) return <p className="text-xs text-slate-600">No samples yet.</p>;
 
   return (
     <div>
@@ -254,7 +254,7 @@ function LatencyHistogram({ buckets }: { buckets: LatencyBucket[] }) {
           );
         })}
       </svg>
-      <div className="mt-1 flex justify-between text-[10px] text-slate-500">
+      <div className="mt-1 flex justify-between text-[10px] text-slate-600">
         <span>{finite.length ? `≤ ${finite[0].le} ms` : ''}</span>
         <span>{finite.length ? `≤ ${finite[finite.length - 1].le} ms` : ''}</span>
         <span>+∞</span>
@@ -267,7 +267,7 @@ function PercentileBar({ label, value, max }: { label: string; value: number; ma
   const width = max > 0 ? Math.min(100, Math.max(2, (value / max) * 100)) : 0;
   return (
     <div className="flex items-center gap-3">
-      <span className="w-8 shrink-0 text-xs font-medium text-slate-500">{label}</span>
+      <span className="w-8 shrink-0 text-xs font-medium text-slate-600">{label}</span>
       <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-200">
         {/* A dynamic width cannot be a Tailwind class; an inline style is the only
             way to express a value that changes every poll. */}
@@ -297,7 +297,7 @@ function StatusBreakdown({ statuses }: { statuses: Array<{ status: number; count
       .reduce((sum, entry) => sum + entry.count, 0),
   }));
 
-  if (!total) return <p className="text-xs text-slate-500">No responses recorded yet.</p>;
+  if (!total) return <p className="text-xs text-slate-600">No responses recorded yet.</p>;
 
   return (
     <div>
@@ -322,7 +322,7 @@ function StatusBreakdown({ statuses }: { statuses: Array<{ status: number; count
         ))}
       </ul>
       {statuses.length > 0 && (
-        <p className="mt-2 text-[11px] text-slate-500">
+        <p className="mt-2 text-[11px] text-slate-600">
           Exact codes:{' '}
           {statuses.map((entry) => `${entry.status}×${entry.count}`).join(', ')}
         </p>
@@ -359,7 +359,7 @@ function Card({
       className={`min-w-0 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm ${className}`}
       aria-label={title}
     >
-      <h2 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
+      <h2 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-slate-600">
         {icon}
         {title}
       </h2>
@@ -383,9 +383,9 @@ function Stat({
     tone === 'bad' ? 'text-red-500' : tone === 'warn' ? 'text-amber-500' : 'text-slate-900';
   return (
     <div>
-      <p className="text-[11px] uppercase tracking-wide text-slate-500">{label}</p>
+      <p className="text-[11px] uppercase tracking-wide text-slate-600">{label}</p>
       <p className={`mt-1 text-2xl font-semibold tabular-nums ${toneClass}`}>{value}</p>
-      {hint && <p className="mt-0.5 text-[11px] text-slate-500">{hint}</p>}
+      {hint && <p className="mt-0.5 text-[11px] text-slate-600">{hint}</p>}
     </div>
   );
 }
@@ -393,7 +393,7 @@ function Stat({
 function Row({ label, value }: { label: string; value: ReactNode }) {
   return (
     <div className="flex items-baseline justify-between gap-4 border-b border-slate-200 py-1.5 last:border-0">
-      <span className="text-xs text-slate-500">{label}</span>
+      <span className="text-xs text-slate-600">{label}</span>
       <span className="text-right text-xs font-medium tabular-nums text-slate-800">{value}</span>
     </div>
   );
@@ -401,7 +401,7 @@ function Row({ label, value }: { label: string; value: ReactNode }) {
 
 function TraceList({ spans }: { spans: TraceSpan[] }) {
   if (!spans.length) {
-    return <p className="text-xs text-slate-500">No spans buffered yet.</p>;
+    return <p className="text-xs text-slate-600">No spans buffered yet.</p>;
   }
   const slowest = Math.max(1, ...spans.map((span) => span.durationMs));
   return (
@@ -417,7 +417,7 @@ function TraceList({ spans }: { spans: TraceSpan[] }) {
           <span className="w-40 shrink-0 truncate font-medium text-slate-700" title={span.name}>
             {span.name}
           </span>
-          <span className="hidden w-20 shrink-0 font-mono text-[10px] text-slate-500 sm:inline">
+          <span className="hidden w-20 shrink-0 font-mono text-[10px] text-slate-600 sm:inline">
             {span.traceId.slice(0, 8)}
           </span>
           <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-slate-200">
@@ -429,7 +429,7 @@ function TraceList({ spans }: { spans: TraceSpan[] }) {
           <span className="w-16 shrink-0 text-right tabular-nums text-slate-700">
             {formatMs(span.durationMs)}
           </span>
-          <span className="hidden w-16 shrink-0 text-right text-slate-500 md:inline">
+          <span className="hidden w-16 shrink-0 text-right text-slate-600 md:inline">
             {formatClock(span.startedAt)}
           </span>
         </li>
@@ -457,13 +457,13 @@ function VitalChips({ vitals }: { vitals: Record<string, ClientVital> }) {
 }
 
 function RouteTable({ routes }: { routes: MetricsSnapshot['routes'] }) {
-  if (!routes.length) return <p className="text-xs text-slate-500">No routes recorded yet.</p>;
+  if (!routes.length) return <p className="text-xs text-slate-600">No routes recorded yet.</p>;
   const slowest = Math.max(1, ...routes.map((route) => route.p95Ms));
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-left text-xs">
         <thead>
-          <tr className="text-[11px] uppercase tracking-wide text-slate-500">
+          <tr className="text-[11px] uppercase tracking-wide text-slate-600">
             <th scope="col" className="pb-2 pr-3 font-medium">Route</th>
             <th scope="col" className="pb-2 pr-3 text-right font-medium">Requests</th>
             <th scope="col" className="pb-2 pr-3 text-right font-medium">Errors</th>
@@ -476,17 +476,17 @@ function RouteTable({ routes }: { routes: MetricsSnapshot['routes'] }) {
             <tr key={`${route.method} ${route.route}`} className="border-t border-slate-200">
               <td className="py-1.5 pr-3">
                 <span className="font-mono text-[11px] text-slate-800">{route.route}</span>
-                <span className="ml-2 text-[10px] text-slate-500">{route.method}</span>
+                <span className="ml-2 text-[10px] text-slate-600">{route.method}</span>
               </td>
               <td className="py-1.5 pr-3 text-right tabular-nums text-slate-700">{route.count}</td>
               <td
                 className={`py-1.5 pr-3 text-right tabular-nums ${
-                  route.errors > 0 ? 'text-red-500' : 'text-slate-500'
+                  route.errors > 0 ? 'text-red-500' : 'text-slate-600'
                 }`}
               >
                 {route.errors + route.clientErrors}
                 {route.aborted > 0 && (
-                  <span className="text-slate-500"> ({route.aborted} aborted)</span>
+                  <span className="text-slate-600"> ({route.aborted} aborted)</span>
                 )}
               </td>
               <td className="py-1.5 pr-3">
@@ -588,13 +588,13 @@ export default function MetricsDashboard() {
               <Gauge className="h-5 w-5 text-[#B88728]" aria-hidden="true" />
               Service metrics
             </h1>
-            <p className="mt-1 text-xs text-slate-500">
+            <p className="mt-1 text-xs text-slate-600">
               Developer surface, not part of the customer product. Source: this process's
               in-memory counters and span buffer.
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-[11px] text-slate-500">
+            <span className="text-[11px] text-slate-600">
               {paused ? 'Paused' : 'Auto-refresh 5s'} · updated {formatClock(updatedAt)}
             </span>
             <button
@@ -638,7 +638,7 @@ export default function MetricsDashboard() {
           <div className="mt-6 flex flex-col items-center gap-3 rounded-2xl border border-slate-200 bg-white px-6 py-14 text-center">
             <ServerCrash className="h-8 w-8 text-slate-400" aria-hidden="true" />
             <p className="text-sm font-medium text-slate-800">No metrics available</p>
-            <p className="max-w-md text-xs text-slate-500">
+            <p className="max-w-md text-xs text-slate-600">
               The dashboard polls <code className="font-mono">/api/metrics</code>,{' '}
               <code className="font-mono">/api/traces</code>,{' '}
               <code className="font-mono">/api/health</code> and{' '}
@@ -666,7 +666,7 @@ export default function MetricsDashboard() {
                   <PercentileBar label="p95" value={latency?.p95 ?? 0} max={latency?.max ?? 0} />
                   <PercentileBar label="p99" value={latency?.p99 ?? 0} max={latency?.max ?? 0} />
                 </div>
-                <p className="mt-2 text-[11px] text-slate-500">
+                <p className="mt-2 text-[11px] text-slate-600">
                   max {formatMs(latency?.max ?? 0)} · avg {formatMs(latency?.avg ?? 0)} ·{' '}
                   {latency?.samples ?? 0} samples
                 </p>
@@ -679,7 +679,7 @@ export default function MetricsDashboard() {
                   hint={`${requests?.errors ?? 0} server · ${requests?.clientErrors ?? 0} client · ${requests?.aborted ?? 0} aborted`}
                   tone={errorRate > 0.01 ? 'bad' : 'default'}
                 />
-                <p className="mt-2 text-[11px] text-slate-500">
+                <p className="mt-2 text-[11px] text-slate-600">
                   Errors are responses with status ≥ 500. An aborted request is client control flow
                   and is never counted as one.
                 </p>
@@ -691,7 +691,7 @@ export default function MetricsDashboard() {
                   value={String(requests?.inFlight ?? 0)}
                   hint={`uptime ${formatUptime(snapshot.uptimeSeconds)}`}
                 />
-                <p className="mt-2 text-[11px] text-slate-500">
+                <p className="mt-2 text-[11px] text-slate-600">
                   {snapshot.traces.buffered} spans buffered · {snapshot.client.eventsReceived} client
                   events received
                 </p>
@@ -701,7 +701,7 @@ export default function MetricsDashboard() {
             <div className="grid gap-4 lg:grid-cols-2">
               <Card title="Duration histogram">
                 <LatencyHistogram buckets={latency?.buckets ?? []} />
-                <p className="mt-2 text-[11px] text-slate-500">
+                <p className="mt-2 text-[11px] text-slate-600">
                   Bars are per-bucket counts derived from the API's cumulative Prometheus buckets.
                 </p>
               </Card>
@@ -741,7 +741,7 @@ export default function MetricsDashboard() {
                       value={
                         <span
                           className={
-                            health?.source === 'postgres' ? 'text-emerald-500' : 'text-amber-500'
+                            health?.source === 'postgres' ? 'text-emerald-700' : 'text-amber-500'
                           }
                         >
                           {health?.source ?? '—'}
@@ -775,7 +775,7 @@ export default function MetricsDashboard() {
                 <Row label="Events accepted" value={String(snapshot.client.eventsReceived)} />
                 <Row label="Events dropped" value={String(snapshot.client.eventsDropped)} />
                 <VitalChips vitals={snapshot.client.vitals} />
-                <p className="mt-2 text-[11px] text-slate-500">
+                <p className="mt-2 text-[11px] text-slate-600">
                   Browser events arrive only from visitors who granted analytics consent.
                 </p>
               </Card>

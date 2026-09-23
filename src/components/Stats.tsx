@@ -41,7 +41,7 @@ export default function Stats() {
                  <div>
                    <div className="text-xl sm:text-[26px] font-bold mb-0.5 leading-none">50+</div>
                    <div className={`text-xs sm:text-[13px] font-medium mt-1 ${
-                     isLight ? 'text-slate-500' : 'text-gray-400'
+                     isLight ? 'text-slate-600' : 'text-gray-400'
                    }`}>Hotel Partners</div>
                  </div>
               </div>
@@ -50,7 +50,7 @@ export default function Stats() {
                  <div>
                    <div className="text-xl sm:text-[26px] font-bold mb-0.5 leading-none">1,000+</div>
                    <div className={`text-xs sm:text-[13px] font-medium mt-1 ${
-                     isLight ? 'text-slate-500' : 'text-gray-400'
+                     isLight ? 'text-slate-600' : 'text-gray-400'
                    }`}>Merchants</div>
                  </div>
               </div>
@@ -59,7 +59,7 @@ export default function Stats() {
                  <div>
                    <div className="text-xl sm:text-[26px] font-bold mb-0.5 leading-none">6</div>
                    <div className={`text-xs sm:text-[13px] font-medium mt-1 ${
-                     isLight ? 'text-slate-500' : 'text-gray-400'
+                     isLight ? 'text-slate-600' : 'text-gray-400'
                    }`}>Cities</div>
                  </div>
               </div>
@@ -68,7 +68,7 @@ export default function Stats() {
                  <div>
                    <div className="text-xl sm:text-[26px] font-bold mb-0.5 leading-none">24/7</div>
                    <div className={`text-xs sm:text-[13px] font-medium mt-1 leading-tight ${
-                     isLight ? 'text-slate-500' : 'text-gray-400'
+                     isLight ? 'text-slate-600' : 'text-gray-400'
                    }`}>Concierge Support</div>
                  </div>
               </div>

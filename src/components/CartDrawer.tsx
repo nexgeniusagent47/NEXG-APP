@@ -138,7 +138,7 @@ export default function CartDrawer() {
                     onClick={clearCart}
                     className={`text-xs transition-colors px-2 py-1 cursor-pointer ${
                       isLight
-                        ? 'text-slate-500 hover:text-rose-600'
+                        ? 'text-slate-600 hover:text-rose-600'
                         : 'text-gray-400 hover:text-rose-400'
                     }`}
                     title="Clear entire cart"
@@ -177,7 +177,7 @@ export default function CartDrawer() {
                       <Sparkles size={12} /> You unlocked Free Priority Delivery!
                     </span>
                   )}
-                  <span className={`text-[11px] ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                  <span className={`text-[11px] ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                     {Math.round(progressToFreeDelivery)}%
                   </span>
                 </div>
@@ -215,7 +215,7 @@ export default function CartDrawer() {
                 <h4 className={`text-lg font-bold mb-1 ${isLight ? 'text-slate-900' : 'text-white'}`}>
                   Your cart is empty
                 </h4>
-                <p className={`text-sm max-w-xs mb-6 ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                <p className={`text-sm max-w-xs mb-6 ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                   Explore our curated restaurants and add artisanal dishes or concierge dining to get started.
                 </p>
                 <button
@@ -286,7 +286,7 @@ export default function CartDrawer() {
 
                         {item.specialInstructions && (
                           <p className={`text-[11px] italic mt-1 truncate ${
-                            isLight ? 'text-slate-500' : 'text-gray-400'
+                            isLight ? 'text-slate-600' : 'text-gray-400'
                           }`}>
                             &quot;{item.specialInstructions}&quot;
                           </p>
@@ -355,7 +355,7 @@ export default function CartDrawer() {
                       <button
                         onClick={removePromo}
                         className={`underline text-[11px] cursor-pointer ${
-                          isLight ? 'text-slate-500 hover:text-slate-800' : 'text-gray-400 hover:text-white'
+                          isLight ? 'text-slate-600 hover:text-slate-800' : 'text-gray-400 hover:text-white'
                         }`}
                       >
                         Remove
@@ -513,7 +513,7 @@ export default function CartDrawer() {
                   </div>
                 </button>
                 <div className={`flex items-center justify-center gap-1.5 text-[11px] mt-3 ${
-                  isLight ? 'text-slate-500' : 'text-gray-400'
+                  isLight ? 'text-slate-600' : 'text-gray-400'
                 }`}>
                   <ShieldCheck size={13} className={isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'} />
                   <span>Simulated checkout & instant confirmation</span>

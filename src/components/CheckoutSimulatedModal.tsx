@@ -246,7 +246,7 @@ export default function CheckoutSimulatedModal() {
                       </div>
                     )}
                   </div>
-                  <p className={`text-[11px] font-medium ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                  <p className={`text-[11px] font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                     Simulates instant STK push prompt directly on mobile handset.
                   </p>
                 </button>
@@ -280,7 +280,7 @@ export default function CheckoutSimulatedModal() {
                       </div>
                     )}
                   </div>
-                  <p className={`text-[11px] font-medium ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                  <p className={`text-[11px] font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                     Simulates 1-click tokenized checkout via test card ending •••• 8492.
                   </p>
                 </button>
@@ -314,7 +314,7 @@ export default function CheckoutSimulatedModal() {
                       </div>
                     )}
                   </div>
-                  <p className={`text-[11px] font-medium ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                  <p className={`text-[11px] font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                     Simulates one-touch FaceID / TouchID authorization.
                   </p>
                 </button>
@@ -348,7 +348,7 @@ export default function CheckoutSimulatedModal() {
                       </div>
                     )}
                   </div>
-                  <p className={`text-[11px] font-medium ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                  <p className={`text-[11px] font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                     Billed directly to your hotel master room folio upon delivery.
                   </p>
                 </button>
@@ -363,7 +363,7 @@ export default function CheckoutSimulatedModal() {
                     isLight ? 'text-slate-700' : 'text-gray-300'
                   }`}>
                     <span>M-Pesa Phone Number (for simulated prompt)</span>
-                    <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">Router Demo Validated</span>
+                    <span className="text-[11px] text-emerald-700 dark:text-emerald-400 font-semibold">Router Demo Validated</span>
                   </label>
                   <input
                     type="tel"
@@ -409,7 +409,7 @@ export default function CheckoutSimulatedModal() {
               isLight ? 'bg-slate-50 border-slate-200' : 'bg-[#121314] border-white/10'
             }`}>
               <div className={`flex items-center justify-between text-xs font-semibold ${
-                isLight ? 'text-slate-500' : 'text-gray-400'
+                isLight ? 'text-slate-600' : 'text-gray-400'
               }`}>
                 <span>Merchant Partner</span>
                 <span className={`font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>
@@ -417,7 +417,7 @@ export default function CheckoutSimulatedModal() {
                 </span>
               </div>
               <div className={`flex items-center justify-between text-xs font-semibold ${
-                isLight ? 'text-slate-500' : 'text-gray-400'
+                isLight ? 'text-slate-600' : 'text-gray-400'
               }`}>
                 <span>Selected Items</span>
                 <span className={`font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>

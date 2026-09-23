@@ -252,7 +252,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
           {activeOrder && activeOrder.estimatedMinutesLeft > 0 && activeOrder.status !== 'delivered' && (
             <button
               onClick={() => setIsTrackingOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 text-xs font-bold hover:bg-emerald-500/30 transition-colors cursor-pointer shadow-xs"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-bold hover:bg-emerald-500/30 transition-colors cursor-pointer shadow-xs"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
               <Bike size={14} />

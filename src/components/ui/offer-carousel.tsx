@@ -94,7 +94,7 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer, twoPerScreen = true
             <div
               className={cn(
                 "flex items-center justify-between text-[11px] font-semibold",
-                isLight ? "text-slate-500" : "text-gray-400"
+                isLight ? "text-slate-600" : "text-gray-400"
               )}
             >
               <span className="uppercase tracking-wider text-[10px] font-bold text-[#7d5a11] dark:text-[#E5B65F]">
@@ -130,7 +130,7 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer, twoPerScreen = true
               <p
                 className={cn(
                   "text-xs line-clamp-2",
-                  isLight ? "text-slate-500" : "text-gray-400"
+                  isLight ? "text-slate-600" : "text-gray-400"
                 )}
               >
                 {offer.description}
@@ -167,7 +167,7 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer, twoPerScreen = true
                 <p
                   className={cn(
                     "text-[10px] font-semibold truncate",
-                    isLight ? "text-slate-500" : "text-gray-400"
+                    isLight ? "text-slate-600" : "text-gray-400"
                   )}
                 >
                   {displayCategory}
@@ -277,7 +277,7 @@ export const OfferCarousel = React.forwardRef<HTMLDivElement, OfferCarouselProps
                 <p
                   className={cn(
                     "text-xs font-semibold uppercase tracking-widest mt-0.5",
-                    isLight ? "text-slate-500" : "text-gray-400"
+                    isLight ? "text-slate-600" : "text-gray-400"
                   )}
                 >
                   {subtitle}

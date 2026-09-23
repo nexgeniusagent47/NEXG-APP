@@ -752,7 +752,7 @@ export function DateTimeField(props: DateTimeFieldProps) {
       </button>
 
       {!suppressMessages && hint && !visibleError && (
-        <p id={hintId} className={cn('mt-1 text-[11px]', isLight ? 'text-slate-500' : 'text-gray-400')}>
+        <p id={hintId} className={cn('mt-1 text-[11px]', isLight ? 'text-slate-600' : 'text-gray-400')}>
           {hint}
         </p>
       )}
@@ -900,7 +900,7 @@ function TimeColumns({
           : 'text-gray-300 hover:bg-white/10'
     );
 
-  const labelClasses = cn('text-[10px] font-bold uppercase tracking-wider mb-1 block', isLight ? 'text-slate-500' : 'text-gray-400');
+  const labelClasses = cn('text-[10px] font-bold uppercase tracking-wider mb-1 block', isLight ? 'text-slate-600' : 'text-gray-400');
 
   return (
     <div className="grid grid-cols-3 gap-2">

@@ -238,7 +238,7 @@ export const CategoryPage: React.FC<CategoryPageProps> = ({
                 : category.subcategories.find((s) => s.id === selectedSubcatId)?.name ||
                   category.name}
             </h1>
-            <p className={cn('text-xs sm:text-sm mt-0.5', isLight ? 'text-slate-500' : 'text-gray-400')}>
+            <p className={cn('text-xs sm:text-sm mt-0.5', isLight ? 'text-slate-600' : 'text-gray-400')}>
               Showing {sortedMerchants.length} verified Nairobi partners
             </p>
           </div>

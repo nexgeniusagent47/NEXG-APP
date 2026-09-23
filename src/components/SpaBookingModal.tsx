@@ -156,16 +156,16 @@ export default function SpaBookingModal({
 
           {/* Stepper Indicator */}
           {step < 4 && (
-            <div className="flex items-center justify-between px-6 py-2.5 bg-slate-50 border-b border-slate-200 text-xs text-slate-500">
-              <span className={step === 1 ? 'text-gold font-bold flex items-center gap-1' : 'text-slate-500'}>
+            <div className="flex items-center justify-between px-6 py-2.5 bg-slate-50 border-b border-slate-200 text-xs text-slate-600">
+              <span className={step === 1 ? 'text-gold font-bold flex items-center gap-1' : 'text-slate-600'}>
                 1. Duration & Time
               </span>
               <ChevronRight size={14} />
-              <span className={step === 2 ? 'text-gold font-bold flex items-center gap-1' : 'text-slate-500'}>
+              <span className={step === 2 ? 'text-gold font-bold flex items-center gap-1' : 'text-slate-600'}>
                 2. Oils & Add-ons
               </span>
               <ChevronRight size={14} />
-              <span className={step === 3 ? 'text-gold font-bold flex items-center gap-1' : 'text-slate-500'}>
+              <span className={step === 3 ? 'text-gold font-bold flex items-center gap-1' : 'text-slate-600'}>
                 3. Villa Details
               </span>
             </div>
@@ -192,7 +192,7 @@ export default function SpaBookingModal({
                             : 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-100'
                         }`}
                       >
-                        <div className="text-xs text-slate-500 font-medium">{d.duration} Minutes</div>
+                        <div className="text-xs text-slate-600 font-medium">{d.duration} Minutes</div>
                         <div className="text-base font-bold text-gold mt-0.5">${d.price}</div>
                       </button>
                     ))}
@@ -217,7 +217,7 @@ export default function SpaBookingModal({
                       <MapPin size={20} className="text-gold shrink-0 mt-0.5" />
                       <div>
                         <div className="font-bold text-sm">Private In-Villa Sanctuary</div>
-                        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                        <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
                           Therapist dispatches directly to your villa with heated table, organic linens & aromatherapy.
                         </p>
                       </div>
@@ -235,7 +235,7 @@ export default function SpaBookingModal({
                       <Compass size={20} className="text-gold shrink-0 mt-0.5" />
                       <div>
                         <div className="font-bold text-sm">Resort Spa Pavilion</div>
-                        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">
+                        <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">
                           Private oceanfront cabana with thermal plunge pool & tranquil zen garden access.
                         </p>
                       </div>
@@ -344,7 +344,7 @@ export default function SpaBookingModal({
                         className={`p-2.5 rounded-xl border text-center text-xs font-semibold transition-colors cursor-pointer ${
                           pressureLevel === p.key
                             ? 'bg-gold-tint border-gold text-gold'
-                            : 'bg-slate-100 border-slate-200 text-slate-500 hover:bg-slate-100'
+                            : 'bg-slate-100 border-slate-200 text-slate-600 hover:bg-slate-100'
                         }`}
                       >
                         {p.label}
@@ -405,7 +405,7 @@ export default function SpaBookingModal({
                                 <span>{addon.name}</span>
                                 <span className="text-xs text-gold">+${addon.price}</span>
                               </div>
-                              <p className="text-[11px] text-slate-500 mt-0.5">{addon.description}</p>
+                              <p className="text-[11px] text-slate-600 mt-0.5">{addon.description}</p>
                             </div>
                             <div
                               className={`w-5 h-5 rounded-md border flex items-center justify-center ${
@@ -481,7 +481,7 @@ export default function SpaBookingModal({
                     <span>${basePrice}</span>
                   </div>
                   {selectedAddOns.map((addon) => (
-                    <div key={addon.id} className="flex justify-between text-slate-500">
+                    <div key={addon.id} className="flex justify-between text-slate-600">
                       <span>Add-on: {addon.name}</span>
                       <span>+${addon.price}</span>
                     </div>
@@ -507,7 +507,7 @@ export default function SpaBookingModal({
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-xs text-slate-500">Slot Scheduled</div>
+                    <div className="text-xs text-slate-600">Slot Scheduled</div>
                     <div className="text-sm font-bold text-gold">
                       {confirmedBooking.date} at {confirmedBooking.timeSlot}
                     </div>
@@ -525,7 +525,7 @@ export default function SpaBookingModal({
                         referrerPolicy="no-referrer"
                       />
                       <div>
-                        <div className="text-xs text-slate-500">Assigned Master Therapist</div>
+                        <div className="text-xs text-slate-600">Assigned Master Therapist</div>
                         <div className="font-bold text-sm text-white">{confirmedBooking.therapist.name}</div>
                         <div className="text-[11px] text-gold flex items-center gap-1">
                           <span>★ {confirmedBooking.therapist.rating}</span>
@@ -572,10 +572,10 @@ export default function SpaBookingModal({
                                 : 'bg-white border-gray-600'
                             }`}
                           />
-                          <div className={`text-xs font-bold ${isCurrent ? 'text-gold' : isDone ? 'text-white' : 'text-slate-500'}`}>
+                          <div className={`text-xs font-bold ${isCurrent ? 'text-gold' : isDone ? 'text-white' : 'text-slate-600'}`}>
                             {s.title}
                           </div>
-                          <p className="text-[11px] text-slate-500 mt-0.5">{s.desc}</p>
+                          <p className="text-[11px] text-slate-600 mt-0.5">{s.desc}</p>
                         </div>
                       );
                     })}
@@ -611,7 +611,7 @@ export default function SpaBookingModal({
           {step < 4 && (
             <div className="p-4 sm:p-5 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
               <div>
-                <div className="text-[11px] text-slate-500">Total Experience Fee</div>
+                <div className="text-[11px] text-slate-600">Total Experience Fee</div>
                 <div className="text-lg sm:text-xl font-bold text-gold">${totalPrice}</div>
               </div>
 

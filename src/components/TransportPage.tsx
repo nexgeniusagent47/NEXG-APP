@@ -280,7 +280,7 @@ export default function TransportPage({ onNavigate }: TransportPageProps) {
                       {provider.name}
                     </h3>
 
-                    <p className={`text-xs font-semibold mb-2 line-clamp-1 ${isLight ? 'text-slate-500' : 'text-gray-400'}`}>
+                    <p className={`text-xs font-semibold mb-2 line-clamp-1 ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                       {provider.serviceAreas}
                     </p>
 

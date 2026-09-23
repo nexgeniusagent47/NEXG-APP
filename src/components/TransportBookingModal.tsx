@@ -142,12 +142,12 @@ export default function TransportBookingModal({
 
           {/* Stepper Indicator */}
           {step < 3 && (
-            <div className="flex items-center justify-between px-6 py-2.5 bg-slate-50 border-b border-slate-200 text-xs text-slate-500">
-              <span className={step === 1 ? 'text-gold font-bold' : 'text-slate-500'}>
+            <div className="flex items-center justify-between px-6 py-2.5 bg-slate-50 border-b border-slate-200 text-xs text-slate-600">
+              <span className={step === 1 ? 'text-gold font-bold' : 'text-slate-600'}>
                 1. Service & Itinerary
               </span>
               <ChevronRight size={14} />
-              <span className={step === 2 ? 'text-gold font-bold' : 'text-slate-500'}>
+              <span className={step === 2 ? 'text-gold font-bold' : 'text-slate-600'}>
                 2. Amenities & Guest
               </span>
             </div>
@@ -354,7 +354,7 @@ export default function TransportBookingModal({
                     <span>{vehicle.name} ({serviceType.replace('_', ' ').toUpperCase()})</span>
                     <span>${calculatedPrice}</span>
                   </div>
-                  <div className="flex justify-between text-slate-500">
+                  <div className="flex justify-between text-slate-600">
                     <span>VIP Meet & Greet + Airport Flight Sync</span>
                     <span className="text-emerald-400">Included</span>
                   </div>
@@ -378,7 +378,7 @@ export default function TransportBookingModal({
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="text-xs text-slate-500">Scheduled Departure</div>
+                    <div className="text-xs text-slate-600">Scheduled Departure</div>
                     <div className="text-sm font-bold text-gold">
                       {confirmedBooking.date} at {confirmedBooking.time}
                     </div>
@@ -396,7 +396,7 @@ export default function TransportBookingModal({
                         referrerPolicy="no-referrer"
                       />
                       <div>
-                        <div className="text-xs text-slate-500">Assigned Chauffeur</div>
+                        <div className="text-xs text-slate-600">Assigned Chauffeur</div>
                         <div className="font-bold text-sm text-white">{confirmedBooking.driver.name}</div>
                         <div className="text-[11px] text-gold flex items-center gap-2 mt-0.5">
                           <span>Plate: {confirmedBooking.driver.vehiclePlate}</span>
@@ -443,10 +443,10 @@ export default function TransportBookingModal({
                                 : 'bg-white border-gray-600'
                             }`}
                           />
-                          <div className={`text-xs font-bold ${isCurrent ? 'text-gold' : isDone ? 'text-white' : 'text-slate-500'}`}>
+                          <div className={`text-xs font-bold ${isCurrent ? 'text-gold' : isDone ? 'text-white' : 'text-slate-600'}`}>
                             {s.title}
                           </div>
-                          <p className="text-[11px] text-slate-500 mt-0.5">{s.desc}</p>
+                          <p className="text-[11px] text-slate-600 mt-0.5">{s.desc}</p>
                         </div>
                       );
                     })}
@@ -470,7 +470,7 @@ export default function TransportBookingModal({
           {step < 3 && (
             <div className="p-4 sm:p-5 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
               <div>
-                <div className="text-[11px] text-slate-500">Total Rate</div>
+                <div className="text-[11px] text-slate-600">Total Rate</div>
                 <div className="text-lg sm:text-xl font-bold text-gold">${calculatedPrice}</div>
               </div>
 

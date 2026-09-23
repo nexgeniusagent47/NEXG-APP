@@ -168,7 +168,7 @@ export const MerchantPage: React.FC<MerchantPageProps> = ({
             </div>
 
             {/* Status */}
-            <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-bold">
+            <div className="flex items-center gap-1 text-emerald-700 dark:text-emerald-400 font-bold">
               <span className="w-2 h-2 rounded-full bg-emerald-500" />
               <span>Open Now</span>
             </div>
@@ -266,7 +266,7 @@ export const MerchantPage: React.FC<MerchantPageProps> = ({
                     <p
                       className={cn(
                         'text-xs line-clamp-2',
-                        isLight ? 'text-slate-500' : 'text-gray-400'
+                        isLight ? 'text-slate-600' : 'text-gray-400'
                       )}
                     >
                       {item.description}
@@ -276,7 +276,7 @@ export const MerchantPage: React.FC<MerchantPageProps> = ({
                         KSh {item.price.toLocaleString()}
                       </span>
                       {item.originalPrice && (
-                        <span className="text-xs text-slate-400 line-through">
+                        <span className="text-xs text-slate-600 line-through">
                           KSh {item.originalPrice.toLocaleString()}
                         </span>
                       )}
