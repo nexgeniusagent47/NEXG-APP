@@ -238,8 +238,8 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onClick={() => onOpenCategories?.(query)}
-              placeholder="Search luxury dining, private chauffeurs, spa retreats, cellar reserve..."
-              className={`w-full pl-13 pr-32 py-4 sm:py-4.5 rounded-2xl text-xs sm:text-sm md:text-base font-semibold outline-none backdrop-blur-xl transition duration-300 cursor-pointer ${
+              placeholder={t.hero.searchPlaceholder}
+              className={`w-full pl-13 pr-24 sm:pr-32 py-4 sm:py-4.5 rounded-2xl text-xs sm:text-sm md:text-base font-semibold outline-none backdrop-blur-xl transition duration-300 cursor-pointer text-ellipsis ${
                 isLight
                   ? 'bg-white/95 text-slate-900 border border-slate-300/80 placeholder:text-slate-400 focus:border-[#B88728] focus:ring-4 focus:ring-[#B88728]/15 shadow-[0_8px_30px_rgba(0,0,0,0.06)]'
                   : 'bg-[#181a1b]/95 text-white border border-white/20 placeholder:text-gray-400 focus:border-[#E5B65F] focus:ring-4 focus:ring-[#E5B65F]/20 shadow-[0_8px_30px_rgba(0,0,0,0.4)]'

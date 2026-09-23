@@ -98,6 +98,67 @@ const CASES = [
     'FAIL',
     'background:#000',
   ],
+
+  // PLACEHOLDER TEXT.
+  //
+  // A placeholder is an attribute, not a text node, so the "renders its own text" filter
+  // skipped every field whose only text is its placeholder. The hero search field is the
+  // most prominent string on the home page and 3248 checks were not looking at it: its
+  // light-mode placeholder was slate-400 on a 95%-white fill, which is 2.63:1.
+  //
+  // The first case also exercises the OPACITY BOUND. The field sits on a gradient, so a walk
+  // that stopped at unreadable layers could not measure it at all; because the fill is 95%
+  // opaque, the hidden layer can move the result by at most 5% and the check goes ahead —
+  // conservatively, using the worse of a white and a black base.
+  {
+    name: 'placeholder slate-400 #94a3b8 at 12px on a 95% white field over a gradient (the light hero field as it was -> FAIL)',
+    expected: 'FAIL',
+    selector: 'input',
+    pageStyle: 'input::placeholder{color:#94a3b8}',
+    extra:
+      '<div style="width:360px;background:linear-gradient(#fff,#000);padding:10px">' +
+      '<input id="t" placeholder="Search dining, spa, rides" ' +
+      'style="width:330px;border:0;font-size:12px;background:rgba(255,255,255,0.95)"></div>',
+  },
+  {
+    // The colour this case pins is the one the field actually ships. slate-500 (#64748b) was
+    // the first choice and it is NOT enough: 4.76:1 against pure white, but 4.26:1 against the
+    // worst backdrop the 5% transparency allows, and 4.5:1 is the requirement. The bound is
+    // what caught that, which is the whole reason it is resolved conservatively.
+    name: 'placeholder slate-600 #475569 at 12px on the same field (the fix -> PASS at 6.66:1 worst case)',
+    expected: 'PASS',
+    pageStyle: 'input::placeholder{color:#475569}',
+    extra:
+      '<div style="width:360px;background:linear-gradient(#fff,#000);padding:10px">' +
+      '<input id="t" placeholder="Search dining, spa, rides" ' +
+      'style="width:330px;border:0;font-size:12px;background:rgba(255,255,255,0.95)"></div>',
+  },
+  {
+    name: 'placeholder on a 50%-opaque field over a gradient is UNRESOLVED, not guessed',
+    expected: 'UNRESOLVED',
+    selector: 'input',
+    pageStyle: 'input::placeholder{color:#94a3b8}',
+    extra:
+      '<div style="width:360px;background:linear-gradient(#fff,#000);padding:10px">' +
+      '<input id="t" placeholder="Search dining, spa, rides" ' +
+      'style="width:330px;border:0;font-size:12px;background:rgba(255,255,255,0.5)"></div>',
+  },
+  {
+    name: 'white on a 95% black field over an IMG is measured, not reported as over-image',
+    expected: 'PASS',
+    selector: 'span',
+    extra:
+      '<div style="position:relative;width:300px">' +
+      '<img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACw=" ' +
+      'style="position:absolute;inset:0;width:300px;height:60px">' +
+      '<span id="t" style="position:relative;color:#fff;background:rgba(0,0,0,0.95);font-size:16px">Sample text here</span></div>',
+  },
+  {
+    name: 'an input with no placeholder and no text is not measured (control)',
+    expected: 'ABSENT',
+    selector: 'input',
+    extra: '<input id="t" style="width:200px;font-size:12px;background:#fff">',
+  },
 ];
 
 // The probe is imported from the same module the audit uses, so passing here is a
@@ -110,19 +171,49 @@ const page = await (await browser.newContext()).newPage();
 let pass = 0;
 let fail = 0;
 
-for (const [name, style, expected, parentStyle = ''] of CASES) {
+for (const raw of CASES) {
+  // Two shapes: the original positional tuple, and an object for cases that need their own
+  // markup (a placeholder needs a <style> rule, which cannot be set inline).
+  const c = Array.isArray(raw)
+    ? {
+        name: raw[0],
+        style: raw[1],
+        expected: raw[2],
+        parentStyle: raw[3] ?? '',
+        selector: 'span',
+        pageStyle: '',
+        extra: '',
+      }
+    : { parentStyle: '', selector: 'span', pageStyle: '', extra: '', ...raw };
+
   await page.setContent(
-    `<!doctype html><html><body style="margin:0">` +
-      `<div style="padding:20px;${parentStyle}">` +
-      `<span id="t" style="${style}">Sample text here</span>` +
+    `<!doctype html><html><head><style>${c.pageStyle}</style></head><body style="margin:0">` +
+      `<div style="padding:20px;${c.parentStyle}">` +
+      // A positional case is always the default span. An object case brings its own markup,
+      // which must carry id="t" so the row can be picked out unambiguously.
+      (c.style === undefined ? '' : `<span id="t" style="${c.style}">Sample text here</span>`) +
+      c.extra +
       `</div></body></html>`
   );
   const rows = await page.evaluate(PROBE);
-  const row = rows.find((r) => r.tag === 'span');
+  // Picked by id, not by tag: an early version selected the first <span> and silently
+  // measured the default element instead of the fixture, which reported 21:1 for a case
+  // whose real answer was white on a 95% black field.
+  const row = rows.find((r) => r.id === 't');
 
   if (!row) {
-    console.log(`FAIL  ${name}  - element not measured at all`);
+    const ok = c.expected === 'ABSENT';
+    if (ok) pass++;
+    else fail++;
+    console.log(
+      `${ok ? 'PASS' : 'FAIL'}  ${c.name}\n        element not measured at all (expected ${c.expected})`
+    );
+    continue;
+  }
+
+  if (c.expected === 'ABSENT') {
     fail++;
+    console.log(`FAIL  ${c.name}\n        expected NOT to be measured, but a <${c.selector}> row was returned`);
     continue;
   }
 
@@ -132,14 +223,15 @@ for (const [name, style, expected, parentStyle = ''] of CASES) {
     : row.ratio < need
       ? 'FAIL'
       : 'PASS';
-  const ok = verdict === expected;
+  const ok = verdict === c.expected;
   if (ok) pass++;
   else fail++;
 
   console.log(
-    `${ok ? 'PASS' : 'FAIL'}  ${name}\n` +
-      `        verdict=${verdict} expected=${expected} ratio=${row.ratio ?? 'n/a'} ` +
-      `fg=${row.color} bg=${row.bg ?? 'n/a'}`
+    `${ok ? 'PASS' : 'FAIL'}  ${c.name}\n` +
+      `        verdict=${verdict} expected=${c.expected} ratio=${row.ratio ?? 'n/a'} ` +
+      `${row.ratioBest === undefined ? '' : `best=${row.ratioBest} bound=${row.boundedBy} `}` +
+      `fg=${row.color} bg=${row.bg ?? 'n/a'}${row.placeholder ? ' [placeholder]' : ''}`
   );
 }
 

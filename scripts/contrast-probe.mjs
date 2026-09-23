@@ -1,13 +1,13 @@
 // scripts/contrast-probe.mjs
 //
 // THE contrast probe, as source text. One copy, used two ways:
-//   1. scripts/audit-contrast.mjs      — measures the real routes
-//   2. scripts/_verify-contrast-probe.mjs — checks the probe against known answers
+//   1. scripts/audit-contrast.mjs      â€” measures the real routes
+//   2. scripts/verify-contrast-probe.mjs â€” checks the probe against known answers
 //
 // WHY `String.raw`: the probe is JavaScript that must run in the browser, so it contains
 // regex escapes like \\( and \\) and template placeholders like ${...}. Inside a normal
 // template literal those are consumed by THIS file's parser and the browser receives
-// something different from what is written — which is exactly what happened on the first
+// something different from what is written â€” which is exactly what happened on the first
 // attempt, where the extraction produced a string the browser rejected with
 // "Invalid or unexpected token". `String.raw` passes the characters through untouched.
 //
@@ -115,13 +115,38 @@ export const CONTRAST_PROBE = String.raw`(() => {
     a: 1
   });
 
+  const compositeOver = (stack, base) => {
+    let out = base;
+    for (const layer of stack) out = blend(layer, out);
+    return out;
+  };
+
   // Walk to the first ancestor that actually paints. A layer that is a real image or a
-  // gradient stops the walk and yields "unresolved" — a guessed ratio is worse than none,
+  // gradient stops the walk and yields "unresolved" â€” a guessed ratio is worse than none,
   // and this project has already been burned by a probe that was confidently wrong.
+  //
+  // THE ONE BOUNDED CASE. A stack that is already 90% opaque hides what is under it: an
+  // unreadable layer beneath can move the result by at most 'remaining' of the sRGB range.
+  // Stopping there turns "unmeasurable" into "measured within a stated bound", which is what
+  // makes an input with a 95%-opaque fill measurable at all â€” otherwise every field, badge
+  // and pill that sits over a photograph is skipped, and the placeholder text inside it is
+  // never checked.
+  //
+  // The bound is resolved CONSERVATIVELY: the composite is computed over both a white and a
+  // black base and the LOWER of the two ratios is the one reported, so a bounded check can
+  // only ever be more pessimistic than the truth, never less.
   const effectiveBackground = (el) => {
     let node = el;
     const stack = [];
+    let remaining = 1; // how much of what lies BENEATH the collected layers still shows
     while (node && node !== document.documentElement.parentElement) {
+      if (remaining <= 0.1) {
+        return {
+          color: compositeOver(stack, { r: 255, g: 255, b: 255, a: 1 }),
+          worst: compositeOver(stack, { r: 0, g: 0, b: 0, a: 1 }),
+          bounded: remaining
+        };
+      }
       const cs = getComputedStyle(node);
       const bgImage = cs.backgroundImage && cs.backgroundImage !== 'none';
       const bg = parseColor(cs.backgroundColor);
@@ -143,12 +168,11 @@ export const CONTRAST_PROBE = String.raw`(() => {
       if (bg) {
         if (bg.unresolvable) return { unresolved: 'unparsable-colour' };
         stack.unshift(bg);
+        remaining *= 1 - bg.a;
       }
       node = node.parentElement;
     }
-    let base = { r: 255, g: 255, b: 255, a: 1 };
-    for (const layer of stack) base = blend(layer, base);
-    return { color: base, node: null };
+    return { color: compositeOver(stack, { r: 255, g: 255, b: 255, a: 1 }) };
   };
 
   // Text painted over an img cannot have its contrast derived from CSS, and this app uses
@@ -178,63 +202,124 @@ export const CONTRAST_PROBE = String.raw`(() => {
   for (const el of document.querySelectorAll('body *')) {
     // Only elements that render their own text.
     const own = Array.prototype.some.call(el.childNodes, (n) => n.nodeType === 3 && n.textContent.trim().length > 1);
-    if (!own) continue;
+
+    // A placeholder is an ATTRIBUTE, not a text node, so a field whose only visible text is
+    // its placeholder was skipped outright by the test above. It is still text a user reads
+    // before typing: the hero search field was the single most prominent string on the home
+    // page and 3248 checks never looked at it. Its colour lives on the ::placeholder pseudo
+    // element, which is readable through the second argument of getComputedStyle.
+    const phEl = el.tagName === 'INPUT' || el.tagName === 'TEXTAREA';
+    const ph = phEl ? String(el.getAttribute('placeholder') || '').trim() : '';
+    const isPlaceholder = !own && ph.length > 1;
+    if (!own && !isPlaceholder) continue;
+
     const rect = el.getBoundingClientRect();
     if (rect.width === 0 || rect.height === 0) continue;
     const cs = getComputedStyle(el);
     if (cs.visibility === 'hidden' || cs.display === 'none') continue;
     if (parseFloat(cs.opacity) < 0.1) continue;
 
-    if (overImage(el, rect)) {
+    const textValue = isPlaceholder ? ph : (el.textContent || '').trim();
+    const pseudo = isPlaceholder ? getComputedStyle(el, '::placeholder') : null;
+    const colorValue = isPlaceholder ? pseudo.color : cs.color;
+    const fontSizeValue = parseFloat(isPlaceholder ? pseudo.fontSize : cs.fontSize);
+    const fontWeightValue = Number(isPlaceholder ? pseudo.fontWeight : cs.fontWeight) || 400;
+
+    const bgInfo = effectiveBackground(el);
+
+    // Text painted over an img cannot have its contrast derived from CSS, and this app uses
+    // that pattern for several decorative sections (a photograph with a bg-black/60 scrim).
+    //
+    // This produced a real false failure: "Ready to Transform Your Property?" was reported as
+    // white-on-white at 1.05:1 in light mode. The heading sits on a photograph with a 60%
+    // black scrim, which the walk could not see, because the scrim is transparent in modern
+    // syntax and an img is not a CSS background at all - so it fell through to the page
+    // colour. Reporting it was worse than saying nothing.
+    //
+    // It is consulted when the walk had to stop, AND when the walk resolved without a bound:
+    // a resolved stack that never met a painted layer has reached the page colour, which says
+    // nothing about an img that may be painting in between. A BOUNDED result is the one case
+    // where the image provably cannot matter, because the stack already hides 90% of it.
+    if (!bgInfo.bounded && overImage(el, rect)) {
       out.push({
         tag: el.tagName.toLowerCase(),
+        id: el.id || '',
         cls: String(el.className || '').slice(0, 60),
-        text: (el.textContent || '').trim().slice(0, 46),
-        fontSize: parseFloat(cs.fontSize),
-        fontWeight: Number(cs.fontWeight) || 400,
-        color: cs.color,
+        text: textValue.slice(0, 46),
+        fontSize: fontSizeValue,
+        fontWeight: fontWeightValue,
+        color: colorValue,
         bg: null,
+        placeholder: isPlaceholder,
         unresolved: 'image'
       });
       continue;
     }
 
-    const fg = parseColor(cs.color);
-    if (!fg) continue;
+    if (bgInfo.unresolved) {
+      out.push({
+        tag: el.tagName.toLowerCase(),
+        id: el.id || '',
+        cls: String(el.className || '').slice(0, 60),
+        text: textValue.slice(0, 46),
+        fontSize: fontSizeValue,
+        fontWeight: fontWeightValue,
+        color: colorValue,
+        bg: null,
+        placeholder: isPlaceholder,
+        unresolved: bgInfo.unresolved
+      });
+      continue;
+    }
 
-    const bgInfo = effectiveBackground(el);
+    const fg = parseColor(colorValue);
+    if (!fg) continue;
 
     // A foreground the browser could not parse. Every parsed colour now carries sRGB
     // channels, so this only fires on a genuinely unreadable value.
     if (fg.unresolvable) {
       out.push({
         tag: el.tagName.toLowerCase(),
+        id: el.id || '',
         cls: String(el.className || '').slice(0, 60),
-        text: (el.textContent || '').trim().slice(0, 46),
-        fontSize: parseFloat(cs.fontSize),
-        fontWeight: Number(cs.fontWeight) || 400,
-        color: cs.color,
+        text: textValue.slice(0, 46),
+        fontSize: fontSizeValue,
+        fontWeight: fontWeightValue,
+        color: colorValue,
         bg: null,
+        placeholder: isPlaceholder,
         unresolved: 'modern-colour'
       });
       continue;
     }
 
+    const rgb = (c) => 'rgb(' + Math.round(c.r) + ', ' + Math.round(c.g) + ', ' + Math.round(c.b) + ')';
     const record = {
       tag: el.tagName.toLowerCase(),
+      id: el.id || '',
       cls: String(el.className || '').slice(0, 60),
-      text: (el.textContent || '').trim().slice(0, 46),
-      fontSize: parseFloat(cs.fontSize),
-      fontWeight: Number(cs.fontWeight) || 400,
-      color: cs.color,
-      bg: bgInfo.color
-        ? 'rgb(' + Math.round(bgInfo.color.r) + ', ' + Math.round(bgInfo.color.g) + ', ' + Math.round(bgInfo.color.b) + ')'
-        : null,
-      unresolved: bgInfo.unresolved || null
+      text: textValue.slice(0, 46),
+      fontSize: fontSizeValue,
+      fontWeight: fontWeightValue,
+      color: colorValue,
+      bg: rgb(bgInfo.color),
+      placeholder: isPlaceholder,
+      unresolved: null
     };
 
-    if (bgInfo.color) {
-      const composedFg = fg.a < 1 ? blend(fg, bgInfo.color) : fg;
+    const composedFg = fg.a < 1 ? blend(fg, bgInfo.color) : fg;
+    if (bgInfo.bounded) {
+      // Report the WORSE of the two possible backdrops, so a bounded check can only be more
+      // pessimistic than the truth. The best case stays on the record so a borderline result
+      // can be judged rather than trusted.
+      const worst = blend(fg, bgInfo.worst);
+      const rWhite = ratio(composedFg, bgInfo.color);
+      const rBlack = ratio(worst, bgInfo.worst);
+      record.bg = rgb(bgInfo.color) + ' .. ' + rgb(bgInfo.worst);
+      record.ratio = Math.round(Math.min(rWhite, rBlack) * 100) / 100;
+      record.ratioBest = Math.round(Math.max(rWhite, rBlack) * 100) / 100;
+      record.boundedBy = Math.round(bgInfo.bounded * 1000) / 1000;
+    } else {
       record.ratio = Math.round(ratio(composedFg, bgInfo.color) * 100) / 100;
     }
     out.push(record);

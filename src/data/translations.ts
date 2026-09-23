@@ -1,6 +1,76 @@
 export type Language = 'en' | 'zh' | 'sw' | 'ar';
 
 export interface TranslationSchema {
+
+  /*
+    SHARED FORM VOCABULARY.
+
+    These are the strings that appear on more than one form — an email label on four onboarding
+    flows, "Save draft" on three. Extracting them means a later component references a key that
+    already exists rather than adding a fifty-first way to say "Full name".
+
+    Scoped deliberately: it holds what is genuinely common and nothing else. Form-specific copy
+    ("Driver's License Expiry Date", "E.g. KMCA 123A") stays with its own screen, because
+    collecting one-off strings into a shared block is how a shared block becomes unmaintainable.
+
+    Placeholders use {braces} where a value is substituted. See forms.stepOf.
+  */
+  forms: {
+    actionSave: string;
+    actionSaveDraft: string;
+    actionContinue: string;
+    actionBack: string;
+    actionNext: string;
+    actionCancel: string;
+    actionConfirm: string;
+    actionSubmit: string;
+    actionReview: string;
+    actionEdit: string;
+    actionRemove: string;
+    actionUpload: string;
+    actionTryAgain: string;
+    fullName: string;
+    emailAddress: string;
+    phoneNumber: string;
+    whatsappNumber: string;
+    nationalId: string;
+    dateOfBirth: string;
+    county: string;
+    addressStreet: string;
+    areaNeighbourhood: string;
+    preferredContact: string;
+    documentType: string;
+    documentUpload: string;
+    documentExpiry: string;
+    businessRegistration: string;
+    taxPin: string;
+    certificateOfIncorporation: string;
+    bankName: string;
+    accountName: string;
+    accountNumber: string;
+    branchName: string;
+    mobileMoneyNumber: string;
+    paymentMethod: string;
+    chooseDate: string;
+    chooseOption: string;
+    selectYourRole: string;
+    yes: string;
+    no: string;
+    optional: string;
+    required: string;
+    thisFieldRequired: string;
+    enterValidEmail: string;
+    enterValidPhone: string;
+    selectOneOption: string;
+    uploadRequired: string;
+    stepOf: string;
+    unsavedChanges: string;
+    placeholderFullName: string;
+    placeholderEmail: string;
+    placeholderPhoneKe: string;
+    placeholderExample: string;
+  };
+
   nav: {
     home: string;
     explore: string;
@@ -287,6 +357,75 @@ export interface TranslationSchema {
 
 export const translations: Record<Language, TranslationSchema> = {
   en: {
+
+  /*
+    SHARED FORM VOCABULARY.
+
+    These are the strings that appear on more than one form — an email label on four onboarding
+    flows, "Save draft" on three. Extracting them means a later component references a key that
+    already exists rather than adding a fifty-first way to say "Full name".
+
+    Scoped deliberately: it holds what is genuinely common and nothing else. Form-specific copy
+    ("Driver's License Expiry Date", "E.g. KMCA 123A") stays with its own screen, because
+    collecting one-off strings into a shared block is how a shared block becomes unmaintainable.
+
+    Placeholders use {braces} where a value is substituted. See forms.stepOf.
+  */
+  forms: {
+    actionSave: 'Save',
+    actionSaveDraft: 'Save draft',
+    actionContinue: 'Continue',
+    actionBack: 'Back',
+    actionNext: 'Next',
+    actionCancel: 'Cancel',
+    actionConfirm: 'Confirm',
+    actionSubmit: 'Submit',
+    actionReview: 'Review',
+    actionEdit: 'Edit',
+    actionRemove: 'Remove',
+    actionUpload: 'Upload',
+    actionTryAgain: 'Try again',
+    fullName: 'Full name',
+    emailAddress: 'Email address',
+    phoneNumber: 'Phone number',
+    whatsappNumber: 'WhatsApp number',
+    nationalId: 'National ID number',
+    dateOfBirth: 'Date of birth',
+    county: 'County / region',
+    addressStreet: 'Address / street',
+    areaNeighbourhood: 'Area / neighbourhood',
+    preferredContact: 'Preferred contact method',
+    documentType: 'Document type',
+    documentUpload: 'Upload document',
+    documentExpiry: 'Expiry date',
+    businessRegistration: 'Business registration document',
+    taxPin: 'Tax PIN',
+    certificateOfIncorporation: 'Certificate of incorporation',
+    bankName: 'Bank name',
+    accountName: 'Account name',
+    accountNumber: 'Account number',
+    branchName: 'Branch',
+    mobileMoneyNumber: 'Mobile money number',
+    paymentMethod: 'Payment method',
+    chooseDate: 'Choose a date',
+    chooseOption: 'Choose an option',
+    selectYourRole: 'Select your role',
+    yes: 'Yes',
+    no: 'No',
+    optional: 'Optional',
+    required: 'Required',
+    thisFieldRequired: 'This field is required',
+    enterValidEmail: 'Enter a valid email address',
+    enterValidPhone: 'Enter a valid phone number',
+    selectOneOption: 'Please select an option',
+    uploadRequired: 'Please upload the required document',
+    stepOf: 'Step {current} of {total}',
+    unsavedChanges: 'You have unsaved changes',
+    placeholderFullName: 'Your full name',
+    placeholderEmail: 'you@example.com',
+    placeholderPhoneKe: '+254 7XX XXX XXX',
+    placeholderExample: 'E.g. {value}',
+  },
     nav: {
       home: 'Home',
       explore: 'Explore',
@@ -317,7 +456,7 @@ export const translations: Record<Language, TranslationSchema> = {
       titleLine1: 'Everything you need',
       titleLine2: 'Right where you are.',
       subtitle: 'Order curated gourmet dishes, book sanctuary spa treatments, arrange VIP chauffeurs, and enjoy swift concierge delivery directly to your villa, room, or residence.',
-      searchPlaceholder: 'Search Nobu, Wagyu, Balinese Spa, Maybach, Caviar...',
+      searchPlaceholder: 'Search dining, spa, rides',
       searchBtn: 'Search',
       popular: 'Popular:',
       sugMichelin: 'Michelin Dining',
@@ -571,6 +710,75 @@ export const translations: Record<Language, TranslationSchema> = {
     },
   },
   zh: {
+
+  /*
+    SHARED FORM VOCABULARY.
+
+    These are the strings that appear on more than one form — an email label on four onboarding
+    flows, "Save draft" on three. Extracting them means a later component references a key that
+    already exists rather than adding a fifty-first way to say "Full name".
+
+    Scoped deliberately: it holds what is genuinely common and nothing else. Form-specific copy
+    ("Driver's License Expiry Date", "E.g. KMCA 123A") stays with its own screen, because
+    collecting one-off strings into a shared block is how a shared block becomes unmaintainable.
+
+    Placeholders use {braces} where a value is substituted. See forms.stepOf.
+  */
+  forms: {
+    actionSave: '保存',
+    actionSaveDraft: '保存草稿',
+    actionContinue: '继续',
+    actionBack: '返回',
+    actionNext: '下一步',
+    actionCancel: '取消',
+    actionConfirm: '确认',
+    actionSubmit: '提交',
+    actionReview: '检查',
+    actionEdit: '编辑',
+    actionRemove: '移除',
+    actionUpload: '上传',
+    actionTryAgain: '重试',
+    fullName: '姓名',
+    emailAddress: '电子邮箱',
+    phoneNumber: '电话号码',
+    whatsappNumber: 'WhatsApp 号码',
+    nationalId: '身份证号码',
+    dateOfBirth: '出生日期',
+    county: '县 / 地区',
+    addressStreet: '地址 / 街道',
+    areaNeighbourhood: '区域 / 街区',
+    preferredContact: '首选联系方式',
+    documentType: '文件类型',
+    documentUpload: '上传文件',
+    documentExpiry: '到期日期',
+    businessRegistration: '营业执照',
+    taxPin: '税号',
+    certificateOfIncorporation: '公司注册证书',
+    bankName: '银行名称',
+    accountName: '账户名称',
+    accountNumber: '账号',
+    branchName: '分行',
+    mobileMoneyNumber: '移动支付号码',
+    paymentMethod: '付款方式',
+    chooseDate: '选择日期',
+    chooseOption: '选择一个选项',
+    selectYourRole: '选择您的角色',
+    yes: '是',
+    no: '否',
+    optional: '可选',
+    required: '必填',
+    thisFieldRequired: '此字段为必填项',
+    enterValidEmail: '请输入有效的电子邮箱',
+    enterValidPhone: '请输入有效的电话号码',
+    selectOneOption: '请选择一个选项',
+    uploadRequired: '请上传所需文件',
+    stepOf: '第 {current} 步，共 {total} 步',
+    unsavedChanges: '您有未保存的更改',
+    placeholderFullName: '您的姓名',
+    placeholderEmail: 'you@example.com',
+    placeholderPhoneKe: '+254 7XX XXX XXX',
+    placeholderExample: '例如：{value}',
+  },
     nav: {
       home: '首页',
       explore: '探索探索',
@@ -601,7 +809,7 @@ export const translations: Record<Language, TranslationSchema> = {
       titleLine1: '您所需的一切尊享体验，',
       titleLine2: '皆在当下触手可得。',
       subtitle: '随时订购顶级名厨珍馐、预约别墅水疗理疗、召唤迈巴赫专车接送，享受白手套尊崇配送直达您的私享套房与泳池露台。',
-      searchPlaceholder: '搜索 Nobu 日料、顶级和牛、巴厘岛 SPA、迈巴赫接送、鱼子酱...',
+      searchPlaceholder: '搜索餐厅、水疗、专车',
       searchBtn: '搜索服务',
       popular: '热门推荐：',
       sugMichelin: '米其林美馔',
@@ -855,6 +1063,75 @@ export const translations: Record<Language, TranslationSchema> = {
     },
   },
   sw: {
+
+  /*
+    SHARED FORM VOCABULARY.
+
+    These are the strings that appear on more than one form — an email label on four onboarding
+    flows, "Save draft" on three. Extracting them means a later component references a key that
+    already exists rather than adding a fifty-first way to say "Full name".
+
+    Scoped deliberately: it holds what is genuinely common and nothing else. Form-specific copy
+    ("Driver's License Expiry Date", "E.g. KMCA 123A") stays with its own screen, because
+    collecting one-off strings into a shared block is how a shared block becomes unmaintainable.
+
+    Placeholders use {braces} where a value is substituted. See forms.stepOf.
+  */
+  forms: {
+    actionSave: 'Hifadhi',
+    actionSaveDraft: 'Hifadhi rasimu',
+    actionContinue: 'Endelea',
+    actionBack: 'Rudi',
+    actionNext: 'Ifuatayo',
+    actionCancel: 'Ghairi',
+    actionConfirm: 'Thibitisha',
+    actionSubmit: 'Wasilisha',
+    actionReview: 'Kagua',
+    actionEdit: 'Hariri',
+    actionRemove: 'Ondoa',
+    actionUpload: 'Pakia',
+    actionTryAgain: 'Jaribu tena',
+    fullName: 'Jina kamili',
+    emailAddress: 'Barua pepe',
+    phoneNumber: 'Namba ya simu',
+    whatsappNumber: 'Namba ya WhatsApp',
+    nationalId: 'Namba ya kitambulisho',
+    dateOfBirth: 'Tarehe ya kuzaliwa',
+    county: 'Kaunti / mkoa',
+    addressStreet: 'Anwani / mtaa',
+    areaNeighbourhood: 'Eneo / mtaa',
+    preferredContact: 'Njia unayopendelea ya mawasiliano',
+    documentType: 'Aina ya hati',
+    documentUpload: 'Pakia hati',
+    documentExpiry: 'Tarehe ya mwisho',
+    businessRegistration: 'Hati ya usajili wa biashara',
+    taxPin: 'Namba ya kodi',
+    certificateOfIncorporation: 'Cheti cha usajili',
+    bankName: 'Jina la benki',
+    accountName: 'Jina la akaunti',
+    accountNumber: 'Namba ya akaunti',
+    branchName: 'Tawi',
+    mobileMoneyNumber: 'Namba ya pesa za simu',
+    paymentMethod: 'Njia ya malipo',
+    chooseDate: 'Chagua tarehe',
+    chooseOption: 'Chagua chaguo',
+    selectYourRole: 'Chagua jukumu lako',
+    yes: 'Ndiyo',
+    no: 'Hapana',
+    optional: 'Si lazima',
+    required: 'Lazima',
+    thisFieldRequired: 'Sehemu hii inahitajika',
+    enterValidEmail: 'Weka barua pepe sahihi',
+    enterValidPhone: 'Weka namba sahihi ya simu',
+    selectOneOption: 'Tafadhali chagua chaguo',
+    uploadRequired: 'Tafadhali pakia hati inayohitajika',
+    stepOf: 'Hatua {current} kati ya {total}',
+    unsavedChanges: 'Una mabadiliko ambayo hayajahifadhiwa',
+    placeholderFullName: 'Jina lako kamili',
+    placeholderEmail: 'wewe@example.com',
+    placeholderPhoneKe: '+254 7XX XXX XXX',
+    placeholderExample: 'Mfano: {value}',
+  },
     nav: {
       home: 'Mwanzo',
       explore: 'Gundua',
@@ -885,7 +1162,7 @@ export const translations: Record<Language, TranslationSchema> = {
       titleLine1: 'Kila kitu unachohitaji,',
       titleLine2: 'pale pale ulipo sasa.',
       subtitle: 'Agiza vyakula bora kutoka kwa wapishi mashuhuri, weka miadi ya masaji ya utulivu wa hali ya juu, agiza madereva wa VIP Maybach, na ufurahie uwasilishaji wa haraka moja kwa moja kwenye villa au chumba chako.',
-      searchPlaceholder: 'Tafuta Nobu, Nyama ya Wagyu, Spa ya Balinese, Maybach, Caviar...',
+      searchPlaceholder: 'Tafuta chakula, spa, gari',
       searchBtn: 'Tafuta',
       popular: 'Maarufu:',
       sugMichelin: 'Vyakula vya Michelin',
@@ -1139,6 +1416,75 @@ export const translations: Record<Language, TranslationSchema> = {
     },
   },
   ar: {
+
+  /*
+    SHARED FORM VOCABULARY.
+
+    These are the strings that appear on more than one form — an email label on four onboarding
+    flows, "Save draft" on three. Extracting them means a later component references a key that
+    already exists rather than adding a fifty-first way to say "Full name".
+
+    Scoped deliberately: it holds what is genuinely common and nothing else. Form-specific copy
+    ("Driver's License Expiry Date", "E.g. KMCA 123A") stays with its own screen, because
+    collecting one-off strings into a shared block is how a shared block becomes unmaintainable.
+
+    Placeholders use {braces} where a value is substituted. See forms.stepOf.
+  */
+  forms: {
+    actionSave: 'حفظ',
+    actionSaveDraft: 'حفظ المسودة',
+    actionContinue: 'متابعة',
+    actionBack: 'رجوع',
+    actionNext: 'التالي',
+    actionCancel: 'إلغاء',
+    actionConfirm: 'تأكيد',
+    actionSubmit: 'إرسال',
+    actionReview: 'مراجعة',
+    actionEdit: 'تعديل',
+    actionRemove: 'إزالة',
+    actionUpload: 'تحميل',
+    actionTryAgain: 'حاول مرة أخرى',
+    fullName: 'الاسم الكامل',
+    emailAddress: 'البريد الإلكتروني',
+    phoneNumber: 'رقم الهاتف',
+    whatsappNumber: 'رقم واتساب',
+    nationalId: 'رقم الهوية الوطنية',
+    dateOfBirth: 'تاريخ الميلاد',
+    county: 'المقاطعة / المنطقة',
+    addressStreet: 'العنوان / الشارع',
+    areaNeighbourhood: 'المنطقة / الحي',
+    preferredContact: 'طريقة التواصل المفضلة',
+    documentType: 'نوع المستند',
+    documentUpload: 'تحميل المستند',
+    documentExpiry: 'تاريخ الانتهاء',
+    businessRegistration: 'وثيقة تسجيل الشركة',
+    taxPin: 'الرقم الضريبي',
+    certificateOfIncorporation: 'شهادة التأسيس',
+    bankName: 'اسم البنك',
+    accountName: 'اسم الحساب',
+    accountNumber: 'رقم الحساب',
+    branchName: 'الفرع',
+    mobileMoneyNumber: 'رقم المحفظة الإلكترونية',
+    paymentMethod: 'طريقة الدفع',
+    chooseDate: 'اختر تاريخاً',
+    chooseOption: 'اختر خياراً',
+    selectYourRole: 'اختر دورك',
+    yes: 'نعم',
+    no: 'لا',
+    optional: 'اختياري',
+    required: 'مطلوب',
+    thisFieldRequired: 'هذا الحقل مطلوب',
+    enterValidEmail: 'أدخل بريداً إلكترونياً صالحاً',
+    enterValidPhone: 'أدخل رقم هاتف صالحاً',
+    selectOneOption: 'الرجاء اختيار أحد الخيارات',
+    uploadRequired: 'الرجاء تحميل المستند المطلوب',
+    stepOf: 'الخطوة {current} من {total}',
+    unsavedChanges: 'لديك تغييرات غير محفوظة',
+    placeholderFullName: 'اسمك الكامل',
+    placeholderEmail: 'you@example.com',
+    placeholderPhoneKe: '+254 7XX XXX XXX',
+    placeholderExample: 'مثال: {value}',
+  },
     nav: {
       home: 'الرئيسية',
       explore: 'استكشف',
@@ -1169,7 +1515,7 @@ export const translations: Record<Language, TranslationSchema> = {
       titleLine1: 'كل ما ترغب به،',
       titleLine2: 'في مكان إقامتك تماماً.',
       subtitle: 'اطلب أرقى أطباق الطهاة العالميين، احجز جلسات تدليك استرخائية في فيلتك، اطلب سيارات مايباخ مع سائق خاص، وتمتع بتوصيل فوري متميز مباشرة إلى باب جناحك أو مسبحك الخاص.',
-      searchPlaceholder: 'ابحث عن نوبو، واغيو، سبا بالي، مايباخ، كافيار...',
+      searchPlaceholder: 'ابحث عن مطعم، سبا، سيارة',
       searchBtn: 'بحث',
       popular: 'الأكثر طلباً:',
       sugMichelin: 'أطباق ميشلان',
