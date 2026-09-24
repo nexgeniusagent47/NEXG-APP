@@ -11,7 +11,7 @@
 # of the shipped UI (see docs/PLAN-v3.md on font licensing).
 
 # ----------------------------------------------------------------- builder ----
-FROM node:24-alpine AS builder
+FROM node:25-alpine AS builder
 
 WORKDIR /build
 
@@ -25,7 +25,7 @@ COPY . .
 RUN npm run build
 
 # ---------------------------------------------------------------- production ---
-FROM node:24-alpine AS production
+FROM node:25-alpine AS production
 
 ENV NODE_ENV=production \
     PORT=3001
