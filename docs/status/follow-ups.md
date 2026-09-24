@@ -5,7 +5,7 @@ re-parks it. Items below are new from the master-plan review and are not claimed
 
 | ID | Item | Source | Parked at | Closer / exit evidence | Status |
 |---|---|---|---|---|---|
-| F-001 | Configure a release source and reconcile the dirty working tree before shipping the Postgres-only patch | 2026-09-24 session | P0 | Owner confirms remote or documented direct path; approved change set passes release gates and post-deploy checks | OPEN |
+| F-001 | Complete staged release and rollback readiness for the Postgres-only patch | 2026-09-24 session | P0 | Candidate `cf30039` is on `origin/master` and CI passes; staging outage/rollback evidence, production release approval, and post-deploy checks complete | IN PROGRESS |
 | F-002 | Revalidate production API exposure, CORS, authz, metrics/traces, and rate-limit behavior | Security runbook / master plan | P2 | Route inventory and controlled allow/deny evidence; production checks authorized and documented | OPEN |
 | F-003 | Capture complete host/merchant/rider form-field and consent inventory | Owner requirement | P4 | Field-by-field mapping proves no requirement was lost in the adaptive form | OPEN |
 | F-004 | Gather TempVault approved name, product specifications, and patent/trademark evidence | Owner requirement | P5 | Owner-approved source evidence and legal-approved public copy | OPEN |
@@ -19,6 +19,7 @@ re-parks it. Items below are new from the master-plan review and are not claimed
 - **F-006 remains OPEN.** The master plan still lists “instant records” and checkout/payment state
   as unresolved. Carry the owner decision into the P3 order contract and P7 portal boundaries; do
   not invent transaction semantics as part of P2 identity work.
-- **F-001 remains OPEN at P0.** This pass confirmed there is no configured Git remote, a broad
-  uncommitted worktree, and a mismatch between the documented server pull directory and the server
-  project path recorded in the current handoff.
+- **F-001 is IN PROGRESS at P0.** Commit `cf30039` is pushed to `origin/master`, the remote ref
+  matches, the working tree is clean, and GitHub CI run `36039810407` passed. The branch workflow
+  does not deploy production. Staging outage/rollback evidence and approved production release and
+  post-deploy checks remain outstanding.

@@ -3,6 +3,9 @@
 - **Date:** 2026-09-24
 **Request:** Document the accumulated local changes, prepare the handoff to Phase 2, and push the site.
 
+This record was updated after the requested GitHub push. The post-push addendum at the end
+supersedes the initial source/commit status below.
+
 ## Plan and scope
 
 This pass reconciles existing code and documentation changes, completes the configured local
@@ -85,10 +88,30 @@ deployment is in scope for this preparation pass. Phase 2 remains in planning un
 
 - No full security audit, staging/production outage, production check, database write, Cloudflare
   change, commit, push, or deploy was performed.
-- P0 remains blocked by no Git remote/upstream, a broad dirty worktree, an unreconciled server
-  destination, and missing staging-topology/rollback evidence. The existing deploy runbook
-  directory and the prior SSH handoff directory differ.
+- At the initial preparation-pass cutoff, P0 remained blocked by no Git remote/upstream, a broad
+  dirty worktree, an unreconciled server destination, and missing staging-topology/rollback
+  evidence. The post-push addendum below updates the source/commit facts; staging and rollback
+  evidence remain open.
 - P2 is only in planning. ADR-0001 through ADR-0004 remain proposed. F-002 stays open and moves to
   P2; F-006 remains open for the P3 order contract/P7 portal boundary.
 - Next session: confirm the approved source/release destination; create/review the detailed 34+2
   P2 plan and threat model; review ADR-0001 through ADR-0004 before writing P2 implementation code.
+
+## Post-push update — 2026-09-24
+
+- Added GitHub as `origin` and pushed commit `cf300395a411e376585e600af93b16cb14585cad` to
+  `master`. `git ls-remote origin refs/heads/master` returned the same commit, and local `master`
+  tracks `origin/master` with a clean worktree.
+- GitHub Actions CI run
+  [36039810407](https://github.com/nexgeniusagent47/NEXG-APP/actions/runs/36039810407) passed
+  for the pushed commit. Its workflow covers typecheck, Vitest, and the Vite production build.
+- The branch-push CI workflow does not deploy the live site. The separate release workflow is
+  tag-driven and publishes a GHCR image; no tag was created. No production container, database,
+  DNS, Cloudflare setting, or certificate was changed by this push.
+- The final local Vite build rerun was blocked by workspace sandbox access to `../..`; the runner
+  loader alternative was incompatible with the config's `__dirname`. The successful GitHub CI run
+  is the production-build evidence for this commit.
+- P0 remains open until staging outage/rollback evidence, the approved production release route,
+  and post-deploy health/source/count checks are complete. P2 remains planning only.
+- Next: finish the safe release and rollback gates for the pushed candidate; then continue P2
+  planning from the API/identity security kickoff.

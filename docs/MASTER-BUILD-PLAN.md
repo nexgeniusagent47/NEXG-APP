@@ -22,9 +22,9 @@ specification and acceptance checklist before implementation. The operating loop
    while respecting a saved user choice.
 2. Inventory and unify host, merchant, and rider onboarding behind one role-selecting intake before
    V1. Preserve existing inputs, agreements, validation, and submission behavior.
-3. Complete release readiness for the local PostgreSQL-only catalogue change and establish the
-   approved source/release path. The checkout has no Git remote and contains unrelated changes, so
-   **there is no safe first push or production deploy today**.
+3. Complete release readiness for the PostgreSQL-only catalogue change. Candidate `cf30039` is now
+   pushed to `origin/master`, and the GitHub CI workflow passed. It is not deployed; production
+   rollout, staging evidence, and rollback rehearsal remain open gates.
 4. Deliver the guest journey from discovery/search through merchant/item selection and the agreed
    V1 ordering outcome. Keep partner/product pages and portals outside the V1 launch scope.
 5. Before V1 production traffic, re-check Cloudflare's edge and origin certificate state, install
@@ -34,12 +34,12 @@ specification and acceptance checklist before implementation. The operating loop
    rollback is rehearsed, and health plus guest/onboarding flows are accepted. Build the other public
    product/partner pages after V1; portals follow later.
 
-The onboarding/logo/theme/language and partner-estimate changes are now present in the local
-worktree. A **push date cannot be responsibly promised yet**: this checkout has no configured Git
-remote, contains a broad mixed change set, and the documented server pull path does not match the
-server project path recorded in the current handoff. The first push becomes schedulable once the
-owner selects a release destination, the exact source/artifact is reconciled, and the candidate
-passes its acceptance checklist. Pushing code and opening public V1 traffic are separate gates.
+The onboarding/logo/theme/language and partner-estimate changes are committed as `cf30039` and
+pushed to [`origin/master`](https://github.com/nexgeniusagent47/NEXG-APP/tree/master). GitHub CI
+passed on that commit. This establishes the source repository; it does not deploy the site. The
+production release still needs a reconciled direct Docker Compose procedure, staging evidence, an
+artifact and rollback rehearsal, and post-deploy checks. Pushing code and opening public V1 traffic
+are separate gates.
 
 ## Capability map and boundary
 
@@ -91,7 +91,8 @@ needs trademark and domain checks before launch.
 - Local release checks run on 2026-09-24: TypeScript check passed after adding the SVG `?url`
   declaration and excluding the ignored `vendor/` examples; Vitest passed 52/52; API contract
   passed 29/29 against a freshly initialized local source server and PostgreSQL; browser flow
-  passed 18/18; merchant/order consistency passed 24/24; and the Vite production build passed.
+  passed 18/18; merchant/order consistency passed 24/24. GitHub Actions CI run `36039810407`
+  passed for candidate `cf30039`, including its production build.
   An isolated local invalid-loopback-DB simulation also returned HTTP 503 for health, categories,
   and merchants with no catalogue fallback. The npm/npx launchers on this workstation are broken,
   so repository-local Node binaries and scripts were invoked directly. No staging/production outage
@@ -133,7 +134,8 @@ software; external references are learning material only.
 - Owner approval of this plan and phase-specific plans.
 - Current repo/spec/handoff, local vendor references where relevant, and existing onboarding
   prototypes/field inventories.
-- A safe, documented deployment route; the repository currently reports no Git remote.
+- A safe, documented deployment route. GitHub `origin/master` is established; no automatic
+  production deployment is configured by the current branch-push workflow.
 - Existing PostgreSQL data and a verified restore path for any schema migration.
 - Owner-provided product details, product readiness, destinations, legal/patent evidence, and the
   mascot assets before those claims or illustrations are published.
@@ -412,9 +414,12 @@ limits. A green build alone is not acceptance.
 ## 23. CI validation
 
 CI must run the repository gates listed in `AGENTS.md`, migration checks, dependency/security
-checks approved for the repo, API contracts, and any end-to-end gates added by phase. Require
-checks before merge/release and preserve their logs. The current checkout has no remote and this
-plan does not assume a CI provider. Decide provider/branch protections in an operations ADR.
+checks approved for the repo, API contracts, and any end-to-end gates added by phase. The existing
+`.github/workflows/ci.yml` runs typecheck, unit tests, and production build on pushes and pull
+requests to `main` and `master`; run `36039810407` passed for `cf30039`. The tag-driven
+`.github/workflows/release.yml` publishes an image to GHCR; it is not a production deploy. Preserve
+CI evidence, add the remaining approved security/API/migration gates, and decide branch protections
+in an operations ADR.
 
 ## 24. Migration requirements
 
@@ -563,7 +568,7 @@ split further when its work spans independent contracts.
 
 | Phase | Outcome | Dependencies / exit evidence |
 |---|---|---|
-| `P0 Release readiness` | Review and accept or revise the fail-closed Postgres catalogue change; establish a safe source/release artifact and rollback | Current checkout is dirty and has no Git remote; exact gates, API/flow checks, DB-outage test off production, approved artifact, release route, post-release health/source/counts |
+| `P0 Release readiness` | Review and accept or revise the fail-closed Postgres catalogue change; establish a safe source/release artifact and rollback | Candidate `cf30039` is on `origin/master` and CI passed; still require DB-outage test off production, approved immutable artifact, staging/rollback rehearsal, safe production release route, and post-release health/source/counts |
 | `P1 Onboarding quality slice` | Apply the owner's wordmark with theme-adaptive ink on transparent backgrounds; put back controls before the logo; use brand gold title bands with readable dark text across merchant, rider, and host onboarding; show a motorcycle for the independent rider path; align light/dark contrast; remove category/subcategory icon tiles and white selection; prepare the complete 112-image prompt set; preserve role fields; detect supported device language | Supplied logo; shared theme tokens; all 112 reviewed local image assets before integration; visual/accessibility review; locale preference and RTL checks; no dropped fields |
 | `P1 partner estimator assumptions` | Show courier estimates in KES at KES 95/km with an adjustable distance input and 48-hour change notice; show property owners' 18% share of order markup with 14-day change notice; localize estimate copy for all four supported languages | Clear illustrative formula and inputs; localized KES display; final commercial terms and legal wording confirmed before production |
 | `P2 API and identity security` | API inventory; browser CORS policy; route authorization; durable sessions; 15-minute reset; endpoint limits; input/output safety | ADRs 1–4; threat model; anonymous/wrong-user/spoofed-origin and expiry/replay checks |
@@ -576,9 +581,9 @@ split further when its work spans independent contracts.
 | `P7 Partner portals` | Role-scoped merchant/host/rider tools; admin/operator boundaries specified separately | P2 identity/authz accepted; guest experience accepted; portal specs/ADRs and tenant-isolation checks |
 | `P8 Operability and progressive delivery` | Mature redacted telemetry, critical alerts, blue/green app release, compatible migrations, and rollback | ADRs 4/7/8; staging rehearsal; alert runbooks; release and rollback evidence |
 
-Current gate state: **P0 remains open** until the release source/destination and exact candidate
-are reconciled, outage/rollback evidence is complete, and a release route is verified. **P2 is in
-planning only**; ADR-0001 through ADR-0004 are proposed, not accepted. See
+Current gate state: **P0 remains open**: the GitHub source and candidate are established, but the
+staging outage/rollback evidence, safe production release route, and post-deploy checks are not
+complete. **P2 is in planning only**; ADR-0001 through ADR-0004 are proposed, not accepted. See
 [`docs/handoff/P2-API-AND-IDENTITY-SECURITY-KICKOFF.md`](handoff/P2-API-AND-IDENTITY-SECURITY-KICKOFF.md).
 Passing local checks does not authorize production deployment or complete either phase.
 

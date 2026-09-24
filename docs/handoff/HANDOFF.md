@@ -9,6 +9,10 @@
 
 ## Current state
 
+- The source is pushed to [`origin/master`](https://github.com/nexgeniusagent47/NEXG-APP/tree/master)
+  at commit `cf300395a411e376585e600af93b16cb14585cad`. GitHub CI run
+  [36039810407](https://github.com/nexgeniusagent47/NEXG-APP/actions/runs/36039810407) passed.
+  The working tree is clean.
 - Local work now includes the PostgreSQL-only, fail-closed catalogue API; app/database/deployment
   documentation; onboarding/logo/theme and partner-estimate changes; language-detection and
   translation work; API logging/observability changes; and the current master plan, security plan,
@@ -44,7 +48,10 @@
   freshly initialized source API and local PostgreSQL.
 - `node scripts/v2-flow-test.mjs` — PASS: 18 assertions.
 - `node scripts/v3-consistency-test.mjs` — PASS: 24 assertions.
-- `node node_modules/vite/bin/vite.js build` — PASS; final run output is in the dated session.
+- GitHub Actions CI — PASS for commit `cf30039`, including typecheck, Vitest, and production build.
+- The final local Vite build rerun was blocked by sandbox filesystem access to `../..`; the
+  `--configLoader runner` workaround is incompatible with this config's `__dirname`. CI provides
+  the production-build result for the pushed commit.
 - `git diff --check` — PASS; see the dated session for the final output.
 
 The workstation's global npm/npx launchers point to a missing npm installation; local Node binaries
@@ -53,21 +60,22 @@ production release.
 
 ## Push/deployment status
 
-No commit, Git push, or deployment was made. The checkout is on `master` at `f0e760e`, has a broad
-uncommitted worktree, and has no Git remote or upstream. The deployment runbook names
-`/var/www/apps/projects/nexg/backend`, while the existing SSH handoff records the live app at
-`/var/www/apps/projects/nexg-concierge`; reconcile the source and destination before building a
-release artifact. The exact changed-file set has not been isolated as a release candidate.
+The full source snapshot is committed and pushed to GitHub `origin/master` at `cf30039`; the
+remote ref matches local `HEAD`, and its CI run passed. The current branch-push workflow does not
+deploy to production. The existing SSH handoff confirms the live project path
+`/var/www/apps/projects/nexg-concierge`; staging topology, an approved immutable release artifact,
+rollback rehearsal, and post-deploy checks remain outstanding. No production container, database,
+Cloudflare setting, or DNS record was changed by this GitHub push.
 
-P0 is not accepted: the release path is unknown, no staging/production outage check or rollback
-rehearsal was performed, and production health/security were not freshly verified. Do not claim
-these changes are live.
+P0 is not accepted: no staging outage check or rollback rehearsal was performed, and production
+health/security were not freshly verified after this push. Do not claim these changes are live.
 
 ## Next actions
 
-1. Resolve F-001: select the approved Git remote or verify the direct-server deployment path and
-   exact destination; review/isolate the intended changes before committing.
-2. Complete P0 staging-topology outage, artifact, and rollback checks in a safe staging environment.
+1. Resolve F-001: complete P0 staging-topology outage, artifact, and rollback checks using the
+   pushed candidate; then confirm the production release procedure before deploying.
+2. Keep the pushed source and production release as separate gates; do not treat GitHub CI as a
+   live-site deployment.
 3. Begin P2 with the API route inventory, threat model, and detailed 34-section plan. Review
    ADR-0001 through ADR-0004; they are proposed only. Include F-002 in P2 and carry F-006's open
    checkout semantics to P3/P7.
