@@ -36,10 +36,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           # Node 24 is the runtime the app actually deploys on: `node server/index.ts`
           # executes TypeScript directly, with no transpiler in the image. Building
