@@ -99,12 +99,14 @@ deployment is in scope for this preparation pass. Phase 2 remains in planning un
 
 ## Post-push update — 2026-09-24
 
-- Added GitHub as `origin` and pushed commit `cf300395a411e376585e600af93b16cb14585cad` to
-  `master`. `git ls-remote origin refs/heads/master` returned the same commit, and local `master`
-  tracks `origin/master` with a clean worktree.
+- Added GitHub as `origin` and pushed the app/source commit `cf300395a411e376585e600af93b16cb14585cad`
+  to `master`; a documentation-only status commit `a0265699530cae325b2240860bc44546d71dda76`
+  followed. Local `master` tracks `origin/master` with a clean worktree.
 - GitHub Actions CI run
   [36039810407](https://github.com/nexgeniusagent47/NEXG-APP/actions/runs/36039810407) passed
-  for the pushed commit. Its workflow covers typecheck, Vitest, and the Vite production build.
+  for `cf30039`. The documentation follow-up CI run
+  [36040825521](https://github.com/nexgeniusagent47/NEXG-APP/actions/runs/36040825521) also passed.
+  CI covers typecheck, Vitest, and the Vite production build.
 - The branch-push CI workflow does not deploy the live site. The separate release workflow is
   tag-driven and publishes a GHCR image; no tag was created. No production container, database,
   DNS, Cloudflare setting, or certificate was changed by this push.

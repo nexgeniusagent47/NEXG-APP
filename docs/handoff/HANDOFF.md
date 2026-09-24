@@ -9,10 +9,12 @@
 
 ## Current state
 
-- The source is pushed to [`origin/master`](https://github.com/nexgeniusagent47/NEXG-APP/tree/master)
-  at commit `cf300395a411e376585e600af93b16cb14585cad`. GitHub CI run
-  [36039810407](https://github.com/nexgeniusagent47/NEXG-APP/actions/runs/36039810407) passed.
-  The working tree is clean.
+- The site-source candidate `cf30039` is pushed to
+  [`origin/master`](https://github.com/nexgeniusagent47/NEXG-APP/tree/master). A documentation-only
+  follow-up was pushed as `a026569`. CI runs
+  [36039810407](https://github.com/nexgeniusagent47/NEXG-APP/actions/runs/36039810407) and
+  [36040825521](https://github.com/nexgeniusagent47/NEXG-APP/actions/runs/36040825521) passed for
+  those commits. Local `master` tracks `origin/master`; the working tree is clean.
 - Local work now includes the PostgreSQL-only, fail-closed catalogue API; app/database/deployment
   documentation; onboarding/logo/theme and partner-estimate changes; language-detection and
   translation work; API logging/observability changes; and the current master plan, security plan,
@@ -60,11 +62,12 @@ production release.
 
 ## Push/deployment status
 
-The full source snapshot is committed and pushed to GitHub `origin/master` at `cf30039`; the
-remote ref matches local `HEAD`, and its CI run passed. The current branch-push workflow does not
-deploy to production. The existing SSH handoff confirms the live project path
-`/var/www/apps/projects/nexg-concierge`; staging topology, an approved immutable release artifact,
-rollback rehearsal, and post-deploy checks remain outstanding. No production container, database,
+The full source snapshot is committed and pushed to GitHub `origin/master` at `cf30039`; its
+documentation follow-up `a026569` is also pushed and passed CI. The branch tracks the remote with a
+clean working tree. The current branch-push workflow does not deploy to production. The existing
+SSH handoff confirms the live project path `/var/www/apps/projects/nexg-concierge`; staging topology,
+an approved immutable release artifact, rollback rehearsal, and post-deploy checks remain
+outstanding. No production container, database,
 Cloudflare setting, or DNS record was changed by this GitHub push.
 
 P0 is not accepted: no staging outage check or rollback rehearsal was performed, and production
