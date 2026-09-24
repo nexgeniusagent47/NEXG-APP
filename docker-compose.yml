@@ -9,14 +9,15 @@
 # hooked into the postgres container's entrypoint. Postgres init scripts only
 # execute on an empty data directory, so an auto-run seed would silently do
 # nothing after the first `up` — the worst failure mode for a demo, because the
-# stack looks provisioned while serving only the JSON fallback. Both files are
+# stack looks provisioned while serving an incomplete catalogue. Both files are
 # idempotent (`CREATE TABLE IF NOT EXISTS`, `TRUNCATE ... CASCADE` before insert),
 # so re-running them is safe.
 #
-# Credentials here match scripts/setup-postgres.ps1 and .github/workflows/ci.yml,
-# so a container stack and a host stack behave identically. They are local
-# development defaults: production injects its own DATABASE_URL from a secret
-# store (see docker-compose.prod.yml and docs/DEPLOYMENT.md).
+# Database secrets are set in the project `.env`. `POSTGRES_PASSWORD` is the
+# raw password used by the PostgreSQL image during first initialization;
+# `POSTGRES_PASSWORD_URLENCODED` is the URI-encoded form used by the app. Both
+# must represent the same password. The app URL fails closed if its encoded
+# value is missing; never insert the raw password directly into a URI.
 
 name: nexg-concierge
 
@@ -26,7 +27,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_USER: nexg_user
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-nexg_dev_password}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set_POSTGRES_PASSWORD_in_.env}
       POSTGRES_DB: nexg_db
       # Same UTF8/C locale as setup-postgres.ps1, so seed text sorts identically.
       POSTGRES_INITDB_ARGS: --encoding=UTF8 --locale=C
@@ -57,9 +58,8 @@ services:
       dockerfile: Dockerfile
     restart: unless-stopped
     # Waits for a genuinely accepting database. `service_started` is not enough:
-    # initDb() retries the pool for a few seconds and then degrades to the JSON
-    # fallback, so starting early would leave the API on the fallback path for
-    # the life of the container while looking healthy.
+    # initDb() retries the pool for a few seconds. If it still cannot connect,
+    # the API reports unhealthy and catalogue requests return HTTP 503.
     depends_on:
       postgres:
         condition: service_healthy
@@ -76,13 +76,11 @@ services:
       # it becomes a restart loop whose cause is buried in `docker compose logs`. Failing
       # here instead stops the deploy immediately and names the missing variable.
       AUTH_SECRET: "${AUTH_SECRET:?AUTH_SECRET is required. Generate one with: node -e \"console.log(require('node:crypto').randomBytes(32).toString('base64url'))\"}"
-      # The service name is the hostname inside the compose network, which is why
-      # this is set here rather than inherited from .env: the `.env` value points
-      # at 127.0.0.1:5433 for a server running on the host, and that address is
-      # the container's own loopback. Compose's `${...:-default}` fallback only
-      # fires when POSTGRES_HOST_PORT is unset, and it still targets the service
-      # name, so an override cannot silently break container networking.
-      DATABASE_URL: postgresql://nexg_user:${POSTGRES_PASSWORD:-nexg_dev_password}@postgres:5432/nexg_db
+      # Use Compose DNS for the database. URI-reserved punctuation in a password
+      # must be percent-encoded before it is placed in this URL. Require the
+      # encoded value so a missing production secret cannot fall back to a known
+      # development password; do not interpolate raw POSTGRES_PASSWORD here.
+      DATABASE_URL: postgresql://nexg_user:${POSTGRES_PASSWORD_URLENCODED:?Set_POSTGRES_PASSWORD_URLENCODED_in_.env}@postgres:5432/nexg_db
       NODE_ENV: production
     env_file:
       # Optional, so a fresh clone that has never run `npm run db:up` still boots.

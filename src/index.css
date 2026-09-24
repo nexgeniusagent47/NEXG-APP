@@ -129,6 +129,18 @@
      element, which is a transform on every frame of an animation that never ends. */
   --animate-status: status-breathe 2.4s ease-in-out infinite;
 
+  /* Reversible app-wide ellipse corner system. Tailwind's rounded utilities use
+     these pairs for their border-radius shorthand. Restore the original Tailwind
+     defaults here to undo the treatment. `rounded-full` stays pill-shaped. */
+  --radius-xs: 0.35rem / 0.29rem;
+  --radius-sm: 0.5rem / 0.41rem;
+  --radius-md: 0.75rem / 0.61rem;
+  --radius-lg: 1rem / 0.82rem;
+  --radius-xl: 1.25rem / 1.02rem;
+  --radius-2xl: 1.5rem / 1.23rem;
+  --radius-3xl: 1.875rem / 1.54rem;
+  --radius-4xl: 2.25rem / 1.85rem;
+
   /* THE BRAND GOLD, AS A THEME COLOUR.
      The palette needs two golds and this is why they must be tokens rather than
      literals: #E5B65F is 9.92:1 on the dark page but only 1.77:1 on the light one, and
@@ -455,11 +467,16 @@ body {
 --------------------------------------------------------------------------- */
 .onboarding-theme {
   --color-white: #ffffff;
+  /* Form text uses a darker gold than decorative fills so it stays readable on white. */
+  --color-gold: #7d5a11;
+  --color-gold-strong: #7d5a11;
+  --color-gold-tint: color-mix(in oklab, #b88728 12%, transparent);
+  --color-gold-line: color-mix(in oklab, #b88728 30%, transparent);
   --color-slate-50: #f8fafc;
   --color-slate-100: #f1f5f9;
   --color-slate-200: #e2e8f0;
   --color-slate-300: #cbd5e1;
-  --color-slate-400: #94a3b8;
+  --color-slate-400: #64748b;
   --color-slate-500: #64748b;
   --color-slate-600: #475569;
   --color-slate-700: #334155;
@@ -470,7 +487,7 @@ body {
   --color-gray-100: #f3f4f6;
   --color-gray-200: #e5e7eb;
   --color-gray-300: #d1d5db;
-  --color-gray-400: #9ca3af;
+  --color-gray-400: #64748b;
   --color-gray-500: #6b7280;
   --color-gray-600: #4b5563;
   --color-gray-700: #374151;
@@ -480,13 +497,48 @@ body {
   --color-black: #000000;
 }
 
+/* A shared heading voice across merchant, courier, and host React forms. Quicksand
+   is the homepage heading face and ships real weights only through 700. Setting the
+   weight here keeps inherited `font-extrabold` utilities from creating synthetic ink. */
+.onboarding-theme :is(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+/* Native select menus keep their platform keyboard and accessibility behavior; this
+   aligns the closed-state chevron consistently across all three onboarding forms. */
+.onboarding-theme select:not([multiple]) {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2.75rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='m5.5 7.5 4.5 4.5 4.5-4.5' stroke='%237d5a11' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  background-size: 1rem;
+  transition: background-position 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.onboarding-theme select:not([multiple]):is(:hover, :focus-visible, :open) {
+  background-position: right 0.72rem center;
+}
+
+html.dark .onboarding-theme select:not([multiple]) {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='m5.5 7.5 4.5 4.5 4.5-4.5' stroke='%23f59e0b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
 html.dark .onboarding-theme {
   --color-white: #16191d;
+  /* Keep the gold text token bright enough for the inverted dark surfaces. */
+  --color-gold: #f59e0b;
+  --color-gold-strong: #f59e0b;
+  --color-gold-tint: color-mix(in oklab, #e5b65f 12%, transparent);
+  --color-gold-line: color-mix(in oklab, #e5b65f 30%, transparent);
   --color-slate-50: #0f1216;
   --color-slate-100: #14181d;
   --color-slate-200: #23282f;
   --color-slate-300: #333a43;
-  --color-slate-400: #6b7280;
+  --color-slate-400: #98a1ac;
   --color-slate-500: #98a1ac;
   --color-slate-600: #b3bac3;
   --color-slate-700: #cbd2da;
@@ -497,7 +549,7 @@ html.dark .onboarding-theme {
   --color-gray-100: #14181d;
   --color-gray-200: #23282f;
   --color-gray-300: #333a43;
-  --color-gray-400: #6b7280;
+  --color-gray-400: #98a1ac;
   --color-gray-500: #98a1ac;
   --color-gray-600: #b3bac3;
   --color-gray-700: #cbd2da;
@@ -894,4 +946,142 @@ html.dark .onboarding-theme .onboarding-text-muted {
    Scoped to the dark onboarding theme again, so adding the class anywhere is inert outside it. */
 html.dark .onboarding-theme .onboarding-text-amber {
   color: #f59e0b;
+}
+
+/* Some small labels sit on a fixed pale amber chip in both themes; keep their ink dark. */
+.onboarding-theme .onboarding-text-on-amber-surface {
+  color: #7d5a11;
+}
+
+.nexg-wordmark {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+.nexg-wordmark__image {
+  display: block;
+  width: auto;
+  height: 100%;
+  object-fit: contain;
+}
+
+.nexg-wordmark__dark {
+  display: none;
+}
+
+html.dark .nexg-wordmark__light {
+  display: none;
+}
+
+html.dark .nexg-wordmark__dark {
+  display: block;
+}
+
+.onboarding-theme .onboarding-brand-band {
+  background: #f8a61e;
+  color: #120f0a;
+}
+
+.onboarding-theme .onboarding-brand-band h1 {
+  color: #120f0a;
+}
+
+.onboarding-theme .onboarding-brand-band p {
+  color: #30220d;
+}
+
+.onboarding-theme .onboarding-brand-kicker {
+  color: #30220d;
+  border-color: rgb(18 15 10 / 24%);
+  background-color: rgb(18 15 10 / 6%);
+}
+
+.onboarding-theme :is(.onboarding-category-option, .onboarding-subcategory-option)[aria-pressed='true'] {
+  background: #fff6df;
+  border-color: #946414;
+}
+
+html.dark .onboarding-theme :is(.onboarding-category-option, .onboarding-subcategory-option)[aria-pressed='true'] {
+  background: #292216;
+  border-color: #e5b65f;
+}
+
+@media print {
+  .nexg-wordmark {
+    padding: 0 !important;
+    background: transparent !important;
+  }
+
+  .nexg-wordmark__dark {
+    display: none !important;
+  }
+
+  .nexg-wordmark__light {
+    display: block !important;
+  }
+}
+
+/* A few onboarding tiles deliberately invert their surface (dark in light mode,
+   light in dark mode). Their accent ink must invert with the surface too. */
+.onboarding-theme .onboarding-gold-on-inverse {
+  color: #e5b65f;
+}
+
+html.dark .onboarding-theme .onboarding-gold-on-inverse {
+  color: #7d5a11;
+}
+
+/* Give form controls a visible boundary in both theme palettes. The neutral border
+   utilities elsewhere remain soft for cards; these controls need a stronger edge. */
+.onboarding-theme :is(input:not([type='checkbox']):not([type='radio']), select, textarea) {
+  border-color: #7c8795;
+}
+
+html.dark .onboarding-theme :is(input:not([type='checkbox']):not([type='radio']), select, textarea) {
+  border-color: #64748b;
+}
+
+.onboarding-theme .onboarding-gold-action {
+  background-color: #7d5a11;
+  color: #ffffff;
+}
+
+.onboarding-theme .onboarding-gold-action:hover {
+  background-color: #5f4616;
+}
+
+/* Ellipse radius longhands for the handful of directional Tailwind utilities. The
+   tokens above intentionally use `x / y` pairs for shorthand utilities; longhands
+   take the same pair as two space-separated radii. */
+.rounded-t-3xl {
+  border-top-left-radius: 1.875rem 1.54rem;
+  border-top-right-radius: 1.875rem 1.54rem;
+}
+
+.rounded-b-2xl {
+  border-bottom-right-radius: 1.5rem 1.23rem;
+  border-bottom-left-radius: 1.5rem 1.23rem;
+}
+
+.rounded-l-3xl,
+.rounded-l-xl {
+  border-top-left-radius: 1.875rem 1.54rem;
+  border-bottom-left-radius: 1.875rem 1.54rem;
+}
+
+.rounded-r-xl {
+  border-top-right-radius: 1.25rem 1.02rem;
+  border-bottom-right-radius: 1.25rem 1.02rem;
+}
+
+@media (min-width: 48rem) {
+  .rounded-t-3xl.md\:rounded-none {
+    border-radius: 0;
+  }
+
+  .rounded-t-3xl.md\:rounded-none.md\:rounded-l-3xl {
+    border-top-left-radius: 1.875rem 1.54rem;
+    border-bottom-left-radius: 1.875rem 1.54rem;
+  }
 }

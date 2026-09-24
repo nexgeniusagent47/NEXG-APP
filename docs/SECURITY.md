@@ -3,6 +3,11 @@
 Rate limiting, security headers, and client identity. Implemented in `server/security.ts`
 and mounted in `server/index.ts`.
 
+For production listener exposure, SSH/key rotation, Cloudflare/origin TLS, database credential
+recovery, safe cleanup, and the acceptance gate, follow the [production security and cleanup
+runbook](./SECURITY-HARDENING-AND-CLEANUP-PLAN.md). The runbook records the live snapshot and
+distinguishes it from these source-level controls.
+
 ---
 
 ## Client identity

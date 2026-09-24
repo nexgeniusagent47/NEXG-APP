@@ -74,7 +74,7 @@ export const OfferCard: React.FC<OfferCardProps> = ({ offer, twoPerScreen = true
           <img
             src={heroImage}
             alt={offer.imageAlt || offer.title}
-            className="h-full w-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-105"
+            className="h-full w-full object-cover rounded-xl"
             referrerPolicy="no-referrer"
           />
 

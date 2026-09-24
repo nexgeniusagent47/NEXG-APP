@@ -1,13 +1,15 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect, useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { Search, Sparkles, Building2, MapPin, Tag, Utensils, Compass, ArrowRight, Star } from 'lucide-react';
-import { CATEGORIES_21, CatalogCategory, CatalogMerchant, DynamicItem, getCategoryMerchants } from '../../data/categoryCatalog21';
+import { CATEGORIES_21, CatalogCategory, CatalogMerchant, DynamicItem } from '../../data/categoryCatalog21';
 import { useTheme } from '../../context/ThemeContext';
 import { useNexGNavigation } from './NexGNavigationContext';
 import { NexGItemCard } from './NexGItemCard';
 import { NexGEntityCard } from './NexGEntityCard';
 import { NexGInfiniteFeed } from './NexGInfiniteFeed';
 import { cn } from '../../lib/utils';
+import { fetchSearch } from '../../lib/apiClient';
+import { toCatalogMerchant, toCatalogMerchantForItem, toDynamicItem } from '../../lib/catalogAdapters';
 
 interface NexGSearchEngineProps {
   query: string;
@@ -19,6 +21,34 @@ export const NexGSearchEngine: React.FC<NexGSearchEngineProps> = ({ query }) => 
   const { navigateToCategory, navigateToMerchant, openItemSheet } = useNexGNavigation();
 
   const cleanQ = query.trim().toLowerCase();
+  const [matchedMerchants, setMatchedMerchants] = useState<CatalogMerchant[]>([]);
+  const [matchedItems, setMatchedItems] = useState<{ item: DynamicItem; merchant: CatalogMerchant }[]>([]);
+  const [searchStatus, setSearchStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+
+  useEffect(() => {
+    if (!cleanQ) return;
+
+    const controller = new AbortController();
+    setSearchStatus('loading');
+
+    fetchSearch(cleanQ, 20, controller.signal)
+      .then((result) => {
+        setMatchedMerchants(result.merchants.map(toCatalogMerchant));
+        setMatchedItems(result.items.map((item) => ({
+          item: toDynamicItem(item),
+          merchant: toCatalogMerchantForItem(item),
+        })));
+        setSearchStatus('ready');
+      })
+      .catch((error: any) => {
+        if (error?.name === 'AbortError') return;
+        setMatchedMerchants([]);
+        setMatchedItems([]);
+        setSearchStatus('error');
+      });
+
+    return () => controller.abort();
+  }, [cleanQ]);
 
   // Search matches across categories
   const matchedCategories = useMemo(() => {
@@ -31,51 +61,21 @@ export const NexGSearchEngine: React.FC<NexGSearchEngineProps> = ({ query }) => 
     ).slice(0, 4);
   }, [cleanQ]);
 
-  // Search matches across all merchants
-  const allMerchants = useMemo(() => {
-    const list: CatalogMerchant[] = [];
-    CATEGORIES_21.forEach((c) => {
-      const merchants = getCategoryMerchants(c.id);
-      list.push(...merchants);
-    });
-    return list;
-  }, []);
-
-  const matchedMerchants = useMemo(() => {
-    if (!cleanQ) return [];
-    return allMerchants.filter(
-      (m) =>
-        m.name.toLowerCase().includes(cleanQ) ||
-        m.cuisineOrType.toLowerCase().includes(cleanQ) ||
-        m.address.toLowerCase().includes(cleanQ) ||
-        m.subcategoryName?.toLowerCase().includes(cleanQ)
-    );
-  }, [allMerchants, cleanQ]);
-
-  // Search matches across dynamic items
-  const matchedItems = useMemo(() => {
-    if (!cleanQ) return [];
-    const items: { item: DynamicItem; merchant: CatalogMerchant }[] = [];
-    allMerchants.forEach((m) => {
-      m.items.forEach((it) => {
-        if (
-          it.name.toLowerCase().includes(cleanQ) ||
-          it.description.toLowerCase().includes(cleanQ) ||
-          it.subcategory.toLowerCase().includes(cleanQ)
-        ) {
-          items.push({ item: it, merchant: m });
-        }
-      });
-    });
-    return items;
-  }, [allMerchants, cleanQ]);
-
   if (!cleanQ) return null;
 
   const totalResults = matchedCategories.length + matchedMerchants.length + matchedItems.length;
 
   return (
     <div className="w-full space-y-8 py-4">
+      {searchStatus === 'loading' && (
+        <p role="status" className="text-sm text-slate-500">Searching the database…</p>
+      )}
+      {searchStatus === 'error' && (
+        <p role="alert" className="rounded-2xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm">
+          Search is unavailable because the database could not be reached. Please try again.
+        </p>
+      )}
+
       {/* Search Header Stats */}
       <div className="flex items-center justify-between border-b pb-4 border-slate-200 dark:border-white/10">
         <div>
@@ -87,7 +87,7 @@ export const NexGSearchEngine: React.FC<NexGSearchEngineProps> = ({ query }) => 
         </div>
       </div>
 
-      {totalResults === 0 ? (
+      {searchStatus === 'loading' ? null : totalResults === 0 ? (
         <div className="py-16 text-center max-w-md mx-auto space-y-3">
           <div className="w-12 h-12 rounded-full bg-amber-500/10 text-[#7d5a11] dark:text-[#E5B65F] mx-auto flex items-center justify-center">
             <Search size={22} />

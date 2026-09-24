@@ -25,8 +25,8 @@ services:
       DATABASE_URL: !reset null
     env_file:
       # Required here, unlike the base file: a production app with no database
-      # string would quietly serve the bundled JSON fallback, which is the exact
-      # opposite of what a managed database is for.
+      # string makes the application unavailable (HTTP 503) instead of quietly
+      # serving stale catalogue data.
       - path: .env
         required: true
     # `!reset null` drops the dependency rather than pointing it at nothing. This is

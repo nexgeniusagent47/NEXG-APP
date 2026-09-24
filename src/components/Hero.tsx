@@ -93,7 +93,7 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
             sizes="100vw"
             priority
             alt={t.ui.hero.s_7ecda2}
-            className="hidden sm:block w-full h-full object-cover opacity-80 brightness-90 transition-transform duration-1000 scale-100 hover:scale-105"
+            className="hidden sm:block w-full h-full object-cover opacity-80 brightness-90"
             referrerPolicy="no-referrer"
           />
           <ResponsiveImage
@@ -140,7 +140,7 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
             sizes="100vw"
             priority
             alt={t.ui.hero.s_c75a68}
-            className="w-full h-full object-cover brightness-100 contrast-[1.03] transition-transform duration-1000 scale-100 hover:scale-105 object-[62%_center] sm:object-center"
+            className="w-full h-full object-cover brightness-100 contrast-[1.03] object-[62%_center] sm:object-center"
             referrerPolicy="no-referrer"
           />
         </div>

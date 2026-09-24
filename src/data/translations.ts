@@ -7,11 +7,9 @@ export interface TranslationSchema {
     Every user-facing string that was written directly into JSX now has a key here, so the four
     languages cover the whole application rather than the navigation shell.
 
-    STATUS: the English values are the source. The Chinese, Swahili and Arabic entries currently
-    hold the English text and are listed in PENDING_TRANSLATIONS, so the UI can show which screens
-    are still awaiting a translator. Seeding rather than inventing keeps every key present in all
-    four languages — which is what makes tsc able to enforce completeness — without putting
-    machine-guessed Arabic in front of a customer.
+    STATUS: English is the source language. Some Chinese, Swahili and Arabic UI values are still
+    exact English placeholders and are counted in PENDING_TRANSLATIONS. The count detects exact
+    matches only; it does not detect English fragments inside otherwise translated copy.
   */
   ui: {
     bookingCalendar: {
@@ -1522,19 +1520,6 @@ export interface TranslationSchema {
   };
 }
 
-/**
- * Keys whose non-English values are still the English source, by language.
- *
- * Counted rather than listed so this cannot drift from reality: the number is written by the
- * generator and re-checked by scripts/check-i18n-pending.mjs. When a language reaches zero the
- * application is fully translated.
- */
-export const PENDING_TRANSLATIONS = {
-  zh: 1042,  // keys still holding English text
-  sw: 1042,  // keys still holding English text
-  ar: 1042,  // keys still holding English text
-};
-
 export const translations: Record<Language, TranslationSchema> = {
   en: {
   ui: {
@@ -2415,7 +2400,7 @@ export const translations: Record<Language, TranslationSchema> = {
       's_cc1e6a': 'Duration histogram',
       's_cec477': 'Last 60s',
       's_e4076f': 'Collecting samples. The line appears after the second poll.',
-      's_ee9d59': 'Json fallback reads',
+      's_ee9d59': 'Database reads',
       's_f8fd6e': 'No responses recorded yet.',
       's_ffb77d': 'Data source',
     },
@@ -3123,15 +3108,15 @@ export const translations: Record<Language, TranslationSchema> = {
       's_fee23b': 'Merchant Partner',
     },
     consentBanner: {
-      's_35c291': 'رفض الكل',
-      's_66cd82': 'ملفات تعريف الارتباط الضرورية للغاية تحافظ على عمل الموقع. تبقى ملفات التحليلات والتسويق معطلة حتى تقوم بتشغيلها، ويمكنك تغيير ذلك في أي وقت.',
-      's_788df5': 'خيارات ملفات تعريف الارتباط',
-      's_821d1f': 'قبول الكل',
-      's_956fa7': 'حفظ الخيارات',
-      's_9e0cba': 'إعدادات ملفات تعريف الارتباط',
-      's_da6a92': 'ملفات تعريف الارتباط الضرورية نشطة دائماً. وكل ما عداها اختياري.',
-      's_e7d306': 'تفضيلات ملفات تعريف الارتباط',
-      's_f477c8': 'نشط دائماً. لا يمكن إيقافه لأن الموقع لا يعمل بدونه.',
+      's_35c291': "全部拒绝",
+      's_66cd82': 'Vidakuzi muhimu pekee huwezesha tovuti kufanya kazi. Vidakuzi vya takwimu na matangazo hubaki vimezimwa hadi uviteue, na unaweza kubadilisha chaguo hili wakati wowote.',
+      's_788df5': "Cookie 选择",
+      's_821d1f': "全部接受",
+      's_956fa7': "保存选择",
+      's_9e0cba': "Cookie 设置",
+      's_da6a92': "必要的 Cookie 始终处于启用状态，其他 Cookie 均为可选项。",
+      's_e7d306': "Cookie 偏好设置",
+      's_f477c8': "始终启用。由于网站运行必需，因此无法关闭。",
     },
     courierOnboarding: {
       's_037e0b': 'Our compliance officers verify your submitted National ID, license, PIN, and fleet logbooks directly against NTSA registers.',
@@ -3683,9 +3668,9 @@ export const translations: Record<Language, TranslationSchema> = {
     },
     hero: {
       's_67300d': 'Clear search',
-      's_7ecda2': 'عشاء فاخر في بنتهاوس ليلي مع أفق المدينة',
-      's_c75a68': 'مسبح لا متناهٍ فاخر في بنتهاوس مشمس مع أفق المدينة',
-      's_ece6e2': 'جناح فاخر ليلي',
+      's_7ecda2': "夜色中的奢华顶层公寓晚宴与城市天际线",
+      's_c75a68': "阳光下的奢华顶层公寓无边泳池与城市天际线",
+      's_ece6e2': "夜色中的奢华套房移动版",
     },
     hostOnboarding: {
       's_00679c': '由谁执行？',
@@ -3778,9 +3763,9 @@ export const translations: Record<Language, TranslationSchema> = {
       's_ff1835': 'NEXG 运营团队',
     },
     languageSwitcher: {
-      's_03e64a': 'تغيير اللغة (English، 中文، Kiswahili، العربية)',
-      's_99547d': 'اختر لغة المنطقة',
-      's_b8cc8e': 'محدد اللغة',
+      's_03e64a': "更改语言（英语、中文、斯瓦希里语、阿拉伯语）",
+      's_99547d': "选择语言和地区",
+      's_b8cc8e': "语言选择器",
     },
     merchantAdCarousel: {
       's_297522': 'Sponsored partner offers',
@@ -3922,7 +3907,7 @@ export const translations: Record<Language, TranslationSchema> = {
       's_cc1e6a': 'Duration histogram',
       's_cec477': 'Last 60s',
       's_e4076f': 'Collecting samples. The line appears after the second poll.',
-      's_ee9d59': 'Json fallback reads',
+      's_ee9d59': 'Database reads',
       's_f8fd6e': 'No responses recorded yet.',
       's_ffb77d': 'Data source',
     },
@@ -4087,10 +4072,10 @@ export const translations: Record<Language, TranslationSchema> = {
       's_eac205': 'No dining partners match your filters',
     },
     routeFallback: {
-      's_1c5772': 'جارٍ تحميل الصفحة',
+      's_1c5772': "正在加载页面",
     },
     scrollToTop: {
-      's_f07710': 'الرجوع إلى الأعلى',
+      's_f07710': "回到页面顶部",
     },
     spaBookingModal: {
       's_039d05': 'Experience Setting',
@@ -4630,15 +4615,15 @@ export const translations: Record<Language, TranslationSchema> = {
       's_fee23b': 'Merchant Partner',
     },
     consentBanner: {
-      's_35c291': 'رفض الكل',
+      's_35c291': "Kataa zote",
       's_66cd82': 'ملفات تعريف الارتباط الضرورية للغاية تحافظ على عمل الموقع. تبقى ملفات التحليلات والتسويق معطلة حتى تقوم بتشغيلها، ويمكنك تغيير ذلك في أي وقت.',
-      's_788df5': 'خيارات ملفات تعريف الارتباط',
-      's_821d1f': 'قبول الكل',
-      's_956fa7': 'حفظ الخيارات',
-      's_9e0cba': 'إعدادات ملفات تعريف الارتباط',
-      's_da6a92': 'ملفات تعريف الارتباط الضرورية نشطة دائماً. وكل ما عداها اختياري.',
-      's_e7d306': 'تفضيلات ملفات تعريف الارتباط',
-      's_f477c8': 'نشط دائماً. لا يمكن إيقافه لأن الموقع لا يعمل بدونه.',
+      's_788df5': "Chaguo zako za vidakuzi",
+      's_821d1f': "Kubali zote",
+      's_956fa7': "Hifadhi chaguo",
+      's_9e0cba': "Mipangilio ya vidakuzi",
+      's_da6a92': "Vidakuzi muhimu huwashwa kila wakati. Vidakuzi vingine vyote ni hiari.",
+      's_e7d306': "Mapendeleo ya vidakuzi",
+      's_f477c8': "Huwashwa kila wakati. Hakiwezi kuzimwa kwa sababu tovuti haiwezi kufanya kazi bila hicho.",
     },
     courierOnboarding: {
       's_037e0b': 'Our compliance officers verify your submitted National ID, license, PIN, and fleet logbooks directly against NTSA registers.',
@@ -5190,9 +5175,9 @@ export const translations: Record<Language, TranslationSchema> = {
     },
     hero: {
       's_67300d': 'Clear search',
-      's_7ecda2': 'عشاء فاخر في بنتهاوس ليلي مع أفق المدينة',
-      's_c75a68': 'مسبح لا متناهٍ فاخر في بنتهاوس مشمس مع أفق المدينة',
-      's_ece6e2': 'جناح فاخر ليلي',
+      's_7ecda2': "Chakula cha kifahari kwenye penthouse usiku pamoja na mandhari ya jiji",
+      's_c75a68': "Bwawa la kifahari lisilo na ukingo kwenye penthouse yenye mwanga wa jua na mandhari ya jiji",
+      's_ece6e2': "Chumba cha kifahari cha simu wakati wa usiku",
     },
     hostOnboarding: {
       's_00679c': 'Who fulfills it?',
@@ -5285,9 +5270,9 @@ export const translations: Record<Language, TranslationSchema> = {
       's_ff1835': 'NEXG Operations',
     },
     languageSwitcher: {
-      's_03e64a': 'تغيير اللغة (English، 中文، Kiswahili، العربية)',
-      's_99547d': 'اختر لغة المنطقة',
-      's_b8cc8e': 'محدد اللغة',
+      's_03e64a': "Badilisha lugha (Kiingereza, Kichina, Kiswahili, Kiarabu)",
+      's_99547d': "Chagua lugha na eneo",
+      's_b8cc8e': "Kichaguaji cha lugha",
     },
     merchantAdCarousel: {
       's_297522': 'Sponsored partner offers',
@@ -5429,7 +5414,7 @@ export const translations: Record<Language, TranslationSchema> = {
       's_cc1e6a': 'Duration histogram',
       's_cec477': 'Last 60s',
       's_e4076f': 'Collecting samples. The line appears after the second poll.',
-      's_ee9d59': 'Json fallback reads',
+      's_ee9d59': 'Database reads',
       's_f8fd6e': 'No responses recorded yet.',
       's_ffb77d': 'Data source',
     },
@@ -5594,10 +5579,10 @@ export const translations: Record<Language, TranslationSchema> = {
       's_eac205': 'No dining partners match your filters',
     },
     routeFallback: {
-      's_1c5772': 'جارٍ تحميل الصفحة',
+      's_1c5772': "Ukurasa unapakia",
     },
     scrollToTop: {
-      's_f07710': 'الرجوع إلى الأعلى',
+      's_f07710': "Rudi juu ya ukurasa",
     },
     spaBookingModal: {
       's_039d05': 'Experience Setting',
@@ -6936,7 +6921,7 @@ export const translations: Record<Language, TranslationSchema> = {
       's_cc1e6a': 'Duration histogram',
       's_cec477': 'Last 60s',
       's_e4076f': 'Collecting samples. The line appears after the second poll.',
-      's_ee9d59': 'Json fallback reads',
+      's_ee9d59': 'Database reads',
       's_f8fd6e': 'No responses recorded yet.',
       's_ffb77d': 'Data source',
     },
@@ -7565,3 +7550,18 @@ export const translations: Record<Language, TranslationSchema> = {
     },
   },
 };
+
+/** Exact English-source matches inside `ui`; this is a progress signal, not a quality score. */
+function countSourceMatches(source: unknown, translated: unknown): number {
+  if (typeof source === 'string') return source === translated ? 1 : 0;
+  if (!source || typeof source !== 'object' || !translated || typeof translated !== 'object') return 0;
+  return Object.entries(source).reduce((count, [key, sourceValue]) => {
+    return count + countSourceMatches(sourceValue, (translated as Record<string, unknown>)[key]);
+  }, 0);
+}
+
+export const PENDING_TRANSLATIONS = {
+  zh: countSourceMatches(translations.en.ui, translations.zh.ui),
+  sw: countSourceMatches(translations.en.ui, translations.sw.ui),
+  ar: countSourceMatches(translations.en.ui, translations.ar.ui),
+} as const;

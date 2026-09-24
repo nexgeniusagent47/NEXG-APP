@@ -78,7 +78,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, twoPerScreen = true 
           <img
             src={product.imageUrl}
             alt={product.name}
-            className="h-full w-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-105"
+            className="h-full w-full object-cover rounded-xl"
             referrerPolicy="no-referrer"
           />
           

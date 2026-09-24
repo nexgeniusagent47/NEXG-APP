@@ -1,12 +1,8 @@
 // server/db.ts
 // PostgreSQL access layer for the NEXG Concierge API.
 //
-// Design contract:
-//   * Postgres is the SOURCE OF TRUTH when DATABASE_URL is set AND reachable.
-//   * The seeded JSON cache is a cold-start FALLBACK so the API still serves
-//     traffic for a contributor who has not provisioned a database.
-//   * The chosen source is reported by /api/health so the state is never
-//     ambiguous (this ambiguity was defect D-03).
+// Design contract: PostgreSQL is the only catalogue source. If it is unavailable,
+// database-backed routes return 503 so operators and clients see the failure.
 //
 // Uses the CommonJS `pg` build via createRequire because the repo is
 // "type": "module" and pg ships no ESM entry point.
@@ -35,7 +31,7 @@ function sleep(ms: number) {
 /**
  * Attempt to establish the connection pool exactly once.
  * Resolves true when the database is usable, false otherwise.
- * Never throws — a missing database must degrade, not crash the API.
+ * The API can stay up to report health, but its database-backed routes then return 503.
  */
 export function initDb(): Promise<boolean> {
   if (initPromise) return initPromise;
@@ -85,7 +81,7 @@ export function initDb(): Promise<boolean> {
       }
     }
 
-    console.warn(`[NEXG db] unavailable, falling back to JSON cache: ${pgUnavailableReason}`);
+    console.error(`[NEXG db] PostgreSQL unavailable; database-backed routes will return 503: ${pgUnavailableReason}`);
     try {
       await candidate.end();
     } catch {
@@ -106,8 +102,8 @@ export function getDbUnavailableReason(): string | null {
 }
 
 /**
- * Run a parameterised query. Throws if the database is not ready — callers
- * must check `isDbReady()` and take the fallback path.
+ * Run a parameterised query. Throws if the database is not ready — HTTP callers
+ * must translate database failures to a visible 503 response.
  *
  * `name` is the span name and MUST be a stable label supplied by the repository
  * ("merchants.list"), never the statement: SQL text carries schema detail, and a

@@ -19,8 +19,8 @@
 //
 // WHY the API is allowed to be absent: the server is a separate process that is often
 // simply not running while the SPA is being worked on. Every panel is written to
-// survive a null snapshot, and a failed poll keeps the last good numbers on screen
-// instead of blanking them.
+// survive a null snapshot. A failed poll clears readiness so an old green database
+// status cannot remain on screen after the API reports an outage.
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import {
@@ -98,7 +98,6 @@ interface MetricsSnapshot {
     connected: boolean;
     configured: boolean;
     reason: string | null;
-    fallbackReads: number;
   };
   client: {
     sessions: number;
@@ -131,11 +130,9 @@ interface VersionInfo {
 }
 
 interface Health {
-  status: string;
-  source: string;
-  postgresConfigured?: boolean;
+  status: 'ok';
+  source: 'postgres';
   postgresConnected?: boolean;
-  postgresError?: string | null;
   totalCategories?: number;
   totalSubcategories?: number;
   totalMerchants?: number;
@@ -552,6 +549,7 @@ export default function MetricsDashboard() {
       // next tick arriving first). Reporting it would paint a failure the user caused
       // on purpose.
       if ((err as { name?: string } | null)?.name === 'AbortError') return;
+      setHealth(null);
       setError(err instanceof Error ? err.message : String(err));
     }
   }, []);
@@ -750,7 +748,6 @@ export default function MetricsDashboard() {
                     />
                     <Row label="Merchants" value={String(health?.totalMerchants ?? '—')} />
                     <Row label="Items" value={String(health?.totalItems ?? '—')} />
-                    <Row label="Json fallback reads" value={String(snapshot.db.fallbackReads)} />
                     <Row
                       label="Service"
                       value={<span className="font-mono text-[11px]">{snapshot.service}</span>}

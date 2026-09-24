@@ -11,7 +11,6 @@ import {
   Globe,
   Star,
   Clock,
-  MapPin,
   TrendingUp,
   Award,
   Zap,
@@ -23,7 +22,6 @@ import {
   X,
   Utensils,
   Sparkles,
-  Car,
   Compass,
   Sun,
   Moon
@@ -32,6 +30,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import LogoIcon from './LogoIcon';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useLanguage } from '../context/LanguageContext';
+import { formatKes, formatLocalizedNumber, interpolatePartnerCopy, partnerEconomicsCopy, PARTNER_ECONOMICS } from '../data/partnerEconomics';
 
 import { useTheme } from '../context/ThemeContext';
 
@@ -43,12 +42,13 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isLight, toggleTheme } = useTheme();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const economicsCopy = partnerEconomicsCopy[language].courier;
 
   // Calculator States
-  const [vehicleType, setVehicleType] = useState<'motorbike' | 'executive_car' | 'bicycle'>('motorbike');
   const [deliveriesPerDay, setDeliveriesPerDay] = useState(12);
-  const [avgTip, setAvgTip] = useState(4);
+  const [averageDistanceKm, setAverageDistanceKm] = useState(5);
+  const [averageTipKes, setAverageTipKes] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,20 +67,11 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
     setIsMobileMenuOpen(false);
   };
 
-  // Calculation Logic
-  // Base fare per delivery depends on vehicle type: motorbike=$4.5, executive_car=$9.0, bicycle=$2.5
-  const getBaseFare = () => {
-    switch (vehicleType) {
-      case 'executive_car': return 9.0;
-      case 'bicycle': return 2.5;
-      case 'motorbike':
-      default: return 4.5;
-    }
-  };
-
-  const baseFare = getBaseFare();
-  const dailyBaseEarnings = Math.round(deliveriesPerDay * baseFare);
-  const dailyTipEarnings = Math.round(deliveriesPerDay * avgTip);
+  // Estimate completed route kilometres at the owner-provided KES rate.
+  const dailyBaseEarnings = Math.round(
+    deliveriesPerDay * averageDistanceKm * PARTNER_ECONOMICS.courierRateKesPerKm,
+  );
+  const dailyTipEarnings = Math.round(deliveriesPerDay * averageTipKes);
   const totalDailyEarnings = dailyBaseEarnings + dailyTipEarnings;
   
   // Weekly earnings assuming 5 active days
@@ -565,61 +556,36 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
               <h3 className={`text-lg sm:text-xl font-bold mb-6 sm:mb-8 flex items-center gap-2 ${
                 isLight ? 'text-slate-900' : 'text-white'
               }`}>
-                <DollarSign size={22} className={isLight ? 'text-amber-800' : 'text-[#E5B65F]'} />{t.ui.forCouriers.s_e18d8e}</h3>
+                <DollarSign size={22} className={isLight ? 'text-amber-800' : 'text-[#E5B65F]'} />{economicsCopy.heading}</h3>
 
               <div className="space-y-6 sm:space-y-8 mb-6 sm:mb-8">
-                {/* Vehicle Selection */}
+                {/* Billable distance per completed delivery */}
                 <div>
-                  <label className={`block text-sm font-bold mb-3 ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>{t.ui.forCouriers.s_39bc68}</label>
-                  <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                    <button
-                      onClick={() => setVehicleType('motorbike')}
-                      className={`py-3 px-1 sm:px-2 rounded-xl text-[10px] xs:text-xs font-bold text-center border transition cursor-pointer ${
-                        vehicleType === 'motorbike'
-                          ? isLight
-                            ? 'border-amber-500 bg-amber-100 text-amber-900 shadow-sm'
-                            : 'border-[#E5B65F] bg-[#E5B65F]/10 text-[#E5B65F]'
-                          : isLight
-                            ? 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
-                            : 'border-white/10 hover:border-white/20 text-gray-300 hover:text-white'
-                      }`}
-                    >
-                      Motorbike
-                    </button>
-                    <button
-                      onClick={() => setVehicleType('executive_car')}
-                      className={`py-3 px-1 sm:px-2 rounded-xl text-[10px] xs:text-xs font-bold text-center border transition cursor-pointer ${
-                        vehicleType === 'executive_car'
-                          ? isLight
-                            ? 'border-amber-500 bg-amber-100 text-amber-900 shadow-sm'
-                            : 'border-[#E5B65F] bg-[#E5B65F]/10 text-[#E5B65F]'
-                          : isLight
-                            ? 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
-                            : 'border-white/10 hover:border-white/20 text-gray-300 hover:text-white'
-                      }`}
-                    >{t.ui.forCouriers.s_93a5bc}</button>
-                    <button
-                      onClick={() => setVehicleType('bicycle')}
-                      className={`py-3 px-1 sm:px-2 rounded-xl text-[10px] xs:text-xs font-bold text-center border transition cursor-pointer ${
-                        vehicleType === 'bicycle'
-                          ? isLight
-                            ? 'border-amber-500 bg-amber-100 text-amber-900 shadow-sm'
-                            : 'border-[#E5B65F] bg-[#E5B65F]/10 text-[#E5B65F]'
-                          : isLight
-                            ? 'border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300'
-                            : 'border-white/10 hover:border-white/20 text-gray-300 hover:text-white'
-                      }`}
-                    >
-                      Bicycle
-                    </button>
+                  <div className="flex justify-between items-center text-xs sm:text-sm font-medium mb-2">
+                    <label htmlFor="courier-distance" className={`font-semibold ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>
+                      {economicsCopy.distancePerDelivery}
+                    </label>
+                    <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>{formatLocalizedNumber(averageDistanceKm, language)} km</span>
                   </div>
+                  <input
+                    id="courier-distance"
+                    type="range"
+                    min="1"
+                    max="25"
+                    step="0.5"
+                    value={averageDistanceKm}
+                    onChange={(event) => setAverageDistanceKm(Number(event.target.value))}
+                    className={`w-full h-1.5 rounded-lg appearance-none cursor-pointer ${
+                      isLight ? 'bg-slate-300 accent-amber-600' : 'bg-white/10 accent-[#E5B65F]'
+                    }`}
+                  />
                 </div>
 
                 {/* Slider: Deliveries */}
                 <div>
                   <div className="flex justify-between items-center text-xs sm:text-sm font-medium mb-2">
-                    <span className={`font-semibold ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>{t.ui.forCouriers.s_355ac2}</span>
-                    <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>{deliveriesPerDay} orders</span>
+                    <span className={`font-semibold ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>{economicsCopy.deliveriesPerDayLabel}</span>
+                    <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>{deliveriesPerDay} {economicsCopy.ordersPerDay}</span>
                   </div>
                   <input 
                     type="range" 
@@ -636,15 +602,16 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                 {/* Slider: Tip */}
                 <div>
                   <div className="flex justify-between items-center text-xs sm:text-sm font-medium mb-2">
-                    <span className={`font-semibold ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>{t.ui.forCouriers.s_f6e64a}</span>
-                    <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>${avgTip} USD</span>
+                    <span className={`font-semibold ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>{economicsCopy.averageTipPerDelivery}</span>
+                    <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>{formatKes(averageTipKes, language)}</span>
                   </div>
                   <input 
                     type="range" 
                     min="0" 
-                    max="15" 
-                    value={avgTip}
-                    onChange={(e) => setAvgTip(parseInt(e.target.value))}
+                    max="500"
+                    step="10"
+                    value={averageTipKes}
+                    onChange={(e) => setAverageTipKes(parseInt(e.target.value))}
                     className={`w-full h-1.5 rounded-lg appearance-none cursor-pointer ${
                       isLight ? 'bg-slate-300 accent-amber-600' : 'bg-white/10 accent-[#E5B65F]'
                     }`}
@@ -658,20 +625,20 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                   <div className={`p-3 sm:p-4 rounded-xl text-center border ${
                     isLight ? 'bg-slate-50 border-slate-200 text-slate-900' : 'bg-white/5 border-white/5 text-white'
                   }`}>
-                    <p className={`text-[10px] sm:text-xs mb-1 font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Est. Daily</p>
-                    <p className={`text-sm sm:text-lg font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>${totalDailyEarnings}</p>
+                    <p className={`text-[10px] sm:text-xs mb-1 font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{economicsCopy.estimatedDaily}</p>
+                    <p className={`text-sm sm:text-lg font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>{formatKes(totalDailyEarnings, language)}</p>
                   </div>
                   <div className={`p-3 sm:p-4 rounded-xl text-center border ${
                     isLight ? 'bg-slate-50 border-slate-200 text-slate-900' : 'bg-white/5 border-white/5 text-white'
                   }`}>
-                    <p className={`text-[10px] sm:text-xs mb-1 font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Weekly</p>
-                    <p className={`text-sm sm:text-lg font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>${totalWeeklyEarnings}</p>
+                    <p className={`text-[10px] sm:text-xs mb-1 font-semibold ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{economicsCopy.weekly}</p>
+                    <p className={`text-sm sm:text-lg font-bold ${isLight ? 'text-slate-900' : 'text-white'}`}>{formatKes(totalWeeklyEarnings, language)}</p>
                   </div>
                   <div className={`p-3 sm:p-4 rounded-xl text-center border ${
                     isLight ? 'bg-amber-50 border-amber-300 text-amber-900' : 'bg-[#E5B65F]/10 border-[#E5B65F]/20 text-[#E5B65F]'
                   }`}>
-                    <p className={`text-[10px] sm:text-xs mb-1 font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>Monthly</p>
-                    <p className={`text-sm sm:text-xl font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>${totalMonthlyEarnings}</p>
+                    <p className={`text-[10px] sm:text-xs mb-1 font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>{economicsCopy.monthly}</p>
+                    <p className={`text-sm sm:text-xl font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>{formatKes(totalMonthlyEarnings, language)}</p>
                   </div>
                 </div>
 
@@ -681,8 +648,19 @@ export default function ForCouriers({ onNavigate }: ForCouriersProps) {
                     : 'bg-[#E5B65F]/10 border-[#E5B65F]/20 text-[#E5B65F]'
                 }`}>
                   <Zap size={16} className={`flex-shrink-0 mt-0.5 ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`} />
-                  <span>{t.ui.forCouriers.s_e10068}<strong>${baseFare.toFixed(2)}</strong> for {vehicleType.replace('_', ' ')}s in Nairobi. Actual earnings vary based on distance, surge peak, and promotional missions.
-                  </span>
+                  <div className="space-y-2">
+                    <p>
+                      {interpolatePartnerCopy(economicsCopy.rateNotice, {
+                        rate: formatKes(PARTNER_ECONOMICS.courierRateKesPerKm, language),
+                        notice: formatLocalizedNumber(PARTNER_ECONOMICS.courierRateNoticeHours, language),
+                      })}
+                    </p>
+                    <p>
+                      {interpolatePartnerCopy(economicsCopy.estimateBasis, {
+                        rate: formatKes(PARTNER_ECONOMICS.courierRateKesPerKm, language),
+                      })}
+                    </p>
+                  </div>
                 </div>
 
                 <button 

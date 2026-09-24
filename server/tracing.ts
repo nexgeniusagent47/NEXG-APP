@@ -270,20 +270,3 @@ export async function withSpan<T>(
     }
   });
 }
-
-/** Synchronous variant, for the JSON fallback reader where nothing awaits. */
-export function withSpanSync<T>(name: string, attributes: SpanAttributes, fn: (span: Span) => T): T {
-  const span = startSpan(name, attributes);
-  return spanStore.run(span, () => {
-    try {
-      const result = fn(span);
-      span.setStatus('ok');
-      return result;
-    } catch (error) {
-      span.setStatus('error', error);
-      throw error;
-    } finally {
-      span.end();
-    }
-  });
-}

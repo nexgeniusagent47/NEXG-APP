@@ -4,9 +4,161 @@ All notable changes to NEXG Concierge. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning is
 [SemVer](https://semver.org/).
 
+## [Unreleased] — release verification and Phase 2 kickoff (2026-09-24)
+
+### Changed
+
+- Consolidated the current local worktree record: fail-closed PostgreSQL catalogue behavior and
+  deployment/security documentation; onboarding/wordmark/theme and localization updates; KES
+  partner-estimate assumptions; API observability changes; master plan, ADR, prompt, status, and
+  handoff documents. Earlier entries below retain the detailed feature history and original
+  implementation-time verification state.
+- Added transparent 1504 × 544 PNG exports for both supplied wordmark themes under
+  `docs/brand/exports/`.
+- Fixed the TypeScript release gate by declaring the SVG `?url` asset import and excluding the
+  Git-ignored `vendor/` demo tree. This does not alter runtime application behavior.
+- Corrected ADR phase mapping to the current master plan, carried the still-open API security and
+  transaction-semantics follow-ups forward, and prepared a P2 API/identity-security kickoff handoff.
+- Marked the old deployment runbook as blocked pending reconciliation because its project directory,
+  container names, and deployment account conflict with the last owner-provided SSH session.
+
+### Verified locally
+
+- TypeScript check passed.
+- Vitest: 7 files, 52 tests passed.
+- API contract: 29/29 assertions passed against the freshly initialized source server and local
+  PostgreSQL (21 categories, 128 subcategories, 640 merchants, 6,000 items).
+- Guest browser flow: 18/18 assertions passed; merchant/order consistency: 24/24 passed.
+- Production Vite build passed. Final `git diff --check` evidence is recorded in the dated handoff.
+- An isolated invalid-loopback database simulation returned 503 for health/categories/merchants
+  without fallback. No staging or production outage/rollback test was run.
+
+### Still open
+
+- No Git remote/upstream is configured, the working tree remains broad and uncommitted, and the
+  documented deployment directory does not match the previously recorded live project directory.
+  No commit, push, deployment, staging/production outage test, rollback rehearsal, or fresh
+  production security verification was performed.
+- Phase 2 remains in planning. ADR-0001 through ADR-0004 are proposed only. Full translations,
+  generated category artwork, a unified adaptive onboarding form, and V1 Cloudflare/origin security
+  acceptance remain open.
+
+## [Unreleased] — onboarding and ecosystem visual consistency (2026-09-24)
+
+### Changed
+
+- Added a reversible app-wide elliptical corner system while preserving pill controls and
+  the intentional side-sheet corner behavior.
+- Set onboarding headings to the homepage Quicksand face at its real 700 weight, strengthened
+  the hierarchy, and aligned the select chevron across merchant, courier, and host React forms
+  in both themes, with a small focus/open movement.
+- Increased the supplied NEXG wordmark's N stroke from 4.1689 to 4.95 in both theme assets; the
+  single value in each file restores the prior weight.
+- Unified all four Properties ecosystem icons and their hover accents to the same theme-aware
+  brand gold.
+- Matched both wordmark variants to the site's theme gold tokens (`#B88728` in light mode and
+  `#E5B65F` in dark mode); the compact bell-G mark now reads the same token directly.
+- Updated `DESIGN.md` to record the implemented type roles and reversible ellipse radius system.
+
+### Pending
+
+- Noun Project's free CC BY download route requires account sign-in/creation and acceptance of
+  its Terms of Use. No account was created and no terms were accepted. Replace the existing
+  Lucide ecosystem glyphs with selected Noun Project SVGs after the owner signs in and provides
+  the four licensed downloads or the site is available through an authorized account session.
+- No test/build, push, commit, or deployment was performed for this visual pass.
+
+## [Unreleased] — partner earnings estimates and KES rates (2026-09-24)
+
+### Changed
+
+- Updated the courier estimator to calculate in Kenyan shillings using the owner-provided KES 95
+  per kilometre rate, an adjustable distance per delivery, and optional tips. It displays daily,
+  weekly, and monthly illustrative totals and a 48-hour rider notice for future rate changes.
+- Updated the property estimator to calculate 18% of all order markup, replacing the previous
+  15%-of-guest-spend formula. It shows a 14-day notice period for changes to the property share.
+- Localized the two estimate cards' labels, notices, and currency formatting for English, Chinese,
+  Kiswahili, and Arabic.
+- Added a centralized assumption source in `src/data/partnerEconomics.ts`; documented that the
+  property order-volume estimate assumes one order per estimated three-night occupied-room stay.
+
+### Pending
+
+- The figures are illustrative and not a guarantee of income. Confirm the final commercial terms,
+  eligibility rules, and contract wording before production use. Site-wide translations and RTL
+  validation remain incomplete. No test/build, push, commit, or deployment was performed.
+
+## [Unreleased] — onboarding brand treatment, selection, and icon prompts (2026-09-24)
+
+### Changed
+
+- Restored theme-adaptive wordmark ink using the supplied artwork: original black/orange in light
+  mode and pale ink with the same orange details on transparent in dark mode. No white logo backing.
+- Kept onboarding back controls before their wordmarks and aligned merchant, rider, and host title
+  bands on the brand-gold surface with dark readable text in both themes.
+- Replaced the independent rider option's car/truck glyph with a motorcycle/bike glyph.
+- Removed the square color tiles behind merchant category icons. Category selection now uses a
+  theme-aware card surface, a visible check, and native keyboard-operable buttons.
+- Removed the duplicate `LogoIcon` import that Vite surfaced during browser review.
+- Added 112 copy-ready Google Flow Image prompts: one for each of the 21 top-level merchant
+  categories and 91 distinct reusable subcategory icon keys, covering all current selectable options.
+
+### Pending
+
+- The Flow-generated image files have not been created or integrated. The line icons are temporary
+  until the owner supplies approved images. Full Chinese, Swahili, and Arabic site translations are
+  also incomplete; device-language detection is not translation completion.
+- No automated tests/build, commit, push, Cloudflare change, or deployment was performed for this update.
+
 ---
 
+## [Unreleased] — Impeccable image interaction cleanup (2026-09-24)
+
+### Changed
+
+- Removed unreachable hover zoom from the homepage's pointer-inert hero and decorative phone
+  mockup images.
+- Removed repeated image zoom from product, sponsored-offer, partner-entry, and discovery merchant
+  cards. Their existing border, shadow, title, and card hover/focus feedback remains in place.
+- The Impeccable live overlay still displays the earlier 52-image finding; it has not been rerun
+  after these source changes. Browser content remained mounted at the local homepage. No tests or
+  build were run for this visual cleanup.
+
+---
+
+## [Unreleased] — master build plan and release/security roadmap (2026-09-24)
+
+### Planned
+
+- Added an owner-reviewable master plan and capability map for security foundations, the guest
+  discovery-to-checkout journey, query/index evidence, accessible gold theme/error states, one
+  adaptive host/merchant/rider intake form, product pages, later portals, monitoring, and
+  blue/green releases.
+- Added a proposed ADR register, phase deliverables matrix, current handoff, dated session record,
+  and follow-up register. No ADR or implementation phase is accepted by these planning documents.
+- Clarified that CORS/origin allowlists govern browser sharing and are not API authentication;
+  specified endpoint classification, authorization, rate limits, prepared SQL, context-aware XSS
+  defenses, 15-minute single-use password reset, and evidence-based indexes as planned controls.
+- Added **NEXG TempVault** as a working product name only. Public patent claims remain gated on
+  owner-provided patent evidence and approved wording.
+
+### Release status
+
+- The existing PostgreSQL fail-closed patch remains local, partially verified, not accepted, and
+  not deployed. This checkout has no Git remote and a dirty worktree. Full release gates were not
+  run in this planning pass; see `docs/handoff/sessions/2026-09-24-master-build-plan.md`.
+
 ## [Unreleased] — merchant menu, host onboarding, deep links, audit
+
+### Database reliability
+
+- Removed the bundled JSON catalogue and all server-side JSON fallback reads.
+- Discovery, category, and search merchant/item results now come from PostgreSQL.
+- Database-backed endpoints return HTTP 503 when PostgreSQL is unavailable; `/api/health`
+  performs a real query and reports unavailable instead of healthy on stale state.
+- Docker health checks use database readiness, and the production image no longer carries
+  the JSON catalogue.
+- Updated operator, architecture, deployment, and observability documentation.
 
 ### Added
 

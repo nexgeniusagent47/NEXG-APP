@@ -1,6 +1,6 @@
 # Outstanding requests
 
-**Date:** 2026-09-23
+**Date:** 2026-09-24
 **HEAD:** `d4fa315`
 **Purpose:** every request made during this build that is **not** implemented, with the reason.
 
@@ -10,29 +10,23 @@ missing input, or my own failure.
 
 ---
 
-## 1. The translations are wired but not translated
+## 1. Site-wide translations remain incomplete
 
 **Asked for:** *"the different languages should be in every single letter on the apps"*
 
-**State:** 1,042 keys exist in all four languages and 53 components now read from them. **In
-Chinese, Swahili and Arabic the values are still the English text.**
+**State:** 1,042 keys exist in all four languages and 53 components read from the translation
+catalog. Many Chinese, Swahili and Arabic values still contain exact English placeholders or
+English fragments. `PENDING_TRANSLATIONS` is computed from exact English matches in the UI catalog;
+it is a progress signal, not a measure of translation quality. The courier and property earnings
+estimators have localized labels, explanations, and KES formatting in all four supported languages.
 
-```ts
-export const PENDING_TRANSLATIONS = {
-  zh: 1042,   // keys still holding English text
-  sw: 1042,
-  ar: 1042,
-};
-```
+**Why:** Translation coverage is partial and exact-match counts cannot detect awkward phrasing,
+mixed-language strings, or incorrect meaning. Contractual and payment language needs review before
+public release.
 
-**Why:** 1,042 strings × 3 languages is about **3,100 translations**. Guessing Arabic and Chinese
-legal, banking and licence copy would put plausible-looking wrong text in front of customers. Wrong
-Arabic is worse than English — it reads as translated, and nobody who does not read the language
-can catch it. This needs either native speakers or a paid translation service.
-
-**What it costs to finish:** open `src/data/translations.ts`, work namespace by namespace, watch
-`PENDING_TRANSLATIONS` fall. `TranslationSchema` is a TypeScript interface, so a key cannot go
-missing from one language without failing the build.
+**Next:** Continue through visible page copy and content, keep locale keys aligned, and review
+translated output in the UI. `TranslationSchema` defines the four-locale key shape; the computed
+`PENDING_TRANSLATIONS` values count exact matches against English only.
 
 ---
 
@@ -40,14 +34,16 @@ missing from one language without failing the build.
 
 **Asked for:** implied by *"every single letter"* — Arabic is one of the four languages.
 
-**State:** the text translates; **the layout stays left-to-right**.
+**State:** `LanguageContext` sets the document direction to RTL when Arabic is selected, but the
+full application has not had a page-by-page RTL layout and interaction review. Some component
+spacing, icon direction, and progress flows may still behave as left-to-right.
 
 **Why:** RTL is not a font or a text change. It needs `dir="rtl"`, logical CSS properties
 (`margin-inline-start` rather than `margin-left`) throughout, and mirrored icons and progress
 indicators. Half-done RTL looks broken — labels right-aligned against fields that still flow left.
 
-**Raised, not assumed.** I asked which was wanted and did not get an answer, so it was left rather
-than guessed at.
+**Next:** Review Arabic pages for logical spacing, field alignment, navigation/progress direction,
+and icons; verify keyboard and responsive behavior after the layout pass.
 
 ---
 

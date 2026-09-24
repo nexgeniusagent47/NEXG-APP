@@ -74,7 +74,6 @@ let totalAborted = 0;
 let inFlight = 0;
 let durationSumMs = 0;
 let durationMaxMs = 0;
-let fallbackReads = 0;
 
 export interface ClientEvent {
   name: string;
@@ -365,28 +364,6 @@ export function observabilityMiddleware(options: ObservabilityOptions = {}) {
   };
 }
 
-/**
- * Wrap the seeded-JSON read path.
- *
- * The fallback is a first-class serving mode in this app (it is what /api/health
- * reports when Postgres is absent), so it gets a span and a counter of its own
- * rather than being invisible next to the Postgres path.
- */
-export async function withFallbackSpan<T>(label: string, read: () => T | Promise<T>): Promise<T> {
-  fallbackReads += 1;
-  const span = startSpan(`fallback.${label}`, { 'data.source': 'seeded_json_fallback' });
-  try {
-    const result = await read();
-    span.setStatus('ok');
-    return result;
-  } catch (error) {
-    span.setStatus('error', error);
-    throw error;
-  } finally {
-    span.end();
-  }
-}
-
 // ------------------------------------------------------------------- snapshot
 
 export interface MetricsSnapshot {
@@ -436,7 +413,6 @@ export interface MetricsSnapshot {
     connected: boolean;
     configured: boolean;
     reason: string | null;
-    fallbackReads: number;
   };
   client: {
     sessions: number;
@@ -538,7 +514,6 @@ export function metricsSnapshot(): MetricsSnapshot {
       // unauthenticated endpoint.
       configured: Boolean(process.env.DATABASE_URL),
       reason: isDbReady() ? null : safeDbReason(),
-      fallbackReads,
     },
     client: {
       sessions: clientSessions.size,
@@ -610,12 +585,10 @@ export function formatPrometheus(snapshot: MetricsSnapshot): string {
   metric('nexg_process_heap_used_bytes', 'V8 heap in use.', 'gauge');
   lines.push(`nexg_process_heap_used_bytes ${snapshot.process.heapUsedBytes}`);
 
-  metric('nexg_db_connected', 'Whether the Postgres pool is ready (1) or the JSON fallback is serving (0).', 'gauge');
+  metric('nexg_db_connected', 'Whether the PostgreSQL pool initialized successfully.', 'gauge');
   lines.push(`nexg_db_connected ${snapshot.db.connected ? 1 : 0}`);
   metric('nexg_db_configured', 'Whether DATABASE_URL is present. The value itself is never exported.', 'gauge');
   lines.push(`nexg_db_configured ${snapshot.db.configured ? 1 : 0}`);
-  metric('nexg_json_fallback_reads_total', 'Reads served from the seeded JSON fallback.', 'counter');
-  lines.push(`nexg_json_fallback_reads_total ${snapshot.db.fallbackReads}`);
 
   metric('nexg_client_events_total', 'Browser telemetry events accepted.', 'counter');
   lines.push(`nexg_client_events_total ${snapshot.client.eventsReceived}`);

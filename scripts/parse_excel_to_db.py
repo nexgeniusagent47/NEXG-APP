@@ -1,11 +1,8 @@
 # scripts/parse_excel_to_db.py
-# Parses NEXG_Nairobi_Merchant_Seed_Catalog.xlsx and generates:
-# 1. src/db/seed_excel.sql (PostgreSQL insert script)
-# 2. src/data/seededCatalog.json (High-speed client hydration & offline cache)
+# Parses NEXG_Nairobi_Merchant_Seed_Catalog.xlsx and generates the PostgreSQL seed script.
 
 import zipfile
 import xml.etree.ElementTree as ET
-import json
 import re
 import os
 import sys
@@ -14,7 +11,6 @@ sys.stdout.reconfigure(encoding='utf-8')
 
 XLSX_PATH = 'NEXG_Nairobi_Merchant_Seed_Catalog.xlsx'
 OUTPUT_SQL_PATH = 'src/db/seed_excel.sql'
-OUTPUT_JSON_PATH = 'src/data/seededCatalog.json'
 
 def get_cell_val(c):
     t = c.attrib.get('t')
@@ -263,43 +259,6 @@ def main():
                     merchants_by_id[m_id]['items'].append(it_data)
 
         print(f'Items loaded: {len(items)} items')
-
-    # Save to JSON bundle for zero-latency client hydration
-    catalog_bundle = {
-        'version': '1.0.0',
-        'generatedAt': '2026-09-21T14:00:00Z',
-        'summary': {
-            'totalCategories': len(categories_dict),
-            'totalMerchants': len(merchants),
-            'totalItems': len(items)
-        },
-        'categories': list(categories_dict.values()),
-        'merchants': merchants[:120], # Provide 120 rich seeded merchants for instant client bundle
-        'allMerchantSummaries': [
-            {
-                'id': m['id'],
-                'name': m['name'],
-                'slug': m['slug'],
-                'category': m['category'],
-                'categoryId': m['categoryId'],
-                'subcategory': m['subcategory'],
-                'nairobiArea': m['nairobiArea'],
-                'rating': m['rating'],
-                'ratingCount': m['ratingCount'],
-                'deliveryTime': m['deliveryTime'],
-                'deliveryFee': m['deliveryFee'],
-                'priceLevel': m['priceLevel'],
-                'heroImage': m['heroImage'],
-                'itemCount': len(m['items'])
-            }
-            for m in merchants
-        ]
-    }
-
-    os.makedirs('src/data', exist_ok=True)
-    with open(OUTPUT_JSON_PATH, 'w', encoding='utf-8') as f:
-        json.dump(catalog_bundle, f, ensure_ascii=False, indent=2)
-    print(f'Saved JSON catalog to: {OUTPUT_JSON_PATH} ({os.path.getsize(OUTPUT_JSON_PATH)} bytes)')
 
     # Generate SQL seed file for PostgreSQL
     print(f'Generating PostgreSQL seed file: {OUTPUT_SQL_PATH}')

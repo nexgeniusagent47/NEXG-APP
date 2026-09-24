@@ -63,8 +63,8 @@ One JSON (or human-readable, see §6) line when the response settles:
 ### 2.2 Spans (server)
 
 Each request opens a root `http.request` span and closes it when the response
-settles. Child spans (`fallback.<label>` for a seeded-JSON read, `db.connect` from the
-pool) nest automatically because the root span is the ambient one for the request.
+settles. The `db.connect` span from the pool nests automatically because the root span
+is the ambient one for the request. Catalogue reads use PostgreSQL only.
 
 A span carries: `name`, `service`, `traceId`, `spanId`, `parentSpanId`, `startedAt`,
 `durationMs`, `status` (`unset`/`ok`/`error`), `attributes` (HTTP method, target,

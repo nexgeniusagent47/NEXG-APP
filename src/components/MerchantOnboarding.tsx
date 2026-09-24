@@ -5,6 +5,7 @@ import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { readMerchantDraft, useMerchantDraft } from '../hooks/useMerchantDraft';
 import LanguageSwitcher from './LanguageSwitcher';
+import LogoIcon from './LogoIcon';
 import { TimeStringField } from './forms/DateTimeField';
 
 interface Branch {
@@ -775,30 +776,33 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
           so with the logo lockup plus the language switcher plus a "Back to Site" button, the
           row kept its natural width and pushed the whole page sideways. Measured before this
           fix: overflowX 71px at 320, 16px at 375, and still 16px at 440 — the page was wider
-          than every phone, at every width, which is why "Back to Site" sat at right=391 on a
-          360px screen.
+          than every phone, at every width. The navigation control now stays first in the row,
+          ahead of the logo, without pushing the page sideways.
 
           `min-w-0` lets the left group shrink and `truncate` is what it shrinks into, so the
-          portal label gives way before the controls do. The right group is `shrink-0` because
-          a language switcher and a navigation button are the parts that must stay tappable. */}
+          portal label gives way before the controls do. The Back to Site control stays before
+          the wordmark, and the right group is `shrink-0` so the language switcher stays tappable. */}
       <div className="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm no-print">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3 min-w-0 cursor-pointer select-none" onClick={() => onNavigate?.('home')}>
-            {/* #7d5a11 on light, #E5B65F on dark. The dark gold measures 1.79:1 on the light
-                page - unreadable - and the light gold measures 3.47:1 on the dark one. Each
-                theme needs its own, which is what DESIGN.md documents. */}
-            <span className="font-extrabold text-2xl tracking-widest font-sans hover:text-amber-500 transition-colors text-[#7d5a11] dark:text-[#E5B65F] shrink-0">NEXG</span>
-            <span className="text-slate-300 font-light shrink-0">|</span>
-            <span className="text-sm font-semibold tracking-wide uppercase text-slate-600 hover:text-slate-900 transition-colors truncate">{t.ui.merchantOnboarding.s_d33bf6}</span>
-          </div>
-          <div className="flex items-center gap-4 shrink-0">
-            <LanguageSwitcher />
+          <div className="flex items-center gap-3 min-w-0">
             <button
-              onClick={() => onNavigate?.('home')}
-              className="text-xs font-bold uppercase tracking-wider text-amber-800 onboarding-text-amber hover:text-[#B88728] transition-colors flex items-center gap-1.5 cursor-pointer bg-slate-50 hover:bg-amber-50 border border-slate-200 hover:border-amber-200 px-3 py-1.5 rounded-xl"
+              onClick={(event) => {
+                event.stopPropagation();
+                onNavigate?.('home');
+              }}
+              aria-label={t.partnersPortal.backToSite}
+              className="text-xs font-bold uppercase tracking-wider text-amber-800 onboarding-text-amber hover:text-gold-strong transition-colors flex items-center gap-1.5 cursor-pointer bg-slate-50 hover:bg-amber-50 border border-slate-200 hover:border-amber-200 px-3 py-1.5 rounded-xl shrink-0"
             >
               {renderIcon('ArrowLeft', 'w-3.5 h-3.5')} {t.partnersPortal.backToSite}
             </button>
+            <div className="flex items-center gap-3 min-w-0 cursor-pointer select-none" onClick={() => onNavigate?.('home')}>
+              <LogoIcon variant="wordmark" className="h-8 w-auto" />
+              <span className="text-slate-300 font-light shrink-0">|</span>
+              <span className="text-sm font-semibold tracking-wide uppercase text-slate-600 hover:text-slate-900 transition-colors truncate">{t.ui.merchantOnboarding.s_d33bf6}</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-4 shrink-0">
+            <LanguageSwitcher />
             <div className="hidden sm:flex items-center gap-4 text-xs font-bold uppercase text-slate-600 tracking-wider">
               <span>{t.partnersPortal.onboardingStatus}</span>
               <span className="bg-amber-100 text-amber-800 px-3 py-1 rounded-full font-extrabold">{t.partnersPortal.activeStatus}</span>
@@ -813,7 +817,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
         <div className="mb-8 no-print">
           <div className="flex justify-between items-center mb-3 text-xs md:text-sm text-slate-600">
             <div className="flex items-center gap-2 font-semibold text-slate-800">
-              <span className="cursor-pointer hover:underline text-[#7d5a11] dark:text-[#E5B65F]" onClick={() => onNavigate?.('home')}>Home</span>
+              <span className="cursor-pointer hover:underline text-gold-strong" onClick={() => onNavigate?.('home')}>Home</span>
               {selectedCategory && (
                 <>
                   <span className="text-slate-400">/</span>
@@ -835,8 +839,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
         <div className="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden min-h-[500px]">
           
           {/* Main Card Hero/Title banner */}
-          <div className="bg-gradient-to-r from-slate-950 to-slate-900 px-8 py-8 md:px-10 text-white relative overflow-hidden">
-            <div className="absolute right-0 top-0 w-32 h-32 bg-gradient-to-tr from-[#E5B65F] to-amber-500 opacity-20 rounded-full blur-2xl"></div>
+          <div className="onboarding-brand-band px-8 py-8 md:px-10 relative overflow-hidden">
             <h1 className="text-2xl md:text-3xl font-extrabold font-sans tracking-tight">{t.ui.merchantOnboarding.s_a03653}</h1>
             <p className="text-slate-300 mt-2 text-xs md:text-sm">{t.ui.merchantOnboarding.s_67de19}</p>
           </div>
@@ -847,9 +850,9 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
             {currentStep === 1 && (
               <div className="space-y-6 no-print">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-gold-tint text-gold flex items-center justify-center font-bold">
+                  <span className="text-gold-strong flex items-center justify-center font-bold" aria-hidden="true">
                     {renderIcon('Store', 'w-4 h-4')}
-                  </div>
+                  </span>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">{t.ui.merchantOnboarding.s_b9084a}</h2>
                 </div>
                 <p className="text-slate-600 text-sm">{t.ui.merchantOnboarding.s_c05283}</p>
@@ -872,42 +875,31 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   {filteredCategories.map(cat => {
                     const isSelected = selectedCategory?.id === cat.id;
                     return (
-                      <div 
+                      <button
+                        type="button"
                         key={cat.id}
                         onClick={() => selectCategory(cat)}
-                        /* THE NEUTRALS MUST BE CLASSES, NOT INLINE STYLE.
-                           This card used to carry
-                             style={{ borderColor: isSelected ? cat.color : '#e2e8f0',
-                                      backgroundColor: isSelected ? cat.bg : 'white' }}
-                           An inline declaration beats every rule in every stylesheet, so it
-                           also beat `.onboarding-theme`'s redefinition of `--color-white`.
-                           Measured in dark mode: the outer card resolved to rgb(22,25,29) while
-                           this nested one stayed pure white, with near-white text on it - 42
-                           elements at 1.11:1 on this page alone. The token system was working
-                           exactly as designed and this one attribute was outside it.
-
-                           The unselected half now uses the ordinary utilities, which read the
-                           tokens and therefore flip with the theme. The selected half keeps
-                           `cat.color`/`cat.bg` because those are per-category brand values from
-                           the catalogue, deliberately the same in both themes. */
-                        style={isSelected ? { borderColor: cat.color, backgroundColor: cat.bg } : undefined}
-                        className={`rounded-2xl p-5 border cursor-pointer hover:shadow-md hover:scale-[1.01] transition flex flex-col justify-between ${
+                        aria-pressed={isSelected}
+                        aria-label={`${cat.name}${isSelected ? ', selected' : ''}`}
+                        className={`onboarding-category-option w-full rounded-2xl p-5 border text-left cursor-pointer hover:shadow-md hover:scale-[1.01] transition flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 ${
                           isSelected ? '' : 'border-slate-200 bg-white'
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: isSelected ? 'rgba(255,255,255,0.8)' : cat.bg, color: cat.color }}>
-                            {renderIcon(cat.icon, "w-5 h-5")}
-                          </div>
+                          <span className="inline-flex items-center justify-center text-gold-strong" aria-hidden="true">
+                            {renderIcon(cat.icon, "w-6 h-6")}
+                          </span>
                           {isSelected && (
-                            <span className="text-xs bg-white text-slate-900 border px-2 py-0.5 rounded-full font-bold">Selected</span>
+                            <span className="inline-flex items-center justify-center text-gold-strong" aria-hidden="true">
+                              {renderIcon('Check', 'w-4 h-4')}
+                            </span>
                           )}
                         </div>
                         <div className="mt-4">
                           <h3 className="font-extrabold text-slate-900 text-sm">{cat.name}</h3>
                           <p className="text-slate-600 text-[11px] leading-relaxed mt-1">{cat.desc}</p>
                         </div>
-                      </div>
+                      </button>
                     );
                   })}
                 </div>
@@ -918,9 +910,9 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
             {currentStep === 2 && selectedCategory && (
               <div className="space-y-6 no-print">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg flex items-center justify-center font-bold" style={{ backgroundColor: selectedCategory.bg, color: selectedCategory.color }}>
+                  <span className="flex items-center justify-center font-bold text-gold-strong" aria-hidden="true">
                     {renderIcon(selectedCategory.icon, 'w-4 h-4')}
-                  </div>
+                  </span>
                   <h2 className="text-xl md:text-2xl font-bold text-slate-950">Select Business Type in {selectedCategory.name}</h2>
                 </div>
                 <p className="text-slate-600 text-sm">{t.ui.merchantOnboarding.s_5fa789}</p>
@@ -929,23 +921,26 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   {selectedCategory.subcategories.map(sub => {
                     const isSelected = selectedSubcategories.some(s => s.id === sub.id);
                     return (
-                      <div 
+                      <button
+                        type="button"
                         key={sub.id}
                         onClick={() => toggleSubcategory(sub)}
-                        className={`rounded-2xl p-5 border cursor-pointer hover:shadow-md transition flex flex-col justify-between ${isSelected ? 'border-[#E5B65F] bg-amber-50/20 shadow-sm' : 'border-slate-200 bg-white'}`}
+                        aria-pressed={isSelected}
+                        aria-label={`${sub.name}${isSelected ? ', added' : ''}`}
+                        className={`onboarding-subcategory-option w-full text-left rounded-2xl p-5 border cursor-pointer hover:shadow-md transition flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 ${isSelected ? 'shadow-sm' : 'border-slate-200 bg-white'}`}
                       >
-                        <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-100 text-slate-600">
+                        <span className="inline-flex items-center justify-center text-gold-strong" aria-hidden="true">
                           {renderIcon(sub.icon, "w-5 h-5")}
-                        </div>
+                        </span>
                         <div className="mt-4">
                           <h3 className="font-extrabold text-slate-900 text-sm">{sub.name}</h3>
                           {isSelected ? (
-                            <span className="text-[10px] text-amber-800 font-extrabold mt-1 block">✓ Added</span>
+                            <span className="text-[10px] text-amber-800 onboarding-text-amber font-extrabold mt-1 block">✓ Added</span>
                           ) : (
                             <span className="text-[10px] text-slate-400 mt-1 block">{t.ui.merchantOnboarding.s_a133eb}</span>
                           )}
                         </div>
-                      </div>
+                      </button>
                     );
                   })}
                 </div>
@@ -958,9 +953,9 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                 {/* Context Category Block */}
                 <div className="bg-slate-900 text-white rounded-2xl p-4 flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-slate-800 text-[#E5B65F]">
+                    <span className="inline-flex items-center justify-center text-[#E5B65F] onboarding-gold-on-inverse" aria-hidden="true">
                       {renderIcon(selectedCategory.icon, "w-5 h-5")}
-                    </div>
+                    </span>
                     <div>
                       <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">{t.ui.merchantOnboarding.s_3fa081}</p>
                       <h4 className="font-extrabold text-base">{selectedCategory.name}</h4>
@@ -1045,7 +1040,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                                   type="button"
                                   key={o}
                                   onClick={() => handleDynamicFieldChange(fieldId, o)}
-                                  className={`px-3 py-1.5 border rounded-xl text-xs font-semibold transition-colors ${dynamicFields[fieldId] === o ? 'border-amber-500 bg-amber-50/20 text-amber-800' : 'border-slate-200 hover:border-amber-400 text-slate-600'}`}
+                                  className={`px-3 py-1.5 border rounded-xl text-xs font-semibold transition-colors ${dynamicFields[fieldId] === o ? 'border-amber-500 bg-amber-50/20 text-amber-800 onboarding-text-amber' : 'border-slate-200 hover:border-amber-400 text-slate-600'}`}
                                 >
                                   {o}
                                 </button>
@@ -1065,7 +1060,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                                       const next = isChecked ? currentList.filter((x: string) => x !== o) : [...currentList, o];
                                       handleDynamicFieldChange(fieldId, next);
                                     }}
-                                    className={`px-3 py-1.5 border rounded-xl text-xs font-semibold transition-colors ${isChecked ? 'border-amber-500 bg-amber-50/20 text-amber-800' : 'border-slate-200 hover:border-amber-400 text-slate-600'}`}
+                                    className={`px-3 py-1.5 border rounded-xl text-xs font-semibold transition-colors ${isChecked ? 'border-amber-500 bg-amber-50/20 text-amber-800 onboarding-text-amber' : 'border-slate-200 hover:border-amber-400 text-slate-600'}`}
                                   >
                                     {o}
                                   </button>
@@ -1099,7 +1094,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                               type="button"
                               key={secName}
                               onClick={() => toggleSuggestedSection(secName)}
-                              className={`px-3 py-1.5 border rounded-full text-xs font-semibold transition-colors ${isSelected ? 'border-amber-500 bg-amber-50/40 text-amber-800 font-extrabold' : 'border-slate-200 bg-white text-slate-600'}`}
+                              className={`px-3 py-1.5 border rounded-full text-xs font-semibold transition-colors ${isSelected ? 'border-amber-500 bg-amber-50/40 text-amber-800 onboarding-text-amber font-extrabold' : 'border-slate-200 bg-white text-slate-600'}`}
                             >
                               {secName}
                             </button>
@@ -1911,9 +1906,9 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   className="border border-slate-200 rounded-3xl p-6 md:p-8 bg-white shadow-inner max-h-[400px] overflow-y-auto text-sm text-slate-700 leading-relaxed font-sans"
                 >
                   <div className="text-center mb-8 border-b pb-6">
-                    <span className="font-extrabold text-2xl tracking-widest text-[#E5B65F]">NEXG</span>
+                    <LogoIcon variant="wordmark" className="mx-auto block h-9 w-auto" />
                     <h3 className="text-lg font-extrabold tracking-tight text-slate-900 mt-2">{t.ui.merchantOnboarding.s_71c904}</h3>
-                    <p className="text-[#E5B65F] font-bold text-xs tracking-wider uppercase">{t.ui.merchantOnboarding.s_b9ffbd}</p>
+                    <p className="text-gold-strong font-bold text-xs tracking-wider uppercase">{t.ui.merchantOnboarding.s_b9ffbd}</p>
                     <p className="text-slate-400 text-xs mt-1">Effective Date: <span className="font-bold">{new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span></p>
                   </div>
 
@@ -1989,7 +1984,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                           {sigMode === 'draw' && signatureImage ? (
                             <img src={signatureImage} className="h-12 max-w-[150px] object-contain" alt={t.ui.merchantOnboarding.s_c6846b} />
                           ) : sigMode === 'type' && signatoryName ? (
-                            <span className="font-cursive text-2xl text-[#E5B65F]">{signatoryName}</span>
+                            <span className="font-cursive text-2xl text-gold-strong">{signatoryName}</span>
                           ) : (
                             <span className="text-[10px] text-slate-300 italic">[Awaiting signature verification]</span>
                           )}
@@ -2058,7 +2053,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                     <div className="space-y-2">
                       <label className="block text-xs font-bold tracking-wider text-slate-600 uppercase">{t.ui.merchantOnboarding.s_e58331}</label>
                       <div className="border border-slate-200 bg-white p-6 rounded-2xl text-center shadow-inner">
-                        <p className="font-cursive text-4xl text-[#E5B65F] select-none">
+                        <p className="font-cursive text-4xl text-gold-strong select-none">
                           {signatoryName || '- Your Signature -'}
                         </p>
                       </div>
@@ -2095,7 +2090,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
 
                 <div className="bg-slate-50 p-6 rounded-3xl max-w-lg mx-auto border border-slate-100 text-left text-xs md:text-sm space-y-3 shadow-inner">
                   <h4 className="font-bold text-slate-800 border-b pb-2 flex items-center gap-1.5">
-                    {renderIcon('Briefcase', 'w-4 h-4 text-[#E5B65F]')} Setup Summary highlights
+                    {renderIcon('Briefcase', 'w-4 h-4 text-gold-strong')} Setup Summary highlights
                   </h4>
                   <p><strong className="text-slate-600">Trading Name:</strong> <span className="font-semibold text-slate-900">{profileData.tradingName}</span></p>
                   <p><strong className="text-slate-600">Store Outlet:</strong> <span className="font-semibold text-slate-900">{branches.length} Location(s) Registered ({branches.map(b => b.name).join(', ')})</span></p>

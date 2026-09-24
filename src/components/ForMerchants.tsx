@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { responsiveProps } from './ResponsiveImage';
 import * as Icons from 'lucide-react';
-import { AnimatePresence, motion } from 'motion/react';
 import LogoIcon from './LogoIcon';
+import { AnimatePresence, motion } from 'motion/react';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
@@ -470,7 +470,7 @@ export default function ForMerchants({ onNavigate }: { onNavigate?: (page: strin
       {/* Footer */}
       <footer className={`border-t transition-colors duration-300 ${isLight ? 'bg-white border-slate-200 text-slate-600' : 'bg-[#1a1c1c] border-white/10 text-[#a0a1a1]'}`}>
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-10 sm:py-12 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className={`font-bold text-xl sm:text-2xl tracking-widest ${isLight ? 'text-slate-900' : 'text-white'}`}>NEXG</div>
+          <LogoIcon variant="wordmark" className="h-8 w-auto" />
           <div className="text-xs sm:text-sm text-center md:text-left">© 2026 NEXG App. All rights reserved.</div>
           <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm">
             <a href="#" className={`transition-colors py-2 px-1 min-h-[44px] flex items-center ${isLight ? 'hover:text-slate-900' : 'hover:text-white'}`}>{t.ui.forMerchants.s_e6a013}</a>

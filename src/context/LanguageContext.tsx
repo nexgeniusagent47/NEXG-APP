@@ -57,22 +57,42 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+const SUPPORTED_LANGUAGES = new Set<Language>(['en', 'zh', 'sw', 'ar']);
+
+function detectDeviceLanguage(): Language {
+  if (typeof navigator === 'undefined') return 'en';
+
+  const preferredLocales = [
+    ...(Array.isArray(navigator.languages) ? navigator.languages : []),
+    navigator.language,
+  ];
+
+  for (const locale of preferredLocales) {
+    if (typeof locale !== 'string') continue;
+    const baseLanguage = locale.trim().replace(/_/g, '-').split('-')[0]?.toLowerCase();
+    if (baseLanguage && SUPPORTED_LANGUAGES.has(baseLanguage as Language)) {
+      return baseLanguage as Language;
+    }
+  }
+
+  return 'en';
+}
+
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>(() => {
     try {
-      const saved = localStorage.getItem('nexg_language') as Language;
-      if (saved && (saved === 'en' || saved === 'zh' || saved === 'sw' || saved === 'ar')) {
-        return saved;
+      const saved = localStorage.getItem('nexg_language');
+      if (saved && SUPPORTED_LANGUAGES.has(saved as Language)) {
+        return saved as Language;
       }
-      return 'en';
     } catch {
-      return 'en';
+      // Storage may be disabled; still honour the device language for this visit.
     }
+    return detectDeviceLanguage();
   });
 
   useEffect(() => {
     try {
-      localStorage.setItem('nexg_language', language);
       document.documentElement.lang = language;
       document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
     } catch {
@@ -81,6 +101,11 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, [language]);
 
   const setLanguage = (lang: Language) => {
+    try {
+      localStorage.setItem('nexg_language', lang);
+    } catch {
+      // Keep the selected language for this visit if storage is unavailable.
+    }
     setLanguageState(lang);
   };
 

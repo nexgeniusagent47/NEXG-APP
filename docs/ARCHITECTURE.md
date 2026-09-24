@@ -161,8 +161,9 @@ performed, on a control that adds a line to the cart.
 
 ## Catalogue generation
 
-`src/db/seed_excel.sql` and `src/data/seededCatalog.json` are **generated**. Do not
-hand-edit them.
+`src/db/seed_excel.sql` is generated. Do not hand-edit it. The generated
+`src/data/seededCatalog.json` bundle was removed; it had duplicated catalogue data
+in the browser and silently masked database failures.
 
 ```
 NEXG_Nairobi_Merchant_Seed_Catalog.xlsx
@@ -173,7 +174,7 @@ scripts/regenerate_catalog_seed.py
         │   declared band, assigns per-vertical imagery, composes descriptions
         │   from the item's own facts
         ▼
-seed_excel.sql + seededCatalog.json  ──►  npm run db:up  ──►  Postgres
+seed_excel.sql  ──►  npm run db:up  ──►  Postgres
 ```
 
 `scripts/parse_excel_to_db.py` is the original generator and is **superseded**. It
@@ -183,18 +184,15 @@ documented in `CHANGELOG.md` under 2.1.0.
 ## Data source strategy
 
 ```
-DATABASE_URL set?
-  ├─ no  → JSON fallback (src/data/seededCatalog.json)
-  └─ yes → try pg Pool (5 attempts, backoff)
-             ├─ connected    → Postgres  ← source of truth
-             └─ unreachable  → JSON fallback + reason recorded
+DATABASE_URL set and PostgreSQL responds?
+  ├─ yes → serve catalogue from PostgreSQL
+  └─ no  → health and catalogue APIs return HTTP 503; container is unhealthy
 ```
 
-`/api/health` always reports which source is live, and the counts it returns are
-derived from **the same collection the list endpoints serve**. This matters: the
-original code reported the JSON `summary` block (640 merchants) while
-`/api/merchants` served the `merchants` array (120), so the API silently looked 81%
-empty while health looked healthy.
+The production image does not contain a JSON catalogue. Discovery, category, and
+search merchant/item results are fetched from the API. `/api/health` performs a
+database count query and returns HTTP 503 when that query fails; catalogue routes
+also return 503 instead of showing stale sample data.
 
 ## Frontend structure
 

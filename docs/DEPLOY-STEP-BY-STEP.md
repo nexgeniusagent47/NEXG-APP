@@ -4,6 +4,15 @@ A first deployment, written to be followed in order. Every command has been rehe
 a local Docker daemon against the real production image, and the results below are
 measured rather than expected.
 
+> **Release destination check required (2026-09-24):** this runbook's target section names
+> `/var/www/apps/projects/nexg/{backend,front-end}`, separate `nexg-apps` containers, and a
+> `deployer` account. The latest owner-provided SSH session recorded the app at
+> `/var/www/apps/projects/nexg-concierge` with `nexg-concierge-*` containers and a root shell.
+> These deployment instructions have not been reconciled against the current live server, and this
+> local checkout has no Git remote. Do not use the pull/build commands below until the owner-approved
+> source and current server directory are verified. This note records a blocker; it does not
+> authorize or perform a deployment.
+
 Target server (as supplied):
 
 | Item | Value |
@@ -163,12 +172,19 @@ chmod 600 .env
 environment; do not reuse the local one. Rotating it invalidates every existing session,
 which is the intended behaviour of a signing key.
 
-**Do not set `DATABASE_URL` here.** The base compose file supplies
-`postgresql://nexg_user:...@postgres:5432/nexg_db` using the compose service name as the
-hostname. A `DATABASE_URL` in `.env` would point at `127.0.0.1`, which inside the app
-container is the container itself, and the app would silently fall back to the bundled
-JSON catalogue while reporting healthy. If `/api/health` ever says
-`seeded_json_fallback` in production, this is why.
+For the live Compose stack, also set `POSTGRES_PASSWORD` and
+`POSTGRES_PASSWORD_URLENCODED` from the same database password. The first is the raw
+PostgreSQL secret; the second is its percent-encoded form for the app connection URI. Use
+the hidden-input procedure in [`SECURITY-HARDENING-AND-CLEANUP-PLAN.md`](./SECURITY-HARDENING-AND-CLEANUP-PLAN.md)
+Phase 1.2. Do not put the raw password inside a connection URL or paste it into a shell
+command, chat, or deployment log.
+
+**Do not set `DATABASE_URL` in the live Compose `.env`.** The base Compose file builds it
+with the private `postgres` service hostname and `POSTGRES_PASSWORD_URLENCODED`. A host URL
+using `127.0.0.1:5433` points back at the app container's own loopback. The Compose setting
+requires the encoded secret; a missing value stops configuration instead of silently using
+a development password. Validate without printing resolved secrets using
+`docker compose config -q`.
 
 ### 4.3 Build and start
 
@@ -206,8 +222,9 @@ docker compose exec -T postgres psql -U nexg_user -d nexg_db -c \
 Both scripts are idempotent (`CREATE TABLE IF NOT EXISTS`, `TRUNCATE ... CASCADE`), so
 re-running them is safe. **They are deliberately not wired into the postgres entrypoint:**
 Postgres only runs init scripts against an empty data directory, so an auto-seed would
-silently do nothing on the second `up` and leave you serving only the JSON fallback while
-looking provisioned.
+silently do nothing on the second `up` and leave the catalogue unseeded while looking
+provisioned. The app now returns 503 if PostgreSQL is unavailable; it has no JSON catalogue
+fallback.
 
 ### 4.5 Verify before involving nginx
 
@@ -217,9 +234,9 @@ curl -s localhost:3001/api/version
 curl -so /dev/null -w '%{http_code}\n' localhost:3001/
 ```
 
-`/api/health` must report `"source":"postgres"`. If it reports
-`"seeded_json_fallback"`, the app cannot reach the database — fix that now, because nginx
-will faithfully proxy a broken app.
+`/api/health` must return HTTP 200 with `"status":"ok"`,
+`"source":"postgres"`, and `"postgresConnected":true`. HTTP 503 means PostgreSQL could
+not answer the readiness query. Fix that before routing customer traffic through nginx.
 
 `/api/version` reads `GIT_SHA`, which is why §4.3 passes it. A plain build reports
 `"gitSha":"unknown"` rather than inventing a commit.
@@ -332,8 +349,9 @@ curl -s localhost:3001/api/version | jq .
 There is also a human dashboard at `/?page=metrics` — a developer surface, deliberately
 outside the customer product. It polls every 5 seconds and shows requests/min with a
 sparkline, the latency histogram, error rate, slowest routes by p95, recent traces, and
-the data-source panel. **Watch `Data source` there:** if it flips to
-`seeded_json_fallback`, the app lost the database.
+the data-source panel. **Watch `Database` there:** if readiness fails, catalogue routes
+return 503 and the Docker health check marks the app unhealthy; there is no stale catalogue
+to hide the outage.
 
 Logs are one JSON object per line on stdout:
 
@@ -354,7 +372,7 @@ oversight — see `docs/OBSERVABILITY.md`.
 | Symptom | Check |
 | --- | --- |
 | `app` restarting immediately | `docker compose logs app`. If it names `AUTH_SECRET`, §4.2 did not take. |
-| App healthy but empty catalogue | `/api/health` — `seeded_json_fallback` means `DATABASE_URL` is wrong or Postgres is unreachable. |
+| App unhealthy or catalogue returns 503 | Check `/api/health` and app logs; verify `DATABASE_URL`, PostgreSQL reachability, and schema/seed presence. |
 | 502 from nginx | Is nginx on the same compose network? `proxy_pass http://app:3001` needs the *service* name, not `localhost`. |
 | Login does not persist | `X-Forwarded-Proto` missing, so `Secure` cookies are dropped (§4.6). |
 | Everything works, then dies after a reboot | `restart` policy is `unless-stopped`; check the daemon started at all — `systemctl status docker`. |

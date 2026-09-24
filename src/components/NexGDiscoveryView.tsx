@@ -1,4 +1,4 @@
-import React, { useRef, useState, useMemo } from 'react';
+import React, { useRef, useState, useMemo, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import {
   Search,
@@ -23,7 +23,7 @@ import {
 import { useTheme } from '../context/ThemeContext';
 import { useCart } from '../context/CartContext';
 import { useNexGNavigation } from './nexg/NexGNavigationContext';
-import { CATEGORIES_21, CatalogCategory, CatalogMerchant, getCategoryMerchants, DynamicItem } from '../data/categoryCatalog21';
+import { CATEGORIES_21, CatalogCategory, CatalogMerchant, DynamicItem } from '../data/categoryCatalog21';
 import { Restaurant } from '../types';
 import { ProductCarousel, type Product } from './ui/product-carousel';
 import { NexGInfiniteFeed } from './nexg/NexGInfiniteFeed';
@@ -32,7 +32,7 @@ import { NexGItemCard } from './nexg/NexGItemCard';
 import { NexGSearchEngine } from './nexg/NexGSearchEngine';
 import { CuratedNairobiWorlds } from './nexg/experiences/CuratedNairobiWorlds';
 import { MerchantCard } from './nexg/MerchantCard';
-import { SEEDED_MERCHANTS } from '../data/catalogData';
+import { fetchMerchants, type ApiMerchant } from '../lib/apiClient';
 import { cn } from '../lib/utils';
 
 interface NexGDiscoveryViewProps {
@@ -63,7 +63,28 @@ export default function NexGDiscoveryView({
 
   const [activeTab, setActiveTab] = useState<'all' | 'food' | 'wellness' | 'experiences' | 'cellar'>('all');
   const [searchInput, setSearchInput] = useState('');
+  const [databaseMerchants, setDatabaseMerchants] = useState<ApiMerchant[]>([]);
+  const [catalogStatus, setCatalogStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+  const [catalogRetry, setCatalogRetry] = useState(0);
   const categoryScrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setCatalogStatus('loading');
+
+    fetchMerchants({ limit: 120, sort: 'recommended' }, controller.signal)
+      .then((page) => {
+        setDatabaseMerchants(page.merchants);
+        setCatalogStatus('ready');
+      })
+      .catch((error: any) => {
+        if (error?.name === 'AbortError') return;
+        setDatabaseMerchants([]);
+        setCatalogStatus('error');
+      });
+
+    return () => controller.abort();
+  }, [catalogRetry]);
 
   const scrollHorizontally = (ref: React.RefObject<HTMLDivElement | null>, direction: 'left' | 'right') => {
     if (ref.current) {
@@ -83,98 +104,26 @@ export default function NexGDiscoveryView({
 
 
 
-  // Instant fast delivery products for carousel
-  const featuredFastProducts: Product[] = [
-    {
-      id: 'fast-dom-p',
-      name: 'Dom Pérignon Vintage Brut Champagne',
-      quantity: '750ml • Chilled in Ice Pouch',
-      price: 48000,
-      originalPrice: 55000,
-      discount: '12% OFF',
-      deliveryTime: '20 min',
-      imageUrl: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80',
-      onAdd: () => {
-        addToCart({
-          id: 'fast-dom-p',
-          name: 'Dom Pérignon Vintage Brut Champagne',
-          price: 48000,
-          quantity: 1,
-        });
-      },
-    },
-    {
-      id: 'fast-beluga-caviar',
-      name: 'Imperial Beluga Hybrid Caviar',
-      quantity: '50g Tin with Mother of Pearl Spoon',
-      price: 26000,
-      deliveryTime: '25 min',
-      imageUrl: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80',
-      onAdd: () => {
-        addToCart({
-          id: 'fast-beluga-caviar',
-          name: 'Imperial Beluga Hybrid Caviar',
-          price: 26000,
-          quantity: 1,
-        });
-      },
-    },
-    {
-      id: 'fast-macallan-18',
-      name: 'The Macallan 18 Year Double Cask',
-      quantity: '700ml Bottle in Wooden Casket',
-      price: 68000,
-      originalPrice: 75000,
-      discount: 'KSh 7k Off',
-      deliveryTime: '15 min',
-      imageUrl: 'https://images.unsplash.com/photo-1569919659476-f0852f6834b7?auto=format&fit=crop&w=600&q=80',
-      onAdd: () => {
-        addToCart({
-          id: 'fast-macallan-18',
-          name: 'The Macallan 18 Year Double Cask',
-          price: 68000,
-          quantity: 1,
-        });
-      },
-    },
-    {
-      id: 'fast-wagyu-ribeye',
-      name: 'Japanese Miyazaki A5 Wagyu Ribeye Cut',
-      quantity: '350g Prime Steak',
-      price: 18500,
-      deliveryTime: '30 min',
-      imageUrl: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80',
-      onAdd: () => {
-        addToCart({
-          id: 'fast-wagyu-ribeye',
-          name: 'Japanese Miyazaki A5 Wagyu Ribeye Cut',
-          price: 18500,
-          quantity: 1,
-        });
-      },
-    },
-    {
-      id: 'fast-truffle-tagliolini',
-      name: 'Handmade Alba White Truffle Pasta',
-      quantity: 'Prepared Fresh in Suite Packaging',
-      price: 5400,
-      deliveryTime: '20 min',
-      imageUrl: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=600&q=80',
-      onAdd: () => {
-        addToCart({
-          id: 'fast-truffle-tagliolini',
-          name: 'Handmade Alba White Truffle Pasta',
-          price: 5400,
-          quantity: 1,
-        });
-      },
-    },
-  ];
-
-  // Feed items for Infinite Feed: dynamic merchants across categories
-  const discoveryMerchants = useMemo(() => {
-    return CATEGORIES_21.flatMap((cat) => getCategoryMerchants(cat.id));
-  }, []);
+  const featuredFastProducts: Product[] = useMemo(
+    () => databaseMerchants
+      .flatMap((merchant) => merchant.items
+        .filter((item) => item.commerceMode === 'instant_purchase' && item.isAvailable !== false)
+        .map((item) => ({
+          id: item.id,
+          name: item.name,
+          quantity: `${merchant.name} · ${merchant.category}`,
+          price: item.price,
+          originalPrice: item.originalPrice,
+          discount: item.originalPrice && item.originalPrice > item.price
+            ? `KSh ${item.originalPrice - item.price} off`
+            : undefined,
+          deliveryTime: merchant.deliveryTime,
+          imageUrl: item.image || merchant.heroImage,
+          onAdd: () => addToCart({ id: item.id, name: item.name, price: item.price, quantity: 1 }),
+        })))
+      .slice(0, 6),
+    [databaseMerchants, addToCart]
+  );
 
   return (
     <div
@@ -316,6 +265,19 @@ export default function NexGDiscoveryView({
 
       {/* Main Content Body */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-12">
+        {catalogStatus === 'error' && (
+          <div role="alert" className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm">
+            <p>We couldn’t load the partner catalogue from the database. Please try again.</p>
+            <button
+              type="button"
+              onClick={() => setCatalogRetry((attempt) => attempt + 1)}
+              className="rounded-full border border-current px-3 py-1.5 font-semibold"
+            >
+              Retry
+            </button>
+          </div>
+        )}
+
         {/* If searching, render the live heterogeneous search engine */}
         {searchInput.trim().length > 0 ? (
           <NexGSearchEngine query={searchInput} />
@@ -396,17 +358,17 @@ export default function NexGDiscoveryView({
             </section>
 
             {/* 2. INSTANT SUITE EXPRESS CONVEYOR CAROUSEL */}
-            <section>
+            {catalogStatus === 'ready' && <section>
               <ProductCarousel
                 title={t.ui.nexGDiscoveryView.s_df4cf6}
                 subtitle={t.ui.nexGDiscoveryView.s_8f8796}
                 products={featuredFastProducts}
               />
-            </section>
+            </section>}
 
             {/* 3. CURATED NAIROBI WORLDS (Unified Single Section with Progressive Reveal) */}
-            <CuratedNairobiWorlds
-              merchants={SEEDED_MERCHANTS}
+            {catalogStatus === 'ready' && <CuratedNairobiWorlds
+              merchants={databaseMerchants}
               onSelectMerchant={(m) => {
                 if (onSelectMerchant) {
                   onSelectMerchant(m);
@@ -444,7 +406,7 @@ export default function NexGDiscoveryView({
                 );
                 if (found) onSelectCategory(found);
               }}
-            />
+            />}
 
             {/* 4. ALL VERIFIED PARTNERS & OFFERINGS (Wolt-Grade Merchant Grid) */}
             <section className="space-y-6 pt-4">
@@ -455,8 +417,13 @@ export default function NexGDiscoveryView({
                 </div>
               </div>
 
+              {catalogStatus === 'loading' ? (
+                <p role="status" className={cn('text-sm', isLight ? 'text-slate-600' : 'text-gray-400')}>
+                  Loading partners from the database…
+                </p>
+              ) : catalogStatus === 'ready' ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {SEEDED_MERCHANTS.slice(0, 18).map((merchant) => (
+                {databaseMerchants.slice(0, 18).map((merchant) => (
                   <MerchantCard
                     key={merchant.id}
                     merchant={merchant}
@@ -494,6 +461,7 @@ export default function NexGDiscoveryView({
                   />
                 ))}
               </div>
+              ) : null}
             </section>
           </>
         )}

@@ -13,16 +13,15 @@ All responses are JSON. Errors use `{ "error": "message" }`.
 
 ## `GET /api/health`
 
-Liveness plus the **active data source** and real catalogue counts.
+Database readiness. A successful response includes counts queried from PostgreSQL;
+an unavailable database returns HTTP `503` so the container and monitoring can detect it.
 
 ```json
 {
   "status": "ok",
   "timestamp": "2026-09-21T12:08:28.266Z",
   "source": "postgres",
-  "postgresConfigured": true,
   "postgresConnected": true,
-  "postgresError": null,
   "totalCategories": 21,
   "totalSubcategories": 128,
   "totalMerchants": 640,
@@ -32,10 +31,19 @@ Liveness plus the **active data source** and real catalogue counts.
 
 | Field | Meaning |
 | --- | --- |
-| `source` | `postgres` or `seeded_json_fallback` |
-| `postgresConfigured` | whether `DATABASE_URL` is set at all |
-| `postgresConnected` | whether the pool actually connected |
-| `postgresError` | the failure reason when not connected, else `null` |
+| `source` | Always `postgres`; there is no JSON catalogue fallback. |
+| `postgresConnected` | A PostgreSQL query succeeded for this health request. |
+| `status` | `ok` on success; `unavailable` in the HTTP 503 response. |
+
+Unavailable response (no connection detail is disclosed):
+
+```json
+{
+  "status": "unavailable",
+  "source": "postgres",
+  "postgresConnected": false
+}
+```
 
 > **Contract:** `totalMerchants` **must** equal `total` from `GET /api/merchants`
 > with no filters. A previous version reported 640 here while serving 120, which
@@ -201,7 +209,7 @@ falls back to `index.html` for any non-`/api/*` path. This makes
 | `400` | missing required query param (`/api/search` without `q`) |
 | `404` | unknown merchant, or unknown route |
 | `500` | unhandled server error |
-| `503` | no data source available (no Postgres **and** no JSON cache) |
+| `503` | PostgreSQL is unavailable or a catalogue query failed |
 
 ## Not implemented
 

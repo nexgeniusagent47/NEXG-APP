@@ -29,6 +29,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import LogoIcon from './LogoIcon';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useLanguage } from '../context/LanguageContext';
+import { formatKes, formatLocalizedNumber, interpolatePartnerCopy, partnerEconomicsCopy, PARTNER_ECONOMICS } from '../data/partnerEconomics';
 
 import { useTheme } from '../context/ThemeContext';
 import { responsiveProps } from './ResponsiveImage';
@@ -37,17 +38,25 @@ interface ForPropertiesProps {
   onNavigate: (page: any) => void;
 }
 
+const ECOSYSTEM_ICON_CLASS =
+  'mb-4 text-gold group-hover:scale-110 transition-transform w-8 h-8 sm:w-10 sm:h-10';
+const ecosystemCardSurface = (isLight: boolean) =>
+  isLight
+    ? 'bg-white hover:bg-amber-50/40 hover:shadow-[0_10px_30px_rgba(184,135,40,0.14)]'
+    : 'bg-white/5 hover:bg-[#E5B65F]/10 hover:shadow-[0_0_20px_rgba(229,182,95,0.12)]';
+
 export default function ForProperties({ onNavigate }: ForPropertiesProps) {
   // Navigation scrolling effect
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isLight, toggleTheme } = useTheme();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const economicsCopy = partnerEconomicsCopy[language].property;
 
   // Calculator states
   const [rooms, setRooms] = useState(25);
   const [occupancy, setOccupancy] = useState(70);
-  const [guestSpend, setGuestSpend] = useState(150);
+  const [averageMarkupPerOrderKes, setAverageMarkupPerOrderKes] = useState(500);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,18 +75,13 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
     setIsMobileMenuOpen(false);
   };
 
-  // Calculate earnings: Rooms * (Occupancy/100) * 30 days * GuestSpend * 0.15 commission (or similar formula)
-  // Let's assume guestSpend is per stay/month, say per booking, with average stay of 3 days.
-  // Number of bookings per month = Rooms * (Occupancy / 100) * (30 / 3) = Rooms * (Occupancy / 100) * 10
-  // Commission = 15% of guest spend per booking.
-  const estimatedBookings = Math.round(rooms * (occupancy / 100) * 10);
-  const totalCommissionRevenue = Math.round(estimatedBookings * guestSpend * 0.15);
-
-  // Dynamic breakdown of revenue streams
-  const foodRev = Math.round(totalCommissionRevenue * 0.43);
-  const transportRev = Math.round(totalCommissionRevenue * 0.22);
-  const spaRev = Math.round(totalCommissionRevenue * 0.27);
-  const excursionRev = Math.round(totalCommissionRevenue * 0.08);
+  // Illustrative order-volume estimate: 30 days divided by an assumed 3-night stay,
+  // with one order per estimated stay. The owner's share applies to markup only.
+  const estimatedMonthlyOrders = Math.round(rooms * (occupancy / 100) * 10);
+  const totalOrderMarkupKes = estimatedMonthlyOrders * averageMarkupPerOrderKes;
+  const totalPropertyShareKes = Math.round(
+    totalOrderMarkupKes * (PARTNER_ECONOMICS.propertyMarkupSharePercent / 100),
+  );
 
   return (
     <div className={`${isLight ? 'bg-[#F8F9FA] text-slate-900' : 'bg-[#0d0e0e] text-[#ececed]'} font-sans antialiased selection:bg-[#E5B65F] selection:text-black min-h-screen transition-colors duration-300`}>
@@ -297,13 +301,9 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             {/* Fine Dining */}
             <div className="group cursor-default">
               <div className={`aspect-square rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center p-4 sm:p-6 transition duration-300 hover:-translate-y-2 shadow-sm ${
-                isLight
-                  ? 'bg-white hover:bg-amber-50/40 hover:shadow-[0_10px_30px_rgba(229,182,95,0.18)]'
-                  : 'bg-white/5 hover:bg-[#E5B65F]/10 hover:shadow-[0_0_20px_rgba(229,182,95,0.15)]'
+                ecosystemCardSurface(isLight)
               }`}>
-                <Utensils className={`mb-4 group-hover:scale-110 transition-transform w-8 h-8 sm:w-10 sm:h-10 ${
-                  isLight ? 'text-amber-800' : 'text-[#E5B65F]'
-                }`} />
+                <Utensils className={ECOSYSTEM_ICON_CLASS} />
                 <p className={`font-bold text-xs sm:text-sm text-center mb-1 ${
                   isLight ? 'text-slate-900' : 'text-white'
                 }`}>{t.ui.forProperties.s_a3fb7a}</p>
@@ -316,11 +316,9 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             {/* Spa & Wellness */}
             <div className="group cursor-default">
               <div className={`aspect-square rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center p-4 sm:p-6 transition duration-300 hover:-translate-y-2 shadow-sm ${
-                isLight
-                  ? 'bg-white hover:bg-cyan-50/40 hover:shadow-[0_10px_30px_rgba(6,182,212,0.18)]'
-                  : 'bg-white/5 hover:bg-[#06B6D4]/10 hover:shadow-[0_0_20px_rgba(6,182,212,0.15)]'
+                ecosystemCardSurface(isLight)
               }`}>
-                <Sparkles className="text-[#06B6D4] mb-4 group-hover:scale-110 transition-transform w-8 h-8 sm:w-10 sm:h-10" />
+                <Sparkles className={ECOSYSTEM_ICON_CLASS} />
                 <p className={`font-bold text-xs sm:text-sm text-center mb-1 ${
                   isLight ? 'text-slate-900' : 'text-white'
                 }`}>{t.ui.forProperties.s_d8481d}</p>
@@ -333,11 +331,9 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             {/* Luxury Transport */}
             <div className="group cursor-default">
               <div className={`aspect-square rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center p-4 sm:p-6 transition duration-300 hover:-translate-y-2 shadow-sm ${
-                isLight
-                  ? 'bg-white hover:bg-blue-50/40 hover:shadow-[0_10px_30px_rgba(59,130,246,0.18)]'
-                  : 'bg-white/5 hover:bg-[#3B82F6]/10 hover:shadow-[0_0_20px_rgba(59,130,246,0.15)]'
+                ecosystemCardSurface(isLight)
               }`}>
-                <Car className="text-[#3B82F6] mb-4 group-hover:scale-110 transition-transform w-8 h-8 sm:w-10 sm:h-10" />
+                <Car className={ECOSYSTEM_ICON_CLASS} />
                 <p className={`font-bold text-xs sm:text-sm text-center mb-1 ${
                   isLight ? 'text-slate-900' : 'text-white'
                 }`}>{t.ui.forProperties.s_c9bc84}</p>
@@ -350,11 +346,9 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             {/* Local Adventures */}
             <div className="group cursor-default">
               <div className={`aspect-square rounded-2xl sm:rounded-3xl flex flex-col items-center justify-center p-4 sm:p-6 transition duration-300 hover:-translate-y-2 shadow-sm ${
-                isLight
-                  ? 'bg-white hover:bg-rose-50/40 hover:shadow-[0_10px_30px_rgba(244,63,94,0.18)]'
-                  : 'bg-white/5 hover:bg-[#F43F5E]/10 hover:shadow-[0_0_20px_rgba(244,63,94,0.15)]'
+                ecosystemCardSurface(isLight)
               }`}>
-                <Compass className="text-[#F43F5E] mb-4 group-hover:scale-110 transition-transform w-8 h-8 sm:w-10 sm:h-10" />
+                <Compass className={ECOSYSTEM_ICON_CLASS} />
                 <p className={`font-bold text-xs sm:text-sm text-center mb-1 ${
                   isLight ? 'text-slate-900' : 'text-white'
                 }`}>{t.ui.forProperties.s_4d2dec}</p>
@@ -874,16 +868,22 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               }`}>{t.ui.forProperties.s_f59c46}</h2>
               <p className={`text-sm sm:text-base md:text-lg mb-6 sm:mb-10 leading-relaxed ${
                 isLight ? 'text-slate-600 font-medium' : 'text-gray-300'
-              }`}>{t.ui.forProperties.s_9fd2f3}</p>
+              }`}>{interpolatePartnerCopy(economicsCopy.explainer, {
+                share: PARTNER_ECONOMICS.propertyMarkupSharePercent,
+              })}</p>
 
               <div className="grid grid-cols-2 gap-4 sm:gap-8 mb-6 sm:mb-10">
                 <div>
-                  <p className={`text-3xl sm:text-4xl font-extrabold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>15%</p>
-                  <p className={`text-[10px] sm:text-xs mt-1 font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>Avg. Commission Share</p>
+                  <p className={`text-3xl sm:text-4xl font-extrabold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>{PARTNER_ECONOMICS.propertyMarkupSharePercent}%</p>
+                  <p className={`text-[10px] sm:text-xs mt-1 font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{economicsCopy.markupShareLabel}</p>
                 </div>
                 <div>
-                  <p className={`text-3xl sm:text-4xl font-extrabold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>$0</p>
-                  <p className={`text-[10px] sm:text-xs mt-1 font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.forProperties.s_25096d}</p>
+                  <p className={`text-3xl sm:text-4xl font-extrabold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>
+                    {interpolatePartnerCopy(economicsCopy.noticePeriodValue, {
+                      days: formatLocalizedNumber(PARTNER_ECONOMICS.propertyShareNoticeDays, language),
+                    })}
+                  </p>
+                  <p className={`text-[10px] sm:text-xs mt-1 font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{economicsCopy.noticePeriodLabel}</p>
                 </div>
               </div>
 
@@ -912,14 +912,14 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
               <h3 className={`text-lg sm:text-xl font-bold mb-6 flex items-center gap-2 ${
                 isLight ? 'text-slate-900' : 'text-white'
               }`}>
-                <DollarSign size={20} className={isLight ? 'text-amber-800' : 'text-[#E5B65F]'} />{t.ui.forProperties.s_17d67c}</h3>
+                <DollarSign size={20} className={isLight ? 'text-amber-800' : 'text-[#E5B65F]'} />{economicsCopy.heading}</h3>
 
               <div className="space-y-6 mb-6 sm:mb-8">
                 {/* Sliders */}
                 <div>
                   <div className="flex justify-between items-center text-xs sm:text-sm font-medium mb-2">
-                    <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>{t.ui.forProperties.s_c86934}</span>
-                    <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>{rooms} Rooms</span>
+                    <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>{economicsCopy.rooms}</span>
+                    <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>{formatLocalizedNumber(rooms, language)}</span>
                   </div>
                   <input 
                     type="range" 
@@ -935,8 +935,8 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
 
                 <div>
                   <div className="flex justify-between items-center text-xs sm:text-sm font-medium mb-2">
-                    <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>{t.ui.forProperties.s_40c759}</span>
-                    <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>{occupancy}%</span>
+                    <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>{economicsCopy.occupancy}</span>
+                    <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>{formatLocalizedNumber(occupancy, language)}%</span>
                   </div>
                   <input 
                     type="range" 
@@ -952,15 +952,16 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
 
                 <div>
                   <div className="flex justify-between items-center text-xs sm:text-sm font-medium mb-2">
-                    <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>{t.ui.forProperties.s_fa3fc3}</span>
-                    <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>${guestSpend} USD</span>
+                    <span className={isLight ? 'text-slate-700' : 'text-gray-300'}>{economicsCopy.averageMarkupPerOrder}</span>
+                    <span className={`font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>{formatKes(averageMarkupPerOrderKes, language)}</span>
                   </div>
                   <input 
                     type="range" 
-                    min="20" 
-                    max="500" 
-                    value={guestSpend}
-                    onChange={(e) => setGuestSpend(parseInt(e.target.value))}
+                    min="50"
+                    max="5000"
+                    step="50"
+                    value={averageMarkupPerOrderKes}
+                    onChange={(e) => setAverageMarkupPerOrderKes(parseInt(e.target.value))}
                     className={`w-full h-1.5 rounded-lg appearance-none cursor-pointer ${
                       isLight ? 'bg-slate-300 accent-amber-600' : 'bg-gray-700 accent-[#E5B65F]'
                     }`}
@@ -975,29 +976,34 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
                     ? 'bg-amber-50/80 border-amber-200 text-slate-900'
                     : 'bg-white/5 border-white/5 text-white'
                 }`}>
-                  <span className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>{t.ui.forProperties.s_4f7049}</span>
+                  <span className={`text-xs sm:text-sm font-medium ${isLight ? 'text-slate-700' : 'text-gray-300'}`}>{economicsCopy.estimatedMonthlyShare}</span>
                   <span className={`text-xl sm:text-2xl font-bold ${isLight ? 'text-amber-800' : 'text-[#E5B65F]'}`}>
-                    ${totalCommissionRevenue.toLocaleString()} USD
+                    {formatKes(totalPropertyShareKes, language)}
                   </span>
                 </div>
 
-                <div className="space-y-2.5 px-1">
-                  <div className={`flex justify-between text-[11px] sm:text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                    <span>{t.ui.forProperties.s_8249e7}</span>
-                    <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>${foodRev.toLocaleString()}</span>
+                <div className={`space-y-2.5 px-1 text-[11px] sm:text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
+                  <div className="flex justify-between gap-4">
+                    <span>{economicsCopy.estimatedMonthlyOrders}</span>
+                    <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>{formatLocalizedNumber(estimatedMonthlyOrders, language)}</span>
                   </div>
-                  <div className={`flex justify-between text-[11px] sm:text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                    <span>{t.ui.forProperties.s_7b1758}</span>
-                    <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>${transportRev.toLocaleString()}</span>
+                  <div className="flex justify-between gap-4">
+                    <span>{economicsCopy.totalEstimatedMarkup}</span>
+                    <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>{formatKes(totalOrderMarkupKes, language)}</span>
                   </div>
-                  <div className={`flex justify-between text-[11px] sm:text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                    <span>In-room Spa bookings commission</span>
-                    <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>${spaRev.toLocaleString()}</span>
-                  </div>
-                  <div className={`flex justify-between text-[11px] sm:text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
-                    <span>{t.ui.forProperties.s_8e8592}</span>
-                    <span className={`font-medium ${isLight ? 'text-slate-900' : 'text-white'}`}>${excursionRev.toLocaleString()}</span>
-                  </div>
+                </div>
+
+                <div className={`rounded-xl p-3 sm:p-4 text-[11px] sm:text-xs leading-relaxed font-medium border space-y-2 ${
+                  isLight
+                    ? 'bg-amber-50/80 border-amber-200 text-amber-900'
+                    : 'bg-[#E5B65F]/10 border-[#E5B65F]/20 text-[#E5B65F]'
+                }`}>
+                  <p>{interpolatePartnerCopy(economicsCopy.rateNotice, {
+                    notice: formatLocalizedNumber(PARTNER_ECONOMICS.propertyShareNoticeDays, language),
+                  })}</p>
+                  <p>{interpolatePartnerCopy(economicsCopy.estimateBasis, {
+                    share: PARTNER_ECONOMICS.propertyMarkupSharePercent,
+                  })}</p>
                 </div>
 
                 <button 

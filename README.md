@@ -22,7 +22,7 @@ quote, rental, ticket, appointment).
 | Capability | State |
 | --- | --- |
 | PostgreSQL database (21 categories / 128 subcategories / 640 merchants / 1,500 items) | ✅ working |
-| REST API over the database, with JSON cold-start fallback | ✅ working |
+| REST API backed only by PostgreSQL; returns 503 when unavailable | ✅ working |
 | **Discovery surface** — search opens a merchant browse screen | ✅ v2 |
 | **Dynamic workflows** — five commerce arcs derived per merchant | ✅ v2 |
 | **Merchant preview** — card click never navigates straight to the page | ✅ v2 |

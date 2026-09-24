@@ -6,7 +6,7 @@
 # nexg-postgres-1 / nexg-api-1 / nexg-kernel-1 (that stack lives in
 # C:\Users\limta\Desktop\NEXG POS and is a separate Go platform).
 #
-# Credentials match .github/workflows/ci.yml exactly so local == CI.
+# Local-only PostgreSQL defaults. CI does not provision a database.
 #
 # Usage:  pwsh -File scripts/setup-postgres.ps1
 #         pwsh -File scripts/setup-postgres.ps1 -Recreate
@@ -25,6 +25,7 @@ $DbName        = 'nexg_db'
 $DbUser        = 'nexg_user'
 # Development-only default. Override with $env:POSTGRES_PASSWORD for anything shared.
 $DbPassword    = if ($env:POSTGRES_PASSWORD) { $env:POSTGRES_PASSWORD } else { 'nexg_dev_password' }
+$DbPasswordUrlEncoded = [Uri]::EscapeDataString($DbPassword)
 
 $RepoRoot = Split-Path -Parent $PSScriptRoot
 $SchemaPath = Join-Path $RepoRoot 'src/db/schema.sql'
@@ -149,16 +150,24 @@ $counts = (Invoke-Docker @('exec', '-i', $ContainerName, 'psql', '-U', $DbUser, 
      UNION ALL SELECT 'items', count(*) FROM items;")).Output
 foreach ($line in $counts) { if ($line.Trim()) { Write-Host "  $line" } }
 
-$url = "postgresql://${DbUser}:${DbPassword}@127.0.0.1:${Port}/${DbName}"
+$url = "postgresql://${DbUser}:${DbPasswordUrlEncoded}@127.0.0.1:${Port}/${DbName}"
 Write-Step 'DATABASE_URL'
-Write-Host "  $url" -ForegroundColor White
+Write-Host "  host=127.0.0.1 port=$Port database=$DbName user=$DbUser (password hidden)" -ForegroundColor White
 
 $envFile = Join-Path $RepoRoot '.env'
 if (-not (Test-Path $envFile)) {
-    Set-Content -Path $envFile -Value "DATABASE_URL=`"$url`"`nPORT=3001`n" -Encoding UTF8
+    $composePasswordLiteral = "'" + $DbPassword.Replace("'", "\'") + "'"
+    $envContent = @(
+        "DATABASE_URL=`"$url`""
+        "POSTGRES_PASSWORD=$composePasswordLiteral"
+        "POSTGRES_PASSWORD_URLENCODED=$DbPasswordUrlEncoded"
+        'PORT=3001'
+    ) -join "`n"
+    $utf8NoBom = [System.Text.UTF8Encoding]::new($false)
+    [System.IO.File]::WriteAllText($envFile, $envContent + "`n", $utf8NoBom)
     Write-Ok 'wrote .env'
 } else {
-    Write-Warn2 '.env already exists - left untouched (add DATABASE_URL manually if missing)'
+    Write-Warn2 '.env already exists - left untouched; verify DATABASE_URL, POSTGRES_PASSWORD, and POSTGRES_PASSWORD_URLENCODED are correct without printing secret values'
 }
 
 Write-Host "`nPostgres ready." -ForegroundColor Green

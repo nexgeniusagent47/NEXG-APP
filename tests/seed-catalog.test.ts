@@ -16,28 +16,16 @@ describe('NEXG Seed Catalog & PostgreSQL Integrity', () => {
     expect(sqlContent).toContain('COMMIT;');
   });
 
-  it('should have generated seededCatalog.json with 21 categories and over 600 merchants', () => {
-    const jsonPath = path.resolve(process.cwd(), 'src/data/seededCatalog.json');
-    expect(fs.existsSync(jsonPath)).toBe(true);
-    const data = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
+  it('should seed the complete catalogue in PostgreSQL without a JSON runtime catalogue', () => {
+    const sqlPath = path.resolve(process.cwd(), 'src/db/seed_excel.sql');
+    const sqlContent = fs.readFileSync(sqlPath, 'utf-8');
+    const categories = sqlContent.match(/^INSERT INTO categories /gm) ?? [];
+    const merchants = sqlContent.match(/^INSERT INTO merchants /gm) ?? [];
+    const items = sqlContent.match(/^INSERT INTO items /gm) ?? [];
 
-    expect(data.summary.totalCategories).toBe(21);
-    expect(data.summary.totalMerchants).toBe(640);
-    expect(data.summary.totalItems).toBeGreaterThan(14000);
-    expect(data.categories.length).toBe(21);
-  });
-
-  it('should verify all merchants have valid Nairobi areas and ratings', () => {
-    const jsonPath = path.resolve(process.cwd(), 'src/data/seededCatalog.json');
-    const data = JSON.parse(fs.readFileSync(jsonPath, 'utf-8'));
-
-    data.merchants.forEach((m: any) => {
-      expect(m.id).toBeDefined();
-      expect(m.name).toBeDefined();
-      expect(m.nairobiArea).toBeDefined();
-      expect(m.rating).toBeGreaterThanOrEqual(4.0);
-      expect(m.rating).toBeLessThanOrEqual(5.0);
-      expect(m.heroImage).toMatch(/^https?:\/\//);
-    });
+    expect(categories).toHaveLength(21);
+    expect(merchants).toHaveLength(640);
+    expect(items.length).toBeGreaterThan(0);
+    expect(fs.existsSync(path.resolve(process.cwd(), 'src/data/seededCatalog.json'))).toBe(false);
   });
 });

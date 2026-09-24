@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import {
   Search,
@@ -28,8 +28,9 @@ import {
   CatalogMerchant,
   CatalogSubcategory,
   DynamicItem,
-  getCategoryMerchants,
 } from '../data/categoryCatalog21';
+import { fetchMerchants } from '../lib/apiClient';
+import { toCatalogMerchant } from '../lib/catalogAdapters';
 import { ProductCarousel, type Product } from './ui/product-carousel';
 import { DateStringField, TimeStringField } from './forms/DateTimeField';
 
@@ -48,6 +49,9 @@ export default function NexGCategoryDrilldown({
   const [selectedSubcategory, setSelectedSubcategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [activeMerchantId, setActiveMerchantId] = useState<string | null>(null);
+  const [allCategoryMerchants, setAllCategoryMerchants] = useState<CatalogMerchant[]>([]);
+  const [catalogStatus, setCatalogStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+  const [catalogRetry, setCatalogRetry] = useState(0);
 
   // NEXG filter states
   const [sortBy, setSortBy] = useState<'recommended' | 'rating' | 'delivery' | 'price_low' | 'price_high'>('recommended');
@@ -57,6 +61,25 @@ export default function NexGCategoryDrilldown({
 
   // Scroll ref for subcategories cards
   const subcategoryScrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setCatalogStatus('loading');
+    setActiveMerchantId(null);
+
+    fetchMerchants({ category: category.slug, limit: 200, sort: 'recommended' }, controller.signal)
+      .then((page) => {
+        setAllCategoryMerchants(page.merchants.map(toCatalogMerchant));
+        setCatalogStatus('ready');
+      })
+      .catch((error: any) => {
+        if (error?.name === 'AbortError') return;
+        setAllCategoryMerchants([]);
+        setCatalogStatus('error');
+      });
+
+    return () => controller.abort();
+  }, [category.slug, catalogRetry]);
 
   // Dynamic booking / order modal state
   const [selectedItemForWorkflow, setSelectedItemForWorkflow] = useState<{
@@ -75,11 +98,7 @@ export default function NexGCategoryDrilldown({
     }
   };
 
-  // Fetch merchants for this category: each subcategory has 5 dedicated merchants (category total = subcategories * 5)
-  const allCategoryMerchants = useMemo(() => getCategoryMerchants(category.id), [category.id]);
-
-  // Displayed merchants filtered by selected subcategory:
-  // If 'all', displays all merchants; if a specific subcategory is chosen, displays its 5 merchants!
+  // Filter the live database results by the selected subcategory.
   const displayedMerchants = useMemo(() => {
     if (selectedSubcategory === 'all') {
       return allCategoryMerchants;
@@ -266,6 +285,22 @@ export default function NexGCategoryDrilldown({
       </header>
 
       <main className="max-w-[1440px] mx-auto px-4 sm:px-8 pt-8 space-y-9">
+        {catalogStatus === 'error' && (
+          <div role="alert" className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm">
+            <p>This category is unavailable because the database could not be reached.</p>
+            <button
+              type="button"
+              onClick={() => setCatalogRetry((attempt) => attempt + 1)}
+              className="rounded-full border border-current px-3 py-1.5 font-semibold"
+            >
+              Retry
+            </button>
+          </div>
+        )}
+
+        {catalogStatus === 'loading' && (
+          <p role="status" className="text-sm text-slate-500">Loading partners from the database…</p>
+        )}
         {/* Category Hero / Title Section */}
         <div className="relative rounded-3xl overflow-hidden border border-white/10 p-6 sm:p-10 bg-slate-950 text-white">
           <img
@@ -500,15 +535,15 @@ export default function NexGCategoryDrilldown({
           </div>
         </section>
 
-        {/* MERCHANTS (5 per subcategory, or all when 'all' is selected) */}
+        {/* MERCHANTS loaded from PostgreSQL */}
         <section id="merchants-selection-section" className="space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
               <h2 className="text-xl font-bold tracking-tight text-foreground">{t.ui.nexGCategoryDrilldown.s_03f70c}</h2>
               <p className={`text-xs ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>
                 {selectedSubcategory === 'all'
-                  ? `Showing ${displayedMerchants.length} premier partners (5 merchants per subcategory). Click any provider to reveal their live items.`
-                  : `Showing 5 partners for ${selectedSubcategory}. Click any provider to reveal their live items.`}
+                  ? `Showing ${displayedMerchants.length} database partners. Click a provider to view its current offerings.`
+                  : `Showing ${displayedMerchants.length} partners for ${selectedSubcategory}. Click a provider to view its current offerings.`}
               </p>
             </div>
             <div className="flex items-center gap-2">

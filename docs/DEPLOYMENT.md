@@ -8,6 +8,12 @@ frontend host and no build step at runtime.
 Verified against this revision — the facts below were read out of the source, not
 assumed. Where something is a convention rather than a guarantee, it says so.
 
+> **Live VM scope:** the production server currently uses the base `docker-compose.yml`
+> with its own PostgreSQL container. Follow [`HANDOFF-2026-09-22.md`](./HANDOFF-2026-09-22.md)
+> and [`SECURITY-HARDENING-AND-CLEANUP-PLAN.md`](./SECURITY-HARDENING-AND-CLEANUP-PLAN.md)
+> for that host. The managed-Postgres examples in this document are a separate deployment
+> option and must not be used to replace the live VM's database service.
+
 ---
 
 ## 1. Environment variables
@@ -52,43 +58,18 @@ that is the important part of the next section.
 
 ---
 
-## 2. The JSON fallback — why a cold deploy works
+## 2. PostgreSQL is required at runtime
 
-`server/db.ts` never throws on a missing database. It tries the pool five times
-with backoff, records the reason, and returns `false`; the routes then serve
-`src/data/seededCatalog.json`, which ships inside the image.
+The API retries its PostgreSQL connection during startup. If it cannot connect,
+the process stays available for diagnostics, while `/api/health` and all
+database-backed catalogue routes return HTTP `503`. The container healthcheck uses
+`/api/health`, so Docker marks it unhealthy. Responses never include the raw
+database connection error.
 
-```
-DATABASE_URL set?
-  ├─ no  → JSON fallback (src/data/seededCatalog.json)
-  └─ yes → pg Pool, 5 attempts with backoff
-             ├─ connected   → Postgres   ← source of truth
-             └─ unreachable → JSON fallback + the reason recorded
-```
-
-`GET /api/health` always reports which one is live:
-
-```json
-{
-  "status": "ok",
-  "source": "seeded_json_fallback",
-  "postgresConfigured": true,
-  "postgresConnected": false,
-  "postgresError": "connect ECONNREFUSED 127.0.0.1:5432",
-  "totalMerchants": 640
-}
-```
-
-Two consequences worth internalising before an incident:
-
-- **`status: "ok"` does not mean the database is up.** It means the API can serve.
-  Alert on `source != "postgres"` if the database is meant to be the source of
-  truth, not on the HTTP status code. The container `HEALTHCHECK` uses this
-  endpoint, so a degraded container reports *healthy* by design — that is a
-  deliberate choice (a serving container should stay in the load balancer), and it
-  means the database needs its own alert.
-- **A typo in `DATABASE_URL` looks like success.** The API boots, serves 640
-  merchants from JSON and answers 200s. Curl `/api/health` after every deploy.
+The production image does not copy or serve `src/data/seededCatalog.json`. The
+generated bundle was removed from the browser discovery flow as well; discovery,
+category, and search results come from PostgreSQL through the API. A database outage
+therefore shows an explicit retryable error instead of sample merchants or items.
 
 ---
 
@@ -107,10 +88,9 @@ The image is multi-stage: `node:24-alpine` builds the SPA, then a second
 `node` user. Node 24 is required, not preferred — `CMD ["node", "server/index.ts"]`
 executes TypeScript directly and the image contains no transpiler.
 
-The build context is trimmed by `.dockerignore`. Two entries must never be added
-there: `public/fonts` (Vite copies it into `dist/`; the licensed webfonts are part
-of the shipped UI) and `src/data/seededCatalog.json` (the runtime fallback
-catalogue).
+The build context is trimmed by `.dockerignore`. Do not exclude `public/fonts`:
+Vite copies it into `dist/`, and the licensed webfonts are part of the shipped UI.
+The generated catalogue JSON is no longer required by the app or production image.
 
 ### Run
 
@@ -204,8 +184,8 @@ Notes that matter operationally:
 - **`seed_excel.sql` is ~3.4 MB and truncates before inserting.** On a live database
   there is a window where the catalogue is empty. Pause traffic or accept the window;
   do not run it from a request handler.
-- **`src/db/seed_excel.sql` and `src/data/seededCatalog.json` are generated.** Never
-  hand-edit them; regenerate via `npm run db:generate-sql`.
+- **`src/db/seed_excel.sql` is generated.** Never hand-edit it; regenerate via
+  `npm run db:generate-sql`. The runtime JSON catalogue has been removed.
 - The application performs **no migrations at boot**. `initDb()` only issues
   `SELECT 1`. A container that starts against an empty but reachable database will
   answer with empty result sets, not an error — that is the failure mode to watch
@@ -308,13 +288,9 @@ Then:
 2. Set `DATABASE_URL` (with `?sslmode=require` if the provider does not add it).
 3. Apply `src/db/schema.sql` then `src/db/seed_excel.sql` once, with `psql`, as a
    release job.
-4. Point the health check at `/api/health` and assert `source == "postgres"` in
-   your monitoring.
-
-Two minutes into the first deploy, before the database is seeded, the app is
-already serving the JSON fallback. That is intended: it is what makes a cold
-deploy possible. It is also why the seeding step must not be forgotten — nothing
-in the logs will complain.
+4. Point the health check at `/api/health`; require HTTP 200 and
+   `postgresConnected == true`. A database outage returns HTTP 503 and marks the
+   container unhealthy.
 
 ---
 

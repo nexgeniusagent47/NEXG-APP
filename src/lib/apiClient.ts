@@ -10,6 +10,8 @@
 // requests — without this, fast typing produces out-of-order responses and the
 // grid renders results for a stale query.
 
+import type { CommerceMode } from '../types/nexg';
+
 const JSON_HEADERS = { Accept: 'application/json' } as const;
 
 export class ApiError extends Error {
@@ -75,6 +77,7 @@ export interface ApiItem {
   originalPrice?: number;
   currency: string;
   image: string;
+  commerceMode: CommerceMode;
   category: string;
   categoryId: string;
   subcategory: string;
@@ -110,8 +113,8 @@ export interface ApiMerchant {
 }
 
 export interface ApiHealth {
-  status: string;
-  source: 'postgres' | 'seeded_json_fallback';
+  status: 'ok';
+  source: 'postgres';
   postgresConnected: boolean;
   totalCategories: number;
   totalSubcategories: number;

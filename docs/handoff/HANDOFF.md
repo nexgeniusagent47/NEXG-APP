@@ -1,0 +1,90 @@
+# Current handoff — NEXG App
+
+- **Updated:** 2026-09-24
+- **Current initiative plan:** [`../MASTER-BUILD-PLAN.md`](../MASTER-BUILD-PLAN.md), v1.3
+- **Current phase:** P0 release readiness remains blocked; P2 API and identity security is in planning.
+- **Phase 2 kickoff:** [`P2-API-AND-IDENTITY-SECURITY-KICKOFF.md`](P2-API-AND-IDENTITY-SECURITY-KICKOFF.md)
+**Live-state/security notes:** [`../HANDOFF-2026-09-22.md`](../HANDOFF-2026-09-22.md) and
+[`../SECURITY-HARDENING-AND-CLEANUP-PLAN.md`](../SECURITY-HARDENING-AND-CLEANUP-PLAN.md)
+
+## Current state
+
+- Local work now includes the PostgreSQL-only, fail-closed catalogue API; app/database/deployment
+  documentation; onboarding/logo/theme and partner-estimate changes; language-detection and
+  translation work; API logging/observability changes; and the current master plan, security plan,
+  ADR register, design prompts, and dated session records. See the changelog and session history
+  for the grouped source changes.
+- The fallback JSON catalogue files were removed from the local source. The local source server
+  booted with PostgreSQL initialized; read-only API contract checks reported 21 categories,
+  128 subcategories, 640 merchants, and 6,000 items. A separate local invalid-loopback DB
+  simulation returned 503 for health, category, and merchant routes without fallback. No
+  staging/production outage test was run.
+- Type checking now passes. The fix adds a `*.svg?url` type declaration for the supplied logo imports
+  and excludes the Git-ignored `vendor/` icon demo from the project's TypeScript input set; it does
+  not change runtime behavior.
+- The supplied NEXG wordmark is used with adaptive ink on transparent backgrounds. Merchant, rider,
+  and host title bands use the gold treatment; onboarding back controls precede the logo; the
+  independent rider selection uses a motorcycle glyph. The wordmark's light and dark theme SVGs
+  have transparent PNG exports (1504 × 544) at [`../brand/exports/`](../brand/exports/).
+- Partner estimates show KES 95/km with 48-hour notice for riders and 18% of estimated order markup
+  with 14-day notice for property owners. These are illustrative and not finalized contract terms.
+- The 112-item Google Flow prompt pack is ready, but generated illustrations are not integrated.
+  Site-wide Chinese, Kiswahili, and Arabic translations and Arabic RTL review remain incomplete.
+  Host/merchant/rider onboarding is not yet one role-selecting form; field preservation still needs
+  a complete inventory.
+- No fresh production security audit was performed. The earlier Cloudflare/origin and server notes
+  are dated observations, not current proof. P2 API/authz controls and P5 Cloudflare/TLS acceptance
+  remain open.
+
+## Verification on 2026-09-24
+
+- `node node_modules/typescript/bin/tsc --noEmit` — PASS.
+- `node node_modules/vitest/vitest.mjs run` — PASS: 7 files, 52 tests.
+- `node scripts/api-contract-test.mjs http://127.0.0.1:3317` — PASS: 29 assertions against the
+  freshly initialized source API and local PostgreSQL.
+- `node scripts/v2-flow-test.mjs` — PASS: 18 assertions.
+- `node scripts/v3-consistency-test.mjs` — PASS: 24 assertions.
+- `node node_modules/vite/bin/vite.js build` — PASS; final run output is in the dated session.
+- `git diff --check` — PASS; see the dated session for the final output.
+
+The workstation's global npm/npx launchers point to a missing npm installation; local Node binaries
+were used to run the repository checks. The local results do not equal phase acceptance or a
+production release.
+
+## Push/deployment status
+
+No commit, Git push, or deployment was made. The checkout is on `master` at `f0e760e`, has a broad
+uncommitted worktree, and has no Git remote or upstream. The deployment runbook names
+`/var/www/apps/projects/nexg/backend`, while the existing SSH handoff records the live app at
+`/var/www/apps/projects/nexg-concierge`; reconcile the source and destination before building a
+release artifact. The exact changed-file set has not been isolated as a release candidate.
+
+P0 is not accepted: the release path is unknown, no staging/production outage check or rollback
+rehearsal was performed, and production health/security were not freshly verified. Do not claim
+these changes are live.
+
+## Next actions
+
+1. Resolve F-001: select the approved Git remote or verify the direct-server deployment path and
+   exact destination; review/isolate the intended changes before committing.
+2. Complete P0 staging-topology outage, artifact, and rollback checks in a safe staging environment.
+3. Begin P2 with the API route inventory, threat model, and detailed 34-section plan. Review
+   ADR-0001 through ADR-0004; they are proposed only. Include F-002 in P2 and carry F-006's open
+   checkout semantics to P3/P7.
+4. After P2 decisions and acceptance, advance to P3 guest ordering and its query/index evidence.
+   Do not begin portals before the guest flow and tenant authorization are accepted.
+5. Re-check Cloudflare/origin TLS and security before any V1 production release.
+
+## Skills applied in this pass
+
+`find-skills` (catalogue searched on skills.sh; local `npx skills` command unavailable),
+`nexg-phase-loop`, `nexg-follow-through`, `security-audit` (guidance mode; no full audit), and
+`dsh-pre-push-checks`.
+
+## Session records
+
+- [`sessions/2026-09-24-master-build-plan.md`](sessions/2026-09-24-master-build-plan.md)
+- [`sessions/2026-09-24-impeccable-cleanup.md`](sessions/2026-09-24-impeccable-cleanup.md)
+- [`sessions/2026-09-24-onboarding-logo-and-icon-prompts.md`](sessions/2026-09-24-onboarding-logo-and-icon-prompts.md)
+- [`sessions/2026-09-24-partner-earnings-rates.md`](sessions/2026-09-24-partner-earnings-rates.md)
+- [`sessions/2026-09-24-release-readiness-and-phase-2.md`](sessions/2026-09-24-release-readiness-and-phase-2.md)

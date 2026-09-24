@@ -21,9 +21,10 @@ interface should disappear into the task.
 
 > A nocturnal near-black surface (`#111315` page, `#181A1F` card, `#141618` sheet)
 > carrying a single gold accent (`#E5B65F` on dark, `#B88728` as fill, `#8A6413`
-> for gold *text* on light), Inter at a tight scale with the 900-weight utility for headings
-> and `tabular-nums` for every price, radius by role — `rounded-full` for controls,
-> `rounded-2xl` for surfaces, `rounded-xl` for inner chips — with hairline
+> for gold *text* on light), Quicksand headings at supported weights, Inter for
+> body copy, Cooper* as a warm accent, Adventor for the wordmark, and tabular numerals
+> for prices. Surfaces use elliptical x/y radii while pill controls remain fully round,
+> with hairline
 > `border-white/10` separation, photographs as the only large colour field, and a
 > plain, factual voice that states what a merchant does rather than selling it.
 
@@ -64,31 +65,22 @@ assembled.
 
 ## Typography
 
-**THIS SECTION IS STALE AND IS MARKED AS SUCH ON PURPOSE.** It records the type system as it
-was before the current faces landed. The build now loads four families with distinct roles
-(`src/index.css`, `@theme`): Cooper* for headings and accents, Inter below a heading,
-Quicksand for the heading face pinned on `h1`, and TeX Gyre Adventor for the display
-wordmark. The "one family, no display/body pairing" claim below is no longer true, and the
-weights row is wrong in a way that has already caused a real defect — see the note after the
-table. Re-record this section before trusting it.
+`src/index.css` is the source of truth for four type roles:
 
-| | Value (as recorded, pre-current-faces) |
+| Role | Face and use |
 | --- | --- |
-| Family | `Inter`, then `ui-sans-serif, system-ui, sans-serif` (`--font-sans`) |
-| Loading | Google Fonts `@import`, weights 400/500/600/700 — **flagged by the detector as `overused-font`; changing it changes the whole product identity, so it is a decision, not a cleanup** |
-| Smoothing | `-webkit-font-smoothing: antialiased` on `body` |
-| Weights | `font-medium` body, `font-bold`/`font-semibold` UI labels, the 900-weight utility for headings and prices — **no longer accurate; see below** |
-| Scale | Fixed rem, tight ratio. Smallest step is 10–11px for metadata; 12–13px for labels; 15px card titles; 18–20px section headings; 30px merchant name |
-| Numerals | `tabular-nums` on **every** price, count and metric |
-| Measure | Prose capped at `max-w-[70ch]` |
+| Headings | Local Quicksand; the homepage and onboarding hierarchy use real weights through 700. |
+| Body and controls | Inter, with system sans-serif fallbacks. |
+| Wordmark/display | TeX Gyre Adventor. |
+| Warm accent | Local Cooper* family. |
+| Smoothing | Antialiased on `body`. |
+| Weight ceiling | Quicksand stops at 700; do not request a heavier synthetic weight. |
+| Numerals | Tabular numerals for prices, counts, and metrics. |
+| Measure | Keep long-form prose to a readable line length. |
 
-**The weights row caused a real defect.** Quicksand declares `font-weight: 300 700`, so the
-900-weight utility this file prescribed rendered **synthetic** bold: 800 and 900 painted at
-byte-identical widths to 700 (637.69px at 40px, against 616.67px at 400), which is the
-signature of a dilated outline rather than a heavier master. 149 uses across 31 files were
-changed to the 700-weight utility. Cooper does ship a real 800 and 900, so the 800-weight
-uses on Cooper elements are correct. Check with
-`node scripts/_diag-synthetic-weights.mjs /`.
+The home page's heading face is now shared by all three onboarding forms. The heading rule is
+centralized on `.onboarding-theme`, so form titles, step headings, and review headings stay
+consistent when a new step is added.
 
 **Do not write class names as inline code in this file.** Tailwind v4 scans Markdown too and
 emits a utility for every class-shaped token it finds, so quoting one here ships a dead CSS
@@ -96,20 +88,14 @@ rule. That is why the utilities above are described by role rather than quoted b
 
 ## Radius
 
-Radius is assigned by role, and the roles are consistent.
+`src/index.css` defines the app-wide radius scale as horizontal/vertical pairs. This creates
+subtle elliptical corners on cards, panels, sheets, and controls; fully round pill controls
+remain unchanged. The x/y pairs live in one `@theme` block and can be reverted there. A short
+set of directional sheet/input rules preserves the intended open edge when a surface attaches
+to the viewport or a neighboring control.
 
-| Role | Value |
-| --- | --- |
-| Controls: buttons, chips, pills, inputs, toggles | `rounded-full` |
-| Surfaces: cards, panels, modal shells | `rounded-2xl` |
-| Sheets (bottom / side) | `rounded-t-3xl` / `rounded-l-3xl` |
-| Inner chips, thumbnails, item rows | `rounded-xl` |
-| Tight badges | `rounded-md` |
-
-Impeccable's craft floor asks for concentric nesting: an inner element's radius
-should be the outer radius minus the padding. `rounded-2xl` (16px) surfaces holding
-`rounded-xl` (12px) children at 6–8px padding satisfy this; do not place a
-`rounded-xl` child directly against a `rounded-2xl` edge.
+Keep nested corners visually concentric: the inner element should use a smaller x/y pair than
+its containing surface, with enough padding to preserve a visible gap.
 
 ## Depth and surface treatment
 

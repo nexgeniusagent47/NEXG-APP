@@ -66,7 +66,7 @@ export default function Promo({ onNavigate }: PromoProps) {
             <img 
               src={responsiveProps('NEXG  PHONE MPCKUP.png', '100vw')?.src} 
               alt={t.ui.promo.s_d2c984} 
-              className="w-full h-full object-contain object-right-bottom drop-shadow-2xl translate-y-[2%] translate-x-[2%] hover:scale-[1.02] transition-transform duration-500" 
+              className="w-full h-full object-contain object-right-bottom drop-shadow-2xl translate-y-[2%] translate-x-[2%]"
               referrerPolicy="no-referrer"
             />
           </div>
@@ -88,7 +88,7 @@ export default function Promo({ onNavigate }: PromoProps) {
               <img 
                 src={responsiveProps('couriers_hero_banner_1783931131203.jpg', '100vw')?.src} 
                 alt={t.ui.promo.s_4a421c} 
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                className="absolute inset-0 w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
             </div>
@@ -126,7 +126,7 @@ export default function Promo({ onNavigate }: PromoProps) {
               <img 
                 src={responsiveProps('courier_delivery_door_1783931148146.jpg', '100vw')?.src} 
                 alt={t.ui.promo.s_c63982} 
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                className="absolute inset-0 w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
             </div>
@@ -164,7 +164,7 @@ export default function Promo({ onNavigate }: PromoProps) {
               <img 
                 src={responsiveProps('properties_hero_1783930332445.jpg', '100vw')?.src} 
                 alt={t.ui.promo.s_38769a} 
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                className="absolute inset-0 w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
             </div>

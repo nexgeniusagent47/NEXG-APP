@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import LogoIcon from './LogoIcon';
 import type { PointerEvent as ReactPointerEvent, ReactNode } from 'react';
 import {
   ArrowLeft,
@@ -690,7 +691,7 @@ interface StepHeadingProps {
 const StepHeading = ({ icon: Icon, title, blurb }: StepHeadingProps) => (
   <div className="mb-7">
     <h2 className="flex items-center gap-3 font-display text-2xl font-extrabold tracking-tight text-slate-950">
-      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 text-amber-800">
+      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 text-amber-800 onboarding-text-amber">
         <Icon className="h-5 w-5" />
       </span>
       {title}
@@ -1247,7 +1248,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
         </div>
         <div className="flex justify-between gap-4">
           <span className="text-slate-600">Status</span>
-          <strong className="text-amber-800">{t.ui.hostOnboarding.s_f0ac0a}</strong>
+          <strong className="text-amber-800 onboarding-text-amber">{t.ui.hostOnboarding.s_f0ac0a}</strong>
         </div>
       </div>
       <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
@@ -1316,8 +1317,8 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
 
       <div className="mb-6 max-h-[390px] overflow-y-auto rounded-3xl border border-slate-200 bg-white p-5 text-sm leading-relaxed text-slate-700 shadow-inner sm:p-7">
         <div className="mb-6 border-b border-slate-200 pb-5 text-center">
-          <div className="font-display text-2xl font-extrabold text-slate-950">NEXG</div>
-          <div className="mt-1 text-[10px] font-bold uppercase tracking-[.18em] text-amber-800">
+          <LogoIcon variant="wordmark" className="mx-auto block h-9 w-auto" />
+          <div className="mt-1 text-[10px] font-bold uppercase tracking-[.18em] text-amber-800 onboarding-text-amber">
             Host Partnership &amp; Property Setup
           </div>
           <div className="mt-2 text-xs text-slate-400">
@@ -1365,7 +1366,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
           </div>
           <div>
             <div className="text-[11px] font-bold uppercase text-slate-600">{t.ui.hostOnboarding.s_ca1948}</div>
-            <div className="mt-7 min-h-[32px] font-warm text-2xl text-amber-800">{signatureLine}</div>
+            <div className="mt-7 min-h-[32px] font-warm text-2xl text-amber-800 onboarding-text-amber">{signatureLine}</div>
             <div className="mt-1 h-px bg-slate-300" />
             <div className="mt-1 text-[10px] text-slate-600">
               Authorized signatory: <span>{form.signatoryName}</span>
@@ -1435,7 +1436,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
             />
           </div>
         ) : (
-          <div className="flex min-h-[90px] items-center justify-center rounded-2xl border border-slate-200 bg-white font-warm text-4xl text-amber-800">
+          <div className="flex min-h-[90px] items-center justify-center rounded-2xl border border-slate-200 bg-white font-warm text-4xl text-amber-800 onboarding-text-amber">
             {form.signatoryName || 'Your Signature'}
           </div>
         )}
@@ -1469,7 +1470,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
       <div className="mb-7">
         <div className="mb-3 flex items-center justify-between gap-4">
           <div className="flex min-w-0 items-center gap-2">
-            <span className="font-display text-xs font-bold text-amber-800 sm:text-sm">{t.ui.hostOnboarding.s_782667}</span>
+            <span className="font-display text-xs font-bold text-amber-800 onboarding-text-amber sm:text-sm">{t.ui.hostOnboarding.s_782667}</span>
             <span className="text-slate-300">/</span>
             <span className="truncate text-xs font-semibold text-slate-700 sm:text-sm">{activeStep.title}</span>
           </div>
@@ -1494,13 +1495,12 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
       </div>
 
       <section className="overflow-hidden rounded-[1.75rem] border border-slate-100 bg-white shadow-xl shadow-slate-200/60">
-        <div className="relative overflow-hidden bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 px-5 py-7 text-white sm:px-9 sm:py-8">
-          <div className="absolute -right-12 -top-20 h-56 w-56 rounded-full bg-gradient-to-tr from-[#E5B65F] to-[#B88728] opacity-20 blur-3xl" />
+        <div className="onboarding-brand-band relative overflow-hidden px-5 py-7 sm:px-9 sm:py-8">
           <div className="relative">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-300">
+            <div className="onboarding-brand-kicker mb-3 inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider">
               <House className="h-3.5 w-3.5" />{t.ui.hostOnboarding.s_369c34}</div>
             <h1 className="font-display text-2xl font-extrabold tracking-tight sm:text-3xl">{t.ui.hostOnboarding.s_1596ef}</h1>
-            <p className="mt-2 max-w-2xl text-sm text-slate-300 sm:text-base">
+            <p className="mt-2 max-w-2xl text-sm sm:text-base">
               Tell us what exists, what guests can access, and how your team operates. We'll use this to build
               your property profile and guest experience.
             </p>
@@ -1813,7 +1813,7 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
                     <button
                       type="button"
                       onClick={() => focusPin.current?.(NAIROBI.lat, NAIROBI.lng, 15)}
-                      className="flex items-center gap-1 whitespace-nowrap text-xs font-bold text-amber-800 transition hover:text-amber-800"
+                      className="flex items-center gap-1 whitespace-nowrap text-xs font-bold text-amber-800 onboarding-text-amber transition hover:text-amber-800"
                     >
                       <Crosshair className="h-3.5 w-3.5" />
                       Nairobi
@@ -2435,13 +2435,10 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
             >
               <ArrowLeft className="h-4 w-4" />
             </button>
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-slate-950 font-display text-lg font-extrabold tracking-tight text-white">
-              N
-            </div>
-            <div className="leading-tight">
-              <div className="font-display font-extrabold tracking-tight text-slate-950">NEXG</div>
-              <div className="text-[10px] font-bold uppercase tracking-[.18em] text-slate-400">{t.ui.hostOnboarding.s_6372ac}</div>
-            </div>
+            <LogoIcon variant="wordmark" className="h-8 w-auto" />
+            <span className="hidden text-[10px] font-bold uppercase tracking-[.18em] text-slate-600 sm:inline">
+              {t.ui.hostOnboarding.s_6372ac}
+            </span>
           </div>
           <div className="hidden items-center gap-3 text-xs font-semibold text-slate-600 sm:flex">
             <span>{t.ui.hostOnboarding.s_0d3b1e}</span>

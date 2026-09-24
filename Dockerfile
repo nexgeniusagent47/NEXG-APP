@@ -42,12 +42,10 @@ RUN npm ci --omit=dev --ignore-scripts && npm cache clean --force
 # then jumps one level up, so this layout — server/ and dist/ as siblings — is
 # load-bearing, not cosmetic:
 #   server/index.ts: REPO_ROOT       = <parent of server/> → /app
-#                    seededCatalog   = /app/src/data/seededCatalog.json
 #                    distDir         = /app/dist
-# The API serves that JSON when Postgres is unset or unreachable, so the file is
-# a runtime dependency and not a build artefact.
+# The generated catalogue seed is not copied into the runtime image. The API
+# serves catalogue data only from PostgreSQL and returns 503 when it is unavailable.
 COPY --chown=node:node server/ ./server/
-COPY --chown=node:node src/data/seededCatalog.json ./src/data/seededCatalog.json
 COPY --chown=node:node --from=builder /build/dist ./dist
 
 # Declared as build args so `docker build` does not warn about unused values, then
@@ -67,10 +65,8 @@ EXPOSE 3001
 
 # Node 24 has fetch built in, which avoids adding curl or wget to an image whose
 # only job is to run the server. The endpoint is intentionally /api/health rather
-# than a bare TCP check: it reports the live data source (postgres vs
-# seeded_json_fallback), so an orchestrator can tell a serving container from a
-# merely listening one. The first probe is deliberately delayed because initDb()
-# retries the Postgres connection for a few seconds before it degrades to JSON.
+# than a bare TCP check: it performs a PostgreSQL query, so a database outage marks
+# the container unhealthy instead of letting it serve stale catalogue data.
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
   CMD node -e "fetch('http://127.0.0.1:'+(process.env.PORT||3001)+'/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
 
