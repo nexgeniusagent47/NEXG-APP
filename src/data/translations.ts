@@ -1307,8 +1307,6 @@ export interface TranslationSchema {
     step2Desc: string;
     step3Title: string;
     step3Desc: string;
-    step4Title: string;
-    step4Desc: string;
   };
   promo: {
     badge: string;
@@ -2807,17 +2805,15 @@ export const translations: Record<Language, TranslationSchema> = {
       viewAll: 'Explore All Categories',
     },
     howItWorks: {
-      badge: 'Seamless Hospitality',
-      heading: 'How NEXG Elevates Your Stay',
-      subtitle: 'An effortless 4-step concierge journey crafted for luxury villas and private suites.',
+      badge: 'The NEXG marketplace',
+      heading: 'NEXG connects Nairobi’s services',
+      subtitle: 'Browse services across Nairobi, then order, book or request—in three clear steps.',
       step1Title: 'Scan or Open',
       step1Desc: 'Scan the in-suite QR code or access our portal directly from any device without downloading apps.',
-      step2Title: 'Curate Your Order',
-      step2Desc: 'Browse verified Michelin partners, private cellar vintages, bespoke spa therapies, and executive rides.',
-      step3Title: 'Discreet Preparation',
-      step3Desc: 'Merchants craft your order with exacting temperature control and white-glove packaging.',
-      step4Title: 'Villa Doorstep Delivery',
-      step4Desc: 'Our vetted elite fleet delivers swiftly directly to your suite door or poolside lounger.',
+      step2Title: 'Explore 21 categories',
+      step2Desc: 'Find restaurants, groceries, pharmacy, wellness, transport, local experiences and more in one marketplace.',
+      step3Title: 'Order, book or request',
+      step3Desc: 'Choose the action available: place an order, book a time, request a service or ask for a quote.',
     },
     promo: {
       badge: 'Exclusive Guest Privileges',
@@ -4314,17 +4310,15 @@ export const translations: Record<Language, TranslationSchema> = {
       viewAll: '浏览全部礼宾类别',
     },
     howItWorks: {
-      badge: '无缝尊享体验',
-      heading: 'NEXG 如何尊崇升级您的度假时光',
-      subtitle: '专为奢华度假村、私享别墅和总统套房定制的4步极简礼宾流程。',
+      badge: 'NEXG 本地服务市场',
+      heading: 'NEXG 汇集内罗毕的各类服务',
+      subtitle: '三步探索服务、找到所需内容，然后下单、预约或提交需求。',
       step1Title: '扫码即刻开启',
       step1Desc: '扫描房间专属二维码或在任何设备浏览器中一键打开，无需下载安装任何 App。',
-      step2Title: '定制您的专属订单',
-      step2Desc: '挑选米其林合作名厨菜单、顶级年份佳酿、私人水疗护理或贵宾专车。',
-      step3Title: '严谨精细备餐',
-      step3Desc: '合作商家严格控温制作，搭配专属白手套奢华保温礼盒包装。',
-      step4Title: '直达套房门前',
-      step4Desc: '经严格安全认证的专职礼宾员直接送达您的别墅套房门口或私家泳池旁。',
+      step2Title: '探索 21 个服务类别',
+      step2Desc: '在一个市场中探索餐厅、杂货、药房、健康服务、出行、本地体验等多种服务。',
+      step3Title: '下单、预约或提交需求',
+      step3Desc: '根据服务选择操作：下单、预约时段、提交服务需求或询价。',
     },
     promo: {
       badge: '尊贵宾客专属礼遇',
@@ -5821,17 +5815,15 @@ export const translations: Record<Language, TranslationSchema> = {
       viewAll: 'Tazama Kategoria Zote',
     },
     howItWorks: {
-      badge: 'Ukarimu Usio na Kikomo',
-      heading: 'Jinsi NEXG Inavyoboresha Kukaa Kwako',
-      subtitle: 'Hatua 4 rahisi za huduma ya concierge zilizoundwa kwa ajili ya villa za kifahari na vyumba vya hadhi ya juu.',
+      badge: 'Soko la huduma la NEXG',
+      heading: 'NEXG inaunganisha huduma za Nairobi',
+      subtitle: 'Gundua huduma, chagua unachohitaji, kisha agiza, weka nafasi au tuma ombi—hatua tatu rahisi.',
       step1Title: 'Skani au Fungua',
       step1Desc: 'Skani msimbo wa QR ndani ya chumba au fungua wavuti yetu moja kwa moja kwenye kifaa chochote bila kupakua programu.',
-      step2Title: 'Chagua Agizo Lako',
-      step2Desc: 'Gundua vyakula vya wapishi maarufu, mvinyo za miaka mingi, huduma za spa, na usafiri wa hadhi ya juu.',
-      step3Title: 'Maandalizi ya Kipekee',
-      step3Desc: 'Wafanyabiashara wanatayarisha agizo lako kwa udhibiti wa halijoto na vifungashio vya hadhi ya juu.',
-      step4Title: 'Kufikishwa Mlangoni',
-      step4Desc: 'Madereva wetu maalum wanaleta agizo lako haraka mlangoni mwa villa au kando ya bwawa.',
+      step2Title: 'Gundua aina 21 za huduma',
+      step2Desc: 'Pata mikahawa, bidhaa za dukani, famasia, afya, usafiri, matukio ya karibu na huduma nyingine katika soko moja.',
+      step3Title: 'Agiza, weka nafasi au omba huduma',
+      step3Desc: 'Chagua hatua inayopatikana: agiza bidhaa, weka nafasi ya huduma, omba huduma au uliza bei.',
     },
     promo: {
       badge: 'Upendeleo Maalum wa Wageni',
@@ -7328,17 +7320,15 @@ export const translations: Record<Language, TranslationSchema> = {
       viewAll: 'استكشف كافة الخدمات',
     },
     howItWorks: {
-      badge: 'ضيافة سلسة ومطلقة',
-      heading: 'كيف ترتقي NEXG بإقامتك الفاخرة',
-      subtitle: 'تجربة كونسيرج راقية من 4 خطوات مصممة خصيصاً للفلل والأجنحة الملكية.',
+      badge: 'سوق خدمات NEXG',
+      heading: 'NEXG تجمع خدمات نيروبي',
+      subtitle: 'استكشف الخدمات، اختر ما تحتاجه، ثم اطلب أو احجز أو أرسل طلباً في ثلاث خطوات.',
       step1Title: 'امسح الرمز أو افتح الموقع',
       step1Desc: 'امسح رمز QR داخل الجناح أو افتح الموقع من أي جهاز دون الحاجة لتحميل تطبيقات.',
-      step2Title: 'اختر طلبك المفضل',
-      step2Desc: 'تصفح قوائم مطاعم ميشلان، المشروبات الفاخرة، جلسات السبا والسيارات التنفيذية.',
-      step3Title: 'تحضير استثنائي بعناية',
-      step3Desc: 'يقوم الشركاء بإعداد طلبك مع تحكم دقيق بدرجة الحرارة وتغليف فاخر بالقفازات البيضاء.',
-      step4Title: 'توصيل لباب الفيلا مباشرة',
-      step4Desc: 'يقوم أسطول النخبة بتسليم طلبك بسرعة إلى باب جناحك أو استراحة المسبح.',
+      step2Title: 'اكتشف 21 فئة من الخدمات',
+      step2Desc: 'اكتشف المطاعم والبقالة والصيدليات والعافية والتنقل والتجارب المحلية وغيرها في سوق واحد.',
+      step3Title: 'اطلب أو احجز أو أرسل طلباً',
+      step3Desc: 'اختر الإجراء المتاح: اطلب منتجاً، احجز خدمة، أرسل طلب خدمة أو استفسر عن السعر.',
     },
     promo: {
       badge: 'امتيازات النزلاء الحصرية',
