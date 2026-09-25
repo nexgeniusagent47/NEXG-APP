@@ -32,6 +32,7 @@ const GroceriesPage = lazy(() => import('./components/GroceriesPage'));
 const ForProperties = lazy(() => import('./components/ForProperties'));
 const ForCouriers = lazy(() => import('./components/ForCouriers'));
 const CourierOnboarding = lazy(() => import('./components/CourierOnboarding'));
+const AdminPortalLogin = lazy(() => import('./components/AdminPortalLogin'));
 
 // NEXG Flow Components
 const NexGDiscoveryView = lazy(() => import('./components/NexGDiscoveryView'));
@@ -133,6 +134,7 @@ export type AppCurrentPage =
   | 'couriers'
   | 'courier_onboarding'
   | 'host_onboarding'
+  | 'admin_login'
   | 'metrics';
 
 /**
@@ -156,6 +158,7 @@ const DEEP_LINK_PAGES: readonly AppCurrentPage[] = [
   'couriers',
   'courier_onboarding',
   'host_onboarding',
+  'admin_login',
   'metrics',
 ];
 
@@ -320,6 +323,7 @@ function AppContent() {
     'merchant_onboarding',
     'courier_onboarding',
     'host_onboarding',
+    'admin_login',
   ].includes(currentPage);
 
   /**
@@ -524,6 +528,10 @@ function AppContent() {
 
         {currentPage === 'host_onboarding' && (
           <HostOnboarding onNavigate={handleNavigate} />
+        )}
+
+        {currentPage === 'admin_login' && (
+          <AdminPortalLogin onNavigate={handleNavigate} />
         )}
 
         {/* Developer surface: live request metrics, traces and build identity.

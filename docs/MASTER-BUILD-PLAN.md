@@ -1,7 +1,7 @@
 # NEXG App — Master Build Plan
 
-- **Plan version:** 1.3
-- **Updated:** 2026-09-24
+- **Plan version:** 1.4
+- **Updated:** 2026-09-25
 - **Status:** `ACTIVE — P0 release readiness blocked; P2 API/identity kickoff in planning`; production release remains gated
 - **Scope:** the NEXG public website and the staged partner experience in this repository
 - **Product owner:** NEXG owner
@@ -9,6 +9,12 @@
 This is the initiative-level plan. Individual phases still need their own approved, detailed
 specification and acceptance checklist before implementation. The operating loop is
 **PLAN → IMPLEMENT → VERIFY → ACCEPT → PROCEED**. A deployment is a separate release gate.
+
+At the owner's request on 2026-09-25, a narrowly scoped admin sign-in visual prototype may be
+planned before P2/P3 acceptance. The owner approved beginning this slice in the current session.
+It cannot authenticate, call APIs, read or write data, or imply operator access. This does not move
+the functional admin portal ahead of the P2 identity/security and guest-acceptance gates. See
+[`ADMIN-PORTAL-SHELL-PROTOTYPE-PLAN.md`](ADMIN-PORTAL-SHELL-PROTOTYPE-PLAN.md) for its boundary.
 
 ## Executive sequence
 
@@ -53,6 +59,7 @@ are separate gates.
 | `category-illustrations` | Consistent, background-free 3D illustrations for every current category and subcategory option | 21 category images plus 91 reusable subcategory-symbol images, generated and reviewed in owner's Google Flow account | Onboarding quality slice; generated files still need integration |
 | `adaptive-onboarding` | One role-selecting form rendering host, merchant, and rider-specific components without dropping existing inputs | Current onboarding forms and prototype field inventory | Required for V1 |
 | `public-partner-products` | Partner-facing pages and public product pages | Approved product catalogue/copy and guest navigation | After the guest flow |
+| `admin-portal-shell` | Static admin sign-in visual prototype | Existing NEXG web shell and approved phase plan | Prototype only; no access or data |
 | `partner-portals` | Authenticated host/merchant/rider operational portals | Identity, authorization, onboarding contracts, and accepted guest flow | Later; not the first release |
 | `operations` | Structured logs, metrics, alerting, migrations, release strategy and rollback | Security and release contracts | Begins with the foundation; matures by later phases |
 
@@ -548,6 +555,9 @@ initiative is **not complete**.
 - Use spec-driven, phased delivery with verification, logs, changelog, ADRs, and handoff.
 - Password reset links must expire after 15 minutes; the owner asked for unique UUID identities and
   isolated user sessions.
+- On 2026-09-25 the owner requested that admin portal work begin. A pre-P2/P3 static sign-in
+  prototype is allowed only under the limits in the phase plan; functional admin/operator access
+  remains gated by P2 identity/authorization and guest acceptance.
 
 ### Decisions still required before dependent implementation
 
@@ -578,6 +588,7 @@ split further when its work spans independent contracts.
 | `P5 V1 Cloudflare and production security gate` | Re-check edge/origin certificate state; serve verified HTTPS at origin; use Full (strict); verify exposed APIs, WAF/rate limits, monitoring, backup, and rollback gates | Fresh dashboard/server evidence; valid hostname certificate at origin on 443; strict-mode HTTPS checks; endpoint exposure register; reviewed launch checklist |
 | `V1 Go-live` | Deploy approved guest journey and adaptive onboarding after P0–P5 exit evidence is accepted | Immutable candidate; complete repo gates; release/rollback rehearsal; Cloudflare/origin security confirmed; health, discovery, and onboarding acceptance |
 | `P6 Public partner/product pages` | After V1, publish accurate partner pages and product catalogue (POS, voice agent, TempVault, and later products) | Approved product copy, destinations, readiness/IP evidence; mobile and link checks |
+| `P7A Admin sign-in shell prototype` | Static, responsive admin sign-in surface to establish the visual direction | Owner-approved detailed plan; no credentials, API calls, data access, database writes, or operator dashboard; test and owner review |
 | `P7 Partner portals` | Role-scoped merchant/host/rider tools; admin/operator boundaries specified separately | P2 identity/authz accepted; guest experience accepted; portal specs/ADRs and tenant-isolation checks |
 | `P8 Operability and progressive delivery` | Mature redacted telemetry, critical alerts, blue/green app release, compatible migrations, and rollback | ADRs 4/7/8; staging rehearsal; alert runbooks; release and rollback evidence |
 
