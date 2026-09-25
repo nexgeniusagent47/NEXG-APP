@@ -17,6 +17,7 @@
     "test:api": "node scripts/api-contract-test.mjs",
     "test:flow": "node scripts/v2-flow-test.mjs",
     "test:consistency": "node scripts/v3-consistency-test.mjs",
+    "test:rider:ui": "node scripts/rider-browser-test.mjs",
     "staging:simulate": "node scripts/staging.mjs simulate",
     "staging:down": "node scripts/staging.mjs down",
     "staging:reset": "node scripts/staging.mjs reset",

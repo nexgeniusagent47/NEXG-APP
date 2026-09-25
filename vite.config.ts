@@ -86,6 +86,10 @@ export default defineConfig(() => {
       // no hardcoded hostname. Without this the frontend would have to know the
       // API port and the browser would need CORS preflight on every call.
       proxy: {
+        '/api/v1/rider': {
+          target: 'http://127.0.0.1:3008',
+          changeOrigin: true,
+        },
         '/api/v1/host': {
           target: 'http://127.0.0.1:3006',
           changeOrigin: true,
@@ -132,6 +136,10 @@ export default defineConfig(() => {
     preview: {
       port: 3000,
       proxy: {
+        '/api/v1/rider': {
+          target: 'http://127.0.0.1:3008',
+          changeOrigin: true,
+        },
         '/api/v1/host': {
           target: 'http://127.0.0.1:3006',
           changeOrigin: true,

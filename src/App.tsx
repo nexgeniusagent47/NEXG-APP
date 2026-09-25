@@ -32,6 +32,7 @@ const GroceriesPage = lazy(() => import('./components/GroceriesPage'));
 const ForProperties = lazy(() => import('./components/ForProperties'));
 const ForCouriers = lazy(() => import('./components/ForCouriers'));
 const CourierOnboarding = lazy(() => import('./components/CourierOnboarding'));
+const RiderPortal = lazy(() => import('./components/RiderPortal'));
 const HostPortal = lazy(() => import('./components/HostPortal'));
 
 // NEXG Flow Components
@@ -127,6 +128,7 @@ export type AppCurrentPage =
   | 'properties'
   | 'couriers'
   | 'courier_onboarding'
+  | 'rider_portal'
   | 'host_login'
   | 'host_apply'
   | 'host_status'
@@ -162,6 +164,7 @@ const DEEP_LINK_PAGES: readonly AppCurrentPage[] = [
   'properties',
   'couriers',
   'courier_onboarding',
+  'rider_portal',
   ...(import.meta.env.DEV ? HOST_PORTAL_PAGES : []),
   'metrics',
 ];
@@ -326,6 +329,7 @@ function AppContent() {
     'couriers',
     'merchant_onboarding',
     'courier_onboarding',
+    'rider_portal',
     'host_login',
     'host_apply',
     'host_status',
@@ -535,6 +539,10 @@ function AppContent() {
 
         {currentPage === 'courier_onboarding' && (
           <CourierOnboarding onNavigate={handleNavigate} />
+        )}
+
+        {currentPage === 'rider_portal' && (
+          <RiderPortal onNavigate={handleNavigate} />
         )}
 
         {import.meta.env.DEV && HOST_PORTAL_PAGES.includes(currentPage) && (
