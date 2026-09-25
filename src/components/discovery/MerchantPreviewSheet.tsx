@@ -103,7 +103,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                 'pointer-events-auto relative w-full md:w-[440px] lg:w-[500px]',
                 'max-h-[92dvh] md:max-h-none flex flex-col overflow-hidden',
                 'rounded-t-3xl md:rounded-none md:rounded-l-3xl',
-                isLight ? 'bg-white' : 'bg-[#141618]',
+                isLight ? 'bg-[#F7EED8]' : 'bg-[#141618]',
                 'shadow-2xl border-t md:border-t-0 md:border-l',
                 isLight ? 'border-slate-200' : 'border-white/10'
               )}
@@ -121,7 +121,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                   'absolute top-4 right-4 z-20 w-9 h-9 rounded-full flex items-center justify-center',
                   'transition-transform duration-150 ease-out hover:scale-105 active:scale-95',
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B88728]',
-                  isLight ? 'bg-white/90 text-slate-800' : 'bg-black/50 text-white'
+                  isLight ? 'bg-[#F7EED8]/90 text-slate-800' : 'bg-black/50 text-white'
                 )}
               >
                 <X size={16} />
@@ -139,7 +139,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
 
                   <div className="absolute bottom-4 left-4 right-4 flex items-end gap-3">
-                    <div className="w-14 h-14 rounded-2xl overflow-hidden border-2 border-white/90 bg-white flex-shrink-0">
+                    <div className="w-14 h-14 rounded-2xl overflow-hidden border-2 border-[#F7EED8]/90 bg-[#F7EED8] flex-shrink-0">
                       <img
                         src={merchant.logoUrl}
                         alt=""
@@ -272,7 +272,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
               <div
                 className={cn(
                   'mt-auto p-4 flex flex-col sm:flex-row gap-2.5 border-t',
-                  isLight ? 'bg-white border-slate-200' : 'bg-[#141618] border-white/10'
+                  isLight ? 'bg-[#F7EED8] border-[#6D531D]/20' : 'bg-[#141618] border-white/10'
                 )}
               >
                 <button
@@ -284,7 +284,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                     'bg-[#E5B65F] text-slate-950 hover:bg-[#d6a54d]',
                     'transition-[transform,background-color] duration-150 ease-out active:scale-[0.98]',
                     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B88728] focus-visible:ring-offset-2',
-                    isLight ? 'focus-visible:ring-offset-white' : 'focus-visible:ring-offset-[#141618]'
+                    isLight ? 'focus-visible:ring-offset-[#D8B350]' : 'focus-visible:ring-offset-[#141618]'
                   )}
                 >
                   {intent.arc.primaryAction}
@@ -300,7 +300,7 @@ export const MerchantPreviewSheet: React.FC<MerchantPreviewSheetProps> = ({
                     'transition-[transform,background-color,border-color] duration-150 ease-out active:scale-[0.98]',
                     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B88728] focus-visible:ring-offset-2',
                     isLight
-                      ? 'bg-white border-slate-300 text-slate-800 hover:bg-slate-50 focus-visible:ring-offset-white'
+                      ? 'bg-[#F7EED8] border-[#6D531D]/20 text-slate-800 hover:bg-[#FBF4E4] focus-visible:ring-offset-[#D8B350]'
                       : 'bg-white/5 border-white/15 text-gray-100 hover:bg-white/10 focus-visible:ring-offset-[#141618]'
                   )}
                 >{t.ui.merchantPreviewSheet.s_28da6e}</button>

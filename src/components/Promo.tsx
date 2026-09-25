@@ -80,7 +80,7 @@ export default function Promo({ onNavigate }: PromoProps) {
             onClick={() => onNavigate?.('merchants')}
             className={`flex items-stretch overflow-hidden rounded-[20px] h-[140px] lg:flex-1 lg:h-auto lg:min-h-[140px] xl:min-h-[150px] transition duration-300 cursor-pointer border group ${
               isLight
-                ? 'bg-white border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300'
+                ? 'bg-[#F7EED8] border-[#6D531D]/20 shadow-sm hover:shadow-md hover:border-[#6D531D]/40'
                 : 'bg-[#252828] border-gray-800 hover:shadow-lg hover:border-gray-700'
             }`}
           >
@@ -118,7 +118,7 @@ export default function Promo({ onNavigate }: PromoProps) {
             onClick={() => onNavigate?.('couriers')}
             className={`flex items-stretch overflow-hidden rounded-[20px] h-[140px] lg:flex-1 lg:h-auto lg:min-h-[140px] xl:min-h-[150px] transition duration-300 cursor-pointer border group ${
               isLight
-                ? 'bg-white border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300'
+                ? 'bg-[#F7EED8] border-[#6D531D]/20 shadow-sm hover:shadow-md hover:border-[#6D531D]/40'
                 : 'bg-[#252828] border-gray-800 hover:shadow-lg hover:border-gray-700'
             }`}
           >
@@ -156,7 +156,7 @@ export default function Promo({ onNavigate }: PromoProps) {
             onClick={() => onNavigate?.('properties')}
             className={`flex items-stretch overflow-hidden rounded-[20px] h-[140px] lg:flex-1 lg:h-auto lg:min-h-[140px] xl:min-h-[150px] transition duration-300 cursor-pointer border group ${
               isLight
-                ? 'bg-white border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300'
+                ? 'bg-[#F7EED8] border-[#6D531D]/20 shadow-sm hover:shadow-md hover:border-[#6D531D]/40'
                 : 'bg-[#252828] border-gray-800 hover:shadow-lg hover:border-gray-700'
             }`}
           >

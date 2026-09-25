@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react';
-import { Search, Sun, Moon, X } from 'lucide-react';
+import { MapPin, Sun, Moon, X } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
 import { useReducedMotion } from 'motion/react';
 import { HeroWipeSubtitle } from './HeroRotatingSubtitle';
 import DockedSearchBar from './hero/DockedSearchBar';
 import ResponsiveImage from './ResponsiveImage';
+import heroRooftopBlueHourDesktop from '../assets/images/hero_rooftop_blue_hour_desktop.webp';
+import heroRooftopBlueHourMobile from '../assets/images/hero_rooftop_blue_hour_mobile.webp';
 import { splitHeadline } from '../lib/headline';
 
 interface HeroProps {
@@ -70,57 +72,56 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
   };
 
   return (
-    <section className={`relative min-h-[92vh] lg:min-h-[100svh] px-4 sm:px-8 xl:px-16 flex flex-col justify-center overflow-hidden pt-24 sm:pt-28 pb-16 transition-colors duration-700 ${
-      isLight ? 'bg-[#f7f8fa]' : 'bg-[#111315]'
+    <section className={`hero-section relative min-h-[92vh] lg:min-h-[100svh] px-4 sm:px-8 xl:px-16 flex flex-col justify-center overflow-hidden pt-24 sm:pt-28 pb-16 transition-colors duration-700 ${
+      isLight ? 'hero-section--light bg-gold-canvas' : 'hero-section--dark bg-[#111315]'
     }`}>
       {/* Background Imagery with Smooth Mode Cross-Fade & Organic Feathering */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Dark Mode Nocturnal Penthouse Image */}
+        {/* Dark-mode blue-hour rooftop image, composed to match the supplied reference. */}
         <div
           className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
             isLight ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          {/* Radial & directional ambient vignettes */}
-          <div className="absolute inset-0 bg-gradient-to-r from-[#111315]/95 via-[#111315]/80 to-[#111315]/30 z-10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#111315] via-transparent to-black/30 z-10" />
+          {/* A restrained left-side wash keeps the headline legible over the skyline. */}
+          <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#071521]/48 via-[#071521]/22 to-transparent" />
           
-          {/* Full-bleed hero art: the browser picks the smallest width that covers
-              this element at the current device pixel ratio, so a phone never
-              downloads the 1920px file. `priority` because it is the first paint. */}
-          <ResponsiveImage
-            name="hero_nocturnal_dining_1789914100984.jpg"
-            sizes="100vw"
-            priority
-            alt={t.ui.hero.s_7ecda2}
-            className="hidden sm:block w-full h-full object-cover opacity-80 brightness-90"
-            referrerPolicy="no-referrer"
-          />
-          <ResponsiveImage
-            name="mobile_landing_page_image.png"
-            sizes="100vw"
-            priority
-            alt={t.ui.hero.s_ece6e2}
-            className="block sm:hidden w-full h-full object-cover opacity-75 brightness-80"
-            referrerPolicy="no-referrer"
+          {/* Full-bleed hero art: phones use the dedicated portrait composition,
+              while desktop keeps the wide rooftop framing. Eager loading protects
+              the first paint because this is the page's largest visual. */}
+          <picture className="absolute inset-0 z-0 block h-full w-full">
+            <source media="(max-width: 639px)" srcSet={heroRooftopBlueHourMobile} />
+            <img
+              src={heroRooftopBlueHourDesktop}
+              alt=""
+              aria-hidden="true"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className="h-full w-full object-cover"
+            />
+          </picture>
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 bottom-0 z-10 h-16 bg-gradient-to-b from-transparent via-[#111315]/45 to-[#111315] sm:h-24"
           />
         </div>
 
-        {/* Light Mode Sunlit Penthouse Terrace Image */}
+        {/* Light-mode sunset penthouse terrace image */}
         <div
           className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
             isLight ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          {/* Subtle directional scrim for optimal text contrast in daylight mode */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-white/20 sm:from-white/90 sm:via-white/70 sm:to-transparent z-10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#f7f8fa] via-[#f7f8fa]/60 to-transparent z-10" />
+          {/* Warm gold scrims preserve headline contrast without bleaching the image. */}
+          <div className="hero-light-warmth absolute inset-0 z-10" />
+          <div className="hero-light-ground absolute inset-0 z-10" />
           {/*
             LIGHT MODE HAS NO MOBILE IMAGE, so this one has to work at every size.
 
-            Dark mode swaps between a landscape desktop shot and `mobile_landing_page_image`
-            at the `sm` breakpoint. Light mode has no equivalent — there is only
-            `hero_daylight_resort`, a landscape composition — so on a phone it was being
+            Dark mode now has a dedicated landscape and portrait pair. Light mode has no
+            equivalent — there is only `hero_daylight_resort`, a landscape composition —
+            so on a phone it was being
             stretched into a portrait frame and cropped wherever `object-cover` happened to
             land. That is what the user saw: the light-mode image reading differently on a
             phone than on a desktop, with the subject lost off the edge.
@@ -140,31 +141,25 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
             sizes="100vw"
             priority
             alt={t.ui.hero.s_c75a68}
-            className="w-full h-full object-cover brightness-100 contrast-[1.03] object-[62%_center] sm:object-center"
+            className="hero-light-image w-full h-full object-cover brightness-100 contrast-[1.03] object-[62%_center] sm:object-center"
             referrerPolicy="no-referrer"
           />
         </div>
 
-        {/* Soft Organic Hero-to-Body Blend Gradient Mask */}
-        <div className={`absolute -bottom-1 left-0 right-0 h-40 z-10 pointer-events-none transition-colors duration-700 ${
-          isLight
-            ? 'bg-gradient-to-t from-[#f7f8fa] via-[#f7f8fa]/80 to-transparent'
-            : 'bg-gradient-to-t from-[#111315] via-[#111315]/80 to-transparent'
-        }`} />
       </div>
 
-      <div className="container mx-auto max-w-[1400px] relative z-20 flex flex-col justify-center flex-1">
-        <div className="hero-copy mt-auto sm:mt-0 mb-8 sm:mb-0">
+      <div className={`container mx-auto relative z-20 flex flex-col justify-center flex-1 ${isLight ? 'hero-content--light' : 'hero-content--dark'}`}>
+        <div className={`hero-copy mt-auto sm:mt-0 mb-8 sm:mb-0 ${isLight ? 'hero-copy--light' : 'hero-copy--dark'}`}>
           
           {/* Hero headline. Values baked from the accepted live-mode variant:
               scale=large, leading=snug, ink=tight. The @scope scaffolding and the
               helper markers are gone; this is the permanent form.
           
-              Line 2 is 0.95em, so it tracks the clamp on the h1 automatically rather
-              than needing its own breakpoint ladder. */}
+              The general line-2 treatment is 0.95em. The accepted home compositions
+              override it to equal-size lines, matching the supplied reference. */}
           <h1
             className={`hero-h1 font-display font-bold transition-colors duration-300 ${
-              isLight ? 'text-slate-900 drop-shadow-sm' : 'text-white'
+              isLight ? 'text-slate-900' : 'text-[#F8F3E8]'
             }`}
           >
             {/*
@@ -199,7 +194,8 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
             </span>
           </h1>
 
-          {/* The rotating line: a customer's word, then what that word buys.
+          {/* The service line: a customer's word, then what that word buys. Dark mode
+              uses the reference's fixed Rides line; light mode retains its own copy.
               TWO spacing decisions, both deliberate:
 
               `pl-[0.18em]` indents it very slightly from the headline's left edge. The
@@ -214,8 +210,9 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
           <HeroWipeSubtitle
             isLight={isLight}
             reduceMotion={Boolean(prefersReducedMotion)}
+            staticRides={!isLight}
             className={`mt-6 mb-4 pl-[0.26em] text-base sm:text-lg md:text-xl font-semibold leading-snug transition-colors duration-300 ${
-              isLight ? 'text-slate-700' : 'text-gray-200 drop-shadow-sm'
+              isLight ? 'hero-light-services text-slate-900' : 'hero-dark-services text-[#E9E3D8]'
             }`}
           />
 
@@ -227,10 +224,11 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
               meaningfully left the hero. The extra box means the hero search must travel
               properly out of view first. */}
           <div ref={inlineSearchRef}>
-          <form onSubmit={handleSearchSubmit} className="relative mb-3">
-            <Search className={`absolute left-5 top-1/2 -translate-y-1/2 pointer-events-none transition-colors ${
-              isLight ? 'text-slate-400' : 'text-gray-400'
-            }`} size={20} />
+          <form onSubmit={handleSearchSubmit} className={`relative mb-3 ${isLight ? 'hero-search--light' : 'hero-search--dark'}`}>
+            <MapPin
+              className="hero-search-icon absolute left-5 top-1/2 -translate-y-1/2 pointer-events-none transition-colors"
+              size={22}
+            />
             
             <input
               id="hero-search-input"
@@ -239,10 +237,10 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
               onChange={(e) => setQuery(e.target.value)}
               onClick={() => onOpenCategories?.(query)}
               placeholder={t.hero.searchPlaceholder}
-              className={`w-full pl-13 pr-24 sm:pr-32 py-4 sm:py-4.5 rounded-2xl text-xs sm:text-sm md:text-base font-semibold outline-none backdrop-blur-xl transition duration-300 cursor-pointer text-ellipsis ${
+              className={`w-full pl-13 pr-24 sm:pr-32 py-4 sm:py-4.5 text-xs sm:text-sm md:text-base font-semibold outline-none backdrop-blur-xl transition duration-300 cursor-pointer text-ellipsis ${
                 isLight
-                  ? 'bg-white/95 text-slate-900 border border-slate-300/80 placeholder:text-slate-400 focus:border-[#B88728] focus:ring-4 focus:ring-[#B88728]/15 shadow-[0_8px_30px_rgba(0,0,0,0.06)]'
-                  : 'bg-[#181a1b]/95 text-white border border-white/20 placeholder:text-gray-400 focus:border-[#E5B65F] focus:ring-4 focus:ring-[#E5B65F]/20 shadow-[0_8px_30px_rgba(0,0,0,0.4)]'
+                  ? 'rounded-2xl bg-[#F7EED8]/95 text-slate-900 border border-[#6D531D]/20 placeholder:text-[#594A2D] focus:border-[#7D5A11] focus:ring-4 focus:ring-[#7D5A11]/20 shadow-[0_8px_30px_rgba(0,0,0,0.06)]'
+                  : 'rounded-full bg-[#181A1F] text-[#F8F3E8] border border-white/10 placeholder:text-[#C4CBD3] focus:border-[#E5B65F] focus:ring-4 focus:ring-[#E5B65F]/20 shadow-[0_10px_32px_rgba(0,0,0,0.38)]'
               }`}
             />
 
@@ -252,7 +250,7 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
                 type="button"
                 onClick={() => setQuery('')}
                 className={`absolute right-24 sm:right-28 top-1/2 -translate-y-1/2 p-1 rounded-full transition-colors cursor-pointer ${
-                  isLight ? 'text-slate-400 hover:text-slate-700 hover:bg-slate-100' : 'text-gray-400 hover:text-white hover:bg-white/10'
+                  isLight ? 'text-[#7D5A11] hover:text-[#3D2E12] hover:bg-[#E9D9B6]' : 'text-gray-400 hover:text-white hover:bg-white/10'
                 }`}
                 title={t.ui.hero.s_67300d}
               >
@@ -263,10 +261,10 @@ export default function Hero({ onNavigate, onOpenCategories }: HeroProps) {
             <button
               id="hero-search-submit-btn"
               type="submit"
-              className={`absolute right-2 top-1/2 -translate-y-1/2 px-4 sm:px-6 py-2.5 sm:py-2.5 rounded-xl font-bold text-xs sm:text-sm transition cursor-pointer shadow-md active:scale-95 ${
+              className={`absolute right-2 top-1/2 -translate-y-1/2 px-4 sm:px-6 py-2.5 sm:py-2.5 font-bold text-xs sm:text-sm transition cursor-pointer shadow-md active:scale-95 ${
                 isLight
-                  ? 'bg-[#B88728] hover:bg-[#9e721d] text-slate-950'
-                  : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-black'
+                  ? 'rounded-xl bg-[#B88728] hover:bg-[#9e721d] text-slate-950'
+                  : 'rounded-full bg-[#E5B65F] hover:bg-[#d6a54d] text-[#1A1712]'
               }`}
             >
               {t.hero.searchBtn}

@@ -338,10 +338,17 @@ export default function MerchantAdCarousel({
                 <button
                   onClick={requestLocation}
                   disabled={isLocating}
-                  className="flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#B88728]/10 dark:bg-[#E5B65F]/15 text-[#7d5a11] dark:text-[#E5B65F] border border-[#B88728]/25 dark:border-[#E5B65F]/35 hover:bg-[#B88728]/20 transition-colors cursor-pointer"
+                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border transition-colors cursor-pointer ${
+                    isLight
+                      ? 'bg-[#B88728]/10 text-[#7d5a11] border-[#B88728]/25 hover:bg-[#B88728]/20'
+                      : 'bg-[#181A1F] text-[#F8F3E8] border-white/10 hover:bg-[#202328]'
+                  }`}
                   title={t.ui.merchantAdCarousel.s_430fac}
                 >
-                  <Navigation size={12} className={isLocating ? 'animate-spin' : ''} />
+                  <Navigation
+                    size={12}
+                    className={`${isLocating ? 'animate-spin' : ''} ${isLight ? 'text-[#7d5a11]' : 'text-[#E5B65F]'}`}
+                  />
                   <span>{isLocating ? 'Detecting...' : 'Enable location'}</span>
                 </button>
               )}
@@ -386,7 +393,7 @@ export default function MerchantAdCarousel({
             >
               Sponsored
             </h2>
-            <p className={`text-xs mt-0.5 font-medium ${isLight ? 'text-slate-600' : 'text-gray-400'}`}>{t.ui.merchantAdCarousel.s_3340de}</p>
+            <p className={`text-xs mt-0.5 font-medium ${isLight ? 'text-[#40341E]' : 'text-gray-400'}`}>{t.ui.merchantAdCarousel.s_3340de}</p>
           </div>
 
           <span
@@ -409,7 +416,7 @@ export default function MerchantAdCarousel({
           pixelsPerSecond={38}
           className={
             isLight
-              ? '[--marquee-fade:#f7f8fa] py-1'
+              ? '[--marquee-fade:#D8B350] py-1'
               : '[--marquee-fade:#111315] py-1'
           }
         >

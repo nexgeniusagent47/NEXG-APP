@@ -39,6 +39,7 @@
 // inventory. Neither half carries the line alone.
 
 import React, { useEffect, useMemo, useState } from 'react';
+import { motion } from 'motion/react';
 
 /** How the line reveals itself. Each variant gives the words a different amount of room. */
 export type RevealMode = 'dash' | 'stack' | 'plain';
@@ -80,6 +81,8 @@ interface HeroSubtitleProps {
   className?: string;
   /** How much room the words get. Defaults to the shipped treatment. */
   reveal?: RevealMode;
+  /** Keeps the reference hero's Rides service line stable instead of rotating. */
+  staticRides?: boolean;
 }
 
 /**
@@ -98,20 +101,22 @@ interface HeroSubtitleProps {
  * people who asked for less motion.
  */
 export const HeroWipeSubtitle: React.FC<HeroSubtitleProps> = ({
+  isLight,
   reduceMotion,
   className,
   reveal = 'dash',
+  staticRides = false,
 }) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    if (reduceMotion) return;
+    if (reduceMotion || isLight || staticRides) return;
     const timer = window.setInterval(
       () => setIndex((current) => (current + 1) % HERO_PODS.length),
       ROTATE_MS
     );
     return () => window.clearInterval(timer);
-  }, [reduceMotion]);
+  }, [reduceMotion, isLight, staticRides]);
 
   const pod = useMemo(() => HERO_PODS[index], [index]);
 
@@ -119,6 +124,46 @@ export const HeroWipeSubtitle: React.FC<HeroSubtitleProps> = ({
   // class for the default is what stopped the `dash` rules from ever matching: the
   // stylesheet targets `.hero-wipe--dash`, so the class has to exist.
   const innerClass = `hero-wipe__inner hero-wipe--${reveal}`;
+
+  if (isLight || staticRides) {
+    const rideServices = HERO_PODS.find((entry) => entry.id === 'rides')!;
+    const themeClass = isLight ? 'hero-light-services' : 'hero-dark-services';
+    const services = rideServices.support.split(' · ');
+    const serviceLine = (
+      <>
+        <span className={`${themeClass}__lead`}>{rideServices.lead}</span>
+        <span className={`${themeClass}__separator`} aria-hidden="true">{' • '}</span>
+        {services.map((service, index) => (
+          <React.Fragment key={service}>
+            {index > 0 && (
+              <span className={`${themeClass}__separator`} aria-hidden="true">{' • '}</span>
+            )}
+            <span className={`${themeClass}__support`}>{service}</span>
+          </React.Fragment>
+        ))}
+      </>
+    );
+
+    return (
+      <p className={className} data-hero-wipe={isLight ? 'light-reference' : 'dark-reference'}>
+        <motion.span
+          className={`hero-services__wrap ${isLight ? 'hero-light-services__wrap' : 'hero-dark-services__wrap'}`}
+          layout={!reduceMotion}
+          initial={reduceMotion ? false : { opacity: 0, y: 2 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={reduceMotion ? { duration: 0 } : {
+            type: 'spring',
+            stiffness: 280,
+            damping: 26,
+            mass: 0.7,
+            layout: { type: 'spring', stiffness: 260, damping: 28, mass: 0.7 },
+          }}
+        >
+          {serviceLine}
+        </motion.span>
+      </p>
+    );
+  }
 
   if (reduceMotion) {
     return (

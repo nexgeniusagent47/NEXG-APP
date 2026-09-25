@@ -151,6 +151,7 @@
      utilities, so a component states its intent once and the theme decides the value. */
   --color-gold: #b88728;
   --color-gold-strong: #9e721d;
+  --color-gold-canvas: #d8b350;
   /* Pre-mixed tints of the gold, as their own theme colours.
      Tailwind v4 does NOT generate an opacity modifier for a colour it did not derive —
      `bg-gold/12` compiles to nothing, silently, leaving an element with no background
@@ -164,6 +165,7 @@
 html.dark {
   --color-gold: #e5b65f;
   --color-gold-strong: #d6a54d;
+  --color-gold-canvas: #111315;
   --color-gold-tint: color-mix(in oklab, #e5b65f 12%, transparent);
   --color-gold-line: color-mix(in oklab, #e5b65f 30%, transparent);
 }
@@ -273,8 +275,14 @@ html.dark {
      two lines then start at different x positions and the headline reads as misaligned
      against the search bar below it, which is the only other left edge in the column. */
   display: block;
-  color: var(--color-gold);
+  color: #F8F3E8;
   font-weight: 700;
+}
+
+/* On the gold light canvas, the base brand gold is too close in luminance.
+   Use a deeper gold so the large headline keeps clear separation from the image wash. */
+html.light .hero-h1__lead {
+  color: #21190D;
 }
 
 /* Line 2: its own line, 5% smaller than the lead, and set slightly lighter in feel
@@ -302,6 +310,396 @@ html.dark {
        Widening rather than shrinking the type: the user said desktop is perfect, so the
        headline stays the size they approved and the container moves instead. */
     max-width: 54rem;
+  }
+}
+
+/* ---------------------------------------------------------------- light homepage ---
+   The supplied desktop reference is the light theme's direction: a warm Nairobi
+   sunset, black display type, one clear service line, and a broad pill search.
+   These overrides are scoped to the home hero; the nocturnal theme and other
+   light-mode surfaces keep their existing treatments.
+--------------------------------------------------------------------------- */
+.hero-section--light {
+  background-color: #F8F3E8;
+}
+
+.hero-light-warmth {
+  background: linear-gradient(
+    90deg,
+    rgb(255 219 112 / 38%) 0%,
+    rgb(255 219 112 / 22%) 48%,
+    rgb(255 219 112 / 5%) 76%,
+    transparent 100%
+  );
+}
+
+.hero-light-ground {
+  background: linear-gradient(
+    0deg,
+    rgb(230 161 24 / 17%) 0%,
+    rgb(242 183 53 / 7%) 27%,
+    transparent 62%
+  );
+}
+
+.hero-light-image {
+  filter: brightness(1.04) saturate(1.1) contrast(1.02);
+}
+
+.hero-content--light {
+  width: 100%;
+  max-width: 76rem;
+}
+
+.hero-copy--light {
+  width: min(100%, 56.625rem);
+  max-width: 56.625rem;
+}
+
+html.light .hero-h1 {
+  text-shadow: none;
+}
+
+html.light .hero-h1__line2 {
+  font-size: 1em;
+}
+
+.hero-light-services {
+  margin-top: 1.75rem;
+  margin-bottom: 1.75rem;
+  padding-left: 0;
+  color: #181713;
+  font-size: clamp(1.125rem, 1.8vw, 1.875rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+}
+
+.hero-services__wrap {
+  display: inline-block;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+/* A soft text shadow follows each glyph, leaving no rounded blur panel edge. */
+.hero-light-services__wrap {
+  text-shadow: 0 0 3px rgb(255 226 164 / 42%), 0 1px 7px rgb(80 43 5 / 17%);
+}
+
+.hero-light-services__lead {
+  font-weight: 600;
+}
+
+.hero-light-services__separator {
+  padding-inline: 0.13em;
+  color: #181713;
+}
+
+.hero-light-services__support {
+  font-weight: 500;
+}
+
+.hero-search--light {
+  width: 100%;
+  max-width: 56.625rem;
+  height: 4.5rem;
+  margin-top: 2.25rem;
+  margin-bottom: 0;
+}
+
+.hero-search--light .hero-search-icon {
+  left: 1.8rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  color: #A67412;
+}
+
+.hero-search--light #hero-search-input {
+  width: 100%;
+  height: 100%;
+  padding: 0 10.5rem 0 4.6rem;
+  border: 1px solid rgb(49 39 19 / 13%);
+  border-radius: 9999px;
+  background: rgb(255 251 241 / 96%);
+  color: #191815;
+  font-size: 1.125rem;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgb(49 39 19 / 13%);
+}
+
+.hero-search--light #hero-search-input::placeholder {
+  color: #5C5546;
+  opacity: 1;
+}
+
+.hero-search--light #hero-search-input:focus-visible {
+  border-color: #8A6413;
+  outline: 2px solid #8A6413;
+  outline-offset: 3px;
+  box-shadow: 0 8px 24px rgb(49 39 19 / 13%);
+}
+
+.hero-search--light .hero-search-icon {
+  z-index: 1;
+}
+
+.hero-search--light [class~="-translate-y-1/2"] {
+  translate: none;
+  transform: translateY(-50%);
+}
+
+.hero-search--light #hero-search-submit-btn {
+  top: 50%;
+  right: 0.35rem;
+  min-width: 8.125rem;
+  height: 3.5rem;
+  padding-inline: 2rem;
+  transform: translateY(-50%);
+  border-radius: 9999px;
+  background: #EFA80B;
+  color: #15130E;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.hero-search--light #hero-search-submit-btn:hover {
+  background: #D99408;
+}
+
+.home-light-header-controls {
+  transition: opacity 180ms ease-out;
+}
+
+@media (min-width: 48rem) {
+  .home-light-header-controls,
+  .home-dark-header-controls {
+    opacity: 0;
+  }
+
+  .home-light-header-controls:hover,
+  .home-light-header-controls:focus-within,
+  .home-dark-header-controls:hover,
+  .home-dark-header-controls:focus-within {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-copy--light {
+    transform: translateY(-8.5vh);
+  }
+}
+
+@media (min-width: 1280px) {
+  html.light .hero-section--light .hero-h1 {
+    font-size: clamp(5.5rem, 6vw, 6.25rem);
+    line-height: 1;
+  }
+}
+
+@media (max-width: 639px) {
+  .hero-light-services {
+    margin-top: 1.25rem;
+    margin-bottom: 1.5rem;
+    font-size: clamp(1rem, 4.3vw, 1.25rem);
+    line-height: 1.35;
+    white-space: normal;
+  }
+
+  .hero-search--light {
+    height: 3.75rem;
+    margin-top: 1.75rem;
+  }
+
+  .hero-search--light .hero-search-icon {
+    left: 1.1rem;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .hero-search--light #hero-search-input {
+    padding-right: 6.5rem;
+    padding-left: 3.25rem;
+    font-size: 0.9375rem;
+  }
+
+  .hero-search--light #hero-search-submit-btn {
+    right: 0.25rem;
+    min-width: 5.75rem;
+    height: 2.9rem;
+    padding-inline: 1.1rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* The dark hero follows the same proportions as the supplied reference while
+   keeping its city-at-dusk artwork and search controls fully responsive. */
+.hero-section--dark {
+  background-color: #071521;
+}
+
+.hero-content--dark {
+  width: 100%;
+  max-width: 76rem;
+}
+
+.hero-copy--dark {
+  width: min(100%, 56.5rem);
+  max-width: 56.5rem;
+}
+
+html:not(.light) .hero-section--dark .hero-h1 {
+  text-shadow: none;
+}
+
+html:not(.light) .hero-section--dark .hero-h1__line2 {
+  font-size: 1em;
+}
+
+html:not(.light) .hero-section--dark .hero-h1__lead {
+  -webkit-text-stroke: 0.006em currentColor;
+  paint-order: stroke fill;
+}
+
+.hero-dark-services {
+  margin-top: 1.75rem;
+  margin-bottom: 1.75rem;
+  padding-left: 0;
+  color: #E9E3D8;
+  font-size: clamp(1.125rem, 1.8vw, 1.875rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  white-space: nowrap;
+}
+
+.hero-dark-services__lead {
+  color: #F8F3E8;
+  font-weight: 600;
+}
+
+.hero-dark-services__separator {
+  padding-inline: 0.13em;
+  color: #E5B65F;
+}
+
+.hero-dark-services__support {
+  color: #E9E3D8;
+  font-weight: 500;
+}
+
+.hero-dark-services__wrap {
+  text-shadow: 0 0 4px rgb(8 18 29 / 48%), 0 1px 8px rgb(8 18 29 / 26%);
+}
+
+.hero-search--dark {
+  width: 100%;
+  max-width: 56.5rem;
+  height: 4.5rem;
+  margin-top: 2.25rem;
+  margin-bottom: 0;
+}
+
+.hero-search--dark .hero-search-icon {
+  z-index: 1;
+  left: 1.8rem;
+  width: 1.4rem;
+  height: 1.4rem;
+  color: #E5B65F;
+}
+
+.hero-search--dark #hero-search-input {
+  width: 100%;
+  height: 100%;
+  padding: 0 10.5rem 0 4.6rem;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 9999px;
+  background: #181A1F;
+  color: #F8F3E8;
+  font-size: 1.125rem;
+  font-weight: 500;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 32%);
+}
+
+.hero-search--dark #hero-search-input::placeholder {
+  color: #C4CBD3;
+  opacity: 1;
+}
+
+.hero-search--dark #hero-search-input:focus-visible {
+  border-color: #E5B65F;
+  outline: 2px solid #E5B65F;
+  outline-offset: 3px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 32%);
+}
+
+.hero-search--dark #hero-search-submit-btn {
+  top: 50%;
+  right: 0.35rem;
+  translate: none;
+  min-width: 8.125rem;
+  height: 3.5rem;
+  padding-inline: 2rem;
+  transform: translateY(-50%);
+  border-radius: 9999px;
+  background: #EFA80B;
+  color: #15130E;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+.hero-search--dark #hero-search-submit-btn:hover {
+  background: #D99408;
+}
+
+@media (min-width: 1024px) {
+  .hero-copy--dark {
+    transform: translateY(-8.5vh);
+  }
+}
+
+@media (min-width: 1280px) {
+  html:not(.light) .hero-section--dark .hero-h1 {
+    font-size: clamp(5.5rem, 6vw, 6.25rem);
+    line-height: 1;
+  }
+}
+
+@media (max-width: 639px) {
+  .hero-dark-services {
+    margin-top: 1.25rem;
+    margin-bottom: 1.5rem;
+    font-size: clamp(1rem, 4.3vw, 1.25rem);
+    line-height: 1.35;
+    white-space: normal;
+  }
+
+  .hero-search--dark {
+    height: 3.75rem;
+    margin-top: 1.75rem;
+  }
+
+  .hero-search--dark .hero-search-icon {
+    left: 1.1rem;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  .hero-search--dark #hero-search-input {
+    padding-right: 6.5rem;
+    padding-left: 3.25rem;
+    font-size: 0.9375rem;
+  }
+
+  .hero-search--dark #hero-search-submit-btn {
+    right: 0.25rem;
+    min-width: 5.75rem;
+    height: 2.9rem;
+    padding-inline: 1.1rem;
+    font-size: 0.875rem;
   }
 }
 
@@ -718,10 +1116,8 @@ body::-webkit-scrollbar {
 
 /* The accent. One point of contrast on the line, on the motivation word rather
    than the merchandise. Two tokens because the palette needs two: #E5B65F is
-   9.92:1 on the dark hero, #7d5a11 is 5.05:1 on the light one. See DESIGN.md. */
-/* The accent. One point of contrast on the line, on the motivation word rather
-   than the merchandise. Two tokens because the palette needs two: #E5B65F is
-   9.92:1 on the dark hero, #7d5a11 is 5.05:1 on the light one. See DESIGN.md.
+   9.92:1 on the dark hero, and the deeper light-theme gold clears 4.5:1 on the
+   new gold canvas.
 
    The face lives here rather than in a variant's scoped block. It was previously
    declared only inside `@scope ([data-impeccable-variant="3"])`, so with variant 1
@@ -748,7 +1144,7 @@ body::-webkit-scrollbar {
    app decides its own theme, so an OS preference of light with the app set to
    dark would have painted #7d5a11 on the dark hero at 2.4:1. */
 html.light .hero-wipe__lead {
-  color: #7d5a11;
+  color: #21190D;
 }
 
 .hero-pod__sep {
@@ -778,7 +1174,326 @@ html.light .hero-wipe__lead {
 }
 
 html.light .hero-wipe__support {
-  color: #55606d;
+  color: #21190d;
+}
+
+/* Gold mode surfaces: soften white with a warm ivory, so surfaces sit with the gold canvas
+   without turning stark white. Keep the palette quiet and reserve gold for accents. */
+html.light {
+  --nexg-light-surface: #F7F1E3;
+  --nexg-light-surface-raised: #EEE5D1;
+  --nexg-light-surface-border: #D7C7A4;
+  --nexg-light-ink: #30291C;
+  --nexg-light-muted-ink: #625842;
+  --nexg-light-gold-ink: #70500E;
+}
+
+html.light :is(
+  [class~="bg-white"], [class~="bg-white/95"], [class~="bg-white/90"],
+  [class~="bg-white/80"], [class~="bg-white/70"], [class~="bg-slate-50"],
+  [class~="bg-slate-50/80"], [class~="bg-slate-100"], [class~="bg-slate-200"],
+  [class~="bg-gray-50"], [class~="bg-gray-100"], [class~="bg-gray-200"],
+  [class~="bg-amber-50"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"],
+  [class~="bg-amber-100"], [class~="bg-[#F7EED8]"], [class~="bg-[#F7EED8]/95"],
+  [class~="bg-[#F7EED8]/90"], [class~="bg-[#F7EED8]/98"], [class~="bg-[#F3E4BD]/88"],
+  [class~="bg-[#F3E4BD]/90"], [class~="bg-[#F3E4BD]/94"], [class~="bg-[#F8F9FA]"],
+  [class~="bg-[#F8F9FA]/85"], [class~="bg-[#f7f8fa]"]
+) {
+  background-color: var(--nexg-light-surface);
+  color: var(--nexg-light-ink);
+  border-color: var(--nexg-light-surface-border);
+}
+
+html.light :is(
+  [class~="bg-white"], [class~="bg-white/95"], [class~="bg-white/90"],
+  [class~="bg-white/80"], [class~="bg-white/70"], [class~="bg-slate-50"],
+  [class~="bg-slate-50/80"], [class~="bg-slate-100"], [class~="bg-slate-200"],
+  [class~="bg-gray-50"], [class~="bg-gray-100"], [class~="bg-gray-200"],
+  [class~="bg-amber-50"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"],
+  [class~="bg-amber-100"], [class~="bg-[#F7EED8]"], [class~="bg-[#F7EED8]/95"],
+  [class~="bg-[#F7EED8]/90"], [class~="bg-[#F7EED8]/98"], [class~="bg-[#F3E4BD]/88"],
+  [class~="bg-[#F3E4BD]/90"], [class~="bg-[#F3E4BD]/94"], [class~="bg-[#F8F9FA]"],
+  [class~="bg-[#F8F9FA]/85"], [class~="bg-[#f7f8fa]"]
+) :is(
+  [class~="text-slate-900"], [class~="text-slate-800"], [class~="text-slate-700"],
+  [class~="text-gray-900"], [class~="text-gray-800"], [class~="text-gray-700"]
+),
+html.light :is(
+  [class~="bg-white"], [class~="bg-white/95"], [class~="bg-white/90"],
+  [class~="bg-white/80"], [class~="bg-white/70"], [class~="bg-slate-50"],
+  [class~="bg-slate-50/80"], [class~="bg-slate-100"], [class~="bg-slate-200"],
+  [class~="bg-gray-50"], [class~="bg-gray-100"], [class~="bg-gray-200"],
+  [class~="bg-amber-50"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"],
+  [class~="bg-amber-100"], [class~="bg-[#F7EED8]"], [class~="bg-[#F7EED8]/95"],
+  [class~="bg-[#F7EED8]/90"], [class~="bg-[#F7EED8]/98"], [class~="bg-[#F3E4BD]/88"],
+  [class~="bg-[#F3E4BD]/90"], [class~="bg-[#F3E4BD]/94"], [class~="bg-[#F8F9FA]"],
+  [class~="bg-[#F8F9FA]/85"], [class~="bg-[#f7f8fa]"]
+):is(
+  [class~="text-slate-900"], [class~="text-slate-800"], [class~="text-slate-700"],
+  [class~="text-gray-900"], [class~="text-gray-800"], [class~="text-gray-700"]
+) {
+  color: var(--nexg-light-ink);
+}
+
+html.light :is(
+  [class~="bg-white"], [class~="bg-white/95"], [class~="bg-white/90"],
+  [class~="bg-white/80"], [class~="bg-white/70"], [class~="bg-slate-50"],
+  [class~="bg-slate-50/80"], [class~="bg-slate-100"], [class~="bg-slate-200"],
+  [class~="bg-gray-50"], [class~="bg-gray-100"], [class~="bg-gray-200"],
+  [class~="bg-amber-50"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"],
+  [class~="bg-amber-100"], [class~="bg-[#F7EED8]"], [class~="bg-[#F7EED8]/95"],
+  [class~="bg-[#F7EED8]/90"], [class~="bg-[#F7EED8]/98"], [class~="bg-[#F3E4BD]/88"],
+  [class~="bg-[#F3E4BD]/90"], [class~="bg-[#F3E4BD]/94"], [class~="bg-[#F8F9FA]"],
+  [class~="bg-[#F8F9FA]/85"], [class~="bg-[#f7f8fa]"]
+) :is(
+  [class~="text-slate-600"], [class~="text-slate-500"], [class~="text-slate-400"],
+  [class~="text-gray-600"], [class~="text-gray-500"], [class~="text-gray-400"],
+  [class~="text-gray-300"]
+),
+html.light :is(
+  [class~="bg-white"], [class~="bg-white/95"], [class~="bg-white/90"],
+  [class~="bg-white/80"], [class~="bg-white/70"], [class~="bg-slate-50"],
+  [class~="bg-slate-50/80"], [class~="bg-slate-100"], [class~="bg-slate-200"],
+  [class~="bg-gray-50"], [class~="bg-gray-100"], [class~="bg-gray-200"],
+  [class~="bg-amber-50"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"],
+  [class~="bg-amber-100"], [class~="bg-[#F7EED8]"], [class~="bg-[#F7EED8]/95"],
+  [class~="bg-[#F7EED8]/90"], [class~="bg-[#F7EED8]/98"], [class~="bg-[#F3E4BD]/88"],
+  [class~="bg-[#F3E4BD]/90"], [class~="bg-[#F3E4BD]/94"], [class~="bg-[#F8F9FA]"],
+  [class~="bg-[#F8F9FA]/85"], [class~="bg-[#f7f8fa]"]
+):is(
+  [class~="text-slate-600"], [class~="text-slate-500"], [class~="text-slate-400"],
+  [class~="text-gray-600"], [class~="text-gray-500"], [class~="text-gray-400"],
+  [class~="text-gray-300"]
+) {
+  color: var(--nexg-light-muted-ink);
+}
+
+html.light :is(
+  [class~="bg-white"], [class~="bg-white/95"], [class~="bg-white/90"],
+  [class~="bg-white/80"], [class~="bg-white/70"], [class~="bg-slate-50"],
+  [class~="bg-slate-50/80"], [class~="bg-slate-100"], [class~="bg-slate-200"],
+  [class~="bg-gray-50"], [class~="bg-gray-100"], [class~="bg-gray-200"],
+  [class~="bg-amber-50"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"],
+  [class~="bg-amber-100"], [class~="bg-[#F7EED8]"], [class~="bg-[#F7EED8]/95"],
+  [class~="bg-[#F7EED8]/90"], [class~="bg-[#F7EED8]/98"], [class~="bg-[#F3E4BD]/88"],
+  [class~="bg-[#F3E4BD]/90"], [class~="bg-[#F3E4BD]/94"], [class~="bg-[#F8F9FA]"],
+  [class~="bg-[#F8F9FA]/85"], [class~="bg-[#f7f8fa]"]
+) :is(
+  [class~="text-[#7d5a11]"], [class~="text-[#B88728]"], [class~="text-amber-900"],
+  [class~="text-amber-800"], [class~="text-gold"]
+),
+html.light :is(
+  [class~="bg-white"], [class~="bg-white/95"], [class~="bg-white/90"],
+  [class~="bg-white/80"], [class~="bg-white/70"], [class~="bg-slate-50"],
+  [class~="bg-slate-50/80"], [class~="bg-slate-100"], [class~="bg-slate-200"],
+  [class~="bg-gray-50"], [class~="bg-gray-100"], [class~="bg-gray-200"],
+  [class~="bg-amber-50"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"],
+  [class~="bg-amber-100"], [class~="bg-[#F7EED8]"], [class~="bg-[#F7EED8]/95"],
+  [class~="bg-[#F7EED8]/90"], [class~="bg-[#F7EED8]/98"], [class~="bg-[#F3E4BD]/88"],
+  [class~="bg-[#F3E4BD]/90"], [class~="bg-[#F3E4BD]/94"], [class~="bg-[#F8F9FA]"],
+  [class~="bg-[#F8F9FA]/85"], [class~="bg-[#f7f8fa]"]
+):is(
+  [class~="text-[#7d5a11]"], [class~="text-[#B88728]"], [class~="text-amber-900"],
+  [class~="text-amber-800"], [class~="text-gold"]
+) {
+  color: var(--nexg-light-gold-ink);
+}
+
+html.light :is(
+  [class~="bg-white"], [class~="bg-white/95"], [class~="bg-white/90"],
+  [class~="bg-white/80"], [class~="bg-white/70"], [class~="bg-slate-50"],
+  [class~="bg-slate-50/80"], [class~="bg-slate-100"], [class~="bg-slate-200"],
+  [class~="bg-gray-50"], [class~="bg-gray-100"], [class~="bg-gray-200"],
+  [class~="bg-amber-50"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"],
+  [class~="bg-amber-100"], [class~="bg-[#F7EED8]"], [class~="bg-[#F7EED8]/95"],
+  [class~="bg-[#F7EED8]/90"], [class~="bg-[#F7EED8]/98"], [class~="bg-[#F3E4BD]/88"],
+  [class~="bg-[#F3E4BD]/90"], [class~="bg-[#F3E4BD]/94"], [class~="bg-[#F8F9FA]"],
+  [class~="bg-[#F8F9FA]/85"], [class~="bg-[#f7f8fa]"]
+) :is(
+  [class~="border-slate-100"], [class~="border-slate-200"], [class~="border-slate-300"],
+  [class~="border-gray-100"], [class~="border-gray-200"], [class~="border-gray-300"]
+),
+html.light :is(
+  [class~="bg-white"], [class~="bg-white/95"], [class~="bg-white/90"],
+  [class~="bg-white/80"], [class~="bg-white/70"], [class~="bg-slate-50"],
+  [class~="bg-slate-50/80"], [class~="bg-slate-100"], [class~="bg-slate-200"],
+  [class~="bg-gray-50"], [class~="bg-gray-100"], [class~="bg-gray-200"],
+  [class~="bg-amber-50"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"],
+  [class~="bg-amber-100"], [class~="bg-[#F7EED8]"], [class~="bg-[#F7EED8]/95"],
+  [class~="bg-[#F7EED8]/90"], [class~="bg-[#F7EED8]/98"], [class~="bg-[#F3E4BD]/88"],
+  [class~="bg-[#F3E4BD]/90"], [class~="bg-[#F3E4BD]/94"], [class~="bg-[#F8F9FA]"],
+  [class~="bg-[#F8F9FA]/85"], [class~="bg-[#f7f8fa]"]
+):is(
+  [class~="border-slate-100"], [class~="border-slate-200"], [class~="border-slate-300"],
+  [class~="border-gray-100"], [class~="border-gray-200"], [class~="border-gray-300"]
+) {
+  border-color: var(--nexg-light-surface-border);
+}
+
+html.light :is(
+  [class~="bg-white"], [class~="bg-white/95"], [class~="bg-white/90"],
+  [class~="bg-white/80"], [class~="bg-white/70"], [class~="bg-slate-50"],
+  [class~="bg-slate-50/80"], [class~="bg-slate-100"], [class~="bg-slate-200"],
+  [class~="bg-gray-50"], [class~="bg-gray-100"], [class~="bg-gray-200"],
+  [class~="bg-amber-50"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"],
+  [class~="bg-amber-100"], [class~="bg-[#F7EED8]"], [class~="bg-[#F7EED8]/95"],
+  [class~="bg-[#F7EED8]/90"], [class~="bg-[#F7EED8]/98"], [class~="bg-[#F3E4BD]/88"],
+  [class~="bg-[#F3E4BD]/90"], [class~="bg-[#F3E4BD]/94"], [class~="bg-[#F8F9FA]"],
+  [class~="bg-[#F8F9FA]/85"], [class~="bg-[#f7f8fa]"]
+) [class~="placeholder-slate-400"]::placeholder,
+html.light :is(
+  [class~="bg-white"], [class~="bg-white/95"], [class~="bg-white/90"],
+  [class~="bg-white/80"], [class~="bg-white/70"], [class~="bg-slate-50"],
+  [class~="bg-slate-50/80"], [class~="bg-slate-100"], [class~="bg-slate-200"],
+  [class~="bg-gray-50"], [class~="bg-gray-100"], [class~="bg-gray-200"],
+  [class~="bg-amber-50"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"],
+  [class~="bg-amber-100"], [class~="bg-[#F7EED8]"], [class~="bg-[#F7EED8]/95"],
+  [class~="bg-[#F7EED8]/90"], [class~="bg-[#F7EED8]/98"], [class~="bg-[#F3E4BD]/88"],
+  [class~="bg-[#F3E4BD]/90"], [class~="bg-[#F3E4BD]/94"], [class~="bg-[#F8F9FA]"],
+  [class~="bg-[#F8F9FA]/85"], [class~="bg-[#f7f8fa]"]
+):is([class~="placeholder-slate-400"], [class~="placeholder:text-slate-400"])::placeholder {
+  color: var(--nexg-light-muted-ink);
+}
+
+html.light [class~="hover:bg-white"]:hover,
+html.light [class~="hover:bg-slate-50"]:hover,
+html.light [class~="hover:bg-slate-100"]:hover,
+html.light [class~="hover:bg-slate-200"]:hover,
+html.light [class~="hover:bg-gray-50"]:hover,
+html.light [class~="hover:bg-gray-100"]:hover,
+html.light [class~="hover:bg-gray-200"]:hover {
+  background-color: var(--nexg-light-surface-raised);
+}
+
+/* Cover the remaining warm-neutral palette used by forms, discovery, and onboarding. */
+html.light :is(
+  [class~="bg-white/50"], [class~="bg-white/60"], [class~="bg-white/98"],
+  [class~="bg-slate-50/50"], [class~="bg-slate-50/60"], [class~="bg-slate-50/70"], [class~="bg-slate-50/80"], [class~="bg-slate-50/90"], [class~="bg-slate-50/95"], [class~="bg-slate-100/70"], [class~="bg-slate-100/80"], [class~="bg-slate-100/90"], [class~="bg-slate-200/80"], [class~="bg-slate-200/90"],
+  [class~="bg-amber-50/20"], [class~="bg-amber-50/25"], [class~="bg-amber-50/40"], [class~="bg-amber-50/50"], [class~="bg-amber-50/70"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"], [class~="bg-amber-100/60"], [class~="bg-amber-100/70"], [class~="bg-[#f8f9fa]"],
+  [class~="bg-[#FDF9F1]"], [class~="bg-[#f0f0f0]"], [class~="bg-[#F4E4BC]"],
+  [class~="bg-[#F5E9C9]"], [class~="bg-[#F6E7C0]"],
+  [class~="bg-[#E8D7AA]"], [class~="bg-[#E9D8AD]"], [class~="bg-[#E9D9B6]"]
+) {
+  background-color: var(--nexg-light-surface);
+  color: var(--nexg-light-ink);
+  border-color: var(--nexg-light-surface-border);
+}
+
+html.light :is(
+  [class~="bg-slate-100"], [class~="bg-slate-100/70"], [class~="bg-slate-100/80"], [class~="bg-slate-100/90"], [class~="bg-slate-200"],
+  [class~="bg-slate-200/80"], [class~="bg-slate-200/90"], [class~="bg-gray-100"], [class~="bg-gray-200"],
+  [class~="bg-amber-100/60"], [class~="bg-amber-100/70"], [class~="bg-[#f0f0f0]"], [class~="bg-[#E8D7AA]"],
+  [class~="bg-[#E9D8AD]"], [class~="bg-[#E9D9B6]"]
+) {
+  background-color: var(--nexg-light-surface-raised);
+}
+
+html.light :is(
+  [class~="bg-white/50"], [class~="bg-white/60"], [class~="bg-white/98"],
+  [class~="bg-slate-50/50"], [class~="bg-slate-50/60"], [class~="bg-slate-50/70"], [class~="bg-slate-50/80"], [class~="bg-slate-50/90"], [class~="bg-slate-50/95"], [class~="bg-slate-100/70"], [class~="bg-slate-100/80"], [class~="bg-slate-100/90"], [class~="bg-slate-200/80"], [class~="bg-slate-200/90"],
+  [class~="bg-amber-50/20"], [class~="bg-amber-50/25"], [class~="bg-amber-50/40"], [class~="bg-amber-50/50"], [class~="bg-amber-50/70"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"], [class~="bg-amber-100/60"], [class~="bg-amber-100/70"], [class~="bg-[#f8f9fa]"],
+  [class~="bg-[#FDF9F1]"], [class~="bg-[#f0f0f0]"], [class~="bg-[#F4E4BC]"],
+  [class~="bg-[#F5E9C9]"], [class~="bg-[#F6E7C0]"],
+  [class~="bg-[#E8D7AA]"], [class~="bg-[#E9D8AD]"], [class~="bg-[#E9D9B6]"]
+) :is(
+  [class~="text-slate-900"], [class~="text-slate-800"], [class~="text-slate-700"],
+  [class~="text-gray-900"], [class~="text-gray-800"], [class~="text-gray-700"]
+),
+html.light :is(
+  [class~="bg-white/50"], [class~="bg-white/60"], [class~="bg-white/98"],
+  [class~="bg-slate-50/50"], [class~="bg-slate-50/60"], [class~="bg-slate-50/70"], [class~="bg-slate-50/80"], [class~="bg-slate-50/90"], [class~="bg-slate-50/95"], [class~="bg-slate-100/70"], [class~="bg-slate-100/80"], [class~="bg-slate-100/90"], [class~="bg-slate-200/80"], [class~="bg-slate-200/90"],
+  [class~="bg-amber-50/20"], [class~="bg-amber-50/25"], [class~="bg-amber-50/40"], [class~="bg-amber-50/50"], [class~="bg-amber-50/70"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"], [class~="bg-amber-100/60"], [class~="bg-amber-100/70"], [class~="bg-[#f8f9fa]"],
+  [class~="bg-[#FDF9F1]"], [class~="bg-[#f0f0f0]"], [class~="bg-[#F4E4BC]"],
+  [class~="bg-[#F5E9C9]"], [class~="bg-[#F6E7C0]"],
+  [class~="bg-[#E8D7AA]"], [class~="bg-[#E9D8AD]"], [class~="bg-[#E9D9B6]"]
+):is(
+  [class~="text-slate-900"], [class~="text-slate-800"], [class~="text-slate-700"],
+  [class~="text-gray-900"], [class~="text-gray-800"], [class~="text-gray-700"]
+) {
+  color: var(--nexg-light-ink);
+}
+
+html.light :is(
+  [class~="bg-white/50"], [class~="bg-white/60"], [class~="bg-white/98"],
+  [class~="bg-slate-50/50"], [class~="bg-slate-50/60"], [class~="bg-slate-50/70"], [class~="bg-slate-50/80"], [class~="bg-slate-50/90"], [class~="bg-slate-50/95"], [class~="bg-slate-100/70"], [class~="bg-slate-100/80"], [class~="bg-slate-100/90"], [class~="bg-slate-200/80"], [class~="bg-slate-200/90"],
+  [class~="bg-amber-50/20"], [class~="bg-amber-50/25"], [class~="bg-amber-50/40"], [class~="bg-amber-50/50"], [class~="bg-amber-50/70"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"], [class~="bg-amber-100/60"], [class~="bg-amber-100/70"], [class~="bg-[#f8f9fa]"],
+  [class~="bg-[#FDF9F1]"], [class~="bg-[#f0f0f0]"], [class~="bg-[#F4E4BC]"],
+  [class~="bg-[#F5E9C9]"], [class~="bg-[#F6E7C0]"],
+  [class~="bg-[#E8D7AA]"], [class~="bg-[#E9D8AD]"], [class~="bg-[#E9D9B6]"]
+) :is(
+  [class~="text-slate-600"], [class~="text-slate-500"], [class~="text-slate-400"],
+  [class~="text-gray-600"], [class~="text-gray-500"], [class~="text-gray-400"],
+  [class~="text-gray-300"]
+),
+html.light :is(
+  [class~="bg-white/50"], [class~="bg-white/60"], [class~="bg-white/98"],
+  [class~="bg-slate-50/50"], [class~="bg-slate-50/60"], [class~="bg-slate-50/70"], [class~="bg-slate-50/80"], [class~="bg-slate-50/90"], [class~="bg-slate-50/95"], [class~="bg-slate-100/70"], [class~="bg-slate-100/80"], [class~="bg-slate-100/90"], [class~="bg-slate-200/80"], [class~="bg-slate-200/90"],
+  [class~="bg-amber-50/20"], [class~="bg-amber-50/25"], [class~="bg-amber-50/40"], [class~="bg-amber-50/50"], [class~="bg-amber-50/70"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"], [class~="bg-amber-100/60"], [class~="bg-amber-100/70"], [class~="bg-[#f8f9fa]"],
+  [class~="bg-[#FDF9F1]"], [class~="bg-[#f0f0f0]"], [class~="bg-[#F4E4BC]"],
+  [class~="bg-[#F5E9C9]"], [class~="bg-[#F6E7C0]"], [class*="bg-[#F9F0DA]"],
+  [class~="bg-[#E8D7AA]"], [class~="bg-[#E9D8AD]"], [class~="bg-[#E9D9B6]"]
+):is(
+  [class~="text-slate-600"], [class~="text-slate-500"], [class~="text-slate-400"],
+  [class~="text-gray-600"], [class~="text-gray-500"], [class~="text-gray-400"],
+  [class~="text-gray-300"]
+) {
+  color: var(--nexg-light-muted-ink);
+}
+
+html.light :is(
+  [class~="bg-white/50"], [class~="bg-white/60"], [class~="bg-white/98"],
+  [class~="bg-slate-50/50"], [class~="bg-slate-50/60"], [class~="bg-slate-50/70"], [class~="bg-slate-50/80"], [class~="bg-slate-50/90"], [class~="bg-slate-50/95"], [class~="bg-slate-100/70"], [class~="bg-slate-100/80"], [class~="bg-slate-100/90"], [class~="bg-slate-200/80"], [class~="bg-slate-200/90"],
+  [class~="bg-amber-50/20"], [class~="bg-amber-50/25"], [class~="bg-amber-50/40"], [class~="bg-amber-50/50"], [class~="bg-amber-50/70"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"], [class~="bg-amber-100/60"], [class~="bg-amber-100/70"], [class~="bg-[#f8f9fa]"],
+  [class~="bg-[#FDF9F1]"], [class~="bg-[#f0f0f0]"], [class~="bg-[#F4E4BC]"],
+  [class~="bg-[#F5E9C9]"], [class~="bg-[#F6E7C0]"], [class*="bg-[#F9F0DA]"],
+  [class~="bg-[#E8D7AA]"], [class~="bg-[#E9D8AD]"], [class~="bg-[#E9D9B6]"]
+) :is(
+  [class~="text-[#7d5a11]"], [class~="text-[#B88728]"], [class~="text-amber-900"],
+  [class~="text-amber-800"], [class~="text-gold"]
+),
+html.light :is(
+  [class~="bg-white/50"], [class~="bg-white/60"], [class~="bg-white/98"],
+  [class~="bg-slate-50/50"], [class~="bg-slate-50/60"], [class~="bg-slate-50/70"], [class~="bg-slate-50/80"], [class~="bg-slate-50/90"], [class~="bg-slate-50/95"], [class~="bg-slate-100/70"], [class~="bg-slate-100/80"], [class~="bg-slate-100/90"], [class~="bg-slate-200/80"], [class~="bg-slate-200/90"],
+  [class~="bg-amber-50/20"], [class~="bg-amber-50/25"], [class~="bg-amber-50/40"], [class~="bg-amber-50/50"], [class~="bg-amber-50/70"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"], [class~="bg-amber-100/60"], [class~="bg-amber-100/70"], [class~="bg-[#f8f9fa]"],
+  [class~="bg-[#FDF9F1]"], [class~="bg-[#f0f0f0]"], [class~="bg-[#F4E4BC]"],
+  [class~="bg-[#F5E9C9]"], [class~="bg-[#F6E7C0]"], [class*="bg-[#F9F0DA]"],
+  [class~="bg-[#E8D7AA]"], [class~="bg-[#E9D8AD]"], [class~="bg-[#E9D9B6]"]
+):is(
+  [class~="text-[#7d5a11]"], [class~="text-[#B88728]"], [class~="text-amber-900"],
+  [class~="text-amber-800"], [class~="text-gold"]
+) {
+  color: var(--nexg-light-gold-ink);
+}
+
+html.light :is(
+  [class~="bg-white/50"], [class~="bg-white/60"], [class~="bg-white/98"],
+  [class~="bg-slate-50/50"], [class~="bg-slate-50/60"], [class~="bg-slate-50/70"], [class~="bg-slate-50/80"], [class~="bg-slate-50/90"], [class~="bg-slate-50/95"], [class~="bg-slate-100/70"], [class~="bg-slate-100/80"], [class~="bg-slate-100/90"], [class~="bg-slate-200/80"], [class~="bg-slate-200/90"],
+  [class~="bg-amber-50/20"], [class~="bg-amber-50/25"], [class~="bg-amber-50/40"], [class~="bg-amber-50/50"], [class~="bg-amber-50/70"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"], [class~="bg-amber-100/60"], [class~="bg-amber-100/70"], [class~="bg-[#f8f9fa]"],
+  [class~="bg-[#FDF9F1]"], [class~="bg-[#f0f0f0]"], [class~="bg-[#F4E4BC]"],
+  [class~="bg-[#F5E9C9]"], [class~="bg-[#F6E7C0]"], [class*="bg-[#F9F0DA]"],
+  [class~="bg-[#E8D7AA]"], [class~="bg-[#E9D8AD]"], [class~="bg-[#E9D9B6]"]
+) :is(
+  [class~="border-slate-100"], [class~="border-slate-200"], [class~="border-slate-300"],
+  [class~="border-gray-100"], [class~="border-gray-200"], [class~="border-gray-300"]
+),
+html.light :is(
+  [class~="bg-white/50"], [class~="bg-white/60"], [class~="bg-white/98"],
+  [class~="bg-slate-50/50"], [class~="bg-slate-50/60"], [class~="bg-slate-50/70"], [class~="bg-slate-50/80"], [class~="bg-slate-50/90"], [class~="bg-slate-50/95"], [class~="bg-slate-100/70"], [class~="bg-slate-100/80"], [class~="bg-slate-100/90"], [class~="bg-slate-200/80"], [class~="bg-slate-200/90"],
+  [class~="bg-amber-50/20"], [class~="bg-amber-50/25"], [class~="bg-amber-50/40"], [class~="bg-amber-50/50"], [class~="bg-amber-50/70"], [class~="bg-amber-50/80"], [class~="bg-amber-50/90"], [class~="bg-amber-100/60"], [class~="bg-amber-100/70"], [class~="bg-[#f8f9fa]"],
+  [class~="bg-[#FDF9F1]"], [class~="bg-[#f0f0f0]"], [class~="bg-[#F4E4BC]"],
+  [class~="bg-[#F5E9C9]"], [class~="bg-[#F6E7C0]"], [class*="bg-[#F9F0DA]"],
+  [class~="bg-[#E8D7AA]"], [class~="bg-[#E9D8AD]"], [class~="bg-[#E9D9B6]"]
+):is(
+  [class~="border-slate-100"], [class~="border-slate-200"], [class~="border-slate-300"],
+  [class~="border-gray-100"], [class~="border-gray-200"], [class~="border-gray-300"]
+) {
+  border-color: var(--nexg-light-surface-border);
+}
+
+html.light [class~="hover:bg-[#E9D9B6]"]:hover,
+html.light [class~="hover:bg-[#FBF4E4]"]:hover,
+html.light [class~="hover:bg-[#F9F0DA]"]:hover {
+  background-color: var(--nexg-light-surface-raised);
 }
 
 @media (prefers-reduced-motion: reduce) {

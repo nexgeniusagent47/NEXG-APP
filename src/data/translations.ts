@@ -2773,7 +2773,7 @@ export const translations: Record<Language, TranslationSchema> = {
       titleLine1: 'Everything you need',
       titleLine2: 'Right where you are.',
       subtitle: 'Order curated gourmet dishes, book sanctuary spa treatments, arrange VIP chauffeurs, and enjoy swift concierge delivery directly to your villa, room, or residence.',
-      searchPlaceholder: 'Search dining, spa, rides',
+      searchPlaceholder: 'Search dining, spa, rides...',
       searchBtn: 'Search',
       popular: 'Popular:',
       sugMichelin: 'Michelin Dining',

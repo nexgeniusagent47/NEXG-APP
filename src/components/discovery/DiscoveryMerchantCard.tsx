@@ -55,13 +55,13 @@ export const DiscoveryMerchantCard: React.FC<DiscoveryMerchantCardProps> = ({
         'hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.99]',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B88728] focus-visible:ring-offset-2',
         isLight
-          ? 'bg-white border-slate-200 hover:border-[#B88728]/50 hover:shadow-lg focus-visible:ring-offset-[#f7f8fa]'
+          ? 'bg-[#F7EED8] border-[#6D531D]/20 hover:border-[#6D531D]/55 hover:shadow-lg focus-visible:ring-offset-[#D8B350]'
           : 'bg-[#181A1F] border-white/10 hover:border-[#E5B65F]/50 hover:shadow-xl focus-visible:ring-offset-[#111315]',
         className
       )}
     >
       {/* Hero */}
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 dark:bg-[#111315]">
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#E8D7AA] dark:bg-[#111315]">
         <img
           src={merchant.heroImage}
           alt=""
@@ -79,7 +79,7 @@ export const DiscoveryMerchantCard: React.FC<DiscoveryMerchantCardProps> = ({
           </div>
         )}
 
-        <div className="absolute bottom-3 left-3 z-10 w-9 h-9 rounded-full overflow-hidden border-2 border-white dark:border-[#181A1F] bg-white">
+        <div className="absolute bottom-3 left-3 z-10 w-9 h-9 rounded-full overflow-hidden border-2 border-[#F7EED8] dark:border-[#181A1F] bg-[#F7EED8]">
           <img
             src={merchant.logoUrl}
             alt=""
@@ -90,7 +90,7 @@ export const DiscoveryMerchantCard: React.FC<DiscoveryMerchantCardProps> = ({
         </div>
 
         <div className="absolute bottom-3 right-3 z-10">
-          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-[11px] font-bold bg-white/95 dark:bg-[#181A1F]/95 text-slate-900 dark:text-white">
+          <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md text-[11px] font-bold bg-[#F7EED8]/95 dark:bg-[#181A1F]/95 text-slate-900 dark:text-white">
             <Clock size={12} className="text-[#7d5a11] dark:text-[#E5B65F]" />
             {merchant.deliveryTime}
           </span>
@@ -147,7 +147,7 @@ export const DiscoveryMerchantCard: React.FC<DiscoveryMerchantCardProps> = ({
         <div
           className={cn(
             'mt-auto pt-2.5 flex items-center justify-between gap-2 border-t',
-            isLight ? 'border-slate-100' : 'border-white/5'
+            isLight ? 'border-[#6D531D]/12' : 'border-white/5'
           )}
         >
           <span className={cn('text-xs font-bold', isLight ? 'text-slate-700' : 'text-gray-200')}>
@@ -157,7 +157,7 @@ export const DiscoveryMerchantCard: React.FC<DiscoveryMerchantCardProps> = ({
             className={cn(
               'w-7 h-7 rounded-full flex items-center justify-center transition-transform duration-200 ease-out',
               'group-hover:translate-x-0.5',
-              isLight ? 'bg-slate-100 text-slate-700' : 'bg-white/10 text-gray-200'
+              isLight ? 'bg-[#E9D9B6] text-slate-800' : 'bg-white/10 text-gray-200'
             )}
           >
             <ArrowRight size={14} />

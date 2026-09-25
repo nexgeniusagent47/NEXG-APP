@@ -42,7 +42,7 @@ export default function ScrollToTop() {
           aria-label={t.ui.scrollToTop.s_f07710}
           className={`fixed right-6 sm:right-8 z-40 p-3 rounded-full shadow-xl backdrop-blur-xl border transition cursor-pointer group hover:scale-110 active:scale-95 ${
             isLight
-              ? 'bg-white/90 hover:bg-white text-[#B88728] border-amber-300/80 shadow-amber-900/10'
+              ? 'bg-[#F7EED8]/95 hover:bg-[#FBF4E4] text-[#7d5a11] border-[#6D531D]/25 shadow-amber-900/10'
               : 'bg-[#181a1d]/90 hover:bg-[#202328] text-[#E5B65F] border-white/15 shadow-black/60'
           }`}
           /* Lifted clear of the home indicator. The previous fixed `bottom-20 sm:bottom-8`

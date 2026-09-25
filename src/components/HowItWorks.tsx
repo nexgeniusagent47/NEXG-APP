@@ -26,7 +26,7 @@ export default function HowItWorks() {
           {t.howItWorks.heading}
         </h2>
         <p className={`text-sm sm:text-base font-medium max-w-md mx-auto ${
-          isLight ? 'text-slate-600' : 'text-gray-400'
+          isLight ? 'text-[#40341E]' : 'text-gray-400'
         }`}>
           {t.howItWorks.subtitle}
         </p>
@@ -59,7 +59,7 @@ export default function HowItWorks() {
               {t.howItWorks.step1Title}
             </h3>
             <p className={`text-xs sm:text-sm leading-relaxed max-w-sm ${
-              isLight ? 'text-slate-600' : 'text-gray-400'
+              isLight ? 'text-[#40341E]' : 'text-gray-400'
             }`}>
               {t.howItWorks.step1Desc}
             </p>
@@ -98,7 +98,7 @@ export default function HowItWorks() {
               {t.howItWorks.step2Title}
             </h3>
             <p className={`text-xs sm:text-sm leading-relaxed max-w-sm ${
-              isLight ? 'text-slate-600' : 'text-gray-400'
+              isLight ? 'text-[#40341E]' : 'text-gray-400'
             }`}>
               {t.howItWorks.step2Desc}
             </p>
@@ -137,7 +137,7 @@ export default function HowItWorks() {
               {t.howItWorks.step3Title}
             </h3>
             <p className={`text-xs sm:text-sm leading-relaxed max-w-sm ${
-              isLight ? 'text-slate-600' : 'text-gray-400'
+              isLight ? 'text-[#40341E]' : 'text-gray-400'
             }`}>
               {t.howItWorks.step3Desc}
             </p>
@@ -184,7 +184,7 @@ export default function HowItWorks() {
               {t.howItWorks.step1Title}
             </h3>
             <p className={`text-sm leading-relaxed max-w-[240px] ${
-              isLight ? 'text-slate-600' : 'text-gray-400'
+              isLight ? 'text-[#40341E]' : 'text-gray-400'
             }`}>
               {t.howItWorks.step1Desc}
             </p>
@@ -212,7 +212,7 @@ export default function HowItWorks() {
               {t.howItWorks.step2Title}
             </h3>
             <p className={`text-sm leading-relaxed max-w-[240px] ${
-              isLight ? 'text-slate-600' : 'text-gray-400'
+              isLight ? 'text-[#40341E]' : 'text-gray-400'
             }`}>
               {t.howItWorks.step2Desc}
             </p>
@@ -240,7 +240,7 @@ export default function HowItWorks() {
               {t.howItWorks.step3Title}
             </h3>
             <p className={`text-sm leading-relaxed max-w-[240px] ${
-              isLight ? 'text-slate-600' : 'text-gray-400'
+              isLight ? 'text-[#40341E]' : 'text-gray-400'
             }`}>
               {t.howItWorks.step3Desc}
             </p>

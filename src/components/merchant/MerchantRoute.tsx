@@ -62,7 +62,7 @@ export default function MerchantRoute({
 
   if (error && !merchant) {
     return (
-      <div className={cn('min-h-[100dvh] flex items-center justify-center px-4', isLight ? 'bg-[#f7f8fa]' : 'bg-[#111315]')}>
+      <div className={cn('min-h-[100dvh] flex items-center justify-center px-4', isLight ? 'bg-gold-canvas' : 'bg-[#111315]')}>
         <div
           className={cn(
             'max-w-sm w-full rounded-2xl border p-8 text-center',
@@ -101,7 +101,7 @@ export default function MerchantRoute({
   // than a spinner. The item list fills in when the detail response lands.
   if (!merchant) {
     return (
-      <div className={cn('min-h-[100dvh] flex items-center justify-center', isLight ? 'bg-[#f7f8fa]' : 'bg-[#111315]')}>
+      <div className={cn('min-h-[100dvh] flex items-center justify-center', isLight ? 'bg-gold-canvas' : 'bg-[#111315]')}>
         <div
           className={cn(
             'flex items-center gap-2 text-xs font-semibold',

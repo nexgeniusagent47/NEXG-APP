@@ -26,7 +26,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { useSpring, animated } from 'react-spring';
-import { Search, X } from 'lucide-react';
+import { MapPin, X } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { cn } from '../../lib/utils';
@@ -90,14 +90,17 @@ export default function DockedSearchBar({
     // `pointer-events-none` while hidden: a bar parked above the viewport can still
     // intercept clicks aimed at the header beneath it otherwise.
     <animated.div
-      style={style}
+      style={{
+        ...style,
+        backgroundColor: isLight ? 'rgba(252, 249, 241, 0.4)' : undefined,
+      }}
       aria-hidden={!docked}
       className={cn(
-        'fixed inset-x-0 top-0 z-[60] border-b backdrop-blur-2xl',
+        'fixed inset-x-0 top-0 z-[60] backdrop-blur-2xl',
         docked ? 'pointer-events-auto' : 'pointer-events-none',
         isLight
-          ? 'bg-white/90 border-slate-200 shadow-[0_4px_24px_rgba(0,0,0,0.06)]'
-          : 'bg-[#111315]/90 border-white/10 shadow-[0_4px_24px_rgba(0,0,0,0.35)]'
+          ? 'bg-transparent shadow-[0_4px_24px_rgba(0,0,0,0.06)]'
+          : 'bg-[#181A1F] shadow-[0_4px_24px_rgba(0,0,0,0.35)]'
       )}
     >
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-8 py-2.5">
@@ -108,12 +111,12 @@ export default function DockedSearchBar({
           }}
           className="relative mx-auto max-w-2xl"
         >
-          <Search
+          <MapPin
             className={cn(
               'absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none',
-              isLight ? 'text-slate-400' : 'text-gray-400'
+              isLight ? 'text-[#7D5A11]' : 'text-[#E5B65F]'
             )}
-            size={18}
+            size={19}
           />
 
           <input
@@ -126,10 +129,10 @@ export default function DockedSearchBar({
             // parked above the viewport.
             tabIndex={docked ? 0 : -1}
             className={cn(
-              'w-full pl-11 pr-28 py-2.5 rounded-xl text-xs sm:text-sm font-semibold outline-none transition',
+              'w-full border-0 bg-transparent pl-11 pr-28 py-2.5 text-xs sm:text-sm font-semibold outline-none transition focus-visible:ring-2',
               isLight
-                ? 'bg-slate-50 text-slate-900 border border-slate-200 placeholder:text-slate-400 focus:border-[#B88728] focus:ring-4 focus:ring-[#B88728]/12'
-                : 'bg-white/[0.06] text-white border border-white/12 placeholder:text-gray-400 focus:border-[#E5B65F] focus:ring-4 focus:ring-[#E5B65F]/15'
+                ? 'rounded-xl text-slate-900 placeholder:text-[#594A2D] focus-visible:ring-[#7D5A11]/25'
+                : 'rounded-full text-[#F8F3E8] placeholder:text-[#C4CBD3] focus-visible:ring-[#E5B65F]/20'
             )}
           />
 
@@ -142,7 +145,7 @@ export default function DockedSearchBar({
               className={cn(
                 'absolute right-20 top-1/2 -translate-y-1/2 p-1 rounded-full transition-colors cursor-pointer',
                 isLight
-                  ? 'text-slate-400 hover:text-slate-700 hover:bg-slate-100'
+                  ? 'text-[#7D5A11] hover:text-[#3D2E12] hover:bg-[#E9D9B6]'
                   : 'text-gray-400 hover:text-white hover:bg-white/10'
               )}
             >
@@ -154,10 +157,10 @@ export default function DockedSearchBar({
             type="submit"
             tabIndex={docked ? 0 : -1}
             className={cn(
-              'absolute right-1.5 top-1/2 -translate-y-1/2 px-4 py-2 rounded-lg font-bold text-xs transition cursor-pointer shadow-sm active:scale-95',
+              'absolute right-1.5 top-1/2 -translate-y-1/2 px-4 py-2 font-bold text-xs transition cursor-pointer shadow-sm active:scale-95',
               isLight
-                ? 'bg-[#B88728] hover:bg-[#9e721d] text-slate-950'
-                : 'bg-[#E5B65F] hover:bg-[#d6a54d] text-black'
+                ? 'rounded-lg bg-[#B88728] hover:bg-[#9e721d] text-slate-950'
+                : 'rounded-full bg-[#E5B65F] hover:bg-[#d6a54d] text-[#1A1712]'
             )}
           >
             {t.hero.searchBtn}

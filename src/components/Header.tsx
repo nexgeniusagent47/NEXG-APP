@@ -103,9 +103,11 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
           ? isLight
             ? 'py-2.5 sm:py-3 shadow-[0_6px_25px_rgba(0,0,0,0.04)]'
             : 'py-2.5 sm:py-3 shadow-[0_10px_35px_rgba(0,0,0,0.45)]'
-          : 'py-3.5 sm:py-4'
+          : isLight
+          ? 'py-4 sm:py-6'
+          : 'py-3.5 sm:py-4 xl:py-6'
       } ${
-        isLight ? 'text-slate-900' : 'text-white'
+        isLight ? 'text-slate-900' : 'text-[#F8F3E8]'
       }`}
     >
       {/* Progressive Blur Layering System */}
@@ -115,15 +117,20 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
           className={`absolute inset-0 backdrop-blur-2xl transition-colors duration-500 ${
             isLight
               ? isScrolled
-                ? 'bg-white/94'
-                : 'bg-white/88'
+                ? 'bg-[#FCF9F1]/48'
+                : 'bg-[#FCF9F1]'
               : isScrolled
-              ? 'bg-[#0c0e12]/94'
-              : 'bg-[#0c0e12]/85'
+              ? 'bg-[#181A1F]'
+              : 'bg-[#181A1F]'
           }`}
           style={{
-            WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 75%, rgba(0,0,0,0.85) 90%, rgba(0,0,0,0.6) 100%)',
-            maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 75%, rgba(0,0,0,0.85) 90%, rgba(0,0,0,0.6) 100%)',
+            backgroundColor: isLight
+              ? isScrolled
+                ? 'rgb(252 249 241 / 48%)'
+                : '#FCF9F1'
+              : undefined,
+            WebkitMaskImage: 'none',
+            maskImage: 'none',
           }}
         />
         {/* Layer 2: Extended Feathered Progressive Blur below bottom border for seamless scroll bleed */}
@@ -132,8 +139,8 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
             isScrolled ? 'opacity-100' : 'opacity-0'
           } ${
             isLight
-              ? 'bg-gradient-to-b from-white/30 to-transparent'
-              : 'bg-gradient-to-b from-[#0c0e12]/40 to-transparent'
+              ? 'bg-gradient-to-b from-[#F3E4BD]/30 to-transparent'
+              : 'bg-gradient-to-b from-[#181A1F]/40 to-transparent'
           }`}
           style={{
             WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%)',
@@ -150,7 +157,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
 
           `min-w-0` lets the children shrink; `truncate` is what they shrink into; the control
           cluster is `shrink-0` because navigation must stay tappable. */}
-      <div className="max-w-[1520px] mx-auto px-4 sm:px-8 flex items-center justify-between gap-3 min-w-0">
+      <div className="max-w-[1536px] mx-auto px-4 sm:px-6 md:px-7 flex items-center justify-between gap-3 min-w-0 relative">
         {/* Brand — the supplied wordmark, with no text beside it.
             The artwork already spells NEXG, so a text block next to it said the name twice.
             Sized by height rather than a square box because the artwork is 361x137, about
@@ -162,7 +169,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
         >
           <LogoIcon
             variant="wordmark"
-            className="h-8 sm:h-9 md:h-10 w-auto group-hover:scale-[1.03] transition-transform origin-left"
+            className="w-auto group-hover:scale-[1.03] transition-transform origin-left h-8 sm:h-10 lg:h-11"
           />
         </div>
 
@@ -175,20 +182,24 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
             This also fixes v1 defect D-15: the full nav needed ~1331px inside a
             1280px `xl` breakpoint, so items crowded at exactly the width where
             they first appeared. */}
-        <nav className="hidden sm:flex items-center gap-7 min-w-0 text-xs sm:text-[13px] font-semibold tracking-wide">
+        <nav className={`hidden sm:flex items-center min-w-0 ${isLight
+          ? 'gap-7 xl:gap-14 text-base lg:text-lg font-medium tracking-normal md:absolute md:left-1/2 md:-translate-x-1/2'
+          : 'gap-7 xl:gap-14 text-xs sm:text-[13px] xl:text-base font-semibold tracking-wide xl:tracking-normal xl:absolute xl:left-1/2 xl:-translate-x-1/2'
+        }`}>
           <button
             onClick={() => (onExplore ? onExplore() : onNavigate('home'))}
-            className={`transition-colors cursor-pointer text-left bg-transparent border-none p-0 ${
+            className={`group flex items-center gap-1 transition-colors cursor-pointer text-left bg-transparent border-none p-0 ${
               currentPage === 'home'
                 ? isLight
-                  ? 'text-[#7d5a11] font-bold'
+                  ? 'text-[#946200] font-medium'
                   : 'text-[#E5B65F] font-bold'
                 : isLight
-                ? 'text-slate-600 hover:text-slate-900'
+                ? 'text-[#171717] hover:text-[#7d5a11]'
                 : 'text-gray-300 hover:text-white'
             }`}
           >
             {t.nav.explore}
+            <ChevronDown size={13} className="transition-transform group-hover:rotate-180" />
           </button>
 
           {/* Partners Dropdown */}
@@ -202,7 +213,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
                     ? 'text-[#7d5a11] font-bold'
                     : 'text-[#E5B65F] font-bold'
                   : isLight
-                  ? 'text-slate-600 hover:text-slate-900'
+                  ? 'text-[#171717] hover:text-[#7d5a11]'
                   : 'text-gray-300 hover:text-white'
               }`}
             >
@@ -213,14 +224,14 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
               <div
                 className={`w-48 rounded-xl shadow-2xl flex flex-col overflow-hidden py-2 border backdrop-blur-xl ${
                   isLight
-                    ? 'bg-white/95 text-slate-800 border-slate-200'
-                    : 'bg-[#141618]/95 text-gray-200 border-white/15'
+                    ? 'bg-[#F7EED8]/95 text-slate-800 border-[#6D531D]/20'
+                    : 'bg-[#181A1F]/95 text-gray-200 border-white/15'
                 }`}
               >
                 <button
                   onClick={() => onNavigate('properties')}
                   className={`px-4 py-2 text-left text-xs font-semibold w-full cursor-pointer transition-colors ${
-                    isLight ? 'hover:bg-slate-100 text-slate-700' : 'hover:bg-white/10 text-gray-200'
+                    isLight ? 'hover:bg-[#E9D9B6] text-slate-700' : 'hover:bg-white/10 text-gray-200'
                   }`}
                 >
                   {t.nav.forProperties}
@@ -228,7 +239,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
                 <button
                   onClick={() => onNavigate('couriers')}
                   className={`px-4 py-2 text-left text-xs font-semibold w-full cursor-pointer transition-colors ${
-                    isLight ? 'hover:bg-slate-100 text-slate-700' : 'hover:bg-white/10 text-gray-200'
+                    isLight ? 'hover:bg-[#E9D9B6] text-slate-700' : 'hover:bg-white/10 text-gray-200'
                   }`}
                 >
                   {t.nav.forCouriers}
@@ -236,7 +247,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
                 <button
                   onClick={() => onNavigate('merchants')}
                   className={`px-4 py-2 text-left text-xs font-semibold w-full cursor-pointer transition-colors ${
-                    isLight ? 'hover:bg-slate-100 text-slate-700' : 'hover:bg-white/10 text-gray-200'
+                    isLight ? 'hover:bg-[#E9D9B6] text-slate-700' : 'hover:bg-white/10 text-gray-200'
                   }`}
                 >
                   {t.nav.forMerchants}
@@ -247,7 +258,9 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
         </nav>
 
         {/* Right Controls */}
-        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+        <div className={`flex items-center gap-2 sm:gap-2.5 shrink-0 ${
+          currentPage === 'home' ? (isLight ? 'home-light-header-controls' : 'home-dark-header-controls') : ''
+        }`}>
           {/* Active Order Tracker Shortcut */}
           {activeOrder && activeOrder.estimatedMinutesLeft > 0 && activeOrder.status !== 'delivered' && (
             <button
@@ -341,8 +354,8 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
             transition={{ duration: 0.15 }}
             className={`w-full border-t p-5 shadow-2xl flex flex-col gap-3.5 z-50 xl:hidden ${
               isLight
-                ? 'bg-white/98 text-slate-900 border-slate-200'
-                : 'bg-[#121417]/98 text-white border-white/15'
+                ? 'bg-[#F7EED8]/98 text-slate-900 border-[#6D531D]/20'
+                : 'bg-[#181A1F]/98 text-white border-white/15'
             }`}
           >
             {/* Mobile Language & Theme Controls */}
@@ -355,7 +368,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
                 onClick={toggleTheme}
                 className={`flex items-center gap-1.5 px-3 py-2 rounded-xl border text-xs font-bold transition-colors cursor-pointer ${
                   isLight
-                    ? 'bg-slate-100 border-slate-200 text-amber-800'
+                    ? 'bg-[#E9D9B6] border-[#6D531D]/20 text-amber-900'
                     : 'bg-white/10 border-white/15 text-[#E5B65F]'
                 }`}
                 title={t.ui.header.s_64f892}
@@ -373,7 +386,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
                   else onNavigate('home');
                 }}
                 className={`text-left py-2 transition-colors border-b ${
-                  isLight ? 'border-slate-100 hover:text-[#B88728] text-slate-800' : 'border-white/10 hover:text-[#E5B65F] text-gray-200'
+                  isLight ? 'border-[#6D531D]/15 hover:text-[#7d5a11] text-slate-800' : 'border-white/10 hover:text-[#E5B65F] text-gray-200'
                 }`}
               >
                 {t.nav.explore}
@@ -383,7 +396,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
                 <button
                   onClick={() => setIsPartnersExpanded(!isPartnersExpanded)}
                   className={`flex items-center justify-between w-full text-left py-2 transition-colors border-b ${
-                    isLight ? 'border-slate-100 hover:text-[#B88728] text-slate-800' : 'border-white/10 hover:text-[#E5B65F] text-gray-200'
+                    isLight ? 'border-[#6D531D]/15 hover:text-[#7d5a11] text-slate-800' : 'border-white/10 hover:text-[#E5B65F] text-gray-200'
                   }`}
                 >
                   <span>{t.nav.partners}</span>
@@ -400,7 +413,7 @@ export default function Header({ currentPage, onNavigate, onExplore }: HeaderPro
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       className={`overflow-hidden rounded-xl mt-2 px-4 py-2 flex flex-col gap-2 text-xs ${
-                        isLight ? 'bg-slate-100 text-slate-700' : 'bg-white/5 text-gray-300'
+                        isLight ? 'bg-[#E9D9B6] text-slate-700' : 'bg-white/5 text-gray-300'
                       }`}
                     >
                       <button

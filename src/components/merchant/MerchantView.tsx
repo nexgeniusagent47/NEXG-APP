@@ -173,7 +173,7 @@ export default function MerchantView({
   };
 
   return (
-    <div className={cn('min-h-[100dvh]', isLight ? 'bg-[#f7f8fa] text-[#1a1d20]' : 'bg-[#111315] text-[#f2f2f2]')}>
+    <div className={cn('min-h-[100dvh]', isLight ? 'bg-gold-canvas text-[#1a1d20]' : 'bg-[#111315] text-[#f2f2f2]')}>
       {/* Cover */}
       <div className="relative h-56 sm:h-72 lg:h-80 w-full overflow-hidden bg-slate-200 dark:bg-black/40">
         <img
@@ -359,7 +359,7 @@ export default function MerchantView({
                     'transition-shadow duration-200',
                     isRailDocked
                       ? isLight
-                        ? 'bg-[#f7f8fa]/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.07)]'
+                        ? 'bg-[#D8B350]/95 backdrop-blur-md shadow-[0_1px_0_rgba(0,0,0,0.07)]'
                         : 'bg-[#111315]/95 backdrop-blur-md shadow-[0_1px_0_rgba(255,255,255,0.07)]'
                       : 'bg-transparent'
                   )}

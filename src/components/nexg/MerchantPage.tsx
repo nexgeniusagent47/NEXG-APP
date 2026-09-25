@@ -75,7 +75,7 @@ export const MerchantPage: React.FC<MerchantPageProps> = ({
     <div
       className={cn(
         'min-h-screen transition-colors pb-24',
-        isLight ? 'bg-[#f7f8fa] text-[#1a1d20]' : 'bg-[#111315] text-[#f2f2f2]'
+        isLight ? 'bg-gold-canvas text-[#1a1d20]' : 'bg-[#111315] text-[#f2f2f2]'
       )}
     >
       {/* 1. MERCHANT HERO */}
