@@ -1,55 +1,49 @@
 # Release readiness
 
-**Push checks: PASS locally. Production release: BLOCKED.** The local change set passed
-the configured CI gates and the production-container rehearsal. A push to GitHub runs CI;
-it does not deploy the live site.
+**Production deployment: COMPLETE.** NEXG App 2.2.0, commit
+`b89350d78c1bcacf040f58696d291ceb9aa1035a`, is live on 2026-09-25. The current handoff and
+[deployment runbook](DEPLOY-STEP-BY-STEP.md) contain the release evidence and rollback tag.
 
-## Evidence available
+## Release evidence
 
-- The current pushed source candidate is recorded in the [handoff](handoff/HANDOFF.md);
-  this change set is local, uncommitted, and not pushed.
-- TypeScript check, Vitest (7 files / 52 tests), and the Vite production build passed in
-  Docker using the patched lockfile.
-- `npm audit --package-lock-only` reports zero vulnerabilities. The production-only npm
-  install in the image also reported zero vulnerabilities.
-- `docker-compose.staging.yml` and `scripts/staging.mjs` passed a local simulation on
-  2026-09-25 using the production Dockerfile and PostgreSQL 15: the SPA shell and all 29
-  API contract assertions passed; health, categories, and merchant routes returned 503
-  during a staging-only database outage; seeded health recovered afterward.
-- The isolated staging stack remains available at `http://127.0.0.1:54095` for inspection.
-  Its ignored `.env.staging` holds disposable credentials; PostgreSQL has no host port.
-- The browser flow and consistency suites were not run: pulling the version-matched
-  Playwright image stalled, and these suites are not part of the current GitHub CI job.
-- `.github/workflows/production-simulation.yml` runs the simulation on pushes and pull
-  requests to `main` and `master`; its result will be available only after these changes
-  are pushed.
+- GitHub [CI](https://github.com/nexgeniusagent47/NEXG-APP/actions/runs/36097453708) and
+  [production simulation](https://github.com/nexgeniusagent47/NEXG-APP/actions/runs/36097453713)
+  both passed for the deployed commit.
+- The production simulation used the production Dockerfile and PostgreSQL 15. It passed the SPA
+  shell and API contract assertions, confirmed health/categories/merchants fail closed during a
+  staging-only DB outage, and recovered after the test DB restarted.
+- A SHA-256-verified archive of the exact commit was built into a fresh release directory on the
+  server. The app image records the full commit SHA and build timestamp in `/api/version`.
+- Before deployment, the PostgreSQL backup was restored into an isolated, temporary Postgres
+  container and matched the expected counts. Production app container was recreated without
+  restarting PostgreSQL or running a schema change. Database container ID and named volume stayed
+  unchanged.
+- After deployment, both hostnames returned the site and health API over HTTPS. HTTP redirected to
+  HTTPS. Version reported the deployed commit; health reported PostgreSQL connected with 21
+  categories, 128 subcategories, 640 merchants and 6,000 items. Categories, merchants and search
+  endpoints returned 200.
+- Metrics/traces return 404 and telemetry read requests return 403, including tested case,
+  trailing-slash and nested path variants. Browser telemetry POST ingestion remains public.
+- The prior app image remains tagged
+  `nexg-concierge-app:rollback-before-b89350d` for rollback.
 
-## Gates still open
+## Work still open
 
-1. Push the local change set when ready, then review both GitHub CI and the production
-   simulation workflow results.
-2. Reconcile the production runbook with the owner-confirmed server directory, Compose
-   project, services, database and proxy topology. Current notes disagree; do not use
-   guessed server paths or the managed-database override.
-3. Define and rehearse an immutable release artifact and a rollback that restores both
-   application version and compatible database state.
-4. Verify backups and restore evidence before changing the live database.
-5. Complete current production security, origin/TLS, monitoring, and post-deploy health
-   checks as recorded in the phase handoff.
-6. Obtain explicit owner approval for the production release after the evidence above
-   is reviewable.
+1. **Zero Trust is deferred.** No Cloudflare Access plan, app, or policy is active. Nginx blocks
+   operator diagnostics in the meantime, so the operations dashboard cannot read metrics or
+   traces. See [Zero Trust for NEXG App](ZERO-TRUST-ACCESS.md) for its purpose, safe scope and
+   future implementation path. The telemetry read view must move to a separate protected route
+   before an Access path policy can be applied without blocking public telemetry ingestion.
+2. **Encrypted off-host database backup remains open.** The isolated restore rehearsal from the
+   server-local dump passed; after making an encrypted off-host copy, verify that copy can also be
+   restored. This deployment did not change database schema or data.
+3. The browser flow and consistency suites were not run because pulling the matching Playwright
+   image stalled. They were not part of the passing GitHub workflows.
+4. Follow up on the remaining production monitoring/logging decisions in the handoff. Do not
+   describe these items as passed until they are implemented and verified.
 
-## Safe local rehearsal
+## Pre-deployment CI
 
-```powershell
-npm run staging:simulate
-npm run staging:down
-npm run staging:reset
-```
-
-The first command builds and starts the isolated stack, performs the database outage
-and recovery check, and leaves the stack running for inspection. `down` preserves the
-simulation database volume. `reset` removes only the staging Compose project, its
-project-scoped volume, and the generated ignored credentials file. It uses the local
-Compose service `postgres` for `DATABASE_URL`, has no production host or credentials
-configured, invokes no deployment command, and does not publish PostgreSQL.
+The current deployed candidate completed the repository's required CI and production-simulation
+workflows. The simulation remains staging-only: its outage exercise must never target production.
+Pushes to `master` do not themselves deploy the live site.
