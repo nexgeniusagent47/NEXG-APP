@@ -1,5 +1,5 @@
 // server/index.ts
-// NEXG Concierge API.
+// NEXG App API.
 //
 // PostgreSQL is the only catalogue source. If it is unavailable, health and
 // catalogue routes fail visibly instead of serving a stale local copy.

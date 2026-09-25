@@ -27,7 +27,7 @@ already knows how that particular kind of thing is ordered.
 
 ## Product Purpose
 
-NEXG Concierge is an on-demand marketplace covering **21 verticals**, from
+NEXG App is an on-demand marketplace covering **21 verticals**, from
 restaurants and groceries to airport transfers, safaris, freight forwarding and
 financial services. It exists so that a customer does not need a different app, a
 different mental model and a different checkout for each kind of errand.
@@ -66,7 +66,7 @@ one-off import.
   verticals; a coffee and a safari share no price scale.
 - **Access context:** guests are often on hotel wifi, on a phone, one-handed,
   mid-interruption, and may not know the city. Residents are on mobile data and
-  know exactly what they want. Concierges are on desktop, often handling several
+  know exactly what they want. Front-desk teams are on desktop, often handling several
   guests at once.
 - **Fulfilment is real-world and mixed:** in-suite delivery, chauffeur, on-site
   booking, scheduled collection. A single order model cannot cover it.
@@ -105,17 +105,17 @@ one-off import.
 
 ## Brand Commitments
 
-- The name **NEXG Concierge** is fixed.
+- The name **NEXG App** is fixed.
 - The visual identity is nocturne: near-black surfaces with a single gold accent.
   Recorded in `DESIGN.md`; not to be changed as a side effect of unrelated work.
 - The voice is plain and factual. It states what a thing is and what happens next.
   Marketing language does not belong on operational surfaces.
-- Concierge is part of the promise: human assistance is available, not only
+- A concierge is part of the promise: human assistance is available, not only
   self-service.
 
 ## Evidence on Hand
 
-- `NEXG_Nairobi_Merchant_Seed_Catalog.xlsx` — the authoritative source catalogue:
+- `data/source/NEXG_Nairobi_Merchant_Seed_Catalog.xlsx` — the authoritative source catalogue:
   640 merchants, 14,895 items, a 128-row taxonomy sheet with per-subcategory
   workflow hints.
 - A seeded PostgreSQL database with a real schema: categories, subcategories,

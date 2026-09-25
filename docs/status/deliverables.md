@@ -1,12 +1,12 @@
 # NEXG App deliverables and phase status
 
-Updated: 2026-09-24. Overall initiative status: **ACTIVE — P0 release readiness blocked; P2 API and identity security in planning**.
+Updated: 2026-09-25. Overall initiative status: **ACTIVE — P0 release readiness blocked; P2 API and identity security in planning**.
 
 | Work item | Status | Evidence / next gate |
 |---|---|---|
 | Master build plan | ACTIVE — plan version 1.3 | `docs/MASTER-BUILD-PLAN.md`; initiative plan is documented, phase plans and owner decisions remain separate gates |
-| P0 PostgreSQL-only catalogue patch | PUSHED — not deployed; phase open | Candidate `cf30039` is on `origin/master`; local source boot plus PostgreSQL API contract passed 29/29; isolated invalid-loopback DB simulation confirmed 503/no fallback. GitHub CI passed. Staging/production topology check, release artifact, rollback rehearsal, and production acceptance remain open |
-| P0 release source and route | SOURCE ESTABLISHED — production release blocked | GitHub repository `nexgeniusagent47/NEXG-APP`, branch `master`; commit `cf30039`; CI run `36039810407` passed. No automatic deployment is configured. Staging topology, artifact, rollback rehearsal, and post-deploy checks remain open |
+| P0 PostgreSQL-only catalogue patch | PUSHED — not deployed; phase open | Candidate `cf30039` is on `origin/master`; local source boot plus PostgreSQL API contract passed 29/29; isolated invalid-loopback DB simulation confirmed 503/no fallback. GitHub CI passed. The new production-image simulation is authored locally but unrun because Docker is unavailable; staging/production topology check, release artifact, rollback rehearsal, and production acceptance remain open |
+| P0 release source and route | SOURCE ESTABLISHED — production release blocked | GitHub repository `nexgeniusagent47/NEXG-APP`, branch `master`; source candidate `cf30039`, current pushed tip `60ca6bb`; latest recorded CI run `36041258585` passed. No automatic deployment is configured. Staging topology, artifact, rollback rehearsal, and post-deploy checks remain open |
 | P1 onboarding and brand slice | IMPLEMENTED LOCALLY — unaccepted | Supplied adaptive wordmark, gold title bands, back-before-logo order, motorcycle glyph, category selection surface, device-language detection, and shared theme updates are present. Existing-field inventory, complete multilingual copy/RTL review, and one adaptive host/merchant/rider entry remain open |
 | P1 partner earnings estimates | IMPLEMENTED LOCALLY — illustrative | Courier estimate uses KES 95/km and 48-hour notice; property share uses 18% of estimated order markup and 14-day notice. Commercial wording and eligibility assumptions need owner confirmation before release |
 | Merchant category illustration prompts | PROMPTS READY — image assets pending | `docs/design/merchant-category-google-flow-prompts.md` covers 21 category images and 91 reusable subcategory symbols (128 selectable subcategory entries). No Flow-generated images are integrated |
@@ -39,3 +39,13 @@ The workstation's global npm/npx launchers are broken; local Node binaries and G
 were used. These checks do not equal production acceptance. No full security audit, staging outage
 test, Cloudflare change, or production deployment was performed. See
 [`../handoff/sessions/2026-09-24-release-readiness-and-phase-2.md`](../handoff/sessions/2026-09-24-release-readiness-and-phase-2.md).
+
+## Local repository and simulation work — 2026-09-25
+
+- Reorganized the source workbook and font-licensing research, removed unused root shims and
+  the unused Bun lockfile and superseded catalogue generator, refreshed the README and
+  documentation index, and corrected the SQL generation command to call the current generator.
+- Added an isolated production-image/PostgreSQL outage-and-recovery simulation and a GitHub
+  Actions workflow. The simulation was not run here because Docker is unavailable. These edits
+  are local and uncommitted; no new CI result exists yet.
+- Production release remains blocked. See [`../RELEASE-READINESS.md`](../RELEASE-READINESS.md).

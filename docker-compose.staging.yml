@@ -1,0 +1,58 @@
+# Disposable production-container rehearsal.
+#
+# This file has its own project name and named volume. PostgreSQL is not
+# published to the host; the app is bound to loopback on a random host port.
+name: nexg-concierge-staging
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: nexg_user
+      POSTGRES_PASSWORD: ${STAGING_POSTGRES_PASSWORD:?Run node scripts/staging.mjs to create .env.staging}
+      POSTGRES_DB: nexg_db
+      POSTGRES_INITDB_ARGS: --encoding=UTF8 --locale=C
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - staging-pgdata:/var/lib/postgresql/data
+      - ./src/db/schema.sql:/docker-entrypoint-initdb.d/10-schema.sql:ro
+      - ./src/db/seed_excel.sql:/docker-entrypoint-initdb.d/20-seed.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U nexg_user -d nexg_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GIT_SHA: ${STAGING_GIT_SHA:-local-worktree}
+        BUILT_AT: ${STAGING_BUILT_AT:-local}
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: "3001"
+      AUTH_SECRET: ${STAGING_AUTH_SECRET:?Run node scripts/staging.mjs to create .env.staging}
+      DATABASE_URL: "postgresql://nexg_user:${STAGING_POSTGRES_PASSWORD_URLENCODED:?Run node scripts/staging.mjs to create .env.staging}@postgres:5432/nexg_db"
+    ports:
+      - "127.0.0.1::3001"
+    healthcheck:
+      test:
+        - CMD
+        - node
+        - -e
+        - "fetch('http://127.0.0.1:3001/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 15s
+
+volumes:
+  staging-pgdata:

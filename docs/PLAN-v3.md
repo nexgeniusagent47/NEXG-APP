@@ -174,7 +174,7 @@ Measured, not assumed:
 - `server/repository.ts` calls `mapItem(i, ..., m.subcategory)` — it stamps **the
   merchant's own subcategory onto every item** and discards the item's own
   `subcategory_id`.
-- The source workbook `NEXG_Nairobi_Merchant_Seed_Catalog.xlsx` sheet 3 holds
+- The source workbook `data/source/NEXG_Nairobi_Merchant_Seed_Catalog.xlsx` sheet 3 holds
   **14,895 item rows across 640 merchants, and not one merchant's items span more
   than a single subcategory.**
 

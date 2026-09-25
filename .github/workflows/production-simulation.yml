@@ -1,0 +1,37 @@
+name: Production simulation
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-simulation-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  simulate:
+    name: Production image and database failure rehearsal
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Build and exercise the production image
+        run: node scripts/staging.mjs simulate
+
+      - name: Remove the disposable staging stack
+        if: always()
+        run: node scripts/staging.mjs reset

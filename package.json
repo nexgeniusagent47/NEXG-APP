@@ -11,11 +11,14 @@
     "start": "node server/index.ts",
     "db:up": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/setup-postgres.ps1",
     "db:seed": "tsx scripts/seed_postgres.ts",
-    "db:generate-sql": "python scripts/parse_excel_to_db.py",
+    "db:generate-sql": "python scripts/regenerate_catalog_seed.py",
     "test": "vitest run",
     "test:api": "node scripts/api-contract-test.mjs",
     "test:flow": "node scripts/v2-flow-test.mjs",
     "test:consistency": "node scripts/v3-consistency-test.mjs",
+    "staging:simulate": "node scripts/staging.mjs simulate",
+    "staging:down": "node scripts/staging.mjs down",
+    "staging:reset": "node scripts/staging.mjs reset",
     "shots": "node scripts/screenshots.mjs",
     "room": "node scripts/device-room/server.mjs",
     "room:check": "node scripts/device-room/check-source.mjs && node scripts/_verify-device-room.mjs",
@@ -56,6 +59,6 @@
     "tsx": "^4.21.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.3",
-    "vitest": "^3.0.7"
+    "vitest": "^4.1.11"
   }
 }

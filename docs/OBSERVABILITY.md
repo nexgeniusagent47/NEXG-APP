@@ -1,6 +1,6 @@
 # Observability
 
-What the NEXG Concierge process records, where every record goes, how long it lives,
+What the NEXG App process records, where every record goes, how long it lives,
 and what the consent model allows. Read this before adding a metric, a log line or a
 browser event.
 

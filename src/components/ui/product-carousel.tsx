@@ -1,9 +1,9 @@
-// components/ui/product-carousel.tsx
+// src/components/ui/product-carousel.tsx
 import * as React from "react";
 import { useLanguage } from '../../context/LanguageContext';
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronLeft, ChevronRight, Clock, Info, Check, Plus } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { useTheme } from "../../context/ThemeContext";
 
 // --- TYPE DEFINITIONS ---

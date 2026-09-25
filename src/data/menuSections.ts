@@ -16,7 +16,7 @@
 //      (`mapItem(i, …, m.subcategory)`), discarding the item's own
 //      `subcategory_id`.
 //   2. Even after fixing that, the source workbook has nothing to group by:
-//      `NEXG_Nairobi_Merchant_Seed_Catalog.xlsx` sheet 3 holds 14,895 item rows
+//      `data/source/NEXG_Nairobi_Merchant_Seed_Catalog.xlsx` sheet 3 holds 14,895 item rows
 //      across 640 merchants, and NOT ONE merchant's items span more than a single
 //      subcategory.
 //

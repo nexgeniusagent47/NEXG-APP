@@ -1,9 +1,9 @@
-// components/ui/offer-carousel.tsx
+// src/components/ui/offer-carousel.tsx
 import * as React from "react";
 import { useLanguage } from '../../context/LanguageContext';
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronLeft, ChevronRight, Sparkles, Clock, ArrowRight, Info, ShieldCheck, Tag } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 import { useTheme } from "../../context/ThemeContext";
 
 export interface Offer {

@@ -22,4 +22,12 @@ re-parks it. Items below are new from the master-plan review and are not claimed
 - **F-001 is IN PROGRESS at P0.** Commit `cf30039` is pushed to `origin/master`, the remote ref
   matches, the working tree is clean, and GitHub CI run `36039810407` passed. The branch workflow
   does not deploy production. Staging outage/rollback evidence and approved production release and
-  post-deploy checks remain outstanding.
+  post-deploy checks remain outstanding. This is the 2026-09-24 baseline; the current local tree
+  contains uncommitted work.
+
+## Repository cleanup and simulation work — 2026-09-25
+
+- The local worktree now has repository cleanup and a disposable production-image simulation. It
+  has not been pushed.
+- The new simulation has not run because Docker is unavailable on the workstation. F-001 remains
+  open until the outage/recovery rehearsal and rollback evidence are captured.

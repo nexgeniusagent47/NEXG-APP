@@ -1,6 +1,6 @@
 # Auth
 
-Session and JWT handling for NEXG Concierge. Built on `node:crypto` with **no new
+Session and JWT handling for NEXG App. Built on `node:crypto` with **no new
 dependencies** — scrypt and HS256 are both in the standard library.
 
 ## Required environment

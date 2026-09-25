@@ -1,195 +1,84 @@
-<div align="center">
+# NEXG App
 
-# NEXG Concierge
+NEXG App is a Nairobi marketplace with 21 categories and ordering flows tailored to
+each kind of service. The seeded catalogue currently contains 128 subcategories,
+640 merchants, and 6,000 items.
 
-**On-demand luxury concierge for Nairobi — Airbnb-grade discovery meets Glovo-grade fulfilment.**
+## Release status
 
-Version **v2.1.0**
+The source branch is `master`. GitHub CI has passed for the current pushed source,
+but a successful CI run does not deploy the site. Production release readiness is
+still blocked on staging evidence, a verified release and rollback procedure, and
+current production security checks. See the [current handoff](docs/handoff/HANDOFF.md)
+and [release readiness checklist](docs/RELEASE-READINESS.md).
 
-</div>
+## Run locally
 
----
+Requirements: Node.js 24+, npm, and Docker Desktop with Compose v2.
 
-## What this is
+```powershell
+npm ci
+npm run db:up       # starts this project's PostgreSQL on 127.0.0.1:5433
+npm run server      # API on :3001, in one terminal
+npm run dev         # Vite on :3000, in another terminal
+```
 
-A marketplace where 21 verticals — fine dining, spa & wellness, cellar, VIP mobility,
-safaris, groceries, logistics and more — share one discovery and fulfilment engine,
-while each subcategory declares its own commerce model (instant purchase, booking,
-quote, rental, ticket, appointment).
+Open <http://localhost:3000>. Local development uses PostgreSQL; the app returns
+HTTP 503 for catalogue requests when the database is unavailable rather than using
+a stale bundled catalogue.
 
-## Status
+## Production-image simulation
 
-| Capability | State |
+The simulation builds the same Dockerfile used for production and runs it against a
+fresh, separately named PostgreSQL 15 container. It checks the production SPA shell,
+version endpoint, and seeded API contract; stops only that temporary database to verify
+fail-closed responses; then checks recovery.
+
+```powershell
+npm run staging:simulate
+npm run staging:down     # stop the stack; keep its disposable database volume
+npm run staging:reset    # remove only the simulation stack and its volume
+```
+
+The simulation binds its app port to loopback on a random port and does not publish
+PostgreSQL. It creates a random, ignored `.env.staging`. `simulate` leaves the stack
+running for inspection. This is local release evidence only; it does not exercise
+the live server or authorize a production release. GitHub Actions runs the same
+simulation on pushes and pull requests to `main` or `master`.
+
+## Checks
+
+```powershell
+npm run lint
+npm test
+npm run test:api         # requires an already running API and seeded database
+npm run test:flow
+npm run test:consistency
+npm run build
+```
+
+`test:api` needs an already running API and seeded PostgreSQL. `test:flow` and
+`test:consistency` need the app and API running at their documented local URLs.
+
+## Repository map
+
+| Path | Contents |
 | --- | --- |
-| PostgreSQL database (21 categories / 128 subcategories / 640 merchants / 1,500 items) | ✅ working |
-| REST API backed only by PostgreSQL; returns 503 when unavailable | ✅ working |
-| **Discovery surface** — search opens a merchant browse screen | ✅ v2 |
-| **Dynamic workflows** — five commerce arcs derived per merchant | ✅ v2 |
-| **Merchant preview** — card click never navigates straight to the page | ✅ v2 |
-| **One merchant page** for all 21 verticals | ✅ v2 |
-| **One item modal** that adapts to each vertical's order requirements | ✅ v2 |
-| Add to cart from the item modal, persisted | ✅ v2 |
-| Typecheck / unit / API / flow / consistency tests | ✅ 102 assertions |
-| Legacy vertical landing pages (19 of them) | ⚠️ still on bundled static data |
-| Auth, payments, real dispatch, live GPS | ❌ out of scope |
+| `src/` | React app, shared components, frontend data, database schema and generated seed SQL |
+| `server/` | Express API and PostgreSQL repository |
+| `scripts/` | Database setup, catalogue generation, checks, screenshots, and staging simulation |
+| `tests/` | Vitest unit tests |
+| `data/source/` | Source workbook used to generate catalogue SQL |
+| `docs/` | Architecture, API, release, planning, brand, and handoff documentation |
+| `public/` | Static assets and licensed fonts |
+| `.github/workflows/` | CI and disposable production-image simulation |
 
-### Known gaps
+## Project guides
 
-**Catalogue depth.** The SQL seed ships **6,000 of the ~14,895 items** in the source
-Excel (`SQL_ITEM_LIMIT` in `scripts/regenerate_catalog_seed.py`). Merchants beyond
-that cap render an honest empty state. Raising the cap is the highest-value next
-task.
-
-**Legacy pages.** The discovery flow, merchant page and item modal read the API.
-`Restaurants.tsx`, `SpaWellness`, `TransportPage`, `GroceriesPage` and
-`NexGDiscoveryView` still read bundled static modules, so the same product shows
-different data depending on the route taken.
-
----
-
-## The discovery flow
-
-```
-landing ──click search bar──▶ Discovery ──click a merchant card──▶ Preview sheet
-                                  │                                     │
-                        live search, vertical rail,        workflow-specific action
-                        subcategory chips, sorting,        + "View full profile"
-                        pagination, skeletons                        │
-                                                                     ▼
-                                                      Merchant page (all verticals)
-                                                                     │
-                                                       click an offering
-                                                                     ▼
-                                                    Item modal (adapts to the arc)
-                                                                     │
-                                                                 Add to cart
-```
-
-Clicking a merchant card **never** navigates. The preview sheet answers "what is this
-and what can I do here?" first; only the explicit *View full profile* action opens the
-merchant page.
-
-### Dynamic workflows
-
-Every merchant carries a `workflow` string from the catalogue. `workflowEngine` maps it
-onto one of five commerce arcs, and the arc decides the card's action, the sheet's
-primary action, and what the item modal asks for:
-
-| Arc | Example verticals | The modal asks for |
-| --- | --- | --- |
-| Browse & buy | restaurants, groceries, pharmacy | quantity, options, delivery or pickup |
-| Book a slot | airport transfers, experiences | date, time, party size |
-| Request a service | concierge, laundry | service address, scope, preferred window |
-| Compliance & appointment | financial services | eligibility, then digital or branch |
-| Get a quote | logistics & shipping | origin, destination, units |
-
-Vertical-specific requirements come from the catalogue's own declarations
-(`merchantCatalog.ts` `fields` + `FIELD_DEFS`), so an alcohol order collects a liquor
-licence and an adults-only order collects an age-gate method — without either being
-hardcoded in the modal.
-
----
-
-## Quick start
-
-Prerequisites: **Node 22+**, **Docker Desktop running**.
-
-```bash
-npm install
-npm run db:up       # provisions Postgres 15 on port 5433
-npm run server      # API on :3001   (terminal 1)
-npm run dev         # SPA on :3000   (terminal 2)
-```
-
-Open <http://localhost:3000> and click the search bar.
-
-### Verify it works
-
-```bash
-npm run lint             # TypeScript
-npm test                 # 34 unit tests
-npm run test:api         # 29 API contract assertions    (server must be running)
-npm run test:flow        # 18 discovery-flow assertions
-npm run test:consistency # 21 merchant-page + item-modal assertions
-npm run shots            # Playwright screenshots -> logs/screenshots/
-```
-
----
-
-## Architecture
-
-
-```
-React 19 + Vite 6 (SPA)  :3000
-        │  fetch /api/* via Vite proxy (same-origin, no CORS)
-        ▼
-Express API (server/)    :3001
-   ├── server/index.ts       routes, pagination clamping, static SPA serving
-   ├── server/repository.ts  SQL queries + row → API mapping
-   └── server/db.ts          pg Pool, graceful fallback, idle-error handling
-        │  pg
-        ▼
-PostgreSQL 15            :5433   container `nexg-concierge-pg`
-```
-
-Full detail: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
-API reference: [`docs/API.md`](docs/API.md).
-Plan and defect backlog: [`docs/PLAN-v1.md`](docs/PLAN-v1.md).
-
----
-
-## Important: two unrelated Postgres stacks on this machine
-
-| Stack | Container | Port | Belongs to |
-| --- | --- | --- | --- |
-| **This project** | `nexg-concierge-pg` | **5433** | `nexg-concierge` |
-| Unrelated | `nexg-postgres-1`, `nexg-api-1`, `nexg-kernel-1` | 5432 | the **NEXG POS** Go platform at `C:\Users\limta\Desktop\NEXG POS` |
-
-`nexg-concierge` deliberately uses a **separate container name and port**. Do not
-point this project at port 5432, and do not modify the `NEXG POS` containers.
-
-## Database credentials
-
-Local development (matches `.github/workflows/ci.yml` so local == CI):
-
-```
-postgresql://nexg_user:change_me@127.0.0.1:5433/nexg_db
-```
-
-`npm run db:up` writes this to `.env`. `.env` is gitignored; `.env.example` is the
-template.
-
----
-
-## Project layout
-
-```
-server/          Express API (db, repository, routes)
-src/             React SPA
-  components/      feature components + nexg/ design system
-  data/            static catalogue modules  ← v2 will replace these with API calls
-  db/              schema.sql + generated seed_excel.sql
-  context/         cart, theme, language providers
-scripts/         provisioning, seeding, contract tests, screenshots
-tests/           vitest unit suites
-docs/            plan, architecture, API reference, handoff
-logs/            run logs + screenshots (see logs/README.md)
-```
-
-## Scripts
-
-| Command | Purpose |
-| --- | --- |
-| `npm run dev` | Vite dev server on :3000 |
-| `npm run server` | Express API on :3001 |
-| `npm run build` | Production SPA build |
-| `npm run db:up` | Provision/seed the Postgres container |
-| `npm run lint` | `tsc --noEmit` |
-| `npm test` | Vitest unit suites |
-| `npm run test:api` | API contract assertions |
-| `npm run shots` | Playwright surface screenshots |
-| `npm run db:generate-sql` | Regenerate seed SQL from the Excel catalogue |
-
-## v1 changelog
-
-See [`CHANGELOG.md`](CHANGELOG.md).
+- [Documentation index](docs/INDEX.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [API reference](docs/API.md)
+- [Release readiness](docs/RELEASE-READINESS.md)
+- [Deployment runbook status](docs/DEPLOY-STEP-BY-STEP.md)
+- [Current handoff](docs/handoff/HANDOFF.md)
+- [Changelog](CHANGELOG.md)

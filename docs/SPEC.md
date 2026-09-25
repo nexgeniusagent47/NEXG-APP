@@ -43,7 +43,7 @@ curation and discretion; the brand colour is gold on near-black.
 21 categories · 128 subcategories · 640 merchants · 6,000 items
 ```
 
-Produced by `scripts/parse_excel_to_db.py` from a spreadsheet into `src/db/seed_excel.sql`,
+Produced by `scripts/regenerate_catalog_seed.py` from the source workbook into `src/db/seed_excel.sql`,
 which is the single source of truth. The merchant names and item titles are **synthetic** —
 "Atlas Appliances House", "Japanese Miyazaki A5 Wagyu Ribeye Cut" — generated to fill the
 catalogue with plausible variety.

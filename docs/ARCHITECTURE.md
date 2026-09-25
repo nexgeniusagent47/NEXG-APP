@@ -2,7 +2,7 @@
 
 ## Overview
 
-NEXG Concierge is a **marketplace engine**, not a restaurant app. The domain problem
+NEXG App is a **marketplace engine**, not a restaurant app. The domain problem
 it solves: 21 unrelated verticals must share one discovery surface and one fulfilment
 pipeline, while each vertical has a genuinely different transaction shape. A
 restaurant order, a spa booking, a car rental and a freight quote cannot share one
@@ -40,7 +40,7 @@ checkout form — so they share an **engine** and declare their differences as d
 | `subcategories` | 128 | belongs to a category; carries workflow semantics |
 | `merchants` | 640 | `metadata JSONB` holds `area`, `archetype`, `palette`, `workflow` |
 | `merchant_subcategories` | — | many-to-many, `is_primary` marks the main one |
-| `items` | 1,500 | purchasable units, `customization_options JSONB` |
+| `items` | 6,000 | purchasable units, `customization_options JSONB` |
 | `merchant_reviews` | 0 | schema present, no seed data yet |
 | `v_merchant_storefront` | view | denormalised read model for storefront queries |
 
@@ -166,7 +166,7 @@ performed, on a control that adds a line to the cart.
 in the browser and silently masked database failures.
 
 ```
-NEXG_Nairobi_Merchant_Seed_Catalog.xlsx
+data/source/NEXG_Nairobi_Merchant_Seed_Catalog.xlsx
         │
         ▼
 scripts/regenerate_catalog_seed.py
@@ -177,9 +177,9 @@ scripts/regenerate_catalog_seed.py
 seed_excel.sql  ──►  npm run db:up  ──►  Postgres
 ```
 
-`scripts/parse_excel_to_db.py` is the original generator and is **superseded**. It
-read the Excel correctly and then discarded most of it; its specific failures are
-documented in `CHANGELOG.md` under 2.1.0.
+The former `parse_excel_to_db.py` generator was retired after it dropped catalogue
+relationships and most item rows. Its historical failures are recorded in
+`CHANGELOG.md` under 2.1.0. `npm run db:generate-sql` calls the current generator.
 
 ## Data source strategy
 
@@ -205,7 +205,7 @@ also return 503 instead of showing stale sample data.
 | Marketplace UI | `src/components/nexg/` | legacy design-system components |
 | Legacy pages | `src/components/*.tsx` | vertical landing pages — **still on static data** |
 | State | `src/context/` | cart, theme, language |
-| Static data | `src/data/` | taxonomy + the generated JSON bundle |
+| Static data | `src/data/` | taxonomy and legacy vertical data modules |
 | Hooks | `src/hooks/` | `useMerchantSearch`, `useModalBehavior` |
 
 ### Known architectural debt
@@ -215,27 +215,33 @@ also return 503 instead of showing stale sample data.
 `restaurantsData.ts`, `spaData.ts`, `transportData.ts` and `cellarData.ts` rather
 than the API, so the same product shows different data depending on the route taken.
 The discovery flow, the merchant page and the item modal are migrated; the rest are
-the top backlog item in `docs/HANDOFF.md`.
+tracked in `docs/handoff/HANDOFF.md`.
 
-There are also duplicate component directories — `components/ui/` and
-`src/components/ui/` — where the former appears to be dead code.
+`src/components/` is the canonical component tree. Root-level forwarding shims and
+the unused root `lib/utils.ts` shim have been removed; shared utilities live in
+`src/lib/`.
 
 ## Security posture
 
-This is a **local development baseline**. It has no authentication and must not be
-exposed publicly. Notable properties:
+This source contains auth/session routes, security headers, and in-process rate limits,
+but it is **not accepted for production exposure**. Current production security
+verification remains open. Notable source-level limits:
 
 - All SQL uses **parameterised queries**; no string concatenation of user input.
   The one value concatenated into SQL is the `sort` key, which selects from a
   fixed whitelist rather than being interpolated from the query string.
 - Pagination input is clamped (`limit` ≤ 200, `offset` ≥ 0) rather than trusted.
-- `CORS: Access-Control-Allow-Origin: *` — safe locally, must be restricted in
-  production.
-- The database password is a **local-only placeholder** committed to `ci.yml` by
-  design; production must inject a real secret.
+- `Access-Control-Allow-Origin: *` is currently set in `server/index.ts`; restrict it
+  before exposing the API to production traffic.
+- Rate-limit counters are in memory and do not coordinate across app instances.
+- Production secrets must be injected at runtime; `AUTH_SECRET` is required and has
+  no default.
+- Production authentication, authorization, proxy/TLS, and exposure checks still need
+  current acceptance evidence; see [release readiness](RELEASE-READINESS.md).
 
 ## Out of scope
 
-Auth, payments, real courier dispatch, live GPS, merchant self-service portal, and
-completed i18n. Discovery pagination exists; the legacy vertical pages still render
-their whole catalogue at once.
+Complete customer authentication/authorization flows, payments, real courier dispatch,
+live GPS, a merchant self-service portal, and completed i18n remain out of scope for the
+current slice. Discovery pagination exists; the legacy vertical pages still render their
+whole catalogue at once.

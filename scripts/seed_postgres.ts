@@ -12,7 +12,7 @@ async function seedPostgres() {
   const seedPath = path.resolve(process.cwd(), 'src/db/seed_excel.sql');
 
   if (!fs.existsSync(seedPath)) {
-    console.error('Error: seed_excel.sql not found! Please run `python scripts/parse_excel_to_db.py` first.');
+    console.error('Error: seed_excel.sql not found! Please run `npm run db:generate-sql` first.');
     process.exit(1);
   }
 

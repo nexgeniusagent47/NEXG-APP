@@ -2,7 +2,8 @@
 
 Why this exists
 ---------------
-`parse_excel_to_db.py` reads the Excel correctly but then throws most of it away:
+The former `parse_excel_to_db.py` generator read the workbook but discarded most of its
+useful data:
 
   1. It computes a `subcategoryId` for every merchant and never emits the
      `merchant_subcategories` link rows, so the junction table is empty. The API
@@ -30,11 +31,13 @@ import os
 import re
 import sys
 from collections import defaultdict
+from pathlib import Path
 
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
-XLSX_PATH = 'NEXG_Nairobi_Merchant_Seed_Catalog.xlsx'
-OUTPUT_SQL_PATH = 'src/db/seed_excel.sql'
+ROOT_DIR = Path(__file__).resolve().parents[1]
+XLSX_PATH = ROOT_DIR / 'data' / 'source' / 'NEXG_Nairobi_Merchant_Seed_Catalog.xlsx'
+OUTPUT_SQL_PATH = ROOT_DIR / 'src' / 'db' / 'seed_excel.sql'
 
 # How many items to emit into the SQL seed. The full catalogue is ~14.9k items;
 # the JSON bundle carries every merchant summary but only a slice of full items.
