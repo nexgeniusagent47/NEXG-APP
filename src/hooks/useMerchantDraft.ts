@@ -1,6 +1,6 @@
 // src/hooks/useMerchantDraft.ts
 //
-// Draft persistence for the long onboarding forms.
+// Draft persistence for the long merchant onboarding form.
 //
 // SNAPSHOT STYLE, NOT OWNED STATE
 // The obvious shape for this hook is to own a single state object and hand back a
@@ -18,20 +18,16 @@
 // forms sharing one key would silently read each other's data, which is worse than
 // either having no draft at all.
 //
-// WHAT IS PERSISTED, AND WHAT DELIBERATELY IS NOT
-// Persisted: everything the applicant typed — step, category, profile, contacts,
-// branches, hours, delivery, banking. That is the work that would otherwise be lost.
+// New writes go to the Express API. `readMerchantDraft` remains as a one-time
+// migration path for drafts saved by older builds in local storage.
 //
-// Not persisted: transient view state. The map modal, its Leaflet coordinates, live
-// Nominatim search results, `isResolving` flags and which branch row is active are all
-// derived from a session, and restoring them would reopen a modal the user had closed
-// and re-fire geocoding requests on load.
+// Transient view state stays in memory. The map modal, its Leaflet coordinates, live
+// Nominatim search results, `isResolving` flags and active branch row are session-only.
 //
-// Nor are uploaded files. A File cannot be serialised, base64 in localStorage would
-// exhaust the ~5 MB quota immediately, and silently writing identity documents to disk
-// is a privacy decision nobody asked for. The UI must re-prompt, and says so.
+// File inputs still only track names in this UI. Binary document upload is separate work.
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { deleteOnboardingDraft, saveOnboardingDraft } from '../lib/onboardingApi';
 
 /** Bump when a persisted field changes shape.
  *
@@ -119,32 +115,24 @@ export function useMerchantDraft(
 
       if (timer.current !== null) window.clearTimeout(timer.current);
       timer.current = window.setTimeout(() => {
-        try {
-          const payload: StoredDraft<Record<string, unknown>> = {
-            version,
-            savedAt: new Date().toISOString(),
-            data: latest.current ?? {},
-          };
-          window.localStorage.setItem(key, JSON.stringify(payload));
-          setSavedAt(new Date(payload.savedAt));
-          setAvailable(true);
-        } catch {
-          // Quota exceeded, or storage blocked. Surface it so the UI can say the work is
-          // not being kept: silently failing to save is the worst outcome, because the
-          // applicant closes the tab believing it is safe.
-          setAvailable(false);
-        }
+        void saveOnboardingDraft('merchant', latest.current ?? {}, version)
+          .then((result) => {
+            setSavedAt(new Date(result.savedAt));
+            setAvailable(true);
+          })
+          .catch(() => {
+            // A failed API write must be visible as an unsaved draft. Do not silently
+            // fall back to local storage for identity and payout details.
+            setAvailable(false);
+          });
       }, debounceMs);
     },
     [key, version, debounceMs]
   );
 
   const clear = useCallback(() => {
-    try {
-      window.localStorage.removeItem(key);
-    } catch {
-      // Usually called while navigating away on success; nothing useful to do.
-    }
+    void deleteOnboardingDraft('merchant').catch(() => setAvailable(false));
+    try { window.localStorage.removeItem(key); } catch { /* legacy draft may be unavailable */ }
     setSavedAt(null);
   }, [key]);
 

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { deleteOnboardingDraft, loadOnboardingDraft, saveOnboardingDraft, submitOnboardingApplication } from '../lib/onboardingApi';
 import LogoIcon from './LogoIcon';
 import type { PointerEvent as ReactPointerEvent, ReactNode } from 'react';
 import {
@@ -586,28 +587,32 @@ const restoreSpaces = (rows: SpaceRow[] | undefined): SpaceRow[] =>
 const restoreRequests = (rows: RequestRow[] | undefined): RequestRow[] =>
   rows && rows.length > 0 ? rows.map((row) => ({ ...row, id: nextRowId('request') })) : [createRequest()];
 
+function normalizeDraft(value: Partial<PersistedDraft> | null | undefined): PersistedDraft | null {
+  if (!value || value.version !== DRAFT_VERSION || !value.form) return null;
+  const step = typeof value.step === 'number' ? value.step : 1;
+  return {
+    version: DRAFT_VERSION,
+    form: { ...INITIAL_FORM, ...value.form, termsAccepted: false },
+    chips: { ...INITIAL_CHIPS, ...value.chips },
+    spaces: restoreSpaces(value.spaces),
+    requests: restoreRequests(value.requests),
+    pin: value.pin ?? null,
+    step: Math.min(Math.max(step, 1), TOTAL_STEPS),
+  };
+}
+
 function loadDraft(): PersistedDraft | null {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as Partial<PersistedDraft>;
-    if (parsed.version !== DRAFT_VERSION || !parsed.form) return null;
-    const step = typeof parsed.step === 'number' ? parsed.step : 1;
-    return {
-      version: DRAFT_VERSION,
-      form: { ...INITIAL_FORM, ...parsed.form },
-      chips: { ...INITIAL_CHIPS, ...parsed.chips },
-      spaces: restoreSpaces(parsed.spaces),
-      requests: restoreRequests(parsed.requests),
-      pin: parsed.pin ?? null,
-      step: Math.min(Math.max(step, 1), TOTAL_STEPS),
-    };
+    return normalizeDraft(parsed);
   } catch {
     return null;
   }
 }
 
-function removeDraft(): void {
+function removeLegacyDraft(): void {
   try {
     window.localStorage.removeItem(STORAGE_KEY);
   } catch {
@@ -833,6 +838,41 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
   const [geoStatus, setGeoStatus] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [saveStatus, setSaveStatus] = useState(initialDraft ? 'Saved on this device' : 'Not saved');
+  const [draftReady, setDraftReady] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState('');
+
+  useEffect(() => {
+    let active = true;
+    void (async () => {
+      try {
+        const remote = await loadOnboardingDraft<Partial<PersistedDraft>>('host');
+        if (!active) return;
+        const normalized = normalizeDraft(remote?.data);
+        if (normalized) {
+          setForm(normalized.form);
+          setChips(normalized.chips);
+          setSpaces(normalized.spaces);
+          setRequests(normalized.requests);
+          setPin(normalized.pin);
+          setCurrentStep(normalized.step);
+          setSaveStatus('Saved to server');
+          removeLegacyDraft();
+        } else if (initialDraft) {
+          await saveOnboardingDraft('host', initialDraft as unknown as Record<string, unknown>, DRAFT_VERSION);
+          removeLegacyDraft();
+          setSaveStatus('Saved to server');
+        } else {
+          setSaveStatus('Draft saves to server');
+        }
+      } catch {
+        if (active) setSaveStatus('Draft not saved — server unavailable');
+      } finally {
+        if (active) setDraftReady(true);
+      }
+    })();
+    return () => { active = false; };
+  }, []);
 
   /* -- validation helpers ------------------------------------------------- */
 
@@ -949,27 +989,28 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
 
   const hydrated = useRef(false);
   useEffect(() => {
-    if (submitted) return;
+    if (submitted || !draftReady) return;
     if (!hydrated.current) {
       hydrated.current = true;
       return;
     }
-    const draft: PersistedDraft = {
+      const draft: PersistedDraft = {
       version: DRAFT_VERSION,
-      form,
+      form: { ...form, termsAccepted: false },
       chips,
       spaces,
       requests,
       pin,
       step: currentStep,
     };
-    try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(draft));
-      setSaveStatus('Saved just now');
-    } catch {
-      setSaveStatus('Not saved');
-    }
-  }, [form, chips, spaces, requests, pin, currentStep, submitted]);
+    setSaveStatus('Saving to server…');
+    const timer = window.setTimeout(() => {
+      void saveOnboardingDraft('host', draft as unknown as Record<string, unknown>, DRAFT_VERSION)
+        .then(() => setSaveStatus('Saved to server'))
+        .catch(() => setSaveStatus('Draft not saved — server unavailable'));
+    }, 700);
+    return () => window.clearTimeout(timer);
+  }, [form, chips, spaces, requests, pin, currentStep, submitted, draftReady]);
 
   /* -- map ---------------------------------------------------------------- */
 
@@ -1150,13 +1191,35 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const submit = (): void => {
+  const submit = async (): Promise<void> => {
     const found = collectIssues();
     setIssues(found);
     if (found.length > 0) return;
-    removeDraft();
-    setSubmitted(true);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsSubmitting(true);
+    setSubmissionError('');
+    try {
+      await submitOnboardingApplication('host', {
+        version: DRAFT_VERSION,
+        form,
+        chips,
+        spaces,
+        requests,
+        pin,
+        step: currentStep,
+        uploads: Object.fromEntries(Object.entries(uploads).map(([key, file]) => [key, { name: file?.name ?? '' }])),
+        signatoryName: form.signatoryName,
+        sigMode: signatureMode,
+        termsAccepted: form.termsAccepted,
+        signatureImage: signatureMode === 'draw' ? canvas.current?.toDataURL() ?? '' : '',
+      }, DRAFT_VERSION);
+      removeLegacyDraft();
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (error) {
+      setSubmissionError(error instanceof Error ? error.message : 'Unable to submit your application.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const goNext = (): void => {
@@ -1172,7 +1235,9 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
   };
 
   const startAnother = (): void => {
-    removeDraft();
+    removeLegacyDraft();
+    void deleteOnboardingDraft('host').catch(() => setSaveStatus('Draft could not be cleared'));
+    setSubmissionError('');
     setForm(INITIAL_FORM);
     setChips(INITIAL_CHIPS);
     setSpaces([createSpace()]);
@@ -2412,8 +2477,8 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
               <span />
             )}
             <div className="hidden text-[11px] font-medium text-slate-400 sm:block">{t.ui.hostOnboarding.s_75d65e}</div>
-            <button type="button" onClick={goNext} className={`ml-auto ${PRIMARY_BUTTON}`}>
-              {isLastStep ? 'Submit Host Application' : 'Continue'}
+            <button type="button" onClick={goNext} disabled={isSubmitting || !draftReady} className={`ml-auto ${PRIMARY_BUTTON}`}>
+              {isSubmitting ? 'Submitting…' : isLastStep ? 'Submit Host Application' : 'Continue'}
               {isLastStep ? <Check className="h-4 w-4" /> : <ArrowRight className="h-4 w-4" />}
             </button>
           </div>
@@ -2453,7 +2518,16 @@ export default function HostOnboarding({ onNavigate }: HostOnboardingProps) {
       </header>
 
       <main className="mx-auto max-w-5xl px-4 py-7 sm:px-6 sm:py-10">
-        {submitted ? renderSuccess() : renderWizard()}
+        {!draftReady ? (
+          <div className="rounded-3xl border border-slate-200 bg-white p-8 text-center text-sm font-semibold text-slate-600">
+            Restoring your saved application…
+          </div>
+        ) : (
+          <>
+            {submissionError && <p role="alert" className="mb-5 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm font-semibold text-red-800">{submissionError}</p>}
+            {submitted ? renderSuccess() : renderWizard()}
+          </>
+        )}
       </main>
     </div>
   );

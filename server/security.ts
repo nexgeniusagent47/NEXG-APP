@@ -125,6 +125,13 @@ const RULES: Array<{ test: (method: string, path: string) => boolean; rule: Rule
     test: (m, p) => m === 'POST' && p === '/api/leads/email',
     rule: { windowMs: 60 * 60_000, max: 20, maxPerIp: 200 },
   },
+  // Onboarding writes contain sensitive personal and payment data. Keep normal
+  // autosave usable while bounding anonymous database writes per device and IP.
+  {
+    name: 'onboarding',
+    test: (m, p) => ['PUT', 'POST', 'DELETE'].includes(m) && /^\/api\/onboarding\/(merchant|courier|host)\/(draft|submit)$/.test(p),
+    rule: { windowMs: 60 * 60_000, max: 180, maxPerIp: 1200 },
+  },
   // Client telemetry: fires often by design, but still bounded.
   {
     name: 'telemetry',

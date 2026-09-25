@@ -35,6 +35,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 import { DateStringField } from './forms/DateTimeField';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
+import { loadOnboardingDraft, saveOnboardingDraft, submitOnboardingApplication } from '../lib/onboardingApi';
 
 interface CourierOnboardingProps {
   onNavigate: (page: 'home' | 'merchants' | 'properties' | 'restaurants' | 'experiences' | 'merchant_onboarding' | 'properties' | 'couriers' | 'courier_onboarding') => void;
@@ -56,6 +57,10 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
   const [currentStep, setCurrentStep] = useState<number>(1);
   const [selectedType, setSelectedType] = useState<'independent' | 'dedicated' | 'fleet'>('independent');
   const [sigMode, setSigMode] = useState<'draw' | 'type'>('draw');
+  const [draftReady, setDraftReady] = useState(false);
+  const [draftSaveState, setDraftSaveState] = useState('Loading saved application…');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState('');
   
   // Signature ref
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -156,6 +161,59 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
   };
 
   const steps = getSteps();
+
+  useEffect(() => {
+    let active = true;
+    void loadOnboardingDraft<Record<string, any>>('courier')
+      .then((draft) => {
+        if (!active) return;
+        if (draft?.version === 1 && draft.data && typeof draft.data === 'object') {
+          const data = draft.data;
+          if (['independent', 'dedicated', 'fleet'].includes(data.selectedType)) setSelectedType(data.selectedType);
+          if (data.formData && typeof data.formData === 'object') setFormData((previous) => ({ ...previous, ...data.formData }));
+          if (Array.isArray(data.fleetRiders)) setFleetRiders(data.fleetRiders);
+          if (Array.isArray(data.csvRiders)) setCsvRiders(data.csvRiders);
+          if (typeof data.csvFileUploaded === 'boolean') setCsvFileUploaded(data.csvFileUploaded);
+          if (typeof data.csvFileName === 'string') setCsvFileName(data.csvFileName);
+          if (data.uploadedFiles && typeof data.uploadedFiles === 'object') setUploadedFiles(data.uploadedFiles);
+          if (data.sigMode === 'draw' || data.sigMode === 'type') setSigMode(data.sigMode);
+          const step = Number(data.currentStep);
+          if (Number.isFinite(step) && step >= 1 && step <= 6) setCurrentStep(step);
+          setDraftSaveState('Saved application restored');
+        } else {
+          setDraftSaveState('Draft saves to server');
+        }
+      })
+      .catch(() => {
+        if (active) setDraftSaveState('Could not load saved application');
+      })
+      .finally(() => {
+        if (active) setDraftReady(true);
+      });
+    return () => { active = false; };
+  }, []);
+
+  useEffect(() => {
+    if (!draftReady || currentStep === 7) return;
+    const data = {
+      currentStep,
+      selectedType,
+      formData,
+      fleetRiders,
+      csvRiders,
+      csvFileUploaded,
+      csvFileName,
+      uploadedFiles,
+      sigMode,
+    };
+    const timer = window.setTimeout(() => {
+      setDraftSaveState('Saving draft…');
+      void saveOnboardingDraft('courier', data)
+        .then(() => setDraftSaveState('Draft saved to server'))
+        .catch(() => setDraftSaveState('Draft not saved — server unavailable'));
+    }, 700);
+    return () => window.clearTimeout(timer);
+  }, [draftReady, currentStep, selectedType, formData, fleetRiders, csvRiders, csvFileUploaded, csvFileName, uploadedFiles, sigMode]);
 
   // Draw on canvas setup
   useEffect(() => {
@@ -470,11 +528,42 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
     }
   };
 
-  const handleFinish = (e: FormEvent) => {
+  const handleFinish = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (validateStep()) {
-      setCurrentStep(7); // success page
+    if (!validateStep()) return;
+    const accepted = Boolean(e.currentTarget.querySelector<HTMLInputElement>('#contract-check')?.checked);
+    if (!accepted) {
+      alert('Please accept the courier agreement to submit your application.');
+      return;
+    }
+    if (sigMode === 'draw' && isCanvasBlank()) {
+      alert('Please draw your signature to submit your application.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmissionError('');
+    try {
+      await submitOnboardingApplication('courier', {
+        currentStep,
+        selectedType,
+        formData,
+        fleetRiders,
+        csvRiders,
+        csvFileUploaded,
+        csvFileName,
+        uploadedFiles,
+        sigMode,
+        signatoryName: formData.signatoryName,
+        termsAccepted: accepted,
+        signatureImage: sigMode === 'draw' ? canvasRef.current?.toDataURL() ?? '' : '',
+      });
+      setCurrentStep(7); // show success only after the server accepts the application
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (error) {
+      setSubmissionError(error instanceof Error ? error.message : 'Unable to submit your application.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -563,6 +652,14 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
     );
   };
 
+  if (!draftReady) {
+    return (
+      <div className="onboarding-theme flex min-h-screen items-center justify-center bg-slate-50 p-6 text-sm font-semibold text-slate-600">
+        Restoring your saved application…
+      </div>
+    );
+  }
+
   return (
     <div className="onboarding-theme bg-slate-50 text-slate-900 font-sans antialiased min-h-screen pt-[88px] pb-20 selection:bg-[#E5B65F] selection:text-black">
       
@@ -610,6 +707,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                 style={{ width: `${(currentStep / steps.length) * 100}%` }}
               ></div>
             </div>
+            <p className="mt-2 text-right text-[11px] font-medium text-gray-500" aria-live="polite">{draftSaveState}</p>
           </div>
         )}
 
@@ -2256,8 +2354,9 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                 {currentStep === 6 ? (
                   <button 
                     type="submit"
+                    disabled={isSubmitting}
                     className="bg-[#7d5a11] hover:bg-[#5f4616] text-white px-8 py-3 rounded-xl font-bold text-sm transition flex items-center gap-2 shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer active:scale-95"
-                  >{t.ui.courierOnboarding.s_ac26fd}<CheckCircle size={16} />
+                  >{isSubmitting ? 'Submitting…' : t.ui.courierOnboarding.s_ac26fd}<CheckCircle size={16} />
                   </button>
                 ) : (
                   <button 
@@ -2269,6 +2368,7 @@ export default function CourierOnboarding({ onNavigate }: CourierOnboardingProps
                 )}
               </div>
             )}
+            {submissionError && <p role="alert" className="mt-5 text-right text-sm font-semibold text-red-700">{submissionError}</p>}
 
           </form>
 

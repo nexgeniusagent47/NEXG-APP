@@ -146,7 +146,39 @@ CREATE INDEX IF NOT EXISTS idx_items_name_trgm ON items USING gin (name gin_trgm
 CREATE INDEX IF NOT EXISTS idx_items_featured ON items(merchant_id, is_featured) WHERE is_available = TRUE;
 
 -- --------------------------------------------------------------------
--- 7. REVIEWS & RATINGS TABLE
+-- 7. ONBOARDING APPLICATIONS
+-- Payloads are encrypted by the API before they reach this table because
+-- applications contain identity, contact, and payout information.
+-- --------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS onboarding_applications (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    application_type VARCHAR(16) NOT NULL CHECK (application_type IN ('merchant', 'courier', 'host')),
+    token_hash CHAR(64) NOT NULL,
+    status VARCHAR(16) NOT NULL CHECK (status IN ('draft', 'submitted')),
+    payload_version INTEGER NOT NULL DEFAULT 1 CHECK (payload_version BETWEEN 1 AND 20),
+    payload_ciphertext BYTEA NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    submitted_at TIMESTAMP WITH TIME ZONE,
+    expires_at TIMESTAMP WITH TIME ZONE,
+    CONSTRAINT uq_onboarding_application_token UNIQUE (application_type, token_hash),
+    CONSTRAINT ck_onboarding_submission_time CHECK (
+      (status = 'draft' AND submitted_at IS NULL) OR
+      (status = 'submitted' AND submitted_at IS NOT NULL)
+    ),
+    CONSTRAINT ck_onboarding_expiry CHECK (
+      (status = 'draft' AND expires_at IS NOT NULL) OR
+      (status = 'submitted' AND expires_at IS NULL)
+    )
+);
+
+CREATE INDEX IF NOT EXISTS idx_onboarding_drafts_expiry
+  ON onboarding_applications(expires_at) WHERE status = 'draft';
+CREATE INDEX IF NOT EXISTS idx_onboarding_submitted_type_date
+  ON onboarding_applications(application_type, submitted_at DESC) WHERE status = 'submitted';
+
+-- --------------------------------------------------------------------
+-- 8. REVIEWS & RATINGS TABLE
 -- --------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS merchant_reviews (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -162,7 +194,7 @@ CREATE TABLE IF NOT EXISTS merchant_reviews (
 CREATE INDEX IF NOT EXISTS idx_reviews_merchant ON merchant_reviews(merchant_id, created_at DESC);
 
 -- --------------------------------------------------------------------
--- 8. ULTRA-FAST STOREFRONT SEARCH VIEW
+-- 9. ULTRA-FAST STOREFRONT SEARCH VIEW
 -- --------------------------------------------------------------------
 CREATE OR REPLACE VIEW v_merchant_storefront AS
 SELECT 

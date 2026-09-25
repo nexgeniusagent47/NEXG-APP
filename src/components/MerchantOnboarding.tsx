@@ -3,7 +3,8 @@ import * as Icons from 'lucide-react';
 import { CATALOG, FIELD_DEFS, SUGGESTED_SECTIONS, Category, Subcategory } from '../data/merchantCatalog';
 import { useTheme } from '../context/ThemeContext';
 import { useLanguage } from '../context/LanguageContext';
-import { readMerchantDraft, useMerchantDraft } from '../hooks/useMerchantDraft';
+import { MERCHANT_DRAFT_VERSION, readMerchantDraft, useMerchantDraft } from '../hooks/useMerchantDraft';
+import { loadOnboardingDraft, saveOnboardingDraft, submitOnboardingApplication } from '../lib/onboardingApi';
 import LanguageSwitcher from './LanguageSwitcher';
 import LogoIcon from './LogoIcon';
 import { TimeStringField } from './forms/DateTimeField';
@@ -42,6 +43,10 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
     draftRef.current = readMerchantDraft<Record<string, unknown>>({});
   }
   const draft = (draftRef.current.data ?? {}) as Record<string, any>;
+
+  const [draftReady, setDraftReady] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState('');
 
   const { save: saveDraft, clear: clearDraft, savedAt, restored, available: draftAvailable } =
     useMerchantDraft(draftRef.current.savedAt);
@@ -180,6 +185,63 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
   const [termsAccepted, setTermsAccepted] = useState<boolean>(false);
   const [signatureImage, setSignatureImage] = useState<string>('');
 
+  // The server is authoritative. Import a legacy browser draft once only when
+  // no server draft exists; after that, applicant data lives in PostgreSQL.
+  useEffect(() => {
+    let active = true;
+    const applyDraft = (data: Record<string, any>) => {
+      const step = Number(data.currentStep);
+      setCurrentStep(Number.isFinite(step) && step >= 1 && step <= totalSteps ? step : 1);
+      const category = data.selectedCategoryId
+        ? CATALOG.find((item) => item.id === data.selectedCategoryId) ?? null
+        : null;
+      setSelectedCategory(category);
+      const ids = new Set<string>(Array.isArray(data.selectedSubcategoryIds) ? data.selectedSubcategoryIds : []);
+      setSelectedSubcategories(category ? category.subcategories.filter((item) => ids.has(item.id)) : []);
+      setDynamicFields(data.dynamicFields ?? {});
+      setSelectedCatalogSections(Array.isArray(data.selectedCatalogSections) ? data.selectedCatalogSections : []);
+      setProfileData((previous) => ({ ...previous, ...(data.profileData ?? {}) }));
+      if (Array.isArray(data.branches) && data.branches.length > 0) setBranches(data.branches);
+      setContactData((previous) => ({ ...previous, ...(data.contactData ?? {}) }));
+      if (Array.isArray(data.operatingDays)) setOperatingDays(data.operatingDays);
+      if (data.hoursMode) setHoursMode(data.hoursMode);
+      if (data.globalHours) setGlobalHours((previous) => ({ ...previous, ...data.globalHours }));
+      if (data.groupHours) setGroupHours((previous) => ({ ...previous, ...data.groupHours }));
+      if (data.dailyHours) setDailyHours((previous) => ({ ...previous, ...data.dailyHours }));
+      if (data.holidayMode) setHolidayMode(data.holidayMode);
+      if (data.holidayHours) setHolidayHours((previous) => ({ ...previous, ...data.holidayHours }));
+      if (typeof data.deliveryNexg === 'boolean') setDeliveryNexg(data.deliveryNexg);
+      if (typeof data.deliveryOwn === 'boolean') setDeliveryOwn(data.deliveryOwn);
+      if (typeof data.prepTime === 'string') setPrepTime(data.prepTime);
+      if (typeof data.deliveryRadius === 'number') setDeliveryRadius(data.deliveryRadius);
+      if (data.paymentData) setPaymentData((previous) => ({ ...previous, ...data.paymentData }));
+      if (data.sigMode) setSigMode(data.sigMode);
+      if (typeof data.signatoryName === 'string') setSignatoryName(data.signatoryName);
+      if (data.uploadedFiles) setUploadedFiles(data.uploadedFiles);
+    };
+
+    void (async () => {
+      try {
+        const serverDraft = await loadOnboardingDraft<Record<string, any>>('merchant');
+        if (!active) return;
+        if (serverDraft?.version === MERCHANT_DRAFT_VERSION) {
+          applyDraft(serverDraft.data);
+          window.localStorage.removeItem('nexg_merchant_onboarding_draft');
+        } else if (draftRef.current?.savedAt) {
+          const legacy = draftRef.current.data as Record<string, unknown>;
+          await saveOnboardingDraft('merchant', legacy, MERCHANT_DRAFT_VERSION);
+          window.localStorage.removeItem('nexg_merchant_onboarding_draft');
+        }
+      } catch {
+        // Keep the legacy draft in memory so the applicant can continue; autosave
+        // reports that the server copy is unavailable instead of writing PII locally.
+      } finally {
+        if (active) setDraftReady(true);
+      }
+    })();
+    return () => { active = false; };
+  }, []);
+
   // Drawing signature canvas refs
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   /**
@@ -195,6 +257,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
    * serialised at all. The agreement step re-prompts, which is correct.
    */
   useEffect(() => {
+    if (!draftReady || currentStep >= totalSteps) return;
     saveDraft({
       currentStep,
       selectedCategoryId: selectedCategory?.id ?? null,
@@ -207,6 +270,8 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
       operatingDays,
       hoursMode,
       globalHours,
+      groupHours,
+      dailyHours,
       holidayMode,
       holidayHours,
       deliveryNexg,
@@ -217,9 +282,9 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
       sigMode,
       signatoryName,
       uploadedFiles,
-      logoPreview,
     });
   }, [
+    draftReady,
     saveDraft,
     currentStep,
     selectedCategory,
@@ -232,6 +297,8 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
     operatingDays,
     hoursMode,
     globalHours,
+    groupHours,
+    dailyHours,
     holidayMode,
     holidayHours,
     deliveryNexg,
@@ -242,7 +309,6 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
     sigMode,
     signatoryName,
     uploadedFiles,
-    logoPreview,
   ]);
 
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
@@ -593,7 +659,7 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
   };
 
   // Step Validation Logic
-  const handleNextStep = () => {
+  const handleNextStep = async () => {
     if (currentStep === 1 && !selectedCategory) {
       alert("Please select a Business Category to continue.");
       return;
@@ -645,9 +711,50 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
       }
     }
 
-    if (currentStep < totalSteps) {
-      setCurrentStep(prev => prev + 1);
+    if (currentStep === 10) {
+      setIsSubmitting(true);
+      setSubmissionError('');
+      try {
+        await submitOnboardingApplication('merchant', {
+          currentStep,
+          selectedCategoryId: selectedCategory?.id ?? null,
+          selectedSubcategoryIds: selectedSubcategories.map((item) => item.id),
+          dynamicFields,
+          selectedCatalogSections,
+          profileData,
+          branches,
+          contactData,
+          operatingDays,
+          hoursMode,
+          globalHours,
+          groupHours,
+          dailyHours,
+          holidayMode,
+          holidayHours,
+          deliveryNexg,
+          deliveryOwn,
+          prepTime,
+          deliveryRadius,
+          paymentData,
+          uploadedFiles,
+          sigMode,
+          signatoryName,
+          termsAccepted,
+          signatureImage: sigMode === 'draw' ? signatureImage : '',
+        }, MERCHANT_DRAFT_VERSION);
+        clearDraft();
+        setCurrentStep(totalSteps);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Unable to submit your application.';
+        setSubmissionError(message);
+      } finally {
+        setIsSubmitting(false);
+      }
+      return;
     }
+
+    if (currentStep < totalSteps - 1) setCurrentStep((previous) => previous + 1);
   };
 
   // Print Agreement contract
@@ -692,6 +799,8 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
   };
 
   const resetOnboarding = () => {
+    clearDraft();
+    setSubmissionError('');
     setCurrentStep(1);
     setSelectedCategory(null);
     setSelectedSubcategories([]);
@@ -709,8 +818,21 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
     setSignatureImage('');
   };
 
+  if (!draftReady) {
+    return (
+      <div className="onboarding-theme flex min-h-screen items-center justify-center bg-slate-50 p-6 text-sm font-semibold text-slate-600">
+        Restoring your saved application…
+      </div>
+    );
+  }
+
   return (
     <div className="onboarding-theme bg-slate-50 min-h-screen text-slate-800">
+      {!draftAvailable && (
+        <p role="alert" className="mx-auto max-w-5xl px-4 pt-4 text-sm font-semibold text-red-700 sm:px-6">
+          Your changes are not saved to the server yet. Keep this page open and try again when the connection returns.
+        </p>
+      )}
       
       {/* Dynamic Style Injection for Font Cursive in Agreement Preview */}
       <style>{`
@@ -2131,12 +2253,19 @@ export default function ForMerchants({ onNavigate }: ForMerchantsProps) {
                   <div />
                 )}
 
+                {submissionError && (
+                  <p role="alert" className="mx-4 max-w-sm text-xs font-semibold text-red-700">
+                    {submissionError}
+                  </p>
+                )}
+
                 <button 
                   type="button" 
                   onClick={handleNextStep}
+                  disabled={isSubmitting}
                   className="bg-slate-950 text-white px-6 py-2.5 rounded-xl text-xs font-bold hover:bg-[#E5B65F] hover:text-black transition-colors flex items-center gap-1.5"
                 >
-                  {currentStep === totalSteps - 1 ? 'Sign & Complete' : 'Next Step'} 
+                  {isSubmitting ? 'Submitting…' : currentStep === totalSteps - 1 ? 'Sign & Complete' : 'Next Step'}
                   {renderIcon('ChevronRight', 'w-4 h-4')}
                 </button>
               </div>

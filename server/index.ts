@@ -14,6 +14,7 @@ import { fileURLToPath } from 'node:url';
 import { initDb, isDbReady, closeDb } from './db.ts';
 import * as repo from './repository.ts';
 import { registerAuthRoutes } from './auth/routes.ts';
+import { registerOnboardingRoutes } from './onboarding.ts';
 import { observabilityMiddleware, registerObservabilityRoutes } from './observability.ts';
 import { rateLimit, securityHeaders, clientIp, deviceId, forwardedChain, rateLimiterStats } from './security.ts';
 import { logger } from './logger.ts';
@@ -86,7 +87,7 @@ app.use(express.json({ limit: '1mb' }));
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   if (req.method === 'OPTIONS') return res.sendStatus(204);
   next();
 });
@@ -240,6 +241,7 @@ app.get('/api/areas', async (_req: Request, res: Response) => {
 // the SPA fallback. registerAuthRoutes calls assertAuthConfigured() internally, which
 // fails the BOOT when AUTH_SECRET is missing rather than failing the first login.
 registerAuthRoutes(app);
+registerOnboardingRoutes(app);
 
 // ------------------------------------------------------------ static + errors
 

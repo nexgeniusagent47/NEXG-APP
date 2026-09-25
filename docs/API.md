@@ -5,7 +5,9 @@ Base URL (development): `http://localhost:3001`
 In the browser, always call **`/api/*` on the same origin** (`:3000`). Vite proxies
 those requests to the API, so there is no CORS preflight and no hardcoded host.
 
-Auth: **none in v1.** Every endpoint is public. Do not expose this API publicly.
+Catalogue endpoints are public. Authenticated account endpoints use the session cookie
+described in [`AUTH.md`](./AUTH.md). Onboarding drafts use an HttpOnly continuation cookie
+and application data is encrypted by the server before storage.
 
 All responses are JSON. Errors use `{ "error": "message" }`.
 
@@ -192,6 +194,36 @@ Distinct Nairobi neighbourhoods present in the catalogue, for filter UI.
 }
 ```
 
+## Onboarding applications
+
+Merchant, courier, and host onboarding drafts and submissions are stored through the
+server. A role-specific HttpOnly cookie lets the same browser resume its draft; drafts
+expire after 30 days and are removed on the next draft read, save, or submission request.
+A successful submission clears the cookie.
+
+All write requests require a same-origin `Origin` or `Referer` header. Payloads are encrypted
+with AES-256-GCM before PostgreSQL stores them, using a key derived from `AUTH_SECRET`;
+keep that secret stable while submissions need to remain readable. Draft bodies are limited
+to 240 KiB. File controls currently send filenames only; binary documents are not uploaded.
+Drawn signatures are included in the encrypted final application payload.
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| GET | `/api/onboarding/:type/draft` | Read the browser's saved draft, if any |
+| PUT | `/api/onboarding/:type/draft` | Save a draft (`type`: `merchant`, `courier`, or `host`) |
+| POST | `/api/onboarding/:type/submit` | Server-validate and submit an application |
+| DELETE | `/api/onboarding/:type/draft` | Delete the current draft |
+
+Write body:
+
+```json
+{ "version": 1, "data": { "...": "form state" } }
+```
+
+Submission returns `201` with an opaque application id. Incomplete submissions return
+`422` with an `issues` array. The application id is not a credential and there is no public
+read endpoint for submitted applications.
+
 ---
 
 ## Static assets
@@ -207,12 +239,12 @@ falls back to `index.html` for any non-`/api/*` path. This makes
 | `200` | success |
 | `204` | CORS preflight (`OPTIONS`) |
 | `400` | missing required query param (`/api/search` without `q`) |
+| `403` | onboarding write did not come from the app's origin |
 | `404` | unknown merchant, or unknown route |
 | `500` | unhandled server error |
 | `503` | PostgreSQL is unavailable or a catalogue query failed |
+| `409` | this onboarding application was already submitted |
+| `422` | onboarding application validation failed |
 
-## Not implemented
-
-`POST`, `PUT`, `PATCH` and `DELETE` do not exist. v1 is read-only, and CORS now
-advertises only `GET, OPTIONS` — the previous build advertised write methods it did
-not implement.
+Other than auth, lead capture, telemetry, and onboarding, catalogue resources remain
+read-only; there are no general merchant, order, or inventory write endpoints.

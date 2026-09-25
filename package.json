@@ -11,6 +11,7 @@
     "start": "node server/index.ts",
     "db:up": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/setup-postgres.ps1",
     "db:seed": "tsx scripts/seed_postgres.ts",
+    "db:migrate:onboarding": "tsx scripts/migrate_onboarding.ts",
     "db:generate-sql": "python scripts/regenerate_catalog_seed.py",
     "test": "vitest run",
     "test:api": "node scripts/api-contract-test.mjs",

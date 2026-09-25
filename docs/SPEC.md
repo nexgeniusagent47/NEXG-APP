@@ -177,7 +177,9 @@ drawer, checkout.
 ### Onboarding — three flows
 
 Merchant, Courier, Host. Each is a multi-step form: details, documents, review, submit. Draft
-state persists locally so a half-finished application survives a refresh.
+state and final submissions are stored through Express and PostgreSQL so a half-finished
+application survives a refresh without keeping its personal and payout details in browser storage.
+The current controls track document filenames; they do not upload document bytes yet.
 
 ### Commerce modes
 
