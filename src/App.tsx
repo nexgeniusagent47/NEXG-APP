@@ -32,6 +32,7 @@ const GroceriesPage = lazy(() => import('./components/GroceriesPage'));
 const ForProperties = lazy(() => import('./components/ForProperties'));
 const ForCouriers = lazy(() => import('./components/ForCouriers'));
 const CourierOnboarding = lazy(() => import('./components/CourierOnboarding'));
+const HostPortal = lazy(() => import('./components/HostPortal'));
 
 // NEXG Flow Components
 const NexGDiscoveryView = lazy(() => import('./components/NexGDiscoveryView'));
@@ -107,12 +108,6 @@ function prefetchRoutes() {
   }
 }
 
-/**
- * Host onboarding is split out of the main bundle on purpose. It carries Leaflet
- * and a ten-step form that nobody reaches from the landing page, so loading it
- * eagerly would make every first paint pay for it.
- */
-const HostOnboarding = lazy(() => import('./components/HostOnboarding'));
 
 /**
  * The operations dashboard, also split out. It is a developer surface reached by
@@ -132,7 +127,11 @@ export type AppCurrentPage =
   | 'properties'
   | 'couriers'
   | 'courier_onboarding'
-  | 'host_onboarding'
+  | 'host_login'
+  | 'host_apply'
+  | 'host_status'
+  | 'host_workspace'
+  | 'host_review'
   | 'metrics';
 
 /**
@@ -143,6 +142,14 @@ export type AppCurrentPage =
  * `home`. Reading the initial page from the query string fixes all three, and the
  * allow-list keeps an unknown value from rendering a blank screen.
  */
+const HOST_PORTAL_PAGES: readonly AppCurrentPage[] = [
+  'host_login',
+  'host_apply',
+  'host_status',
+  'host_workspace',
+  'host_review',
+];
+
 const DEEP_LINK_PAGES: readonly AppCurrentPage[] = [
   'home',
   'merchants',
@@ -155,7 +162,7 @@ const DEEP_LINK_PAGES: readonly AppCurrentPage[] = [
   'properties',
   'couriers',
   'courier_onboarding',
-  'host_onboarding',
+  ...(import.meta.env.DEV ? HOST_PORTAL_PAGES : []),
   'metrics',
 ];
 
@@ -319,7 +326,11 @@ function AppContent() {
     'couriers',
     'merchant_onboarding',
     'courier_onboarding',
-    'host_onboarding',
+    'host_login',
+    'host_apply',
+    'host_status',
+    'host_workspace',
+    'host_review',
   ].includes(currentPage);
 
   /**
@@ -375,6 +386,10 @@ function AppContent() {
   };
 
   const handleNavigate = (page: string) => {
+    if (!import.meta.env.DEV && HOST_PORTAL_PAGES.includes(page as AppCurrentPage)) {
+      setCurrentPage('properties');
+      return;
+    }
     if (page === 'home') {
       setNexgStage('none');
     }
@@ -522,8 +537,8 @@ function AppContent() {
           <CourierOnboarding onNavigate={handleNavigate} />
         )}
 
-        {currentPage === 'host_onboarding' && (
-          <HostOnboarding onNavigate={handleNavigate} />
+        {import.meta.env.DEV && HOST_PORTAL_PAGES.includes(currentPage) && (
+          <HostPortal page={currentPage as 'host_login' | 'host_apply' | 'host_status' | 'host_workspace' | 'host_review'} onNavigate={handleNavigate} />
         )}
 
         {/* Developer surface: live request metrics, traces and build identity.

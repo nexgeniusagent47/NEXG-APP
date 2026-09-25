@@ -46,6 +46,7 @@ const ecosystemCardSurface = (isLight: boolean) =>
     : 'bg-white/5 hover:bg-[#E5B65F]/10 hover:shadow-[0_0_20px_rgba(229,182,95,0.12)]';
 
 export default function ForProperties({ onNavigate }: ForPropertiesProps) {
+  const hostAccessEnabled = import.meta.env.DEV;
   // Navigation scrolling effect
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -263,9 +264,10 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             <p className={`text-sm sm:text-base md:text-lg lg:text-xl mb-6 sm:mb-10 max-w-2xl leading-relaxed ${isLight ? 'text-slate-700 font-medium' : 'text-gray-200'}`}>{t.ui.forProperties.s_06fb24}</p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <button 
-                onClick={() => onNavigate('host_onboarding')}
-                className="flex items-center justify-center gap-2 bg-[#E5B65F] hover:bg-[#ffddb1] text-[#291800] px-8 py-4 rounded-full font-bold text-base transition shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
-              >{t.ui.forProperties.s_cd4fe8}<ArrowRight size={18} />
+                onClick={() => hostAccessEnabled && onNavigate('host_apply')}
+                disabled={!hostAccessEnabled}
+                className="flex items-center justify-center gap-2 bg-[#E5B65F] hover:bg-[#ffddb1] text-[#291800] px-8 py-4 rounded-full font-bold text-base transition shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-75"
+              >{hostAccessEnabled ? 'Apply for Host access' : 'Host applications are not open yet'}<ArrowRight size={18} />
               </button>
               <button className={`flex items-center justify-center border px-8 py-4 rounded-full font-semibold text-base transition-colors shadow-md cursor-pointer ${
                 isLight
@@ -1037,9 +1039,10 @@ export default function ForProperties({ onNavigate }: ForPropertiesProps) {
             </h2>
             <p className="text-gray-200 text-xs sm:text-sm md:text-base lg:text-lg mb-6 sm:mb-10 leading-relaxed max-w-2xl mx-auto">{t.ui.forProperties.s_110820}</p>
             <button 
-              onClick={() => onNavigate('merchant_onboarding')}
-              className="bg-[#E5B65F] hover:bg-[#ffddb1] text-[#291800] px-8 sm:px-10 py-3.5 sm:py-5 rounded-full font-bold text-sm sm:text-lg transition-transform hover:scale-105 active:scale-95 shadow-xl cursor-pointer"
-            >{t.ui.forProperties.s_cd4fe8}</button>
+              onClick={() => hostAccessEnabled && onNavigate('host_apply')}
+              disabled={!hostAccessEnabled}
+              className="bg-[#E5B65F] hover:bg-[#ffddb1] text-[#291800] px-8 sm:px-10 py-3.5 sm:py-5 rounded-full font-bold text-sm sm:text-lg transition-transform hover:scale-105 active:scale-95 shadow-xl disabled:cursor-not-allowed disabled:opacity-75"
+            >{hostAccessEnabled ? 'Apply for Host access' : 'Host applications are not open yet'}</button>
             <p className="mt-8 text-gray-300 text-[10px] sm:text-xs tracking-wider uppercase font-semibold">
               Ultra-Fast Onboarding • Dedicated Account Success Managers • Guaranteed Lift
             </p>

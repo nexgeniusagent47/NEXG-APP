@@ -45,6 +45,11 @@ async function probeMerchants() {
 /** landing -> discovery -> preview sheet -> explicit full merchant page. */
 async function openMerchantPage(page, merchantName) {
   await page.goto(BASE, { waitUntil: 'domcontentloaded' });
+  // Keep the active Impeccable authoring session untouched while preventing its
+  // developer toolbar from intercepting clicks in this isolated test browser.
+  if (await page.locator('#impeccable-live-bar').count()) {
+    await page.addStyleTag({ content: '#impeccable-live-bar{display:none!important;pointer-events:none!important}' });
+  }
   await settle(page, 1400);
 
   await page.click('#hero-search-input');

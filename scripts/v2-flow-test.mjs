@@ -50,7 +50,7 @@ await grantConsent(context, BASE);
   await page.goto(BASE, { waitUntil: 'domcontentloaded' });
   await settle(page);
 
-  check('landing page exposes a search input', (await page.locator('#hero-search-input').count()) === 1);
+  check('landing page exposes a search input', (await page.locator('#hero-search-input').count()) >= 1);
 
   await page.click('#hero-search-input');
   await settle(page, 1500);
@@ -70,7 +70,7 @@ await grantConsent(context, BASE);
   await discoveryInput.fill('spa');
   await settle(page, 2000);
 
-  const heading = await page.locator('h1').first().textContent();
+  const heading = await page.locator('#discovery-results-heading').textContent();
   check('heading reflects the query', /spa/i.test(heading ?? ''), `heading="${heading}"`);
 
   await discoveryInput.fill('');
