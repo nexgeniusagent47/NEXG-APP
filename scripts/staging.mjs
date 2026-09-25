@@ -14,6 +14,8 @@ const COMPOSE_FILE = path.join(ROOT, 'docker-compose.staging.yml');
 const ENV_FILE = path.join(ROOT, '.env.staging');
 const API_CONTRACT = path.join(ROOT, 'scripts', 'api-contract-test.mjs');
 const GENERATED_ENV_MARKER = '# Generated locally by scripts/staging.mjs; never commit this file.';
+const REQUEST_TIMEOUT_MS = 5_000;
+const DATABASE_OUTAGE_REQUEST_TIMEOUT_MS = 10_000;
 
 function createEnvFile() {
   const ignoreCheck = spawnSync('git', ['check-ignore', '--quiet', '.env.staging'], {
@@ -90,8 +92,8 @@ function getBaseUrl() {
   return 'http://127.0.0.1:' + match[1];
 }
 
-async function fetchJson(baseUrl, route) {
-  const response = await fetch(baseUrl + route, { signal: AbortSignal.timeout(5000) });
+async function fetchJson(baseUrl, route, timeoutMs = REQUEST_TIMEOUT_MS) {
+  const response = await fetch(baseUrl + route, { signal: AbortSignal.timeout(timeoutMs) });
   let body = null;
   try {
     body = await response.json();
@@ -102,7 +104,7 @@ async function fetchJson(baseUrl, route) {
 }
 
 async function fetchHtml(baseUrl, route) {
-  const response = await fetch(baseUrl + route, { signal: AbortSignal.timeout(5000) });
+  const response = await fetch(baseUrl + route, { signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) });
   return {
     status: response.status,
     contentType: response.headers.get('content-type') ?? '',
@@ -164,7 +166,12 @@ async function waitForStatus(baseUrl, route, expectedStatus, timeoutMs = 30000) 
   let last = 'No HTTP response yet.';
   while (Date.now() < deadline) {
     try {
-      const response = await fetchJson(baseUrl, route);
+      // PostgreSQL can use its full 5-second connection timeout before the API returns 503.
+      // Leave enough margin for that response instead of aborting at the same deadline.
+      const requestTimeoutMs = expectedStatus === 503
+        ? DATABASE_OUTAGE_REQUEST_TIMEOUT_MS
+        : REQUEST_TIMEOUT_MS;
+      const response = await fetchJson(baseUrl, route, requestTimeoutMs);
       last = 'HTTP ' + response.status;
       if (response.status === expectedStatus) return;
     } catch (error) {
